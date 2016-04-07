@@ -1,0 +1,53 @@
+<md-dialog aria-label="LOGIN" flex-sm="40" flex-xs="50" flex-gt-sm="25">
+    <md-toolbar class="md-hue-2">
+        <div class="md-toolbar-tools  ">
+            <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
+            <h2 class=" md-padding ">LOGIN</h2>
+            <span flex></span>
+        </div>
+    </md-toolbar>
+    <form name="loginForm" class="md-padding " ng-submit="vm.login(loginForm)">
+        <md-dialog-content>
+            <md-dialog-content-body>
+                <md-input-container class="md-block ">
+                    <md-icon md-svg-icon="communication:ic_email_24px"></md-icon>
+                    <label for="email">eMail</label>
+                    <input id="email" ng-model="vm.loginModel.email" type="email" name="email"
+                           minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" required>
+                    <div ng-messages="loginForm.email.$error" role="alert"
+                         ng-show="loginForm.email.$touched && loginForm.email.$invalid ">
+                        <div ng-message-exp="['minlength', 'maxlength']">
+                            Your email must be between 10 and 100 characters long and look like an e-mail address.
+                        </div>
+                        <div ng-message="required">
+                            Please tell us your email.
+                        </div>
+                        <div ng-message="pattern">
+                            Your email must look like an e-mail address.
+                        </div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <md-icon md-svg-icon="action:ic_lock_24px"></md-icon>
+                    <label>Password</label>
+                    <input ng-model="vm.loginModel.password" id="password" type="password" name="password"
+                           required
+                           maxlength="20">
+                    <div ng-messages="loginForm.password.$error" role="alert"
+                         ng-show="loginForm.password.$touched && loginForm.password.$invalid ">
+                        <div ng-message-exp="['required']">
+                            Please tell us your password.
+                        </div>
+                        <div ng-message-exp="[ 'minlength', 'maxlength']">
+                            Your password must be between 5 and 20 characters long.
+                        </div>
+                    </div>
+                </md-input-container>
+            </md-dialog-content-body>
+        </md-dialog-content>
+        <md-dialog-actions layout="row" md-whiteframe="2">
+            <md-button ng-click="vm.cancel()">Cancel</md-button>
+            <md-button type="submit" class="md-raised md-accent"> Login</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
