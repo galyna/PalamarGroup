@@ -7,14 +7,16 @@ var port = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 
 var jwt = require('jsonwebtoken');
-var restEndpoint = require('./routes/restEndpoint');
+var restEndpoint = require('./routes/rest.endpoint');
+var userEndpoint = require('./routes/user.endpoint');
 //models
 var User = require('./models/user');
-var Artist = require('./models/artist');
-var Album = require('./models/album');
-var Composition = require('./models/composition');
+var Contact = require('./models/contact');
+var Course = require('./models/course');
+var CourseModule = require('./models/courseModule');
+var Order = require('./models/order');
 
-var authenticate = require('./routes/authenticate');
+var authenticate = require('./auth/authenticate');
 
 mongoose.connect(config.mongoUrl);
 
@@ -66,74 +68,12 @@ api.post('/authenticate', function(req, res){
         });
 });
 
-api.route('/user')
-    .get(authenticate,function(req, res){
-        User.find()
-            .then(function(users){
-                res.json({users: users});
-            })
-            .catch(function(err){
-                res.status(500);
-                res.json(err);
-            });
-    })
-    .post(function(req, res){
-        if(!req.body.email || !req.body.password){
-            res.status(400);
-        }
-        User.where({email: req.body.email}).find(function(docs){
-            if (!docs){
-                var user = new User({
-                    email: req.body.email,
-                    password: req.body.password
-                });
-                user.save().then(function(){
-                    res.json({
-                        email: user.email,
-                        id: user._id
-                    });
-                });
-            }else{
-                console.log('user exists: ', req.body.email);
-                res.status(500);
-                res.json(new Error("User exists!"));
-            }
-        })
-    });
 
-api.route('/user/:id')
-    .get(authenticate,function(req, res){
-        User.where({_id: req.params.id}).findOne(function(err, user){
-            if(!user){
-                res.status(404);
-                res.send();
-                return;
-            }
-            res.json(user);
-        });
-    })
-    .delete(authenticate,function(req, res){
-        User.where({_id: req.params.id}).remove().then(function(user){
-            if(!user) {
-                res.status(404)
-            }
-            res.send();
-        })
-    })
-    .put(authenticate,function(req, res){
-        User.where({_id: req.params.id}).findOneAndUpdate({password: req.body.password})
-            .then(function(user){
-                if(!user) {
-                    res.status(404)
-                }
-                res.send();
-            });
-    });
-
-api.use('/artist', restEndpoint(Artist));
-api.use('/album', restEndpoint(Album));
-api.use('/composition', restEndpoint(Composition));
-
+api.use('/contact', restEndpoint(Contact));
+api.use('/course', restEndpoint(Course));
+api.use('/course_module', restEndpoint(CourseModule));
+api.use('/order', restEndpoint(Order));
+api.use('/user', userEndpoint);
 app.use('/api', api);
 
 //static content

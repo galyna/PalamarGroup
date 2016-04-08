@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var authenticate = require('./authenticate');
+var authenticate = require('./../auth/authenticate');
 var env = require('../config').env;
 
 function authIfDev (req, res, next){
@@ -20,51 +20,51 @@ function restEndpoint(_Model, options){
     var routes = express.Router();
     var Model = _Model;
     routes.route('/')
-        .get((req, res) => {
-            Model.find({}, {__v: 0}).then((users) => {
+        .get(function(req, res) {
+            Model.find({}, {__v: 0}).then(function(users) {
                 res.json(users);
             })
         })
-        .post(authIfDev, (req, res) => {
+        .post(authIfDev, function(req, res) {
             var artistData = req.body;
             try{
                 var artist = new Model(artistData);
             }catch(ex){
                 res.status(500).json(ex);
             }
-            artist.save().then(()=> {
+            artist.save().then(function() {
                 res.json(artist);
-            }).catch((err)=>{
+            }).catch(function(err) {
                 res.status(500).json(err);
             })
         });
 
     routes.route('/:id')
-        .get((req,res)=>{
+        .get(function(req,res) {
             Model.findOne({_id: req.params.id})
-                .then((artist)=>{
+                .then(function(artist) {
                     res.json(artist);
                 })
-                .catch((err)=>{
+                .catch(function(err) {
                     //TODO: better error handling
                     res.status(404).send();
                 });
         })
-        .put(authIfDev, (req, res) => {
+        .put(authIfDev, function(req, res) {
             var id = req.params.id;
             Model.update({_id: id}, req.body)
-                .then(()=>{
+                .then(function() {
                     res.send();
-                }).catch((err)=>{
+                }).catch(function(err) {
                 //TODO: better error handling
                 res.status(500).json(err)
             });
         })
-        .delete(authIfDev, (req,res) => {
+        .delete(authIfDev, function(req,res) {
             Model.remove({_id: req.params.id})
-                .then(()=>{
+                .then(function() {
                     res.send();
-                }).catch((err)=>{
+                }).catch(function(err) {
                 //TODO: better error handling
                 res.status(404).json(err);
             });
