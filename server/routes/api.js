@@ -15,21 +15,37 @@ var CourseModule = require('../models/courseModule');
 var Order = require('../models/order');
 
 api.get('/setup', function(req, res){
-    var adminEmail = 'admin@admin.com';
-    User.remove({email: adminEmail}, function(){
-        var admin = new User({
-            email: adminEmail,
-            password: 'admin'
-        });
-        admin.save().then(function(admin){
-            if(!admin){res.status(500);return;}
+    //TODO: make dump of db and recover it on npm install
+    var testUsers = [
+        {
+            email: 'admin@email.com',
+            password: bcrypt.hashSync('admin', 8),
+            roles: ['admin']
+        },
+        {
+            email: 'moderator@email.com',
+            password: bcrypt.hashSync('moderator', 8),
+            roles: ['moderator']
+        },
+        {
+            email: 'user@email.com',
+            password: bcrypt.hashSync('user', 8),
+            roles: ['user']
+        }
+    ];
 
-            res.status(201);
-            res.json([admin]);
-            console.log('admin user created');
+    User.remove().then(function(){
+        return User.create(testUsers).then(function(users){
+            if(!users.length){res.status(500);return;}
+
+            res.status(201).json(users);
+            console.log('test users created during setup');
         });
+    }).catch(function(err){
+        res.status(500).send(err);
     });
 });
+
 api.post('/authenticate', function(req, res){
     var email = req.body.email;
     var password = req.body.password;
@@ -44,7 +60,7 @@ api.post('/authenticate', function(req, res){
                     return res.status(500).send({error: err});
                 }
                 if(!result) return res.status(403).send({error: {message: 'Wrong email and/or password'}});
-                var token = jwt.sign(user, 'secretKey', {
+                var token = jwt.sign(user._doc, 'secretKey', {
                     expiresIn: 1440*60 //1 day
                 });
                 res.json({

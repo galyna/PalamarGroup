@@ -1,12 +1,14 @@
 var express = require('express');
 var bcrypt = require('bcrypt');
+var extend = require('util')._extend;
+var currentUser = require('../auth/current_user');
 var userApi = express.Router();
 var authenticate = require('./../auth/authenticate');
 var User = require('../models/user');
 
 userApi.route('/')
-    .get(authenticate,function(req, res){
-        User.find()
+    .get(authenticate, currentUser.is('admin'), function(req, res){
+        User.find({}, {"email": 1, "roles": 1})
             .then(function(users){
                 res.json({users: users});
             })
@@ -46,7 +48,7 @@ userApi.route('/')
     });
 
 userApi.route('/:id')
-    .get(authenticate,function(req, res){
+    .get(authenticate, currentUser.is('admin'), function(req, res){
         User.where({_id: req.params.id}).findOne(function(err, user){
             if(!user){
                 res.status(404);
@@ -56,7 +58,7 @@ userApi.route('/:id')
             res.json(user);
         });
     })
-    .delete(authenticate,function(req, res){
+    .delete(authenticate, currentUser.is('admin'), function(req, res){
         User.where({_id: req.params.id}).remove().then(function(user){
             if(!user) {
                 res.status(404)
@@ -64,8 +66,12 @@ userApi.route('/:id')
             res.send();
         })
     })
-    .put(authenticate,function(req, res){
-        User.where({_id: req.params.id}).findOneAndUpdate({password: req.body.password})
+    //TODO: add update password flow
+    .put(authenticate, currentUser.is('admin'), function(req, res){
+        var updateRequest = extend({}, req.body);
+        updateRequest.password = bcrypt.hashSync(updateRequest.password);
+        delete updateRequest.id;
+        User.where({_id: req.params._id}).findOneAndUpdate(updateRequest)
             .then(function(user){
                 if(!user) {
                     res.status(404).send({error: {message: "User not found"}});

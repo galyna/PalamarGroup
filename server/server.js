@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/api', api);
 
 //static content
+//TODO: add some concatenation
 app.use('/', express.static('../front-end'));
 app.use('/node_modules', express.static('../node_modules'));
 

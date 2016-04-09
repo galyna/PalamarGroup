@@ -3,9 +3,6 @@ var config = require('../config');
 var appSecret = require('../config').appSecret;
 
 function authenticate(req, res, next){
-    //TODO: remove on production!!!
-    if(config.env === 'debug') return next();
-
     var token = req.headers['x-access-token'];
     if (token) {
         // verifies secret and checks exp
