@@ -1,0 +1,43 @@
+
+<md-content layout-xs="column" layout="row">
+    <div flex="12">
+        <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
+                    md-component-id="left"
+                    aria-label="Адміністрування сайту">
+
+            <md-toolbar class="md-whiteframe-z1">
+                <div class="md-toolbar-tools">
+                    <h3 class="md-padding"></h3>
+                </div>
+            </md-toolbar>
+            <md-list>
+                <md-list-item>
+                    <md-button>
+                        Модулі
+                    </md-button>
+                </md-list-item>
+            </md-list>
+
+        </md-sidenav>
+    </div>
+    <div flex="75">
+        <md-content>
+            <md-list flex>
+                <md-subheader class="md-no-sticky">Модулі</md-subheader>
+                <md-list-item class="md-3-line" ng-repeat="item in cources" ng-click="null">
+                    <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />
+                    <div class="md-list-item-text" layout="column">
+                        <h3>{{ item.who }}</h3>
+                        <h4>{{ item.what }}</h4>
+                        <p>{{ item.notes }}</p>
+                    </div>
+                </md-list-item>
+
+
+            </md-list>
+        </md-content>
+    </div>
+    <div flex="12">
+    </div>
+    </div>
+</md-content>
