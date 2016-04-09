@@ -1,5 +1,5 @@
 var express = require('express');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 var extend = require('util')._extend;
 var currentUser = require('../auth/current_user');
 var userApi = express.Router();
@@ -26,7 +26,7 @@ userApi.route('/')
             if (docs){
                 res.status(409).send(new Error("email already registered"));
             }
-            bcrypt.hash(req.body.password, 8, function(err, hash) {
+            bcrypt.hash(req.body.password, null, null, function(err, hash) {
                 if(err) throw err;
 
                 var user = new User({

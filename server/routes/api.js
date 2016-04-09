@@ -5,7 +5,7 @@ var api = express.Router();
 var jwt = require('jsonwebtoken');
 var restEndpoint = require('./rest.endpoint');
 var userEndpoint = require('./user.endpoint');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 
 //models
 var User = require('../models/user');
