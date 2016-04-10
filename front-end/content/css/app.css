@@ -14,102 +14,27 @@ md-input-container .md-input-messages-animation {
 
 }
 
-.card-media {
-    background-color: #999999;
+.thumb {
+    width: 24px;
+    height: 24px;
+    float: none;
+    position: relative;
+    top: 7px;
 }
 
-.artists md-card md-card-footer {
-     padding:10px;
-  }
-
-
-.artists md-icon svg {
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
+form .progress {
+    line-height: 15px;
 }
 
-.artists .s64 {
-    font-size: 64px;
+
+.progress {
+    display: inline-block;
+    width: 100px;
+    border: 3px groove #CCC;
 }
 
-.artists .s32 {
-    font-size: 48px;
-}
-
-.artists md-icon.fa {
-    display: block;
-    padding-left: 0;
-}
-
-.artists md-icon.s32 span {
-    padding-left: 8px;
-}
-
-.artists md-grid-list {
-    margin: 8px;
-}
-
-.artists .gray {
-    background: #f5f5f5;
-}
-
-.artists .green {
-    background: #b9f6ca;
-}
-
-.artists .yellow {
-    background: #ffff8d;
-}
-
-.artists .blue {
-    background: #84ffff;
-}
-
-.artists .darkBlue {
-    background: #80d8ff;
-}
-
-.artists .deepBlue {
-    background: #448aff;
-}
-
-.artists .purple {
-    background: #b388ff;
-}
-
-.artists .lightPurple {
-    background: #8c9eff;
-}
-
-.artists .red {
-    background: #ff8a80;
-}
-
-.artists .pink {
-    background: #ff80ab;
-}
-
-.artists md-grid-tile {
-    transition: all 300ms ease-out 50ms;
-}
-
-.artists md-grid-tile md-icon {
-    padding-bottom: 32px;
-}
-
-.artists md-grid-tile md-grid-tile-footer {
-    background: rgba(0, 0, 0, 0.68);
-    height: 36px;
-}
-
-.artists md-grid-tile-footer figcaption {
-    width: 100%;
-}
-
-.artists md-grid-tile-footer figcaption h3 {
-    margin: 0;
-    font-weight: 700;
-    width: 100%;
-    text-align: center;
+.progress div {
+    font-size: smaller;
+    background: orange;
+    width: 0;
 }

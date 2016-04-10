@@ -1,0 +1,124 @@
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools md-padding ">
+        <h2 class=" md-padding "> Редагувати модуль</h2>
+        <span flex></span>
+    </div>
+</md-toolbar>
+<form name="editCorseForm" class="md-padding " novalidate ng-submit="vm.editCourse(editCorseForm)">
+    <md-content>
+        <md-input-container class="md-block ">
+            <md-checkbox ng-model="vm.editCourseModel.isVisible" aria-label="Finished?">
+                Показати на сайті
+            </md-checkbox>
+        </md-input-container>
+        <md-input-container class="md-block ">
+            <label for="name">Назва</label>
+            <input id="name" ng-model="vm.editCourseModel.name" name="name"
+                   required>
+            <div ng-messages="editCorseForm.name.$error" role="alert"
+                 ng-show="editCorseForm.name.$touched && editCorseForm.name.$invalid ">
+                <div ng-message="required">
+                    Назва модуля на може бути пустою
+                </div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Опис</label>
+            <input ng-model="vm.editCourseModel.description" id="description" name="description">
+        </md-input-container>
+        <md-input-container class="md-block ">
+            <label for="order">Порядок відображення</label>
+            <input id="order" ng-model="vm.editCourseModel.order" name="order" type="number"/>
+
+        </md-input-container>
+        <md-input-container class="md-block ">
+            <label for="price">Ціна</label>
+            <input id="price" ng-model="vm.editCourseModel.price" name="price" type="number"/>
+
+        </md-input-container>
+        <md-divider></md-divider>
+        <md-divider></md-divider>
+        <md-input-container class="md-block ">
+
+            <md-list flex>
+                <md-subheader class="md-no-sticky">Дати модулів</md-subheader>
+                <md-list-item class="md-3-line" ng-repeat="date in vm.editCourseModel.courseModulesDates">
+                    <md-datepicker ng-model="date" disabled></md-datepicker>
+                    <md-button class="  md-raised"
+                               ng-click="vm.deleteCourseDate(vm.editCourseModel.courseModulesDates,item)">Видалити
+                    </md-button>
+                </md-list-item>
+            </md-list>
+            <md-input-container class="md-block  ">
+                <md-button class="md-raised" ng-click="vm.showAddDate()">Додати дату
+                </md-button>
+            </md-input-container>
+
+        </md-input-container>
+        <md-divider></md-divider>
+        <md-divider></md-divider>
+        <md-input-container class="md-block ">
+            <label for="price">Ім`я автора</label>
+            <input id="nameauthor" ng-model="vm.editCourseModel.author.name" name="nameauthor"/>
+        </md-input-container>
+        <md-input-container class="md-block ">
+            <label for="price">Фото автора</label>
+            <img ng-src="{{vm.editCourseModel.author.photourl}}"/>
+            <md-button ng-click="vm.showImageUpload()">змінити фото автора</md-button>
+        </md-input-container>
+        <md-divider></md-divider>
+        <md-divider></md-divider>
+        <md-input-container class="md-block">
+            <md-list flex>
+                <md-subheader class="md-no-sticky">Форми модулів</md-subheader>
+                <md-list-item class="md-3-line" ng-repeat="item in vm.editCourseModel.hearFormsPhotos" ng-click="null">
+                    <img ng-src="{{item}}"/>
+                    <div class="md-list-item-text" layout="row">
+                        <md-input-container class="md-block  ">
+
+                            <label for="name">Назва форми</label>
+                            <input id="formname" ng-model="item.name" name="formname"/>
+                        </md-input-container>
+                        <md-button class="  md-raised" ng-click="vm.deleteFormPhotoCourse(editCourseModel.photos,item)">
+                            Видалити
+                        </md-button>
+                    </div>
+                </md-list-item>
+            </md-list>
+            <md-input-container class="md-block  ">
+                <md-button class="  md-raised" ng-click="vm.showImageUpload(editCourseModel.photos,item)">Додати форму
+                </md-button>
+            </md-input-container>
+        </md-input-container>
+        <md-divider></md-divider>
+        <md-divider></md-divider>
+        <md-input-container class="md-block">
+            <md-list flex>
+                <md-subheader class="md-no-sticky">Форми історії попередніх модулів</md-subheader>
+                <md-list-item class="md-3-line" ng-repeat="item in vm.editCourseModel.historyPhotos" ng-click="null">
+                    <img ng-src="{{item}}"/>
+                    <div class="md-list-item-text" layout="row">
+                        <md-input-container class="md-block  ">
+
+                            <label for="name">Назва форми</label>
+                            <input id="formname" ng-model="item.name" name="formname"/>
+                        </md-input-container>
+                        <md-button class="  md-raised" ng-click="vm.deleteFormPhotoCourse(editCourseModel.photos,item)">
+                            Видалити
+                        </md-button>
+                    </div>
+                </md-list-item>
+            </md-list>
+            <md-input-container class="md-block  ">
+                <md-button class="  md-raised" ng-click="vm.showImageUpload(editCourseModel.photos,item)">Додати фото
+                    історії
+                </md-button>
+            </md-input-container>
+        </md-input-container>
+    </md-content>
+    <div layout="row" md-whiteframe="4">
+        <md-button class="md-raised md-primary" ng-click="vm.closeEditCourseForm()">Скасувати</md-button>
+        <md-button type="submit"  class="md-raised md-accent">Зберегти</md-button>
+    </div>
+</form>
+

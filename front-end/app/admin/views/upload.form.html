@@ -1,0 +1,35 @@
+<md-dialog aria-label="Модуль" flex="30" >
+    <md-toolbar class="md-hue-2">
+        <div class="md-toolbar-tools md-padding ">
+            <h2 class=" md-padding "> Завантажити фото</h2>
+            <span flex></span>
+        </div>
+    </md-toolbar>
+<form name="myForm">
+    <fieldset>
+        <legend>Завантажте та збережіть</legend>
+        Назва файлу:
+        <input type="text" name="userName" ng-model="vm.photoName" size="31" required>
+        <i ng-show="myForm.userName.$error.required">*обов`язкове поле</i>
+        <br>Photo:
+        <input type="file" ngf-select ng-model="picFile" name="file"
+               accept="image/*" ngf-max-size="2MB" required
+               ngf-model-invalid="errorFile">
+        <i ng-show="myForm.file.$error.required">*обов`язкове поле</i><br>
+        <i ng-show="myForm.file.$error.maxSize">Файл надто великий
+            {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+        <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile"> <button ng-click="picFile = null" ng-show="picFile">Видалити</button>
+        <br>
+        <button ng-disabled="!myForm.$valid"
+                ng-click="vm.uploadPic(picFile)">Зберегти</button>
+      <span class="progress" ng-show="picFile.progress >= 0">
+        <div style="width:{{picFile.progress}}%"
+             ng-bind="picFile.progress + '%'"></div>
+      </span>
+        <span ng-show="picFile.result">Завантажено успішно</span>
+        <span class="err" ng-show="vm.upload.errorMsg">{{errorMsg}}</span>
+    </fieldset>
+    <br>
+</form>
+
+</md-dialog>
