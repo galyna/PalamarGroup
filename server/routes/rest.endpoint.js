@@ -26,14 +26,14 @@ function restEndpoint(_Model, options){
             })
         })
         .post(authIfDev, function(req, res) {
-            var artistData = req.body;
+            var data = req.body;
             try{
-                var artist = new Model(artistData);
+                var item = new Model(data);
             }catch(ex){
                 res.status(500).json(ex);
             }
-            artist.save().then(function() {
-                res.json(artist);
+            item.save().then(function() {
+                res.json(item);
             }).catch(function(err) {
                 res.status(500).json(err);
             })

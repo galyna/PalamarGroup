@@ -6,11 +6,24 @@ var CourseSchema = new Schema({
     price: Number,
     order: Number,
     videos: [String],
-    hearFormsPhotos: [{type: Schema.Types.ObjectId, ref: 'Photo'}],
-    historyPhotos: [{type: Schema.Types.ObjectId, ref: 'Photo'}],
-    author: {name: String, photourl: {type: Schema.Types.ObjectId, ref: 'Photo'}},
+    //TODO: create an unified photo object
+    hearFormsPhotos: [{
+        name: String,
+        url: String,
+        order: Number
+    }],
+    historyPhotos: [{
+        name: String,
+        url: String,
+        order: Number
+    }],
+    author: {name: String, photourl: {
+        name: String,
+        url: String,
+        order: Number
+    }},
     courseModulesDates: [Date],
-    isVisible: Boolean,
+    isVisible: Boolean
 });
 
 module.exports = mongoose.model('Course', CourseSchema);

@@ -21,7 +21,7 @@
         <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile"> <button ng-click="picFile = null" ng-show="picFile">Видалити</button>
         <br>
         <button ng-disabled="!myForm.$valid"
-                ng-click="vm.uploadPic(picFile)">Зберегти</button>
+                ng-click="vm.uploadPic(picFile,ctrl.editCourseModelId)">Зберегти</button>
       <span class="progress" ng-show="picFile.progress >= 0">
         <div style="width:{{picFile.progress}}%"
              ng-bind="picFile.progress + '%'"></div>

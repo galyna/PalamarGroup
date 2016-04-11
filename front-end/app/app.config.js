@@ -6,7 +6,8 @@ angular
     .module('ostapRadioApp')
     .constant('constants', {
         baseUrl: '/',
-        apiUrl: '/api'
+        apiUrl: '/api',
+        uploadDir: '/content/uploads'
     })
     .config(function ($routeProvider, $mdThemingProvider, $mdIconProvider) {
         $routeProvider

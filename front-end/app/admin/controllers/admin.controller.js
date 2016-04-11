@@ -5,7 +5,7 @@
 
     angular
         .module('admin')
-        .controller('AdminController', ['$mdDialog', '$mdSidenav', '$templateCache', 'courseService', '$log', 'Upload', '$timeout', AdminController
+        .controller('AdminController', ['$scope','$mdDialog', '$mdSidenav', '$templateCache', 'courseService', '$log', 'Upload', '$timeout', AdminController
         ]);
 
     /**
@@ -13,7 +13,7 @@
      * @param $mdDialog
      * @constructor
      */
-    function AdminController($mdDialog, $mdSidenav, $templateCache, courseService, $log, Upload, $timeout) {
+    function AdminController($scope,$mdDialog, $mdSidenav, $templateCache, courseService, $log, Upload, $timeout) {
         var vm = this;
 
         vm.courses = [];
@@ -76,16 +76,13 @@
             vm.showCourseEditForm = true;
         }
 
-        function showImageUpload() {
-
+        function showImageUpload(coll) {
+            vm.editCourseModel.selectedPhotoColl=coll;
             $mdDialog.show({
-                controller: 'AdminController',
-                controllerAs: "vm",
-                preserveScope: true,
+                scope:$scope,
                 template: $templateCache.get('admin/views/upload.form.html'),
                 parent: angular.element(document.body),
                 clickOutsideToClose: true,
-
             });
         }
 
@@ -112,15 +109,15 @@
         }
 
         function uploadPic(file) {
-            $log.debug("photoName..." + vm.photoName);
+
             file.upload = Upload.upload({
-                url: 'http://localhost:8080/api/photo',
-                data: {name: vm.photoName, file: file},
+                url: '/api/course/'+ vm.editCourseModel._id+'/hearFormsPhotos',
+                data: {name: vm.photoName, file: file}
             });
 
             file.upload.then(function (response) {
                 $timeout(function () {
-                    file.result = response.data;
+                    $mdDialog.hide();
                 });
             }, function (response) {
                 if (response.status > 0)

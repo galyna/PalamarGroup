@@ -4,9 +4,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var PhotoSchema = new Schema({
-    name: String,
-    file: Buffer,
-
+    name: String
 });
 
 module.exports = mongoose.model('Photo', PhotoSchema);
