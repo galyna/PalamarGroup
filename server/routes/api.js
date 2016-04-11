@@ -13,8 +13,9 @@ var Contact = require('../models/contact');
 var Course = require('../models/course');
 var CourseModule = require('../models/courseModule');
 var Order = require('../models/order');
+var Photo = require('../models/photo');
 
-api.get('/setup', function(req, res){
+api.get('/setup', function (req, res) {
     //TODO: make dump of db and recover it on npm install
     var testUsers = [
         {
@@ -34,34 +35,34 @@ api.get('/setup', function(req, res){
         }
     ];
 
-    User.remove().then(function(){
-        return User.create(testUsers).then(function(users){
-            if(!users.length){res.status(500);return;}
+    User.remove().then(function () {
+        return User.create(testUsers).then(function (users) {
+            if (!users.length) {
+                res.status(500);
+                return;
+            }
 
             res.status(201).json(users);
             console.log('test users created during setup');
         });
-    }).catch(function(err){
-        res.status(500).send(err);
     });
 });
-
-api.post('/authenticate', function(req, res){
+api.post('/authenticate', function (req, res) {
     var email = req.body.email;
     var password = req.body.password;
-    if(!email || !password){
+    if (!email || !password) {
         return res.status(403);
     }
     User.findOne({email: email})
-        .then(function(user){
-            if(!user) return res.status(403).send({error: {message: 'Wrong email and/or password'}});
-            bcrypt.compare(req.body.password, user.password, function(err, result) {
-                if(err){
+        .then(function (user) {
+            if (!user) return res.status(403).send({error: {message: 'Wrong email and/or password'}});
+            bcrypt.compare(req.body.password, user.password, function (err, result) {
+                if (err) {
                     return res.status(500).send({error: err});
                 }
-                if(!result) return res.status(403).send({error: {message: 'Wrong email and/or password'}});
+                if (!result) return res.status(403).send({error: {message: 'Wrong email and/or password'}});
                 var token = jwt.sign(user._doc, 'secretKey', {
-                    expiresIn: 1440*60 //1 day
+                    expiresIn: 1440 * 60 //1 day
                 });
                 res.json({
                     token: token,
@@ -72,7 +73,7 @@ api.post('/authenticate', function(req, res){
                 });
             });
         })
-        .catch(function(err){
+        .catch(function (err) {
             res.status(500).send({error: err});
         });
 });
@@ -82,6 +83,7 @@ api.use('/contact', restEndpoint(Contact));
 api.use('/course', restEndpoint(Course));
 api.use('/course_module', restEndpoint(CourseModule));
 api.use('/order', restEndpoint(Order));
+api.use('/photo', restEndpoint(Photo));
 api.use('/user', userEndpoint);
 
 module.exports = api;

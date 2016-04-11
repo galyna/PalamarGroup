@@ -34,27 +34,29 @@
         <md-input-container class="md-block ">
             <label for="price">Ціна</label>
             <input id="price" ng-model="vm.editCourseModel.price" name="price" type="number"/>
-
         </md-input-container>
         <md-divider></md-divider>
         <md-divider></md-divider>
-        <md-input-container class="md-block ">
+
 
             <md-list flex>
                 <md-subheader class="md-no-sticky">Дати модулів</md-subheader>
                 <md-list-item class="md-3-line" ng-repeat="date in vm.editCourseModel.courseModulesDates">
-                    <md-datepicker ng-model="date" disabled></md-datepicker>
+
+                        <md-datepicker ng-model="date" disabled="true" ></md-datepicker>
+
+
                     <md-button class="  md-raised"
                                ng-click="vm.deleteCourseDate(vm.editCourseModel.courseModulesDates,item)">Видалити
                     </md-button>
                 </md-list-item>
             </md-list>
-            <md-input-container class="md-block  ">
+
                 <md-button class="md-raised" ng-click="vm.showAddDate()">Додати дату
                 </md-button>
-            </md-input-container>
 
-        </md-input-container>
+
+
         <md-divider></md-divider>
         <md-divider></md-divider>
         <md-input-container class="md-block ">

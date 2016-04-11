@@ -18,16 +18,14 @@
 
         vm.courses = [];
         vm.editCourseModel = {};
+        vm.editCourseModel.addNewDateModel = new Date();
         vm.showCourseEditForm = false;
-        vm.addModuleDateMolel = new Date();
         vm.deleteCourse = deleteCourse;
         vm.editCourse = editCourse;
         vm.toggleLeftMenu = toggleLeftMenu;
         vm.showEditForm = showEditForm;
         vm.showImageUpload = showImageUpload;
-        vm.closeEditCourseForm = closeEditCourseForm;
         vm.deleteCourseDate = deleteCourseDate;
-
         vm.showAddDate = showAddDate;
         vm.cancel = cancel;
         vm.saveModuleDate = saveModuleDate;
@@ -74,7 +72,8 @@
         function showEditForm(course) {
             $log.debug("model for edit ..." + course._id + "" + course.name);
             vm.editCourseModel = angular.copy(course);
-            vm.editCourseModel.oldIndex = vm.courses.indexOf(course)
+            vm.editCourseModel.oldIndex = vm.courses.indexOf(course);
+            vm.editCourseModel.courseModulesDates=[new Date(),new Date(),new Date()];
             vm.showCourseEditForm = true;
         }
 
@@ -105,17 +104,9 @@
 
         function saveModuleDate() {
             $mdDialog.hide();
-            $log.debug("new date..." + vm.addModuleDateMolel.toString());
-
-            vm.editCourseModel.courseModulesDates=[];
-            vm.editCourseModel.courseModulesDates.push(vm.addModuleDateMolel);
-            $log.debug("new date..." + vm.editCourseModel.courseModulesDates.length);
-        }
-
-        function closeEditCourseForm() {
-            vm.showCourseEditForm = false;
-            vm.editCourseModel = {};
-            vm.selectedIndexforEdit = null;
+            $log.debug("new date..." + vm.editCourseModel.addNewDateModel.toString());
+            //vm.editCourseModel.courseModulesDates.push(vm.editCourseModel.addNewDateModel);
+            $log.debug("typeof ..." + typeof  vm.editCourseModel.courseModulesDates );
         }
 
         function toggleLeftMenu() {
