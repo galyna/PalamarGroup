@@ -104,8 +104,8 @@
 
         function saveModuleDate() {
             $mdDialog.hide();
-            $log.debug("new date..." + vm.editCourseModel.addNewDateModel.toString());
-            //vm.editCourseModel.courseModulesDates.push(vm.editCourseModel.addNewDateModel);
+            $log.debug("new date..." + vm.editCourseModel.newDateModel.toString());
+            vm.editCourseModel.courseModulesDates.push(vm.editCourseModel.newDateModel);
             $log.debug("typeof ..." + typeof  vm.editCourseModel.courseModulesDates );
         }
 
