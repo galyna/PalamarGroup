@@ -18,7 +18,7 @@
 
         vm.courses = [];
         vm.editCourseModel = {};
-        vm.editCourseModel.addNewDateModel = new Date();
+        vm.editCourseModel.newDateModel = new Date();
         vm.showCourseEditForm = false;
         vm.deleteCourse = deleteCourse;
         vm.editCourse = editCourse;
