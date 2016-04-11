@@ -15,38 +15,7 @@ var CourseModule = require('../models/courseModule');
 var Order = require('../models/order');
 var Photo = require('../models/photo');
 
-api.get('/setup', function (req, res) {
-    //TODO: make dump of db and recover it on npm install
-    var testUsers = [
-        {
-            email: 'admin@email.com',
-            password: bcrypt.hashSync('admin', 8),
-            roles: ['admin']
-        },
-        {
-            email: 'moderator@email.com',
-            password: bcrypt.hashSync('moderator', 8),
-            roles: ['moderator']
-        },
-        {
-            email: 'user@email.com',
-            password: bcrypt.hashSync('user', 8),
-            roles: ['user']
-        }
-    ];
 
-    User.remove().then(function () {
-        return User.create(testUsers).then(function (users) {
-            if (!users.length) {
-                res.status(500);
-                return;
-            }
-
-            res.status(201).json(users);
-            console.log('test users created during setup');
-        });
-    });
-});
 api.post('/authenticate', function (req, res) {
     var email = req.body.email;
     var password = req.body.password;
