@@ -18,7 +18,6 @@
 
         vm.courses = [];
         vm.editCourseModel = {};
-        vm.editCourseModel.newDateModel = new Date();
         vm.showCourseEditForm = false;
         vm.deleteCourse = deleteCourse;
         vm.editCourse = editCourse;
@@ -73,7 +72,7 @@
             $log.debug("model for edit ..." + course._id + "" + course.name);
             vm.editCourseModel = angular.copy(course);
             vm.editCourseModel.oldIndex = vm.courses.indexOf(course);
-            vm.editCourseModel.courseModulesDates=[new Date(),new Date(),new Date()];
+            vm.editCourseModel.newDateModel = new Date();
             vm.showCourseEditForm = true;
         }
 
@@ -97,8 +96,7 @@
                 preserveScope: true,
                 template: $templateCache.get('admin/views/add.course.date.form.html'),
                 parent: angular.element(document.body),
-                clickOutsideToClose: true,
-
+                clickOutsideToClose: true
             });
         }
 

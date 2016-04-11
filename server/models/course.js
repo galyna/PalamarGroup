@@ -6,9 +6,9 @@ var CourseSchema = new Schema({
     price: Number,
     order: Number,
     videos: [String],
-    hearFormsPhotos: [String],
-    historyPhotos: [String],
-    author: {name: String, photourl: String},
+    hearFormsPhotos: [{type: Schema.Types.ObjectId, ref: 'Photo'}],
+    historyPhotos: [{type: Schema.Types.ObjectId, ref: 'Photo'}],
+    author: {name: String, photourl: {type: Schema.Types.ObjectId, ref: 'Photo'}},
     courseModulesDates: [Date],
     isVisible: Boolean,
 });
