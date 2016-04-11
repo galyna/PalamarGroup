@@ -27,7 +27,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-ng-annotate": "^2.0.0",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglify": "^1.5.3",
+    "gulp-uglify": "^1.5.3"
   },
   "scripts": {
     "prestart": "npm update"

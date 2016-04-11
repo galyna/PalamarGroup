@@ -1,0 +1,43 @@
+{
+  "user":[
+    {
+      "email": "admin@email.com",
+      "password": "admin",
+      "roles": ["admin"]
+    },
+    {
+      "email": "moderator@email.com",
+      "password": "moderator",
+      "roles": ["moderator"]
+    },
+    {
+      "email": "user@email.com",
+      "password": "user",
+      "roles": ["user"]
+    }
+  ],
+  "course": [
+    {
+      "name": "first event",
+      "description": "first event description",
+      "price": 123.45,
+      "order": 1,
+      "videos": [
+        "https://youtu.be/oLGQd2xv2KI",
+        "https://youtu.be/F8DEzSBY0rE"
+      ],
+      "hearFormsPhotos": [],
+      "historyPhotos": [],
+      "author": {
+        "name": "Galyna Krupska",
+        "photourl": "https://avatars3.githubusercontent.com/u/2136087?v=3&s=400"
+      },
+      "courseModulesDates": [
+        "Mon Apr 11 2016 17:33:08 GMT+0300 (EEST)",
+        "Tue Apr 12 2016 17:33:08 GMT+0300 (EEST)",
+        "Thu Apr 13 2016 17:33:08 GMT+0300 (EEST)"
+      ],
+      "isVisible": 1
+    }
+  ]
+}

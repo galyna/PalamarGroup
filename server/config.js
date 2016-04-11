@@ -1,7 +1,7 @@
 var config = {
     mongoUrl: 'mongodb://localhost:27017/palamar_group',
     appSecret: 'secretKey',
-    env: 'debug'
+    env: 'dev'
 };
 
 module.exports = config;

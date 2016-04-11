@@ -6,6 +6,12 @@ var bodyParser = require('body-parser');
 var port = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 
+//TODO: remove on production
+if(config.env === 'dev'){
+    var setupRouter = require('./routes/setup.endpoint');
+    app.use('/setup', setupRouter);
+}
+
 mongoose.connect(config.mongoUrl);
 
 app.use(bodyParser.json());

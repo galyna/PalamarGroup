@@ -5,7 +5,7 @@ var authenticate = require('./../auth/authenticate');
 var env = require('../config').env;
 
 function authIfDev (req, res, next){
-    if(env !== 'debug'){
+    if(env !== 'dev'){
         authenticate(req,res,next);
     }else{
         next();
