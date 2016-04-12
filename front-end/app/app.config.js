@@ -21,7 +21,7 @@ angular
                 controller: 'AdminController',
                 controllerAs: "vm"
             })
-            .when('/profile', {templateUrl: 'app/users/views/profile.html'})
+           
             .otherwise({redirectTo: '/home'});
 
 

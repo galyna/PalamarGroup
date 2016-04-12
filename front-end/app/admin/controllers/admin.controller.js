@@ -5,7 +5,7 @@
 
     angular
         .module('admin')
-        .controller('AdminController', ['$scope','$mdDialog', '$mdSidenav', '$templateCache', 'courseService', '$log', 'Upload', '$timeout', AdminController
+        .controller('AdminController', ['$scope', '$mdDialog', '$mdSidenav', '$templateCache', 'courseService', '$log', 'Upload', '$timeout', AdminController
         ]);
 
     /**
@@ -13,7 +13,7 @@
      * @param $mdDialog
      * @constructor
      */
-    function AdminController($scope,$mdDialog, $mdSidenav, $templateCache, courseService, $log, Upload, $timeout) {
+    function AdminController($scope, $mdDialog, $mdSidenav, $templateCache, courseService, $log, Upload, $timeout) {
         var vm = this;
 
         vm.courses = [];
@@ -21,15 +21,13 @@
         vm.showCourseEditForm = false;
         vm.deleteCourse = deleteCourse;
         vm.editCourse = editCourse;
-        vm.toggleLeftMenu = toggleLeftMenu;
         vm.showEditForm = showEditForm;
         vm.showImageUpload = showImageUpload;
         vm.deleteCourseDate = deleteCourseDate;
-        vm.showAddDate = showAddDate;
         vm.cancel = cancel;
         vm.saveModuleDate = saveModuleDate;
         vm.uploadPic = uploadPic;
-
+        vm.closeEditForm = closeEditForm;
         //init page data
         getCourses();
 
@@ -40,19 +38,15 @@
         function getCourses() {
             courseService.get().then(function (data) {
                 vm.courses = data;
+                vm.courses.forEach(function (item) {
+                    item.courseModulesDates = item.courseModulesDates.map(function (date) {
+                        return new Date(date);
+                    })
+                })
             })
         }
 
-        function deleteCourse(item) {
-            courseService.delete(item._id).then(function () {
-                vm.courses.splice(vm.courses.indexOf(item), 1);
-            })
-        }
-
-        function deleteCourseDate(list, item) {
-            list.splice(list.indexOf(item), 1);
-        }
-
+        //course edit start
         function editCourse(form) {
             if (form.$valid) {
                 courseService.put(vm.editCourseModel._id, vm.editCourseModel)
@@ -76,42 +70,40 @@
             vm.showCourseEditForm = true;
         }
 
+        function closeEditForm() {
+            vm.editCourseModel = {};
+            vm.showCourseEditForm = false;
+        }
+
+        //course date start
+        function saveModuleDate() {
+            $mdDialog.hide();
+            $log.debug("new date..." + vm.editCourseModel.newDateModel.toString());
+            vm.editCourseModel.courseModulesDates.push(vm.editCourseModel.newDateModel);
+            $log.debug("typeof ..." + typeof  vm.editCourseModel.courseModulesDates);
+        }
+
+        function deleteCourseDate(list, item) {
+            list.splice(list.indexOf(item), 1);
+        }
+
+        //course date end
+
+        //course image upload start
         function showImageUpload(coll) {
-            vm.editCourseModel.selectedPhotoColl=coll;
+            vm.editCourseModel.selectedPhotoColl = coll;
             $mdDialog.show({
-                scope:$scope,
+                scope: $scope,
                 template: $templateCache.get('admin/views/upload.form.html'),
                 parent: angular.element(document.body),
                 clickOutsideToClose: true,
             });
         }
 
-        function showAddDate() {
-            $mdDialog.show({
-                controller: 'AdminController',
-                controllerAs: "vm",
-                preserveScope: true,
-                template: $templateCache.get('admin/views/add.course.date.form.html'),
-                parent: angular.element(document.body),
-                clickOutsideToClose: true
-            });
-        }
-
-        function saveModuleDate() {
-            $mdDialog.hide();
-            $log.debug("new date..." + vm.editCourseModel.newDateModel.toString());
-            vm.editCourseModel.courseModulesDates.push(vm.editCourseModel.newDateModel);
-            $log.debug("typeof ..." + typeof  vm.editCourseModel.courseModulesDates );
-        }
-
-        function toggleLeftMenu() {
-            $mdSidenav('left').toggle();
-        }
-
         function uploadPic(file) {
 
             file.upload = Upload.upload({
-                url: '/api/course/'+ vm.editCourseModel._id+'/hearFormsPhotos',
+                url: '/api/course/' + vm.editCourseModel._id + '/hearFormsPhotos',
                 data: {name: vm.photoName, file: file}
             });
 
@@ -127,6 +119,17 @@
                 file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
             });
         }
+
+        //course image upload end
+        //course edit end
+
+        function deleteCourse(item) {
+            courseService.delete(item._id).then(function () {
+                vm.courses.splice(vm.courses.indexOf(item), 1);
+            })
+        }
+
+
     }
 })();
 

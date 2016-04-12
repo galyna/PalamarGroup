@@ -27,7 +27,7 @@
             <md-list flex>
                 <md-subheader class="md-no-sticky">Модулі</md-subheader>
                 <md-list-item class="md-2-line " ng-repeat="item in vm.courses" ng-click="null">
-                    <img ng-src="{{item.hearFormsPhotos[0]}}?{{$index}}" class="md-avatar" />
+                    <img ng-src="{{item.hearFormsPhotos[0].url}}?{{$index}}" class="md-avatar" />
                     <div class="md-list-item-text" layout="column">
                         <h3>{{ item.name }}</h3>
                         <md-list layout="row" layout-align="center center">
