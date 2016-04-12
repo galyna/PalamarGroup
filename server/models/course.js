@@ -17,11 +17,14 @@ var CourseSchema = new Schema({
         url: String,
         order: Number
     }],
-    author: {name: String, photourl: {
-        name: String,
-        url: String,
-        order: Number
-    }},
+    author: {
+        name: String, 
+        photo: {
+            name: String,
+            url: String,
+            order: Number
+        }
+    },
     courseModulesDates: [Date],
     isVisible: Boolean
 });

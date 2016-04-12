@@ -104,7 +104,8 @@
 
             file.upload = Upload.upload({
                 url: '/api/course/' + vm.editCourseModel._id + '/hearFormsPhotos',
-                data: {name: vm.photoName, file: file}
+                data: {name: vm.photoName, file: file},
+                method: 'PUT'
             });
 
             file.upload.then(function (response) {
