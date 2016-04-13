@@ -5,6 +5,7 @@ var api = express.Router();
 var jwt = require('jsonwebtoken');
 var restEndpoint = require('./rest.endpoint');
 var userEndpoint = require('./user.endpoint');
+var courseEndpoint = require('./course.endpoint');
 var bcrypt = require('bcrypt-nodejs');
 
 //models
@@ -12,7 +13,6 @@ var User = require('../models/user');
 var Contact = require('../models/contact');
 var Course = require('../models/course');
 var Order = require('../models/order');
-
 
 api.post('/authenticate', function (req, res) {
     var email = req.body.email;
@@ -47,7 +47,7 @@ api.post('/authenticate', function (req, res) {
 
 
 api.use('/contact', restEndpoint(Contact));
-api.use('/course', restEndpoint(Course));
+api.use('/course', courseEndpoint, restEndpoint(Course));
 api.use('/order', restEndpoint(Order));
 api.use('/user', userEndpoint);
 
