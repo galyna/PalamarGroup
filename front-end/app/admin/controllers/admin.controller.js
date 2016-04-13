@@ -13,7 +13,7 @@
      * @param $mdDialog
      * @constructor
      */
-    function AdminController($scope, $mdDialog, $mdSidenav, $templateCache, courseService, $log, Upload, $timeout) {
+    function AdminController( adminService, $log, Upload, $timeout) {
         var vm = this;
 
         vm.courses = [];
@@ -38,7 +38,7 @@
         getCourses();
 
         function getCourses() {
-            courseService.get().then(function (data) {
+            adminService.get().then(function (data) {
                 vm.courses = data;
                 vm.courses.forEach(function (item) {
                     item.courseModulesDates = item.courseModulesDates.map(function (date) {
@@ -72,7 +72,7 @@
         function createCourse(form) {
             $log.debug("createCourse ...$valid" + form.$valid);
             if (form.$valid) {
-                courseService.post(vm.newCourseModel)
+                adminService.post(vm.newCourseModel)
                     .then(function (course) {
                         $log.debug("success createCourse...");
                         vm.courses.push(course);
@@ -92,7 +92,7 @@
             $log.debug("editCourse ...$valid" + form.$valid);
             $log.debug("editCourse ...vm.editCourseModel._id===" + vm.editCourseModel._id);
             if (form.$valid) {
-                courseService.put(vm.editCourseModel._id, vm.editCourseModel)
+                adminService.put(vm.editCourseModel._id, vm.editCourseModel)
                     .then(function () {
                         vm.courses.splice(vm.editCourseModel.oldIndex, 1, vm.editCourseModel);
                         vm.editCourseModel = {};
@@ -168,7 +168,7 @@
 
         //course date end
         function deleteCourse(item) {
-            courseService.delete(item._id).then(function () {
+            adminService.delete(item._id).then(function () {
                 vm.courses.splice(vm.courses.indexOf(item), 1);
             })
         }

@@ -1,4 +1,10 @@
 /**
+ * Created by Galyna on 13.04.2016.
+ */
+/**
+ * Created by Galyna on 09.04.2016.
+ */
+/**
  * Created by Galyna on 08.04.2016.
  */
 (function(){
@@ -7,31 +13,31 @@
     angular.module('admin').service('adminService', AdminService);
 
     AdminService.$inject = ['$http', 'constants'];
-    
+
     function AdminService($http, constants){
-        var url = constants.apiUrl + '/user';
+        var url = constants.apiUrl + '/course';
         //TODO: implement filtering
-        this.get = function(email){
-            var getUrl = email ? url + '/' + email : url;
+        this.get = function(id){
+            var getUrl = id ? url + '/' + id : url;
             return $http.get(getUrl).then(function(res){
                 return res.data;
             });
         };
 
-        this.post = function(user){
-            return $http.post(url, user).then(function(res){
+        this.post = function(course){
+            return $http.post(url, course).then(function(res){
                 return res.data;
             });
         };
 
-        this.put = function(email, user){
-            return $http.put(url + '/' + email, user).then(function(res){
+        this.put = function(id, course){
+            return $http.put(url + '/' + id, course).then(function(res){
                 return res.data;
             });
         };
 
-        this.delete = function(email){
-            return $thhp.delete(url + '/' + email).then(function(res){
+        this.delete = function(id){
+            return $http.delete(url + '/' + id).then(function(res){
                 return res.data;
             });
         }
