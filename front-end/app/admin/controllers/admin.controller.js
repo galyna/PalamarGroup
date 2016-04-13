@@ -84,6 +84,7 @@
 
             }
         }
+
         //course creation start
 
         // course edit start
@@ -110,6 +111,7 @@
             vm.editCourseModel.newDateModel = new Date();
             vm.showCourseEditForm = true;
         }
+
         //course edit end
 
         //course image upload start
@@ -148,8 +150,15 @@
                 });
             }).catch(function (err) {
                 console.log(err);
+            }).finally(function () {
+                $timeout(function () {
+                    vm.showFormPhotoUpload = false;
+                    vm.showHistoryPhotoUpload = false;
+                });
             });
+            ;
         }
+
         //course image upload end
 
         //course date start

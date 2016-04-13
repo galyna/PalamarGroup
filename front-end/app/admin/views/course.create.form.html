@@ -32,7 +32,7 @@
         <md-divider></md-divider>
         <md-divider></md-divider>
         <!--dates-->
-        <md-list flex>
+        <md-list class="md-dense" flex>
             <md-subheader class="md-no-sticky">Дати модулів</md-subheader>
             <md-list-item class="md-1-line" ng-repeat="date in vm.newCourseModel.courseModulesDates track by $index">
                 <md-datepicker ng-model="date" disabled="true"></md-datepicker>
@@ -75,7 +75,7 @@
         <md-divider></md-divider>
         <md-divider></md-divider>
         <!--hearForm-->
-        <md-list flex>
+        <md-list class="md-dense" flex>
             <md-subheader class="md-no-sticky">Форми модулів</md-subheader>
             <md-list-item class="md-1-line" ng-repeat="item in vm.newCourseModel.hearFormsPhotos track by $index"
                           ng-click="null">
@@ -112,7 +112,7 @@
         <md-divider></md-divider>
         <md-divider></md-divider>
         <!--history-->
-        <md-list flex>
+        <md-list class="md-dense" flex>
             <md-subheader class="md-no-sticky">Форми історії попередніх модулів</md-subheader>
             <md-list-item class="md-1-line" ng-repeat="item in vm.newCourseModel.historyPhotos" ng-click="null">
                 <img ng-src="{{item.url}}"/>
