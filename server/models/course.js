@@ -21,10 +21,7 @@ var CourseSchema = new Schema({
     historyPhotos: [PhotoSchema],
     author: {
         name: String, 
-        photo: {
-            name: String,
-            url: String
-        }
+        photoUrl: String
     },
     courseModulesDates: [Date],
     isVisible: Boolean
