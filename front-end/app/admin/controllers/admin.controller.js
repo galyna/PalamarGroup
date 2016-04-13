@@ -19,15 +19,16 @@
         vm.courses = [];
         vm.editCourseModel = {};
         vm.showCourseEditForm = false;
+        vm.showImageUpload = false;
+
         vm.deleteCourse = deleteCourse;
         vm.editCourse = editCourse;
         vm.showEditForm = showEditForm;
-        vm.showImageUpload = showImageUpload;
-        vm.deleteCourseDate = deleteCourseDate;
-        vm.cancel = cancel;
-        vm.saveModuleDate = saveModuleDate;
-        vm.uploadPic = uploadPic;
         vm.closeEditForm = closeEditForm;
+        vm.deleteFromList = deleteFromList;
+        vm.saveModuleDate = saveModuleDate;
+        vm.uploadPhoto = uploadPhoto;
+
         //init page data
         getCourses();
 
@@ -48,10 +49,11 @@
 
         //course edit start
         function editCourse(form) {
+            $log.debug("editCourse ...$valid" + form.$valid);
             if (form.$valid) {
                 courseService.put(vm.editCourseModel._id, vm.editCourseModel)
                     .then(function (course) {
-                        $log.debug("selectedIndexforEdit ..." + vm.selectedIndexforEdit);
+                        $log.debug("selectedIndexforEdit ..." + vm.editCourseModel.oldIndex);
                         vm.courses.splice(vm.editCourseModel.oldIndex, 1, vm.editCourseModel);
                         vm.selectedIndexforEdit = null;
                         vm.showCourseEditForm = false;
@@ -80,44 +82,28 @@
             $mdDialog.hide();
             $log.debug("new date..." + vm.editCourseModel.newDateModel.toString());
             vm.editCourseModel.courseModulesDates.push(vm.editCourseModel.newDateModel);
-            $log.debug("typeof ..." + typeof  vm.editCourseModel.courseModulesDates);
         }
 
-        function deleteCourseDate(list, item) {
+        function deleteFromList(list, item) {
             list.splice(list.indexOf(item), 1);
         }
 
         //course date end
 
         //course image upload start
-        function showImageUpload(coll) {
-            vm.editCourseModel.selectedPhotoColl = coll;
-            $mdDialog.show({
-                scope: $scope,
-                template: $templateCache.get('admin/views/upload.form.html'),
-                parent: angular.element(document.body),
-                clickOutsideToClose: true,
-            });
-        }
-
-        function uploadPic(file) {
+        function uploadPhoto(file,collection) {
 
             file.upload = Upload.upload({
                 url: '/api/course/' + vm.editCourseModel._id + '/hearFormsPhotos',
-                data: {name: vm.photoName, file: file},
-                method: 'PUT'
+                data: {name: "", file: file}
+
             });
 
             file.upload.then(function (response) {
                 $timeout(function () {
-                    $mdDialog.hide();
+                    vm.showImageUpload=false;
+                    collection.push(response.data);
                 });
-            }, function (response) {
-                if (response.status > 0)
-                    vm.upload.errorMsg = response.status + ': ' + response.data;
-            }, function (evt) {
-                // Math.min is to fix IE which reports 200% sometimes
-                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
             });
         }
 

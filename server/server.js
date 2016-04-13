@@ -47,8 +47,8 @@ app.post('/api/course/:_id/hearFormsPhotos', function (req, res, next) {
             course.hearFormsPhotos.push(photoModel);
             return course.save();
         })
-        .then(function (course) {
-            res.status(201).json(course);
+        .then(function () {
+            res.status(201).json(photoModel);
         })
         .catch(function(err){
             res.send(500, err);
