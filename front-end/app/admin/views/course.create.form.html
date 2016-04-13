@@ -4,7 +4,7 @@
         <span flex></span>
     </div>
 </md-toolbar>
-<form name="createCorseForm" class="md-padding " novalidate ng-submit="vm.createOrUpdateCourse(createCorseForm)">
+<form name="createCorseForm" class="md-padding " novalidate ng-submit="vm.createCourse(createCorseForm)">
     <md-content>
         <md-input-container class="md-block ">
             <md-checkbox ng-model="vm.newCourseModel.isVisible" aria-label="Чи паказати?">
@@ -31,6 +31,7 @@
         </md-input-container>
         <md-divider></md-divider>
         <md-divider></md-divider>
+        <!--dates-->
         <md-list flex>
             <md-subheader class="md-no-sticky">Дати модулів</md-subheader>
             <md-list-item class="md-1-line" ng-repeat="date in vm.newCourseModel.courseModulesDates track by $index">
@@ -42,26 +43,42 @@
         </md-list>
         <label for="price">Додати дату</label>
         <md-datepicker ng-model="vm.newCourseModel.newDateModel"></md-datepicker>
-        <md-button class="md-raised" ng-click="vm.saveModuleDate(vm.newCourseModel,vm.newCourseModel.newDateModel)">Зберегти
+        <md-button class="md-raised" ng-click="vm.saveModuleDate(vm.newCourseModel,vm.newCourseModel.newDateModel)">
+            Зберегти
         </md-button>
         <md-divider></md-divider>
         <md-divider></md-divider>
-        <md-input-container class="md-block ">
-            <label for="price">Ім`я автора</label>
-            <input id="nameauthor" ng-model="vm.newCourseModel.author.name" name="nameauthor"/>
+        <!--author-->
+        <md-input-container class="md-block">
+            <label>Їм`я автора</label>
+            <input ng-model="vm.newCourseModel.author.name" id="author-name" name="author-name">
         </md-input-container>
-        <md-input-container class="md-block ">
+        <div>
             <label for="price">Фото автора</label>
-            <div layout="row">
+            <div>
                 <img ng-src="{{vm.newCourseModel.author.photourl}}"/>
-                <md-button ng-click="vm.showImageUpload()">змінити фото автора</md-button>
+                <br/>
+                <md-button ng-if="!vm.showAuthorPhotoUpload" class="md-raised" ng-click="vm.showAuthorPhotoUpload=true">
+                    Змінити фото автора
+                </md-button>
+                <div ng-if="vm.showAuthorPhotoUpload">
+                    <input type="file" ngf-select ng-model="authorPhotoFile" name="authorPhotoFile"
+                           accept="image/*" required/>
+
+                    <!--TODO: add validation-->
+                    <md-button class="md-raised" ng-disabled="!authorPhotoFile"
+                               ng-click="vm.uploadAuthorPhoto(authorPhotoFile,vm.newCourseModel)">Завантажити
+                    </md-button>
+                </div>
             </div>
-        </md-input-container>
+        </div>
         <md-divider></md-divider>
         <md-divider></md-divider>
+        <!--hearForm-->
         <md-list flex>
             <md-subheader class="md-no-sticky">Форми модулів</md-subheader>
-            <md-list-item class="md-1-line" ng-repeat="item in vm.newCourseModel.hearFormsPhotos track by $index" ng-click="null">
+            <md-list-item class="md-1-line" ng-repeat="item in vm.newCourseModel.hearFormsPhotos track by $index"
+                          ng-click="null">
                 <img ng-src="{{item.url}}"/>
                 <div layout="column">
                     <md-input-container class="md-block  ">
@@ -84,28 +101,30 @@
                 Додати форму
             </md-button>
             <div ng-if="vm.showFormPhotoUpload">
-                <input type="file" ngf-select ng-model="newHearFormsFile" name="newHearFormsFile"
+                <input type="file" ngf-select ng-model="hearFormsFile" name="hearFormsFile"
                        accept="image/*" required/>
-                <label>Назва форми:</label>
-                <!--TODO: add validation-->
-                <input type="text" name="newFormsPhotoName" ng-model="newFormsPhotoName">
                 <md-button class="md-raised" ng-disabled="!createCorseForm.$valid"
-                           ng-click="vm.sendForUpload(newHearFormsFile,newFormsPhotoName,vm.editCourseModel,'hearFormsPhotos')">Завантажити
+                           ng-click="vm.uploadCollPhoto(hearFormsFile,vm.newCourseModel.hearFormsPhotos,vm.showFormPhotoUpload)">
+                    Завантажити
                 </md-button>
             </div>
         </div>
         <md-divider></md-divider>
         <md-divider></md-divider>
-
+        <!--history-->
         <md-list flex>
             <md-subheader class="md-no-sticky">Форми історії попередніх модулів</md-subheader>
-            <md-list-item class="md-3-line" ng-repeat="item in vm.newCourseModel.historyPhotos" ng-click="null">
+            <md-list-item class="md-1-line" ng-repeat="item in vm.newCourseModel.historyPhotos" ng-click="null">
                 <img ng-src="{{item.url}}"/>
-                <div class="md-list-item-text" layout="row">
+                <div layout="column">
                     <md-input-container class="md-block  ">
 
                         <label for="name">Назва форми</label>
                         <input id="historyNme" ng-model="item.name" name="historyNme"/>
+                    </md-input-container>
+                    <md-input-container class="md-block  ">
+                        <label for="ord">Порядок відображення</label>
+                        <input id="orvd" ng-model="item.order" type="number"/>
                     </md-input-container>
                     <md-button class="  md-raised"
                                ng-click="vm.deleteFromList(vm.newCourseModel.historyPhotos,item)">
@@ -122,16 +141,15 @@
                 <input type="file" ngf-select ng-model="historyPhotoFile" name="historyPhotoFile"
                        accept="image/*" required/>
                 <!--TODO: add validation-->
-                <label for="name">Підпис фото</label>
-                <input id="newHistoryPhotoName" ng-model="newHistoryPhotoName" name="newHistoryPhotoName" />
-                <md-button class="md-raised" ng-disabled="!createCorseForm.$valid"
-                           ng-click="vm.sendForUpload(historyPhotoFile,newHistoryPhotoName,vm.newCourseModel,'historyPhotos')">Завантажити
+                <md-button class="md-raised" ng-disabled="!historyPhotoFile"
+                           ng-click="vm.uploadCollPhoto(historyPhotoFile,vm.newCourseModel.historyPhotos,vm.showHistoryPhotoUpload)">
+                    Завантажити
                 </md-button>
             </div>
         </div>
     </md-content>
     <div layout="row" md-whiteframe="4">
-        <md-button class="md-raised md-primary" ng-click="vm.cancelCourseCreate()">Скасувати</md-button>
+        <md-button class="md-raised md-primary" ng-click="vm.showCourseCreateForm = false">Скасувати</md-button>
         <md-button type="submit" class="md-raised md-accent">Зберегти</md-button>
     </div>
 </form>

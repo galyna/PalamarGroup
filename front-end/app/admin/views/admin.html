@@ -22,7 +22,7 @@
     </div>
     <div flex="75">
         <md-content>
-            <md-button ng-if="!vm.showCourseCreateForm" class="md-raised" ng-click="vm.showCreateForm()">
+            <md-button ng-if="!vm.showCourseCreateForm && !vm.showCourseEditForm" class="md-raised" ng-click="vm.showCreateForm()">
                 Додати модуль
             </md-button>
             <div ng-if="vm.showCourseCreateForm && !vm.showCourseEditForm" ng-include="'admin/views/course.create.form.html'" ></div>

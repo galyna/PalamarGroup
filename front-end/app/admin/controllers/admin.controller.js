@@ -18,21 +18,21 @@
 
         vm.courses = [];
         vm.editCourseModel = {};
-        vm.showCourseEditForm = false;
-        vm.showHistoryPhotoUpload= false;
-        vm.showFormPhotoUpload= false;
         vm.newCourseModel = {};
-        vm.createOrUpdateCourse = createOrUpdateCourse;
-        vm.cancelCourseCreate = cancelCourseCreate;
+        vm.showCourseEditForm = false;
+        vm.showCourseCreateForm = false;
+        vm.showHistoryPhotoUpload = false;
+        vm.showFormPhotoUpload = false;
+
+        vm.createCourse = createCourse;
         vm.deleteCourse = deleteCourse;
         vm.editCourse = editCourse;
         vm.showEditForm = showEditForm;
         vm.showCreateForm = showCreateForm;
-        vm.closeEditForm = closeEditForm;
         vm.deleteFromList = deleteFromList;
         vm.saveModuleDate = saveModuleDate;
-        vm.sendForUpload = sendForUpload;
         vm.uploadAuthorPhoto = uploadAuthorPhoto;
+        vm.uploadCollPhoto = uploadCollPhoto;
 
         //init page data
         getCourses();
@@ -48,8 +48,9 @@
             })
         }
 
-        function getCourseEmptyModel() {
-            return {
+        //course creation start
+        function showCreateForm() {
+            vm.newCourseModel = {
                 name: "",
                 description: "",
                 price: 0,
@@ -65,56 +66,41 @@
                 isVisible: true,
                 newDateModel: new Date()
             };
-        }
-
-        //course creation start
-        function showCreateForm() {
-            vm.newCourseModel = getCourseEmptyModel();
             vm.showCourseCreateForm = true;
         }
 
-        function cancelCourseCreate() {
-            if (vm.newCourseModel_id) {
-                deleteCourse(vm.newCourseModel);
-            }
-            vm.showCourseCreateForm = false;
-        }
-
-        function createOrUpdateCourse(form) {
+        function createCourse(form) {
             $log.debug("createCourse ...$valid" + form.$valid);
-            if (form.$valid && !vm.newCourseModel._id) {
+            if (form.$valid) {
                 courseService.post(vm.newCourseModel)
                     .then(function (course) {
                         $log.debug("success createCourse...");
                         vm.courses.push(course);
-                        vm.showCourseCreateForm = false;
-                    }, function () {
-                        $log.debug("fail createCourse...");
-                    })
-            }else {
-                courseService.put(vm.newCourseModel._id, vm.newCourseModel)
-                    .then(function (course) {
-                        vm.courses.push(vm.newCourseModel);
-                        vm.showCourseCreateForm = false;
-                    }, function () {
-                        $log.debug("fail editCourse...");
-                    })
+                    }).catch(function (err) {
+                    $log.debug("fail createCourse..." + err);
+                }).finally(function () {
+                    vm.showCourseCreateForm = false;
+                });
+
             }
         }
+
         //course creation start
 
         // course edit start
         function editCourse(form) {
             $log.debug("editCourse ...$valid" + form.$valid);
+            $log.debug("editCourse ...vm.editCourseModel._id===" + vm.editCourseModel._id);
             if (form.$valid) {
                 courseService.put(vm.editCourseModel._id, vm.editCourseModel)
-                    .then(function (course) {
+                    .then(function () {
                         vm.courses.splice(vm.editCourseModel.oldIndex, 1, vm.editCourseModel);
-                        vm.showCourseEditForm = false;
                         vm.editCourseModel = {};
-                    }, function () {
-                        $log.debug("fail editCourse...");
-                    })
+                    }).catch(function (err) {
+                    $log.debug("fail editCourse..." + err);
+                }).finally(function () {
+                    vm.showCourseEditForm = false;
+                });
             }
         }
 
@@ -126,43 +112,48 @@
             vm.showCourseEditForm = true;
         }
 
-        function closeEditForm() {
-            vm.editCourseModel = {};
-            vm.showCourseEditForm = false;
-        }
-
         //course edit end
         //course image upload start
-        function uploadPhoto(file,name, collection,url) {
+        function uploadAuthorPhoto(file, model) {
             file.upload = Upload.upload({
-                url: url,
-                data: {name: name, file: file}
+                url: '/api/photo',
+                data: {file: file}
             });
 
             file.upload.then(function (response) {
                 $timeout(function () {
-                    vm.showHistoryPhotoUpload= false;
-                    vm.showFormPhotoUpload= false;
-                    collection.push(response.data);
+                    model.author.photourl = response.data.url;
+                });
+            }).catch(function (err) {
+                console.log(err);
+            }).finally(function () {
+                $timeout(function () {
+                    vm.showAuthorPhotoUpload = false;
                 });
             });
         }
 
-        function sendForUpload(file,name,model,collectionName) {
-            var url='/api/course/';
-            if(!model._id){
-                courseService.post(vm.newCourseModel)
-                    .then(function (course) {
-                        url+= course._id + '/'+collectionName;
-                        vm.newCourseModel=course;
-                        uploadPhoto(file,name,vm.newCourseModel[collectionName],url)
-                    }, function () {
-                        $log.debug("fail createCourse...");
+        function uploadCollPhoto(file, collection, showFlag) {
+            file.upload = Upload.upload({
+                url: '/api/photo',
+                data: {file: file}
+            });
+
+            file.upload.then(function (response) {
+                $timeout(function () {
+                    collection.push({
+                        name: "",
+                        url: response.data.url,
+                        order: 0
                     })
-            }else{
-                url+= model._id + '/'+collectionName;
-                uploadPhoto(file,name, model[collectionName],url)
-            }
+                });
+            }).catch(function (err) {
+                console.log(err);
+            }).finally(function () {
+                $timeout(function () {
+                    showFlag = false;
+                });
+            });
         }
 
         //course image upload end
@@ -182,24 +173,6 @@
             list.splice(list.indexOf(item), 1);
         }
 
-        function uploadAuthorPhoto(file){
-            file.upload = Upload.upload({
-                url: '/api/photo',
-                data: {file: file}
-            });
-
-            file.upload.then(function (response) {
-                $timeout(function () {
-                    vm.editCourseModel.author.photourl = response.data.url;
-                });
-            }).catch(function(err){
-                console.log(err);
-            }).finally(function(){
-                $timeout(function () {
-                    vm.showAuthorPhotoUpload= false;
-                });
-            });
-        }
 
     }
 })
