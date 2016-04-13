@@ -39,7 +39,7 @@
         <md-divider></md-divider>
         <md-list flex>
             <md-subheader class="md-no-sticky">Дати модулів</md-subheader>
-            <md-list-item class="md-3-line" ng-repeat="date in vm.editCourseModel.courseModulesDates track by $index">
+            <md-list-item class="md-1-line" ng-repeat="date in vm.newCourseModel.courseModulesDates track by $index">
                 <md-datepicker ng-model="date" disabled="true"></md-datepicker>
                 <md-button class="  md-raised" ng-click="vm.deleteFromList(vm.newCourseModel.courseModulesDates,date)">
                     Видалити
@@ -48,7 +48,7 @@
         </md-list>
         <label for="price">Додати дату</label>
         <md-datepicker ng-model="vm.newCourseModel.newDateModel"></md-datepicker>
-        <md-button class="md-raised" ng-click="vm.newCourseModel.courseModulesDates.push(vm.newCourseModel.newDateModel)">Зберегти
+        <md-button class="md-raised" ng-click="vm.saveModuleDate(vm.newCourseModel,vm.newCourseModel.newDateModel)">Зберегти
         </md-button>
         <md-divider></md-divider>
         <md-divider></md-divider>
@@ -68,9 +68,9 @@
 
         <md-list flex>
             <md-subheader class="md-no-sticky">Форми модулів</md-subheader>
-            <md-list-item class="md-3-line" ng-repeat="item in vm.newCourseModel.hearFormsPhotos track by $index" ng-click="null">
+            <md-list-item class="md-1-line" ng-repeat="item in vm.newCourseModel.hearFormsPhotos track by $index" ng-click="null">
                 <img ng-src="{{item.url}}"/>
-                <div layout="row">
+                <div layout="column">
                     <md-input-container class="md-block  ">
                         <label for="name">Назва форми</label>
                         <input id="photoName" ng-model="item.name" name="photoName"/>

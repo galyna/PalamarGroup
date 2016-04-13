@@ -81,7 +81,7 @@
         function createCourse(form) {
             $log.debug("createCourse ...$valid" + form.$valid);
             if (form.$valid) {
-                courseService.post(vm.editCourseModel)
+                courseService.post(vm.newCourseModel)
                     .then(function (course) {
                         vm.courses.push(course);
                         vm.showCourseCreateForm = false
@@ -142,7 +142,7 @@
         //course image upload end
         //course date start
         function saveModuleDate(model, date) {
-            $log.debug("model.courseModulesDates ..." + typeof model.courseModulesDates);
+            $log.debug("model.courseModulesDates ..length." +  model.courseModulesDates.length);
             model.courseModulesDates.push(date);
         }
 
