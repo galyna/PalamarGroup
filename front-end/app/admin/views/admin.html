@@ -22,6 +22,10 @@
     </div>
     <div flex="75">
         <md-content>
+            <md-button ng-if="!vm.showCourseCreateForm" class="md-raised" ng-click="vm.showCreateForm()">
+                Додати модуль
+            </md-button>
+            <div ng-if="vm.showCourseCreateForm" ng-include="'admin/views/course.create.form.html'" ></div>
             <div ng-if="vm.showCourseEditForm" ng-include="'admin/views/course.edit.form.html'" ></div>
             <md-list flex>
                 <md-subheader class="md-no-sticky">Модулі</md-subheader>

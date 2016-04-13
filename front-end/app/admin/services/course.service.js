@@ -21,8 +21,8 @@
             });
         };
 
-        this.post = function(user){
-            return $http.post(url, user).then(function(res){
+        this.post = function(course){
+            return $http.post(url, course).then(function(res){
                 return res.data;
             });
         };

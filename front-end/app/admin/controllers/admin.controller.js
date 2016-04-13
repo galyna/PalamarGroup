@@ -20,10 +20,13 @@
         vm.editCourseModel = {};
         vm.showCourseEditForm = false;
         vm.showImageUpload = false;
-
+        vm.newCourseModel = {};
+        vm.createCourse = createCourse;
+        vm.cancelCourseCreate = cancelCourseCreate;
         vm.deleteCourse = deleteCourse;
         vm.editCourse = editCourse;
         vm.showEditForm = showEditForm;
+        vm.showCreateForm = showCreateForm;
         vm.closeEditForm = closeEditForm;
         vm.deleteFromList = deleteFromList;
         vm.saveModuleDate = saveModuleDate;
@@ -31,10 +34,6 @@
 
         //init page data
         getCourses();
-
-        function cancel() {
-            $mdDialog.hide();
-        }
 
         function getCourses() {
             courseService.get().then(function (data) {
@@ -47,7 +46,54 @@
             })
         }
 
-        //course edit start
+        function getCourseEmptyModel() {
+            return {
+                name: "",
+                description: "",
+                price: 0,
+                order: 0,
+                videos: [],
+                hearFormsPhotos: [],
+                historyPhotos: [],
+                author: {
+                    name: "",
+                    photoUrl: "",
+                },
+                courseModulesDates: [],
+                isVisible: true,
+                newDateModel: new Date()
+            };
+        }
+
+        //course creation start
+        function showCreateForm() {
+            vm.newCourseModel = getCourseEmptyModel();
+            vm.showCourseCreateForm = true;
+        }
+
+        function cancelCourseCreate() {
+            if (vm.newCourseModel_id) {
+                deleteCourse(vm.newCourseModel);
+            }
+            vm.showCourseCreateForm = false;
+        }
+
+        function createCourse(form) {
+            $log.debug("createCourse ...$valid" + form.$valid);
+            if (form.$valid) {
+                courseService.post(vm.editCourseModel)
+                    .then(function (course) {
+                        vm.courses.push(course);
+                        vm.showCourseCreateForm = false
+                    }, function () {
+                        $log.debug("fail createCourse...");
+                    })
+            }
+        }
+
+        //course creation start
+
+        // course edit start
         function editCourse(form) {
             $log.debug("editCourse ...$valid" + form.$valid);
             if (form.$valid) {
@@ -77,47 +123,42 @@
             vm.showCourseEditForm = false;
         }
 
-        //course date start
-        function saveModuleDate() {
-            $mdDialog.hide();
-            $log.debug("new date..." + vm.editCourseModel.newDateModel.toString());
-            vm.editCourseModel.courseModulesDates.push(vm.editCourseModel.newDateModel);
-        }
-
-        function deleteFromList(list, item) {
-            list.splice(list.indexOf(item), 1);
-        }
-
-        //course date end
-
+        //course edit end
         //course image upload start
-        function uploadPhoto(file,collection) {
-
+        function uploadPhoto(file, collection) {
             file.upload = Upload.upload({
                 url: '/api/course/' + vm.editCourseModel._id + '/hearFormsPhotos',
                 data: {name: "", file: file}
-
             });
 
             file.upload.then(function (response) {
                 $timeout(function () {
-                    vm.showImageUpload=false;
+                    vm.showImageUpload = false;
                     collection.push(response.data);
                 });
             });
         }
 
         //course image upload end
-        //course edit end
+        //course date start
+        function saveModuleDate(model, date) {
+            $log.debug("model.courseModulesDates ..." + typeof model.courseModulesDates);
+            model.courseModulesDates.push(date);
+        }
 
+        //course date end
         function deleteCourse(item) {
             courseService.delete(item._id).then(function () {
                 vm.courses.splice(vm.courses.indexOf(item), 1);
             })
         }
 
+        function deleteFromList(list, item) {
+            list.splice(list.indexOf(item), 1);
+        }
 
     }
-})();
+})
+();
 
 
