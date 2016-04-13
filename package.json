@@ -20,7 +20,8 @@
     "jsonwebtoken": "^5.7.0",
     "material-design-icons": "^2.2.3",
     "mongoose": "^4.4.8",
-    "ng-file-upload": "^12.0.4"
+    "ng-file-upload": "^12.0.4",
+    "node-uuid": "^1.4.7"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

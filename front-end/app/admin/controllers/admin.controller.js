@@ -32,6 +32,7 @@
         vm.deleteFromList = deleteFromList;
         vm.saveModuleDate = saveModuleDate;
         vm.sendForUpload = sendForUpload;
+        vm.uploadAuthorPhoto = uploadAuthorPhoto;
 
         //init page data
         getCourses();
@@ -58,7 +59,7 @@
                 historyPhotos: [],
                 author: {
                     name: "",
-                    photoUrl: "",
+                    photoUrl: ""
                 },
                 courseModulesDates: [],
                 isVisible: true,
@@ -179,6 +180,25 @@
 
         function deleteFromList(list, item) {
             list.splice(list.indexOf(item), 1);
+        }
+
+        function uploadAuthorPhoto(file){
+            file.upload = Upload.upload({
+                url: '/api/photo',
+                data: {file: file}
+            });
+
+            file.upload.then(function (response) {
+                $timeout(function () {
+                    vm.editCourseModel.author.photourl = response.data.url;
+                });
+            }).catch(function(err){
+                console.log(err);
+            }).finally(function(){
+                $timeout(function () {
+                    vm.showAuthorPhotoUpload= false;
+                });
+            });
         }
 
     }

@@ -3,6 +3,12 @@ var config = require('../config');
 var appSecret = require('../config').appSecret;
 
 function authenticate(req, res, next){
+
+    //TODO: only for development, remove!!!
+    if(config.env === 'dev') return next();
+    // TODO: only for development, remove!!!
+
+
     var token = req.headers['x-access-token'];
     if (token) {
         // verifies secret and checks exp

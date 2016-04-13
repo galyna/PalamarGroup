@@ -6,6 +6,7 @@ var jwt = require('jsonwebtoken');
 var restEndpoint = require('./rest.endpoint');
 var userEndpoint = require('./user.endpoint');
 var courseEndpoint = require('./course.endpoint');
+var photoEndpoint = require('./photo.endpoint');
 var bcrypt = require('bcrypt-nodejs');
 
 //models
@@ -50,5 +51,6 @@ api.use('/contact', restEndpoint(Contact));
 api.use('/course', courseEndpoint, restEndpoint(Course));
 api.use('/order', restEndpoint(Order));
 api.use('/user', userEndpoint);
+api.use('/photo', photoEndpoint);
 
 module.exports = api;

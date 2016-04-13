@@ -56,8 +56,19 @@
             <label for="price">Фото автора</label>
             <div layout="row">
                 <img ng-src="{{vm.editCourseModel.author.photourl}}"/>
-                <md-button ng-click="vm.showImageUpload()">змінити фото автора</md-button>
+                <md-button ng-if="!vm.showAuthorPhotoUpload" class="md-raised" ng-click="vm.showAuthorPhotoUpload=true">
+                    змінити фото автора
+                </md-button>
+                <div ng-if="vm.showAuthorPhotoUpload">
+                    <input type="file" ngf-select ng-model="authorPhotoFile" name="authorPhotoFile"
+                           accept="image/*" required/>
+                    <!--TODO: add validation-->
+                    <md-button class="md-raised" ng-disabled="!authorPhotoFile"
+                               ng-click="vm.uploadAuthorPhoto(authorPhotoFile)">Завантажити
+                    </md-button>
+                </div>
             </div>
+
         </md-input-container>
         <md-divider></md-divider>
         <md-divider></md-divider>

@@ -70,41 +70,6 @@ courseApi.route('/:_id/historyPhotos').post(function (req, res) {
         });
 });
 
-// courseApi.route('/:_id/author').post(function (req, res) {
-//     var _id = req.params._id;
-//     if (!_id) return res.send(400);
-//
-//     //TODO: add security handling!!
-//     var file = req.files.file;
-//     var ext = file.name.match(/\w+\.(\w+)/)[1];
-//     var newName = makeid(10);
-//     var newPath = config.uploadDir + '/' + newName + '.' + ext;
-//
-//     var author = {
-//         name: req.body.name || newName,
-//         photo: {
-//             name: req.body.photo.name || newName,
-//             url: '/content/uploads/' + newName + '.' + ext
-//         }
-//     };
-//
-//     Course.findOne({_id: _id})
-//         .then(function (course) {
-//             fs.rename(file.path, newPath);
-//             return course;
-//         })
-//         .then(function (course) {
-//             course.hearFormsPhotos.push(photoModel);
-//             return course.save();
-//         })
-//         .then(function (course) {
-//             res.status(201).json(photoModel);
-//         })
-//         .catch(function(err){
-//             res.send(500, err);
-//         });
-// });
-
 function makeid(length) {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

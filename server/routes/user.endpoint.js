@@ -2,8 +2,8 @@ var express = require('express');
 var bcrypt = require('bcrypt-nodejs');
 var extend = require('util')._extend;
 var currentUser = require('../auth/current_user');
-var userApi = express.Router();
 var authenticate = require('./../auth/authenticate');
+var userApi = express.Router();
 var User = require('../models/user');
 
 userApi.route('/')
