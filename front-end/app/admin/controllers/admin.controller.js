@@ -19,9 +19,10 @@
         vm.courses = [];
         vm.editCourseModel = {};
         vm.showCourseEditForm = false;
-        vm.showImageUpload = false;
+        vm.showHistoryPhotoUpload= false;
+        vm.showFormPhotoUpload= false;
         vm.newCourseModel = {};
-        vm.createCourse = createCourse;
+        vm.createOrUpdateCourse = createOrUpdateCourse;
         vm.cancelCourseCreate = cancelCourseCreate;
         vm.deleteCourse = deleteCourse;
         vm.editCourse = editCourse;
@@ -30,7 +31,7 @@
         vm.closeEditForm = closeEditForm;
         vm.deleteFromList = deleteFromList;
         vm.saveModuleDate = saveModuleDate;
-        vm.uploadPhoto = uploadPhoto;
+        vm.sendForUpload = sendForUpload;
 
         //init page data
         getCourses();
@@ -78,19 +79,27 @@
             vm.showCourseCreateForm = false;
         }
 
-        function createCourse(form) {
+        function createOrUpdateCourse(form) {
             $log.debug("createCourse ...$valid" + form.$valid);
-            if (form.$valid) {
+            if (form.$valid && !vm.newCourseModel._id) {
                 courseService.post(vm.newCourseModel)
                     .then(function (course) {
+                        $log.debug("success createCourse...");
                         vm.courses.push(course);
-                        vm.showCourseCreateForm = false
+                        vm.showCourseCreateForm = false;
                     }, function () {
                         $log.debug("fail createCourse...");
                     })
+            }else {
+                courseService.put(vm.newCourseModel._id, vm.newCourseModel)
+                    .then(function (course) {
+                        vm.courses.push(vm.newCourseModel);
+                        vm.showCourseCreateForm = false;
+                    }, function () {
+                        $log.debug("fail editCourse...");
+                    })
             }
         }
-
         //course creation start
 
         // course edit start
@@ -99,9 +108,7 @@
             if (form.$valid) {
                 courseService.put(vm.editCourseModel._id, vm.editCourseModel)
                     .then(function (course) {
-                        $log.debug("selectedIndexforEdit ..." + vm.editCourseModel.oldIndex);
                         vm.courses.splice(vm.editCourseModel.oldIndex, 1, vm.editCourseModel);
-                        vm.selectedIndexforEdit = null;
                         vm.showCourseEditForm = false;
                         vm.editCourseModel = {};
                     }, function () {
@@ -125,24 +132,41 @@
 
         //course edit end
         //course image upload start
-        function uploadPhoto(file, collection) {
+        function uploadPhoto(file,name, collection,url) {
             file.upload = Upload.upload({
-                url: '/api/course/' + vm.editCourseModel._id + '/hearFormsPhotos',
-                data: {name: "", file: file}
+                url: url,
+                data: {name: name, file: file}
             });
 
             file.upload.then(function (response) {
                 $timeout(function () {
-                    vm.showImageUpload = false;
+                    vm.showHistoryPhotoUpload= false;
+                    vm.showFormPhotoUpload= false;
                     collection.push(response.data);
                 });
             });
         }
 
+        function sendForUpload(file,name,model,collectionName) {
+            var url='/api/course/';
+            if(!model._id){
+                courseService.post(vm.newCourseModel)
+                    .then(function (course) {
+                        url+= course._id + '/'+collectionName;
+                        vm.newCourseModel=course;
+                        uploadPhoto(file,name,vm.newCourseModel[collectionName],url)
+                    }, function () {
+                        $log.debug("fail createCourse...");
+                    })
+            }else{
+                url+= model._id + '/'+collectionName;
+                uploadPhoto(file,name, model[collectionName],url)
+            }
+        }
+
         //course image upload end
         //course date start
         function saveModuleDate(model, date) {
-            $log.debug("model.courseModulesDates ..length." +  model.courseModulesDates.length);
             model.courseModulesDates.push(date);
         }
 

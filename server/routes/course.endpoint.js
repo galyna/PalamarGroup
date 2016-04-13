@@ -49,7 +49,7 @@ courseApi.route('/:_id/historyPhotos').post(function (req, res) {
 
     var photoModel = {
         name: req.body.name || newName,
-        url: config.uploadsUrl + newName,
+        url: config.uploadsUrl + '/' + newName,
         order: req.body.order || 0
     };
 
