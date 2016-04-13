@@ -84,7 +84,6 @@
 
             }
         }
-
         //course creation start
 
         // course edit start
@@ -111,8 +110,8 @@
             vm.editCourseModel.newDateModel = new Date();
             vm.showCourseEditForm = true;
         }
-
         //course edit end
+
         //course image upload start
         function uploadAuthorPhoto(file, model) {
             file.upload = Upload.upload({
@@ -133,7 +132,7 @@
             });
         }
 
-        function uploadCollPhoto(file, collection, showFlag) {
+        function uploadCollPhoto(file, collection) {
             file.upload = Upload.upload({
                 url: '/api/photo',
                 data: {file: file}
@@ -149,14 +148,10 @@
                 });
             }).catch(function (err) {
                 console.log(err);
-            }).finally(function () {
-                $timeout(function () {
-                    showFlag = false;
-                });
             });
         }
-
         //course image upload end
+
         //course date start
         function saveModuleDate(model, date) {
             model.courseModulesDates.push(date);
@@ -172,7 +167,6 @@
         function deleteFromList(list, item) {
             list.splice(list.indexOf(item), 1);
         }
-
 
     }
 })

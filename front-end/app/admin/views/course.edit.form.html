@@ -99,7 +99,7 @@
                 <input type="file" ngf-select ng-model="hearFormsFile" name="hearFormsFile"
                        accept="image/*" required/>
                 <md-button class="md-raised" ng-disabled="!hearFormsFile"
-                           ng-click="vm.uploadCollPhoto(hearFormsFile,vm.editCourseModel.hearFormsPhotos,vm.showFormPhotoUpload)">
+                           ng-click="vm.uploadCollPhoto(hearFormsFile,vm.editCourseModel.hearFormsPhotos)">
                     Завантажити
                 </md-button>
             </div>
@@ -137,7 +137,7 @@
                        accept="image/*" required/>
                 <!--TODO: add validation-->
                 <md-button class="md-raised" ng-disabled="!historyPhotoFile"
-                           ng-click="vm.uploadCollPhoto(historyPhotoFile,vm.editCourseModel.historyPhotos,vm.showHistoryPhotoUpload)">
+                           ng-click="vm.uploadCollPhoto(historyPhotoFile,vm.editCourseModel.historyPhotos)">
                     Завантажити
                 </md-button>
             </div>
