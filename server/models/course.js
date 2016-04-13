@@ -1,28 +1,29 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var PhotoSchema = new Schema({
+    name: String,
+    url: String,
+    order: Number
+});
+var VideoSchema = new Schema({
+    name: String,
+    url: String,
+    order: Number
+});
+
 var CourseSchema = new Schema({
     name: String,
     description: String,
     price: Number,
     order: Number,
-    videos: [String],
-    //TODO: create an unified photo object
-    hearFormsPhotos: [{
-        name: String,
-        url: String,
-        order: Number
-    }],
-    historyPhotos: [{
-        name: String,
-        url: String,
-        order: Number
-    }],
+    videos: [VideoSchema],
+    hearFormsPhotos: [PhotoSchema],
+    historyPhotos: [PhotoSchema],
     author: {
         name: String, 
         photo: {
             name: String,
-            url: String,
-            order: Number
+            url: String
         }
     },
     courseModulesDates: [Date],

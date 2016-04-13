@@ -11,7 +11,6 @@ var bcrypt = require('bcrypt-nodejs');
 var User = require('../models/user');
 var Contact = require('../models/contact');
 var Course = require('../models/course');
-var CourseModule = require('../models/courseModule');
 var Order = require('../models/order');
 var Photo = require('../models/photo');
 
@@ -50,7 +49,6 @@ api.post('/authenticate', function (req, res) {
 
 api.use('/contact', restEndpoint(Contact));
 api.use('/course', restEndpoint(Course));
-api.use('/course_module', restEndpoint(CourseModule));
 api.use('/order', restEndpoint(Order));
 api.use('/photo', restEndpoint(Photo));
 api.use('/user', userEndpoint);
