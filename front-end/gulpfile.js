@@ -7,24 +7,6 @@ var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
 var templateCache = require('gulp-angular-templatecache');
-var browserSync = require('browser-sync').create();
-//
-//gulp.task('useref', function(){
-//    return gulp.src('index.html')
-//        .pipe(useref())
-//        // Minifies only if it's a JavaScript file
-//        .pipe(gulpIf('*.js', uglify()))
-//        .pipe(gulp.dest('dist'))
-//});
-
-gulp.task('browserSync', function() {
-    browserSync.init({
-        server: {
-            baseDir: './'
-        },
-
-    })
-})
 
 gulp.task('html', function () {
     return gulp.src(['!app/index.html','!app/layout/views/layout.html','!app/users/views/profile.html','app/**/*.html'])
@@ -40,26 +22,13 @@ gulp.task('js', function () {
         .pipe(ngAnnotate())
         .pipe(uglify())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./'))
-        .pipe(browserSync.reload({
-            stream: true
-        }))
-})
-
-
-//gulp.task('watch', ['browserSync','html','js'], function () {
-//    gulp.watch('app/**/*.html', ['html'])   ;
-//    gulp.watch('app/**/*.js', ['js'])
-//    gulp.watch('app/*.html', browserSync.reload);
-//
-//    gulp.watch('app/content/**/*.css', browserSync.reload);
-//});
-
-gulp.task('watch', ['html','js'], function () {
-    gulp.watch('app/**/*.html', ['html'])   ;
-    gulp.watch('app/**/*.js', ['js'])
-
-
+        .pipe(gulp.dest('./'));
 });
+
+gulp.task('watch', ['default'], function () {
+    gulp.watch('app/**/*.html', ['html']);
+    gulp.watch('app/**/*.js', ['js']);
+});
+
 gulp.task('default', ['html','js']);
 
