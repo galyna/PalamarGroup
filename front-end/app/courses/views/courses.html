@@ -1,5 +1,5 @@
-<div ng-controller="CoursesController as vm" class="courses" layout layout-wrap layout-align="center ">
-        <md-card ng-repeat="course in vm.courses"  class="md-margin"  flex="22" flex-md="46" flex-xs="80">
+<div flex ng-controller="CoursesController as vm" layout layout-wrap layout-align="center ">
+        <md-card  ng-repeat="course in vm.courses"  class="md-margin"  flex-gt-md="22" flex-md="46" flex-sm="46" flex-xs="80">
                 <img ng-src="{{course.hearFormsPhotos[0].url}}" class="md-card-image" >
             <md-card-content >
                 <h3>{{course.name}}</h3>
