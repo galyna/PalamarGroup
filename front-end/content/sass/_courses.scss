@@ -26,38 +26,43 @@ md-input-container .md-input-messages-animation {
     max-width: 100%;
   }
 
-  md-card-content {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    height: 30%;
-    background-color: rgba(0, 0, 0, 0.7);
-  }
+
   md-card {
     position: relative;
     display: block;
-
+    md-card-content {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 30%;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
     // Custom setting since ngMaterial 1.0.0 only
     // supports percentage increments of 5
     // 4-column Table, except Row 1 to be 2-Columns
-    &.flex-gt-md {
-      // max-width: 24% !important;
-      // Disable to all varying sizes in Cards
-      max-height: 100%;
-      box-sizing: border-box;
-      flex: 3 33%;
 
-      &:first-child, &:nth-child(2) {
-        flex: 3 33%;
-      }
-    }
-
-    @media (min-width: 960px) and (max-width: 1279px) {
+    @media (min-width: 1280px) and (max-width: 1930px) {
       // Custom setting since ngMaterial 1.0.0 only
       // supports percentage increments of 5
       // 2-column table
-      &.flex-md-46 {
+      &.flex-gt-md-22 {
+        // max-width: 24% !important;
+        // Disable to all varying sizes in Cards
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 3 25%;
+      }
+      &:first-child, &:nth-child(2) {
+        flex: 3 25%;
+      }
+    }
+
+    @media (min-width: 600px) and (max-width: 1279px) {
+      // Custom setting since ngMaterial 1.0.0 only
+      // supports percentage increments of 5
+      // 2-column table
+      &.flex-gt-sm-46 {
         // max-width: 24% !important;
         // Disable to all varying sizes in Cards
         max-height: 100%;
@@ -68,20 +73,6 @@ md-input-container .md-input-messages-animation {
         flex: 2 46%;
       }
     }
-    @media (min-width: 600px) and (max-width: 959px) {
-      // Custom setting since ngMaterial 1.0.0 only
-      // supports percentage increments of 5
-      // 2-column table
-      &.flex-sm-46 {
-        // max-width: 24% !important;
-        // Disable to all varying sizes in Cards
-        max-height: 100%;
-        box-sizing: border-box;
-        flex: 2 46%;
-      }
-
-    }
-
 
     // Need this for specificity to override defaults
     // 1-column Table
