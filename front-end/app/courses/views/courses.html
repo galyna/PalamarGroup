@@ -1,25 +1,8 @@
-<div ng-controller="CoursesController as vm">
-<md-grid-list md-cols-gt-md="3" md-cols-md="2" md-cols-sm="1" md-row-height="1:1">
-    <md-grid-tile ng-repeat="course in vm.courses">
-        <md-card class="md-margin">
-            <div layout="column" layout-align="center end" class="md-whiteframe-z1">
-                <img ng-src="{{course.hearFormsPhotos[0].url}}" class="md-card-image " >
-                <div style="height: 0px">
-                    <md-button class="md-fab md-primary"  aria-label="Play"
-                               style="position:relative; bottom:35px; margin-right:20px">
-                        <md-icon md-svg-icon="av:ic_play_circle_filled_24px"></md-icon>
-                    </md-button>
-                </div>
-            </div>
-            <md-card-content layout="row" layout-align=" start">
+<div ng-controller="CoursesController as vm" class="courses" layout layout-wrap layout-align="center ">
+        <md-card ng-repeat="course in vm.courses"  class="md-margin"  flex="22" flex-md="46" flex-xs="80">
+                <img ng-src="{{course.hearFormsPhotos[0].url}}" class="md-card-image" >
+            <md-card-content >
                 <h3>{{course.name}}</h3>
-                <md-card-actions layout="row">
-                    <md-button class="md-icon-button" aria-label="Favorite">
-                        <md-icon md-svg-icon="action:ic_favorite_24px"></md-icon>
-                    </md-button>
-                </md-card-actions>
             </md-card-content>
         </md-card>
-    </md-grid-tile>
-</md-grid-list>
 </div>

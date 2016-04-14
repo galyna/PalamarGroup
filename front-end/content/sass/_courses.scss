@@ -1,0 +1,99 @@
+.md-no-animations,
+md-dialog.md-transition-in,
+md-dialog.md-transition-out {
+  -webkit-transform: none !important;
+  transform: none !important;
+}
+
+md-dialog {
+  min-width: 200px;
+}
+
+md-input-container .md-input-messages-animation {
+  max-width: 300px;
+}
+
+.shaded {
+  background-color: rgba(110, 110, 61, 0.09);
+  transition: all 500ms ease-in;
+}
+
+.courses {
+
+  img {
+    max-width: 100%;
+  }
+
+  md-card-content {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 30%;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  md-card {
+    position: relative;
+    display: block;
+
+    // Custom setting since ngMaterial 1.0.0 only
+    // supports percentage increments of 5
+    // 4-column Table, except Row 1 to be 2-Columns
+    &.flex-22 {
+      // max-width: 24% !important;
+      // Disable to all varying sizes in Cards
+      max-height: 100%;
+      box-sizing: border-box;
+      flex: 3 24%;
+
+      &:first-child, &:nth-child(2) {
+        flex: 3 24%;
+      }
+    }
+
+    @media (min-width: 600px) and (max-width: 959px) {
+      // Custom setting since ngMaterial 1.0.0 only
+      // supports percentage increments of 5
+      // 2-column table
+      &.flex-sm-46 {
+        // max-width: 24% !important;
+        // Disable to all varying sizes in Cards
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 2 46%;
+      }
+
+    }
+
+    @media (min-width: 600px) and (max-width: 1279px) {
+      // Custom setting since ngMaterial 1.0.0 only
+      // supports percentage increments of 5
+      // 2-column table
+      &.flex-md-46 {
+        // max-width: 24% !important;
+        // Disable to all varying sizes in Cards
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 2 46%;
+      }
+
+    }
+
+    // Need this for specificity to override defaults
+    // 1-column Table
+    @media (max-width: 599px) {
+      &.flex-xs-80 {
+        flex: 1 80%;
+        // Special override for the 1st & 2nd child default resizing
+        &:first-child, &:nth-child(2) {
+          flex: 1 80%;
+        }
+      }
+    }
+
+  }
+}
+
+
+
+

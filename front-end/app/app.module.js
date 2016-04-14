@@ -4,4 +4,4 @@
 angular.module("templates", []);
 
 angular
-    .module('ostapRadioApp', ['ngMaterial', 'ngMessages', 'ngRoute', 'ngFileUpload', 'layout', 'users', 'templates', 'admin', 'courses']);
+    .module('yuliaPalamarApp', ['ngMaterial', 'ngMessages', 'ngRoute', 'ngFileUpload', 'layout', 'users', 'templates', 'admin', 'courses']);

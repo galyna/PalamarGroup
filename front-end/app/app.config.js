@@ -3,7 +3,7 @@
  */
 
 angular
-    .module('ostapRadioApp')
+    .module('yuliaPalamarApp')
     .constant('constants', {
         baseUrl: '/',
         apiUrl: '/api',
@@ -45,7 +45,7 @@ angular
             .definePalette('customBackground',
                 customBackground);
         $mdThemingProvider.theme('default')
-            .primaryPalette('grey')
+            .primaryPalette('grey').dark();
             // If you specify less than all of the keys, it will inherit from the
             // default shades
 

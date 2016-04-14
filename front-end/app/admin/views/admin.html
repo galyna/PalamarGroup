@@ -1,5 +1,5 @@
 
-<md-content layout-xs="column" layout="row">
+<md-content layout-xs="column" layout="row" flex>
     <div flex="12">
         <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
                     md-component-id="left"
@@ -20,7 +20,7 @@
 
         </md-sidenav>
     </div>
-    <div flex="75">
+    <div flex="75" layout="column">
             <md-button ng-if="!vm.showCourseCreateForm && !vm.showCourseEditForm" class="md-raised" ng-click="vm.showCreateForm()">
                 Додати модуль
             </md-button>

@@ -5,7 +5,7 @@
 
     angular
         .module('admin')
-        .controller('AdminController', ['$scope', '$mdDialog', '$mdSidenav', '$templateCache', 'courseService', '$log', 'Upload', '$timeout', AdminController
+        .controller('AdminController', [ 'adminService', '$log', 'Upload', '$timeout', AdminController
         ]);
 
     /**
