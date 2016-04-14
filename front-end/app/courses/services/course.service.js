@@ -1,11 +1,4 @@
 /**
- * Created by Galyna on 13.04.2016.
- */
-
-/**
- * Created by Galyna on 09.04.2016.
- */
-/**
  * Created by Galyna on 08.04.2016.
  */
 (function(){
