@@ -82,6 +82,72 @@
         "Thu Apr 13 2016 17:33:08 GMT+0300 (EEST)"
       ],
       "isVisible": 1
+    },
+    {
+      "name": "second event",
+      "description": "first event description",
+      "price": 123.45,
+      "order": 1,
+      "videos": [
+        {
+          "name": "video 1",
+          "url": "https://youtu.be/oLGQd2xv2KI",
+          "order": 0
+        },
+        {
+          "name": "Galyna avatar",
+          "url": "https://youtu.be/F8DEzSBY0rE",
+          "order": 1
+        }
+      ],
+      "hearFormsPhotos": [
+        {
+          "name": "test1",
+          "url": "/content/uploads/1Ym2Ar4C8V.jpg",
+          "order": 0
+        },
+        {
+          "name": "test2",
+          "url": "/content/uploads/3ev2zmwK5n.jpg",
+          "order": 0
+        },
+        {
+          "name": "test3",
+          "url": "/content/uploads/5zz4LPsvZ8.jpg",
+          "order": 0
+        }
+      ],
+      "historyPhotos": [
+        {
+          "name": "test4",
+          "url": "/content/uploads/eSpQKG846H.jpg",
+          "order": 0
+        },
+        {
+          "name": "test5",
+          "url": "/content/uploads/rE8DstcnlF.jpg",
+          "order": 0
+        },
+        {
+          "name": "test6",
+          "url": "/content/uploads/S9pyed1hNB.jpg",
+          "order": 0
+        }
+      ],
+      "author": {
+        "name": "Galyna Krupska",
+        "photo": {
+          "name": "Galyna avatar",
+          "url": "https://avatars3.githubusercontent.com/u/2136087?v=3&s=400",
+          "order": 0
+        }
+      },
+      "courseModulesDates": [
+        "Wed Apr 13 2016 00:00:00 GMT+0300 (Финляндия (лето))",
+        "Tue Apr 12 2016 17:33:08 GMT+0300 (EEST)",
+        "Thu Apr 13 2016 17:33:08 GMT+0300 (EEST)"
+      ],
+      "isVisible": 1
     }
   ]
 }

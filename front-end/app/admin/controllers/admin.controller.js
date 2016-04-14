@@ -146,7 +146,7 @@
                         name: "",
                         url: response.data.url,
                         order: 0
-                    })
+                    });
                 });
             }).catch(function (err) {
                 console.log(err);
