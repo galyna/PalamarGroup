@@ -17178,38 +17178,41 @@ md-input-container .md-input-messages-animation {
   background-color: rgba(110, 110, 61, 0.09);
   transition: all 500ms ease-in; }
 
-.courses img {
-  max-width: 100%; }
-
-.courses md-card-content {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  height: 30%;
-  background-color: rgba(0, 0, 0, 0.7); }
-
-.courses md-card {
-  position: relative;
-  display: block; }
-  .courses md-card.flex-22 {
-    max-height: 100%;
-    box-sizing: border-box;
-    flex: 3 24%; }
-    .courses md-card.flex-22:first-child, .courses md-card.flex-22:nth-child(2) {
-      flex: 3 24%; }
-  @media (min-width: 600px) and (max-width: 959px) {
-    .courses md-card.flex-sm-46 {
+.courses {
+  box-sizing: border-box;
+  height: 100%; }
+  .courses img {
+    max-width: 100%; }
+  .courses md-card-content {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 30%;
+    background-color: rgba(0, 0, 0, 0.7); }
+  .courses md-card {
+    position: relative;
+    display: block; }
+    .courses md-card.flex-gt-md {
       max-height: 100%;
       box-sizing: border-box;
-      flex: 2 46%; } }
-  @media (min-width: 600px) and (max-width: 1279px) {
-    .courses md-card.flex-md-46 {
-      max-height: 100%;
-      box-sizing: border-box;
-      flex: 2 46%; } }
-  @media (max-width: 599px) {
-    .courses md-card.flex-xs-80 {
-      flex: 1 80%; }
-      .courses md-card.flex-xs-80:first-child, .courses md-card.flex-xs-80:nth-child(2) {
-        flex: 1 80%; } }
+      flex: 3 33%; }
+      .courses md-card.flex-gt-md:first-child, .courses md-card.flex-gt-md:nth-child(2) {
+        flex: 3 33%; }
+    @media (min-width: 960px) and (max-width: 1279px) {
+      .courses md-card.flex-md-46 {
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 2 46%; }
+      .courses md-card:first-child, .courses md-card:nth-child(2) {
+        flex: 2 46%; } }
+    @media (min-width: 600px) and (max-width: 959px) {
+      .courses md-card.flex-sm-46 {
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 2 46%; } }
+    @media (max-width: 599px) {
+      .courses md-card.flex-xs-80 {
+        flex: 1 80%; }
+        .courses md-card.flex-xs-80:first-child, .courses md-card.flex-xs-80:nth-child(2) {
+          flex: 1 80%; } }
