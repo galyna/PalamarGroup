@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Created by Galyna on 19.03.2016.
  */
@@ -7,6 +9,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
 var templateCache = require('gulp-angular-templatecache');
+var sass = require('gulp-sass');
 
 gulp.task('html', function () {
     return gulp.src(['!app/index.html','!app/layout/views/layout.html','!app/users/views/profile.html','app/**/*.html'])
@@ -25,10 +28,25 @@ gulp.task('js', function () {
         .pipe(gulp.dest('./'));
 });
 
-gulp.task('watch', ['default'], function () {
+gulp.task('sass', function () {
+    return gulp.src('./content/sass/**/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('./content/css'));
+});
+
+gulp.task('html:watch', function () {
     gulp.watch('app/**/*.html', ['html']);
+});
+
+gulp.task('js:watch', function () {
     gulp.watch('app/**/*.js', ['js']);
 });
 
-gulp.task('default', ['html','js']);
+gulp.task('sass:watch', function () {
+    gulp.watch('./content/sass/**/*.scss', ['sass']);
+});
+
+gulp.task('watch', ['default', 'html:watch', 'js:watch', 'sass:watch']);
+
+gulp.task('default', ['html','js', 'sass']);
 
