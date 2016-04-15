@@ -123,7 +123,7 @@
 
             file.upload.then(function (response) {
                 $timeout(function () {
-                    model.author.photourl = response.data.url;
+                    model.author.photoUrl = response.data.url;
                 });
             }).catch(function (err) {
                 console.log(err);
