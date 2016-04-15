@@ -4,4 +4,16 @@
 angular.module("templates", []);
 
 angular
-    .module('yuliaPalamarApp', ['ngMaterial', 'ngMessages', 'ngRoute', 'ngFileUpload', 'layout', 'users', 'templates', 'admin', 'courses']);
+    .module('yuliaPalamarApp', [
+        'ngMaterial',
+        'ngMessages',
+        'ngRoute',
+        'ngFileUpload',
+
+        'ui',
+        'layout',
+        'users',
+        'templates',
+        'admin',
+        'courses'
+    ]);

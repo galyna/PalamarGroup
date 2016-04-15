@@ -1,0 +1,9 @@
+
+<div flex ng-controller="TestController as vm" layout layout-wrap layout-align="center">
+    <owl-carousel owl-options="{{vm.customOptions}}" class="owl-carousel">
+        <owl-carousel-item ng-repeat="item in ::vm.items" class="item">
+            <img src= "/api/photo/b7cc7a32-cd19-49c7-a530-947587c848a6.jpg" alt="{{item}}">
+            <span>{{item}}</span>
+        </owl-carousel-item>
+    </owl-carousel>
+</div>
