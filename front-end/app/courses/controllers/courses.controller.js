@@ -5,7 +5,7 @@
 
     angular
         .module('courses')
-        .controller('CoursesController', [ 'courseService', CoursesController
+        .controller('CoursesController', ['courseService', '$location', CoursesController
         ]);
 
     /**
@@ -13,10 +13,11 @@
      * @param $mdDialog
      * @constructor
      */
-    function CoursesController( courseService) {
+    function CoursesController(courseService, $location) {
         var vm = this;
 
         vm.courses = [];
+        vm.showDetails = showDetails;
 
         //init page data
         getCourses();
@@ -31,7 +32,11 @@
                 })
             })
         }
-        
+
+        function showDetails(id) {
+            $location.url('/course/' +id);
+        }
+
     }
 })
 ();

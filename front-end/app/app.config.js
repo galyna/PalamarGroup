@@ -12,8 +12,8 @@ angular
     .config(function ($routeProvider, $mdThemingProvider, $mdIconProvider) {
         $routeProvider
             .when('/home', {
-                templateUrl: 'app/layout/views/layout.html',
-                controller: 'LayoutController',
+                templateUrl: 'app/courses/views/courses.html',
+                controller: 'CoursesController',
                 controllerAs: "vm"
             })
             .when('/admin', {
@@ -45,7 +45,7 @@ angular
             .definePalette('customBackground',
                 customBackground);
         $mdThemingProvider.theme('default')
-            .primaryPalette('grey').dark();
+            .primaryPalette('grey')
             // If you specify less than all of the keys, it will inherit from the
             // default shades
 

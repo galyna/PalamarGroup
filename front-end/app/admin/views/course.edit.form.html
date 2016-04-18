@@ -111,7 +111,7 @@
             <md-subheader class="md-no-sticky">Форми історії попередніх модулів</md-subheader>
             <md-list-item class="md-1-line" ng-repeat="item in vm.editCourseModel.historyPhotos track by $index"
                           ng-click="null">
-                <img ng-src="{{item.url}}"/>
+                <img ng-src="{{item.url}}" style="width:400px;"/>
                 <div  layout="column">
                     <md-input-container class="md-block  ">
                         <label for="name">Назва форми</label>

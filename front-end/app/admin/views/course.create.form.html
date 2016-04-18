@@ -115,7 +115,6 @@
         <md-list class="md-dense" flex>
             <md-subheader class="md-no-sticky">Форми історії попередніх модулів</md-subheader>
             <md-list-item class="md-1-line" ng-repeat="item in vm.newCourseModel.historyPhotos" ng-click="null">
-                <img ng-src="{{item.url}}"/>
                 <div layout="column">
                     <md-input-container class="md-block  ">
 
@@ -131,6 +130,8 @@
                         Видалити
                     </md-button>
                 </div>
+                <img class="md-xs" style="width: 600px;" ng-src="{{item.url}}"/>
+
             </md-list-item>
         </md-list>
         <div>

@@ -2,7 +2,7 @@
     angular.module('courses')
         .config(function ($routeProvider) {
             $routeProvider
-                .when('/course/:name', {
+                .when('/course/:id', {
                     templateUrl: 'app/courses/views/course.html',
                     controller: 'CourseController',
                     controllerAs: "vm"

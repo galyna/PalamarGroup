@@ -11,7 +11,6 @@ angular
         'ngFileUpload',
 
         'ui',
-        'layout',
         'users',
         'templates',
         'admin',

@@ -1,113 +1,68 @@
-
-
-<md-content layout-xs="column" layout="row">
-    <div flex="12">
+<md-content flex layout="row">
+    <div flex="12" flex-xs="0" flex-sm="4">
     </div>
-    <div flex="75">
-        <md-button ng-show="!vm.order.formVisible" ng-click="vm.order.showForm()" class="md-raised">Записатися</md-button>
-        <md-button ng-show="vm.order.formVisible" ng-click="vm.order.hideForm()" class="md-raised">Згорнути</md-button>
+    <div flex="75" flex-xs="100" flex-sm="92" layout-align="center center">
+        <div ng-include="'courses/views/order.html'">
+        </div>
 
-        <form ng-show="vm.order.formVisible" name="orderForm" class="md-padding" novalidate ng-submit="">
-            <md-input-container class="md-block">
-                <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
-                <label for="name">Як до вас звертатися</label>
-                <input id="name" ng-model="vm.order.model.name" type="text" name="name">
-            </md-input-container>
-            <md-input-container class="md-block">
-                <md-icon md-svg-icon="communication:ic_email_24px"></md-icon>
-                <label for="email">email</label>
-                <input id="email" ng-model="vm.order.model.email" type="text" name="email">
-            </md-input-container>
-            <md-input-container class="md-block">
-                <md-icon md-svg-icon="communication:ic_phonelink_ring_24px"></md-icon>
-                <label for="phone">Телефон</label>
-                <input id="phone" ng-model="vm.order.model.phone" type="text" name="phone">
-            </md-input-container>
-            <p>Після запису на модуль з Вами звяжеться менеджер для узгодження деталей</p>
-            <md-button ng-click="vm.order.submit(orderForm)" class="md-raised md-accent">Відправити</md-button>
-        </form>
-        <!--<md-tabs md-dynamic-height md-border-bottom md-center-tabs md-stretch-tabs="always">-->
-            <!--<md-tab label="POP">-->
-                <!--<md-grid-list md-cols-gt-md="3" md-cols-md="2" md-cols-sm="1" md-row-height="1:1">-->
-                    <!--<md-grid-tile ng-repeat="tile in vm.artists1">-->
-                        <!--<md-card class="md-margin">-->
-                            <!--<div layout="column" layout-align="center end" class="md-whiteframe-z1">-->
-                                <!--<img ng-src="{{tile.icon}}" class="md-card-image " alt="{{tile.title}}">-->
-                                <!--<div style="height: 0px">-->
-                                    <!--<md-button class="md-fab md-primary"  aria-label="Play"-->
-                                               <!--style="position:relative; bottom:35px; margin-right:20px">-->
-                                        <!--<md-icon md-svg-icon="av:ic_play_circle_filled_24px"></md-icon>-->
-                                    <!--</md-button>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<md-card-content layout="row" layout-align=" start">-->
-                                <!--<h3>{{tile.title}}</h3>-->
-                                <!--<md-card-actions layout="row">-->
-                                    <!--<md-button class="md-icon-button" aria-label="Favorite">-->
-                                        <!--<md-icon md-svg-icon="action:ic_favorite_24px"></md-icon>-->
-                                    <!--</md-button>-->
+        <div flex layout layout-wrap layout-align="center ">
+            <h3>{{vm.course.name}}</h3>
+        </div>
+        <div layout="row">
 
-                                <!--</md-card-actions>-->
-                            <!--</md-card-content>-->
-                        <!--</md-card>-->
-                    <!--</md-grid-tile>-->
-                <!--</md-grid-list>-->
-            <!--</md-tab>-->
-            <!--<md-tab label="Rock">-->
-                <!--<md-grid-list md-cols-gt-md="3" md-cols-md="2" md-cols-sm="1" md-row-height="1:1">-->
-                    <!--<md-grid-tile ng-repeat="tile in vm.artists2">-->
-                        <!--<md-card class="md-margin">-->
-                            <!--<div layout="column" layout-align="center end" class="md-whiteframe-z1">-->
-                                <!--<img ng-src="{{tile.icon}}" class="md-card-image " alt="{{tile.title}}">-->
-                                <!--<div style="height: 0px">-->
-                                    <!--<md-button class="md-fab md-primary" aria-label="Play"-->
-                                               <!--style="position:relative; bottom:35px; margin-right:20px">-->
-                                        <!--<md-icon md-svg-icon="av:ic_play_circle_filled_24px"></md-icon>-->
-                                    <!--</md-button>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<md-card-content layout="row" layout-align=" start">-->
-                                <!--<h3>{{tile.title}}</h3>-->
-                                <!--<md-card-actions layout="row">-->
-                                    <!--<md-button class="md-icon-button" aria-label="Favorite">-->
-                                        <!--<md-icon md-svg-icon="action:ic_favorite_24px"></md-icon>-->
-                                    <!--</md-button>-->
+            <md-card>
+                <img hide-gt-sm ng-src="{{vm.course.author.photoUrl}}" class="md-card-image md-padding"/>
+                <md-card-title>
+                    <md-card-title-media>
+                        <img hide-sm show-gt-sm hide-xs class="md-card-image md-padding"
+                             ng-src="{{vm.course.author.photoUrl}}"/>
 
-                                <!--</md-card-actions>-->
-                            <!--</md-card-content>-->
-                        <!--</md-card>-->
-                    <!--</md-grid-tile>-->
-                <!--</md-grid-list>-->
-            <!--</md-tab>-->
-            <!--<md-tab label="Alternative">-->
-                <!--<md-grid-list md-cols-gt-md="3" md-cols-md="2" md-cols-sm="1" md-row-height="1:1">-->
-                    <!--<md-grid-tile ng-repeat="tile in vm.artists">-->
-                        <!--<md-card class="md-margin">-->
-                            <!--<div layout="column" layout-align="center end" class="md-whiteframe-z1">-->
-                                <!--<img ng-src="{{tile.icon}}" class="md-card-image " alt="{{tile.title}}">-->
-                                <!--<div style="height: 0px">-->
-                                    <!--<md-button class="md-fab md-primary" aria-label="Play"-->
-                                               <!--style="position:relative; bottom:35px; margin-right:20px">-->
-                                        <!--<md-icon md-svg-icon="av:ic_play_circle_filled_24px"></md-icon>-->
-                                    <!--</md-button>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<md-card-content layout="row" layout-align=" start">-->
-                                <!--<h3>{{tile.title}}</h3>-->
-                                <!--<md-card-actions layout="row">-->
-                                    <!--<md-button class="md-icon-button" aria-label="Favorite">-->
-                                        <!--<md-icon md-svg-icon="action:ic_favorite_24px"></md-icon>-->
-                                    <!--</md-button>-->
+                    </md-card-title-media>
+                    <md-card-title-text>
+                        <span class="md-headline">Автор {{ vm.course.author.name}}</span>
+                        <span class="md-subhead">Дати проведення модуля</span>
+                        <span class="md-subhead" ng-repeat="date in vm.course.courseModulesDates">{{ date| date:'dd.MM.yyyy'}} </span>
+                        <span class="md-headline">Ціна {{ vm.course.price}}  грн</span>
+                        <span class="md-subhead"> {{vm.course.description}}</span>
+                        <div flex layout layout-wrap layout-align="end center">
+                            <md-button ng-show="!vm.order.formVisible" class="md-accent md-raised " style="width: 130px;" aria-label="Play" ng-click="vm.order.showForm(course)"/>
+                            Записатись
+                            </md-button>
+                        </div>
 
-                                <!--</md-card-actions>-->
-                            <!--</md-card-content>-->
-                        <!--</md-card>-->
-                    <!--</md-grid-tile>-->
-                <!--</md-grid-list>-->
-            <!--</md-tab>-->
-        <!--</md-tabs>-->
+                    </md-card-title-text>
+
+                </md-card-title>
+
+            </md-card>
+        </div>
+        <div flex layout layout-wrap layout-align="center ">
+            <h3>Теми модуля</h3>
+        </div>
+        <div class="courses" flex layout layout-wrap layout-align="center ">
+            <md-card ng-repeat="photo in vm.course.hearFormsPhotos" class="md-margin" flex-gt-md="22" flex-md="46"
+                     flex-gt-sm="46" flex-xs="80">
+                <img ng-src="{{photo.url}}" class="md-card-image">
+                <md-card-content>
+                    <h3>{{photo.name}}</h3>
+
+                </md-card-content>
+            </md-card>
+        </div>
+        <div flex layout layout-wrap layout-align="center ">
+            <h3>Фото Попередніх модулів</h3>
+        </div>
+        <div class="courses-history" flex layout layout-wrap layout-align="center ">
+            <md-card ng-repeat="photo in vm.course.historyPhotos" class="md-margin" flex-gt-md="22" flex-md="46"
+                     flex-gt-sm="46" flex-xs="80">
+                <img ng-src="{{photo.url}}" class="md-card-image">
+                <md-card-content>
+                    <h3>{{photo.name}}</h3>
+                </md-card-content>
+            </md-card>
+        </div>
     </div>
-    <div flex="12">
-    </div>
+    <div flex="12" flex-sm="4" flex-xs="0">
     </div>
 </md-content>
+

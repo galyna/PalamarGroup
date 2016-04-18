@@ -1,6 +1,6 @@
 
 <md-content layout-xs="column" layout="row" flex>
-    <div flex="12">
+    <div flex="0">
         <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
                     md-component-id="left"
                     aria-label="Адміністрування сайту">
@@ -20,7 +20,7 @@
 
         </md-sidenav>
     </div>
-    <div flex="75" layout="column">
+    <div flex="100" layout="column">
             <md-button ng-if="!vm.showCourseCreateForm && !vm.showCourseEditForm" class="md-raised" ng-click="vm.showCreateForm()">
                 Додати модуль
             </md-button>
@@ -45,7 +45,7 @@
                 </md-list-item>
             </md-list>
     </div>
-    <div flex="12">
+    <div flex="0">
     </div>
     </div>
 </md-content>

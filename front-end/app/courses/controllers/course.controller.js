@@ -12,7 +12,7 @@
                 phone: ''
             },
             formVisible: false,
-            showForm: function(){
+            showForm: function(course){
                 this.formVisible = true;
             },
             hideForm: function () {
@@ -35,9 +35,7 @@
             }
         }
         
-        $routeParams.name = '570ff80671392d4a073626bd';
-        
-        courseService.get($routeParams.name).then(function(course){
+        courseService.get($routeParams.id).then(function(course){
             vm.course = course;
             vm.order = order;
         }).catch(function(err){
