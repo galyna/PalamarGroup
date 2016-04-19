@@ -4,14 +4,11 @@
     <div flex="12" flex-xs="0" flex-sm="4" >
 
     </div>
-    <div flex="75" flex-xs="100" class="content"  flex-sm="92" layout-align="center center">
-
-
-        <div flex layout layout-wrap layout-align="center ">
+    <div flex="75" flex-xs="100" class="content course-divider"  flex-sm="92" layout-align="center center">
+        <div flex layout layout-wrap layout-align="center " >
             <h3>{{vm.course.name}}</h3>
         </div>
         <div layout="row">
-
             <md-card>
                 <img hide-gt-sm ng-src="{{vm.course.author.photoUrl}}" class="md-card-image md-padding"/>
                 <md-card-title>
@@ -40,8 +37,7 @@
             </md-card>
 
         </div>
-
-        <div flex layout layout-wrap layout-align="center ">
+        <div flex layout layout-wrap layout-align="center " ng-if="vm.course.hearFormsPhotos">
             <h3>Теми модуля</h3>
         </div>
         <div class="courses course-inner" flex layout layout-wrap layout-align="center ">
@@ -56,13 +52,16 @@
                 </md-card-content>
             </md-card>
         </div>
-        <div flex layout layout-wrap layout-align="center ">
+        <div flex layout layout-wrap layout-align="center " ng-if="vm.course.historyPhotos" >
             <h3>Фото Попередніх модулів</h3>
         </div>
         <div class="courses-history" flex layout layout-wrap layout-align="center ">
             <md-card ng-repeat="photo in vm.course.historyPhotos" class="md-margin" flex-gt-md="22" flex-md="46"
                      flex-gt-sm="46" flex-xs="80">
-                <img ng-src="{{photo.url}}" class="md-card-image">
+                <card-image-container>
+                    <img ng-src="{{photo.url}}" class="md-card-image">
+                </card-image-container>
+
                 <md-card-content layout="column" layout-align="center center" ng-if="photo.name">
                     <h3>{{photo.name}}</h3>
                 </md-card-content>

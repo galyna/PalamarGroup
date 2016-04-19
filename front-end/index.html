@@ -13,6 +13,16 @@
 
 
     <style type="text/css">
+        @font-face {
+            font-family: microsquare; /* Гарнитура шрифта */
+            src: url('ufonts.com_microsquare-ex-regular.ttf'); /* Путь к файлу со шрифтом */
+        }
+        header {
+            font-family: microsquare, 'Comic Sans MS', cursive;
+
+            word-wrap: break-word;
+
+        }
         /**
          * Hide when Angular is not yet loaded and initialized
          */
@@ -25,19 +35,19 @@
 <body ng-app="yuliaPalamarApp" layout="column" ng-cloak>
 <div class="bgImageContainer">
 </div>
-<header layout layout-wrap layout-align="center "  class="md-whiteframe-z4">
+<header layout layout-wrap layout-align="center center"   class="md-whiteframe-z4">
 
-            <h2 >
-                YULIA PALAMAR GROUP
-            </h2>
+<div>
+    Y&nbsp;U&nbsp;L&nbsp;I&nbsp;A  &nbsp;&nbsp;  P&nbsp;A&nbsp;L&nbsp;A&nbsp;M&nbsp;A&nbsp;R  &nbsp;&nbsp;   G&nbsp;R&nbsp;O&nbsp;U&nbsp;P
 
+</div>
 </header>
 <main  >
     <div   ng-view ></div>
 </main>
-<footer class="md-whiteframe-z5" layout layout-wrap layout-align="center " >
+<!--<footer class="md-whiteframe-z5" layout layout-wrap layout-align="center " >-->
 
-</footer>
+<!--</footer>-->
 
 
 <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
