@@ -1,8 +1,9 @@
-
+<div class="bgImageContainer">
+</div>
 <md-content flex   layout="row" >
     <div flex="12" flex-xs="0" flex-sm="4" >
     </div>
-    <div  flex="75" flex-xs="100"  flex-sm="92"  layout-align="center center" >
+    <div  flex="75" flex-xs="100" class="content"   flex-sm="92"  layout-align="center center" >
         <div class="courses" flex ng-controller="CoursesController as vm" layout layout-wrap layout-align="center ">
             <md-card  ng-repeat="course in vm.courses" ng-if="course.isVisible" class="md-margin"  flex-gt-md="22" flex-md="46" flex-gt-sm="46" flex-xs="80">
                 <card-image-container>
