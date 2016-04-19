@@ -42,7 +42,9 @@
         <div class="courses" flex layout layout-wrap layout-align="center ">
             <md-card ng-repeat="photo in vm.course.hearFormsPhotos" class="md-margin" flex-gt-md="22" flex-md="46"
                      flex-gt-sm="46" flex-xs="80">
-                <img ng-src="{{photo.url}}" class="md-card-image">
+                <card-image-container>
+                    <img ng-src="{{photo.url}}" class="md-card-image">
+                </card-image-container>
                 <md-card-content>
                     <h3>{{photo.name}}</h3>
 
