@@ -13,11 +13,6 @@ md-input-container .md-input-messages-animation {
   max-width: 300px;
 }
 
-.shaded {
-  background-color: rgba(110, 110, 61, 0.09);
-  transition: all 500ms ease-in;
-}
-
 .courses {
   box-sizing: border-box;
   height: 100%;
@@ -26,7 +21,7 @@ md-input-container .md-input-messages-animation {
     max-width: 100%;
   }
 
-  card-image-container{
+  card-image-container {
     display: block;
     overflow: hidden;
   }
@@ -47,9 +42,10 @@ md-input-container .md-input-messages-animation {
       bottom: 0;
       right: 0;
       left: 0;
-      height: 30%;
+      height: 20%;
       background-color: rgba(0, 0, 0, 0.7);
     }
+
     // Custom setting since ngMaterial 1.0.0 only
     // supports percentage increments of 5
     // 4-column Table, except Row 1 to be 2-Columns
@@ -101,6 +97,12 @@ md-input-container .md-input-messages-animation {
   }
 }
 
+.course-inner{ md-card md-card-content {
+  color:white;
+  height: 5%;
+
+}}
+
 .courses-history {
   box-sizing: border-box;
   height: 100%;
@@ -118,6 +120,7 @@ md-input-container .md-input-messages-animation {
       right: 0;
       left: 0;
       height: 10%;
+      color:white;
       background-color: rgba(0, 0, 0, 0.7);
     }
     // Custom setting since ngMaterial 1.0.0 only
@@ -188,8 +191,33 @@ md-input-container .md-input-messages-animation {
 }
 
 .content {
-
+  top: 80px;
+  bottom: 80px;
   z-index: 2;
   position: relative;
+
 }
 
+footer {
+  z-index: 3;
+  height: 80px;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color:white;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+header {
+  z-index: 3;
+  height: 80px;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  color:white;
+  background-color: rgba(0, 0, 0, 0.8);
+}

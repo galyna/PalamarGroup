@@ -45,7 +45,7 @@ angular
             .definePalette('customBackground',
                 customBackground);
         $mdThemingProvider.theme('default')
-            .primaryPalette('grey').dark()
+            .primaryPalette('customBackground')
             // If you specify less than all of the keys, it will inherit from the
             // default shades
 

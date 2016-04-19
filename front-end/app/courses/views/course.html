@@ -1,13 +1,11 @@
-<div class="bgImageContainer">
-</div>
-<md-content flex layout="row" >
+
+<div  layout="row" >
 
     <div flex="12" flex-xs="0" flex-sm="4" >
 
     </div>
     <div flex="75" flex-xs="100" class="content"  flex-sm="92" layout-align="center center">
-        <div ng-include="'courses/views/order.html'">
-        </div>
+
 
         <div flex layout layout-wrap layout-align="center ">
             <h3>{{vm.course.name}}</h3>
@@ -29,27 +27,30 @@
                         <span class="md-headline">Ціна {{ vm.course.price}}  грн</span>
                         <span class="md-subhead"> {{vm.course.description}}</span>
                         <div flex layout layout-wrap layout-align="end center">
-                            <md-button ng-show="!vm.order.formVisible" class="md-accent md-raised " style="width: 130px;" aria-label="Play" ng-click="vm.order.showForm(course)"/>
+                            <md-button ng-show="!vm.order.formVisible" class="md-accent md-raised " style="width: 130px;" aria-label="Play" ng-click="vm.order.showForm(course)">
                             Записатись
                             </md-button>
                         </div>
-
+                        <div ng-include="'courses/views/order.html'">
+                        </div>
                     </md-card-title-text>
 
                 </md-card-title>
 
             </md-card>
+
         </div>
+
         <div flex layout layout-wrap layout-align="center ">
             <h3>Теми модуля</h3>
         </div>
-        <div class="courses" flex layout layout-wrap layout-align="center ">
+        <div class="courses course-inner" flex layout layout-wrap layout-align="center ">
             <md-card ng-repeat="photo in vm.course.hearFormsPhotos" class="md-margin" flex-gt-md="22" flex-md="46"
                      flex-gt-sm="46" flex-xs="80">
                 <card-image-container>
                     <img ng-src="{{photo.url}}" class="md-card-image">
                 </card-image-container>
-                <md-card-content>
+                <md-card-content layout="column" layout-align="center center" ng-if="photo.name">
                     <h3>{{photo.name}}</h3>
 
                 </md-card-content>
@@ -62,7 +63,7 @@
             <md-card ng-repeat="photo in vm.course.historyPhotos" class="md-margin" flex-gt-md="22" flex-md="46"
                      flex-gt-sm="46" flex-xs="80">
                 <img ng-src="{{photo.url}}" class="md-card-image">
-                <md-card-content>
+                <md-card-content layout="column" layout-align="center center" ng-if="photo.name">
                     <h3>{{photo.name}}</h3>
                 </md-card-content>
             </md-card>
@@ -70,5 +71,5 @@
     </div>
     <div flex="12" flex-sm="4" flex-xs="0">
     </div>
-</md-content>
+</div>
 

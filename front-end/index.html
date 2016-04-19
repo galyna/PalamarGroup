@@ -22,29 +22,22 @@
     </style>
 </head>
 
-<body ng-app="yuliaPalamarApp" layout="row" ng-cloak>
+<body ng-app="yuliaPalamarApp" layout="column" ng-cloak>
+<div class="bgImageContainer">
+</div>
+<header layout layout-wrap layout-align="center "  class="md-whiteframe-z4">
 
+            <h2 >
+                YULIA PALAMAR GROUP
+            </h2>
 
-    <div flex layout="column" tabIndex="-1" role="main">
-        <md-toolbar class="md-whiteframe-z3">
-            <div class="md-toolbar-tools">
-                <h1 class=" md-padding ">
-                    <span>YULIA PALAMAR GROUP</span>
-                </h1>
-                <span flex></span>
-            </div>
-        </md-toolbar>
-        <div layout-fill flex ng-view layout="column"></div>
-        <md-toolbar class="md-whiteframe-z3">
-            <div class="md-toolbar-tools">
-                <h1 class=" md-padding ">
-                    <span>YULIA PALAMAR GROUP</span>
-                </h1>
-                <span flex></span>
-            </div>
-        </md-toolbar>
-    </div>
+</header>
+<main  >
+    <div   ng-view ></div>
+</main>
+<footer class="md-whiteframe-z5" layout layout-wrap layout-align="center " >
 
+</footer>
 
 
 <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
