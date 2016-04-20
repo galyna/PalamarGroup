@@ -1,11 +1,10 @@
-
-<div layout="row"  >
-    <div flex="12"  flex-xs="0" flex-sm="4">
+<div  layout="row"  >
+    <div flex="12" flex-xs="0" flex-sm="4">
     </div>
-    <div flex="75" flex-xs="100"  flex-sm="92" class="content courses"  layout layout-wrap layout-align="center center">
+    <div flex="75" flex-xs="100" flex-sm="92" class=" courses" layout layout-wrap layout-align="center center">
 
         <md-card ng-click="vm.showDetails(course._id)" ng-repeat="course in vm.courses" ng-if="course.isVisible"
-                 class="md-margin" flex-gt-md="22" flex-md="46" flex-gt-sm="46" flex-xs="80">
+                 class="md-margin" flex-gt-md="22" flex-md="22" flex-gt-sm="46" flex-xs="80">
             <card-image-container>
                 <img ng-src="{{course.hearFormsPhotos[0].url}}" class="md-card-image">
             </card-image-container>
@@ -18,7 +17,8 @@
         </md-card>
 
     </div>
-    <div flex="12"  flex-sm="4" flex-xs="0">
+    <div flex="12" flex-sm="4" flex-xs="0">
     </div>
 </div>
+
 

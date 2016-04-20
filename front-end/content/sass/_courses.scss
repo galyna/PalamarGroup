@@ -43,7 +43,7 @@ md-input-container .md-input-messages-animation {
       right: 0;
       left: 0;
       height: 20%;
-      color:whitesmoke;
+      color: whitesmoke;
       background-color: rgba(0, 0, 0, 0.7);
     }
 
@@ -60,11 +60,9 @@ md-input-container .md-input-messages-animation {
         // Disable to all varying sizes in Cards
         max-height: 100%;
         box-sizing: border-box;
-        flex: 3 15%;
+        flex: 2 32%;
       }
-      &:first-child, &:nth-child(2) {
-        flex: 3 15%;
-      }
+
     }
 
     @media (min-width: 600px) and (max-width: 1279px) {
@@ -98,16 +96,20 @@ md-input-container .md-input-messages-animation {
   }
 }
 
-.course-inner{ md-card md-card-content {
-  color:whitesmoke;
-  height: 10%;
+.course-inner {
+  md-card md-card-content {
+    color: whitesmoke;
+    height: 10%;
 
-}}
-.course-divider{
+  }
+}
+
+.course-divider {
 
   background-color: rgba(1, 1, 1, 0.1);
 
 }
+
 .courses-history {
   box-sizing: border-box;
   height: 100%;
@@ -125,7 +127,7 @@ md-input-container .md-input-messages-animation {
       right: 0;
       left: 0;
       height: 10%;
-      color:white;
+      color: white;
       background-color: rgba(0, 0, 0, 0.7);
     }
     // Custom setting since ngMaterial 1.0.0 only
@@ -179,7 +181,7 @@ md-input-container .md-input-messages-animation {
 }
 
 .bgImageContainer {
- // background-image: url('/content/images/palamar_logo_big.jpg');
+  background-image: url('/content/images/palamar_logo_big.jpg');
   z-index: 1;
   height: 100%;
   width: 100%;
@@ -196,43 +198,41 @@ md-input-container .md-input-messages-animation {
 }
 
 .content {
-  top: 70px;
-  bottom: 60px;
+  top: 0;
+  bottom: 0;
   z-index: 2;
   position: relative;
-
+  height: 100%;
 }
 
 footer {
-  z-index: 3;
-  height: 60px;
+  z-index: 2;
+  height: 80px;
   width: 100%;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  color:whitesmoke;
+bottom: 0;
+  color: whitesmoke;
   background-color: rgba(0, 0, 0, 0.9);
 }
-
+.view-container{   height: 100%;}
 header {
   z-index: 3;
-  height:70px;
+  height: 90px;
   width: 100%;
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
-  color:white;
+  color: white;
   font-size: 32px;
- text-align: center;
+  text-align: center;
   background-color: rgba(0, 0, 0, 0.7);
+  .subheader{font-size: 18px;padding-top: 4px;}
 }
-
+main{ padding-top: 90px;}
 @media (max-width: 599px) {
   header {
-    font-size:24px;
-    height:80px;
-
+    font-size: 22px;
+    height: 100px;
+    .subheader{font-size: 16px;padding-top:2px;}
   }
 }

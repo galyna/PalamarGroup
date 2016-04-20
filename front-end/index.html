@@ -17,12 +17,14 @@
             font-family: microsquare; /* Гарнитура шрифта */
             src: url('ufonts.com_microsquare-ex-regular.ttf'); /* Путь к файлу со шрифтом */
         }
+
         header {
             font-family: microsquare, 'Comic Sans MS', cursive;
 
             word-wrap: break-word;
 
         }
+
         /**
          * Hide when Angular is not yet loaded and initialized
          */
@@ -32,23 +34,26 @@
     </style>
 </head>
 
-<body ng-app="yuliaPalamarApp" layout="column" ng-cloak>
+<body ng-app="yuliaPalamarApp" ng-cloak>
 <div class="bgImageContainer">
 </div>
-<header layout layout-wrap layout-align="center center"   class="md-whiteframe-z4">
+<div class="content" layout="column">
+    <header layout="column" layout-align="center center" class="md-whiteframe-z4">
+        <div>
+            Y&nbsp;U&nbsp;L&nbsp;I&nbsp;A &nbsp;&nbsp; P&nbsp;A&nbsp;L&nbsp;A&nbsp;M&nbsp;A&nbsp;R &nbsp;&nbsp; G&nbsp;R&nbsp;O&nbsp;U&nbsp;P
+        </div>
+        <div class="subheader" >
+           beauty parlour & academy
+        </div>
+    </header>
 
-<div>
-    Y&nbsp;U&nbsp;L&nbsp;I&nbsp;A  &nbsp;&nbsp;  P&nbsp;A&nbsp;L&nbsp;A&nbsp;M&nbsp;A&nbsp;R  &nbsp;&nbsp;   G&nbsp;R&nbsp;O&nbsp;U&nbsp;P
+    <main   layout-fill layout="column">
+        <div ng-view flex="grow"  ></div>
+        <footer flex="none" class="md-whiteframe-z5">
+        </footer>
+    </main>
 
 </div>
-</header>
-<main  >
-    <div   ng-view ></div>
-</main>
-<!--<footer class="md-whiteframe-z5" layout layout-wrap layout-align="center " >-->
-
-<!--</footer>-->
-
 
 <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="node_modules/owl.carousel/dist/owl.carousel.js"></script>
