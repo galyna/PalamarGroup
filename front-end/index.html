@@ -50,7 +50,7 @@
     <main layout-fill layout="column">
 
         <div ng-view flex="grow"></div>
-        <footer flex="none" class="md-whiteframe-z5" layout="row" layout-sx="column" layout-align="center center">
+        <footer flex="none" class="md-whiteframe-z5" layout="column" layout-gt-md="row" layout-align="center center">
             <span>Слидкуйте за нами в &nbsp;&nbsp;</span>
             <div>
                 <a href="https://www.facebook.com/hashtag/palamar_group">
@@ -63,6 +63,8 @@
 
                 <md-icon class="md-social-image" md-svg-src="../content/images/twi.svg"></md-icon>
                 <md-icon class="md-social-image" md-svg-src="../content/images/goo.svg"></md-icon>
+            </div>
+            <div layout="column" layout-gt-xs="row" class="md-padding"><span>вул.Щирецька 36&nbsp;</span> <span>&nbsp; 067 264 62 16 &nbsp;</span><span>&nbsp; 097 246 01 74</span>
             </div>
 
         </footer>

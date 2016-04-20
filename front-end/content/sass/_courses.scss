@@ -97,6 +97,7 @@ md-input-container .md-input-messages-animation {
     // 1-column Table
     @media (max-width: 599px) {
       &.flex-xs-80 {
+        font-size: 16px;
         flex: 1 80%;
         // Special override for the 1st & 2nd child default resizing
         &:first-child, &:nth-child(2) {
@@ -316,7 +317,7 @@ md-input-container .md-input-messages-animation {
 
 footer {
   z-index: 2;
-  height: 80px;
+  height: 95px;
   width: 100%;
   bottom: 0;
   color: whitesmoke;
@@ -346,6 +347,14 @@ main {
 }
 
 @media (max-width: 599px) {
+  footer {
+    z-index: 2;
+    height: 125px;
+    width: 100%;
+    bottom: 0;
+    color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0.9);
+  }
   header {
     font-size: 22px;
     height: 100px;
