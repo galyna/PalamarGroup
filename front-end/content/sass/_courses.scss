@@ -13,10 +13,19 @@ md-input-container .md-input-messages-animation {
   max-width: 300px;
 }
 
-.courses {
+.md-social-image {
+  padding: 5px;
+  transition: transform 0.5s;
+  &:hover {
+    transform: scale(1.2, 1.2);
+    transition: transform 0.2s;
+  }
+}
+
+.courses-main {
   box-sizing: border-box;
   height: 100%;
-
+  font-size: 21px;
   img {
     max-width: 100%;
   }
@@ -29,7 +38,94 @@ md-input-container .md-input-messages-animation {
   .md-card-image {
     transition: transform 0.5s;
     &:hover {
-      transform: scale(1.2, 1.2);
+      transform: scale(1.1, 1.1);
+      transition: transform 0.5s;
+    }
+  }
+
+  md-card {
+    position: relative;
+    display: block;
+    md-card-content {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 25%;
+      color: whitesmoke;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    @media (min-width: 1280px) and (max-width: 1930px) {
+
+      &.flex-gt-md-22 {
+
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 2 30%;
+      }
+
+    }
+
+    @media (min-width: 600px) and (max-width: 1279px) {
+      // Custom setting since ngMaterial 1.0.0 only
+      // supports percentage increments of 5
+      // 2-column table
+      &.flex-gt-sm-46 {
+        // max-width: 24% !important;
+        // Disable to all varying sizes in Cards
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 2 36%;
+      }
+      &:first-child, &:nth-child(2) {
+        flex: 2 36%;
+      }
+
+      md-card-content {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        height: 35%;
+        color: whitesmoke;
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+    }
+
+    // Need this for specificity to override defaults
+    // 1-column Table
+    @media (max-width: 599px) {
+      &.flex-xs-80 {
+        flex: 1 80%;
+        // Special override for the 1st & 2nd child default resizing
+        &:first-child, &:nth-child(2) {
+          flex: 1 80%;
+        }
+      }
+    }
+
+  }
+
+}
+
+.courses {
+  box-sizing: border-box;
+  height: 100%;
+  font-size: 18px;
+  img {
+    max-width: 100%;
+  }
+
+  card-image-container {
+    display: block;
+    overflow: hidden;
+  }
+
+  .md-card-image {
+    transition: transform 0.5s;
+    &:hover {
+      transform: scale(1.1, 1.1);
       transition: transform 0.5s;
     }
   }
@@ -52,6 +148,7 @@ md-input-container .md-input-messages-animation {
     // 4-column Table, except Row 1 to be 2-Columns
 
     @media (min-width: 1280px) and (max-width: 1930px) {
+
       // Custom setting since ngMaterial 1.0.0 only
       // supports percentage increments of 5
       // 2-column table
@@ -60,7 +157,7 @@ md-input-container .md-input-messages-animation {
         // Disable to all varying sizes in Cards
         max-height: 100%;
         box-sizing: border-box;
-        flex: 2 32%;
+        flex: 2 18%;
       }
 
     }
@@ -116,6 +213,18 @@ md-input-container .md-input-messages-animation {
 
   img {
     max-width: 100%;
+  }
+  card-image-container {
+    display: block;
+    overflow: hidden;
+  }
+
+  .md-card-image {
+    transition: transform 0.5s;
+    &:hover {
+      transform: scale(1.1, 1.1);
+      transition: transform 0.5s;
+    }
   }
 
   md-card {
@@ -181,7 +290,7 @@ md-input-container .md-input-messages-animation {
 }
 
 .bgImageContainer {
-  background-image: url('/content/images/palamar_logo_big.jpg');
+  //background-image: url('/content/images/palamar_logo_big.jpg');
   z-index: 1;
   height: 100%;
   width: 100%;
@@ -209,11 +318,11 @@ footer {
   z-index: 2;
   height: 80px;
   width: 100%;
-bottom: 0;
+  bottom: 0;
   color: whitesmoke;
   background-color: rgba(0, 0, 0, 0.9);
 }
-.view-container{   height: 100%;}
+
 header {
   z-index: 3;
   height: 90px;
@@ -225,14 +334,50 @@ header {
   color: white;
   font-size: 32px;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.7);
-  .subheader{font-size: 18px;padding-top: 4px;}
+  background-color: rgba(0, 0, 0, 0.8);
+  .subheader {
+    font-size: 18px;
+    padding-top: 4px;
+  }
 }
-main{ padding-top: 90px;}
+
+main {
+  padding-top: 90px;
+}
+
 @media (max-width: 599px) {
   header {
     font-size: 22px;
     height: 100px;
-    .subheader{font-size: 16px;padding-top:2px;}
+    .subheader {
+      font-size: 16px;
+      padding-top: 2px;
+    }
   }
+}
+
+@media (min-width: 600px) and (max-width: 1279px) {
+  header {
+    font-size: 22px;
+    height: 100px;
+    .subheader {
+      font-size: 16px;
+      padding-top: 2px;
+    }
+  }
+}
+.detail-btn {
+   width: 120px;
+   color: floralwhite;
+   background-color: rgba(0, 0, 0, 1);
+   &:hover {
+     color: black;
+     background-color: rgba(1, 1, 1, 1);
+
+     transition: transform 0.5s;
+   }
+ }
+
+.course-name {
+  height: 65px;
 }

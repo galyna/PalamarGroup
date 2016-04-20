@@ -16,13 +16,12 @@
         @font-face {
             font-family: microsquare; /* Гарнитура шрифта */
             src: url('ufonts.com_microsquare-ex-regular.ttf'); /* Путь к файлу со шрифтом */
+
         }
 
         header {
-            font-family: microsquare, 'Comic Sans MS', cursive;
-
+            font-family: microsquare, 'Georgia', cursive;
             word-wrap: break-word;
-
         }
 
         /**
@@ -42,14 +41,30 @@
         <div>
             Y&nbsp;U&nbsp;L&nbsp;I&nbsp;A &nbsp;&nbsp; P&nbsp;A&nbsp;L&nbsp;A&nbsp;M&nbsp;A&nbsp;R &nbsp;&nbsp; G&nbsp;R&nbsp;O&nbsp;U&nbsp;P
         </div>
-        <div class="subheader" >
-           beauty parlour & academy
+        <div class="subheader">
+            beauty parlour & academy
         </div>
+
     </header>
 
-    <main   layout-fill layout="column">
-        <div ng-view flex="grow"  ></div>
-        <footer flex="none" class="md-whiteframe-z5">
+    <main layout-fill layout="column">
+
+        <div ng-view flex="grow"></div>
+        <footer flex="none" class="md-whiteframe-z5" layout="row" layout-sx="column" layout-align="center center">
+            <span>Слидкуйте за нами в &nbsp;&nbsp;</span>
+            <div>
+                <a href="https://www.facebook.com/hashtag/palamar_group">
+                    <md-icon class="md-social-image" md-svg-src="../content/images/face.svg"></md-icon>
+                </a>
+
+                <a href="https://www.instagram.com/palamar_group/">
+                    <md-icon class="md-social-image" md-svg-src="../content/images/insta.svg"></md-icon>
+                </a>
+
+                <md-icon class="md-social-image" md-svg-src="../content/images/twi.svg"></md-icon>
+                <md-icon class="md-social-image" md-svg-src="../content/images/goo.svg"></md-icon>
+            </div>
+
         </footer>
     </main>
 

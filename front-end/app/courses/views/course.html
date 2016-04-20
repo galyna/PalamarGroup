@@ -1,12 +1,20 @@
+<div layout="row">
 
-<div  layout="row" >
+    <div flex="12" flex-xs="0" flex-sm="4" flex layout="column" layout-align="start center ">
 
-    <div flex="12" flex-xs="0" flex-sm="4" >
-
+        <md-button hide-xs style=" background-color: rgba(0, 0, 0, 0.75);left:0;top:95px; position: fixed" class="md-fab " ng-click="vm.backToHome()">
+            <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
+        </md-button>
     </div>
-    <div flex="75" flex-xs="100" class=" course-divider"  flex-sm="92" layout-align="center center">
-        <div flex layout layout-wrap layout-align="center " >
-            <h3>{{vm.course.name}}</h3>
+    <div flex="75" flex-xs="100" class=" course-divider" flex-sm="92" layout-align="center center">
+
+
+        <div flex layout="row" layout-wrap layout-align="center " class="course-name" >
+            <md-button hide-gt-xs style=" background-color: rgba(0, 0, 0, 0.75);left:0;top:97px; position: fixed" class="md-fab course-back-small-fab" ng-click="vm.backToHome()">
+                <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
+            </md-button>
+            <h2 hide-xs>{{vm.course.name}}</h2>
+            <h3 hide-gt-xs >{{vm.course.name}}</h3>
         </div>
         <div layout="row">
             <md-card>
@@ -24,8 +32,9 @@
                         <span class="md-headline">Ціна {{ vm.course.price}}  грн</span>
                         <span class="md-subhead"> {{vm.course.description}}</span>
                         <div flex layout layout-wrap layout-align="end center">
-                            <md-button ng-show="!vm.order.formVisible" class="md-accent md-raised " style="width: 130px;" aria-label="Play" ng-click="vm.order.showForm(course)">
-                            Записатись
+                            <md-button ng-show="!vm.order.formVisible" class="detail-btn" style="width: 140px;"
+                                       aria-label="Play" ng-click="vm.order.showForm(course)">
+                                Записатись
                             </md-button>
                         </div>
                         <div ng-include="'courses/views/order.html'">
@@ -52,7 +61,7 @@
                 </md-card-content>
             </md-card>
         </div>
-        <div flex layout layout-wrap layout-align="center " ng-if="vm.course.historyPhotos.length>0" >
+        <div flex layout layout-wrap layout-align="center " ng-if="vm.course.historyPhotos.length>0">
             <h3>Фото Попередніх модулів</h3>
         </div>
         <div class="courses-history" flex layout layout-wrap layout-align="center ">

@@ -1,9 +1,9 @@
-(function(){
+(function () {
     angular.module('courses')
         .controller('CourseController', CourseController);
-    
-    CourseController.$inject = ['$log', '$routeParams', 'courseService', 'orderService'];
-    function CourseController($log, $routeParams, courseService, orderService){
+
+    CourseController.$inject = ['$log', '$routeParams', 'courseService', 'orderService', '$location'];
+    function CourseController($log, $routeParams, courseService, orderService, $location) {
         var vm = this;
         var order = {
             model: {
@@ -12,7 +12,7 @@
                 phone: ''
             },
             formVisible: false,
-            showForm: function(course){
+            showForm: function (course) {
                 this.formVisible = true;
             },
             hideForm: function () {
@@ -20,25 +20,32 @@
             },
             submit: submitOrder
         };
+
+        vm.backToHome = backToHome;
         
-        function submitOrder(form){
+        function backToHome() {
+            $location.url('/home');
+        }
+
+        function submitOrder(form) {
             var that = this;
-            if(this.model.email || this.model.phone){
+            that.hideForm();
+            if (this.model.email || this.model.phone) {
                 this.model.event = vm.course._id;
                 orderService.post(this.model)
-                    .then(function(){
+                    .then(function () {
                         that.hideForm();
                     })
-                    .catch(function(err){
+                    .catch(function (err) {
                         $log.error(err);
                     });
             }
         }
-        
-        courseService.get($routeParams.id).then(function(course){
+
+        courseService.get($routeParams.id).then(function (course) {
             vm.course = course;
             vm.order = order;
-        }).catch(function(err){
+        }).catch(function (err) {
             $log.error(err);
         });
     }
