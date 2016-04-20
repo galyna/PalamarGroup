@@ -1,10 +1,10 @@
 
-
+<md-button  ng-if="!vm.showCourseCreateForm && !vm.showCourseEditForm" class="md-raised" ng-click="vm.showCreateForm()">
+    Додати модуль
+</md-button>
 
     <div flex  layout="column" class="content ">
-            <md-button ng-if="!vm.showCourseCreateForm && !vm.showCourseEditForm" class="md-raised" ng-click="vm.showCreateForm()">
-                Додати модуль
-            </md-button>
+
             <div ng-if="vm.showCourseCreateForm && !vm.showCourseEditForm" ng-include="'admin/views/course.create.form.html'" ></div>
             <div ng-if="vm.showCourseEditForm && !vm.showCourseCreateForm" ng-include="'admin/views/course.edit.form.html'" ></div>
 
