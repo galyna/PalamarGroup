@@ -1,14 +1,15 @@
 
-<md-button  ng-if="!vm.showCourseCreateForm && !vm.showCourseEditForm" class="md-raised" ng-click="vm.showCreateForm()">
-    Додати модуль
-</md-button>
 
-    <div flex  layout="column" class="content ">
+        <md-button  ng-if="!vm.showCourseCreateForm && !vm.showCourseEditForm" class="md-raised" ng-click="vm.showCreateForm()">
+            Додати модуль
+        </md-button>
+        <div  >
 
             <div ng-if="vm.showCourseCreateForm && !vm.showCourseEditForm" ng-include="'admin/views/course.create.form.html'" ></div>
             <div ng-if="vm.showCourseEditForm && !vm.showCourseCreateForm" ng-include="'admin/views/course.edit.form.html'" ></div>
 
-            <md-list class="md-dense"  flex>
+            <md-list    flex="100"  layout-fill="true">
+
                 <md-subheader class="md-no-sticky">Модулі</md-subheader>
                 <md-list-item class="md-2-line " ng-repeat="item in vm.courses" ng-click="null">
                     <img ng-src="{{item.hearFormsPhotos[0].url}}?{{$index}}" class="md-avatar" />
@@ -26,5 +27,7 @@
                 </md-list-item>
             </md-list>
     </div>
+
+
 
 

@@ -43,28 +43,52 @@
       },
       "historyPhotos": [
         {
-          "name": "",
+          "name": "Модуль у 2014 році",
           "url": "/api/photo/06627101-6897-4703-bcff-672f41281c13.jpg",
           "order": 0,
           "_id": "57110f857b5e91c80046886e"
         },
         {
-          "name": "",
+          "name": "Модуль у 2015 році",
           "url": "/api/photo/25110077-6f70-453a-9c4f-477945a0684d.jpg",
           "order": 0,
           "_id": "5715c121872833d0032bb09f"
         },
         {
-          "name": "",
+          "name": "Модуль у 2016 році",
           "url": "/api/photo/0875bb44-379e-4846-ad60-4c85c8808c60.jpg",
           "order": 0,
           "_id": "5715c121872833d0032bb09e"
         },
         {
-          "name": "",
+          "name": "Модуль у 2014 році",
           "url": "/api/photo/95fc02a4-94b1-4647-8857-780790bf4efe.jpg",
           "order": 0,
           "_id": "5715c121872833d0032bb09d"
+        },
+        {
+          "name": "Модуль у 2016 році",
+          "url": "/api/photo/2405983b-fd13-494a-b9d6-ae8d3302ecb3.jpg",
+          "order": 0,
+          "_id": "571a8b7888ed7be0164ce370"
+        },
+        {
+          "name": "Модуль у 2016 році",
+          "url": "/api/photo/0437a50f-80cd-4c57-b8e4-f5edabe39a8e.jpg",
+          "order": 0,
+          "_id": "571a8b7888ed7be0164ce36f"
+        },
+        {
+          "name": "Модуль у 2016 році",
+          "url": "/api/photo/9963c30c-c157-491f-944c-b9fc4b6f6bed.jpg",
+          "order": 0,
+          "_id": "571a8b7888ed7be0164ce36e"
+        },
+        {
+          "name": "Модуль у 2016 році",
+          "url": "/api/photo/fa96301f-cbb4-440a-bdd9-bc7a20d61532.jpg",
+          "order": 0,
+          "_id": "571a8b7888ed7be0164ce36d"
         }
       ],
       "hearFormsPhotos": [
@@ -92,7 +116,7 @@
     {
       "_id": "570ea14e13bb7a0c1d01fc87",
       "name": "Чоловіча стрижка",
-      "description": "Оригінальна і сучасна чоловіча стрижка відповідає справжнім трендам і може бути виконана тільки добре навченим майстром , що знають технологію виконання чоловічої модельної стрижки .",
+      "description": "В даний час чоловіки прагнуть виглядати вишукано і сучасно , звертаючи уваги не тільки на одяг , а й на імідж в цілому , який , як відомо , створює перше враження про особу . Важливою деталлю іміджу є стрижка , правильно підкреслює риси обличчя і ідеально підходить структурі волосся . Оригінальна і сучасна чоловіча стрижка відповідає справжнім трендам і може бути виконана тільки добре навченим майстром , що знають технологію виконання чоловічої модельної стрижки .",
       "price": 8003,
       "order": 4,
       "isVisible": true,
@@ -108,13 +132,13 @@
       },
       "historyPhotos": [
         {
-          "name": "",
+          "name": "Модуль у 2016 році",
           "url": "/api/photo/b3dde2f1-c5b1-45de-b600-a14d565f4d52.jpg",
           "order": 0,
           "_id": "57113af148c81f081b85c31c"
         },
         {
-          "name": "",
+          "name": "Модуль у 2016 році",
           "url": "/api/photo/43d29135-6017-48cf-9401-20799cb80d7e.jpg",
           "order": 0,
           "_id": "57113af148c81f081b85c31b"
@@ -122,31 +146,31 @@
       ],
       "hearFormsPhotos": [
         {
-          "name": "",
+          "name": "Назва форми",
           "url": "/api/photo/1a33eb65-b887-4e25-83a2-4c664fb0ceff.jpg",
           "order": 0,
           "_id": "571010e122b3688c1e275f32"
         },
         {
-          "name": "",
+          "name": "Назва форми",
           "url": "/api/photo/de1fd6f7-ba9b-4f7e-8bf2-a64244f52de0.jpg",
           "order": 0,
           "_id": "5710b693d307a76811b5e2d5"
         },
         {
-          "name": "",
+          "name": "Назва форми",
           "url": "/api/photo/63edfd05-c12d-4e37-b01c-98d3681cf624.jpg",
           "order": 0,
           "_id": "5710b693d307a76811b5e2d4"
         },
         {
-          "name": "",
+          "name": "Назва форми",
           "url": "/api/photo/0afc17f6-2eec-4c65-9ffd-cef8afc254c5.jpg",
           "order": 0,
           "_id": "5710b693d307a76811b5e2d3"
         },
         {
-          "name": "",
+          "name": "Назва форми",
           "url": "/api/photo/26506edd-2e7d-4ef1-8a99-e1e89bdd8cd0.jpg",
           "order": 0,
           "_id": "5710b693d307a76811b5e2d2"
@@ -174,49 +198,49 @@
       "historyPhotos": [],
       "hearFormsPhotos": [
         {
-          "name": "",
+          "name": "Назва прийому",
           "url": "/api/photo/ddfa1418-cec6-492b-a513-26ac3e4a98da.jpg",
           "order": 0,
           "_id": "5710b6efd307a76811b5e2dd"
         },
         {
-          "name": "",
+          "name": "Назва прийому",
           "url": "/api/photo/5ca3d00f-4aec-4e48-8811-b1c06d8a7167.jpg",
           "order": 0,
           "_id": "5710b6efd307a76811b5e2dc"
         },
         {
-          "name": "",
+          "name": "Назва прийому",
           "url": "/api/photo/bec6ab6b-c49e-4ba6-8308-496377ad3e8e.jpg",
           "order": 0,
           "_id": "5710b6efd307a76811b5e2db"
         },
         {
-          "name": "",
+          "name": "Назва прийому",
           "url": "/api/photo/0f35e1ed-9a32-4f1c-b996-5117b3f41654.jpg",
           "order": 0,
           "_id": "5710b6efd307a76811b5e2da"
         },
         {
-          "name": "",
+          "name": "Назва прийому",
           "url": "/api/photo/0d525b20-992c-472a-8500-ce73c57060d1.jpg",
           "order": 0,
           "_id": "5710b6efd307a76811b5e2d9"
         },
         {
-          "name": "",
+          "name": "Назва прийому",
           "url": "/api/photo/8eebbb34-c746-4c73-b3fb-64aec94c0d00.jpg",
           "order": 0,
           "_id": "5710b6efd307a76811b5e2d8"
         },
         {
-          "name": "",
+          "name": "Назва прийому",
           "url": "/api/photo/b87a08b5-92ff-4d17-8962-75fa9d300d16.jpg",
           "order": 0,
           "_id": "5710b6efd307a76811b5e2d7"
         },
         {
-          "name": "",
+          "name": "Назва прийому",
           "url": "/api/photo/df3598a8-655e-49a8-a0b5-b435184f0c3c.jpg",
           "order": 0,
           "_id": "5710b6efd307a76811b5e2d6"
@@ -226,7 +250,7 @@
     },
     {
       "_id": "5710118122b3688c1e275f34",
-      "name": "Мистецтво мекіяжу",
+      "name": "Мистецтво макіяжу",
       "description": "Зробивши вибір вчитися на візажиста , майбутні фахівці отримують шанс перейняти досвід професіоналів своєї справи , які діляться корисними рекомендаціями .",
       "price": 5000,
       "order": 4,
@@ -238,31 +262,31 @@
         "2016-05-26T21:00:00.000Z"
       ],
       "author": {
-        "name": "",
+        "name": "Тетяна Літвінова",
         "photoUrl": "/api/photo/58a2b7e4-1c34-46fc-ac42-b19e8b166db2.jpg"
       },
       "historyPhotos": [],
       "hearFormsPhotos": [
         {
-          "name": "",
+          "name": "Назва прийоми",
           "url": "/api/photo/0c5ade51-ce3c-4fb0-ad15-a683a982c60b.jpg",
           "order": 0,
           "_id": "5710118c22b3688c1e275f35"
         },
         {
-          "name": "",
+          "name": "Назва прийоми",
           "url": "/api/photo/df116a18-67c8-42d9-9f38-62b3f8ce5202.jpg",
           "order": 0,
           "_id": "5710b74fd307a76811b5e2e4"
         },
         {
-          "name": "",
+          "name": "Назва прийоми",
           "url": "/api/photo/68950e97-488a-405a-9359-c0f1a61bdc92.jpg",
           "order": 0,
           "_id": "5710b74fd307a76811b5e2e3"
         },
         {
-          "name": "",
+          "name": "Назва прийоми",
           "url": "/api/photo/7babf4e4-9e4b-4245-adba-ec0180d34871.jpg",
           "order": 0,
           "_id": "5710b74fd307a76811b5e2e2"
@@ -290,31 +314,31 @@
       "historyPhotos": [],
       "hearFormsPhotos": [
         {
-          "name": "",
+          "name": "Назва стилю",
           "url": "/api/photo/4758b911-b519-4c7d-b258-362fce49c4e9.jpg",
           "order": 0,
           "_id": "571011b922b3688c1e275f37"
         },
         {
-          "name": "",
+          "name": "Назва стилю",
           "url": "/api/photo/b1ba1f3e-a38f-4c75-8e0e-164d8127b712.jpg",
           "order": 0,
           "_id": "5710b724d307a76811b5e2e1"
         },
         {
-          "name": "",
+          "name": "Назва стилю",
           "url": "/api/photo/b7126e60-ec7b-44c9-90ec-51f109c52394.jpg",
           "order": 0,
           "_id": "5710b724d307a76811b5e2e0"
         },
         {
-          "name": "",
+          "name": "Назва стилю",
           "url": "/api/photo/cb441b3a-eaa0-4d32-93ed-d32d2d319e9a.jpg",
           "order": 0,
           "_id": "5710b724d307a76811b5e2df"
         },
         {
-          "name": "",
+          "name": "Назва стилю",
           "url": "/api/photo/9fb30246-34b9-454d-a9a1-607865817563.jpg",
           "order": 0,
           "_id": "5710b724d307a76811b5e2de"
