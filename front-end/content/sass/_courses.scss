@@ -37,6 +37,7 @@ md-input-container .md-input-messages-animation {
 
   .md-card-image {
     transition: transform 0.5s;
+    cursor: pointer;
     &:hover {
       transform: scale(1.1, 1.1);
       transition: transform 0.5s;
@@ -121,6 +122,7 @@ md-input-container .md-input-messages-animation {
   card-image-container {
     display: block;
     overflow: hidden;
+    cursor: pointer ;
   }
 
   .md-card-image {
@@ -316,12 +318,17 @@ md-input-container .md-input-messages-animation {
 }
 
 footer {
+  padding: 12px;
   z-index: 2;
   height: 95px;
   width: 100%;
   bottom: 0;
   color: whitesmoke;
   background-color: rgba(0, 0, 0, 0.9);
+
+  a{
+    text-decoration: none;
+  }
 }
 
 header {
@@ -336,6 +343,10 @@ header {
   font-size: 32px;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.8);
+  a{
+    color: white;
+    text-decoration: none;
+  }
   .subheader {
     font-size: 18px;
     padding-top: 4px;

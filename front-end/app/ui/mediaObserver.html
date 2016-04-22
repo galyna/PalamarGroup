@@ -1,0 +1,48 @@
+<media-observer>
+    <div class="top-menu">
+        <span>
+            <md-icon ng-click="vm.close()" md-svg-icon="navigation:ic_close_24px">
+            </md-icon>
+        </span>
+        <span>
+            <md-icon class="md-social-image" md-svg-src="../content/images/face.svg">
+                <md-tooltip md-direction="bottom">
+                    Поділитися
+                </md-tooltip>
+            </md-icon>
+            <md-icon class="md-social-image" md-svg-src="../content/images/insta.svg">
+                <md-tooltip md-direction="bottom">
+                    Поділитися
+                </md-tooltip></md-icon>
+            <md-icon class="md-social-image" md-svg-src="../content/images/twi.svg">
+                  <md-tooltip md-direction="bottom">
+                    Поділитися
+                </md-tooltip>
+            </md-icon>
+            <md-icon class="md-social-image" md-svg-src="../content/images/goo.svg">
+                  <md-tooltip md-direction="bottom">
+                    Поділитися
+                </md-tooltip>
+            </md-icon>
+        </span>
+    </div>
+    <div class="container">
+        <prev ng-click="vm.prev()">
+            <div>
+                <md-icon md-svg-icon="navigation:ic_arrow_back_24px">
+                </md-icon>
+            </div>
+        </prev>
+        <div class="img-container" ng-click="vm.next()">
+            <!--<img ng-repeat="item in vm.items" ng-src="{{item.url}}" ng-class="{'active': $index == vm.index}">-->
+            <img ng-if="!vm.isVideo()" ng-src="{{vm.img.current.url}}">
+        </div>
+
+        <next ng-click="vm.next()">
+            <div>
+                <md-icon md-svg-icon="navigation:ic_arrow_forward_24px">
+                </md-icon>
+            </div>
+        </next>
+    </div>
+</media-observer>

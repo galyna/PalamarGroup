@@ -2,8 +2,8 @@
     angular.module('courses')
         .controller('CourseController', CourseController);
 
-    CourseController.$inject = ['$log', '$routeParams', 'courseService', 'orderService', '$location'];
-    function CourseController($log, $routeParams, courseService, orderService, $location) {
+    CourseController.$inject = ['$log', '$routeParams', 'courseService', 'orderService', '$location', 'mediaObserver'];
+    function CourseController($log, $routeParams, courseService, orderService, $location, mediaObserver) {
         var vm = this;
         var order = {
             model: {
@@ -22,7 +22,8 @@
         };
 
         vm.backToHome = backToHome;
-        
+        vm.showMediaObserver = mediaObserver.observe.bind(mediaObserver);
+
         function backToHome() {
             $location.url('/home');
         }
