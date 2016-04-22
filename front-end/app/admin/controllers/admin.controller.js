@@ -66,6 +66,7 @@
                 isVisible: true,
                 newDateModel: new Date()
             };
+            vm.showCourseEditForm = false;
             vm.showCourseCreateForm = true;
         }
 
@@ -110,6 +111,7 @@
             vm.editCourseModel.oldIndex = vm.courses.indexOf(course);
             vm.editCourseModel.newDateModel = new Date();
             vm.showCourseEditForm = true;
+            vm.showCourseCreateForm = false;
         }
 
         //course edit end

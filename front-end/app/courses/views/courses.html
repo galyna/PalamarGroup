@@ -8,9 +8,9 @@
             <card-image-container >
                 <img ng-src="{{::course.hearFormsPhotos[0].url}}" class="md-card-image">
             </card-image-container>
-            <md-card-content layout="column"    layout-align="center center">
-                <div>{{::course.name}}</div>
-                <md-button flex-xs="100" class="detail-btn" aria-label="Play" ng-click="vm.showDetails(course._id)">
+            <md-card-content layout="column" flex="100"   layout-align="center center">
+                <span class="  md-margin"  >{{::course.name}}</span>
+                <md-button class="detail-btn "    aria-label="Play" ng-click="vm.showDetails(course._id)">
                     Деталі
                 </md-button>
             </md-card-content>
