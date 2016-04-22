@@ -3,13 +3,13 @@
     </div>
     <div flex="75" flex-xs="100" flex-sm="92" class="courses-main" layout-margin layout layout-wrap layout-align="center center">
 
-        <md-card md-whiteframe="10" ng-click="vm.showDetails(course._id)" ng-repeat="course in vm.courses" ng-if="course.isVisible"
+        <md-card md-whiteframe="10" ng-click="vm.showDetails(course._id)" ng-repeat="course in vm.courses" ng-if="::course.isVisible"
                  class="md-margin " flex-gt-md="22" flex-md="22" flex-gt-sm="46" flex-xs="80">
             <card-image-container >
-                <img ng-src="{{course.hearFormsPhotos[0].url}}" class="md-card-image">
+                <img ng-src="{{::course.hearFormsPhotos[0].url}}" class="md-card-image">
             </card-image-container>
             <md-card-content layout="column"    layout-align="center center">
-                <div>{{course.name}}</div>
+                <div>{{::course.name}}</div>
                 <md-button flex-xs="100" class="detail-btn" aria-label="Play" ng-click="vm.showDetails(course._id)">
                     Деталі
                 </md-button>

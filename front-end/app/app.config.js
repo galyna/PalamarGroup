@@ -9,6 +9,9 @@ angular
         apiUrl: '/api',
         uploadDir: '/content/uploads'
     })
+    .config(['$compileProvider', function ($compileProvider) {
+        $compileProvider.debugInfoEnabled(false);
+    }])
     .config(function ($routeProvider, $mdThemingProvider, $mdIconProvider) {
         $routeProvider
             .when('/home', {
@@ -60,7 +63,8 @@ angular
             .iconSet("av", "../node_modules/material-design-icons/sprites/svg-sprite/svg-sprite-av.svg")
 
 
-    }).run(function ($http, $templateCache) {
+    })
+    .run(function ($http, $templateCache) {
     var urls = [
         '../node_modules/material-design-icons/sprites/svg-sprite/svg-sprite-navigation.svg',
         "../node_modules//material-design-icons/sprites/svg-sprite/svg-sprite-action.svg",
