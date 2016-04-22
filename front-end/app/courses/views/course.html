@@ -1,6 +1,6 @@
 <div layout="row">
 
-    <div flex="12" flex-xs="0" flex-sm="4" flex layout="column" layout-align="start center ">
+    <div flex="12" flex-xs="0" flex-sm="4"  layout="column" layout-align="start center ">
 
         <md-button hide-xs style=" background-color: rgba(0, 0, 0, 0.75);left:0;top:95px; position: fixed;z-index: 0;" class="md-fab " ng-click="vm.backToHome()">
             <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
@@ -9,7 +9,7 @@
     <div flex="75" flex-xs="100" class=" course-divider" flex-sm="92" layout-align="center center">
 
 
-        <div flex layout="row" layout-wrap layout-align="center " layout-align-xs=" center end" class="course-nz-index: 0;ame" >
+        <div  layout="row" layout-wrap layout-align="center " layout-align-xs=" center end" class="course-nz-index: 0;ame" >
             <md-button hide-gt-xs style=" background-color: rgba(0, 0, 0, 0.75);left:0;top:97px; position: fixed;z-index: 0;" class="md-fab course-back-small-fab" ng-click="vm.backToHome()">
                 <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
             </md-button>
@@ -49,7 +49,7 @@
         <div flex layout layout-wrap layout-align="center " ng-if="vm.course.hearFormsPhotos.length>0">
             <h3>Теми модуля</h3>
         </div>
-        <div class="courses course-inner" flex layout layout-wrap layout-align="center ">
+        <div class="courses course-inner"  layout layout-wrap layout-align="center ">
             <md-card ng-click="::vm.showMediaObserver(vm.course.hearFormsPhotos, $index)" ng-repeat="photo in ::vm.course.hearFormsPhotos" class="md-margin" flex-gt-md="22" flex-md="46"
                      flex-gt-sm="46" flex-xs="80">
                 <card-image-container>
@@ -64,7 +64,7 @@
         <div flex layout layout-wrap layout-align="center " ng-if="vm.course.historyPhotos.length>0">
             <h3>Фото Попередніх модулів</h3>
         </div>
-        <div class="courses-history" flex layout layout-wrap layout-align="center ">
+        <div class="courses-history"  layout layout-wrap layout-align="center ">
             <md-card ng-click="::vm.showMediaObserver(vm.course.historyPhotos, $index)"  ng-repeat="photo in ::vm.course.historyPhotos" class="md-margin" flex-gt-md="22" flex-md="46"
                      flex-gt-sm="46" flex-xs="80">
                 <card-image-container>

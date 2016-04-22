@@ -24,7 +24,6 @@ md-input-container .md-input-messages-animation {
 
 .courses-main {
   box-sizing: border-box;
-  height: 100%;
   font-size: 21px;
   img {
     max-width: 100%;
@@ -113,7 +112,6 @@ md-input-container .md-input-messages-animation {
 
 .courses {
   box-sizing: border-box;
-  height: 100%;
   font-size: 18px;
   img {
     max-width: 100%;
@@ -212,7 +210,7 @@ md-input-container .md-input-messages-animation {
 
 .courses-history {
   box-sizing: border-box;
-  height: 100%;
+
 
   img {
     max-width: 100%;
@@ -314,7 +312,6 @@ md-input-container .md-input-messages-animation {
   bottom: 0;
   z-index: 2;
   position: relative;
-  height: 100%;
 }
 
 footer {
@@ -386,6 +383,7 @@ main {
     }
   }
 }
+
 .detail-btn {
    width: 120px;
    color: floralwhite;
