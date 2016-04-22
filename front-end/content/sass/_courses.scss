@@ -389,12 +389,11 @@ main {
 .detail-btn {
    width: 120px;
    color: floralwhite;
-   background-color: rgba(0, 0, 0, 1);
+   background-color: rgba(0, 0, 0, 1.5);
    &:hover {
      color: black;
-     background-color: rgba(1, 1, 1, 1);
-
-     transition: transform 0.5s;
+     background-color: rgba(0, 0, 0, 1);
+     transition: transform 0.2s;
    }
  }
 
