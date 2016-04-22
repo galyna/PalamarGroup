@@ -2,8 +2,16 @@
     angular.module('courses')
         .controller('CourseController', CourseController);
 
-    CourseController.$inject = ['$log', '$routeParams', 'courseService', 'orderService', '$location', 'mediaObserver'];
-    function CourseController($log, $routeParams, courseService, orderService, $location, mediaObserver) {
+    CourseController.$inject = ['$scope', '$log', '$routeParams', 'courseService', 'orderService', '$location', 'mediaObserver'];
+    function CourseController($scope, $log, $routeParams, courseService, orderService, $location, mediaObserver) {
+
+        $scope.$on("$destroy", function() {
+            vm.backToHome = null;
+            vm.showMediaObserver = null;
+            vm.course = null;
+            vm.order = null;
+        });
+
         var vm = this;
         var order = {
             model: {

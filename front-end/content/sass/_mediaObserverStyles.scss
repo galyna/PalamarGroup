@@ -21,6 +21,7 @@ media-observer {
     color: rgba(255,255,255,0.5);
     cursor: pointer;
     transition: 0.2s;
+    outline: none;
   }
 
   md-icon:hover {
@@ -40,7 +41,8 @@ media-observer {
 
   .container {
     display: flex;
-    height: calc(100% - 48px);
+    height: calc(100% - 72px);
+    padding-bottom: 0;
   }
 
   prev, next {
@@ -71,6 +73,12 @@ media-observer {
   }
 
   @media (max-width: 599px){
+
+    .container {
+      height: calc(100% - 48px);
+      padding-bottom: 0;
+    }
+
     .img-container{
       width: 100%;
     }

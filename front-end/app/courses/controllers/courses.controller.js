@@ -5,16 +5,21 @@
 
     angular
         .module('courses')
-        .controller('CoursesController', ['courseService', '$location', CoursesController
-        ]);
+        .controller('CoursesController', CoursesController);
 
     /**
      * Main Controller for the  App
      * @param $mdDialog
      * @constructor
      */
-    function CoursesController(courseService, $location) {
+    CoursesController.$inject = ['$scope', '$location', 'courseService'];
+    function CoursesController($scope, $location, courseService) {
         var vm = this;
+
+        $scope.$on("$destroy", function() {
+            vm.courses = null;
+            vm.showDetails = null;
+        });
 
         vm.courses = [];
         vm.showDetails = showDetails;
