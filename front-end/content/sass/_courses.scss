@@ -153,7 +153,6 @@ md-input-container .md-input-messages-animation {
 
   }
 
-
 }
 
 .courses {
@@ -360,9 +359,8 @@ md-input-container .md-input-messages-animation {
 }
 
 footer {
-  padding: 12px;
+
   z-index: 2;
-  height: 95px;
   width: 100%;
   bottom: 0;
   color: whitesmoke;
@@ -397,17 +395,10 @@ header {
 
 main {
   padding-top: 90px;
+  min-height: 100vh;
 }
 
 @media (max-width: 599px) {
-  footer {
-    z-index: 2;
-    height: 125px;
-    width: 100%;
-    bottom: 0;
-    color: whitesmoke;
-    background-color: rgba(0, 0, 0, 0.9);
-  }
   header {
     font-size: 22px;
     height: 100px;
@@ -431,20 +422,11 @@ main {
 
 }
 
-
 @media (max-width: 248px) {
   .detail-btn {
     display: none;
   }
 
-  footer {
-    z-index: 2;
-    height: 135px;
-    width: 100%;
-    bottom: 0;
-    color: whitesmoke;
-    background-color: rgba(0, 0, 0, 0.9);
-  }
   header {
     font-size: 18px;
     height: 105px;
@@ -455,7 +437,6 @@ main {
   }
 
 }
-
 
 @media (min-width: 600px) and (max-width: 1279px) {
   header {
@@ -493,5 +474,12 @@ main {
 }
 
 .header-loading {
-  z-index: 39;background-color: rgba(255, 255, 255, 0.15);position: absolute;bottom: 0
+  z-index: 39;
+  background-color: rgba(255, 255, 255, 0.15);
+  position: absolute;
+  bottom: 0
+}
+
+body {
+  min-width: 212px;
 }
