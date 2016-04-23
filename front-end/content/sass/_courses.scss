@@ -491,3 +491,7 @@ main {
 .course-name {
   height: 65px;
 }
+
+.header-loading {
+  z-index: 39;background-color: rgba(255, 255, 255, 0.15);position: absolute;bottom: 0
+}
