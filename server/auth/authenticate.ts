@@ -1,30 +1,29 @@
-"use strict";
-var jwt = require('jsonwebtoken');
-var config_1 = require('../config');
-function authenticate(req, res, next) {
+import * as jwt from 'jsonwebtoken';
+import config from '../config';
+
+function authenticate(req, res, next){
+
     //TODO: only for development, remove!!!
-    if (config_1.default.env === 'dev')
-        return next();
+    if(config.env === 'dev') return next();
     // TODO: only for development, remove!!!
+
+
     var token = req.headers['x-access-token'];
     if (token) {
         // verifies secret and checks exp
-        jwt.verify(token, config_1.default.appSecret, function (err, decoded) {
+        jwt.verify(token, config.appSecret, function(err, decoded) {
             if (err) {
                 return res.status(403).send();
-            }
-            else {
+            } else {
                 // if everything is good, save to request for use in other routes
                 req.user = decoded;
                 next();
             }
         });
-    }
-    else {
+    } else {
         // if there is no token return an error
         return res.status(403).send();
     }
 }
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = authenticate;
-//# sourceMappingURL=authenticate.js.map
+
+export default authenticate;
