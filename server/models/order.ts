@@ -1,4 +1,7 @@
-import {Schema, model} from "mongoose";
+import {Document, Schema, Types, model} from "mongoose";
+
+interface IOrderModel extends PG.Models.IOrder, Document {}
+
 //noinspection ReservedWordAsName
 let OrderSchema = new Schema({
     name: String, 
@@ -7,8 +10,8 @@ let OrderSchema = new Schema({
     date: {type:Date, default: Date.now},
     event_name: String,
     event_dates: [Date],
-    event_id: { type: Schema.Types.ObjectId, ref: 'Course' },
+    event_id: { type: Types.ObjectId, ref: 'Course' },
     answered: {type:Boolean, default: false}
 });
 
-export default model('Order', OrderSchema);
+export var Order = model<IOrderModel>('Order', OrderSchema);

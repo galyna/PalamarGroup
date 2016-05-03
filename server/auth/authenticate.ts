@@ -1,7 +1,8 @@
 import * as jwt from 'jsonwebtoken';
 import config from '../config';
+import {NextFunction, Request, Response} from "express-serve-static-core";
 
-function authenticate(req, res, next){
+function authenticate(req: Request, res: Response, next: NextFunction): void{
 
     //TODO: only for development, remove!!!
     if(config.env === 'dev') return next();
@@ -13,7 +14,8 @@ function authenticate(req, res, next){
         // verifies secret and checks exp
         jwt.verify(token, config.appSecret, function(err, decoded) {
             if (err) {
-                return res.status(403).send();
+                res.status(403).send(null);
+                return;
             } else {
                 // if everything is good, save to request for use in other routes
                 req.user = decoded;
@@ -22,7 +24,8 @@ function authenticate(req, res, next){
         });
     } else {
         // if there is no token return an error
-        return res.status(403).send();
+        res.status(403).send(null);
+        return;
     }
 }
 

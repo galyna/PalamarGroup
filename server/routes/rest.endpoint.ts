@@ -1,8 +1,7 @@
 import {Model} from "mongoose";
 import config from '../config';
-
-var express = require('express');
-var authenticate = require('./../auth/authenticate');
+import {Router} from 'express';
+import authenticate from './../auth/authenticate';
 
 function authIfDev (req, res, next){
     if(config.env !== 'dev'){
@@ -13,18 +12,19 @@ function authIfDev (req, res, next){
 }
 
 function restEndpoint(_Model: Model<any>){
-    var routes = express.Router();
-    var Model = _Model;
+    let routes = Router();
+    let Model = _Model;
     routes.route('/')
         .get(function(req, res) {
             Model.find({}, {__v: 0}).then(function(users) {
                 res.json(users);
-            })
+            });
         })
         .post(authIfDev, function(req, res) {
-            var data = req.body;
+            let data = req.body;
+            let item;
             try{
-                var item = new Model(data);
+                item = new Model(data);
             }catch(ex){
                 res.status(500).json(ex);
             }
@@ -43,14 +43,14 @@ function restEndpoint(_Model: Model<any>){
                 })
                 .catch(function() {
                     //TODO: better error handling
-                    res.status(404).send();
+                    res.status(404).send(null);
                 });
         })
         .put(authIfDev, function(req, res) {
-            var id = req.params.id;
+            let id = req.params.id;
             Model.update({_id: id}, req.body)
                 .then(function() {
-                    res.send();
+                    res.send(null);
                 }).catch(function(err) {
                 //TODO: better error handling
                 res.status(500).json(err)
@@ -59,7 +59,7 @@ function restEndpoint(_Model: Model<any>){
         .delete(authIfDev, function(req,res) {
             Model.remove({_id: req.params.id})
                 .then(function() {
-                    res.send();
+                    res.send(null);
                 }).catch(function(err) {
                 //TODO: better error handling
                 res.status(404).json(err);

@@ -29,3 +29,5 @@ app.use('/node_modules', express.static('../node_modules'));
 
 app.listen(port);
 console.log('api is running at localhost:' + port);
+
+export default app;

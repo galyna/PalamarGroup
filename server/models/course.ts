@@ -1,17 +1,19 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var PhotoSchema = new Schema({
+import {Document, Schema, model} from "mongoose";
+
+interface ICourseModel extends PG.Models.ICourse, Document{}
+
+let PhotoSchema = new Schema({
     name: String,
     url: String,
     order: Number
 });
-var VideoSchema = new Schema({
+let VideoSchema = new Schema({
     name: String,
     url: String,
     order: Number
 });
 
-var CourseSchema = new Schema({
+let CourseSchema = new Schema({
     name: String,
     description: String,
     price: Number,
@@ -27,4 +29,4 @@ var CourseSchema = new Schema({
     isVisible: Boolean
 });
 
-export default mongoose.model('Course', CourseSchema);
+export var Course = model<ICourseModel>('Course', CourseSchema);

@@ -1,5 +1,5 @@
-var ConnectRoles = require('connect-roles');
-var currentUser = new ConnectRoles();
+let ConnectRoles = require('connect-roles');
+let currentUser = new ConnectRoles();
 
 //TODO: only for development, remove!!!
 import config from '../config';

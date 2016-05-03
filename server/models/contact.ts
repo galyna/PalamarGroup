@@ -1,6 +1,8 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var ContactSchema = new Schema({
+import {Document, Schema, model} from "mongoose";
+
+interface IContactModel extends PG.Models.IContact, Document{}
+
+let ContactSchema = new Schema({
     name: String,
     email: String,
     phone: String,
@@ -8,4 +10,4 @@ var ContactSchema = new Schema({
     address: String
 });
 
-export default mongoose.model('Contact', ContactSchema);
+export var Contact = model<IContactModel>('Contact', ContactSchema);

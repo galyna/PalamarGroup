@@ -1,6 +1,8 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var UserSchema = new Schema({
+import {Document, Schema, model} from "mongoose";
+
+interface IUserModel extends PG.Models.IUser, Document{}
+
+let UserSchema = new Schema({
     email: {
         type: String,
         unique: true,
@@ -10,4 +12,4 @@ var UserSchema = new Schema({
     roles: [String]
 });
 
-export default mongoose.model('User', UserSchema);
+export var User = model<IUserModel>('User', UserSchema);

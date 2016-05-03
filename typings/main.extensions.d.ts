@@ -3,3 +3,7 @@ declare module "express-serve-static-core" {
         files: any;
     }
 }
+
+interface ObjectConstructor {
+    assign(target: any, ...sources: any[]): any;
+}
