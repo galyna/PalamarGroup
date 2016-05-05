@@ -9,7 +9,7 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
 
     <link rel="stylesheet" href="content/css/app.css"/>
-    <link rel="shortcut icon" href="http://localhost:8080/favicon.ico">
+    <link rel="shortcut icon" href="favicon.ico">
 
 
     <style type="text/css">
@@ -33,13 +33,15 @@
     </style>
 </head>
 
-<body ng-app="yuliaPalamarApp" ng-cloak>
+<body ng-cloak>
+<!--<body ng-app="yuliaPalamarApp" ng-cloak>-->
 
 <div layout="column">
     <header layout="column" layout-align="center center" class="md-whiteframe-z4">
         <a href="/">
             <div>
-                Y&nbsp;U&nbsp;L&nbsp;I&nbsp;Y&nbsp;A &nbsp;&nbsp; P&nbsp;A&nbsp;L&nbsp;A&nbsp;M&nbsp;A&nbsp;R &nbsp;&nbsp; G&nbsp;R&nbsp;O&nbsp;U&nbsp;P
+                Y&nbsp;U&nbsp;L&nbsp;I&nbsp;Y&nbsp;A &nbsp;&nbsp; P&nbsp;A&nbsp;L&nbsp;A&nbsp;M&nbsp;A&nbsp;R &nbsp;&nbsp;
+                G&nbsp;R&nbsp;O&nbsp;U&nbsp;P
             </div>
             <div class="subheader">
                 beauty parlour & academy
@@ -49,9 +51,10 @@
 
     </header>
 
-    <main layout="column" >
-                <div flex="grow" ng-view></div>
-              <footer flex="none" class="md-whiteframe-z5 md-padding" layout="column" layout-gt-md="row" layout-align="center center">
+    <main layout="column">
+        <div flex="grow" ng-view></div>
+        <footer flex="none" class="md-whiteframe-z5 md-padding" layout="column" layout-gt-md="row"
+                layout-align="center center">
             <span>Слідкуйте за нами в &nbsp;&nbsp;</span>
             <div>
                 <a href="https://www.facebook.com/hashtag/palamar_group" target="_blank">
@@ -83,7 +86,48 @@
 <script type="text/javascript" src="node_modules/angular-material/angular-material.js"></script>
 <script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload.js"></script>
 
-<script src="app.js"></script>
+<!--<script src="app.js"></script>-->
+
+<script src="/node_modules/systemjs/dist/system.js"></script>
+<script>
+    System.config({
+        packages: {
+            app: {
+                format: 'register',
+                defaultExtension: 'js'
+            }
+//            vendor: {
+//                defaultExtension: 'js',
+//                baseURL: '/',
+//                map: {
+//                    'angular': '/node_modules/angular/angular.js',
+//                    'angular-route': 'node_modules/angular-route/angular-route.js',
+//                    'angular-animate': 'node_modules/angular-animate/angular-animate.js',
+//                    'angular-aria': 'node_modules/angular-aria/angular-aria.js',
+//                    'angular-messages': 'node_modules/angular-messages/angular-messages.js',
+//                    'angular-material': 'node_modules/angular-material/angular-material.js',
+//                    'ng-file-upload': 'node_modules/ng-file-upload/dist/ng-file-upload.js',
+//                },
+//                meta: {
+//                    'angular': {
+//                        format: 'global',
+//                        exports: 'angular'
+//                    },
+//                    'angular-route': {
+//                        format: 'global',
+//                        exports: 'angular',
+//                        deps: ['angular']
+//                    }
+//                }
+//            }
+        }
+
+
+    });
+
+System.import('app/main')
+        .then(null, console.error.bind(console));
+</script>
 
 </body>
 </html>

@@ -1,61 +1,61 @@
-(function () {
-    angular.module('courses')
-        .controller('CourseController', CourseController);
-
-    CourseController.$inject = ['$scope', '$log', '$routeParams', 'courseService', 'orderService', '$location', 'mediaObserver'];
-    function CourseController($scope, $log, $routeParams, courseService, orderService, $location, mediaObserver) {
-
-        $scope.$on("$destroy", function() {
-            vm.backToHome = null;
-            vm.showMediaObserver = null;
-            vm.course = null;
-            vm.order = null;
-        });
-
-        var vm = this;
-        var order = {
-            model: {
-                name: '',
-                email: '',
-                phone: ''
-            },
-            formVisible: false,
-            showForm: function (course) {
-                this.formVisible = true;
-            },
-            hideForm: function () {
-                this.formVisible = false;
-            },
-            submit: submitOrder
-        };
-
-        vm.backToHome = backToHome;
-        vm.showMediaObserver = mediaObserver.observe.bind(mediaObserver);
-
-        function backToHome() {
-            $location.url('/home');
-        }
-
-        function submitOrder(form) {
-            var that = this;
-            that.hideForm();
-            if (this.model.email || this.model.phone) {
-                this.model.event = vm.course._id;
-                orderService.post(this.model)
-                    .then(function () {
-                        that.hideForm();
-                    })
-                    .catch(function (err) {
+System.register([], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var CourseController;
+    return {
+        setters:[],
+        execute: function() {
+            CourseController = (function () {
+                function CourseController($log, $routeParams, $location, courseService, orderService, mediaObserver) {
+                    var _this = this;
+                    this.$log = $log;
+                    this.$location = $location;
+                    this.orderService = orderService;
+                    this.mediaObserver = mediaObserver;
+                    courseService.get($routeParams.id).then(function (course) {
+                        _this.course = course;
+                        _this.order = {
+                            name: '',
+                            email: '',
+                            phone: ''
+                        };
+                    }).catch(function (err) {
                         $log.error(err);
                     });
-            }
+                }
+                CourseController.prototype.backToHome = function () {
+                    this.$location.url('/home');
+                };
+                CourseController.prototype.submitOrder = function () {
+                    var _this = this;
+                    this.order.hideForm();
+                    if (this.order.model.email || this.order.model.phone) {
+                        this.order.model.event = this.course._id;
+                        this.orderService.post(this.order.model)
+                            .then(function () {
+                            _this.hideForm();
+                        })
+                            .catch(function (err) {
+                            _this.$log.error(err);
+                        });
+                    }
+                };
+                CourseController.prototype.showForm = function () {
+                    this.formVisible = true;
+                };
+                CourseController.prototype.hideForm = function () {
+                    this.formVisible = false;
+                };
+                ;
+                CourseController.prototype.showMediaObserver = function () {
+                    this.mediaObserver.observe();
+                };
+                CourseController.$inject = ['$log', '$routeParams', '$location', 'courseService', 'orderService', 'mediaObserver'];
+                CourseController.componentName = 'CourseController';
+                return CourseController;
+            }());
+            exports_1("CourseController", CourseController);
         }
-
-        courseService.get($routeParams.id).then(function (course) {
-            vm.course = course;
-            vm.order = order;
-        }).catch(function (err) {
-            $log.error(err);
-        });
     }
-})();
+});
+//# sourceMappingURL=course.controller.js.map

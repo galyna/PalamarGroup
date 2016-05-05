@@ -1,6 +1,6 @@
-import {Document, Schema, Types, model} from "mongoose";
+import {Document, Schema, model} from "mongoose";
 
-interface IOrderModel extends PG.Models.IOrder, Document {}
+interface IOrderModel extends pg.models.IOrder, Document {}
 
 //noinspection ReservedWordAsName
 let OrderSchema = new Schema({
@@ -10,7 +10,7 @@ let OrderSchema = new Schema({
     date: {type:Date, default: Date.now},
     event_name: String,
     event_dates: [Date],
-    event_id: { type: Types.ObjectId, ref: 'Course' },
+    event_id: { type: Schema.Types.ObjectId, ref: 'Course' },
     answered: {type:Boolean, default: false}
 });
 

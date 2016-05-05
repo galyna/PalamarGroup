@@ -1,50 +1,45 @@
 /**
  * Created by Galyna on 13.04.2016.
  */
-(function () {
-
-    angular
-        .module('courses')
-        .controller('CoursesController', CoursesController);
-
-    /**
-     * Main Controller for the  App
-     * @param $mdDialog
-     * @constructor
-     */
-    CoursesController.$inject = ['$scope', '$location', 'courseService'];
-    function CoursesController($scope, $location, courseService) {
-        var vm = this;
-
-        $scope.$on("$destroy", function() {
-            vm.courses = null;
-            vm.showDetails = null;
-        });
-
-        vm.courses = [];
-        vm.showDetails = showDetails;
-
-        //init page data
-        getCourses();
-
-        function getCourses() {
-            courseService.get().then(function (data) {
-                vm.courses = data;
-                vm.courses.forEach(function (item) {
-                    item.courseModulesDates = item.courseModulesDates.map(function (date) {
-                        return new Date(date);
-                    })
-                })
-            })
+System.register([], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var CoursesController;
+    return {
+        setters:[],
+        execute: function() {
+            CoursesController = (function () {
+                function CoursesController($scope, $location, courseService) {
+                    var _this = this;
+                    this.$location = $location;
+                    this.courseService = courseService;
+                    $scope.$on("$destroy", function () {
+                        _this.courses = null;
+                        _this.showDetails = null;
+                    });
+                    //init page data
+                    this.getCourses();
+                }
+                CoursesController.prototype.getCourses = function () {
+                    var _this = this;
+                    this.courseService.get().then(function (data) {
+                        _this.courses = data;
+                        _this.courses.forEach(function (item) {
+                            item.courseModulesDates = item.courseModulesDates.map(function (date) {
+                                return new Date(date);
+                            });
+                        });
+                    });
+                };
+                CoursesController.prototype.showDetails = function (id) {
+                    this.$location.url('/course/' + id);
+                };
+                CoursesController.$inject = ['$scope', '$location', 'courseService'];
+                CoursesController.componentName = 'CoursesController';
+                return CoursesController;
+            }());
+            exports_1("CoursesController", CoursesController);
         }
-
-        function showDetails(id) {
-            $location.url('/course/' +id);
-        }
-
     }
-})
-();
-
-
-
+});
+//# sourceMappingURL=courses.controller.js.map

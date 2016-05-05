@@ -13,7 +13,7 @@ var sass = require('gulp-sass');
 
 gulp.task('html', function () {
     return gulp.src(['!app/index.html','!app/layout/views/layout.html','!app/users/views/profile.html','app/**/*.html'])
-        .pipe(templateCache())
+        .pipe(templateCache({standalone: true}))
         .pipe(concat('templates.js'))
         .pipe(gulp.dest('./app'));
 });

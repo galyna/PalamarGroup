@@ -1,6 +1,6 @@
-declare module PG {
-    module Models {
-        interface IContact {
+declare module pg {
+    module models {
+        export interface IContact {
             name:string,
             email:string,
             phone:string,
@@ -8,19 +8,20 @@ declare module PG {
             address:string
         }
 
-        interface  IVideo {
+        export interface  IVideo {
             name: string,
             url: string,
             order: number
         }
 
-        interface  IPhoto {
+        export interface  IPhoto {
             name: string,
             url: string,
             order: number
         }
 
-        interface ICourse{
+        export interface ICourse{
+            _id: any,
             name: string,
             description: string,
             price: number,
@@ -32,12 +33,12 @@ declare module PG {
                 name: string,
                 photoUrl: string
             },
-            courseModulesDates: [Date],
+            courseModulesDates: [string],
             isVisible: boolean
         }
 
         //noinspection ReservedWordAsName
-        interface IOrder {
+        export interface IOrder {
             name: string,
             phone: string,
             email: string,
@@ -48,7 +49,7 @@ declare module PG {
             answered: boolean
         }
 
-        interface IUser {
+        export interface IUser {
             email: string,
             password: string,
             roles: [string]

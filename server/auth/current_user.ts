@@ -3,20 +3,20 @@ let currentUser = new ConnectRoles();
 
 //TODO: only for development, remove!!!
 import config from '../config';
-currentUser.use(function(){
+currentUser.use(() => {
     return config.env === 'dev';
 });
 //TODO: only for development, remove!!!
 
-currentUser.use('admin', function(req) {
+currentUser.use('admin', (req) => {
     return req.user && req.user.roles.indexOf('admin') > -1;
 });
 
-currentUser.use('moderator', function(req) {
+currentUser.use('moderator', (req) => {
     return req.user && req.user.roles.indexOf('moderator') > -1;
 });
 
-currentUser.use('user', function(req) {
+currentUser.use('user', (req) => {
     return req.user && req.user.roles.indexOf('user') > -1;
 });
 
