@@ -78,56 +78,18 @@
 
 </div>
 
-<script type="text/javascript" src="node_modules/angular/angular.js"></script>
-<script type="text/javascript" src="node_modules/angular-route/angular-route.js"></script>
-<script type="text/javascript" src="node_modules/angular-animate/angular-animate.js"></script>
-<script type="text/javascript" src="node_modules/angular-aria/angular-aria.js"></script>
-<script type="text/javascript" src="node_modules/angular-messages/angular-messages.min.js"></script>
-<script type="text/javascript" src="node_modules/angular-material/angular-material.js"></script>
-<script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload.js"></script>
+<!--<script type="text/javascript" src="node_modules/angular/angular.js"></script>-->
+<!--<script type="text/javascript" src="node_modules/angular-route/angular-route.js"></script>-->
+<!--<script type="text/javascript" src="node_modules/angular-animate/angular-animate.js"></script>-->
+<!--<script type="text/javascript" src="node_modules/angular-aria/angular-aria.js"></script>-->
+<!--<script type="text/javascript" src="node_modules/angular-messages/angular-messages.min.js"></script>-->
+<!--<script type="text/javascript" src="node_modules/angular-material/angular-material.js"></script>-->
+<!--<script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload.js"></script>-->
 
 <!--<script src="app.js"></script>-->
 
 <script src="/node_modules/systemjs/dist/system.js"></script>
-<script>
-    System.config({
-        packages: {
-            app: {
-                format: 'register',
-                defaultExtension: 'js'
-            }
-//            vendor: {
-//                defaultExtension: 'js',
-//                baseURL: '/',
-//                map: {
-//                    'angular': '/node_modules/angular/angular.js',
-//                    'angular-route': 'node_modules/angular-route/angular-route.js',
-//                    'angular-animate': 'node_modules/angular-animate/angular-animate.js',
-//                    'angular-aria': 'node_modules/angular-aria/angular-aria.js',
-//                    'angular-messages': 'node_modules/angular-messages/angular-messages.js',
-//                    'angular-material': 'node_modules/angular-material/angular-material.js',
-//                    'ng-file-upload': 'node_modules/ng-file-upload/dist/ng-file-upload.js',
-//                },
-//                meta: {
-//                    'angular': {
-//                        format: 'global',
-//                        exports: 'angular'
-//                    },
-//                    'angular-route': {
-//                        format: 'global',
-//                        exports: 'angular',
-//                        deps: ['angular']
-//                    }
-//                }
-//            }
-        }
-
-
-    });
-
-System.import('app/main')
-        .then(null, console.error.bind(console));
-</script>
+<script src="systemjs.config.js"></script>
 
 </body>
 </html>

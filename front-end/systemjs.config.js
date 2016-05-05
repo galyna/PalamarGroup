@@ -1,8 +1,16 @@
 System.config({
     baseURL: './',
+
+    packages: {
+        app: {
+            main: 'main',
+            format: 'register',
+            defaultExtension: 'js'
+        }
+    },
     map: {
-        'angular': './node_modules/angular/angular.js',
-        'angular-route': './node_modules/angular-route/angular-route.js',
+        'angular': 'node_modules/angular/angular.js',
+        'angular-route': 'node_modules/angular-route/angular-route.js',
         'angular-animate': 'node_modules/angular-animate/angular-animate.js',
         'angular-aria': 'node_modules/angular-aria/angular-aria.js',
         'angular-messages': 'node_modules/angular-messages/angular-messages.js',
@@ -15,17 +23,24 @@ System.config({
             exports: 'angular'
         },
         'angular-route': {
-            format: 'global',
-            exports: 'angular',
             deps: ['angular']
-        }
-    },
-    packages: {
-        app: {
-            format: 'register',
-            defaultExtension: 'js'
+        },
+        'angular-material': {
+            deps: ['angular', 'angular-animate']
+        },
+        'angular-aria': {
+            deps: ['angular']
+        },
+        'angular-animate': {
+            deps: ['angular']
+        },
+        'angular-messages': {
+            deps: ['angular']
+        },
+        'ng-file-upload': {
+            deps: ['angular']
         }
     }
 });
 
-System.import('app/main');
+System.import('app');
