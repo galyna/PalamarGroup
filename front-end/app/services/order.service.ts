@@ -1,4 +1,4 @@
-import {IConstants} from "../../app.config";
+import {IConstants} from "../app.config";
 import IOrder = pg.models.IOrder;
 
 export interface IOrderService {

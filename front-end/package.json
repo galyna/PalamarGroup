@@ -1,8 +1,8 @@
 {
-  "name": "ostapradio",
+  "name": "palamar-group-client",
   "private": true,
   "version": "0.0.0",
-  "description": "Ostap",
+  "description": "",
   "license": "MIT",
   "dependencies": {
     "angular": "^1.4.9",
@@ -12,32 +12,29 @@
     "angular-messages": "^1.5.2",
     "angular-route": "^1.4.9",
     "angular-sanitize": "^1.5.2",
-    "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.15.0",
-    "connect-multiparty": "^2.0.0",
-    "connect-roles": "^3.1.2",
-    "express": "^4.13.4",
-    "jsonwebtoken": "^5.7.0",
     "material-design-icons": "^2.2.3",
-    "mongoose": "^4.4.8",
     "ng-file-upload": "^12.0.4",
-    "node-uuid": "^1.4.7",
     "systemjs": "^0.19.27"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "chai-http": "^2.0.1",
+    "del": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-angular-templatecache": "^1.8.0",
     "gulp-concat": "^2.6.0",
+    "gulp-html-replace": "^1.5.5",
     "gulp-ng-annotate": "^2.0.0",
     "gulp-sass": "^2.2.0",
+    "gulp-sequence": "^0.4.5",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.3",
-    "mocha": "^2.4.5"
+    "systemjs-builder": "^0.15.16",
+    "typescript": "^1.8.10",
+    "typings": "^0.8.1"
   },
   "scripts": {
-    "start": "node server/server.js",
-    "prestart": "npm update"
+    "postinstall": "npm run typings:install && npm run tsc",
+    "tsc": "tsc",
+    "typings:install": "cd ../ && typings install",
+    "gulp:prod": "gulp prod"
   }
 }

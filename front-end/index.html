@@ -8,33 +8,22 @@
     <meta name="description" content="">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
 
+    <!--build:prod-->
+    <script src="node_modules/systemjs/dist/system.js"></script>
+    <script src="system.config.js"></script>
+
     <link rel="stylesheet" href="content/css/app.css"/>
+    <!--endbuild-->
+
     <link rel="shortcut icon" href="favicon.ico">
 
 
     <style type="text/css">
-        @font-face {
-            font-family: microsquare; /* Гарнитура шрифта */
-            src: url('ufonts.com_microsquare-ex-regular.ttf'); /* Путь к файлу со шрифтом */
 
-        }
-
-        header {
-            font-family: microsquare, 'Georgia', cursive;
-            word-wrap: break-word;
-        }
-
-        /**
-         * Hide when Angular is not yet loaded and initialized
-         */
-        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-            display: none !important;
-        }
     </style>
 </head>
 
 <body ng-cloak>
-<!--<body ng-app="yuliaPalamarApp" ng-cloak>-->
 
 <div layout="column">
     <header layout="column" layout-align="center center" class="md-whiteframe-z4">
@@ -77,19 +66,5 @@
     </main>
 
 </div>
-
-<!--<script type="text/javascript" src="node_modules/angular/angular.js"></script>-->
-<!--<script type="text/javascript" src="node_modules/angular-route/angular-route.js"></script>-->
-<!--<script type="text/javascript" src="node_modules/angular-animate/angular-animate.js"></script>-->
-<!--<script type="text/javascript" src="node_modules/angular-aria/angular-aria.js"></script>-->
-<!--<script type="text/javascript" src="node_modules/angular-messages/angular-messages.min.js"></script>-->
-<!--<script type="text/javascript" src="node_modules/angular-material/angular-material.js"></script>-->
-<!--<script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload.js"></script>-->
-
-<!--<script src="app.js"></script>-->
-
-<script src="/node_modules/systemjs/dist/system.js"></script>
-<script src="systemjs.config.js"></script>
-
 </body>
 </html>

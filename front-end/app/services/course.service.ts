@@ -1,5 +1,5 @@
-import {IConstants} from "../../app.config";
 import ICourse = pg.models.ICourse;
+import {IConstants} from "../app.config";
 /**
  * Created by Galyna on 08.04.2016.
  */

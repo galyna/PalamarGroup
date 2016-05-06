@@ -1,6 +1,6 @@
 import {Document, Schema, model} from "mongoose";
 
-interface ICourseModel extends pg.models.ICourse, Document{}
+interface ICourseModel extends pg.models.ICourseBase, Document{}
 
 let PhotoSchema = new Schema({
     name: String,

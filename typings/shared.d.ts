@@ -1,44 +1,59 @@
 declare module pg {
     module models {
-        export interface IContact {
+        export interface IContactBase {
             name:string,
             email:string,
             phone:string,
             photo:string,
             address:string
         }
-
-        export interface  IVideo {
+        
+        export interface IContact extends IContactBase {
+            _id?: any;
+        }
+        
+        export interface  IVideoBase {
             name: string,
             url: string,
             order: number
         }
 
-        export interface  IPhoto {
+        export interface IVideo extends IVideoBase {
+            _id?: any;
+        }
+        
+        export interface  IPhotoBase {
             name: string,
             url: string,
             order: number
         }
 
-        export interface ICourse{
-            _id: any,
+        export interface IPhoto extends IPhotoBase {
+            _id?: any;
+        }
+        
+        export interface ICourseBase {
             name: string,
             description: string,
             price: number,
             order: number,
-            videos: [IVideo],
-            hearFormsPhotos: [IPhoto],
-            historyPhotos: [IPhoto],
+            videos: IVideo[],
+            hearFormsPhotos: IPhoto[],
+            historyPhotos: IPhoto[],
             author: {
                 name: string,
                 photoUrl: string
             },
-            courseModulesDates: [string],
+            courseModulesDates: string[],
             isVisible: boolean
         }
 
+        export interface ICourse extends ICourseBase {
+            _id?: any;
+        }
+        
         //noinspection ReservedWordAsName
-        export interface IOrder {
+        export interface IOrderBase {
             name: string,
             phone: string,
             email: string,
@@ -49,12 +64,18 @@ declare module pg {
             answered: boolean
         }
 
-        export interface IUser {
+        export interface IOrder extends IOrderBase {
+            _id?: any;
+        }
+        
+        export interface IUserBase {
             email: string,
             password: string,
             roles: [string]
         }
-    }
 
-    
+        export interface IUser extends IUserBase {
+            _id?: any;
+        }
+    }
 }

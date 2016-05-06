@@ -5,7 +5,8 @@ import {Router} from "express";
 
 let courseApi = Router();
 
-courseApi.route('/:_id/hearFormsPhotos').post((req, res) => {
+courseApi.route('/:_id/hearFormsPhotos')
+    .post((req, res) => {
     let _id = req.params._id;
     if (!_id) return res.send(400);
 

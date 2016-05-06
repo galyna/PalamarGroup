@@ -47,9 +47,9 @@ export function materialConfig($mdThemingProvider:ng.material.IThemingProvider,
     // default shades
     
     $mdIconProvider
-        .iconSet("action", "../node_modules//material-design-icons/sprites/svg-sprite/svg-sprite-action.svg")
-        .iconSet("social", "../node_modules//material-design-icons/sprites/svg-sprite/svg-sprite-social.svg")
-        .iconSet("communication", "../node_modules//material-design-icons/sprites/svg-sprite/svg-sprite-communication.svg")
-        .iconSet("navigation", "../node_modules/material-design-icons/sprites/svg-sprite/svg-sprite-navigation.svg")
-        .iconSet("av", "../node_modules/material-design-icons/sprites/svg-sprite/svg-sprite-av.svg")
+        .iconSet("action", "/content/images/icons/svg-sprite-action.svg")
+        .iconSet("social", "/content/images/icons/svg-sprite-social.svg")
+        .iconSet("communication", "/content/images/icons/svg-sprite-communication.svg")
+        .iconSet("navigation", "/content/images/icons/svg-sprite-navigation.svg")
+        .iconSet("av", "/content/images/icons/svg-sprite-av.svg")
 }

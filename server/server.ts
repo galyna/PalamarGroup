@@ -3,8 +3,9 @@ import config from './config';
 import api from './routes/api';
 import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
-let app = express();
 let multipart = require('connect-multiparty');
+
+let app = express();
 let port = process.env.PORT || 8080;
 
 //TODO: remove on production
@@ -23,9 +24,25 @@ app.use(multipart());
 app.use('/api', api);
 
 //static content
-//TODO: add some concatenation
-app.use('/', express.static('../front-end'));
-app.use('/node_modules', express.static('../node_modules'));
+if(process.env.TYPE == 'prod'){
+    app.use('/', express.static('../front-end/dist'));
+}else {
+    app.use('/', express.static('../front-end'));
+}
+
+
+import {Course} from './models/course';
+
+var course = new Course({
+    _id: 'something',
+    name: 'test'
+});
+course.save().then(function(course) {
+    console.log(course)
+}).catch(function(err){
+    console.log(err)
+});
+
 
 app.listen(port);
 console.log('api is running at localhost:' + port);

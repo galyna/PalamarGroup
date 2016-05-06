@@ -46,7 +46,7 @@ export class AdminController {
             },
             courseModulesDates: [],
             isVisible: true,
-            newDateModel: new Date()
+            // newDateModel: new Date()
         };
         this.showCourseEditForm = false;
         this.showCourseCreateForm = true;
@@ -138,7 +138,6 @@ export class AdminController {
                 this.showHistoryPhotoUpload = false;
             });
         });
-        ;
     }
     //course image upload end
 

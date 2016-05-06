@@ -1,0 +1,31 @@
+{
+  "name": "palamar-group-server",
+  "private": true,
+  "version": "0.0.0",
+  "description": "",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.0",
+    "connect-multiparty": "^2.0.0",
+    "connect-roles": "^3.1.2",
+    "express": "^4.13.4",
+    "jsonwebtoken": "^5.7.0",
+    "mongoose": "^4.4.8",
+    "node-uuid": "^1.4.7"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "mocha": "^2.4.5",
+    "typescript": "^1.8.10",
+    "typings": "^0.8.1"
+  },
+  "scripts": {
+    "postinstall": "npm run typings:install && npm run tsc",
+    "start:prod": "forever stopall && TYPE=prod forever start server.js",
+    "stop:prod": "forever stopall",
+    "tsc": "tsc",
+    "typings:install": "cd ../ && typings install"
+  }
+}
