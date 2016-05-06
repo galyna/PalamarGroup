@@ -1,4 +1,4 @@
-System.register(['./courses.routes', './controllers/courses.controller', "./services/course.service", "./controllers/course.controller", "./services/order.service"], function(exports_1, context_1) {
+System.register(['./courses.routes', './controllers/courses.controller', "../services/course.service", "./controllers/course.controller", "../services/order.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var courses_routes_1, courses_controller_1, course_service_1, course_controller_1, order_service_1;

@@ -1,186 +1,153 @@
 /**
  * Created by Galyna on 08.04.2016.
  */
-(function () {
-
-    angular
-        .module('admin')
-        .controller('AdminController', [ 'adminService', '$log', 'Upload', '$timeout', AdminController
-        ]);
-
-    /**
-     * Main Controller for the  App
-     * @param $mdDialog
-     * @constructor
-     */
-    function AdminController( adminService, $log, Upload, $timeout) {
-        var vm = this;
-
-        vm.courses = [];
-        vm.editCourseModel = {};
-        vm.newCourseModel = {};
-        vm.showCourseEditForm = false;
-        vm.showCourseCreateForm = false;
-        vm.showHistoryPhotoUpload = false;
-        vm.showFormPhotoUpload = false;
-
-        vm.createCourse = createCourse;
-        vm.deleteCourse = deleteCourse;
-        vm.editCourse = editCourse;
-        vm.showEditForm = showEditForm;
-        vm.showCreateForm = showCreateForm;
-        vm.deleteFromList = deleteFromList;
-        vm.saveModuleDate = saveModuleDate;
-        vm.uploadAuthorPhoto = uploadAuthorPhoto;
-        vm.uploadCollPhoto = uploadCollPhoto;
-
-        //init page data
-        getCourses();
-
-        function getCourses() {
-            adminService.get().then(function (data) {
-                vm.courses = data;
-                vm.courses.forEach(function (item) {
-                    item.courseModulesDates = item.courseModulesDates.map(function (date) {
-                        return new Date(date);
-                    })
-                })
-            })
-        }
-
-        //course creation start
-        function showCreateForm() {
-            vm.newCourseModel = {
-                name: "",
-                description: "",
-                price: 0,
-                order: 0,
-                videos: [],
-                hearFormsPhotos: [],
-                historyPhotos: [],
-                author: {
-                    name: "",
-                    photoUrl: ""
-                },
-                courseModulesDates: [],
-                isVisible: true,
-                newDateModel: new Date()
-            };
-            vm.showCourseEditForm = false;
-            vm.showCourseCreateForm = true;
-        }
-
-        function createCourse(form) {
-            $log.debug("createCourse ...$valid" + form.$valid);
-            if (form.$valid) {
-                adminService.post(vm.newCourseModel)
-                    .then(function (course) {
-                        $log.debug("success createCourse...");
-                        vm.courses.push(course);
+System.register([], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var AdminController;
+    return {
+        setters:[],
+        execute: function() {
+            AdminController = (function () {
+                function AdminController(courseService, $log, Upload, $timeout) {
+                    var _this = this;
+                    this.courseService = courseService;
+                    this.$log = $log;
+                    this.Upload = Upload;
+                    this.$timeout = $timeout;
+                    courseService.get().then(function (courses) {
+                        _this.courses = courses;
                     }).catch(function (err) {
-                    $log.debug("fail createCourse..." + err);
-                }).finally(function () {
-                    vm.showCourseCreateForm = false;
-                });
-
-            }
-        }
-
-        //course creation start
-
-        // course edit start
-        function editCourse(form) {
-            $log.debug("editCourse ...$valid" + form.$valid);
-            $log.debug("editCourse ...vm.editCourseModel._id===" + vm.editCourseModel._id);
-            if (form.$valid) {
-                adminService.put(vm.editCourseModel._id, vm.editCourseModel)
-                    .then(function () {
-                        vm.courses.splice(vm.editCourseModel.oldIndex, 1, vm.editCourseModel);
-                        vm.editCourseModel = {};
-                    }).catch(function (err) {
-                    $log.debug("fail editCourse..." + err);
-                }).finally(function () {
-                    vm.showCourseEditForm = false;
-                });
-            }
-        }
-
-        function showEditForm(course) {
-            $log.debug("model for edit ..." + course._id + "" + course.name);
-            vm.editCourseModel = angular.copy(course);
-            vm.editCourseModel.oldIndex = vm.courses.indexOf(course);
-            vm.editCourseModel.newDateModel = new Date();
-            vm.showCourseEditForm = true;
-            vm.showCourseCreateForm = false;
-        }
-
-        //course edit end
-
-        //course image upload start
-        function uploadAuthorPhoto(file, model) {
-            file.upload = Upload.upload({
-                url: '/api/photo',
-                data: {file: file}
-            });
-
-            file.upload.then(function (response) {
-                $timeout(function () {
-                    model.author.photoUrl = response.data.url;
-                });
-            }).catch(function (err) {
-                console.log(err);
-            }).finally(function () {
-                $timeout(function () {
-                    vm.showAuthorPhotoUpload = false;
-                });
-            });
-        }
-
-        function uploadCollPhoto(file, collection) {
-            file.upload = Upload.upload({
-                url: '/api/photo',
-                data: {file: file}
-            });
-
-            file.upload.then(function (response) {
-                $timeout(function () {
-                    collection.push({
-                        name: "",
-                        url: response.data.url,
-                        order: 0
+                        $log.error(err);
                     });
-                });
-            }).catch(function (err) {
-                console.log(err);
-            }).finally(function () {
-                $timeout(function () {
-                    vm.showFormPhotoUpload = false;
-                    vm.showHistoryPhotoUpload = false;
-                });
-            });
-            ;
+                }
+                //course creation start
+                AdminController.prototype.showCreateForm = function () {
+                    this.newCourseModel = {
+                        name: "",
+                        description: "",
+                        price: 0,
+                        order: 0,
+                        videos: [],
+                        hearFormsPhotos: [],
+                        historyPhotos: [],
+                        author: {
+                            name: "",
+                            photoUrl: ""
+                        },
+                        courseModulesDates: [],
+                        isVisible: true,
+                        newDateModel: new Date()
+                    };
+                    this.showCourseEditForm = false;
+                    this.showCourseCreateForm = true;
+                };
+                AdminController.prototype.createCourse = function (form) {
+                    var _this = this;
+                    this.$log.debug("createCourse ...$valid" + form.$valid);
+                    if (form.$valid) {
+                        this.courseService.post(this.newCourseModel)
+                            .then(function (course) {
+                            _this.$log.debug("success createCourse...");
+                            _this.courses.push(course);
+                        }).catch(function (err) {
+                            _this.$log.debug("fail createCourse..." + err);
+                        }).finally(function () {
+                            _this.showCourseCreateForm = false;
+                        });
+                    }
+                };
+                //course creation start
+                // course edit start
+                AdminController.prototype.editCourse = function (form) {
+                    var _this = this;
+                    this.$log.debug("editCourse ...$valid" + form.$valid);
+                    this.$log.debug("editCourse ...vm.editCourseModel._id===" + this.editCourseModel._id);
+                    if (form.$valid) {
+                        this.courseService.put(this.editCourseModel._id, this.editCourseModel)
+                            .then(function () {
+                            _this.courses.splice(_this.editCourseModel.oldIndex, 1, _this.editCourseModel);
+                            _this.editCourseModel = {};
+                        }).catch(function (err) {
+                            _this.$log.debug("fail editCourse..." + err);
+                        }).finally(function () {
+                            _this.showCourseEditForm = false;
+                        });
+                    }
+                };
+                AdminController.prototype.showEditForm = function (course) {
+                    this.$log.debug("model for edit ..." + course._id + "" + course.name);
+                    this.editCourseModel = angular.copy(course);
+                    this.editCourseModel.oldIndex = this.courses.indexOf(course);
+                    this.editCourseModel.newDateModel = new Date();
+                    this.showCourseEditForm = true;
+                    this.showCourseCreateForm = false;
+                };
+                //course edit end
+                //course image upload start
+                AdminController.prototype.uploadAuthorPhoto = function (file, model) {
+                    var _this = this;
+                    file.upload = this.Upload.upload({
+                        url: '/api/photo',
+                        data: { file: file }
+                    });
+                    file.upload.then(function (response) {
+                        _this.$timeout(function () {
+                            model.author.photoUrl = response.data.url;
+                        });
+                    }).catch(function (err) {
+                        _this.$log.debug("fail upload file..." + err);
+                    }).finally(function () {
+                        _this.$timeout(function () {
+                            _this.showAuthorPhotoUpload = false;
+                        });
+                    });
+                };
+                AdminController.prototype.uploadCollPhoto = function (file, collection) {
+                    var _this = this;
+                    file.upload = this.Upload.upload({
+                        url: '/api/photo',
+                        data: { file: file }
+                    });
+                    file.upload.then(function (response) {
+                        _this.$timeout(function () {
+                            collection.push({
+                                name: "",
+                                url: response.data.url,
+                                order: 0
+                            });
+                        });
+                    }).catch(function (err) {
+                        _this.$log.debug("fail upload file..." + err);
+                    }).finally(function () {
+                        _this.$timeout(function () {
+                            _this.showFormPhotoUpload = false;
+                            _this.showHistoryPhotoUpload = false;
+                        });
+                    });
+                    ;
+                };
+                //course image upload end
+                //course date start
+                AdminController.prototype.saveModuleDate = function (model, date) {
+                    model.courseModulesDates.push(date);
+                };
+                //course date end
+                AdminController.prototype.deleteCourse = function (item) {
+                    var _this = this;
+                    this.courseService.delete(item._id).then(function () {
+                        _this.courses.splice(_this.courses.indexOf(item), 1);
+                    });
+                };
+                AdminController.prototype.deleteFromList = function (list, item) {
+                    list.splice(list.indexOf(item), 1);
+                };
+                AdminController.$inject = ['courseService', '$log', 'Upload', '$timeout',];
+                AdminController.componentName = 'AdminController';
+                return AdminController;
+            }());
+            exports_1("AdminController", AdminController);
         }
-
-        //course image upload end
-
-        //course date start
-        function saveModuleDate(model, date) {
-            model.courseModulesDates.push(date);
-        }
-
-        //course date end
-        function deleteCourse(item) {
-            adminService.delete(item._id).then(function () {
-                vm.courses.splice(vm.courses.indexOf(item), 1);
-            })
-        }
-
-        function deleteFromList(list, item) {
-            list.splice(list.indexOf(item), 1);
-        }
-
     }
-})
-();
-
-
+});
+//# sourceMappingURL=admin.controller.js.map

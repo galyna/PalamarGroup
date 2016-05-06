@@ -18,6 +18,25 @@ System.register([], function(exports_1, context_1) {
                     });
                 };
                 ;
+                CourseService.prototype.post = function (course) {
+                    return this.$http.post(this.url, course).then(function (res) {
+                        return res.data;
+                    });
+                };
+                ;
+                CourseService.prototype.put = function (id, course) {
+                    var getUrl = id ? this.url + '/' + id : this.url;
+                    return this.$http.put(getUrl, course).then(function (res) {
+                        return res.data;
+                    });
+                };
+                ;
+                CourseService.prototype.delete = function (id) {
+                    var getUrl = id ? this.url + '/' + id : this.url;
+                    return this.$http.delete(getUrl).then(function (res) {
+                    });
+                };
+                ;
                 CourseService.$inject = ['$http', 'constants'];
                 CourseService.componentName = 'courseService';
                 return CourseService;

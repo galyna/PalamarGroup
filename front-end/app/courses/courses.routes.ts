@@ -1,4 +1,5 @@
 import {CoursesController} from './controllers/courses.controller';
+import {CourseController} from './controllers/course.controller';
 
 coursesRoutes.$inject = ['$routeProvider'];
 export function coursesRoutes($routeProvider:ng.route.IRouteProvider) {
@@ -10,7 +11,7 @@ export function coursesRoutes($routeProvider:ng.route.IRouteProvider) {
         })
         .when('/course/:id', {
             templateUrl: 'app/courses/views/course.html',
-            controller: 'CourseController',
+            controller: CourseController.componentName,
             controllerAs: "vm"
         })
         .when('/test', {

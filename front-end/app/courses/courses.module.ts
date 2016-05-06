@@ -3,9 +3,9 @@
  */
 import {coursesRoutes} from './courses.routes';
 import {CoursesController} from './controllers/courses.controller';
-import {CourseService} from "./services/course.service";
+import {CourseService} from "../services/course.service";
 import {CourseController} from "./controllers/course.controller";
-import {OrderService} from "./services/order.service";
+import {OrderService} from "../services/order.service";
 
 let app = angular.module('courses', [ 'ngMaterial'])
     .config(coursesRoutes)

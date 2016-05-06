@@ -1,4 +1,4 @@
-<form ng-show="vm.order.formVisible" name="orderForm" class="md-padding" novalidate ng-submit="">
+<form ng-show="vm.formVisible" name="orderForm" class="md-padding" novalidate ng-submit="">
     <md-input-container class="md-block">
         <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
         <label for="name">Як до вас звертатися</label>
@@ -16,8 +16,8 @@
     </md-input-container>
     <p>Після запису на модуль з Вами звяжеться координатор для узгодження деталей</p>
     <div flex layout layout-wrap layout-align="end center">
-        <md-button ng-click="vm.order.hideForm()"  class="md-raised detail-cancel-btn">Скасувати</md-button>
-        <md-button ng-click="vm.order.submit(orderForm)"  class="order-btn">Відправити</md-button>
+        <md-button ng-click="vm.hideForm()"  class="md-raised detail-cancel-btn">Скасувати</md-button>
+        <md-button ng-click="vm.submit(orderForm)"  class="order-btn">Відправити</md-button>
     </div>
 
 </form>

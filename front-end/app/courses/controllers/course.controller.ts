@@ -1,4 +1,4 @@
-import {ICourseService} from "../services/course.service";
+import {ICourseService} from "../../services/course.service";
 import ICourse = pg.models.ICourse;
 
 interface IRouteParams extends ng.route.IRouteParamsService {

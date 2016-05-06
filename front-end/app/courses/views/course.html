@@ -32,8 +32,8 @@
                         <span class="md-headline">Ціна {{ ::vm.course.price}}  грн</span>
                         <span class="md-subhead"> {{::vm.course.description}}</span>
                         <div flex layout layout-wrap layout-align="end center">
-                            <md-button ng-show="!vm.order.formVisible" class="  order-btn"
-                                       aria-label="Play" ng-click="vm.order.showForm(course)">
+                            <md-button ng-show="!vm.formVisible" class="  order-btn"
+                                       aria-label="Play" ng-click="vm.showForm()">
                                 Записатись
                             </md-button>
                         </div>
