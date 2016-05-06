@@ -13,7 +13,7 @@ var Builder = require('systemjs-builder');
 var gulpSequence = require('gulp-sequence');
 var del = require('del');
 
-gulp.task('html', function () {
+gulp.task('templatesCache', function () {
     var templateHeader =
         'System.register(["angular"], function(exports_1, context_1) {'
         +'"use strict";'
@@ -101,5 +101,5 @@ gulp.task('prod:clean', function () {
     return del('dist/**/*');
 });
 
-gulp.task('prod', gulpSequence('sass', 'prod:clean', ['prod:html', 'prod:js', 'prod:content']));
+gulp.task('prod', gulpSequence(['sass', 'templatesCache', 'prod:clean'], ['prod:js', 'prod:html', 'prod:content']));
 
