@@ -33,16 +33,6 @@ if(process.env.TYPE == 'prod'){
 
 import {Course} from './models/course';
 
-var course = new Course({
-    _id: 'something',
-    name: 'test'
-});
-course.save().then(function(course) {
-    console.log(course)
-}).catch(function(err){
-    console.log(err)
-});
-
 
 app.listen(port);
 console.log('api is running at localhost:' + port);

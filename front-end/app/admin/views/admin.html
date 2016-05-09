@@ -3,6 +3,9 @@
         <md-button  ng-if="!vm.showCourseCreateForm && !vm.showCourseEditForm" class="md-raised md-margin" ng-click="vm.showCreateForm()">
             Додати модуль
         </md-button>
+        <md-button   class="md-raised md-margin" ng-click="vm.toOrders()">
+           Замовлення
+        </md-button>
         <div class=" md-margin" >
 
             <div ng-if="vm.showCourseCreateForm && !vm.showCourseEditForm" ng-include="'app/admin/views/course.create.form.html'" ></div>

@@ -14,11 +14,6 @@ System.register([], function(exports_1, context_1) {
                     this.mediaObserver = mediaObserver;
                     courseService.get($routeParams.id).then(function (course) {
                         _this.course = course;
-                        _this.order = {
-                            name: '',
-                            email: '',
-                            phone: ''
-                        };
                     }).catch(function (err) {
                         $log.error(err);
                     });
@@ -28,10 +23,13 @@ System.register([], function(exports_1, context_1) {
                 };
                 CourseController.prototype.submitOrder = function () {
                     var _this = this;
-                    this.order.hideForm();
-                    if (this.order.model.email || this.order.model.phone) {
-                        this.order.model.event = this.course._id;
-                        this.orderService.post(this.order.model)
+                    this.hideForm();
+                    if (this.order.email || this.order.phone || this.order.name) {
+                        this.order.event_id = this.course._id;
+                        this.order.event_dates = this.course.courseModulesDates;
+                        this.order.event_name = this.course.name;
+                        this.order.date = new Date();
+                        this.orderService.post(this.order)
                             .then(function () {
                             _this.hideForm();
                         })

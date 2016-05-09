@@ -21,11 +21,11 @@ export class CoursesController {
     getCourses() {
         this.courseService.get().then((data) => {
             this.courses = data;
-            this.courses.forEach((item) => {
-                item.courseModulesDates = item.courseModulesDates.map((date) => {
-                    return new Date(date); 
-                });
-            });
+            // this.courses.forEach((item) => {
+            //     item.courseModulesDates = item.courseModulesDates.map((date) => {
+            //         return new Date(date);
+            //     });
+            // });
         });
     }
     

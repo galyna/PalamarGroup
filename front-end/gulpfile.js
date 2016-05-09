@@ -49,6 +49,13 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./content/css'));
 });
 
+gulp.task('html', function () {
+    return gulp.src(['!app/index.html','app/**/*.html'])
+        .pipe(templateCache())
+        .pipe(concat('templates.js'))
+        .pipe(gulp.dest('./app'));
+});
+
 gulp.task('html:watch', function () {
     gulp.watch('app/**/*.html', ['html']);
 });

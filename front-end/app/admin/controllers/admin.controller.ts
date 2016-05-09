@@ -6,6 +6,7 @@ import {ICourseService} from "../services/course.service";
 import ICourse = pg.models.ICourse;
 
 
+
 export class AdminController {
 
     static $inject = ['courseService', '$log', 'Upload', '$timeout',];
@@ -32,22 +33,6 @@ export class AdminController {
 
     //course creation start
     showCreateForm():void {
-        this.newCourseModel = {
-            name: "",
-            description: "",
-            price: 0,
-            order: 0,
-            videos: [],
-            hearFormsPhotos: [],
-            historyPhotos: [],
-            author: {
-                name: "",
-                photoUrl: ""
-            },
-            courseModulesDates: [],
-            isVisible: true,
-            // newDateModel: new Date()
-        };
         this.showCourseEditForm = false;
         this.showCourseCreateForm = true;
     }

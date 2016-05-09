@@ -2,22 +2,22 @@
     <md-input-container class="md-block">
         <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
         <label for="name">Як до вас звертатися</label>
-        <input id="name" ng-model="vm.order.model.name" type="text" name="name">
+        <input id="name" ng-model="vm.order.name" type="text" name="name">
     </md-input-container>
     <md-input-container class="md-block">
         <md-icon md-svg-icon="communication:ic_email_24px"></md-icon>
         <label for="email">email</label>
-        <input id="email" ng-model="vm.order.model.email" type="text" name="email">
+        <input id="email" ng-model="vm.order.email" type="text" name="email">
     </md-input-container>
     <md-input-container class="md-block">
         <md-icon md-svg-icon="communication:ic_phonelink_ring_24px"></md-icon>
         <label for="phone">Телефон</label>
-        <input id="phone" ng-model="vm.order.model.phone" type="text" name="phone">
+        <input id="phone" ng-model="vm.order.phone" type="text" name="phone">
     </md-input-container>
     <p>Після запису на модуль з Вами звяжеться координатор для узгодження деталей</p>
     <div flex layout layout-wrap layout-align="end center">
         <md-button ng-click="vm.hideForm()"  class="md-raised detail-cancel-btn">Скасувати</md-button>
-        <md-button ng-click="vm.submit(orderForm)"  class="order-btn">Відправити</md-button>
+        <md-button ng-click="vm.submitOrder()"  class="order-btn">Відправити</md-button>
     </div>
 
 </form>

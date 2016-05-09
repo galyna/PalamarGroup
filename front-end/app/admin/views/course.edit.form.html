@@ -33,8 +33,8 @@
         <!--dates-->
         <md-list flex class="md-dense">
             <md-subheader class="md-no-sticky">Дати модулів</md-subheader>
-            <md-list-item class="md-1-line" ng-repeat="date in vm.editCourseModel.courseModulesDates track by $index">
-                <md-datepicker ng-model="date" disabled="true"></md-datepicker>
+            <md-list-item class="md-1-line" ng-repeat="date in vm.editCourseModel.courseModulesDates | date track by $index">
+                {{ date| date:'dd.MM.yyyy'}}
                 <md-button class="  md-raised" ng-click="vm.deleteFromList(vm.editCourseModel.courseModulesDates,date)">
                     Видалити
                 </md-button>

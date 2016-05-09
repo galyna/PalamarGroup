@@ -24,11 +24,11 @@ System.register([], function(exports_1, context_1) {
                     var _this = this;
                     this.courseService.get().then(function (data) {
                         _this.courses = data;
-                        _this.courses.forEach(function (item) {
-                            item.courseModulesDates = item.courseModulesDates.map(function (date) {
-                                return new Date(date);
-                            });
-                        });
+                        // this.courses.forEach((item) => {
+                        //     item.courseModulesDates = item.courseModulesDates.map((date) => {
+                        //         return new Date(date);
+                        //     });
+                        // });
                     });
                 };
                 CoursesController.prototype.showDetails = function (id) {
