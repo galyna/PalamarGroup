@@ -55,7 +55,7 @@ gulp.task('html:watch', function () {
     gulp.watch('app/**/*.html', ['html']);
 });
 
-gulp.task('sass:watch', function () {
+gulp.task('sass:watch', ['sass'], function () {
     gulp.watch('./content/sass/**/*.scss', ['sass']);
 });
 
@@ -103,5 +103,5 @@ gulp.task('prod:clean', function () {
     return del('dist/**/*');
 });
 
-gulp.task('prod', gulpSequence(['sass', 'templatesCache', 'prod:clean'], ['prod:js', 'prod:html', 'prod:content']));
+gulp.task('prod', gulpSequence(['sass', 'html', 'prod:clean'], ['prod:js', 'prod:html', 'prod:content']));
 

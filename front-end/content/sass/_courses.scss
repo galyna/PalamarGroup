@@ -1,3 +1,5 @@
+@import "theme";
+
 .md-no-animations,
 md-dialog.md-transition-in,
 md-dialog.md-transition-out {
@@ -53,7 +55,7 @@ md-input-container .md-input-messages-animation {
       left: 0;
       height: 25%;
       color: whitesmoke;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba($primary, 0.7);
     }
 
     @media (min-width: 1280px) and (max-width: 1930px) {
@@ -99,7 +101,7 @@ md-input-container .md-input-messages-animation {
         height: 31%;
         font-size: 17px;
         color: whitesmoke;
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: rgba($primary, 0.7);
       }
     }
 
@@ -121,7 +123,7 @@ md-input-container .md-input-messages-animation {
         height: 27%;
         font-size: 20px;
         color: whitesmoke;
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: rgba($primary, 0.7);
       }
     }
 
@@ -186,7 +188,7 @@ md-input-container .md-input-messages-animation {
       left: 0;
       height: 20%;
       color: whitesmoke;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba($primary, 0.7);
     }
 
     // Custom setting since ngMaterial 1.0.0 only
@@ -248,9 +250,7 @@ md-input-container .md-input-messages-animation {
 }
 
 .course-divider {
-
-  background-color: rgba(1, 1, 1, 0.1);
-
+  background-color: $accent-50;
 }
 
 .courses-history {
@@ -282,7 +282,7 @@ md-input-container .md-input-messages-animation {
       left: 0;
       height: 12%;
       color: white;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba($primary, 0.7);
     }
     // Custom setting since ngMaterial 1.0.0 only
     // supports percentage increments of 5
@@ -364,49 +364,16 @@ footer {
   width: 100%;
   bottom: 0;
   color: whitesmoke;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba($primary, 0.9);
 
   a {
     text-decoration: none;
   }
 }
 
-header {
-  z-index: 3;
-  height: 90px;
-  width: 100%;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  color: white;
-  font-size: 32px;
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.8);
-  a {
-    color: white;
-    text-decoration: none;
-  }
-  .subheader {
-    font-size: 18px;
-    padding-top: 4px;
-  }
-}
 
-main {
-  padding-top: 90px;
-  min-height: 100vh;
-}
 
 @media (max-width: 599px) {
-  header {
-    font-size: 22px;
-    height: 100px;
-    .subheader {
-      font-size: 16px;
-      padding-top: 2px;
-    }
-  }
   .order-btn {
     width: 100%;
     min-width: 100%;
@@ -426,27 +393,6 @@ main {
   .detail-btn {
     display: none;
   }
-
-  header {
-    font-size: 18px;
-    height: 105px;
-    .subheader {
-      font-size: 14px;
-      padding-top: 0px;
-    }
-  }
-
-}
-
-@media (min-width: 600px) and (max-width: 1279px) {
-  header {
-    font-size: 22px;
-    height: 100px;
-    .subheader {
-      font-size: 16px;
-      padding-top: 2px;
-    }
-  }
 }
 
 .detail-btn {
@@ -461,10 +407,10 @@ main {
 
 .order-btn {
   color: floralwhite;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba($primary, 0.8);
   &:hover {
     color: black;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba($primary, 0.7);
     transition: transform 0.2s;
   }
 }
@@ -478,8 +424,4 @@ main {
   background-color: rgba(255, 255, 255, 0.15);
   position: absolute;
   bottom: 0
-}
-
-body {
-  min-width: 212px;
 }

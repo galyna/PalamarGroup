@@ -1,12 +1,62 @@
+@import "theme";
+
 @font-face {
   font-family: microsquare; /* Гарнитура шрифта */
   src: url('../fonts/ufonts.com_microsquare-ex-regular.ttf'); /* Путь к файлу со шрифтом */
+}
 
+
+body {
+  min-width: 212px;
+}
+
+main {
+  padding-top: 90px;
+  min-height: 100vh;
 }
 
 header {
+  z-index: 3;
   font-family: microsquare, 'Georgia', cursive;
   word-wrap: break-word;
+  width: 100%;
+  height: 100px;
+  position: fixed;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  background-color: rgba($primary, 0.8);
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .subheader {
+    font-size: 14px;
+    padding-top: 0;
+  }
+
+  @media (min-width: 248px) {
+    font-size: 22px;
+    .subheader {
+      font-size: 16px;
+      padding-top: 2px;
+    }
+  }
+
+  @media (min-width: $layout-breakpoint-md) {
+    font-size: 32px;
+    .subheader {
+      font-size: 18px;
+      padding-top: 4px;
+    }
+  }
+
+}
+
+md-button.md-fab{
+  background: rgba($primary, 0.8);
 }
 
 /**

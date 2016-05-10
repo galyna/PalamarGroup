@@ -1,4 +1,6 @@
+appRun.$inject = ['$http', '$templateCache'];
 export function appRun($http: ng.IHttpService, $templateCache: ng.ITemplateCacheService) {
+
     var urls = [
         '/content/images/icons/svg-sprite-navigation.svg',
         "/content/images/icons/svg-sprite-action.svg",

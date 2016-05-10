@@ -5,7 +5,7 @@
 import 'angular';
 import 'angular-route';
 import 'angular-aria';
-import  'angular-messages';
+import 'angular-messages';
 import 'angular-material';
 import 'ng-file-upload';
 import {uiModule} from './ui/ui.module';
