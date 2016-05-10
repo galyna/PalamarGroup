@@ -13,7 +13,7 @@
     "jsonwebtoken": "registry:dt/jsonwebtoken#0.0.0+20160316155526",
     "mime": "registry:dt/mime#0.0.0+20160316155526",
     "mocha": "registry:dt/mocha#2.2.5+20160317120654",
-    "mongoose": "registry:dt/mongoose#3.8.5+20160316155526",
+    "mongoose": "registry:dt/mongoose#3.8.5+20160505185535",
     "ng-file-upload": "registry:dt/ng-file-upload#0.0.0+20160317120654",
     "node": "registry:dt/node#4.0.0+20160423143914",
     "serve-static": "registry:dt/serve-static#0.0.0+20160317120654"

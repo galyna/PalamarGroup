@@ -4,7 +4,12 @@
 
 import {ICourseService} from "../services/course.service";
 import ICourse = pg.models.ICourse;
+import IPhoto = pg.models.IPhoto;
 
+interface IEditCourseModel extends ICourse {
+    oldIndex?: number;
+    newDateModel?: Date;
+}
 
 
 export class AdminController {
@@ -12,20 +17,20 @@ export class AdminController {
     static $inject = ['courseService', '$log', 'Upload', '$timeout',];
     static componentName = 'AdminController';
 
-    courses:[ICourse];
-    editCourseModel:ICourse;
+    courses:ICourse[];
+    editCourseModel:IEditCourseModel;
     newCourseModel:ICourse;
     showCourseEditForm:boolean;
     showCourseCreateForm:boolean;
     showHistoryPhotoUpload:boolean;
     showFormPhotoUpload:boolean;
+    showAuthorPhotoUpload: boolean;
 
     constructor(private courseService:ICourseService, private $log:ng.ILogService,
                 private Upload:ng.angularFileUpload.IUploadService, private $timeout:ng.ITimeoutService) {
 
         courseService.get().then((courses) => {
             this.courses = courses;
-
         }).catch(function (err) {
             $log.error(err);
         });
@@ -62,7 +67,7 @@ export class AdminController {
             this.courseService.put(this.editCourseModel._id, this.editCourseModel)
                 .then(()=> {
                     this.courses.splice(this.editCourseModel.oldIndex, 1, this.editCourseModel);
-                    this.editCourseModel = {};
+                    this.editCourseModel = <IEditCourseModel>{};
                 }).catch((err)=> {
                 this.$log.debug("fail editCourse..." + err);
             }).finally(()=> {
@@ -71,7 +76,7 @@ export class AdminController {
         }
     }
 
-    showEditForm(course:ICourse):void {
+    showEditForm(course:IEditCourseModel):void {
         this.$log.debug("model for edit ..." + course._id + "" + course.name);
         this.editCourseModel = angular.copy(course);
         this.editCourseModel.oldIndex = this.courses.indexOf(course);
@@ -82,8 +87,9 @@ export class AdminController {
     //course edit end
 
     //course image upload start
-    uploadAuthorPhoto(file:ng.angularFileUpload.IFileUploadConfigFile, model:ICourse):void {
+    uploadAuthorPhoto(file, model:IEditCourseModel):void {
         file.upload = this.Upload.upload({
+            method: 'POST',
             url: '/api/photo',
             data: {file: file}
         });
@@ -101,8 +107,10 @@ export class AdminController {
         });
     }
 
-    uploadCollPhoto(file:ng.angularFileUpload.IFileUploadConfigFile, collection:[ICourse]):void {
+    //TODO: add file param type
+    uploadCollPhoto(file, collection:IPhoto[]):void {
         file.upload = this.Upload.upload({
+            method: 'POST',
             url: '/api/photo',
             data: {file: file}
         });
@@ -127,8 +135,8 @@ export class AdminController {
     //course image upload end
 
     //course date start
-    saveModuleDate(model:ICourse, date:Date):void {
-        model.courseModulesDates.push(date);
+    static saveModuleDate(model:ICourse, date:Date):void {
+        model.courseModulesDates.push(date.toJSON());
     }
     //course date end
 
@@ -138,7 +146,7 @@ export class AdminController {
         });
     }
 
-    deleteFromList(list:[any], item:any):void {
+    static deleteFromList(list:any[], item:any):void {
         list.splice(list.indexOf(item), 1);
     }
 

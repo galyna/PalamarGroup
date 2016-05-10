@@ -1,12 +1,14 @@
-import {IConstants} from "../app.config";
-import ICourse = pg.models.ICourse;
 /**
  * Created by Galyna on 08.04.2016.
  */
 
+import {IConstants} from "../app.config";
+import ICourse = pg.models.ICourse;
+
+//noinspection ReservedWordAsName
 export interface ICourseService {
-    get(): ng.IHttpPromise<[ICourse]>;
-   // get(id: string): ng.IPromise<ICourse>;
+    get(): ng.IPromise<ICourse[]>;
+    get(id: string): ng.IPromise<ICourse>;
     delete(id: string): ng.IPromise<void>;
     post(course: any): ng.IPromise<ICourse>;
     put(id:string,course: any): ng.IPromise<ICourse>;
@@ -24,7 +26,7 @@ export class CourseService implements ICourseService {
     //TODO: implement filtering
     get(id?:string) {
         var getUrl = id ? this.url + '/' + id : this.url;
-        return this.$http.get<[ICourse]>(getUrl).then((res) => {
+        return this.$http.get<ICourse | ICourse[]>(getUrl).then((res) => {
             return res.data;
         });
     };
@@ -43,9 +45,10 @@ export class CourseService implements ICourseService {
         });
     };
 
+    //noinspection ReservedWordAsName
     delete(id:string) {
         var getUrl = id ? this.url + '/' + id : this.url;
-        return this.$http.delete(getUrl).then((res) => {
+        return this.$http.delete(getUrl).then(() => {
           
         });
     };

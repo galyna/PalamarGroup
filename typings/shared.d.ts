@@ -7,7 +7,9 @@ declare module pg {
             photo:string,
             address:string
         }
-        
+
+
+        //noinspection JSUnusedGlobalSymbols
         export interface IContact extends IContactBase {
             _id?: any;
         }
@@ -57,9 +59,9 @@ declare module pg {
             name: string,
             phone: string,
             email: string,
-            date: Date,
+            date: string,
             event_name: string,
-            event_dates: [Date],
+            event_dates: string[],
             event_id: string,
             answered: boolean
         }
@@ -71,9 +73,10 @@ declare module pg {
         export interface IUserBase {
             email: string,
             password: string,
-            roles: [string]
+            roles: string[]
         }
-
+        
+        //noinspection JSUnusedGlobalSymbols
         export interface IUser extends IUserBase {
             _id?: any;
         }

@@ -36,7 +36,7 @@ export class CourseController {
             this.order.event_id = this.course._id;
             this.order.event_dates = this.course.courseModulesDates;
             this.order.event_name = this.course.name;
-            this.order.date = new Date();
+            this.order.date = new Date().toJSON();
             this.orderService.post(this.order)
                 .then(() => {
                     this.hideForm();

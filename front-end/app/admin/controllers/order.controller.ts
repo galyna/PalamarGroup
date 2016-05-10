@@ -6,7 +6,7 @@ export class OrderController {
     static $inject = ['orderService'];
     static componentName = 'OrderController';
 
-    orders: [IOrder];
+    orders: IOrder[];
 
     constructor(private orderService:IOrderService) {
         this.orderService.get().then((orders) => {

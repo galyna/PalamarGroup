@@ -2,7 +2,8 @@ import {IConstants} from "../app.config";
 import IOrder = pg.models.IOrder;
 
 export interface IOrderService {
-    get(id?: string): ng.IPromise<IOrder|[IOrder]>;
+    get(): ng.IPromise<IOrder[]>;
+    get(id: string): ng.IPromise<IOrder>;
     post(order: any): ng.IHttpPromise<IOrder>;
 }
 
@@ -20,7 +21,7 @@ export class OrderService implements IOrderService {
     //TODO: implement filtering
     get(id?:string) {
         var getUrl = id ? this.url + '/' + id : this.url;
-        return this.$http.get<IOrder |[IOrder]>(getUrl).then((res) => {
+        return this.$http.get<IOrder | IOrder[]>(getUrl).then((res) => {
             return res.data;
         });
     }
