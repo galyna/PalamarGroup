@@ -30,10 +30,6 @@ if(process.env.TYPE == 'prod'){
     app.use('/', express.static('../front-end'));
 }
 
-
-import {Course} from './models/course';
-
-
 app.listen(port);
 console.log('api is running at localhost:' + port);
 
