@@ -13,7 +13,7 @@ var Builder = require('systemjs-builder');
 var gulpSequence = require('gulp-sequence');
 var del = require('del');
 
-gulp.task('templatesCache', function () {
+gulp.task('html', function () {
     var templateHeader =
         'System.register(["angular"], function(exports_1, context_1) {'
         +'"use strict";'
@@ -49,12 +49,7 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./content/css'));
 });
 
-gulp.task('html', function () {
-    return gulp.src(['!app/index.html','app/**/*.html'])
-        .pipe(templateCache())
-        .pipe(concat('templates.js'))
-        .pipe(gulp.dest('./app'));
-});
+
 
 gulp.task('html:watch', function () {
     gulp.watch('app/**/*.html', ['html']);
