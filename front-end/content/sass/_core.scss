@@ -6,6 +6,8 @@
 }
 
 
+
+
 body {
   min-width: 212px;
 }
@@ -55,6 +57,23 @@ header {
 
 }
 
+footer {
+
+  z-index: 2;
+  width: 100%;
+  bottom: 0;
+  color: whitesmoke;
+  background-color: rgba($primary, 0.9);
+
+  a {
+    text-decoration: none;
+  }
+}
+
+md-input-container .md-input-messages-animation {
+  max-width: 300px;
+}
+
 md-button.md-fab{
   background: rgba($primary, 0.8);
 }
@@ -64,4 +83,28 @@ md-button.md-fab{
  */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
+}
+
+.header-loading {
+  z-index: 39;
+  background-color: rgba(255, 255, 255, 0.15);
+  position: absolute;
+  bottom: 0
+}
+
+.bgImageContainer {
+  //background-image: url('/content/images/palamar_logo_big.jpg');
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+
+  display: block;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
 }

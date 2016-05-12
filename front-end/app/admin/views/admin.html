@@ -1,36 +1,19 @@
 
 
-        <md-button  ng-if="!vm.showCourseCreateForm && !vm.showCourseEditForm" class="md-raised md-margin" ng-click="vm.showCreateForm()">
-            Додати модуль
-        </md-button>
-        <md-button   class="md-raised md-margin" ng-click="vm.toOrders()">
-           Замовлення
-        </md-button>
-        <div class=" md-margin" >
-
-            <div ng-if="vm.showCourseCreateForm && !vm.showCourseEditForm" ng-include="'app/admin/views/course.create.form.html'" ></div>
-            <div ng-if="vm.showCourseEditForm && !vm.showCourseCreateForm" ng-include="'app/admin/views/course.edit.form.html'" ></div>
-
-            <md-list    >
-
-                <md-subheader class="md-no-sticky">Модулі</md-subheader>
-                <md-list-item class="md-2-line " ng-repeat="item in vm.courses" ng-click="null">
-                    <img ng-src="{{item.hearFormsPhotos[0].url}}?{{$index}}" class="md-avatar" />
-                    <div class="md-list-item-text" layout="column">
-                        <h3>{{ item.name }}</h3>
-                        <md-list layout="row" layout-align="center center">
-                            <md-list-item >
-                                <md-button class="  md-raised" ng-click="vm.deleteCourse(item)">Видалити</md-button>
-                            </md-list-item>
-                            <md-list-item >
-                                <md-button class=" md-primary md-raised" ng-click="vm.showEditForm(item)">Редагувати</md-button>
-                            </md-list-item>
-                        </md-list>
-                    </div>
-                </md-list-item>
-            </md-list>
+<div  layout="row"  >
+    <div flex="12" flex-xs="0" flex-sm="4">
     </div>
+    <div flex="75" flex-xs="100" flex-sm="92" layout="column"   layout-margin layout layout-wrap layout-align="center center">
 
 
-
-
+            <md-button class="md-reised" ng-click="vm.navToAcademy()">
+                Академія
+            </md-button>
+            <md-button class="md-reised " ng-click="vm.navToSalon()">
+                Салон
+            </md-button>
+        </md-list>
+    </div>
+    <div flex="12" flex-sm="4" flex-xs="0">
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div layout="row">
+    <div ng-include="'app/admin//academy/views/left.menu.html'"></div>
+    <div>
+        <div class=" md-long-text" ng-repeat="order in vm.orders" ng-click="null">
+
+            <div class="md-list-item-text">
+                <h3>{{order.event_name}}</h3>
+            <h4>{{order.event_dates}}</h4>
+                <p>
+                    <span ng-if="order.name"><b>name:</b> {{order.name}}</span>
+                    <span ng-if="order.phone"><b>phone: </b>{{order.phone}}</span>
+                    <span ng-if="order.email"><b>email</b>: <a href="mailto:{{order.email}}">{{order.email}}</a></span>
+                </p>
+                <md-button class="  md-raised" ng-click="vm.deleteOrder(order)">Видалити</md-button>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,7 +1,7 @@
-System.register(['./controllers/order.controller', './controllers/admin.controller'], function(exports_1, context_1) {
+System.register(['./academy/controllers/orders.controller', './academy/controllers/courses.controller', './controllers/admin.controller'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var order_controller_1, admin_controller_1;
+    var orders_controller_1, courses_controller_1, admin_controller_1;
     function coursesRoutes($routeProvider) {
         $routeProvider
             .when('/admin', {
@@ -9,17 +9,35 @@ System.register(['./controllers/order.controller', './controllers/admin.controll
             controller: admin_controller_1.AdminController.componentName,
             controllerAs: "vm"
         })
-            .when('/admin/order', {
-            templateUrl: 'app/admin/views/orders.html',
-            controller: order_controller_1.OrderController.componentName,
+            .when('/admin/academy', {
+            templateUrl: 'app/admin/academy/views/courses.html',
+            controller: courses_controller_1.AcademyCoursesController.componentName,
+            controllerAs: "vm"
+        })
+            .when('/admin/salon', {
+            templateUrl: 'app/admin/salon/views/salon.html',
+            controller: courses_controller_1.AcademyCoursesController.componentName,
+            controllerAs: "vm"
+        })
+            .when('/admin/academy/orders', {
+            templateUrl: 'app/admin/academy/views/orders.html',
+            controller: orders_controller_1.AcademyOrdersController.componentName,
+            controllerAs: "vm"
+        })
+            .when('/admin/academy/courses', {
+            templateUrl: 'app/admin/academy/views/courses.html',
+            controller: courses_controller_1.AcademyCoursesController.componentName,
             controllerAs: "vm"
         });
     }
     exports_1("coursesRoutes", coursesRoutes);
     return {
         setters:[
-            function (order_controller_1_1) {
-                order_controller_1 = order_controller_1_1;
+            function (orders_controller_1_1) {
+                orders_controller_1 = orders_controller_1_1;
+            },
+            function (courses_controller_1_1) {
+                courses_controller_1 = courses_controller_1_1;
             },
             function (admin_controller_1_1) {
                 admin_controller_1 = admin_controller_1_1;

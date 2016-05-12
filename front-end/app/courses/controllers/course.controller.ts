@@ -1,4 +1,5 @@
 import {ICourseService} from "../../services/course.service";
+
 import ICourse = pg.models.ICourse;
 import IOrder = pg.models.IOrder;
 
@@ -55,7 +56,7 @@ export class CourseController {
         this.formVisible = false;
     };
 
-    showMediaObserver():void {
-        this.mediaObserver.observe();
+    showMediaObserver(items, index):void {
+        this.mediaObserver.observe(items, index);
     }
 }
