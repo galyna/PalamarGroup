@@ -22,6 +22,20 @@ System.register([], function(exports_1, context_1) {
                         return res.data;
                     });
                 };
+                OrderService.prototype.put = function (id, order) {
+                    var getUrl = id ? this.url + '/' + id : this.url;
+                    return this.$http.put(getUrl, order).then(function (res) {
+                        return res.data;
+                    });
+                };
+                ;
+                //noinspection ReservedWordAsName
+                OrderService.prototype.delete = function (id) {
+                    var getUrl = id ? this.url + '/' + id : this.url;
+                    return this.$http.delete(getUrl).then(function () {
+                    });
+                };
+                ;
                 OrderService.$inject = ['$http', 'constants'];
                 OrderService.componentName = 'orderService';
                 return OrderService;

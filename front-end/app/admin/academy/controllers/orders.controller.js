@@ -14,8 +14,18 @@ System.register([], function(exports_1, context_1) {
                         _this.orders = orders;
                     });
                 }
-                AcademyOrdersController.prototype.deleteOrder = function () {
-                    this.$location.url('/admin/academy');
+                AcademyOrdersController.prototype.deleteOrder = function (item) {
+                    var _this = this;
+                    this.orderService.delete(item._id).then(function () {
+                        _this.orders.splice(_this.orders.indexOf(item), 1);
+                    });
+                };
+                AcademyOrdersController.prototype.answerOrder = function (item) {
+                    var _this = this;
+                    item.answered = true;
+                    this.orderService.put(item._id, item).then(function () {
+                        _this.orders.splice(_this.orders.indexOf(item), 1, item);
+                    });
                 };
                 AcademyOrdersController.$inject = ['orderService', '$location'];
                 AcademyOrdersController.componentName = 'AcademyOrdersController';
