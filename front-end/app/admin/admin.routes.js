@@ -1,7 +1,7 @@
-System.register(['./academy/controllers/orders.controller', './academy/controllers/courses.controller', './academy/controllers/models.controller', './academy/controllers/delivery.controller', './academy/controllers/contacts.controller', './controllers/admin.controller'], function(exports_1, context_1) {
+System.register(['./academy/controllers/orders.controller', './academy/controllers/courses.controller', './academy/controllers/models.controller', './academy/controllers/delivery.controller', './academy/controllers/contacts.controller', './controllers/admin.controller', "./academy/controllers/comments.controller"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var orders_controller_1, courses_controller_1, models_controller_1, delivery_controller_1, contacts_controller_1, admin_controller_1;
+    var orders_controller_1, courses_controller_1, models_controller_1, delivery_controller_1, contacts_controller_1, admin_controller_1, comments_controller_1;
     function coursesRoutes($routeProvider) {
         $routeProvider
             .when('/admin', {
@@ -39,6 +39,11 @@ System.register(['./academy/controllers/orders.controller', './academy/controlle
             controller: contacts_controller_1.AcademyContactsController.componentName,
             controllerAs: "vm"
         })
+            .when('/admin/academy/comments', {
+            templateUrl: 'app/admin/academy/views/comments.html',
+            controller: comments_controller_1.AcademyCommentController.componentName,
+            controllerAs: "vm"
+        })
             .when('/admin/academy/courses', {
             templateUrl: 'app/admin/academy/views/courses.html',
             controller: courses_controller_1.AcademyCoursesController.componentName,
@@ -65,6 +70,9 @@ System.register(['./academy/controllers/orders.controller', './academy/controlle
             },
             function (admin_controller_1_1) {
                 admin_controller_1 = admin_controller_1_1;
+            },
+            function (comments_controller_1_1) {
+                comments_controller_1 = comments_controller_1_1;
             }],
         execute: function() {
             coursesRoutes.$inject = ['$routeProvider'];

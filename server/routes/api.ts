@@ -12,6 +12,7 @@ import {Course} from '../models/course';
 import {Order} from '../models/order';
 import {Model} from '../models/model';
 import {SalonClient} from '../models/salon.client';
+import {Comment} from '../models/comment';
 
 let api = express.Router();
 
@@ -54,5 +55,6 @@ api.use('/user', userEndpoint);
 api.use('/photo', photoEndpoint);
 api.use('/model', restEndpoint(Model));
 api.use('/salon-client', restEndpoint(SalonClient));
+api.use('/comment', restEndpoint(Comment));
 
 export default api;

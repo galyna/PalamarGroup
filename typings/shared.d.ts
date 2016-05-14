@@ -104,5 +104,16 @@ declare module pg {
         export interface ISalonClient extends ISalonClientBase {
             _id?: any;
         }
+
+        export interface ICommentBase {
+            name: String,
+            text: String,
+            isVisible: boolean,
+            answered: boolean
+        }
+
+        export interface IComment extends ICommentBase {
+            _id?: any;
+        }
     }
 }

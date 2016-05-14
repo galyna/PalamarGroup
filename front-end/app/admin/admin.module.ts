@@ -7,14 +7,17 @@ import {AcademyOrdersController} from './academy/controllers/orders.controller';
 import {AcademyCoursesController} from './academy/controllers/courses.controller';
 import {AcademyModelController} from './academy/controllers/models.controller';
 import {AcademyDeliveryController} from './academy/controllers/delivery.controller';
+import {AcademyCommentController} from './academy/controllers/comments.controller';
+import {AcademyContactsController} from './academy/controllers/contacts.controller';
 import {AdminController} from './controllers/admin.controller';
 import {LeftMenuController} from './academy/controllers/left.menu.controller';
 import {CourseService} from "../services/course.service";
 import {OrderService} from "../services/order.service";
-import {ContactService} from "../services/contact.service";
+import {CommentService} from "../services/comment.service";
 import {ModelService} from "../services/model.service";
 import {SalonClientService} from "./academy/services/salon.client.service";
 import {DeliveryService} from "./academy/services/delivery.service";
+import {ContactService} from "../services/contact.service";
 
 let app = angular.module('admin', ['ngMaterial', 'ngFileUpload'])
     .config(coursesRoutes)
@@ -23,10 +26,13 @@ let app = angular.module('admin', ['ngMaterial', 'ngFileUpload'])
     .controller(AcademyOrdersController.componentName, AcademyOrdersController)
     .controller(AcademyModelController.componentName, AcademyModelController)
     .controller(AcademyDeliveryController.componentName, AcademyDeliveryController)
+    .controller(AcademyCommentController.componentName, AcademyCommentController)
+    .controller(AcademyContactsController.componentName, AcademyContactsController)
     .controller(LeftMenuController.componentName, LeftMenuController)
     .service(CourseService.componentName, CourseService)
     .service(OrderService.componentName, OrderService)
     .service(ModelService.componentName, ModelService)
+    .service(CommentService.componentName, CommentService)
     .service(ContactService.componentName, ContactService)
     .service(SalonClientService.componentName, SalonClientService)
     .service(DeliveryService.componentName, DeliveryService);

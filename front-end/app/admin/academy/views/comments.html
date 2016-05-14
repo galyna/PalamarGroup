@@ -1,0 +1,36 @@
+<div layout="row">
+    <div ng-include="'app/admin//academy/views/left.menu.html'"></div>
+    <div layout="column">
+        <form flex name="editContactForm" class="md-padding " novalidate ng-submit="vm.createCourse(editContactForm)">
+            <md-content>
+                <md-input-container class="md-block ">
+                    <label for="name">Ім`я </label>
+                    <input id="name" ng-model="vm.newComment.name" name="name"/>
+                    <!--TODO add validation-->
+                </md-input-container>
+
+                <md-input-container class="md-block">
+
+                    <label for="email">text</label>
+                    <input id="email" ng-model="vm.newComment.text" type="text" name="text">
+                </md-input-container>
+
+            </md-content>
+            <div layout="row" md-whiteframe="4">
+                <md-button type="submit" class="md-raised md-accent">Зберегти</md-button>
+            </div>
+        </form>
+        <div flex class="md-padding" ng-repeat="comment in vm.comments" ng-class="{'not-answered':!comment.answered}">
+
+            <span ng-if="comment.name"><b>name:</b> {{comment.name}}</span>
+            <span ng-if="comment.text"><b>text: </b>{{comment.text}}</span>
+
+            <md-button class="  md-raised" ng-click="vm.deleteComment(comment)">Видалити</md-button>
+            <md-button ng-show="!comment.answered" class="  md-raised" ng-click="vm.answerComment(comment)">Перевірено
+            </md-button>
+            <md-button class="  md-raised" ng-click="vm.showComment(comment)">Показати</md-button>
+        </div>
+
+
+    </div>
+</div>

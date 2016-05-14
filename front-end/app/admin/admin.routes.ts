@@ -4,6 +4,7 @@ import {AcademyModelController} from './academy/controllers/models.controller';
 import {AcademyDeliveryController} from './academy/controllers/delivery.controller';
 import {AcademyContactsController} from './academy/controllers/contacts.controller';
 import {AdminController} from './controllers/admin.controller';
+import {AcademyCommentController} from "./academy/controllers/comments.controller";
 
 coursesRoutes.$inject = ['$routeProvider'];
 export function coursesRoutes($routeProvider:ng.route.IRouteProvider) {
@@ -41,6 +42,11 @@ export function coursesRoutes($routeProvider:ng.route.IRouteProvider) {
         .when('/admin/academy/contacts', {
             templateUrl: 'app/admin/academy/views/contacts.html',
             controller: AcademyContactsController.componentName,
+            controllerAs: "vm"
+        })
+        .when('/admin/academy/comments', {
+            templateUrl: 'app/admin/academy/views/comments.html',
+            controller: AcademyCommentController.componentName,
             controllerAs: "vm"
         })
         .when('/admin/academy/courses', {

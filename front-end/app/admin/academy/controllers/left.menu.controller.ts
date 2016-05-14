@@ -39,4 +39,9 @@ export class LeftMenuController {
         this.$route.reload();
     }
 
+
+    navToComments():void {
+        this.$location.url('/admin/academy/comments');
+        this.$route.reload();
+    }
 }
