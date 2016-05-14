@@ -37,9 +37,6 @@ export class AcademyCoursesController {
         });
     }
 
-    deleteOrder():void {
-        this.$location.url('/admin/academy/orders');
-    }
 
     //course creation start
     showCreateForm():void {

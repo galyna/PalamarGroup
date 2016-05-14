@@ -1,0 +1,27 @@
+
+<div layout="row" >
+    <div  ng-include="'app/admin//academy/views/left.menu.html'"></div>
+    <div flex  >
+        <md-button  ng-if="!vm.showSalonCreateForm && !vm.showSalonEditForm" class="md-raised md-margin" ng-click="vm.showCreateForm()">
+            Додати салон
+        </md-button>
+        <div ng-if="vm.showSalonCreateForm && !vm.showSalonEditForm" ng-include="'app/admin/academy/views/salon.client.create.form.html'" ></div>
+        <div flex ng-if="vm.showSalonEditForm && !vm.showSalonCreateForm" ng-include="'app/admin/academy/views/salon.client.edit.form.html'" ></div>
+
+
+        <div  ng-if="!vm.showSalonCreateForm && !vm.showSalonEditForm"  ng-repeat="item in vm.salons" ng-click="null" layout="row" class=" md-margin" >
+
+            <div layout="column">
+                <span ng-if="item.name"><b>ім`я:</b> {{item.name}}</span>
+                <span ng-if="item.phone"><b>телефон: </b>{{item.phone}}</span>
+                <span ng-if="item.email"><b>email</b>: <a href="mailto:{{item.email}}">{{item.email}}</a></span>
+
+                <div layout="row" layout-align="center end">
+                    <md-button class="  md-raised" ng-click="vm.deleteSalon(item)">Видалити</md-button>
+                    <md-button class=" md-primary md-raised" ng-click="vm.showEditForm(item)">Редагувати</md-button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

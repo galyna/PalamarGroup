@@ -7,6 +7,7 @@ let PhotoSchema = new Schema({
     url: String,
     order: Number
 });
+
 let VideoSchema = new Schema({
     name: String,
     url: String,

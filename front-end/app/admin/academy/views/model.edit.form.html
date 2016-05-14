@@ -1,0 +1,71 @@
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools md-padding " style="color:white;">
+        <h2 class=" md-padding ">Редагувати модель</h2>
+        <span flex></span>
+    </div>
+</md-toolbar>
+<form name="editModelForm" class="md-padding " novalidate ng-submit="vm.editModel(editModelForm)">
+    <md-content>
+        <md-input-container class="md-block">
+            <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
+            <label for="name">Ім`я моделі</label>
+            <input id="name" ng-model="vm.editModelModel.name" type="text" name="name">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <md-icon md-svg-icon="communication:ic_email_24px"></md-icon>
+            <label for="email">email</label>
+            <input id="email" ng-model="vm.editModelModel.email" type="text" name="email">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <md-icon md-svg-icon="communication:ic_phonelink_ring_24px"></md-icon>
+            <label for="phone">Телефон</label>
+            <input id="phone" ng-model="vm.editModelModel.phone" type="text" name="phone">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label for="address">Адреса</label>
+            <input id="address" ng-model="vm.editModelModel.address" type="text" name="address">
+        </md-input-container>
+        <md-divider></md-divider>
+        <md-divider></md-divider>
+        <!--hearForm-->
+        <div flex>
+            <md-subheader class="md-no-sticky">Фото моделі</md-subheader>
+            <div layout="row" ng-repeat="item in vm.editModelModel.hearFormsPhotos track by $index"
+                 ng-click="null">
+                <img ng-src="{{item.url}}"/>
+                <div layout="column">
+                    <md-input-container class="md-block  ">
+                        <label for="name">Назва фото</label>
+                        <input id="photoName" ng-model="item.name" name="photoName"/>
+                    </md-input-container>
+                    <md-input-container class="md-block  ">
+                        <label for="ord">Порядок відображення</label>
+                        <input id="ord" ng-model="item.order" type="number"/>
+                    </md-input-container>
+                    <md-button class="  md-raised"
+                               ng-click="vm.deleteFromList(vm.editModelModel.hearFormsPhotos,item)">
+                        Видалити
+                    </md-button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <md-button ng-if="!vm.showFormPhotoUpload" class="md-raised" ng-click="vm.showFormPhotoUpload=true">
+                Додати форму
+            </md-button>
+            <div ng-if="vm.showFormPhotoUpload">
+                <input type="file" ngf-select ng-model="hearFormsFile" name="hearFormsFile"
+                       accept="image/*" required/>
+                <md-button class="md-raised" ng-disabled="!editModelForm.$valid"
+                           ng-click="vm.uploadCollPhoto(hearFormsFile,vm.editModelModel.hearFormsPhotos)">
+                    Завантажити
+                </md-button>
+            </div>
+        </div>
+    </md-content>
+    <div layout="row" md-whiteframe="4">
+        <md-button class="md-raised md-primary" ng-click="vm.showModelEditForm = false">Скасувати</md-button>
+        <md-button type="submit" class="md-raised md-accent">Зберегти</md-button>
+    </div>
+</form>
+

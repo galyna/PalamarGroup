@@ -5,7 +5,8 @@ declare module pg {
             email:string,
             phone:string,
             photo:string,
-            address:string
+            address:string,
+            isAcademy:boolean
         }
 
 
@@ -78,6 +79,29 @@ declare module pg {
         
         //noinspection JSUnusedGlobalSymbols
         export interface IUser extends IUserBase {
+            _id?: any;
+        }
+        
+        export interface IModelBase {
+            name: String,
+            phone: String,
+            email: String,
+            address: String,
+            hearFormsPhotos: IPhoto[],
+        }
+
+        export interface IModel extends IModelBase {
+            _id?: any;
+        }
+
+        export interface ISalonClientBase {
+            name: String,
+            phone: String,
+            email: String,
+            address: String,
+        }
+
+        export interface ISalonClient extends ISalonClientBase {
             _id?: any;
         }
     }

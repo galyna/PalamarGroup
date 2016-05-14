@@ -7,7 +7,8 @@ let ContactSchema = new Schema({
     email: String,
     phone: String,
     photo: String,
-    address: String
+    address: String,
+    isAcademy: Boolean
 });
 
 export var Contact = model<IContactModel>('Contact', ContactSchema);

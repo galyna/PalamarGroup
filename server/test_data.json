@@ -22,6 +22,18 @@
       ]
     }
   ],
+  "contact": [
+    {
+      "email": "academy@email.com",
+      "name": "academy admin",
+      "isAcademy": true
+    },
+    {
+      "email": "admin@email.com",
+      "name": "salon admin",
+      "isAcademy": false
+    }
+  ],
   "course": [
     {
       "_id": "570e9fe813bb7a0c1d01fc84",

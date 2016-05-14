@@ -1,0 +1,28 @@
+
+<div layout="row" >
+    <div  ng-include="'app/admin//academy/views/left.menu.html'"></div>
+    <div flex  >
+        <md-button  ng-if="!vm.showModelCreateForm && !vm.showModelEditForm" class="md-raised md-margin" ng-click="vm.showCreateForm()">
+            Додати модель
+        </md-button>
+        <div ng-if="vm.showModelCreateForm && !vm.showModelEditForm" ng-include="'app/admin/academy/views/model.create.form.html'" ></div>
+        <div flex ng-if="vm.showModelEditForm && !vm.showModelCreateForm" ng-include="'app/admin/academy/views/model.edit.form.html'" ></div>
+
+
+        <div  ng-if="!vm.showModelCreateForm && !vm.showModelEditForm"  ng-repeat="item in vm.models" ng-click="null" layout="row" class=" md-margin" >
+
+                <img ng-src="{{item.hearFormsPhotos[0].url}}?{{$index}}" class="module-avatar" />
+            <div layout="column">
+                    <span ng-if="item.name"><b>ім`я:</b> {{item.name}}</span>
+                    <span ng-if="item.phone"><b>телефон: </b>{{item.phone}}</span>
+                    <span ng-if="item.email"><b>email</b>: <a href="mailto:{{item.email}}">{{item.email}}</a></span>
+
+                <div layout="row" layout-align="center end">
+                    <md-button class="  md-raised" ng-click="vm.deleteModel(item)">Видалити</md-button>
+                    <md-button class=" md-primary md-raised" ng-click="vm.showEditForm(item)">Редагувати</md-button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

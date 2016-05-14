@@ -18,8 +18,25 @@ export class LeftMenuController {
         this.$location.url('/admin/academy/courses');
         this.$route.reload();
     }
+
     navToOrders():void {
         this.$location.url('/admin/academy/orders');
         this.$route.reload();
     }
+
+    navToModels():void {
+        this.$location.url('/admin/academy/models');
+        this.$route.reload();
+    }
+
+    navToDelivery():void {
+        this.$location.url('/admin/academy/delivery');
+        this.$route.reload();
+    }
+
+    navToContacts():void {
+        this.$location.url('/admin/academy/contacts');
+        this.$route.reload();
+    }
+
 }

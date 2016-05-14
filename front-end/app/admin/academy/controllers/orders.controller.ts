@@ -20,11 +20,11 @@ export class AcademyOrdersController {
         });
     }
 
-        answerOrder(item:IOrder):void {
-            item.answered=true;
-            this.orderService.put( item._id, item).then(()=> {
-                this.orders.splice(this.orders.indexOf(item), 1, item);
-            });
-        }
+    answerOrder(item:IOrder):void {
+        item.answered=true;
+        this.orderService.put( item._id, item).then(()=> {
+            this.orders.splice(this.orders.indexOf(item), 1, item);
+        });
+    }
 
 }
