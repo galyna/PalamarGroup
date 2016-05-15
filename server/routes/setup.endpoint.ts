@@ -14,26 +14,27 @@ function encryptPasswords(modelData) {
 }
 
 setupRouter.get('/:model', function (req, res) {
-    var modelName = req.params.model.toLowerCase();
+    let fileName = req.params.model.toLowerCase();
+    let modelName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
     try {
-        var Model = require('../models/' + modelName);
+        var Model = require('../models/' + fileName)[modelName];
     }catch(err){
-        return res.status(500).send({error: {message: modelName + ' model doesn\'t exist'}});
+        return res.status(500).send({error: {message: fileName + ' model doesn\'t exist'}});
     }
-    var modelData = data[modelName];
+    var modelData = data[fileName];
     if(!modelData){
-        return res.status(500).send({error: {message: 'No data found for ' + modelName + ' model'}});
+        return res.status(500).send({error: {message: 'No data found for ' + fileName + ' model'}});
     }
     Model.remove({})
         .then(function(){
-            console.log( modelName + ' collection dropped during setup');
-            if(modelName === 'user'){
+            console.log( fileName + ' collection dropped during setup');
+            if(fileName === 'user'){
                 encryptPasswords(modelData);
             }
 
             return Model.create(modelData).then(function (items) {
                 res.status(201).json(items);
-                console.log('test ' + modelName + ' collection created during setup');
+                console.log('test ' + fileName + ' collection created during setup');
             });
         })
         .catch(function(err){
