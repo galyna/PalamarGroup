@@ -3,6 +3,7 @@
  */
 import {coursesRoutes} from './courses.routes';
 import {CoursesController} from './controllers/courses.controller';
+import {TestController} from './controllers/test.controller';
 import {CourseService} from "../services/course.service";
 import {CourseController} from "./controllers/course.controller";
 import {OrderService} from "../services/order.service";
@@ -11,6 +12,7 @@ let app = angular.module('courses', [ 'ngMaterial'])
     .config(coursesRoutes)
     .controller(CoursesController.componentName, CoursesController)
     .controller(CourseController.componentName, CourseController)
+    .controller(TestController.componentName, TestController)
     .service(CourseService.componentName, CourseService)
     .service(OrderService.componentName, OrderService);
 

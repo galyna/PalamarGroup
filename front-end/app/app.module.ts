@@ -21,17 +21,17 @@ import {appConstants, appConfig, materialConfig} from './app.config';
 import {appRun} from './app.run';
 
 let app = angular.module('yuliaPalamarApp', [
-        'ngMaterial',
-        'ngMessages',
-        'ngRoute',
-        'ngFileUpload',
+    'ngMaterial',
+    'ngMessages',
+    'ngRoute',
+    'ngFileUpload',
 
-        'templates',
-        uiModule.name,
-        usersModule.name,
-        adminModule.name,
-        coursesModule.name
-    ])
+    'templates',
+    uiModule.name,
+    usersModule.name,
+    adminModule.name,
+    coursesModule.name
+])
     .config(httpInterceptorConfig)
     .config(routesConfig)
     .config(appConfig)

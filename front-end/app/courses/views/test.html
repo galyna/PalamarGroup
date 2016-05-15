@@ -1,11 +1,14 @@
-<!--<div class="media-observer">-->
-    <!--<left>-->
-        <!--<span>close</span>-->
-    <!--</left>-->
-    <!--<container>-->
-        <!--<img ng-src="http://lorempixel.com/1000/200/">-->
-    <!--</container>-->
-    <!--<right>-->
-        <!--<span>next</span>-->
-    <!--</right>-->
-<!--</div>-->
+<pg-calendar flex layout layout-fill
+             calendar-direction="direction"
+             on-prev-month="prevMonth"
+             on-next-month="nextMonth"
+             on-day-click="dayClick"
+             title-format="'MMMM y'"
+             ng-model='selectedDate'
+             day-format="'d'"
+             day-label-format="'EEE'"
+             day-label-tooltip-format="'EEEE'"
+             day-tooltip-format="'fullDate'"
+             week-starts-on="firstDayOfWeek"
+             day-content="setDayContent"
+             template-url="'app/calendar/calendar.html'"></pg-calendar>
