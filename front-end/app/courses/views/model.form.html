@@ -1,0 +1,93 @@
+<form ng-show="vm.modelFormVisible" name="orderForm" class="md-padding" novalidate ng-submit="">
+    <md-input-container class="md-block">
+        <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
+        <label for="name">Як до вас звертатися</label>
+        <input id="name" ng-model="vm.newModel.name" type="text" name="name">
+    </md-input-container>
+    <md-input-container class="md-block">
+        <md-icon md-svg-icon="communication:ic_email_24px"></md-icon>
+        <label for="email">email</label>
+        <input id="email" ng-model="vm.newModel.email" type="text" name="email">
+    </md-input-container>
+    <md-input-container class="md-block">
+        <md-icon md-svg-icon="communication:ic_phonelink_ring_24px"></md-icon>
+        <label for="phone">Телефон</label>
+        <input id="phone" ng-model="vm.newModel.phone" type="text" name="phone">
+    </md-input-container>
+    <md-input-container class="md-block">
+        <label for="comment">Додаткова інформація</label>
+        <input id="comment" ng-model="vm.newModel.comment" type="text" name="phone">
+    </md-input-container>
+    </md-input-container>
+    <p>Завантажте свої фото у різних ракурсах як на прикладі нижче.</p>
+    <div class="courses course-inner model-card " layout layout-wrap layout-align="center ">
+    <md-card class="md-margin" flex-gt-md="22" flex-md="46"
+             flex-gt-sm="46" flex-xs="80">
+        <img  ng-if="vm.newModel.fasPhotoUrl" ng-src="{{vm.newModel.fasPhotoUrl}}" class="md-card-image">
+        <img  ng-if="!vm.newModel.fasPhotoUrl" ng-src="../content/images/fas.jpg" class="md-card-image">
+
+        <md-card-content layout="column" layout-align="center center">
+<span>Виберіть фото ан фас</span>
+                <input type="file" ngf-select ng-model="fasPhotoUrlFile" name="fasPhotoUrlFile"
+                       accept="image/*" required/>
+                <md-button class="md-raised" ng-hide="!fasPhotoUrlFile"
+                           ng-click="vm.saveModelPhoto(fasPhotoUrlFile,'fasPhotoUrl')">
+                    Завантажити
+                </md-button>
+
+        </md-card-content>
+    </md-card>
+    <md-card class="md-margin" flex-gt-md="22" flex-md="46"
+             flex-gt-sm="46" flex-xs="80">
+
+        <img tyle="width:70px;" ng-if="vm.newModel.profilePhotoUrl" ng-src="{{::vm.newModel.profilePhotoUrl}}" class="md-card-image">
+        <img ng-if="!vm.newModel.profilePhotoUrl" ng-src="../content/images/model-profile.jpg" class="md-card-image">
+        <md-card-content layout="column" layout-align="center center">
+            <span>Виберіть фото в профіль</span>
+                <input type="file" ngf-select ng-model="profilePhotoFile" name="profilePhotoFile"
+                       accept="image/*" required/>
+                <md-button class="md-raised" ng-hide="!profilePhotoFile"
+                           ng-click="vm.saveModelPhoto(profilePhotoFile,'profilePhotoUrl')">
+                    Завантажити
+                </md-button>
+
+        </md-card-content>
+    </md-card>
+    <md-card class="md-margin" flex-gt-md="22" flex-md="46"
+             flex-gt-sm="46" flex-xs="80">
+        <img ng-if="vm.newModel.backPhotoUrl" ng-src="{{::vm.newModel.backPhotoUrl}}" class="md-card-image">
+        <img ng-if="!vm.newModel.backPhotoUrl" ng-src="../content/images/back.jpg" class="md-card-image">
+        <md-card-content layout="column" layout-align="center center">
+            <span>Виберіть фото вид ззаду</span>
+                <input type="file" ngf-select ng-model="backPhotoFile" name="backPhotoFile"
+                       accept="image/*" required/>
+                <md-button class="md-raised" ng-hide="!backPhotoFile"
+                           ng-click="vm.saveModelPhoto(backPhotoFile,'backPhotoUrl')">
+                    Завантажити
+                </md-button>
+
+        </md-card-content>
+    </md-card>
+    <md-card   flex-gt-md="22" flex-md="46"
+             flex-gt-sm="46" flex-xs="80>
+
+        <img ng-if="vm.newModel.fullSizePhotoUrl" ng-src="{{::vm.newModel.fullSizePhotoUrl}}" class="md-card-image">
+        <img ng-if="!vm.newModel.fullSizePhotoUrl" ng-src="../content/images/fullsize.jpg" class="md-card-image">
+        <md-card-content class="model-card-content" layout="column" layout-align="center center">
+            <span>Виберіть фото в повний ріст</span>
+                <input type="file" ngf-select ng-model="fullSizeFile" name="fullSizeFile"
+                       accept="image/*" required/>
+                <md-button class="md-raised" ng-hide="!fullSizeFile"
+                           ng-click="vm.saveModelPhoto(fullSizeFile,'fullSizePhotoUrl')">
+                    Завантажити
+                </md-button>
+
+        </md-card-content>
+    </md-card>
+    </div>
+    <div flex layout layout-wrap layout-align="end center">
+        <md-button ng-click="vm.hideModelForm()" class="md-raised detail-cancel-btn">Скасувати</md-button>
+        <md-button ng-click="vm.submitModel()" class="order-btn">Відправити</md-button>
+    </div>
+
+</form>

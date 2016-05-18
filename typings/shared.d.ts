@@ -61,10 +61,11 @@ declare module pg {
             phone: string,
             email: string,
             date: string,
-            event_name: string,
-            event_dates: string[],
+            comment:string,
+            admin_comment:string,
             event_id: string,
-            answered: boolean
+            answered: boolean,
+            booked: boolean
         }
 
         export interface IOrder extends IOrderBase {
@@ -87,7 +88,10 @@ declare module pg {
             phone: String,
             email: String,
             address: String,
-            hearFormsPhotos: IPhoto[],
+            fasPhotoUrl:String,
+            profilePhotoUrl:String,
+            backPhotoUrl:String,
+            fullSizePhotoUrl:String,
         }
 
         export interface IModel extends IModelBase {

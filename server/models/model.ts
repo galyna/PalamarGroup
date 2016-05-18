@@ -5,11 +5,6 @@ import {Document, Schema, model} from "mongoose";
 
 interface IModel extends pg.models.IModelBase, Document{}
 
-let PhotoSchema = new Schema({
-    name: String,
-    url: String,
-    order: Number
-});
 
 
 let ModelSchema = new Schema({
@@ -17,8 +12,10 @@ let ModelSchema = new Schema({
     phone: String,
     email: String,
     address: String,
-    hearFormsPhotos: [PhotoSchema],
-
+    fasPhotoUrl:String,
+    profilePhotoUrl:String,
+    backPhotoUrl:String,
+    fullSizePhotoUrl:String,
 });
 
 export var Model = model<IModel>('Model', ModelSchema);

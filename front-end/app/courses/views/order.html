@@ -1,4 +1,4 @@
-<form ng-show="vm.formVisible" name="orderForm" class="md-padding" novalidate ng-submit="">
+<form ng-show="vm.orderFormVisible" name="orderForm" class="md-padding" novalidate ng-submit="">
     <md-input-container class="md-block">
         <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
         <label for="name">Як до вас звертатися</label>
@@ -13,6 +13,10 @@
         <md-icon md-svg-icon="communication:ic_phonelink_ring_24px"></md-icon>
         <label for="phone">Телефон</label>
         <input id="phone" ng-model="vm.order.phone" type="text" name="phone">
+    </md-input-container>
+    <md-input-container class="md-block">
+        <label for="comment">Додаткова інформація</label>
+        <input id="comment" ng-model="vm.order.comment" type="text" name="phone">
     </md-input-container>
     <p>Після запису на модуль з Вами звяжеться координатор для узгодження деталей</p>
     <div flex layout layout-wrap layout-align="end center">

@@ -10,8 +10,10 @@
 
 
         <div  ng-if="!vm.showModelCreateForm && !vm.showModelEditForm"  ng-repeat="item in vm.models" ng-click="null" layout="row" class=" md-margin" >
-
-                <img ng-src="{{item.hearFormsPhotos[0].url}}?{{$index}}" class="module-avatar" />
+            <img ng-src="{{item.fasPhotoUrl}}?{{$index}}" class="module-avatar" />
+            <img ng-src="{{item.profilePhotoUrl}}?{{$index}}" class="module-avatar" />
+            <img ng-src="{{item.backPhotoUrl}}?{{$index}}" class="module-avatar" />
+            <img ng-src="{{item.fullSizePhotoUrl}}?{{$index}}" class="module-avatar" />
             <div layout="column">
                     <span ng-if="item.name"><b>ім`я:</b> {{item.name}}</span>
                     <span ng-if="item.phone"><b>телефон: </b>{{item.phone}}</span>

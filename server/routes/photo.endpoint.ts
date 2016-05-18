@@ -30,7 +30,7 @@ photoApi.route('/')
         function (req, res) {
             //TODO: add security handling!!
             let file = req.files.file;
-            let ext = file.name.match(/\w+\.(\w+)$/)[1];
+            let ext = file.name.match(/.*\.(\w+)$/)[1];
             let newName = uuid.v4() + '.' + ext;
             let newPath = config.uploadDir + '/' + newName;
             fs.rename(file.path, newPath);

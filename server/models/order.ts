@@ -8,10 +8,11 @@ let OrderSchema = new Schema({
     phone: String,
     email: String,
     date: {type:Date, default: Date.now},
-    event_name: String,
-    event_dates: [Date],
+    comment:String,
+    admin_comment:String,
     event_id: { type: Schema.Types.ObjectId, ref: 'Course' },
-    answered: {type:Boolean, default: false}
+    answered: {type:Boolean, default: false},
+    booked:{type:Boolean, default: false},
 });
 
 export var Order = model<IOrderModel>('Order', OrderSchema);
