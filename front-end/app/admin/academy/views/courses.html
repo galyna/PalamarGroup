@@ -1,5 +1,3 @@
-
-
 <div layout="row" >
     <div  ng-include="'app/admin//academy/views/left.menu.html'"></div>
     <div flex  >
@@ -17,6 +15,7 @@
                 <div layout="row" layout-align="center center">
                     <md-button class="  md-raised" ng-click="vm.deleteCourse(item)">Видалити</md-button>
                     <md-button class=" md-primary md-raised" ng-click="vm.showEditForm(item)">Редагувати</md-button>
+                    <md-button class="md-raised" ng-click="vm.cloneCourse(item)">Клонувати</md-button>
                 </div>
             </div>
 

@@ -152,6 +152,18 @@ export class AcademyCoursesController {
         });
     }
 
+    cloneCourse(course: ICourse):void {
+        var newCourse = angular.copy(course);
+        delete newCourse._id;
+        newCourse.courseModulesDates = [];
+        newCourse.isVisible = false;
+        this.courseService.post(newCourse).then((course) => {
+            this.showEditForm(course);
+        }).catch((err) => {
+            this.$log.error(err);
+        });
+    }
+
     deleteFromList(list:any[], item:any):void {
         list.splice(list.indexOf(item), 1);
     }
