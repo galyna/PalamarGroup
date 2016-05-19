@@ -16,36 +16,35 @@ import {Comment} from '../models/comment';
 
 let api = express.Router();
 
-api.post('/authenticate', (req, res) => {
+api.post('/authenticate', async (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
     if (!email || !password) {
         return res.status(403);
     }
-    User.findOne({email: email})
-        .then((user) => {
-            if (!user) return res.status(403).send({error: {message: 'Wrong email and/or password'}});
-            bcrypt.compare(req.body.password, user.password, (err, result) => {
-                if (err) {
-                    return res.status(500).send({error: err});
+    try {
+        let user = await User.findOne({email: email});
+        if (!user) return res.status(403).send({error: {message: 'Wrong email and/or password'}});
+        bcrypt.compare(req.body.password, user.password, (err, result) => {
+            if (err) {
+                return res.status(500).send({error: err});
+            }
+            if (!result) return res.status(403).send({error: {message: 'Wrong email and/or password'}});
+            let signOptions = {
+                expiresIn: (1440 * 60).toString() //1 day
+            };
+            let token = jwt.sign(user.toObject(), 'secretKey', signOptions);
+            res.json({
+                token: token,
+                user: {
+                    email: user.email,
+                    id: user._id
                 }
-                if (!result) return res.status(403).send({error: {message: 'Wrong email and/or password'}});
-                let signOptions = {
-                    expiresIn: (1440 * 60).toString() //1 day
-                };
-                let token = jwt.sign(user._doc, 'secretKey', signOptions);
-                res.json({
-                    token: token,
-                    user: {
-                        email: user.email,
-                        id: user._id
-                    }
-                });
             });
-        })
-        .catch((err) => {
-            res.status(500).send({error: err});
         });
+    } catch (err) {
+        res.status(500).send({error: err});
+    }
 });
 
 api.use('/contact', restEndpoint(Contact));

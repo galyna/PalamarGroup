@@ -36,15 +36,14 @@ function restEndpoint(_Model: Model<any>){
         });
 
     routes.route('/:id')
-        .get(function(req,res) {
-            Model.findOne({_id: req.params.id})
-                .then(function(artist) {
-                    res.json(artist);
-                })
-                .catch(function() {
-                    //TODO: better error handling
-                    res.status(404).send(null);
-                });
+        .get(async (req,res) => {
+            try {
+                let artist = await Model.findOne({_id: req.params.id});
+                res.json(artist);
+            }catch (err){
+                //TODO: better error handling
+                res.status(404).send(null);
+            }
         })
         .put(authIfDev, async function(req, res) {
             let id = req.params.id;
@@ -59,14 +58,14 @@ function restEndpoint(_Model: Model<any>){
                 res.status(500).json(err)
             }
         })
-        .delete(authIfDev, function(req,res) {
-            Model.remove({_id: req.params.id})
-                .then(function() {
-                    res.send(null);
-                }).catch(function(err) {
+        .delete(authIfDev, async (req,res) => {
+            try {
+                await Model.remove({_id: req.params.id});
+                res.end();
+            } catch (err){
                 //TODO: better error handling
                 res.status(404).json(err);
-            });
+            }
         });
 
     return routes;
