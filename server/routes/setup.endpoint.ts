@@ -1,7 +1,8 @@
 var data = require('../test_data.json');
 var express = require('express');
-var setupRouter = express.Router();
 var bcrypt = require('bcrypt-nodejs');
+
+export var setupRouter = express.Router();
 
 setupRouter.get('/', function(){
     
@@ -42,5 +43,3 @@ setupRouter.get('/:model', function (req, res) {
             res.status(500).send(err);
         });
 });
-
-module.exports = setupRouter;

@@ -1,6 +1,8 @@
 import {Document, Schema, model} from "mongoose";
 
-interface IUserModel extends pg.models.IUserBase, Document{}
+interface IUserModel extends pg.models.IUser, Document{
+    _id: any;
+}
 
 let UserSchema = new Schema({
     email: {

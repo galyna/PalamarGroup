@@ -1,12 +1,13 @@
 import {Document, Schema, model} from "mongoose";
+import {photoService} from "../services/photo.service";
+import {IPhotoModel, PhotoSchema} from "./photo.schema";
 
-interface ICourseModel extends pg.models.ICourseBase, Document{}
+export interface ICourseModel extends pg.models.ICourse, Document{
+    hearFormsPhotos: IPhotoModel[],
+    historyPhotos: IPhotoModel[],
+    _id: any;
+}
 
-let PhotoSchema = new Schema({
-    name: String,
-    url: String,
-    order: Number
-});
 
 let VideoSchema = new Schema({
     name: String,
@@ -28,6 +29,20 @@ let CourseSchema = new Schema({
     },
     courseModulesDates: [Date],
     isVisible: Boolean
+});
+
+CourseSchema.post('remove', (course:ICourseModel) => {
+    try {
+        course.historyPhotos.forEach((photo:any)=> {
+            photo.remove();
+        });
+        course.hearFormsPhotos.forEach((photo: any)=> {
+            photo.remove();
+        });
+        photoService.removeByUrl(course.author.photoUrl);
+    } catch(err) {
+        console.log(err);
+    }
 });
 
 export var Course = model<ICourseModel>('Course', CourseSchema);

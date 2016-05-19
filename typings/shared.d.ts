@@ -1,6 +1,8 @@
 declare module pg {
     module models {
-        export interface IContactBase {
+        
+        export interface IContact {
+            _id?: any;
             name:string,
             email:string,
             phone:string,
@@ -9,33 +11,22 @@ declare module pg {
             isAcademy:boolean
         }
 
-
-        //noinspection JSUnusedGlobalSymbols
-        export interface IContact extends IContactBase {
+        export interface IVideo {
             _id?: any;
-        }
-        
-        export interface  IVideoBase {
             name: string,
             url: string,
             order: number
         }
 
-        export interface IVideo extends IVideoBase {
+        export interface IPhoto {
             _id?: any;
-        }
-        
-        export interface  IPhotoBase {
             name: string,
             url: string,
             order: number
         }
 
-        export interface IPhoto extends IPhotoBase {
+        export interface ICourse {
             _id?: any;
-        }
-        
-        export interface ICourseBase {
             name: string,
             description: string,
             price: number,
@@ -51,12 +42,8 @@ declare module pg {
             isVisible: boolean
         }
 
-        export interface ICourse extends ICourseBase {
+        export interface IOrder{
             _id?: any;
-        }
-        
-        //noinspection ReservedWordAsName
-        export interface IOrderBase {
             name: string,
             phone: string,
             email: string,
@@ -68,22 +55,15 @@ declare module pg {
             booked: boolean
         }
 
-        export interface IOrder extends IOrderBase {
+        export interface IUser {
             _id?: any;
-        }
-        
-        export interface IUserBase {
             email: string,
             password: string,
             roles: string[]
         }
-        
-        //noinspection JSUnusedGlobalSymbols
-        export interface IUser extends IUserBase {
+
+        export interface IModel {
             _id?: any;
-        }
-        
-        export interface IModelBase {
             name: String,
             phone: String,
             email: String,
@@ -94,30 +74,20 @@ declare module pg {
             fullSizePhotoUrl:String,
         }
 
-        export interface IModel extends IModelBase {
+        export interface ISalonClient {
             _id?: any;
-        }
-
-        export interface ISalonClientBase {
             name: String,
             phone: String,
             email: String,
             address: String,
         }
 
-        export interface ISalonClient extends ISalonClientBase {
+        export interface IComment {
             _id?: any;
-        }
-
-        export interface ICommentBase {
             name: String,
             text: String,
             isVisible: boolean,
             answered: boolean
-        }
-
-        export interface IComment extends ICommentBase {
-            _id?: any;
         }
     }
 }

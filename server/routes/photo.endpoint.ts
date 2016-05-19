@@ -1,14 +1,10 @@
 import authenticate from "../auth/authenticate";
 import currentUser from '../auth/current_user';
-import config from '../config';
-import {Router, Request} from 'express';
+import {Router} from 'express';
+import {photoService} from '../services/photo.service';
 let photoApi = Router();
 let uuid = require('node-uuid');
 let fs = require('fs');
-
-interface IPhotoDeleteRequest extends Request {
-    pathToDelete: string;
-}
 
 photoApi.route('/')
     .post(authenticate, currentUser.is('admin'), function (req, res, next) {
@@ -27,21 +23,16 @@ photoApi.route('/')
                 next();
             }
         },
-        function (req, res) {
+        async function (req, res) {
             //TODO: add security handling!!
-            let file = req.files.file;
-            let ext = file.name.match(/.*\.(\w+)$/)[1];
-            let newName = uuid.v4() + '.' + ext;
-            let newPath = config.uploadDir + '/' + newName;
-            fs.rename(file.path, newPath);
+            let newName = await photoService.create(req.files.file.path);
             //TODO: remove hardcode
             res.json({url: "/api/photo/" + newName});
         });
 
 photoApi.route('/:name')
     .get(function (req, res) {
-        let fileName = req.params.name;
-        let path = config.uploadDir + '/' + fileName;
+        let path = photoService.path(req.params.name);
         res.sendFile(path, function (err) {
             if (err) {
                 res.status(err.status).end();
@@ -49,25 +40,13 @@ photoApi.route('/:name')
         });
     })
     .delete(authenticate, currentUser.is('admin'),
-        function(req: IPhotoDeleteRequest, res, next){
-            req.pathToDelete = config.uploadDir + '/' + req.params.name;
-            fs.access(req.pathToDelete, function (err) {
-                if(err){
-                    res.status(404).end();
-                }else{
-                    next();
-                }
-            });
-        },
-        function(req: IPhotoDeleteRequest, res){
-            fs.unlink(req.pathToDelete, function(err){
-                if(err) {
-                    console.log(err);
-                    res.status(500);
-                }else{
-                    res.status(200).end();
-                }
-            });
+        async function(req, res){
+            try{
+                await photoService.remove(req.params.name);
+                res.status(200).end();
+            }catch (err){
+                res.status(404).end();
+            }
         }
     );
 

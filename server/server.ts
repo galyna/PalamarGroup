@@ -3,6 +3,7 @@ import config from './config';
 import api from './routes/api';
 import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
+import {setupRouter} from './routes/setup.endpoint';
 let multipart = require('connect-multiparty');
 
 let app = express();
@@ -10,7 +11,7 @@ let port = process.env.PORT || 8080;
 
 //TODO: remove on production
 if (config.env === 'dev') {
-    var setupRouter = require('./routes/setup.endpoint');
+    mongoose.set('debug', true);
     app.use('/setup', setupRouter);
 }
 

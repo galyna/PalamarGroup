@@ -3,7 +3,9 @@
  */
 import {Document, Schema, model} from "mongoose";
 
-interface IModel extends pg.models.IModelBase, Document{}
+interface IModel extends pg.models.IModel, Document{
+    _id: any;
+}
 
 
 

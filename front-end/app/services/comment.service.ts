@@ -7,7 +7,7 @@ import IComment = pg.models.IComment;
 export interface ICommentService {
     get(): ng.IPromise<IComment[]>;
     get(id: string): ng.IPromise<IComment>;
-    post(comment: any): ng.IHttpPromise<IComment>;
+    post(comment: any): ng.IPromise<IComment>;
     delete(id: string): ng.IPromise<void>;
     put(id:string,comment: any): ng.IPromise<IComment>;
 }
@@ -32,7 +32,7 @@ export class CommentService implements ICommentService {
     }
 
     post(comment) {
-        return this.$http.post<{data: IComment}>(this.url, comment).then(function (res) {
+        return this.$http.post<IComment>(this.url, comment).then(function (res) {
             return res.data;
         });
     }

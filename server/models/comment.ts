@@ -3,8 +3,11 @@
  */
 import {Document, Schema, model} from "mongoose";
 
-interface ICommentModel extends pg.models.ICommentBase, Document{}
+interface ICommentModel extends pg.models.IComment, Document{
+    _id: any;
+}
 
+//noinspection ReservedWordAsName
 let ICommentSchema = new Schema({
     name: String,
     text: String,

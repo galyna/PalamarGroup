@@ -1,6 +1,8 @@
 import {Document, Schema, model} from "mongoose";
 
-interface IContactModel extends pg.models.IContactBase, Document{}
+interface IContactModel extends pg.models.IContact, Document{
+    _id: any;
+}
 
 let ContactSchema = new Schema({
     name: String,

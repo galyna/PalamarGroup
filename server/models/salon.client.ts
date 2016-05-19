@@ -3,9 +3,10 @@
  */
 import {Document, Schema, model} from "mongoose";
 
-interface ISalonClient extends pg.models.ISalonClientBase, Document {}
+interface ISalonClient extends pg.models.ISalonClient, Document {
+    _id: any;
+}
 
-//noinspection ReservedWordAsName
 let SalonClientSchema = new Schema({
     name: String,
     phone: String,

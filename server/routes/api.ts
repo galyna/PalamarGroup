@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as jwt from 'jsonwebtoken';
 import restEndpoint from './rest.endpoint';
 import userEndpoint from './user.endpoint';
-import courseEndpoint from './course.endpoint';
+import {courseEndpoint} from "./course.endpoint";
 import photoEndpoint from './photo.endpoint';
 import * as bcrypt from 'bcrypt-nodejs';
 //models

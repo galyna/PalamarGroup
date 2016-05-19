@@ -1,6 +1,8 @@
 import {Document, Schema, model} from "mongoose";
 
-interface IOrderModel extends pg.models.IOrderBase, Document {}
+interface IOrderModel extends pg.models.IOrder, Document {
+    _id: any;
+}
 
 //noinspection ReservedWordAsName
 let OrderSchema = new Schema({

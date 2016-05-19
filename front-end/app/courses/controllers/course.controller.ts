@@ -39,7 +39,11 @@ export class CourseController {
             phone: '',
             email: '',
             comment: '',
-            date: ''
+            date: '',
+            admin_comment: '',
+            event_id: '',
+            answered: false,
+            booked: false
         };
 
         this.newModel = {

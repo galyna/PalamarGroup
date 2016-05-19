@@ -46,15 +46,18 @@ function restEndpoint(_Model: Model<any>){
                     res.status(404).send(null);
                 });
         })
-        .put(authIfDev, function(req, res) {
+        .put(authIfDev, async function(req, res) {
             let id = req.params.id;
-            Model.update({_id: id}, req.body)
-                .then(function() {
-                    res.send(null);
-                }).catch(function(err) {
-                //TODO: better error handling
+            let model = await Model.findById(id);
+            if(!model) return res.status(404).end();
+
+            Object.assign(model, req.body);
+            try {
+                await model.save();
+                res.send(null);
+            } catch(err){
                 res.status(500).json(err)
-            });
+            }
         })
         .delete(authIfDev, function(req,res) {
             Model.remove({_id: req.params.id})
