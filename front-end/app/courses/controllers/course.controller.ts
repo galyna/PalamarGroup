@@ -4,7 +4,8 @@ import {IModelService} from "../services/model.service";
 import ICourse = pg.models.ICourse;
 import IOrder = pg.models.IOrder;
 import IModel = pg.models.IModel;
-import IPromise = angular.IPromise;
+import {IConstants} from "../app.config";
+import IUploadPromise = angular.angularFileUpload.IUploadPromise;
 
 
 interface IRouteParams extends ng.route.IRouteParamsService {
@@ -14,7 +15,7 @@ interface IRouteParams extends ng.route.IRouteParamsService {
 export class CourseController {
 
     static $inject = ['$log', '$routeParams', '$location', 'courseService',
-        'orderService', 'mediaObserver', '$mdDialog', 'Upload', '$timeout', 'modelService'];
+        'orderService', 'mediaObserver', '$mdDialog', 'Upload', '$timeout', 'modelService','constants'];
     static componentName = 'CourseController';
 
     course:ICourse;
@@ -26,7 +27,8 @@ export class CourseController {
     constructor(private $log:ng.ILogService, $routeParams:IRouteParams,
                 private $location:ng.ILocationService, courseService:ICourseService,
                 private orderService:ICourseService, private mediaObserver, private mdDialog,
-                private Upload:ng.angularFileUpload.IUploadService, private $timeout:ng.ITimeoutService, private modelService:IModelService) {
+                private Upload:ng.angularFileUpload.IUploadService, private $timeout:ng.ITimeoutService,
+                private modelService:IModelService,private constants:IConstants) {
 
         courseService.get($routeParams.id).then((course) => {
             this.course = course;
@@ -46,16 +48,7 @@ export class CourseController {
             booked: false
         };
 
-        this.newModel = {
-            name: '',
-            phone: '',
-            email: '',
-            address: '',
-            fasPhotoUrl: '',
-            profilePhotoUrl: '',
-            backPhotoUrl: '',
-            fullSizePhotoUrl: ''
-        };
+        this.newModel =  angular.copy(this.constants.newModel);
 
     }
 
@@ -64,29 +57,33 @@ export class CourseController {
     }
 
     showModelForm():void {
+        this.newModel =  angular.copy(this.constants.newModel);
         this.modelFormVisible = true;
     }
 
     hideModelForm():void {
         this.modelFormVisible = false;
     };
-    
-    saveModelPhoto(file,photoName):void {
-        file.upload = this.Upload.upload({
-            method: 'POST',
-            url: '/api/photo',
-            data: {file: file}
-        });
 
-        file.upload.then((response)=> {
+    saveModelPhoto(file,photoName):void {
+        if(!file) return;
+        this.fileUpload(file).then((response)=> {
             this.newModel[photoName] = response.data.url;
         }).catch((err)=> {
             this.$log.debug("fail upload file..." + err);
         })
     }
 
-    submitModel():void {
+    fileUpload(file) {
+        return this.Upload.upload<{url:string}>({
+            method: 'POST',
+            url: this.constants.photoUrl,
+            data: {file: file}
+        });
+    }
 
+
+    submitModel():void {
             this.modelService.post(this.newModel)
                 .then(() => {
                     this.showModelConfirm();
@@ -103,6 +100,7 @@ export class CourseController {
     }
 
     showModelConfirm():void {
+
         this.mdDialog.show(
             this.mdDialog.alert()
                 .clickOutsideToClose(true)

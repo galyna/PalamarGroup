@@ -7,6 +7,7 @@
 
 
 import {IModelService} from "../services/model.service";
+import {IConstants} from "../app.config";
 import IModel = pg.models.IModel;
 import IPhoto = pg.models.IPhoto;
 
@@ -17,7 +18,7 @@ interface IEditIModelModel extends IModel {
 
 export class AcademyModelController {
 
-    static $inject = ['modelService', '$log', 'Upload', '$timeout', '$location'];
+    static $inject = ['modelService', '$log', 'Upload', '$timeout', '$location', 'constants'];
     static componentName = 'AcademyModelController';
 
     models:IModel[];
@@ -29,23 +30,27 @@ export class AcademyModelController {
 
 
     constructor(private modelService:IModelService, private $log:ng.ILogService,
-                private Upload, private $timeout:ng.ITimeoutService, private $location:ng.ILocationService) {
+                private Upload:ng.angularFileUpload.IUploadService, private $timeout:ng.ITimeoutService,
+                private $location:ng.ILocationService, private constants:IConstants) {
 
         modelService.get().then((models) => {
             this.models = models;
         }).catch(function (err) {
             $log.error(err);
         });
+
+        this.newModelModel = constants.newModel;
     }
-    
+
 
     //course creation start
     showCreateForm():void {
+        this.newModelModel = this.constants.newModel;
         this.showModelEditForm = false;
         this.showModelCreateForm = true;
     }
 
-  createModel(form:ng.IFormController):void {
+    createModel(form:ng.IFormController):void {
         this.$log.debug("createCourse ...$valid" + form.$valid);
         if (form.$valid) {
             this.modelService.post(this.newModelModel)
@@ -89,36 +94,31 @@ export class AcademyModelController {
     }
 
     //course edit end
-    
-    //TODO: add file param type
-    uploadCollPhoto(file, collection:IPhoto[]):void {
-        file.upload = this.Upload.upload({
-            method: 'POST',
-            url: '/api/photo',
-            data: {file: file}
-        });
 
-        file.upload.then((response)=> {
-            this.$timeout(()=> {
-                collection.push({
-                    name: "",
-                    url: response.data.url,
-                    order: 0
-                });
-            });
+    saveEditModelPhoto(file, photoName):void {
+        this.fileUpload(file).then((response)=> {
+            this.editModelModel[photoName] = response.data.url;
         }).catch((err)=> {
             this.$log.debug("fail upload file..." + err);
-        }).finally(()=> {
-            this.$timeout(()=> {
-                this.showFormPhotoUpload = false;
-
-            });
-        });
+        })
     }
 
-    //course image upload end
+    saveNewModelPhoto(file, photoName):void {
+        this.fileUpload(file).then((response)=> {
+            this.newModelModel[photoName] = response.data.url;
+        }).catch((err)=> {
+            this.$log.debug("fail upload file..." + err);
+        })
+    }
 
-    //course date end
+    fileUpload(file) {
+        return this.Upload.upload<{url:string}>({
+            method: 'POST',
+            url: this.constants.photoUrl,
+            data: {file: file}
+        });
+    }
+    
 
     deleteModel(item:IModel):void {
         this.modelService.delete(item._id).then(()=> {

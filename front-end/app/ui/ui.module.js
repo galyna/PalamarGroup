@@ -13,7 +13,20 @@ System.register(['../calendar/calendar.module', "./mediaObserver.service"], func
             }],
         execute: function() {
             app = angular.module('ui', [calendar_module_1.pgCalendarModule.name])
-                .factory('mediaObserver', mediaObserver_service_1.MediaObserverFactory);
+                .factory('mediaObserver', mediaObserver_service_1.MediaObserverFactory)
+                .directive('chooseFileButton', function () {
+                return {
+                    restrict: 'E',
+                    link: function (scope, elem, attrs) {
+                        var button = elem.find('button');
+                        var input = elem.find('input');
+                        input.css({ display: 'none' });
+                        button.bind('click', function () {
+                            input[0].click();
+                        });
+                    }
+                };
+            });
             exports_1("uiModule", uiModule = app);
         }
     }

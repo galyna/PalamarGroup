@@ -269,17 +269,12 @@
       color: white;
       background-color: rgba($primary, 0.7);
     }
-    // Custom setting since ngMaterial 1.0.0 only
-    // supports percentage increments of 5
-    // 4-column Table, except Row 1 to be 2-Columns
+
 
     @media (min-width: 1280px) and (max-width: 1930px) {
-      // Custom setting since ngMaterial 1.0.0 only
-      // supports percentage increments of 5
-      // 2-column table
+
       &.flex-gt-md-22 {
-        // max-width: 24% !important;
-        // Disable to all varying sizes in Cards
+
         max-height: 100%;
         box-sizing: border-box;
         flex: 2 46%;
@@ -289,12 +284,8 @@
       }
     }
     @media (min-width: 600px) and (max-width: 1930px) {
-      // Custom setting since ngMaterial 1.0.0 only
-      // supports percentage increments of 5
-      // 2-column table
+
       &.flex-gt-sm-46 {
-        // max-width: 24% !important;
-        // Disable to all varying sizes in Cards
         max-height: 100%;
         box-sizing: border-box;
         flex: 2 46%;
@@ -304,8 +295,6 @@
       }
     }
 
-    // Need this for specificity to override defaults
-    // 1-column Table
     @media (max-width: 599px) {
       &.flex-xs-80 {
         flex: 1 80%;
@@ -364,8 +353,57 @@
 .course-name {
   height: 65px;
 }
-.model-card md-card md-card-content{
+.model-card md-card {
 
-  min-height: 50%;
+  position: relative;
+  display: block;
+  md-card-content {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 30%;
+    min-height: 100px;
+
+    color: white;
+    background-color: rgba($primary, 0.7);
+  }
+
+
+  @media (min-width: 1280px) and (max-width: 1930px) {
+
+    &.flex-gt-md-22 {
+
+      max-height: 100%;
+      box-sizing: border-box;
+      flex: 2 46%;
+    }
+    &:first-child, &:nth-child(2) {
+      flex: 2 46%;
+    }
+  }
+  @media (min-width: 600px) and (max-width: 1930px) {
+
+    &.flex-gt-sm-46 {
+      max-height: 100%;
+      box-sizing: border-box;
+      flex: 2 46%;
+    }
+    &:first-child, &:nth-child(2) {
+      flex: 2 46%;
+    }
+  }
+
+  @media (max-width: 599px) {
+    &.flex-xs-80 {
+      flex: 1 80%;
+      // Special override for the 1st & 2nd child default resizing
+      &:first-child, &:nth-child(2) {
+        flex: 1 80%;
+      }
+    }
+  }
+
+
 }
 
