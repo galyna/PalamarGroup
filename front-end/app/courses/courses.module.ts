@@ -1,6 +1,7 @@
 /**
  * Created by Galyna on 13.04.2016.
  */
+import 'angular';
 import {coursesRoutes} from './courses.routes';
 import {CoursesController} from './controllers/courses.controller';
 import {TestController} from './controllers/test.controller';

@@ -1,13 +1,20 @@
 /**
  * Created by Galyna on 08.04.2016.
  */
-System.register(['./admin.routes', './academy/controllers/orders.controller', './academy/controllers/courses.controller', './academy/controllers/models.controller', './academy/controllers/delivery.controller', './academy/controllers/comments.controller', './academy/controllers/contacts.controller', './controllers/admin.controller', './academy/controllers/left.menu.controller', "../services/course.service", "../services/order.service", "../services/comment.service", "../services/model.service", "./academy/services/salon.client.service", "./academy/services/delivery.service", "../services/contact.service"], function(exports_1, context_1) {
+System.register(['angular', 'angular-route', 'angular-aria', 'angular-messages', 'angular-material', 'angular-animate', 'ng-file-upload', './admin.routes', './academy/controllers/orders.controller', './academy/controllers/courses.controller', './academy/controllers/models.controller', './academy/controllers/delivery.controller', './academy/controllers/comments.controller', './academy/controllers/contacts.controller', './controllers/admin.controller', './academy/controllers/left.menu.controller', "../services/course.service", "../services/order.service", "../services/comment.service", "../services/model.service", "./academy/services/salon.client.service", "./academy/services/delivery.service", "../services/contact.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var admin_routes_1, orders_controller_1, courses_controller_1, models_controller_1, delivery_controller_1, comments_controller_1, contacts_controller_1, admin_controller_1, left_menu_controller_1, course_service_1, order_service_1, comment_service_1, model_service_1, salon_client_service_1, delivery_service_1, contact_service_1;
     var app, adminModule;
     return {
         setters:[
+            function (_1) {},
+            function (_2) {},
+            function (_3) {},
+            function (_4) {},
+            function (_5) {},
+            function (_6) {},
+            function (_7) {},
             function (admin_routes_1_1) {
                 admin_routes_1 = admin_routes_1_1;
             },
@@ -57,7 +64,11 @@ System.register(['./admin.routes', './academy/controllers/orders.controller', '.
                 contact_service_1 = contact_service_1_1;
             }],
         execute: function() {
-            app = angular.module('admin', ['ngMaterial', 'ngFileUpload'])
+            app = angular.module('admin', [
+                'ngRoute',
+                'ngMaterial',
+                'ngFileUpload'
+            ])
                 .config(admin_routes_1.coursesRoutes)
                 .controller(admin_controller_1.AdminController.componentName, admin_controller_1.AdminController)
                 .controller(courses_controller_1.AcademyCoursesController.componentName, courses_controller_1.AcademyCoursesController)

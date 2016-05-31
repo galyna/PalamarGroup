@@ -140,6 +140,7 @@ export class AcademyCoursesController {
     //course image upload end
 
     //course date start
+    //noinspection JSMethodCanBeStatic
     saveModuleDate(model:ICourse, date:Date):void {
         model.courseModulesDates.push(date.toJSON());
     }
@@ -164,6 +165,7 @@ export class AcademyCoursesController {
         });
     }
 
+    //noinspection JSMethodCanBeStatic
     deleteFromList(list:any[], item:any):void {
         list.splice(list.indexOf(item), 1);
     }

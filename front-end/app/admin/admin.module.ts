@@ -2,6 +2,14 @@
  * Created by Galyna on 08.04.2016.
  */
 
+import 'angular';
+import 'angular-route';
+import 'angular-aria';
+import 'angular-messages';
+import 'angular-material';
+import 'angular-animate';
+import 'ng-file-upload';
+
 import {coursesRoutes} from './admin.routes';
 import {AcademyOrdersController} from './academy/controllers/orders.controller';
 import {AcademyCoursesController} from './academy/controllers/courses.controller';
@@ -18,8 +26,13 @@ import {ModelService} from "../services/model.service";
 import {SalonClientService} from "./academy/services/salon.client.service";
 import {DeliveryService} from "./academy/services/delivery.service";
 import {ContactService} from "../services/contact.service";
+import {AcademyCourseController} from "./academy/controllers/course.controller";
 
-let app = angular.module('admin', ['ngMaterial', 'ngFileUpload'])
+let app = angular.module('admin', [
+    'ngRoute',
+    'ngMaterial',
+    'ngFileUpload'
+])
     .config(coursesRoutes)
     .controller(AdminController.componentName, AdminController)
     .controller(AcademyCoursesController.componentName, AcademyCoursesController)
