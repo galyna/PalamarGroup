@@ -27,40 +27,77 @@
         </md-input-container>
         <md-divider></md-divider>
         <md-divider></md-divider>
-        <!--hearForm-->
-        <div flex>
-            <md-subheader class="md-no-sticky">Фото моделі</md-subheader>
-            <div layout="row" ng-repeat="item in vm.newModelModel.hearFormsPhotos track by $index"
-                 ng-click="null">
-                <img ng-src="{{item.url}}"/>
-                <div layout="column">
-                    <md-input-container class="md-block  ">
-                        <label for="name">Назва фото</label>
-                        <input id="photoName" ng-model="item.name" name="photoName"/>
-                    </md-input-container>
-                    <md-input-container class="md-block  ">
-                        <label for="ord">Порядок відображення</label>
-                        <input id="ord" ng-model="item.order" type="number"/>
-                    </md-input-container>
-                    <md-button class="  md-raised"
-                               ng-click="vm.deleteFromList(vm.newModelModel.hearFormsPhotos,item)">
-                        Видалити
-                    </md-button>
-                </div>
-            </div>
-        </div>
-        <div>
-            <md-button ng-if="!vm.showFormPhotoUpload" class="md-raised" ng-click="vm.showFormPhotoUpload=true">
-                Додати форму
-            </md-button>
-            <div ng-if="vm.showFormPhotoUpload">
-                <input type="file" ngf-select ng-model="hearFormsFile" name="hearFormsFile"
-                       accept="image/*" required/>
-                <md-button class="md-raised" ng-disabled="!createModelForm.$valid"
-                           ng-click="vm.uploadCollPhoto(hearFormsFile,vm.newModelModel.hearFormsPhotos)">
-                    Завантажити
-                </md-button>
-            </div>
+        <div class="courses course-inner model-card " layout layout-wrap layout-align="center ">
+            <md-card class="md-margin" flex-gt-md="22" flex-md="46"
+                     flex-gt-sm="46" flex-xs="80">
+                <card-image-container>
+                    <img ng-src="{{vm.newModelModel.fasPhotoUrl}}" class="md-card-image">
+                </card-image-container>
+                <md-card-content layout="column" layout-align="center center">
+                    <span>Фото ан фас</span>
+                    <choose-file-button>
+                        <md-button aria-label="Upload a file" class="detail-btn  ">
+                            Виберіть файл
+                        </md-button>
+                        <input type="file" ngf-select="vm.saveNewModelPhoto(fasPhotoUrlFile,'fasPhotoUrl')"
+                               ng-model="fasPhotoUrlFile" name="fasPhotoUrlFile"
+                               accept="image/*" />
+                    </choose-file-button>
+                </md-card-content>
+            </md-card>
+            <md-card class="md-margin" flex-gt-md="22" flex-md="46"
+                     flex-gt-sm="46" flex-xs="80">
+                <card-image-container>
+                    <img ng-src="{{vm.newModelModel.profilePhotoUrl}}"
+                         class="md-card-image">
+                </card-image-container>
+                <md-card-content layout="column" layout-align="center center">
+                    <span>Фото в профіль</span>
+                    <choose-file-button>
+                        <md-button aria-label="Upload a file" class="detail-btn  ">
+                            Виберіть файл
+                        </md-button>
+                        <input type="file" ngf-select="vm.saveNewModelPhoto(profilePhotoFile,'profilePhotoUrl')"
+                               ng-model="profilePhotoFile" name="profilePhotoFile"
+                               accept="image/*" />
+                    </choose-file-button>
+                </md-card-content>
+            </md-card>
+            <md-card class="md-margin" flex-gt-md="22" flex-md="46"
+                     flex-gt-sm="46" flex-xs="80">
+                <card-image-container>
+                    <img ng-src="{{vm.newModelModel.backPhotoUrl}}" class="md-card-image">
+                </card-image-container>
+                <md-card-content layout="column" layout-align="center center">
+                    <span>Фото вид ззаду</span>
+                    <choose-file-button>
+                        <md-button aria-label="Upload a file" class="detail-btn  ">
+                            Виберіть файл
+                        </md-button>
+                        <input type="file" ngf-select="vm.saveNewModelPhoto(backPhotoFile,'backPhotoUrl')"
+                               ng-model="backPhotoFile"
+                               name="backPhotoFile"
+                               accept="image/*" />
+                    </choose-file-button>
+                </md-card-content>
+            </md-card>
+            <md-card class="md-margin" flex-gt-md="22" flex-md="46"
+                     flex-gt-sm="46" flex-xs="80">
+                <card-image-container>
+                    <img ng-src="{{vm.newModelModel.fullSizePhotoUrl}}" class="md-card-image">
+                </card-image-container>
+
+                <md-card-content class="model-card-content" layout="column" layout-align="center center">
+                    <span>Фото в повний ріст</span>
+                    <choose-file-button>
+                        <md-button aria-label="Upload a file" class="detail-btn  ">
+                            Виберіть файл
+                        </md-button>
+                        <input type="file" ngf-select="vm.saveNewModelPhoto(fullSizeFile,'fullSizePhotoUrl')"
+                               ng-model="fullSizeFile" name="fullSizeFile"
+                               accept="image/*" />
+                </md-card-content>
+            </md-card>
         </div>
     </md-content>
     <div layout="row" md-whiteframe="4">
