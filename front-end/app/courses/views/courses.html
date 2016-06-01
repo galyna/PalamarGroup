@@ -1,22 +1,47 @@
-<div  layout="row"  >
+<div layout="row">
     <div flex="12" flex-xs="0" flex-sm="4">
     </div>
-    <div flex="75" flex-xs="100" flex-sm="92" class="courses-main" layout-margin layout layout-wrap layout-align="center center">
 
-        <md-card md-whiteframe="10" ng-click="vm.showDetails(course._id)" ng-repeat="course in vm.courses" ng-if="::course.isVisible"
-                 class="md-margin " flex-gt-md="22" flex-md="22" flex-gt-sm="46" flex-xs="80">
-            <card-image-container >
-                <img ng-src="{{::course.hearFormsPhotos[0].url}}" class="md-card-image">
-            </card-image-container>
-            <md-card-content layout="column" flex="100"   layout-align="center center">
-                <span class="  md-margin"  >{{::course.name}}</span>
-                <md-button class="detail-btn "    aria-label="Play" ng-click="vm.showDetails(course._id)">
-                    Деталі
-                </md-button>
-            </md-card-content>
-        </md-card>
+    <md-tabs md-swipe-content md-center-tabs md-stretch-tabs="always" md-border-bottom flex="75"
+             flex-xs="100" flex-sm="92" md-dynamic-height>
+        <md-tab label="Калетдар курсів">
+            <div  flex>
+            <pg-calendar class="md-padding"
+                         calendar-direction="direction"
+                         on-prev-month="prevMonth"
+                         on-next-month="nextMonth"
+                         on-day-click="dayClick"
+                         title-format="'MMMM y'"
+                         ng-model='selectedDate'
+                         day-format="'d'"
+                         day-label-format="'EEE'"
+                         day-label-tooltip-format="'EEEE'"
+                         day-tooltip-format="'fullDate'"
+                         week-starts-on="firstDayOfWeek"
+                         day-content="setDayContent"
+                         template-url="'app/calendar/calendar.html'"></pg-calendar>
+                </div>
+        </md-tab>
+        <md-tab label="Курси">
+            <div class="courses-main" layout-margin layout layout-wrap layout-align="center center">
+                <md-card md-whiteframe="10" ng-click="vm.showDetails(course._id)" ng-repeat="course in vm.courses"
+                         ng-if="::course.isVisible"
+                         class="md-margin " flex-gt-md="22" flex-md="22" flex-gt-sm="46" flex-xs="80">
+                    <card-image-container>
+                        <img ng-src="{{::course.hearFormsPhotos[0].url}}" class="md-card-image">
+                    </card-image-container>
+                    <md-card-content layout="column" flex="100" layout-align="center center">
+                        <span class="  md-margin">{{::course.name}}</span>
+                        <md-button class="detail-btn " aria-label="Play" ng-click="vm.showDetails(course._id)">
+                            Деталі
+                        </md-button>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </md-tab>
+    </md-tabs>
 
-    </div>
+
     <div flex="12" flex-sm="4" flex-xs="0">
     </div>
 </div>
