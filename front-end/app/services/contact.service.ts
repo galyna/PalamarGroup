@@ -1,8 +1,8 @@
 /**
  * Created by Galyna on 14.05.2016.
  */
-import {IConstants} from "../app.config";
 import IContact = pg.models.IContact;
+import {IConstants} from "../core/core.config";
 
 export interface IContactService {
     get(): ng.IPromise<IContact[]>;

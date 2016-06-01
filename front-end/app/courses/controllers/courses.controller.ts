@@ -1,14 +1,15 @@
+import {CourseResourceName, ICourseResource, ICourse} from "../../resources/course.resource";
 /**
  * Created by Galyna on 13.04.2016.
  */
 
 export class CoursesController {
 
-    static $inject = ['$scope', '$location', 'courseService'];
+    static $inject = ['$scope', '$location', CourseResourceName];
     static componentName = 'CoursesController';
-    courses:[pg.models.ICourse];
+    courses: ICourse[];
 
-    constructor($scope, private $location, private courseService) {
+    constructor($scope, private $location, private CourseResource: ICourseResource) {
         $scope.$on("$destroy", () => {
             this.courses = null;
             this.showDetails = null;
@@ -19,14 +20,7 @@ export class CoursesController {
     }
 
     getCourses() {
-        this.courseService.get().then((data) => {
-            this.courses = data;
-            // this.courses.forEach((item) => {
-            //     item.courseModulesDates = item.courseModulesDates.map((date) => {
-            //         return new Date(date);
-            //     });
-            // });
-        });
+        this.courses = this.CourseResource.query();
     }
     
     showDetails(id:string) {

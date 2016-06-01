@@ -14,6 +14,7 @@ System.config({
         'angular': 'node_modules/angular/angular.js',
         'angular-sanitize': 'node_modules/angular-sanitize/angular-sanitize.js',
         'angular-route': 'node_modules/angular-route/angular-route.js',
+        'angular-resource': 'node_modules/angular-resource/angular-resource.js',
         'angular-animate': 'node_modules/angular-animate/angular-animate.js',
         'angular-aria': 'node_modules/angular-aria/angular-aria.js',
         'angular-messages': 'node_modules/angular-messages/angular-messages.js',

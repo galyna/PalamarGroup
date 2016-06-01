@@ -2,7 +2,7 @@ System.register(['./academy/controllers/orders.controller', './academy/controlle
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var orders_controller_1, courses_controller_1, models_controller_1, delivery_controller_1, contacts_controller_1, admin_controller_1, comments_controller_1;
-    function coursesRoutes($routeProvider) {
+    function adminRoutes($routeProvider) {
         $routeProvider
             .when('/admin', {
             templateUrl: 'app/admin/views/admin.html',
@@ -50,7 +50,7 @@ System.register(['./academy/controllers/orders.controller', './academy/controlle
             controllerAs: "vm"
         });
     }
-    exports_1("coursesRoutes", coursesRoutes);
+    exports_1("adminRoutes", adminRoutes);
     return {
         setters:[
             function (orders_controller_1_1) {
@@ -75,7 +75,7 @@ System.register(['./academy/controllers/orders.controller', './academy/controlle
                 comments_controller_1 = comments_controller_1_1;
             }],
         execute: function() {
-            coursesRoutes.$inject = ['$routeProvider'];
+            adminRoutes.$inject = ['$routeProvider'];
         }
     }
 });

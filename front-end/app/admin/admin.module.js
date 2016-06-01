@@ -1,10 +1,10 @@
 /**
  * Created by Galyna on 08.04.2016.
  */
-System.register(['angular', 'angular-route', 'angular-aria', 'angular-messages', 'angular-material', 'angular-animate', 'ng-file-upload', './admin.routes', './academy/controllers/orders.controller', './academy/controllers/courses.controller', './academy/controllers/models.controller', './academy/controllers/delivery.controller', './academy/controllers/comments.controller', './academy/controllers/contacts.controller', './controllers/admin.controller', './academy/controllers/left.menu.controller', "../services/course.service", "../services/order.service", "../services/comment.service", "../services/model.service", "./academy/services/salon.client.service", "./academy/services/delivery.service", "../services/contact.service"], function(exports_1, context_1) {
+System.register(['angular', 'angular-route', 'angular-aria', 'angular-messages', 'angular-material', 'angular-animate', 'ng-file-upload', "../core/core.module", "../resources/resources.module", './admin.routes', './academy/controllers/orders.controller', './academy/controllers/courses.controller', './academy/controllers/models.controller', './academy/controllers/delivery.controller', './academy/controllers/comments.controller', './academy/controllers/contacts.controller', './controllers/admin.controller', './academy/controllers/left.menu.controller', "../services/order.service", "../services/comment.service", "../services/model.service", "./academy/services/salon.client.service", "./academy/services/delivery.service", "../services/contact.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var admin_routes_1, orders_controller_1, courses_controller_1, models_controller_1, delivery_controller_1, comments_controller_1, contacts_controller_1, admin_controller_1, left_menu_controller_1, course_service_1, order_service_1, comment_service_1, model_service_1, salon_client_service_1, delivery_service_1, contact_service_1;
+    var core_module_1, resources_module_1, admin_routes_1, orders_controller_1, courses_controller_1, models_controller_1, delivery_controller_1, comments_controller_1, contacts_controller_1, admin_controller_1, left_menu_controller_1, order_service_1, comment_service_1, model_service_1, salon_client_service_1, delivery_service_1, contact_service_1;
     var app, adminModule;
     return {
         setters:[
@@ -15,6 +15,12 @@ System.register(['angular', 'angular-route', 'angular-aria', 'angular-messages',
             function (_5) {},
             function (_6) {},
             function (_7) {},
+            function (core_module_1_1) {
+                core_module_1 = core_module_1_1;
+            },
+            function (resources_module_1_1) {
+                resources_module_1 = resources_module_1_1;
+            },
             function (admin_routes_1_1) {
                 admin_routes_1 = admin_routes_1_1;
             },
@@ -42,9 +48,6 @@ System.register(['angular', 'angular-route', 'angular-aria', 'angular-messages',
             function (left_menu_controller_1_1) {
                 left_menu_controller_1 = left_menu_controller_1_1;
             },
-            function (course_service_1_1) {
-                course_service_1 = course_service_1_1;
-            },
             function (order_service_1_1) {
                 order_service_1 = order_service_1_1;
             },
@@ -67,9 +70,11 @@ System.register(['angular', 'angular-route', 'angular-aria', 'angular-messages',
             app = angular.module('admin', [
                 'ngRoute',
                 'ngMaterial',
-                'ngFileUpload'
+                'ngFileUpload',
+                core_module_1.coreModule.name,
+                resources_module_1.resourcesModule.name
             ])
-                .config(admin_routes_1.coursesRoutes)
+                .config(admin_routes_1.adminRoutes)
                 .controller(admin_controller_1.AdminController.componentName, admin_controller_1.AdminController)
                 .controller(courses_controller_1.AcademyCoursesController.componentName, courses_controller_1.AcademyCoursesController)
                 .controller(orders_controller_1.AcademyOrdersController.componentName, orders_controller_1.AcademyOrdersController)
@@ -78,7 +83,6 @@ System.register(['angular', 'angular-route', 'angular-aria', 'angular-messages',
                 .controller(comments_controller_1.AcademyCommentController.componentName, comments_controller_1.AcademyCommentController)
                 .controller(contacts_controller_1.AcademyContactsController.componentName, contacts_controller_1.AcademyContactsController)
                 .controller(left_menu_controller_1.LeftMenuController.componentName, left_menu_controller_1.LeftMenuController)
-                .service(course_service_1.CourseService.componentName, course_service_1.CourseService)
                 .service(order_service_1.OrderService.componentName, order_service_1.OrderService)
                 .service(model_service_1.ModelService.componentName, model_service_1.ModelService)
                 .service(comment_service_1.CommentService.componentName, comment_service_1.CommentService)

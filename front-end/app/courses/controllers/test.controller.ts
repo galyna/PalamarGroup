@@ -1,16 +1,16 @@
 import ICourse = pg.models.ICourse;
-import {ICourseService} from "../../services/course.service";
+import {ICourseResource, CourseResourceName} from "../../resources/course.resource";
 export class TestController {
 
-    static $inject = ['$scope', 'courseService', 'pgCalendarData', '$sce', '$rootScope', '$compile'];
+    static $inject = ['$scope', CourseResourceName, 'pgCalendarData', '$sce', '$rootScope', '$compile'];
     static componentName = 'TestController';
 
     courses:ICourse[];
 
-    constructor($scope, courseService:ICourseService, private pgCalendarData, $sce,
+    constructor($scope, CourseResource: ICourseResource, private pgCalendarData, $sce,
                 $rootScope:ng.IRootScopeService, $compile:ng.ICompileService) {
 
-        courseService.get().then((courses) => {
+        CourseResource.query().$promise.then((courses) => {
             courses.forEach((course)=> {
                 var $scope: any = $rootScope.$new(true);
                 $scope.course = course;

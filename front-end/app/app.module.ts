@@ -4,6 +4,7 @@
 //modules
 import 'angular';
 import 'angular-route';
+import 'angular-resource';
 import 'angular-aria';
 import 'angular-messages';
 import 'angular-material';
@@ -18,16 +19,21 @@ import './templates';
 //components
 import {httpInterceptorConfig} from './app.interceptor';
 import {routesConfig} from './app.routes';
-import {appConstants, appConfig, materialConfig} from './app.config';
+import {appConfig, materialConfig} from './app.config';
 import {appRun} from './app.run';
+import {resourcesModule} from "./resources/resources.module";
+import {coreModule} from "./core/core.module";
 
 let app = angular.module('yuliaPalamarApp', [
+    'ngResource',
     'ngMaterial',
     'ngMessages',
     'ngRoute',
     'ngFileUpload',
 
     'templates',
+    coreModule.name,
+    resourcesModule.name,
     uiModule.name,
     usersModule.name,
     adminModule.name,
@@ -37,9 +43,6 @@ let app = angular.module('yuliaPalamarApp', [
     .config(routesConfig)
     .config(appConfig)
     .config(materialConfig)
-
-    .constant('constants', appConstants)
-
     .run(appRun);
 
 export var appModule = app;

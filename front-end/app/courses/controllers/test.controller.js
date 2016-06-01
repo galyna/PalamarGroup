@@ -1,15 +1,19 @@
-System.register([], function(exports_1, context_1) {
+System.register(["../../resources/course.resource"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
+    var course_resource_1;
     var TestController;
     return {
-        setters:[],
+        setters:[
+            function (course_resource_1_1) {
+                course_resource_1 = course_resource_1_1;
+            }],
         execute: function() {
             TestController = (function () {
-                function TestController($scope, courseService, pgCalendarData, $sce, $rootScope, $compile) {
+                function TestController($scope, CourseResource, pgCalendarData, $sce, $rootScope, $compile) {
                     var _this = this;
                     this.pgCalendarData = pgCalendarData;
-                    courseService.get().then(function (courses) {
+                    CourseResource.query().$promise.then(function (courses) {
                         courses.forEach(function (course) {
                             var $scope = $rootScope.$new(true);
                             $scope.course = course;
@@ -32,7 +36,7 @@ System.register([], function(exports_1, context_1) {
                     //
                     // mObserver.observe(vm.items);
                 }
-                TestController.$inject = ['$scope', 'courseService', 'pgCalendarData', '$sce', '$rootScope', '$compile'];
+                TestController.$inject = ['$scope', course_resource_1.CourseResourceName, 'pgCalendarData', '$sce', '$rootScope', '$compile'];
                 TestController.componentName = 'TestController';
                 return TestController;
             }());
