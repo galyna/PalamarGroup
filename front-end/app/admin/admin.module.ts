@@ -23,12 +23,8 @@ import {AcademyCommentController} from './academy/controllers/comments.controlle
 import {AcademyContactsController} from './academy/controllers/contacts.controller';
 import {AdminController} from './controllers/admin.controller';
 import {LeftMenuController} from './academy/controllers/left.menu.controller';
-import {OrderService} from "../services/order.service";
-import {CommentService} from "../services/comment.service";
-import {ModelService} from "../services/model.service";
 import {SalonClientService} from "./academy/services/salon.client.service";
 import {DeliveryService} from "./academy/services/delivery.service";
-import {ContactService} from "../services/contact.service";
 
 
 let app = angular.module('admin', [
@@ -48,10 +44,6 @@ let app = angular.module('admin', [
     .controller(AcademyCommentController.componentName, AcademyCommentController)
     .controller(AcademyContactsController.componentName, AcademyContactsController)
     .controller(LeftMenuController.componentName, LeftMenuController)
-    .service(OrderService.componentName, OrderService)
-    .service(ModelService.componentName, ModelService)
-    .service(CommentService.componentName, CommentService)
-    .service(ContactService.componentName, ContactService)
     .service(SalonClientService.componentName, SalonClientService)
     .service(DeliveryService.componentName, DeliveryService);
 

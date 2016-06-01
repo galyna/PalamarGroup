@@ -1,10 +1,9 @@
-import ICourse = pg.models.ICourse;
-import IOrder = pg.models.IOrder;
-import IModel = pg.models.IModel;
 import IUploadPromise = angular.angularFileUpload.IUploadPromise;
 import {IConstants} from "../../core/core.config";
-import {ICourseResource, CourseResourceName} from "../../resources/course.resource";
-import {IModelService} from "../../services/model.service";
+import {ICourseResource, CourseResourceName, ICourse} from "../../resources/course.resource";
+import {IModelResource, IModel, ModelResourceName} from "../../resources/model.resource";
+import {IOrder, IOrderResource, OrderResourceName} from "../../resources/order.resource";
+import {IMediaObserverFactory, MediaObserverFactoryName} from "../../ui/mediaObserver.service";
 
 
 interface IRouteParams extends ng.route.IRouteParamsService {
@@ -14,7 +13,7 @@ interface IRouteParams extends ng.route.IRouteParamsService {
 export class CourseController {
 
     static $inject = ['$log', '$routeParams', '$location', CourseResourceName,
-        'orderService', 'mediaObserver', '$mdDialog', 'Upload', '$timeout', 'modelService','constants'];
+        OrderResourceName, MediaObserverFactoryName, '$mdDialog', 'Upload', '$timeout', ModelResourceName,'constants'];
     static componentName = 'CourseController';
 
     course:ICourse;
@@ -25,25 +24,16 @@ export class CourseController {
 
     constructor(private $log:ng.ILogService, $routeParams:IRouteParams,
                 private $location:ng.ILocationService, CourseResource:ICourseResource,
-                private orderService, private mediaObserver, private mdDialog,
-                private Upload:ng.angularFileUpload.IUploadService, private $timeout:ng.ITimeoutService,
-                private modelService:IModelService,private constants:IConstants) {
+                private OrderResource: IOrderResource, private mediaObserver: IMediaObserverFactory, 
+                private mdDialog: ng.material.IDialogService, private Upload:ng.angularFileUpload.IUploadService, 
+                private $timeout:ng.ITimeoutService, private ModelResource: IModelResource, 
+                private constants:IConstants) {
 
         this.course = CourseResource.get({id: $routeParams.id});
 
-        this.order = {
-            name: '',
-            phone: '',
-            email: '',
-            comment: '',
-            date: '',
-            admin_comment: '',
-            event_id: '',
-            answered: false,
-            booked: false
-        };
+        this.order = new OrderResource();
 
-        this.newModel =  angular.copy(this.constants.newModel);
+        this.newModel = this.getBlankModel();
 
     }
 
@@ -52,7 +42,7 @@ export class CourseController {
     }
 
     showModelForm():void {
-        this.newModel =  angular.copy(this.constants.newModel);
+        this.newModel =  this.getBlankModel();
         this.modelFormVisible = true;
     }
 
@@ -79,7 +69,7 @@ export class CourseController {
 
 
     submitModel():void {
-            this.modelService.post(this.newModel)
+            this.newModel.$save()
                 .then(() => {
                     this.showModelConfirm();
                 })
@@ -123,7 +113,7 @@ export class CourseController {
         if (this.order.email || this.order.phone || this.order.name) {
             this.order.event_id = this.course._id;
             this.order.date = new Date().toJSON();
-            this.orderService.post(this.order)
+            this.order.$save()
                 .then(() => {
                     this.hideForm();
                     this.showOrderConfirm();
@@ -144,5 +134,14 @@ export class CourseController {
 
     showMediaObserver(items, index):void {
         this.mediaObserver.observe(items, index);
+    }
+
+    private getBlankModel(){
+        return new this.ModelResource({
+            fasPhotoUrl: '../content/images/fas.jpg',
+            profilePhotoUrl: '../content/images/prifile.jpg',
+            backPhotoUrl: '../content/images/back.jpg',
+            fullSizePhotoUrl: '../content/images/fullsize.jpg'
+        });
     }
 }

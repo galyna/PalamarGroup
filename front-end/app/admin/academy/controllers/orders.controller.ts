@@ -1,30 +1,25 @@
-import {IOrderService} from "../services/order.service";
-import IOrder = pg.models.IOrder;
+import {IOrderResource, IOrder, OrderResourceName} from "../../../resources/order.resource";
 
 export class AcademyOrdersController {
 
-    static $inject = ['orderService', '$location'];
+    static $inject = [OrderResourceName, '$location'];
     static componentName = 'AcademyOrdersController';
 
-    orders:IOrder[];
+    orders: IOrder[];
 
-    constructor(private orderService:IOrderService, private $location:ng.ILocationService) {
-        this.orderService.get().then((orders) => {
-            this.orders = orders;
-        })
+    constructor(private OrderResource: IOrderResource, private $location:ng.ILocationService) {
+        this.orders = this.OrderResource.query();
     }
 
-    deleteOrder(item:IOrder):void {
-        this.orderService.delete(item._id).then(()=> {
-            this.orders.splice(this.orders.indexOf(item), 1);
+    deleteOrder(order: IOrder) {
+        order.$delete().then(()=> {
+            this.orders.splice(this.orders.indexOf(order), 1);
         });
     }
 
-    answerOrder(item:IOrder):void {
-        item.answered=true;
-        this.orderService.put( item._id, item).then(()=> {
-            this.orders.splice(this.orders.indexOf(item), 1, item);
-        });
+    answerOrder(order: IOrder) {
+        order.answered=true;
+        order.$save();
     }
 
 }

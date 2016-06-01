@@ -1,11 +1,16 @@
 //TODO: refactor
 import {IRootScope} from "../../typings";
 
+export interface IMediaObserverFactory {
+    observe(items: string[], index: number): void;
+    close():void;
+}
 interface IScope extends ng.IScope {
     vm: any,
-    items: any;
+    items: string[];
 }
 
+export let MediaObserverFactoryName = 'mediaObserver';
 MediaObserverFactory.$inject = ['$compile', '$rootScope', '$templateCache'];
 export function MediaObserverFactory($compile: ng.ICompileService, $rootScope: IRootScope,
                                      $templateCache: ng.ITemplateCacheService) {
@@ -45,9 +50,9 @@ export function MediaObserverFactory($compile: ng.ICompileService, $rootScope: I
         return false;
     }
 
-    return {
-        observe: function (items, index) {
-            $scope.vm.index = index || 0;
+    return <IMediaObserverFactory>{
+        observe: (items, index = 0) => {
+            $scope.vm.index = index;
             $scope.vm.items = items;
             $scope.vm.img.current = $scope.vm.items[$scope.vm.index];
             element.addClass('visible');

@@ -1,7 +1,6 @@
-import {IModelService} from "../services/model.service";
-import IModel = pg.models.IModel;
 import IPhoto = pg.models.IPhoto;
 import {IConstants} from "../../../core/core.config";
+import {IModel, IModelResource, ModelResourceName} from "../../../resources/model.resource";
 
 interface IEditIModelModel extends IModel {
     oldIndex?:number;
@@ -10,7 +9,7 @@ interface IEditIModelModel extends IModel {
 
 export class AcademyModelController {
 
-    static $inject = ['modelService', '$log', 'Upload', '$timeout', '$location', 'constants'];
+    static $inject = [ModelResourceName, '$log', 'Upload', '$timeout', '$location', 'constants'];
     static componentName = 'AcademyModelController';
 
     models:IModel[];
@@ -21,23 +20,19 @@ export class AcademyModelController {
     showFormPhotoUpload:boolean;
 
 
-    constructor(private modelService:IModelService, private $log:ng.ILogService,
+    constructor(private ModelResource: IModelResource, private $log:ng.ILogService,
                 private Upload:ng.angularFileUpload.IUploadService, private $timeout:ng.ITimeoutService,
                 private $location:ng.ILocationService, private constants:IConstants) {
 
-        modelService.get().then((models) => {
-            this.models = models;
-        }).catch(function (err) {
-            $log.error(err);
-        });
+        this.models = ModelResource.query();
 
-        this.newModelModel = constants.newModel;
+        this.newModelModel = this.getBlankModel();
     }
 
 
     //course creation start
     showCreateForm():void {
-        this.newModelModel = this.constants.newModel;
+        this.newModelModel = this.getBlankModel();
         this.showModelEditForm = false;
         this.showModelCreateForm = true;
     }
@@ -45,15 +40,17 @@ export class AcademyModelController {
     createModel(form:ng.IFormController):void {
         this.$log.debug("createCourse ...$valid" + form.$valid);
         if (form.$valid) {
-            this.modelService.post(this.newModelModel)
+            this.newModelModel.$save()
                 .then((model)=> {
                     this.$log.debug("success createCourse...");
                     this.models.push(model);
-                }).catch((err)=> {
-                this.$log.debug("fail createCourse..." + err);
-            }).finally(()=> {
-                this.showModelCreateForm = false;
-            });
+                })
+                .catch((err)=> {
+                    this.$log.debug("fail createCourse..." + err);
+                })
+                .finally(()=> {
+                    this.showModelCreateForm = false;
+                });
 
         }
     }
@@ -65,15 +62,17 @@ export class AcademyModelController {
         this.$log.debug("editModelModel ...$valid" + form.$valid);
         this.$log.debug("editModelModel ...vm.editModelModel._id===" + this.editModelModel._id);
         if (form.$valid) {
-            this.modelService.put(this.editModelModel._id, this.editModelModel)
+            this.editModelModel.$save()
                 .then(()=> {
                     this.models.splice(this.editModelModel.oldIndex, 1, this.editModelModel);
                     this.editModelModel = <IEditIModelModel>{};
-                }).catch((err)=> {
-                this.$log.debug("fail editCourse..." + err);
-            }).finally(()=> {
-                this.showModelEditForm = false;
-            });
+                })
+                .catch((err)=> {
+                    this.$log.debug("fail editCourse..." + err);
+                })
+                .finally(()=> {
+                    this.showModelEditForm = false;
+                });
         }
     }
 
@@ -112,14 +111,24 @@ export class AcademyModelController {
     }
     
 
-    deleteModel(item:IModel):void {
-        this.modelService.delete(item._id).then(()=> {
-            this.models.splice(this.models.indexOf(item), 1);
+    deleteModel(model:IModel):void {
+        model.$delete().then(()=> {
+            this.models.splice(this.models.indexOf(model), 1);
         });
     }
 
+    //noinspection JSMethodCanBeStatic
     deleteFromList(list:any[], item:any):void {
         list.splice(list.indexOf(item), 1);
+    }
+    
+    private getBlankModel(){
+        return new this.ModelResource({
+            fasPhotoUrl: '../content/images/fas.jpg',
+            profilePhotoUrl: '../content/images/prifile.jpg',
+            backPhotoUrl: '../content/images/back.jpg',
+            fullSizePhotoUrl: '../content/images/fullsize.jpg'
+        });
     }
 
 }

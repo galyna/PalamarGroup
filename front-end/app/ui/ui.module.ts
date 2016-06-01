@@ -1,8 +1,9 @@
 import 'angular';
 import {pgCalendarModule} from '../calendar/calendar.module';
-import {MediaObserverFactory} from "./mediaObserver.service";
-let app:angular.IModule = angular.module('ui', [pgCalendarModule.name])
-    .factory('mediaObserver', MediaObserverFactory)
+import {MediaObserverFactory, MediaObserverFactoryName} from "./mediaObserver.service";
+export let uiModule = angular.module('ui', [pgCalendarModule.name])
+    .factory(MediaObserverFactoryName, MediaObserverFactory)
+    //TODO: extract to separate file
     .directive('chooseFileButton', function () {
         return {
             restrict: 'E',
@@ -16,4 +17,3 @@ let app:angular.IModule = angular.module('ui', [pgCalendarModule.name])
             }
         };
     });
-export let uiModule = app;

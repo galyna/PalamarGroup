@@ -1,6 +1,7 @@
 System.register([], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
+    var MediaObserverFactoryName;
     function MediaObserverFactory($compile, $rootScope, $templateCache) {
         var $scope = $rootScope.$new(true);
         $scope.vm = {
@@ -35,7 +36,8 @@ System.register([], function(exports_1, context_1) {
         }
         return {
             observe: function (items, index) {
-                $scope.vm.index = index || 0;
+                if (index === void 0) { index = 0; }
+                $scope.vm.index = index;
                 $scope.vm.items = items;
                 $scope.vm.img.current = $scope.vm.items[$scope.vm.index];
                 element.addClass('visible');
@@ -48,6 +50,7 @@ System.register([], function(exports_1, context_1) {
     return {
         setters:[],
         execute: function() {
+            exports_1("MediaObserverFactoryName", MediaObserverFactoryName = 'mediaObserver');
             MediaObserverFactory.$inject = ['$compile', '$rootScope', '$templateCache'];
         }
     }
