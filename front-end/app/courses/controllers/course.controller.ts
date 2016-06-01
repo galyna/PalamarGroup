@@ -1,11 +1,10 @@
-import {ICourseService} from "../../services/course.service";
-import {IModelService} from "../services/model.service";
-
 import ICourse = pg.models.ICourse;
 import IOrder = pg.models.IOrder;
 import IModel = pg.models.IModel;
-import {IConstants} from "../app.config";
 import IUploadPromise = angular.angularFileUpload.IUploadPromise;
+import {IConstants} from "../../core/core.config";
+import {ICourseResource, CourseResourceName} from "../../resources/course.resource";
+import {IModelService} from "../../services/model.service";
 
 
 interface IRouteParams extends ng.route.IRouteParamsService {
@@ -14,7 +13,7 @@ interface IRouteParams extends ng.route.IRouteParamsService {
 
 export class CourseController {
 
-    static $inject = ['$log', '$routeParams', '$location', 'courseService',
+    static $inject = ['$log', '$routeParams', '$location', CourseResourceName,
         'orderService', 'mediaObserver', '$mdDialog', 'Upload', '$timeout', 'modelService','constants'];
     static componentName = 'CourseController';
 
@@ -25,16 +24,12 @@ export class CourseController {
     newModel:IModel;
 
     constructor(private $log:ng.ILogService, $routeParams:IRouteParams,
-                private $location:ng.ILocationService, courseService:ICourseService,
-                private orderService:ICourseService, private mediaObserver, private mdDialog,
+                private $location:ng.ILocationService, CourseResource:ICourseResource,
+                private orderService, private mediaObserver, private mdDialog,
                 private Upload:ng.angularFileUpload.IUploadService, private $timeout:ng.ITimeoutService,
                 private modelService:IModelService,private constants:IConstants) {
 
-        courseService.get($routeParams.id).then((course) => {
-            this.course = course;
-        }).catch(function (err) {
-            $log.error(err);
-        });
+        this.course = CourseResource.get({id: $routeParams.id});
 
         this.order = {
             name: '',

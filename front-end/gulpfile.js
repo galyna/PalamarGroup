@@ -25,10 +25,10 @@ gulp.task('html', function () {
         +'            angular_1 = angular_1_1;'
         +'        }],'
         +'    execute: function() {'
-        +'        exports_1("default",angular_1.default.module("templates", [])'
+        +'        angular.module("templates", [])'
         +'           .run(["$templateCache", function ($templateCache) {';
     var templateFooter =
-        '           }]));'
+        '           }]);'
         +'      }'
         +'  }'
         +'});';
@@ -36,6 +36,7 @@ gulp.task('html', function () {
     return gulp.src(['!app/index.html', '!app/layout/views/layout.html', '!app/users/views/profile.html', 'app/**/*.html'])
         .pipe(templateCache({
             standalone: true,
+            root: 'app/',
             templateHeader: templateHeader,
             templateFooter: templateFooter
         }))

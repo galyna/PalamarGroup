@@ -3,9 +3,8 @@
  */
 
 
-import {ICourseService} from "../services/course.service";
-import ICourse = pg.models.ICourse;
 import IPhoto = pg.models.IPhoto;
+import {ICourseResource, ICourse, CourseResourceName} from "../../../resources/course.resource";
 
 interface IEditCourseModel extends ICourse {
     oldIndex?:number;
@@ -15,7 +14,7 @@ interface IEditCourseModel extends ICourse {
 
 export class AcademyCoursesController {
 
-    static $inject = ['courseService', '$log', 'Upload', '$timeout', '$location'];
+    static $inject = [CourseResourceName, '$log', 'Upload', '$timeout', '$location'];
     static componentName = 'AcademyCoursesController';
 
     courses:ICourse[];
@@ -27,14 +26,9 @@ export class AcademyCoursesController {
     showFormPhotoUpload:boolean;
     showAuthorPhotoUpload:boolean;
 
-    constructor(private courseService:ICourseService, private $log:ng.ILogService,
+    constructor(private CourseResource: ICourseResource, private $log:ng.ILogService,
                 private Upload, private $timeout:ng.ITimeoutService, private $location:ng.ILocationService) {
-
-        courseService.get().then((courses) => {
-            this.courses = courses;
-        }).catch(function (err) {
-            $log.error(err);
-        });
+        this.courses = CourseResource.query();
     }
 
 
@@ -47,16 +41,17 @@ export class AcademyCoursesController {
     createCourse(form:ng.IFormController):void {
         this.$log.debug("createCourse ...$valid" + form.$valid);
         if (form.$valid) {
-            this.courseService.post(this.newCourseModel)
+            let newCourseResource = new this.CourseResource(this.newCourseModel);
+            newCourseResource.$save()
                 .then((course)=> {
                     this.$log.debug("success createCourse...");
                     this.courses.push(course);
-                }).catch((err)=> {
-                this.$log.debug("fail createCourse..." + err);
-            }).finally(()=> {
-                this.showCourseCreateForm = false;
-            });
-
+                })
+                .catch((err)=> {
+                    this.$log.debug("fail createCourse..." + err);
+                }).finally(()=> {
+                    this.showCourseCreateForm = false;
+                });
         }
     }
 
@@ -67,15 +62,16 @@ export class AcademyCoursesController {
         this.$log.debug("editCourse ...$valid" + form.$valid);
         this.$log.debug("editCourse ...vm.editCourseModel._id===" + this.editCourseModel._id);
         if (form.$valid) {
-            this.courseService.put(this.editCourseModel._id, this.editCourseModel)
+            this.editCourseModel.$save()
                 .then(()=> {
                     this.courses.splice(this.editCourseModel.oldIndex, 1, this.editCourseModel);
                     this.editCourseModel = <IEditCourseModel>{};
-                }).catch((err)=> {
-                this.$log.debug("fail editCourse..." + err);
-            }).finally(()=> {
-                this.showCourseEditForm = false;
-            });
+                })
+                .catch((err)=> {
+                    this.$log.debug("fail editCourse..." + err);
+                }).finally(()=> {
+                    this.showCourseEditForm = false;
+                });
         }
     }
 
@@ -140,6 +136,7 @@ export class AcademyCoursesController {
     //course image upload end
 
     //course date start
+    //noinspection JSMethodCanBeStatic
     saveModuleDate(model:ICourse, date:Date):void {
         model.courseModulesDates.push(date.toJSON());
     }
@@ -147,23 +144,26 @@ export class AcademyCoursesController {
     //course date end
 
     deleteCourse(item:ICourse):void {
-        this.courseService.delete(item._id).then(()=> {
-            this.courses.splice(this.courses.indexOf(item), 1);
-        });
+        item.$delete()
+            .then(()=> {
+                this.courses.splice(this.courses.indexOf(item), 1);
+            });
     }
 
     cloneCourse(course: ICourse):void {
-        var newCourse = angular.copy(course);
+        var newCourse = new this.CourseResource(course);
         delete newCourse._id;
         newCourse.courseModulesDates = [];
         newCourse.isVisible = false;
-        this.courseService.post(newCourse).then((course) => {
+
+        newCourse.$save().then((course) => {
             this.showEditForm(course);
         }).catch((err) => {
             this.$log.error(err);
         });
     }
 
+    //noinspection JSMethodCanBeStatic
     deleteFromList(list:any[], item:any):void {
         list.splice(list.indexOf(item), 1);
     }

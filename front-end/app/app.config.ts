@@ -1,33 +1,6 @@
 /**
  * Created by Galyna on 16.03.2016.
  */
-import IModel = pg.models.IModel;
-
-export interface IConstants {
-    baseUrl:string,
-    apiUrl:string,
-    uploadDir:string,
-    photoUrl:string
-    newModel:IModel
-}
-
-export let appConstants:IConstants = {
-    baseUrl: '/',
-    apiUrl: '/api',
-    uploadDir: '/content/uploads',
-    photoUrl: '/api/photo',
-    newModel: {
-        name: '',
-        phone: '',
-        email: '',
-        address: '',
-        fasPhotoUrl: '../content/images/fas.jpg',
-        profilePhotoUrl: '../content/images/prifile.jpg',
-        backPhotoUrl: '../content/images/back.jpg',
-        fullSizePhotoUrl: '../content/images/fullsize.jpg'
-    }
-
-};
 
 appConfig.$inject = ['$compileProvider'];
 export function appConfig($compileProvider) {

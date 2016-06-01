@@ -2,8 +2,8 @@
  * Created by Galyna on 14.05.2016.
  */
 
-import {IConstants} from "../app.config";
 import IModel = pg.models.IModel;
+import {IConstants} from "../core/core.config";
 
 //noinspection ReservedWordAsName
 export interface IModelService {

@@ -1,5 +1,5 @@
-import {IConstants} from "../app.config";
 import IOrder = pg.models.IOrder;
+import {IConstants} from "../core/core.config";
 
 export interface IOrderService {
     get(): ng.IPromise<IOrder[]>;

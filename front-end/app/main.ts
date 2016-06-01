@@ -1,4 +1,4 @@
-import angular from 'angular';
+import 'angular';
 import {appModule} from './app.module';
 
 angular.element(document).ready(function () {

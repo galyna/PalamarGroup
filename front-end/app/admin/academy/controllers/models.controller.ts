@@ -1,15 +1,7 @@
-/**
- * Created by Galyna on 14.05.2016.
- */
-/**
- * Created by Galyna on 12.05.2016.
- */
-
-
 import {IModelService} from "../services/model.service";
-import {IConstants} from "../app.config";
 import IModel = pg.models.IModel;
 import IPhoto = pg.models.IPhoto;
+import {IConstants} from "../../../core/core.config";
 
 interface IEditIModelModel extends IModel {
     oldIndex?:number;

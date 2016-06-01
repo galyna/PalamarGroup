@@ -1,3 +1,4 @@
+import 'angular';
 import {pgCalendarModule} from '../calendar/calendar.module';
 import {MediaObserverFactory} from "./mediaObserver.service";
 let app:angular.IModule = angular.module('ui', [pgCalendarModule.name])

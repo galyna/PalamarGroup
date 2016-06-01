@@ -6,8 +6,8 @@ import {AcademyContactsController} from './academy/controllers/contacts.controll
 import {AdminController} from './controllers/admin.controller';
 import {AcademyCommentController} from "./academy/controllers/comments.controller";
 
-coursesRoutes.$inject = ['$routeProvider'];
-export function coursesRoutes($routeProvider:ng.route.IRouteProvider) {
+adminRoutes.$inject = ['$routeProvider'];
+export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
     $routeProvider
         .when('/admin', {
             templateUrl: 'app/admin/views/admin.html',

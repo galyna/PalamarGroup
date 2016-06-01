@@ -1,8 +1,8 @@
 /**
  * Created by Galyna on 14.05.2016.
  */
-import {IConstants} from "../app.config";
 import IComment = pg.models.IComment;
+import {IConstants} from "../core/core.config";
 
 export interface ICommentService {
     get(): ng.IPromise<IComment[]>;
