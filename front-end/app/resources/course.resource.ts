@@ -2,9 +2,7 @@ import {IConstants} from "../core/core.config";
 
 export interface ICourse extends ng.resource.IResource<ICourse>, pg.models.ICourse{}
 
-export interface ICourseResource extends ng.resource.IResourceClass<ICourse>{
-    update(ICourse) : ICourse;
-}
+export interface ICourseResource extends ng.resource.IResourceClass<ICourse>{}
 
 export let CourseResourceName = 'CourseResource';
 
