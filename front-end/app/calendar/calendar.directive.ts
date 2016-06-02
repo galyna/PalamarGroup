@@ -27,7 +27,7 @@ export function pgCalendarDirective($compile:ng.ICompileService, $parse:ng.IPars
             ngModel: "=?",
             template: "&",
             templateUrl: "=?",
-            onDayClick: "=?",
+            onDayClick: "&?",
             onPrevMonth: "=?",
             onNextMonth: "=?",
             calendarDirection: "=?",
@@ -105,7 +105,7 @@ export function pgCalendarDirective($compile:ng.ICompileService, $parse:ng.IPars
             });
 
             var handleCb = function (cb, data) {
-                (cb || angular.noop)(data);
+                (cb || angular.noop)({date: data});
             };
 
             var dateFind = function (arr, date) {

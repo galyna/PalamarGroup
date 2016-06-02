@@ -10,7 +10,7 @@
                          calendar-direction="vm.calendarDirection"
                          on-prev-month="prevMonth"
                          on-next-month="nextMonth"
-                         on-day-click="dayClick"
+                         on-day-click="vm.dayClick(date)"
                          title-format="'MMMM y'"
                          ng-model='selectedDate'
                          day-format="'d'"

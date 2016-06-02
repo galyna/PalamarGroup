@@ -22,7 +22,7 @@ System.register(["./calendar.data.service"], function(exports_1, context_1) {
                 ngModel: "=?",
                 template: "&",
                 templateUrl: "=?",
-                onDayClick: "=?",
+                onDayClick: "&?",
                 onPrevMonth: "=?",
                 onNextMonth: "=?",
                 calendarDirection: "=?",
@@ -90,7 +90,7 @@ System.register(["./calendar.data.service"], function(exports_1, context_1) {
                     bootstrap();
                 });
                 var handleCb = function (cb, data) {
-                    (cb || angular.noop)(data);
+                    (cb || angular.noop)({ date: data });
                 };
                 var dateFind = function (arr, date) {
                     var index = -1;
