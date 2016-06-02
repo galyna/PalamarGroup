@@ -1,5 +1,5 @@
 {
-  "user": [
+  "User": [
     {
       "email": "admin@email.com",
       "password": "admin",
@@ -22,7 +22,7 @@
       ]
     }
   ],
-  "contact": [
+  "Contact": [
     {
       "email": "academy@email.com",
       "name": "academy admin",
@@ -34,7 +34,7 @@
       "isAcademy": false
     }
   ],
-  "course": [
+  "Course": [
     {
       "_id": "570e9fe813bb7a0c1d01fc84",
       "name": "Геометрія стрижки",
@@ -357,6 +357,31 @@
         }
       ],
       "videos": []
+    }
+  ],
+  "SalonClient": [
+    {
+      "_id": "57500c872347424c53f2e164",
+      "name": "ostap",
+      "email": "ostapnagovitsyn@gmail.com",
+      "phone": "0963073149",
+      "address": "qwertyui",
+      "__v": 0
+    },
+    {
+      "_id": "57500ca82347424c53f2e165",
+      "name": "galyna",
+      "email": "galynavistovska@gmail.com",
+      "phone": "12345689",
+      "__v": 0
+    },
+    {
+      "_id": "57500cb62347424c53f2e166",
+      "name": "verh",
+      "email": "verh@yandex.ru",
+      "phone": "123456789",
+      "address": "gfd",
+      "__v": 0
     }
   ]
 }

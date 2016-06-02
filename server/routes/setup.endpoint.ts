@@ -14,15 +14,23 @@ function encryptPasswords(modelData) {
     }
 }
 
+
+function modelNameReplacer(match){
+    if(match.charAt(0) === '.')
+        match = match.slice(1);
+    return match.charAt(0).toUpperCase() + match.slice(1);
+}
+
 setupRouter.get('/:model', function (req, res) {
+    let modelNameRegexp = /(\.?\w{1,})/g;
     let fileName = req.params.model.toLowerCase();
-    let modelName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
+    let modelName = fileName.replace(modelNameRegexp, modelNameReplacer);
     try {
         var Model = require('../models/' + fileName)[modelName];
     }catch(err){
         return res.status(500).send({error: {message: fileName + ' model doesn\'t exist'}});
     }
-    var modelData = data[fileName];
+    var modelData = data[modelName];
     if(!modelData){
         return res.status(500).send({error: {message: 'No data found for ' + fileName + ' model'}});
     }
