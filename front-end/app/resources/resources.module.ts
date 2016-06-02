@@ -9,10 +9,12 @@ import {OrderResource, OrderResourceName} from "./order.resource";
 import {ModelResourceName, ModelResource} from "./model.resource";
 import {ContactResourceName, ContactResource} from "./contact.resource";
 import {CommentResourceName, CommentResource} from "./comment.resource";
+import {SalonClientResourceName, SalonClientResource} from "./salon.client.resource";
 
 export let resourcesModule = angular.module('resources', ['ngResource', coreModule.name])
     .factory(CourseResourceName, CourseResource)
     .factory(ModelResourceName, ModelResource)
     .factory(ContactResourceName, ContactResource)
     .factory(CommentResourceName, CommentResource)
+    .factory(SalonClientResourceName, SalonClientResource)
     .factory(OrderResourceName, OrderResource);

@@ -1,7 +1,7 @@
 /**
  * Created by Galyna on 14.05.2016.
  */
-
+//TODO: do we need it?
 import ISalonClient = pg.models.ISalonClient;
 import {IConstants} from "../../../core/core.config";
 
