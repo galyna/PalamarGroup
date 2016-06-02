@@ -2,9 +2,9 @@ import {IPgCalendarDataService, PgCalendarData} from "./calendar.data.service";
 import {IPgCalendarFactory} from "./calendar.factory";
 
 pgCalendarDirective.$inject = ["$compile", "$parse", "$http", "$q", "pgCalendar", "pgCalendarData"];
-export function pgCalendarDirective($compile: ng.ICompileService, $parse: ng.IParseService,
-                                    $http: ng.IHttpService, $q: ng.IQService,
-                                    pgCalendar, CalendarData: IPgCalendarDataService) {
+export function pgCalendarDirective($compile:ng.ICompileService, $parse:ng.IParseService,
+                                    $http:ng.IHttpService, $q:ng.IQService,
+                                    pgCalendar, CalendarData:IPgCalendarDataService) {
 
     var defaultTemplate = "/* calendar.html */";
 

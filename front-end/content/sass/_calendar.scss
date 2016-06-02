@@ -9,7 +9,14 @@ pg-calendar {
   max-height: 100%;
   height: calc(100vh - 260px);
 
-  .md-toolbar-tools {
+  .courses-calendar {
+    box-sizing: border-box;
+    font-size: 21px;
+    img {
+      max-width: 100%;
+    }
+  }
+    .md-toolbar-tools {
     h2 {
       overflow-x: hidden;
       text-overflow: ellipsis;
