@@ -1,8 +1,8 @@
 import * as express from 'express';
 import * as jwt from 'jsonwebtoken';
-import restEndpoint from './rest.endpoint';
+import * as restify from 'express-restify-mongoose';
+import currentUser from '../auth/current_user';
 import userEndpoint from './user.endpoint';
-import {courseEndpoint} from "./course.endpoint";
 import photoEndpoint from './photo.endpoint';
 import * as bcrypt from 'bcrypt-nodejs';
 //models
@@ -15,6 +15,52 @@ import {SalonClient} from '../models/salon.client';
 import {Comment} from '../models/comment';
 
 let api = express.Router();
+
+restify.defaults({
+    prefix: '',
+    version: '',
+    limit: 20, //max and default query limit
+    findOneAndUpdate: false,
+    findOneAndRemove: false,
+    totalCountHeader: true,
+    onError: (err, req, res) => {
+        const statusCode = req.erm.statusCode; // 400 or 404
+        res.status(statusCode).json({
+            message: err.message
+        });
+    },
+    // postRead: function (req, res, next) {
+    //     const result = req.erm.result;         // unfiltered document, object or array
+    //     const statusCode = req.erm.statusCode; // 200
+    //
+    //     if(statusCode == 200 && Array.isArray(result)){
+    //         req.erm.result = {
+    //             data: result,
+    //             limit: parseInt(req.query.limit) || 20, //TODO: remove hardcode
+    //             sort: req.query.sort,
+    //             skip: req.query.skip || 0,
+    //             totalCount: req.erm.totalCount
+    //         }
+    //     }
+    //     next();
+    // }
+});
+
+
+let readOnlyOptions = {
+    preCreate: [currentUser.is('admin')],
+    preUpdate: [currentUser.is('admin')],
+    preDelete: [currentUser.is('admin')]
+};
+
+restify.serve(api, Contact, Object.assign({}, readOnlyOptions));
+restify.serve(api, Course);
+restify.serve(api, Model, Object.assign({}, readOnlyOptions));
+restify.serve(api, Order, Object.assign({}, readOnlyOptions));
+restify.serve(api, SalonClient, Object.assign({}, readOnlyOptions));
+restify.serve(api, Comment, Object.assign({}, readOnlyOptions));
+api.use('/user', userEndpoint);
+api.use('/photo', photoEndpoint);
 
 api.post('/authenticate', async (req, res) => {
     let email = req.body.email;
@@ -46,14 +92,5 @@ api.post('/authenticate', async (req, res) => {
         res.status(500).send({error: err});
     }
 });
-
-api.use('/contact', restEndpoint(Contact));
-api.use('/course', courseEndpoint, restEndpoint(Course));
-api.use('/order', restEndpoint(Order));
-api.use('/user', userEndpoint);
-api.use('/photo', photoEndpoint);
-api.use('/model', restEndpoint(Model));
-api.use('/salon-client', restEndpoint(SalonClient));
-api.use('/comment', restEndpoint(Comment));
 
 export default api;

@@ -11,14 +11,12 @@ import {coursesRoutes} from './courses.routes';
 import {CoursesController} from './controllers/courses.controller';
 import {TestController} from './controllers/test.controller';
 import {CourseController} from "./controllers/course.controller";
-import {OrderService} from "../services/order.service";
 
 
 let app = angular.module('courses', [ 'ngMaterial', resourcesModule.name])
     .config(coursesRoutes)
     .controller(CoursesController.componentName, CoursesController)
     .controller(CourseController.componentName, CourseController)
-    .controller(TestController.componentName, TestController)
-    .service(OrderService.componentName, OrderService);
+    .controller(TestController.componentName, TestController);
 
 export let coursesModule = app;

@@ -34,7 +34,6 @@
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.0",
     "karma-systemjs": "^0.13.0",
-    "phantomjs": "^2.1.7",
     "phantomjs-prebuilt": "^2.1.7",
     "systemjs-builder": "^0.15.16",
     "typescript": "^1.8.10",
