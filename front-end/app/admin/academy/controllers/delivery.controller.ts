@@ -13,9 +13,13 @@ export class AcademyDeliveryController {
     newSalonModel:ISalonClient;
     showSalonEditForm:boolean;
     showSalonCreateForm:boolean;
-
+    showEmailAdvForm: boolean;
     
     constructor(private SalonClientResource: ISalonClientResource, private $log: ng.ILogService) {
+        this.showSalonEditForm = false;
+        this.showSalonCreateForm = false;
+        this.showEmailAdvForm = false;
+        
         this.salons = SalonClientResource.query();
     }
 
@@ -76,6 +80,10 @@ export class AcademyDeliveryController {
     //noinspection JSMethodCanBeStatic
     deleteFromList(list:any[], item:any) {
         list.splice(list.indexOf(item), 1);
+    }
+
+    toggleEmailAdvForm(){
+        this.showEmailAdvForm = !this.showEmailAdvForm;
     }
 
 }

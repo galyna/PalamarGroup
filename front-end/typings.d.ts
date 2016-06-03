@@ -4,4 +4,5 @@
 
 export interface IRootScope extends ng.IRootScopeService {
     loading:boolean;
+    isAdminZone: () => boolean;
 }

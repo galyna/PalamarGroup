@@ -1,9 +1,3 @@
-<md-toolbar class="md-hue-2">
-    <div class="md-toolbar-tools md-padding " style="color:white;">
-        <h2 class=" md-padding "> Додати модель</h2>
-        <span flex></span>
-    </div>
-</md-toolbar>
 <form name="createModelForm" class="md-padding " novalidate ng-submit="vm.createModel(createModelForm)">
     <md-content>
         <md-input-container class="md-block">
@@ -96,6 +90,7 @@
                         <input type="file" ngf-select="vm.saveNewModelPhoto(fullSizeFile,'fullSizePhotoUrl')"
                                ng-model="fullSizeFile" name="fullSizeFile"
                                accept="image/*" />
+                        </choose-file-button>
                 </md-card-content>
             </md-card>
         </div>

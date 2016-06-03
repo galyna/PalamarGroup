@@ -5,10 +5,9 @@ import {
 } from "../../../../app/admin/academy/controllers/delivery.controller";
 import {
     ISalonClientResource, SalonClientResourceName,
-    ISalonClient
 } from "../../../../app/resources/salon.client.resource";
 
-fdescribe(`${adminModule.name} module`, () => {
+describe(`${adminModule.name} module`, () => {
     describe(AcademyDeliveryController.componentName, () => {
         let $controller: ng.IControllerService,
             $q: ng.IQService,
@@ -71,7 +70,7 @@ fdescribe(`${adminModule.name} module`, () => {
             });
         });
         
-        fdescribe("editSalon method", () => {
+        describe("editSalon method", () => {
             it("should call editSalonModel.$save() if form is valid", () => {
                 let salonClientResource = new SalonClientResource({_id: "someid"});
                 let spy = spyOn(salonClientResource, '$save').and.returnValue($q.resolve());

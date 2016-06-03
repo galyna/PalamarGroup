@@ -1,9 +1,3 @@
-<md-toolbar class="md-hue-2">
-    <div class="md-toolbar-tools md-padding " style="color:white;">
-        <h2 class=" md-padding "> Створити модуль</h2>
-        <span flex></span>
-    </div>
-</md-toolbar>
 <form name="createCorseForm" class="md-padding " novalidate ng-submit="vm.createCourse(createCorseForm)">
     <md-content>
         <md-input-container class="md-block ">
@@ -17,7 +11,7 @@
             <!--TODO validation-->
         </md-input-container>
         <md-input-container class="md-block">
-            <label>Опис</label>
+            <label for="description">Опис</label>
             <input ng-model="vm.newCourseModel.description" id="description" name="description">
         </md-input-container>
         <md-input-container class="md-block ">
@@ -50,7 +44,7 @@
         <md-divider></md-divider>
         <!--author-->
         <md-input-container class="md-block">
-            <label>Їм`я автора</label>
+            <label for="author-name">Ім`я автора</label>
             <input ng-model="vm.newCourseModel.author.name" id="author-name" name="author-name">
         </md-input-container>
         <div>
@@ -82,7 +76,7 @@
                 <img ng-src="{{item.url}}"/>
                 <div layout="column">
                     <md-input-container class="md-block  ">
-                        <label for="name">Назва форми</label>
+                        <label for="photoName">Назва форми</label>
                         <input id="photoName" ng-model="item.name" name="photoName"/>
                     </md-input-container>
                     <md-input-container class="md-block  ">
@@ -115,15 +109,14 @@
         <div class="md-dense" flex>
             <md-subheader class="md-no-sticky">Форми історії попередніх модулів</md-subheader>
             <div class="md-1-line" ng-repeat="item in vm.newCourseModel.historyPhotos" ng-click="null">
-                <img class="md-xs" class="module-history-img" ng-src="{{item.url}}"/>
+                <img class="module-history-img md-xs" ng-src="{{item.url}}"/>
                 <div layout="column">
                     <md-input-container class="md-block  ">
-
-                        <label for="name">Назва форми</label>
+                        <label for="historyNme">Назва форми</label>
                         <input id="historyNme" ng-model="item.name" name="historyNme"/>
                     </md-input-container>
                     <md-input-container class="md-block  ">
-                        <label for="ord">Порядок відображення</label>
+                        <label for="orvd">Порядок відображення</label>
                         <input id="orvd" ng-model="item.order" type="number"/>
                     </md-input-container>
                     <md-button class="  md-raised"

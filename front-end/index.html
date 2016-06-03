@@ -20,55 +20,50 @@
 
     <link rel="shortcut icon" href="favicon.ico">
 
-
-    <style type="text/css">
-
-    </style>
 </head>
 
-<body ng-cloak>
+<body ng-cloak layout="column">
+<header layout="column" layout-align="center center" class="md-whiteframe-z4">
+    <a href="/">
+        <div>
+            P&nbsp;A&nbsp;L&nbsp;A&nbsp;M&nbsp;A&nbsp;R &nbsp;&nbsp;
+            G&nbsp;R&nbsp;O&nbsp;U&nbsp;P
+        </div>
+        <div class="subheader">
+            beauty parlour & academy
+        </div>
+    </a>
+    <md-progress-linear class="header-loading" ng-show="$root.loading"></md-progress-linear>
 
-<div layout="column">
-
-    <header layout="column" layout-align="center center" class="md-whiteframe-z4">
-        <a href="/">
-            <div>
-               P&nbsp;A&nbsp;L&nbsp;A&nbsp;M&nbsp;A&nbsp;R &nbsp;&nbsp;
-                G&nbsp;R&nbsp;O&nbsp;U&nbsp;P
-            </div>
-            <div class="subheader">
-                beauty parlour & academy
-            </div>
-        </a>
-        <md-progress-linear class="header-loading" ng-show="$root.loading"></md-progress-linear>
-
-    </header>
-
-    <main layout="column">
-        <div flex="grow" ng-view></div>
-        <footer flex="none" class="md-whiteframe-z5 md-padding" layout="column" layout-gt-md="row"
-                layout-align="center center">
-            <span>Слідкуйте за нами в &nbsp;&nbsp;</span>
-            <div>
-                <a href="https://www.facebook.com/hashtag/palamar_group" target="_blank">
-                    <md-icon class="md-social-image" md-svg-src="../content/images/face.svg"></md-icon>
-                </a>
-                <a href="https://www.instagram.com/palamar_group/" target="_blank">
-                    <md-icon class="md-social-image" md-svg-src="../content/images/insta.svg"></md-icon>
-                </a>
-                <a href="https://www.twitter.com/palamar_group/" target="_blank">
-                    <md-icon class="md-social-image" md-svg-src="../content/images/twi.svg"></md-icon>
-                </a>
-                <a href="https://www.google.com/" target="_blank">
-                    <md-icon class="md-social-image" md-svg-src="../content/images/goo.svg"></md-icon>
-                </a>
-            </div>
-            <div layout="column" layout-gt-xs="row" class="md-padding"><span>вул.Щирецька 36&nbsp;</span> <span>&nbsp; 067 264 62 16 &nbsp;</span><span>&nbsp; 097 246 01 74</span>
-            </div>
-
-        </footer>
-    </main>
-
+</header>
+<!--TODO: extract admin out of here!-->
+<div style="margin-top: 100px;" flex="grow" layout="row" ng-if="$root.isAdminZone();">
+    <div ng-include="'app/admin/academy/views/left.menu.html'"></div>
+    <md-content flex="grow" ng-view></md-content>
 </div>
+
+<ng-view style="margin-top: 100px;" flex="grow" ng-if="!$root.isAdminZone();"></ng-view>
+
+<footer ng-if="!$root.isAdminZone()" flex="none" class="md-whiteframe-z5 md-padding" layout="column" layout-gt-md="row"
+        layout-align="center center">
+    <span>Слідкуйте за нами в &nbsp;&nbsp;</span>
+    <div>
+        <a href="https://www.facebook.com/hashtag/palamar_group" target="_blank">
+            <md-icon class="md-social-image" md-svg-src="../content/images/face.svg"></md-icon>
+        </a>
+        <a href="https://www.instagram.com/palamar_group/" target="_blank">
+            <md-icon class="md-social-image" md-svg-src="../content/images/insta.svg"></md-icon>
+        </a>
+        <a href="https://www.twitter.com/palamar_group/" target="_blank">
+            <md-icon class="md-social-image" md-svg-src="../content/images/twi.svg"></md-icon>
+        </a>
+        <a href="https://www.google.com/" target="_blank">
+            <md-icon class="md-social-image" md-svg-src="../content/images/goo.svg"></md-icon>
+        </a>
+    </div>
+    <div layout="column" layout-gt-xs="row" class="md-padding"><span>вул.Щирецька 36&nbsp;</span> <span>&nbsp; 067 264 62 16 &nbsp;</span><span>&nbsp; 097 246 01 74</span>
+    </div>
+
+</footer>
 </body>
 </html>

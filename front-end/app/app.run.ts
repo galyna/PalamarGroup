@@ -1,5 +1,11 @@
-appRun.$inject = ['$http', '$templateCache'];
-export function appRun($http: ng.IHttpService, $templateCache: ng.ITemplateCacheService) {
+import {IRootScope} from "../typings";
+appRun.$inject = ['$http', '$templateCache', '$rootScope', '$location'];
+export function appRun($http: ng.IHttpService, $templateCache: ng.ITemplateCacheService,
+$rootScope: IRootScope, $location: ng.ILocationService) {
+
+    $rootScope.isAdminZone = () => {
+        return $location.path().indexOf('/admin') === 0;
+    };
 
     var urls = [
         '/content/images/icons/svg-sprite-navigation.svg',

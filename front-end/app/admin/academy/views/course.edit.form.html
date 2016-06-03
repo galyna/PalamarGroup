@@ -1,9 +1,3 @@
-<md-toolbar class="md-hue-2">
-    <div class="md-toolbar-tools md-padding " >
-        <h2 class=" md-padding " style="color:white;"> Редагувати модуль</h2>
-        <span flex></span>
-    </div>
-</md-toolbar>
 <form flex name="editCorseForm" class="md-padding " novalidate ng-submit="vm.editCourse(editCorseForm)">
     <md-content>
         <md-input-container class="md-block ">
@@ -17,7 +11,7 @@
             <!--TODO add validation-->
         </md-input-container>
         <md-input-container class="md-block">
-            <label>Опис</label>
+            <label for="description">Опис</label>
             <input ng-model="vm.editCourseModel.description" id="description" name="description">
         </md-input-container>
         <md-input-container class="md-block ">
@@ -49,7 +43,7 @@
         <md-divider></md-divider>
         <!--author-->
         <md-input-container class="md-block ">
-            <label for="price">Ім`я автора</label>
+            <label for="nameauthor">Ім`я автора</label>
             <input id="nameauthor" ng-model="vm.editCourseModel.author.name" name="nameauthor"/>
         </md-input-container>
         <div>
@@ -77,7 +71,7 @@
                 <img ng-src="{{item.url}}"/>
                 <div layout="column">
                     <md-input-container class="md-block  ">
-                        <label for="name">Назва форми</label>
+                        <label for="photoName">Назва форми</label>
                         <input id="photoName" ng-model="item.name" name="photoName"/>
                     </md-input-container>
                     <md-input-container class="md-block  ">
@@ -114,12 +108,12 @@
                 <img ng-src="{{item.url}}" class="module-history-img"/>
                 <div  layout="column">
                     <md-input-container class="md-block  ">
-                        <label for="name">Назва форми</label>
+                        <label for="historyNme">Назва форми</label>
                         <input id="historyNme" ng-model="item.name" name="historyNme"/>
                     </md-input-container>
                     <md-input-container class="md-block  ">
                         <label for="ord">Порядок відображення</label>
-                        <input ng-model="item.order" type="number"/>
+                        <input id="ord" ng-model="item.order" type="number"/>
                     </md-input-container>
                     <md-button class="  md-raised"
                                ng-click="vm.deleteFromList(vm.editCourseModel.historyPhotos,item)">

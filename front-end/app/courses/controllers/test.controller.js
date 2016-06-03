@@ -10,31 +10,9 @@ System.register(["../../resources/course.resource"], function(exports_1, context
             }],
         execute: function() {
             TestController = (function () {
+                //noinspection JSUnusedLocalSymbols
                 function TestController($scope, CourseResource, pgCalendarData, $sce, $rootScope, $compile) {
-                    var _this = this;
                     this.pgCalendarData = pgCalendarData;
-                    CourseResource.query().$promise.then(function (courses) {
-                        courses.forEach(function (course) {
-                            var $scope = $rootScope.$new(true);
-                            $scope.course = course;
-                            course.courseModulesDates.forEach(function (dateString) {
-                                $scope.date = new Date(dateString);
-                                var template = "<div><span>{{date}}</span><md-tooltip>{{course.name}}</md-tooltip></div>";
-                                var el = $compile(template)($scope);
-                                _this.pgCalendarData.setDayContent($scope.date, $sce.trustAsHtml(el));
-                            });
-                        });
-                    }).catch(function (err) {
-                        console.log(err);
-                    });
-                    // this.items = [
-                    //     {url: '/api/photo/test_width.jpeg'},
-                    //     {url: '/api/photo/test_height.jpeg'},
-                    //     {url: '/api/photo/test_small.jpeg'},
-                    //     {url: '/api/photo/test_big.jpeg'}
-                    // ];
-                    //
-                    // mObserver.observe(vm.items);
                 }
                 TestController.$inject = ['$scope', course_resource_1.CourseResourceName, 'pgCalendarData', '$sce', '$rootScope', '$compile'];
                 TestController.componentName = 'TestController';

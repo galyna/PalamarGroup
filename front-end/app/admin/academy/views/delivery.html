@@ -1,15 +1,6 @@
-
-<div layout="row" >
-    <div  ng-include="'app/admin//academy/views/left.menu.html'"></div>
-    <div flex  >
-        <md-button  ng-if="!vm.showSalonCreateForm && !vm.showSalonEditForm" class="md-raised md-margin" ng-click="vm.showCreateForm()">
-            Додати салон
-        </md-button>
-        <div ng-if="vm.showSalonCreateForm && !vm.showSalonEditForm" ng-include="'app/admin/academy/views/salon.client.create.form.html'" ></div>
-        <div flex ng-if="vm.showSalonEditForm && !vm.showSalonCreateForm" ng-include="'app/admin/academy/views/salon.client.edit.form.html'" ></div>
-
-
-        <div  ng-if="!vm.showSalonCreateForm && !vm.showSalonEditForm"  ng-repeat="item in vm.salons" ng-click="null" layout="row" class=" md-margin" >
+<md-tabs md-stretch-tabs="always" md-dynamic-height >
+    <md-tab label="Контакти">
+        <div ng-repeat="item in vm.salons" ng-click="null" layout="row" class=" md-margin">
 
             <div layout="column">
                 <span ng-if="item.name"><b>ім`я:</b> {{item.name}}</span>
@@ -18,10 +9,21 @@
 
                 <div layout="row" layout-align="center end">
                     <md-button class="  md-raised" ng-click="vm.deleteSalon(item)">Видалити</md-button>
-                    <md-button class=" md-primary md-raised" ng-click="vm.showEditForm(item)">Редагувати</md-button>
+                    <md-button class=" md-primary md-raised" ng-click="vm.showEditForm(item)">Редагувати
+                    </md-button>
                 </div>
             </div>
 
         </div>
-    </div>
-</div>
+        <div flex ng-if="vm.showSalonEditForm"
+             ng-include="'app/admin/academy/views/salon.client.edit.form.html'"></div>
+    </md-tab>
+    <md-tab label="Додати контакт">
+        <div ng-include="'app/admin/academy/views/salon.client.create.form.html'"></div>
+    </md-tab>
+    <md-tab label="Email розсилка">
+        <md-card>
+            <md-card-content ng-include="'app/admin/academy/views/email.adv.form.html'"></md-card-content>
+        </md-card>
+    </md-tab>
+</md-tabs>

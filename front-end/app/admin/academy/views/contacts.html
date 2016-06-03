@@ -1,56 +1,41 @@
+<form flex name="editContactForm" class="md-padding " novalidate ng-submit="vm.editContact(editContactForm)">
+    <!--<md-content>-->
+    <!--<md-input-container class="md-block ">-->
+    <!--<label for="name">Ім`я контактної особи</label>-->
+    <!--<input id="name" ng-model="vm.editModel.name" name="name"/>-->
+    <!--&lt;!&ndash;TODO add validation&ndash;&gt;-->
+    <!--</md-input-container>-->
 
-<div layout="row">
-    <div ng-include="'app/admin//academy/views/left.menu.html'"></div>
-    <div layout="column">
+    <!--<md-input-container class="md-block">-->
+    <!--<md-icon md-svg-icon="communication:ic_email_24px"></md-icon>-->
+    <!--<label for="email">email</label>-->
+    <!--<input id="email" ng-model="vm.editModel.email" type="text" name="email">-->
+    <!--</md-input-container>-->
+    <!--<md-input-container class="md-block">-->
+    <!--<md-icon md-svg-icon="communication:ic_phonelink_ring_24px"></md-icon>-->
+    <!--<label for="phone">Телефон</label>-->
+    <!--<input id="phone" ng-model="vm.editModel.phone" type="text" name="phone">-->
+    <!--</md-input-container>-->
+    <!--<div>-->
+    <!--<label >Фото контакстоної особи </label>-->
+    <!--<img ng-src="{{vm.editModel.author.photoUrl}}"/>-->
+    <!--<br/>-->
+    <!--<md-button ng-if="!vm.showAuthorPhotoUpload" class="md-raised" ng-click="vm.showAuthorPhotoUpload=true">-->
+    <!--Змінити фото-->
+    <!--</md-button>-->
+    <!--<div ng-if="vm.showAuthorPhotoUpload">-->
+    <!--<input type="file" ngf-select ng-model="authorPhotoFile" name="authorPhotoFile"-->
+    <!--accept="image/*" required/>-->
+    <!--&lt;!&ndash;TODO: add validation&ndash;&gt;-->
+    <!--<md-button class="md-raised" ng-disabled="!authorPhotoFile"-->
+    <!--ng-click="vm.uploadAuthorPhoto(authorPhotoFile,vm.editCourseModel)">Завантажити-->
+    <!--</md-button>-->
+    <!--</div>-->
+    <!--</div>-->
 
-        <md-toolbar class="md-hue-2">
-            <div class="md-toolbar-tools md-padding " >
-                <h2 class=" md-padding " style="color:white;"> Редагувати сонтаксні дані академії</h2>
-                <span flex></span>
-            </div>
-        </md-toolbar>
-        <form flex name="editContactForm" class="md-padding " novalidate ng-submit="vm.editContact(editContactForm)">
-            <!--<md-content>-->
-            <!--<md-input-container class="md-block ">-->
-            <!--<label for="name">Ім`я контактної особи</label>-->
-            <!--<input id="name" ng-model="vm.editModel.name" name="name"/>-->
-            <!--&lt;!&ndash;TODO add validation&ndash;&gt;-->
-            <!--</md-input-container>-->
-
-            <!--<md-input-container class="md-block">-->
-            <!--<md-icon md-svg-icon="communication:ic_email_24px"></md-icon>-->
-            <!--<label for="email">email</label>-->
-            <!--<input id="email" ng-model="vm.editModel.email" type="text" name="email">-->
-            <!--</md-input-container>-->
-            <!--<md-input-container class="md-block">-->
-            <!--<md-icon md-svg-icon="communication:ic_phonelink_ring_24px"></md-icon>-->
-            <!--<label for="phone">Телефон</label>-->
-            <!--<input id="phone" ng-model="vm.editModel.phone" type="text" name="phone">-->
-            <!--</md-input-container>-->
-            <!--<div>-->
-            <!--<label >Фото контакстоної особи </label>-->
-            <!--<img ng-src="{{vm.editModel.author.photoUrl}}"/>-->
-            <!--<br/>-->
-            <!--<md-button ng-if="!vm.showAuthorPhotoUpload" class="md-raised" ng-click="vm.showAuthorPhotoUpload=true">-->
-            <!--Змінити фото-->
-            <!--</md-button>-->
-            <!--<div ng-if="vm.showAuthorPhotoUpload">-->
-            <!--<input type="file" ngf-select ng-model="authorPhotoFile" name="authorPhotoFile"-->
-            <!--accept="image/*" required/>-->
-            <!--&lt;!&ndash;TODO: add validation&ndash;&gt;-->
-            <!--<md-button class="md-raised" ng-disabled="!authorPhotoFile"-->
-            <!--ng-click="vm.uploadAuthorPhoto(authorPhotoFile,vm.editCourseModel)">Завантажити-->
-            <!--</md-button>-->
-            <!--</div>-->
-            <!--</div>-->
-
-            <!--</md-content>-->
-            <div layout="row" md-whiteframe="4">
-                <md-button class="md-raised md-primary" ng-click="vm.showCourseEditForm = false;">Скасувати</md-button>
-                <md-button type="submit" class="md-raised md-accent">Зберегти</md-button>
-            </div>
-        </form>
-
-
+    <!--</md-content>-->
+    <div layout="row" md-whiteframe="4">
+        <md-button class="md-raised md-primary" ng-click="vm.showCourseEditForm = false;">Скасувати</md-button>
+        <md-button type="submit" class="md-raised md-accent">Зберегти</md-button>
     </div>
-</div>
+</form>

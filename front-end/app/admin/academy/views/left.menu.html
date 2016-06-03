@@ -1,30 +1,26 @@
-<div layout="column" ng-controller="LeftMenuController as vm" class=" md-margin">
-    <md-sidenav md-component-id="left" class="md-sidenav-left" md-is-locked-open="true">
-        <md-list>
-            <md-subheader class="md-no-sticky">Академія</md-subheader>
-            <md-list-item class="md-1-line " ng-click="vm.navToCources()">
-                Курси
-            </md-list-item>
-            <md-list-item class="md-1-line " ng-click="vm.navToOrders()">
-                Записи на курси
-            </md-list-item>
-            <md-list-item class="md-1-line " ng-click="vm.navToModels()">
-                Моделі
-            </md-list-item>
-            <md-list-item class="md-1-line " ng-click="vm.navToDelivery()">
-                Розсилка
-            </md-list-item>
-            <md-list-item class="md-1-line " ng-click="vm.navToContacts()">
-                Контакти
-            </md-list-item>
-            <md-list-item class="md-1-line " ng-click="vm.navToComments()">
-                Відгуки
-            </md-list-item>
-        </md-list>
-    </md-sidenav>
-
-
-</div>
+<md-sidenav md-component-id="left" class="md-sidenav-left" md-is-locked-open="true">
+    <md-list ng-controller="LeftMenuController as vm">
+        <md-subheader class="md-no-sticky">Академія</md-subheader>
+        <md-list-item class="md-1-line " ng-click="vm.navToCources()">
+            Курси
+        </md-list-item>
+        <md-list-item class="md-1-line " ng-click="vm.navToOrders()">
+            Записи на курси
+        </md-list-item>
+        <md-list-item class="md-1-line " ng-click="vm.navToModels()">
+            Моделі
+        </md-list-item>
+        <md-list-item class="md-1-line " ng-click="vm.navToDelivery()">
+            Розсилка
+        </md-list-item>
+        <md-list-item class="md-1-line " ng-click="vm.navToContacts()">
+            Контакти
+        </md-list-item>
+        <md-list-item class="md-1-line " ng-click="vm.navToComments()">
+            Відгуки
+        </md-list-item>
+    </md-list>
+</md-sidenav>
 
 
 
