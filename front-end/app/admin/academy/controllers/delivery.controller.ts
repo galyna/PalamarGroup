@@ -1,11 +1,19 @@
 import {ISalonClient, ISalonClientResource, SalonClientResourceName} from "../../../resources/salon.client.resource";
+import {ICourseResource, CourseResourceName, ICourse} from "../../../resources/course.resource";
+
+enum Tabs {
+    Contacts,
+    CreateNewContact,
+    EmailAdv
+}
 
 export interface IEditSalonModel extends ISalonClient {
     oldIndex?:number;
 }
+
 export class AcademyDeliveryController {
 
-    static $inject = [SalonClientResourceName, '$log'];
+    static $inject = ['$log', SalonClientResourceName, CourseResourceName];
     static componentName = 'AcademyDeliveryController';
 
     salons:ISalonClient[];
@@ -13,20 +21,16 @@ export class AcademyDeliveryController {
     newSalonModel:ISalonClient;
     showSalonEditForm:boolean;
     showSalonCreateForm:boolean;
-    showEmailAdvForm: boolean;
+    selectedTab: Tabs;
+    courses: ICourse[];
     
-    constructor(private SalonClientResource: ISalonClientResource, private $log: ng.ILogService) {
+    constructor(private $log: ng.ILogService, private SalonClientResource: ISalonClientResource, 
+    private CourseResource: ICourseResource) {
+        this.selectedTab = Tabs.Contacts; //contacts tab
         this.showSalonEditForm = false;
-        this.showSalonCreateForm = false;
-        this.showEmailAdvForm = false;
-        
-        this.salons = SalonClientResource.query();
-    }
-
-    showCreateForm():void {
-        this.showSalonEditForm = false;
-        this.showSalonCreateForm = true;
         this.newSalonModel = new this.SalonClientResource();
+        this.salons = SalonClientResource.query();
+        this.courses = CourseResource.query();
     }
 
     createSalon(form:ng.IFormController, newSalonModel: ISalonClient) {
@@ -36,6 +40,8 @@ export class AcademyDeliveryController {
                 .then((salon)=> {
                     this.$log.debug("success createCourse...");
                     this.salons.push(salon);
+                    this.newSalonModel = new this.SalonClientResource();
+                    this.selectedTab = Tabs.Contacts;
                 })
                 .catch((err)=> {
                     this.$log.debug("fail createCourse..." + err);
@@ -69,7 +75,6 @@ export class AcademyDeliveryController {
         this.showSalonCreateForm = false;
     }
 
-
     deleteSalon(salonClient:ISalonClient):void {
         salonClient.$delete()
             .then(()=> {
@@ -81,9 +86,4 @@ export class AcademyDeliveryController {
     deleteFromList(list:any[], item:any) {
         list.splice(list.indexOf(item), 1);
     }
-
-    toggleEmailAdvForm(){
-        this.showEmailAdvForm = !this.showEmailAdvForm;
-    }
-
 }

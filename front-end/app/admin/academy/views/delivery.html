@@ -1,7 +1,6 @@
-<md-tabs md-stretch-tabs="always" md-dynamic-height >
+<md-tabs md-selected="vm.selectedTab" md-stretch-tabs="always" md-dynamic-height md-border-bottom>
     <md-tab label="Контакти">
-        <div ng-repeat="item in vm.salons" ng-click="null" layout="row" class=" md-margin">
-
+        <div ng-if="!vm.showSalonEditForm" ng-repeat="item in vm.salons" ng-click="null" layout="row" class=" md-margin">
             <div layout="column">
                 <span ng-if="item.name"><b>ім`я:</b> {{item.name}}</span>
                 <span ng-if="item.phone"><b>телефон: </b>{{item.phone}}</span>
@@ -22,8 +21,6 @@
         <div ng-include="'app/admin/academy/views/salon.client.create.form.html'"></div>
     </md-tab>
     <md-tab label="Email розсилка">
-        <md-card>
-            <md-card-content ng-include="'app/admin/academy/views/email.adv.form.html'"></md-card-content>
-        </md-card>
+        <pg-email-adv courses="vm.courses"></pg-email-adv>
     </md-tab>
 </md-tabs>

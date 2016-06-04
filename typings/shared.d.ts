@@ -64,28 +64,28 @@ declare module pg {
 
         export interface IModel {
             _id?: any;
-            name: String,
-            phone: String,
-            email: String,
-            address: String,
-            fasPhotoUrl:String,
-            profilePhotoUrl:String,
-            backPhotoUrl:String,
-            fullSizePhotoUrl:String,
+            name: string,
+            phone: string,
+            email: string,
+            address: string,
+            fasPhotoUrl:string,
+            profilePhotoUrl:string,
+            backPhotoUrl:string,
+            fullSizePhotoUrl:string,
         }
 
         export interface ISalonClient {
             _id?: any;
-            name: String,
-            phone: String,
-            email: String,
-            address: String,
+            name: string,
+            phone: string,
+            email: string,
+            address: string,
         }
 
         export interface IComment {
             _id?: any;
-            name: String,
-            text: String,
+            name: string,
+            text: string,
             isVisible: boolean,
             answered: boolean
         }

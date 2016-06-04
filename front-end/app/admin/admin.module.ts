@@ -24,6 +24,7 @@ import {AcademyContactsController} from './academy/controllers/contacts.controll
 import {AdminController} from './controllers/admin.controller';
 import {LeftMenuController} from './academy/controllers/left.menu.controller';
 import {DeliveryService} from "./academy/services/delivery.service";
+import {EmailAdvComponentName, EmailAdvComponentOptions} from "./academy/components/email.adv.directive";
 
 
 let app = angular.module('admin', [
@@ -43,6 +44,7 @@ let app = angular.module('admin', [
     .controller(AcademyCommentController.componentName, AcademyCommentController)
     .controller(AcademyContactsController.componentName, AcademyContactsController)
     .controller(LeftMenuController.componentName, LeftMenuController)
-    .service(DeliveryService.componentName, DeliveryService);
+    .service(DeliveryService.componentName, DeliveryService)
+    .component(EmailAdvComponentName, EmailAdvComponentOptions);
 
 export let adminModule = app;

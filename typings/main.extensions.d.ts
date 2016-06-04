@@ -64,25 +64,27 @@ declare module "xoauth2" {
 
 declare module "mongoose" {
     export interface Model<T extends Document> extends NodeJS.EventEmitter {
-        findOne(cond?: Object, callback?: (err: any, res: T) => void): Promise<T>;
-        findOne(cond: Object, fields: Object, callback?: (err: any, res: T) => void): Promise<T>;
-        findOne(cond: Object, fields: Object, options: Object, callback?: (err: any, res: T) => void): Promise<T>;
+        findOne(cond?: Object): Promise<T>;
+        findOne(cond: Object, fields: Object): Promise<T>;
+        findOne(cond: Object, fields: Object, options: Object): Promise<T>;
 
-        findByIdAndRemove(id: string, callback?: (err: any, res: T) => void): Promise<T>;
-        findByIdAndRemove(id: string, options: Object, callback?: (err: any, res: T) => void): Promise<T>;
+        findByIdAndRemove(id: string): Promise<T>;
+        findByIdAndRemove(id: string, options: Object): Promise<T>;
 
-        findOneAndUpdate(cond: Object, update: Object, callback?: (err: any, res: T) => void): Promise<T>;
-        findOneAndUpdate(cond: Object, update: Object, options: FindAndUpdateOption, callback?: (err: any, res: T) => void): Promise<T>;
+        findOneAndUpdate(cond: Object, update: Object): Promise<T>;
+        findOneAndUpdate(cond: Object, update: Object, options: FindAndUpdateOption): Promise<T>;
 
-        findById(id: string, callback?: (err: any, res: T) => void): Promise<T>;
-        findById(id: string, fields: Object, callback?: (err: any, res: T) => void): Promise<T>;
-        findById(id: string, fields: Object, options: Object, callback?: (err: any, res: T) => void): Promise<T>;
+        findById(id: string): Promise<T>;
+        findById(id: string, fields: Object): Promise<T>;
+        findById(id: string, fields: Object, options: Object): Promise<T>;
 
-        find(cond: Object, callback?: (err: any, res: T[]) => void): Promise<T[]>;
-        find(cond: Object, fields: Object, callback?: (err: any, res: T[]) => void): Promise<T[]>;
-        find(cond: Object, fields: Object, options: Object, callback?: (err: any, res: T[]) => void): Promise<T[]>;
+        find(cond: Object): Promise<T[]>;
+        find(cond: Object, fields: Object): Promise<T[]>;
+        find(cond: Object, fields: Object, options: Object): Promise<T[]>;
 
-        remove(cond: Object, callback?: (err: any) => void): Promise<{}>;
+        remove(cond: Object): Promise<{}>;
+
+        count(conditions: Object): Promise<number>;
 
     }
 

@@ -1,6 +1,6 @@
 import {Document, Schema, model} from "mongoose";
 
-interface IContactModel extends pg.models.IContact, Document{
+export interface IContactModel extends pg.models.IContact, Document{
     _id: any;
 }
 

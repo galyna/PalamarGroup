@@ -10,6 +10,7 @@ import {ModelResourceName, ModelResource} from "./model.resource";
 import {ContactResourceName, ContactResource} from "./contact.resource";
 import {CommentResourceName, CommentResource} from "./comment.resource";
 import {SalonClientResourceName, SalonClientResource} from "./salon.client.resource";
+import {EmailService} from "./email.service";
 
 export let resourcesModule = angular.module('resources', ['ngResource', coreModule.name])
     .factory(CourseResourceName, CourseResource)
@@ -17,4 +18,5 @@ export let resourcesModule = angular.module('resources', ['ngResource', coreModu
     .factory(ContactResourceName, ContactResource)
     .factory(CommentResourceName, CommentResource)
     .factory(SalonClientResourceName, SalonClientResource)
-    .factory(OrderResourceName, OrderResource);
+    .factory(OrderResourceName, OrderResource)
+    .service(EmailService.componentName, EmailService);

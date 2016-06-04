@@ -1,19 +1,16 @@
-import * as xoauth2 from 'xoauth2';
 import * as nodemailer from 'nodemailer';
+import {XOAuth2GeneratorOptions, Generator, createXOAuth2Generator} from "xoauth2";
+import {SendMailOptions} from "nodemailer";
 
 export class EmailService {
     
     private transporter: nodemailer.Transporter;
-    private generator: xoauth2.Generator;
+    private generator: Generator;
 
-    constructor(user: string, clientId: string, clientSecret: string, refreshToken: string, service = 'gmail'){
-
-        this.generator = xoauth2.createXOAuth2Generator({
-            user: user,
-            clientId: clientId,
-            clientSecret: clientSecret,
-            refreshToken: refreshToken
-        });
+    constructor(generatorOptions: XOAuth2GeneratorOptions, service?){
+        service = service || 'gmail';
+        
+        this.generator = createXOAuth2Generator(generatorOptions);
 
         this.transporter = nodemailer.createTransport(({
             service: service,
@@ -23,20 +20,17 @@ export class EmailService {
         }));
     }
     
-    send(from: string, to: string, subject: string, text?: string, html?: string){
-        // send mail
-        this.transporter.sendMail({
-            from: from,
-            to: to,
-            subject: subject,
-            text: text,
-            html: html
-        }, (error) => {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Message sent');
-            }
+    send(sendmailOptions: SendMailOptions){
+        return new Promise((resolve, reject) => {
+            this.transporter.sendMail(sendmailOptions, (error) => {
+                if (error) {
+                    console.log(error);
+                    return reject(error);
+                } else {
+                    console.log(`Message to ${sendmailOptions.to} sent`);
+                    return resolve();
+                }
+            });
         });
     }
 }

@@ -13,6 +13,7 @@ import {Order} from '../models/order';
 import {Model} from '../models/model';
 import {SalonClient} from '../models/salon.client';
 import {Comment} from '../models/comment';
+import {emailEndpoint} from "./email.endpoint";
 
 let api = express.Router();
 
@@ -61,6 +62,7 @@ restify.serve(api, SalonClient, Object.assign({}, readOnlyOptions));
 restify.serve(api, Comment, Object.assign({}, readOnlyOptions));
 api.use('/user', userEndpoint);
 api.use('/photo', photoEndpoint);
+api.use('/email', emailEndpoint);
 
 api.post('/authenticate', async (req, res) => {
     let email = req.body.email;
