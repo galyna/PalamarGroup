@@ -52,7 +52,7 @@ export class CoursesController {
         angular.forEach(course.courseModulesDates, (courseDate) => {
             var cDate = new Date(courseDate);
             let content =
-                `<div>
+                `<div class="course-marker">
                         <img src="${course.hearFormsPhotos[0].url}"/>
                         <span>${course.name}</span>
                     </div>`;

@@ -56,12 +56,22 @@
                     Змінити фото автора
                 </md-button>
                 <div ng-if="vm.showAuthorPhotoUpload">
-                    <input type="file" ngf-select ng-model="authorPhotoFile" name="authorPhotoFile"
-                           accept="image/*" required/>
-
-                    <!--TODO: add validation-->
-                    <md-button class="md-raised" ng-disabled="!authorPhotoFile"
-                               ng-click="vm.uploadAuthorPhoto(authorPhotoFile,vm.newCourseModel)">Завантажити
+                    <md-button ngf-select ng-model="authorPhotoFile" accept="image/*" class="md-raised">
+                        Вибрати файл
+                    </md-button>
+                    <div ngf-drop ng-model="authorPhotoFile" ngf-pattern="image/*"
+                         class="cropArea">
+                        <img-crop area-type="rectangle" result-image-size="{w:300,h:300}" aspect-ratio="1" init-max-area="true"
+                                  image="authorPhotoFile  | ngfDataUrl"
+                                  result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+                        </img-crop>
+                    </div>
+                    <div>
+                        <img ng-src="{{croppedDataUrl}}"/>
+                    </div>
+                    <md-button class="md-primary"
+                               ng-click="vm.uploadAuthorPhoto(croppedDataUrl, authorPhotoFile.name,vm.newCourseModel)">
+                        Завантажити
                     </md-button>
                 </div>
             </div>
@@ -95,10 +105,21 @@
                 Додати форму
             </md-button>
             <div ng-if="vm.showFormPhotoUpload">
-                <input type="file" ngf-select ng-model="hearFormsFile" name="hearFormsFile"
-                       accept="image/*" required/>
-                <md-button class="md-raised" ng-disabled="!createCorseForm.$valid"
-                           ng-click="vm.uploadCollPhoto(hearFormsFile,vm.newCourseModel.hearFormsPhotos)">
+                <md-button ngf-select ng-model="hearFormsFile" accept="image/*" class="md-raised">
+                    Вибрати файл
+                </md-button>
+                <div ngf-drop ng-model="hearFormsFile" ngf-pattern="image/*"
+                     class="cropArea">
+                    <img-crop area-type="rectangle" result-image-size="{w:403,h:604}" aspect-ratio="0.67"  init-max-area="true"
+                              image="hearFormsFile  | ngfDataUrl"
+                              result-image="croppedHearFormsFile" ng-init="croppedHearFormsFile=''">
+                    </img-crop>
+                </div>
+                <div>
+                    <img ng-src="{{croppedHearFormsFile}}"/>
+                </div>
+                <md-button class="md-primary"
+                           ng-click="vm.uploadCollPhoto(croppedHearFormsFile, hearFormsFile.name,vm.newCourseModel.hearFormsPhotos)">
                     Завантажити
                 </md-button>
             </div>
@@ -133,11 +154,21 @@
                 Додати фото історії
             </md-button>
             <div ng-if="vm.showHistoryPhotoUpload">
-                <input type="file" ngf-select ng-model="historyPhotoFile" name="historyPhotoFile"
-                       accept="image/*" required/>
-                <!--TODO: add validation-->
-                <md-button class="md-raised" ng-disabled="!historyPhotoFile"
-                           ng-click="vm.uploadCollPhoto(historyPhotoFile,vm.newCourseModel.historyPhotos)">
+                <md-button ngf-select ng-model="historyPhotoFile" accept="image/*" class="md-raised">
+                    Вибрати файл
+                </md-button>
+                <div ngf-drop ng-model="historyPhotoFile" ngf-pattern="image/*"
+                     class="cropArea">
+                    <img-crop area-type="rectangle" result-image-size="{w:960,h:720}" aspect-ratio="1.33" init-max-area="true"
+                              image="historyPhotoFile  | ngfDataUrl"
+                              result-image="croppedHistoryPhotoFile" ng-init="croppedHistoryPhotoFile=''">
+                    </img-crop>
+                </div>
+                <div>
+                    <img ng-src="{{croppedHistoryPhotoFile}}"/>
+                </div>
+                <md-button class="md-primary"
+                           ng-click="vm.uploadCollPhoto(croppedHistoryPhotoFile, historyPhotoFile.name,vm.newCourseModel.historyPhotos)">
                     Завантажити
                 </md-button>
             </div>

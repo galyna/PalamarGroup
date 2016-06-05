@@ -31,7 +31,7 @@ let app = angular.module('admin', [
     'ngRoute',
     'ngMaterial',
     'ngFileUpload',
-
+    'ngImgCrop',
     coreModule.name,
     resourcesModule.name
 ])
