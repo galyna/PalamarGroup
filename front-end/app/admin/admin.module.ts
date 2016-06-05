@@ -24,7 +24,11 @@ import {AcademyContactsController} from './academy/controllers/contacts.controll
 import {AdminController} from './controllers/admin.controller';
 import {LeftMenuController} from './academy/controllers/left.menu.controller';
 import {DeliveryService} from "./academy/services/delivery.service";
-import {EmailAdvComponentName, EmailAdvComponentOptions} from "./academy/components/email.adv.directive";
+import {EmailAdvComponentName, EmailAdvComponentOptions} from "./academy/components/email.adv.component";
+import {
+    SalonClientFormComponentName,
+    SalonClientFormComponentOptions
+} from "./academy/components/salon.client.form.component";
 
 
 let app = angular.module('admin', [
@@ -45,6 +49,7 @@ let app = angular.module('admin', [
     .controller(AcademyContactsController.componentName, AcademyContactsController)
     .controller(LeftMenuController.componentName, LeftMenuController)
     .service(DeliveryService.componentName, DeliveryService)
-    .component(EmailAdvComponentName, EmailAdvComponentOptions);
+    .component(EmailAdvComponentName, EmailAdvComponentOptions)
+    .component(SalonClientFormComponentName, SalonClientFormComponentOptions);
 
 export let adminModule = app;
