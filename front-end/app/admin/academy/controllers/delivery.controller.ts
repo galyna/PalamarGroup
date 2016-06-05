@@ -2,88 +2,83 @@ import {ISalonClient, ISalonClientResource, SalonClientResourceName} from "../..
 import {ICourseResource, CourseResourceName, ICourse} from "../../../resources/course.resource";
 
 enum Tabs {
-    Contacts,
+    List,
     CreateNewContact,
     EmailAdv
 }
 
-export interface IEditSalonModel extends ISalonClient {
-    oldIndex?:number;
-}
-
 export class AcademyDeliveryController {
 
-    static $inject = ['$log', SalonClientResourceName, CourseResourceName];
+    static $inject = ['$q', '$log', SalonClientResourceName, CourseResourceName];
     static componentName = 'AcademyDeliveryController';
-
+    
     salons:ISalonClient[];
-    editSalonModel:IEditSalonModel;
-    newSalonModel:ISalonClient;
+    editSalonModel:ISalonClient;
     showSalonEditForm:boolean;
-    showSalonCreateForm:boolean;
     selectedTab: Tabs;
     courses: ICourse[];
+    salonGroups: string[];
     
-    constructor(private $log: ng.ILogService, private SalonClientResource: ISalonClientResource, 
+    constructor(private $q: ng.IQService, private $log: ng.ILogService, private SalonClientResource: ISalonClientResource,
     private CourseResource: ICourseResource) {
-        this.selectedTab = Tabs.Contacts; //contacts tab
+        this.selectedTab = Tabs.List; //contacts tab
         this.showSalonEditForm = false;
-        this.newSalonModel = new this.SalonClientResource();
-        this.salons = SalonClientResource.query();
         this.courses = CourseResource.query();
+        this.initSalons();
     }
 
-    createSalon(form:ng.IFormController, newSalonModel: ISalonClient) {
-        this.$log.debug("createCourse ...$valid: " + form.$valid);
-        if (form.$valid) {
+    initSalons(){
+        this.salons = this.SalonClientResource.query();
+        this.salonGroups = this.SalonClientResource.getGroups();
+        return this.$q.all([this.salons.$promise, this.salonGroups.$promise]);
+    }
+
+    showListTab(){
+        this.editSalonModel = undefined;
+        this.showSalonEditForm = false;
+        this.selectedTab = Tabs.List;
+    }
+    
+    createSalon(newSalonModel: ISalonClient) {
+        this.$log.debug("createSalon ...");
             newSalonModel.$save()
-                .then((salon)=> {
-                    this.$log.debug("success createCourse...");
-                    this.salons.push(salon);
-                    this.newSalonModel = new this.SalonClientResource();
-                    this.selectedTab = Tabs.Contacts;
+                .then(()=> {
+                    this.$log.debug("success createSalon...");
+                    return this.initSalons();
                 })
                 .catch((err)=> {
-                    this.$log.debug("fail createCourse..." + err);
+                    this.$log.debug("fail createSalon..." + err);
                 }).finally(()=> {
-                    this.showSalonCreateForm = false;
+                    this.showListTab();
                 });
-        }
     }
 
-    editSalon(form:ng.IFormController, editSalonModel: IEditSalonModel):void {
-        this.$log.debug("editSalonModel ...$valid" + form.$valid);
+    editSalon(editSalonModel: ISalonClient):void {
         this.$log.debug("editSalonModel ...vm.editSalonModel._id===" + editSalonModel._id);
-        if (form.$valid) {
             editSalonModel.$save()
                 .then(()=> {
-                    this.salons.splice(editSalonModel.oldIndex, 1, editSalonModel);
+                    return this.initSalons();
                 })
                 .catch((err)=> {
                     this.$log.debug("fail editCourse..." + err);
                 }).finally(()=> {
-                    this.showSalonEditForm = false;
+                    this.showListTab();
                 });
-        }
     }
 
-    showEditForm(model:IEditSalonModel) {
-        this.$log.debug("model for edit ..." + model._id + "" + model.name);
-        this.editSalonModel = angular.copy(model);
-        this.editSalonModel.oldIndex = this.salons.indexOf(model);
+    showEditForm(model:ISalonClient) {
+        this.editSalonModel = model;
         this.showSalonEditForm = true;
-        this.showSalonCreateForm = false;
     }
 
     deleteSalon(salonClient:ISalonClient):void {
         salonClient.$delete()
-            .then(()=> {
-                this.salons.splice(this.salons.indexOf(salonClient), 1);
-            });
+            .then(() => this.initSalons());
     }
 
     //noinspection JSMethodCanBeStatic
     deleteFromList(list:any[], item:any) {
         list.splice(list.indexOf(item), 1);
     }
+    
 }

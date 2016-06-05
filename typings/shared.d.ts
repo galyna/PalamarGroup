@@ -76,18 +76,19 @@ declare module pg {
 
         export interface ISalonClient {
             _id?: any;
-            name: string,
-            phone: string,
-            email: string,
-            address: string,
+            name: string;
+            phone: string;
+            email: string;
+            address: string;
+            group: string;
         }
 
         export interface IComment {
             _id?: any;
-            name: string,
-            text: string,
-            isVisible: boolean,
-            answered: boolean
+            name: string;
+            text: string;
+            isVisible: boolean;
+            answered: boolean;
         }
     }
 }

@@ -1,18 +1,21 @@
 import {adminModule} from "../../../../app/admin/admin.module";
 import {
-    AcademyDeliveryController,
-    IEditSalonModel
+    AcademyDeliveryController
 } from "../../../../app/admin/academy/controllers/delivery.controller";
 import {
     ISalonClientResource, SalonClientResourceName,
 } from "../../../../app/resources/salon.client.resource";
+import {ICourseResource, CourseResourceName} from "../../../../app/resources/course.resource";
 
 describe(`${adminModule.name} module`, () => {
     describe(AcademyDeliveryController.componentName, () => {
         let $controller: ng.IControllerService,
             $q: ng.IQService,
             $rootScope: ng.IRootScopeService,
-            SalonClientResource: ISalonClientResource;
+            SalonClientResource: ISalonClientResource,
+            CourseResource: ICourseResource,
+            controller: AcademyDeliveryController,
+            salonsSpy, salonGroupsSpy, coursesSpy;
         
         beforeEach(angular.mock.module(adminModule.name));
         
@@ -21,91 +24,74 @@ describe(`${adminModule.name} module`, () => {
             $q = $injector.get("$q");
             $rootScope = $injector.get("$rootScope");
             SalonClientResource = $injector.get(SalonClientResourceName);
+            CourseResource = $injector.get(CourseResourceName);
         }));
 
-        function getDeliveryController($scope?){
-            return <AcademyDeliveryController>$controller(AcademyDeliveryController.componentName, $scope);
-        }
+        beforeEach(() => {
+            salonsSpy = spyOn(SalonClientResource, 'query').and.returnValue({$promise: $q.when()});
+            salonGroupsSpy = spyOn(SalonClientResource, 'getGroups').and.returnValue({$promise: $q.when()});
+            coursesSpy = spyOn(CourseResource, 'query').and.returnValue({$promise: $q.when()});
+            controller = <AcademyDeliveryController>$controller(AcademyDeliveryController.componentName, $rootScope.$new());
+            $rootScope.$digest();
+        });
 
         it("should query salonClients during init", () => {
-            let spy = spyOn(SalonClientResource, 'query');
-            
-            getDeliveryController();
-
-            expect(spy).toHaveBeenCalled();
+            expect(salonsSpy).toHaveBeenCalled();
         });
 
         describe("createSalon method", () => {
             it("should call newSalonModel.$save() if form is valid", () => {
                 let salonClientResource = new SalonClientResource();
                 let spy = spyOn(salonClientResource, '$save').and.returnValue($q.resolve());
-                let controller = getDeliveryController();
-                let formMock = {$valid: true};
 
-                controller.createSalon(<ng.IFormController>formMock, salonClientResource);
+                controller.createSalon(salonClientResource);
 
                 expect(spy).toHaveBeenCalled();
             });
-            it("should not call newSalonModel.$save() if form is not valid", () => {
+
+            it("should call this.initSalons() on success", () => {
                 let salonClientResource = new SalonClientResource();
-                let spy = spyOn(salonClientResource, '$save');
-                let controller = getDeliveryController();
-                let formMock = {$valid: false};
+                spyOn(salonClientResource, '$save').and.returnValue($q.when(salonClientResource));
+                let initSalonsSpy = spyOn(controller, 'initSalons');
 
-                controller.createSalon(<ng.IFormController>formMock, salonClientResource);
-
-                expect(spy).not.toHaveBeenCalled();
-            });
-            it("should push created salon to this.salons on success", () => {
-                let salonClientResource = new SalonClientResource();
-                spyOn(SalonClientResource, 'query').and.returnValue([]);
-                spyOn(salonClientResource, '$save').and.returnValue($q.resolve(salonClientResource));
-                let controller = getDeliveryController();
-                let formMock = {$valid: true};
-
-                controller.createSalon(<ng.IFormController>formMock, salonClientResource);
+                controller.createSalon(salonClientResource);
                 $rootScope.$digest();
 
-                expect(controller.salons[controller.salons.length-1]).toBe(salonClientResource);
+                expect(initSalonsSpy).toHaveBeenCalled();
             });
         });
         
         describe("editSalon method", () => {
-            it("should call editSalonModel.$save() if form is valid", () => {
+            it("should call editSalonModel.$save()", () => {
                 let salonClientResource = new SalonClientResource({_id: "someid"});
                 let spy = spyOn(salonClientResource, '$save').and.returnValue($q.resolve());
-                let controller = getDeliveryController();
-                let formMock = {$valid: true};
 
-                controller.editSalon(<ng.IFormController>formMock, salonClientResource);
+                controller.editSalon(salonClientResource);
 
                 expect(spy).toHaveBeenCalled();
             });
-            it("should not call editSalonModel.$save() if form is not valid", () => {
-                let salonClientResource = new SalonClientResource({_id: "someid"});
-                let spy = spyOn(salonClientResource, '$save');
-                let controller = getDeliveryController();
-                let formMock = {$valid: false};
 
-                controller.editSalon(<ng.IFormController>formMock, salonClientResource);
-
-                expect(spy).not.toHaveBeenCalled();
-            });
-            it("should update edited salon in this.salons on success", () => {
+            it("should call this.initSalons() on success", () => {
                 let salonClientResource = new SalonClientResource({_id: "someid", name: "before edit"});
-                let editSalon = <IEditSalonModel>angular.copy(salonClientResource);
-                editSalon.oldIndex = 0;
+                let editSalon = angular.copy(salonClientResource);
                 editSalon.name = "after edit";
-                spyOn(editSalon, '$save').and.returnValue($q.resolve(editSalon));
-                spyOn(SalonClientResource, 'query').and.returnValue([salonClientResource]);
-                let controller = getDeliveryController();
-                $rootScope.$digest();
-                let formMock = {$valid: true};
+                spyOn(editSalon, '$save').and.returnValue($q.when(salonClientResource));
 
-                controller.editSalon(<ng.IFormController>formMock, editSalon);
+
+                controller.editSalon(editSalon);
+                let initSalonsSpy = spyOn(controller, 'initSalons');
                 $rootScope.$digest();
 
-                expect(controller.salons[0].name).toBe(editSalon.name);
+                expect(initSalonsSpy).toHaveBeenCalled();
+            });
+        });
+        
+        describe("initSalons", () => {
+            it("should query salons and salongroups", () => {
+                controller.initSalons();
+
+                expect(salonsSpy).toHaveBeenCalled();
+                expect(salonGroupsSpy).toHaveBeenCalled();
             });
         });
         

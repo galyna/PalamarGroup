@@ -366,6 +366,7 @@
       "email": "ostapnagovitsyn@gmail.com",
       "phone": "0963073149",
       "address": "qwertyui",
+      "group": "global",
       "__v": 0
     },
     {
@@ -373,6 +374,7 @@
       "name": "galyna",
       "email": "galynavistovska@gmail.com",
       "phone": "12345689",
+      "group": "global",
       "__v": 0
     },
     {
@@ -381,6 +383,7 @@
       "email": "verh@yandex.ru",
       "phone": "123456789",
       "address": "gfd",
+      "group": "global",
       "__v": 0
     }
   ]

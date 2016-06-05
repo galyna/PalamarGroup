@@ -23,7 +23,8 @@ restify.defaults({
     limit: 20, //max and default query limit
     findOneAndUpdate: false,
     findOneAndRemove: false,
-    totalCountHeader: true,
+    //distinct queries can't be used with totalCountHeader enabled
+    // totalCountHeader: true,
     onError: (err, req, res) => {
         const statusCode = req.erm.statusCode; // 400 or 404
         res.status(statusCode).json({
