@@ -25,11 +25,13 @@ export class AcademyCoursesController {
     showHistoryPhotoUpload:boolean;
     showFormPhotoUpload:boolean;
     showAuthorPhotoUpload:boolean;
+    tabSelectedIndex:Number;
 
     constructor(private CourseResource:ICourseResource, private $log:ng.ILogService,
                 private Upload, private $timeout:ng.ITimeoutService, private $location:ng.ILocationService) {
         this.courses = CourseResource.query();
         this.newCourseModel=this.getBlankModel();
+        this.tabSelectedIndex=0;
     }
 
 
@@ -51,7 +53,9 @@ export class AcademyCoursesController {
                 .catch((err)=> {
                     this.$log.debug("fail createCourse..." + err);
                 }).finally(()=> {
-                this.showCourseCreateForm = false;
+                this.tabSelectedIndex=0;
+                this.newCourseModel=this.getBlankModel();
+              
             });
         }
     }

@@ -50,7 +50,7 @@
             <label for="price">Фото автора</label>
             <img ng-src="{{vm.editCourseModel.author.photoUrl}}"/>
             <br/>
-            <md-button ng-if="!vm.showAuthorPhotoUpload" class="md-raised" ng-click="vm.showAuthorPhotoUpload=true">
+            <md-button  ng-if="!vm.showAuthorPhotoUpload" class="md-raised" ng-click="vm.showAuthorPhotoUpload=true">
                 Змінити фото автора
             </md-button>
             <div ng-if="vm.showAuthorPhotoUpload">
@@ -64,9 +64,7 @@
                               result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
                     </img-crop>
                 </div>
-                <div>
-                    <img ng-src="{{croppedDataUrl}}"/>
-                </div>
+
                 <md-button class="md-primary"
                            ng-click="vm.uploadAuthorPhoto(croppedDataUrl, authorPhotoFile.name,vm.editCourseModel)">
                     Завантажити
@@ -110,9 +108,6 @@
                               image="hearFormsFile  | ngfDataUrl"
                               result-image="croppedHearFormsFile" ng-init="croppedHearFormsFile=''">
                     </img-crop>
-                </div>
-                <div>
-                    <img ng-src="{{croppedHearFormsFile}}"/>
                 </div>
                 <md-button class="md-primary"
                            ng-click="vm.uploadCollPhoto(croppedHearFormsFile, hearFormsFile.name,vm.editCourseModel.hearFormsPhotos)">
@@ -158,9 +153,6 @@
                               image="historyPhotoFile  | ngfDataUrl"
                               result-image="croppedHistoryPhotoFile" ng-init="croppedHistoryPhotoFile=''">
                     </img-crop>
-                </div>
-                <div>
-                    <img ng-src="{{croppedHistoryPhotoFile}}"/>
                 </div>
                 <md-button class="md-primary"
                            ng-click="vm.uploadCollPhoto(croppedHistoryPhotoFile, historyPhotoFile.name,vm.editCourseModel.historyPhotos)">

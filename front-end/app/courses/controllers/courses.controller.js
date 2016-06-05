@@ -61,7 +61,7 @@ System.register(["../../resources/course.resource"], function(exports_1, context
                     var _this = this;
                     angular.forEach(this.coursesDateMap, function (course) {
                         var cDate = new Date(course.date);
-                        if (cDate.getDay() == date.getDay() && cDate.getFullYear() == date.getFullYear() && cDate.getMonth() == date.getMonth()) {
+                        if (cDate.getDate() == date.getDate() && cDate.getFullYear() == date.getFullYear() && cDate.getMonth() == date.getMonth()) {
                             _this.$location.url('/course/' + course.coursesId);
                             return;
                         }

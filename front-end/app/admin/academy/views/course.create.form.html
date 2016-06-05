@@ -52,9 +52,6 @@
             <div>
                 <img ng-src="{{vm.newCourseModel.author.photoUrl}}"/>
                 <br/>
-                <md-button ng-if="!vm.showAuthorPhotoUpload" class="md-raised" ng-click="vm.showAuthorPhotoUpload=true">
-                    Змінити фото автора
-                </md-button>
                 <div ng-if="vm.showAuthorPhotoUpload">
                     <md-button ngf-select ng-model="authorPhotoFile" accept="image/*" class="md-raised">
                         Вибрати файл
@@ -66,9 +63,7 @@
                                   result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
                         </img-crop>
                     </div>
-                    <div>
-                        <img ng-src="{{croppedDataUrl}}"/>
-                    </div>
+
                     <md-button class="md-primary"
                                ng-click="vm.uploadAuthorPhoto(croppedDataUrl, authorPhotoFile.name,vm.newCourseModel)">
                         Завантажити
@@ -115,9 +110,6 @@
                               result-image="croppedHearFormsFile" ng-init="croppedHearFormsFile=''">
                     </img-crop>
                 </div>
-                <div>
-                    <img ng-src="{{croppedHearFormsFile}}"/>
-                </div>
                 <md-button class="md-primary"
                            ng-click="vm.uploadCollPhoto(croppedHearFormsFile, hearFormsFile.name,vm.newCourseModel.hearFormsPhotos)">
                     Завантажити
@@ -127,26 +119,25 @@
         <md-divider></md-divider>
         <md-divider></md-divider>
         <!--history-->
-        <div class="md-dense" flex>
+        <div flex>
             <md-subheader class="md-no-sticky">Форми історії попередніх модулів</md-subheader>
-            <div class="md-1-line" ng-repeat="item in vm.newCourseModel.historyPhotos" ng-click="null">
-                <img class="module-history-img md-xs" ng-src="{{item.url}}"/>
+            <div layout="row" ng-repeat="item in vm.newCourseModel.historyPhotos track by $index"
+                 ng-click="null">
+                <img ng-src="{{item.url}}" class="module-history-img"/>
                 <div layout="column">
                     <md-input-container class="md-block  ">
                         <label for="historyNme">Назва форми</label>
                         <input id="historyNme" ng-model="item.name" name="historyNme"/>
                     </md-input-container>
                     <md-input-container class="md-block  ">
-                        <label for="orvd">Порядок відображення</label>
-                        <input id="orvd" ng-model="item.order" type="number"/>
+                        <label for="ord">Порядок відображення</label>
+                        <input id="ord" ng-model="item.order" type="number"/>
                     </md-input-container>
                     <md-button class="  md-raised"
                                ng-click="vm.deleteFromList(vm.newCourseModel.historyPhotos,item)">
                         Видалити
                     </md-button>
                 </div>
-
-
             </div>
         </div>
         <div>
@@ -164,9 +155,6 @@
                               result-image="croppedHistoryPhotoFile" ng-init="croppedHistoryPhotoFile=''">
                     </img-crop>
                 </div>
-                <div>
-                    <img ng-src="{{croppedHistoryPhotoFile}}"/>
-                </div>
                 <md-button class="md-primary"
                            ng-click="vm.uploadCollPhoto(croppedHistoryPhotoFile, historyPhotoFile.name,vm.newCourseModel.historyPhotos)">
                     Завантажити
@@ -175,7 +163,7 @@
         </div>
     </md-content>
     <div layout="row" md-whiteframe="4">
-        <md-button class="md-raised md-primary" ng-click="vm.showCourseCreateForm = false">Скасувати</md-button>
+        <md-button class="md-raised md-primary" ng-click="vm.tabSelectedIndex=0;">Скасувати</md-button>
         <md-button type="submit" class="md-raised md-accent">Зберегти</md-button>
     </div>
 </form>

@@ -16,6 +16,7 @@ export class CoursesController {
     courses:ICourse[];
     calendarDirection = 'horizontal';
     coursesDateMap:ICourseDates[];
+  
 
     constructor($scope, private $sce, private $location, private pgCalendarData:IPgCalendarDataService,
                 private CourseResource:ICourseResource, private $mdMedia) {
@@ -23,7 +24,7 @@ export class CoursesController {
             this.courses = null;
             this.showDetails = null;
         });
-
+        
         //init calendar direction
         this.calendarDirection = this.$mdMedia('max-width: 600px') ? 'vertical' : 'horizontal';
         $scope.$watch(()=> {
@@ -72,7 +73,7 @@ export class CoursesController {
     dayClick(date:Date) {
         angular.forEach(this.coursesDateMap, (course) => {
             var cDate = new Date(course.date);
-            if (cDate.getDay() == date.getDay() && cDate.getFullYear() == date.getFullYear() && cDate.getMonth() == date.getMonth()) {
+            if (cDate.getDate() == date.getDate() && cDate.getFullYear() == date.getFullYear() && cDate.getMonth() == date.getMonth()) {
                 this.$location.url('/course/' + course.coursesId);
                 return;
             }
