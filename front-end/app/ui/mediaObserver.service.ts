@@ -22,7 +22,7 @@ export function MediaObserverFactory($compile: ng.ICompileService, $rootScope: I
         isVideo: isVideo,
         img: {}
     };
-    var test = $templateCache.get('ui/mediaObserver.html');
+    var test = $templateCache.get('app/ui/mediaObserver.html');
     var templateEl = angular.element(test);
     var element = $compile(templateEl)($scope);
     var body = angular.element(document.body);
