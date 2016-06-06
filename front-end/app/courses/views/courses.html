@@ -4,24 +4,7 @@
 
     <md-tabs md-swipe-content md-center-tabs md-stretch-tabs="always" md-border-bottom flex="75"
              flex-xs="100" flex-sm="92" md-dynamic-height>
-        <md-tab label="Калетдар курсів">
-            <div  flex>
-            <pg-calendar class="md-padding"
-                         calendar-direction="vm.calendarDirection"
-                         on-prev-month="prevMonth"
-                         on-next-month="nextMonth"
-                         on-day-click="vm.dayClick(date)"
-                         title-format="'MMMM y'"
-                         ng-model='selectedDate'
-                         day-format="'d'"
-                         day-label-format="'EEE'"
-                         day-label-tooltip-format="'EEEE'"
-                         day-tooltip-format="'fullDate'"
-                         week-starts-on="firstDayOfWeek"
-                         day-content="setDayContent"
-                         template-url="'app/calendar/calendar.html'"></pg-calendar>
-                </div>
-        </md-tab>
+
         <md-tab label="Курси">
             <div class="courses-main" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="10" ng-click="vm.showDetails(course._id)" ng-repeat="course in vm.courses"
@@ -37,6 +20,24 @@
                         </md-button>
                     </md-card-content>
                 </md-card>
+            </div>
+        </md-tab>
+        <md-tab label="Калетдар курсів">
+            <div  flex>
+                <pg-calendar class="md-padding"
+                             calendar-direction="vm.calendarDirection"
+                             on-prev-month="prevMonth"
+                             on-next-month="nextMonth"
+                             on-day-click="vm.dayClick(date)"
+                             title-format="'MMMM y'"
+                             ng-model='selectedDate'
+                             day-format="'d'"
+                             day-label-format="'EEE'"
+                             day-label-tooltip-format="'EEEE'"
+                             day-tooltip-format="'fullDate'"
+                             week-starts-on="firstDayOfWeek"
+                             day-content="setDayContent"
+                             template-url="'app/calendar/calendar.html'"></pg-calendar>
             </div>
         </md-tab>
     </md-tabs>
