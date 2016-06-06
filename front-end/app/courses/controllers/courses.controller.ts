@@ -53,10 +53,13 @@ export class CoursesController {
         angular.forEach(course.courseModulesDates, (courseDate) => {
             var cDate = new Date(courseDate);
             let content =
-                ` <div class="hovereffect">
+                ` <div class="hovereffect course-marker">
                        <img class="img-responsive" src="${course.hearFormsPhotos[0].url}" alt="">
                       <div class="overlay">
                      <h2>${course.name}</h2>
+                      <button class="md-button detail-btn" aria-label="Play" >
+                            Деталі
+                        </button>
                        </div>                  
                     </div>`;
 
