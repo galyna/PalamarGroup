@@ -47,7 +47,7 @@ System.register(["../../resources/course.resource"], function(exports_1, context
                     var _this = this;
                     angular.forEach(course.courseModulesDates, function (courseDate) {
                         var cDate = new Date(courseDate);
-                        var content = "<div class=\"course-marker\">\n                        <img src=\"" + course.hearFormsPhotos[0].url + "\"/>\n                        <span>" + course.name + "</span>\n                    </div>";
+                        var content = " <div class=\"hovereffect\">\n                       <img class=\"img-responsive\" src=\"" + course.hearFormsPhotos[0].url + "\" alt=\"\">\n                      <div class=\"overlay\">\n                     <h2>" + course.name + "</h2>\n                       </div>                  \n                    </div>";
                         _this.pgCalendarData.setDayContent(cDate, _this.$sce.trustAsHtml(content));
                     });
                 };

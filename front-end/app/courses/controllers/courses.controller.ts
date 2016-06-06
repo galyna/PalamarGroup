@@ -53,9 +53,11 @@ export class CoursesController {
         angular.forEach(course.courseModulesDates, (courseDate) => {
             var cDate = new Date(courseDate);
             let content =
-                `<div class="course-marker">
-                        <img src="${course.hearFormsPhotos[0].url}"/>
-                        <span>${course.name}</span>
+                ` <div class="hovereffect">
+                       <img class="img-responsive" src="${course.hearFormsPhotos[0].url}" alt="">
+                      <div class="overlay">
+                     <h2>${course.name}</h2>
+                       </div>                  
                     </div>`;
 
             this.pgCalendarData.setDayContent(cDate, this.$sce.trustAsHtml(content));
