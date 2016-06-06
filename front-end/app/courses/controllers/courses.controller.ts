@@ -26,9 +26,9 @@ export class CoursesController {
         });
         
         //init calendar direction
-        this.calendarDirection = this.$mdMedia('max-width: 600px') ? 'vertical' : 'horizontal';
+        this.calendarDirection = this.$mdMedia('max-width: 960px') ? 'vertical' : 'horizontal';
         $scope.$watch(()=> {
-            return this.$mdMedia('max-width: 600px');
+            return this.$mdMedia('max-width: 960px');
         }, (sm)=> {
             this.calendarDirection = sm ? 'vertical' : 'horizontal';
         });

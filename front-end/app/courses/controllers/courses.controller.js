@@ -23,9 +23,9 @@ System.register(["../../resources/course.resource"], function(exports_1, context
                         _this.showDetails = null;
                     });
                     //init calendar direction
-                    this.calendarDirection = this.$mdMedia('max-width: 600px') ? 'vertical' : 'horizontal';
+                    this.calendarDirection = this.$mdMedia('max-width: 960px') ? 'vertical' : 'horizontal';
                     $scope.$watch(function () {
-                        return _this.$mdMedia('max-width: 600px');
+                        return _this.$mdMedia('max-width: 960px');
                     }, function (sm) {
                         _this.calendarDirection = sm ? 'vertical' : 'horizontal';
                     });
