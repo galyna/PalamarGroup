@@ -22,16 +22,16 @@ System.register(["../../resources/course.resource"], function(exports_1, context
                         _this.courses = null;
                         _this.showDetails = null;
                     });
-                    //init calendar direction
-                    this.calendarDirection = this.$mdMedia('max-width: 960px') ? 'vertical' : 'horizontal';
-                    $scope.$watch(function () {
-                        return _this.$mdMedia('max-width: 960px');
-                    }, function (sm) {
-                        _this.calendarDirection = sm ? 'vertical' : 'horizontal';
-                    });
-                    //init page data
                     this.getCourses();
                 }
+                CoursesController.prototype.setCoursesCalendarTemplate = function (picture, name) {
+                    if (!!('ontouchstart' in window)) {
+                        return " <div class=\"touch-device course-marker\">\n                       <img  src=\"" + picture + "\" alt=\"\">\n                      <div class=\"overlay\">\n                     <h2>" + name + "</h2>                    \n                       </div>                  \n                    </div>";
+                    }
+                    else {
+                        return " <div class=\"hovereffect course-marker\">\n                       <img  src=\"" + picture + "\" alt=\"\">\n                      <div class=\"overlay\">\n                     <h2>" + name + "</h2>\n                      <button class=\"md-button detail-btn\" aria-label=\"Play\" >\n                            \u0414\u0435\u0442\u0430\u043B\u0456\n                        </button>\n                       </div>                  \n                    </div>";
+                    }
+                };
                 CoursesController.prototype.getCourses = function () {
                     var _this = this;
                     this.coursesDateMap = [];
@@ -47,7 +47,7 @@ System.register(["../../resources/course.resource"], function(exports_1, context
                     var _this = this;
                     angular.forEach(course.courseModulesDates, function (courseDate) {
                         var cDate = new Date(courseDate);
-                        var content = " <div class=\"hovereffect course-marker\">\n                       <img class=\"img-responsive\" src=\"" + course.hearFormsPhotos[0].url + "\" alt=\"\">\n                      <div class=\"overlay\">\n                     <h2>" + course.name + "</h2>\n                      <button class=\"md-button detail-btn\" aria-label=\"Play\" >\n                            \u0414\u0435\u0442\u0430\u043B\u0456\n                        </button>\n                       </div>                  \n                    </div>";
+                        var content = _this.setCoursesCalendarTemplate(course.hearFormsPhotos[0].url, course.name);
                         _this.pgCalendarData.setDayContent(cDate, _this.$sce.trustAsHtml(content));
                     });
                 };
@@ -70,7 +70,7 @@ System.register(["../../resources/course.resource"], function(exports_1, context
                 CoursesController.prototype.showDetails = function (id) {
                     this.$location.url('/course/' + id);
                 };
-                CoursesController.$inject = ['$scope', '$sce', '$location', 'pgCalendarData', course_resource_1.CourseResourceName, '$mdMedia'];
+                CoursesController.$inject = ['$scope', '$sce', '$location', 'pgCalendarData', course_resource_1.CourseResourceName, '$mdMedia',];
                 CoursesController.componentName = 'CoursesController';
                 return CoursesController;
             }());

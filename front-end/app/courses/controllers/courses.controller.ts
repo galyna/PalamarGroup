@@ -11,31 +11,44 @@ export interface ICourseDates {
 
 export class CoursesController {
 
-    static $inject = ['$scope', '$sce', '$location', 'pgCalendarData', CourseResourceName, '$mdMedia'];
+    static $inject = ['$scope', '$sce', '$location', 'pgCalendarData', CourseResourceName, '$mdMedia', ];
     static componentName = 'CoursesController';
     courses:ICourse[];
     calendarDirection = 'horizontal';
     coursesDateMap:ICourseDates[];
-  
 
     constructor($scope, private $sce, private $location, private pgCalendarData:IPgCalendarDataService,
                 private CourseResource:ICourseResource, private $mdMedia) {
+
         $scope.$on("$destroy", () => {
             this.courses = null;
             this.showDetails = null;
-        });
+        })
         
-        //init calendar direction
-        this.calendarDirection = this.$mdMedia('max-width: 960px') ? 'vertical' : 'horizontal';
-        $scope.$watch(()=> {
-            return this.$mdMedia('max-width: 960px');
-        }, (sm)=> {
-            this.calendarDirection = sm ? 'vertical' : 'horizontal';
-        });
-
-        //init page data
         this.getCourses();
 
+    }
+
+    setCoursesCalendarTemplate(picture,name) {
+        if (!!('ontouchstart' in window)) {
+            return` <div class="touch-device course-marker">
+                       <img  src="${picture}" alt="">
+                      <div class="overlay">
+                     <h2>${name}</h2>                    
+                       </div>                  
+                    </div>`
+        } else {
+            return` <div class="hovereffect course-marker">
+                       <img  src="${picture}" alt="">
+                      <div class="overlay">
+                     <h2>${name}</h2>
+                      <button class="md-button detail-btn" aria-label="Play" >
+                            Деталі
+                        </button>
+                       </div>                  
+                    </div>`
+
+        }
     }
 
     getCourses() {
@@ -52,17 +65,7 @@ export class CoursesController {
     setCalendarContent(course:ICourse) {
         angular.forEach(course.courseModulesDates, (courseDate) => {
             var cDate = new Date(courseDate);
-            let content =
-                ` <div class="hovereffect course-marker">
-                       <img class="img-responsive" src="${course.hearFormsPhotos[0].url}" alt="">
-                      <div class="overlay">
-                     <h2>${course.name}</h2>
-                      <button class="md-button detail-btn" aria-label="Play" >
-                            Деталі
-                        </button>
-                       </div>                  
-                    </div>`;
-
+            let content = this.setCoursesCalendarTemplate(course.hearFormsPhotos[0].url,course.name);
             this.pgCalendarData.setDayContent(cDate, this.$sce.trustAsHtml(content));
         });
     }
