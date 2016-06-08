@@ -314,8 +314,9 @@
     min-width: 100%;
   }
   .detail-btn {
-    width: 100%;
-
+    width: 90%;
+    margin-left:5% ;
+    margin-right:5% ;
   }
 
   .detail-cancel-btn {
@@ -324,7 +325,7 @@
 
 }
 
-@media (max-width: 248px) {
+@media (max-width: 278px) {
   .detail-btn {
     display: none;
   }

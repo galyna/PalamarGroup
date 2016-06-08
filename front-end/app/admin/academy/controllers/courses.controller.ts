@@ -25,10 +25,13 @@ export class AcademyCoursesController {
     showHistoryPhotoUpload:boolean;
     showFormPhotoUpload:boolean;
     showAuthorPhotoUpload:boolean;
+    tabSelectedIndex:Number;
 
-    constructor(private CourseResource: ICourseResource, private $log:ng.ILogService,
+    constructor(private CourseResource:ICourseResource, private $log:ng.ILogService,
                 private Upload, private $timeout:ng.ITimeoutService, private $location:ng.ILocationService) {
         this.courses = CourseResource.query();
+        this.newCourseModel=this.getBlankModel();
+        this.tabSelectedIndex=0;
     }
 
 
@@ -50,8 +53,10 @@ export class AcademyCoursesController {
                 .catch((err)=> {
                     this.$log.debug("fail createCourse..." + err);
                 }).finally(()=> {
-                    this.showCourseCreateForm = false;
-                });
+                this.tabSelectedIndex=0;
+                this.newCourseModel=this.getBlankModel();
+              
+            });
         }
     }
 
@@ -70,8 +75,8 @@ export class AcademyCoursesController {
                 .catch((err)=> {
                     this.$log.debug("fail editCourse..." + err);
                 }).finally(()=> {
-                    this.showCourseEditForm = false;
-                });
+                this.showCourseEditForm = false;
+            });
         }
     }
 
@@ -87,14 +92,15 @@ export class AcademyCoursesController {
     //course edit end
 
     //course image upload start
-    uploadAuthorPhoto(file, model:IEditCourseModel):void {
-        file.upload = this.Upload.upload({
+    uploadAuthorPhoto(dataUrl, name, model:IEditCourseModel):void {
+        this.Upload.upload({
             method: 'POST',
             url: '/api/photo',
-            data: {file: file}
-        });
+            data: {
+                file: this.Upload.dataUrltoBlob(dataUrl, name)
+            }
 
-        file.upload.then((response)=> {
+        }).then((response)=> {
             this.$timeout(()=> {
                 model.author.photoUrl = response.data.url;
             });
@@ -108,14 +114,15 @@ export class AcademyCoursesController {
     }
 
     //TODO: add file param type
-    uploadCollPhoto(file, collection:IPhoto[]):void {
-        file.upload = this.Upload.upload({
+    uploadCollPhoto(dataUrl, name, collection:IPhoto[]):void {
+        this.Upload.upload({
             method: 'POST',
             url: '/api/photo',
-            data: {file: file}
-        });
+            data: {
+                file: this.Upload.dataUrltoBlob(dataUrl, name)
+            }
 
-        file.upload.then((response)=> {
+        }).then((response)=> {
             this.$timeout(()=> {
                 collection.push({
                     name: "",
@@ -150,7 +157,7 @@ export class AcademyCoursesController {
             });
     }
 
-    cloneCourse(course: ICourse):void {
+    cloneCourse(course:ICourse):void {
         var newCourse = new this.CourseResource(course);
         delete newCourse._id;
         newCourse.courseModulesDates = [];
@@ -166,6 +173,19 @@ export class AcademyCoursesController {
     //noinspection JSMethodCanBeStatic
     deleteFromList(list:any[], item:any):void {
         list.splice(list.indexOf(item), 1);
+    }
+
+    private getBlankModel() {
+        return new this.CourseResource({
+            hearFormsPhotos: [],
+            historyPhotos: [],
+            courseModulesDates:[],
+            author: {
+                name: "",
+                photoUrl: ""
+            }
+
+        });
     }
 
 }

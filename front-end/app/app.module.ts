@@ -10,6 +10,7 @@ import 'angular-messages';
 import 'angular-material';
 import 'angular-animate';
 import 'ng-file-upload';
+import 'ng-img-crop-full-extended';
 import {uiModule} from './ui/ui.module';
 import {usersModule} from './users/users.module';
 import {adminModule} from './admin/admin.module';
@@ -30,7 +31,7 @@ let app = angular.module('yuliaPalamarApp', [
     'ngMessages',
     'ngRoute',
     'ngFileUpload',
-
+    'ngImgCrop',
     'templates',
     coreModule.name,
     resourcesModule.name,

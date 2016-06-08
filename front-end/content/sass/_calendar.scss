@@ -1,35 +1,110 @@
-$calendar-md-background-active: rgba(0, 0, 0, .02) !default;
-$calendar-md-shadow-active: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12) !default;
-$calendar-md-border: 1px solid rgba(0, 0, 0, .12) !default;
-$calendar-md-background-hover: rgba(0, 0, 0, .04) !default;
+$calendar-md-background-active: rgba($primary, .02) !default;
+$calendar-md-shadow-active: 0 1px 3px 0 rgba($primary, .2), 0 1px 1px 0 rgba($primary, .14), 0 2px 1px -1px rgba($primary, .12) !default;
+$calendar-md-shadow-course: 0 8px 25px 0 rgba($primary, 0.5), 0 8px 8px 0 rgba($primary, 0.2), 0 15px 8px -1px rgba($primary, 0.2) !default;
+$calendar-md-shadow-touch-course: 0 4px 13px 0 rgba($primary, 0.5), 0 4px 13px 0 rgba($primary, 0.2), 0 8px 4px -1px rgba($primary, 0.2) !default;
+$calendar-md-border: 1px solid rgba($primary, .12) !default;
+$calendar-md-background-hover: rgba($primary, .4) !default;
 
 pg-calendar {
 
   display: block;
-  max-height: 100%;
-  height: calc(100vh - 260px);
+  min-width: 300px;
+  min-height: 400px;
+  height: calc(100vh - 200px);
 
   .courses-calendar {
     box-sizing: border-box;
-    font-size: 21px;
+    font-size: 18px;
+    position: relative;
     img {
       max-width: 100%;
     }
   }
-    .md-toolbar-tools {
-    h2 {
-      overflow-x: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-  }
 
   md-content {
+
+    md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+      background-color: rgba($primary, 0.8);
+    }
     > md-content {
+      overflow: hidden;
       // Week row, agenda view.
       border: $calendar-md-border;
 
       &.agenda {
+        position: relative;
+        .courses-calendar {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .course-marker {
+
+          .detail-btn {
+            min-width: 50%;
+            font-size: 14px;
+            bottom: 10px;
+            padding: 5px;
+          }
+        }
+        .calendar-day {
+          color: rgba($primary, 0.8);
+          font-size: 21px;
+          text-align: center;
+          padding: 10px;
+          left: 10px;
+          font-weight: 100;
+
+        }
+
+        .hovereffect {
+          width: 303px;
+          height: 100%;
+          font-size: 16px;
+          transition: all .3s ease-in-out;
+          overflow: visible;
+          position: relative;
+          text-align: center;
+          cursor: pointer;
+          padding: 0px !important;
+          background-color: rgba($primary, .75);;
+
+          img {
+            width: 100%;
+            padding: 0px !important;
+          }
+        }
+
+        .hovereffect h2 {
+          opacity: 1;
+          color: floralwhite;
+          text-align: center;
+          position: relative;
+          font-size: 18px;
+          padding: 0px;
+          overflow: hidden;
+        }
+
+        .hovereffect .overlay {
+          opacity: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          filter: alpha(opacity=100);
+          -webkit-transition-delay: 0s;
+          transition-delay: 0s;
+          -webkit-transform: translate(0px, 0px);
+          -ms-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+          width: 100%;
+          height: 30%;
+          position: absolute;
+          overflow: hidden;
+          bottom: 0;
+          left: 0;
+          background-color: rgba($primary, 0.8);
+        }
+
         // Week container
         > * {
           > * {
@@ -42,9 +117,7 @@ pg-calendar {
             // Date label.
             :first-child {
               padding: 12px;
-              width: 200px;
-              text-align: right;
-              color: rgba(0, 0, 0, .75);
+              color: rgba($primary, .75);
               font-weight: 100;
               overflow-x: hidden;
               text-overflow: ellipsis;
@@ -66,6 +139,145 @@ pg-calendar {
 
       // Week row (calendar view.)
       &.calendar {
+        height: 100%;
+
+        .course-marker {
+          position: absolute;
+          width: 100%;
+          z-index: 1;
+        }
+
+        .calendar-day {
+          width: 100%;
+          top: 45%;
+          color: rgba($primary, 0.8);
+          font-size: 21px;
+          text-align: center;
+          padding: 10px;
+          position: absolute;
+        }
+
+        .touch-device {
+          width: 100%;
+          height: 100%;
+          transition: all .3s ease-in-out;
+          overflow: visible;
+          position: absolute;
+          text-align: center;
+          cursor: pointer;
+          box-shadow: $calendar-md-shadow-touch-course;
+
+          h2 {
+            color: #fff;
+            text-align: center;
+            position: relative;
+            font-size: 13px;
+            overflow: visible;
+            padding: 3px;
+            opacity: 1;
+          }
+
+            .overlay {
+              opacity: 1;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              filter: alpha(opacity=100);
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              overflow: hidden;
+              top: 0;
+              left: 0;
+              background-color: rgba($primary, 0.5);
+            }
+
+        }
+
+        .hovereffect {
+          width: 100%;
+          height: 100%;
+          transition: all .3s ease-in-out;
+          overflow: visible;
+          position: absolute;
+          text-align: center;
+          cursor: pointer;
+
+
+          .detail-btn {
+            min-width: 70%;
+            font-size: 10px;
+          }
+
+          h2 {
+            opacity: 0;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            font-size: 13px;
+            overflow: hidden;
+          }
+
+          &:hover {
+            box-shadow: $calendar-md-shadow-course;
+            transform: scale(1.5);
+            z-index: 2;
+
+            .overlay {
+              opacity: 1;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              filter: alpha(opacity=100);
+              -webkit-transition-delay: 0s;
+              transition-delay: 0s;
+              -webkit-transform: translate(0px, 0px);
+              -ms-transform: translate(0px, 0px);
+              transform: translate(0px, 0px);
+              position: absolute;
+              overflow: hidden;
+              top: 0;
+              bottom: 0;
+              right: 0;
+              left: 0;
+              background-color: rgba($primary, 0.8);
+            }
+
+            h2 {
+              padding: 3px;
+              opacity: 1;
+              -webkit-transform: translateY(0px);
+              -ms-transform: translateY(0px);
+              transform: translateY(0px);
+              -webkit-transition-delay: 0.1s;
+              transition-delay: 0.1s;
+
+            }
+
+          }
+
+        }
+
+        @media (min-height: 220px) and (max-height: 850px) {
+          .hovereffect h2 {
+            font-size: 13px;
+          }
+          .course-marker {
+            .detail-btn {
+              display: none;
+            }
+          }
+        }
+        @media (min-width: 100px) and (max-width: 520px) {
+          .hovereffect h2 {
+            font-size: 8px;
+          }
+        }
+        @media (min-width: 900px) {
+          .touch-device h2 {
+            font-size:22px;
+          }
+        }
 
         // Subheader row.
         > :first-child {
@@ -109,101 +321,12 @@ pg-calendar {
             :last-child {
               overflow: hidden;
               text-overflow: ellipsis;
+
             }
           }
         }
       }
     }
   }
-  md-content {
-    > md-content {
-      // Week row, agenda view.
-      border: $calendar-md-border;
 
-      &.agenda {
-        // Week container
-        > * {
-          > * {
-            &.disabled {
-              color: rgba(0, 0, 0, .3);
-              pointer-events: none;
-              cursor: auto;
-            }
-            border-bottom: $calendar-md-border;
-            // Date label.
-            :first-child {
-              padding: 12px;
-              width: 200px;
-              text-align: right;
-              color: rgba(0, 0, 0, .75);
-              font-weight: 100;
-              overflow-x: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-            }
-            // Day content container
-            :not(:first-child) {
-              overflow: hidden;
-              text-overflow: ellipsis;
-            }
-          }
-        }
-      }
-
-      // All day cells, don't make them too small, even on tiny screens.
-      > * > * {
-        min-width: 48px;
-      }
-
-      // Week row (calendar view.)
-      &.calendar {
-
-        // Subheader row.
-        > :first-child {
-          background: $calendar-md-background-active;
-          border-bottom: $calendar-md-border;
-          margin-right: 0;
-          min-height: 36px;
-        }
-
-        // Week rows.
-        > :not(:first-child) {
-
-          // Day containers.
-          > * {
-
-            border-bottom: $calendar-md-border;
-            border-right: $calendar-md-border;
-            cursor: pointer;
-
-            &:hover {
-              background: $calendar-md-background-hover;
-            }
-
-            &.disabled {
-              color: rgba(0, 0, 0, .3);
-              pointer-events: none;
-              cursor: auto;
-            }
-
-            &.active {
-              box-shadow: $calendar-md-shadow-active;
-              background: $calendar-md-background-active;
-            }
-
-            // Day number label.
-            :first-child {
-              padding: 0;
-            }
-
-            // Day html content.
-            :last-child {
-              overflow: hidden;
-              text-overflow: ellipsis;
-            }
-          }
-        }
-      }
-    }
-  }
 }

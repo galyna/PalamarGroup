@@ -19,6 +19,13 @@ System.config({
         'angular-aria': 'node_modules/angular-aria/angular-aria.js',
         'angular-messages': 'node_modules/angular-messages/angular-messages.js',
         'angular-material': 'node_modules/angular-material/angular-material.js',
-        'ng-file-upload': 'node_modules/ng-file-upload/dist/ng-file-upload.js'
+        'ng-file-upload': 'node_modules/ng-file-upload/dist/ng-file-upload.js',
+        'ng-img-crop-full-extended': 'node_modules/ng-img-crop-full-extended/compile/minified/ng-img-crop.js'
+    },
+    meta: {
+        'ng-img-crop-full-extended': {
+            deps: ['angular'],
+            format: "global"
+        }
     }
 });

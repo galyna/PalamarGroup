@@ -3,3 +3,10 @@
 .module-avatar{height: 200px;}
 .module-history-img{max-width: 500px;max-height: 300px;}
 .not-answered{border-width: 2px;border-color: red;border-style: solid;}
+
+.cropArea {
+  background: #E4E4E4;
+  overflow: hidden;
+  width:960px;
+  height:750px;
+}
