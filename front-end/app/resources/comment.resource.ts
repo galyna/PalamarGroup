@@ -8,5 +8,5 @@ export let CommentResourceName = 'CommentResource';
 
 CommentResource.$inject = ['$resource', 'constants'];
 export function CommentResource($resource: ng.resource.IResourceService, constants: IConstants){
-    return <ICommentResource>$resource(`${constants.apiUrl}/course/:id`, {id: '@_id'});
+    return <ICommentResource>$resource(`${constants.apiUrl}/comment/:id`, {id: '@_id'});
 }

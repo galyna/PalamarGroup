@@ -13,17 +13,18 @@ export class AcademyCommentController {
 
     constructor(private CommentResource: ICommentResource, private $log:ng.ILogService) {
         this.comments = this.CommentResource.query();
+        this.newComment= new CommentResource();
     }
-    createCourse(form:ng.IFormController):void {
-        this.$log.debug("createCourse ...$valid" + form.$valid);
+    createComment(form:ng.IFormController):void {
+        this.$log.debug("createComment ...$valid" + form.$valid);
         if (form.$valid) {
             this.newComment.$save()
                 .then((comment)=> {
-                    this.$log.debug("success createCourse...");
+                    this.$log.debug("success createComment...");
                     this.comments.push(comment);
                 })
                 .catch((err)=> {
-                    this.$log.debug("fail createCourse..." + err);
+                    this.$log.debug("fail createComment..." + err);
                 });
         }
     }

@@ -14,6 +14,7 @@ import {Model} from '../models/model';
 import {SalonClient} from '../models/salon.client';
 import {Comment} from '../models/comment';
 import {emailEndpoint} from "./email.endpoint";
+import {courseApi} from "./course.endpoint";
 
 let api = express.Router();
 
@@ -56,7 +57,13 @@ let readOnlyOptions = {
 };
 
 restify.serve(api, Contact, Object.assign({}, readOnlyOptions));
+
 restify.serve(api, Course);
+api.use('/course/:id', (req: any, res, next) => {
+    req.courseId = req.params.id;
+    next();
+}, courseApi);
+
 restify.serve(api, Model, Object.assign({}, readOnlyOptions));
 restify.serve(api, Order, Object.assign({}, readOnlyOptions));
 restify.serve(api, SalonClient, Object.assign({}, readOnlyOptions));

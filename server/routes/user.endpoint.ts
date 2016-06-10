@@ -7,7 +7,6 @@ let userApi = Router();
 
 userApi.route('/')
     .get(authenticate, currentUser.is('admin'), async (req, res) => {
-        
         try{
             let users = await User.find({}, {"email": 1, "roles": 1});
             res.json({users: users});

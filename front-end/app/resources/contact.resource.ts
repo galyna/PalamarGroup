@@ -8,5 +8,5 @@ export let ContactResourceName = 'ContactResource';
 
 ContactResource.$inject = ['$resource', 'constants'];
 export function ContactResource($resource: ng.resource.IResourceService, constants: IConstants){
-    return <IContactResource>$resource(`${constants.apiUrl}/course/:id`, {id: '@_id'});
+    return <IContactResource>$resource(`${constants.apiUrl}/contact/:id`, {id: '@_id'});
 }

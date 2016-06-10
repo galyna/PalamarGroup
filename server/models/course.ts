@@ -24,11 +24,15 @@ let CourseSchema = new Schema({
     hearFormsPhotos: [PhotoSchema],
     historyPhotos: [PhotoSchema],
     author: {
-        name: String, 
+        name: String,
         photoUrl: String
     },
     courseModulesDates: [Date],
-    isVisible: Boolean
+    isVisible: Boolean,
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: "Comment"
+    }]
 });
 
 CourseSchema.post('remove', (course:ICourseModel) => {

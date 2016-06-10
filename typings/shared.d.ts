@@ -39,7 +39,8 @@ declare module pg {
                 photoUrl: string
             },
             courseModulesDates: string[],
-            isVisible: boolean
+            isVisible: boolean,
+            comments: [IComment]
         }
 
         export interface IOrder{

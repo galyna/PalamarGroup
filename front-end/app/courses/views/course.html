@@ -1,18 +1,11 @@
-<div layout="row">
+<div layout="row" layout-align="center">
 
-    <div flex="12" flex-xs="0" flex-sm="4" layout="column" layout-align="start center ">
-
-        <md-button hide-xs style="left:0;top:102px; position: fixed;z-index: 1;" class="md-fab course-back-small-fab"
-                   ng-click="vm.backToHome()">
-            <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
-        </md-button>
-    </div>
     <div flex="75" flex-xs="100" class=" course-divider" flex-sm="92" layout-align="center center">
         <div layout="row" layout-wrap layout-align="center " layout-align-xs=" center end"
              class="course-nz-index: 0;ame">
-            <md-button hide-gt-xs
-                       style=" left:0;top:97px; position: fixed;z-index: 1;"
-                       class="md-fab course-back-small-fab" ng-click="vm.backToHome()">
+            <md-button
+                    style=" left:0;top:97px; position: fixed;z-index: 1;"
+                    class="md-fab course-back-small-fab" ng-click="vm.backToHome()">
                 <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
             </md-button>
             <h2 hide-xs>{{::vm.course.name}}</h2>
@@ -34,6 +27,10 @@
                         <span class="md-headline">Ціна {{ ::vm.course.price}}  грн</span>
                         <span class="md-subhead"> {{::vm.course.description}}</span>
                         <div flex layout layout-wrap layout-align="end center">
+                            <md-button class="  order-btn"
+                                       aria-label="Відгуки" ng-click="vm.scrollToComments()">
+                                Відгуки
+                            </md-button>
                             <md-button ng-show="!vm.formVisible" class="  order-btn"
                                        aria-label="Play" ng-click="vm.showForm()">
                                 Записатись
@@ -88,5 +85,48 @@
             </md-card>
         </div>
     </div>
+
 </div>
 
+<div id="a001" layout="row" layout-align="center">
+
+    <div flex="75" flex-xs="100" flex-sm="92" layout-align="center center">
+        <a id="comments"></a>
+        <div flex layout layout-wrap layout-align="center ">
+            <h3>Відгуки</h3>
+        </div>
+        <div layout layout-wrap layout-align=" start">
+            <md-list class="md-dense" flex>
+                <md-divider></md-divider>
+                <md-list-item class="md-2-line" ng-repeat="comment in vm.course.comments track by $index">
+                    <md-divider></md-divider>
+                    <div class="md-list-item-text md-padding" layout="column">
+                        <b class=" md-padding">{{ comment.name }}</b>
+                        <h3 class=" md-padding">{{ comment.text }}</h3>
+                    </div>
+                </md-list-item>
+
+            </md-list>
+        </div>
+        <div flex layout layout-wrap layout-align="center ">
+            <h3>Додати відгук</h3>
+        </div>
+        <div class="md-padding" layout="column" layout-wrap layout-align="center ">
+
+            <md-input-container class="md-block ">
+                <label for="name">Ім`я </label>
+                <input id="name" ng-model="vm.newComment.name" name="name"/>
+                <!--TODO add validation-->
+            </md-input-container>
+            <md-input-container class="md-block">
+
+                <label for="text">Відгук</label>
+                <input id="text" ng-model="vm.newComment.text" type="text" name="text">
+            </md-input-container>
+            <div layout="row" layout-align="end center" md-whiteframe="4">
+                <md-button ng-click="vm.submitComment()" class="  order-btn">Зберегти</md-button>
+            </div>
+
+        </div>
+    </div>
+</div>

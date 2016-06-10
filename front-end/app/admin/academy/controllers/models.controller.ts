@@ -38,15 +38,15 @@ export class AcademyModelController {
     }
 
     createModel(form:ng.IFormController):void {
-        this.$log.debug("createCourse ...$valid" + form.$valid);
+        this.$log.debug("createModel ...$valid" + form.$valid);
         if (form.$valid) {
             this.newModelModel.$save()
                 .then((model)=> {
-                    this.$log.debug("success createCourse...");
+                    this.$log.debug("success createModel...");
                     this.models.push(model);
                 })
                 .catch((err)=> {
-                    this.$log.debug("fail createCourse..." + err);
+                    this.$log.debug("fail createModel..." + err);
                 })
                 .finally(()=> {
                     this.showModelCreateForm = false;

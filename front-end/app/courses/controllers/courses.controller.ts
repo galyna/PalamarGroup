@@ -16,6 +16,7 @@ export class CoursesController {
     courses:ICourse[];
     calendarDirection = 'horizontal';
     coursesDateMap:ICourseDates[];
+    
 
     constructor($scope, private $sce, private $location, private pgCalendarData:IPgCalendarDataService,
                 private CourseResource:ICourseResource, private $mdMedia) {
@@ -26,7 +27,6 @@ export class CoursesController {
         })
         
         this.getCourses();
-
     }
 
     setCoursesCalendarTemplate(picture,name) {
