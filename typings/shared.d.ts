@@ -51,6 +51,8 @@ declare module pg {
             comment:string,
             admin_comment:string,
             event_id: string,
+            event_name: string,
+            event_dates: string[],
             answered: boolean,
             booked: boolean
         }
