@@ -89,7 +89,7 @@ class EditOrderDialogController {
     }
 }
 
-class AdminOrdersController {
+export class AdminOrdersController {
 
     static $inject = ["$filter", "$mdDialog", "$mdToast", "$mdMedia"];
 

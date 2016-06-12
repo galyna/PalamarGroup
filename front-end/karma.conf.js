@@ -10,7 +10,9 @@ module.exports = function (config) {
             config: {
                 paths: {
                     'angular-mocks': 'node_modules/angular-mocks/angular-mocks.js',
-                    'phantomjs-polyfill': 'node_modules/phantomjs-polyfill/bind-polyfill.js'
+                    'phantomjs-polyfill': 'node_modules/phantomjs-polyfill/bind-polyfill.js',
+                    'testData': 'tests/testData.js'
+
                 }
             },
             serveFiles: [
@@ -24,7 +26,9 @@ module.exports = function (config) {
                 'node_modules/angular-messages/angular-messages.js',
                 'node_modules/angular-material/angular-material.js',
                 'node_modules/ng-file-upload/dist/ng-file-upload.js',
-                'node_modules/angular-mocks/angular-mocks.js'
+                'node_modules/ng-img-crop-full-extended/compile/minified/ng-img-crop.js',
+                'node_modules/angular-mocks/angular-mocks.js',
+                'tests/testData.js'
             ]
         },
 
