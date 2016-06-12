@@ -1,7 +1,7 @@
 import {uiModule} from "../../app/ui/ui.module";
 import {chooseFileButtonDirectiveName} from "../../app/ui/choose.file.button.directive";
 
-describe(uiModule.name, () => {
+describe(uiModule.name + " module", () => {
         describe(chooseFileButtonDirectiveName, () => {
 
             let $scope, $compile;
@@ -43,6 +43,5 @@ describe(uiModule.name, () => {
 
 
         });
-
 });
 
