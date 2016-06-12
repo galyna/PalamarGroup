@@ -14,6 +14,8 @@ import {Model} from '../models/model';
 import {SalonClient} from '../models/salon.client';
 import {Comment} from '../models/comment';
 import {emailEndpoint} from "./email.endpoint";
+import IOrder = pg.models.IOrder;
+import {orderOptions} from "./order.endpoint";
 import {courseApi} from "./course.endpoint";
 
 let api = express.Router();
@@ -65,7 +67,7 @@ api.use('/course/:id', (req: any, res, next) => {
 }, courseApi);
 
 restify.serve(api, Model, Object.assign({}, readOnlyOptions));
-restify.serve(api, Order, Object.assign({}, readOnlyOptions));
+restify.serve(api, Order, orderOptions);
 restify.serve(api, SalonClient, Object.assign({}, readOnlyOptions));
 restify.serve(api, Comment, Object.assign({}, readOnlyOptions));
 api.use('/user', userEndpoint);

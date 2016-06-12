@@ -1,6 +1,6 @@
 import {Document, Schema, model} from "mongoose";
 
-interface IOrderModel extends pg.models.IOrder, Document {
+export interface IOrderModel extends pg.models.IOrder, Document {
     _id: any;
 }
 
@@ -9,12 +9,14 @@ let OrderSchema = new Schema({
     name: String, 
     phone: String,
     email: String,
-    date: {type:Date, default: Date.now},
-    comment:String,
-    admin_comment:String,
-    event_id: { type: Schema.Types.ObjectId, ref: 'Course' },
-    answered: {type:Boolean, default: false},
-    booked:{type:Boolean, default: false},
+    date: { type: Date, default: Date.now, required: true, index: true },
+    comment: String,
+    admin_comment: String,
+    event_id: { type: Schema.Types.ObjectId, ref: 'Course', required: true, index: true },
+    event_name: { type: String, required: true },
+    event_dates: [Date],
+    answered: { type: Boolean, default: false, index: true },
+    booked: { type: Boolean, default: false },
 });
 
 export var Order = model<IOrderModel>('Order', OrderSchema);

@@ -29,6 +29,7 @@ import {
     SalonClientFormComponentName,
     SalonClientFormComponentOptions
 } from "./academy/components/salon.client.form.component";
+import {AdminOrdersComponentName, AdminOrdersComponentOptions} from "./academy/components/orders.component";
 
 
 let app = angular.module('admin', [
@@ -50,6 +51,7 @@ let app = angular.module('admin', [
     .controller(LeftMenuController.componentName, LeftMenuController)
     .service(DeliveryService.componentName, DeliveryService)
     .component(EmailAdvComponentName, EmailAdvComponentOptions)
+    .component(AdminOrdersComponentName, AdminOrdersComponentOptions)
     .component(SalonClientFormComponentName, SalonClientFormComponentOptions);
 
 export let adminModule = app;

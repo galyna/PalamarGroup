@@ -5,6 +5,7 @@ import {AcademyDeliveryController} from './academy/controllers/delivery.controll
 import {AcademyContactsController} from './academy/controllers/contacts.controller';
 import {AdminController} from './controllers/admin.controller';
 import {AcademyCommentController} from "./academy/controllers/comments.controller";
+import {OrderResourceName, IOrderResource} from "../resources/order.resource";
 
 adminRoutes.$inject = ['$routeProvider'];
 export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
@@ -25,9 +26,10 @@ export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
             controllerAs: "vm"
         })
         .when('/admin/academy/orders', {
-            templateUrl: 'app/admin/academy/views/orders.html',
-            controller: AcademyOrdersController.componentName,
-            controllerAs: "vm"
+            template: '<pg-admin-orders orders="$resolve.orders"></pg-admin-orders>',
+            resolve: {
+                orders: [OrderResourceName, (orderResource: IOrderResource) => orderResource.query()]
+            }
         })
         .when('/admin/academy/models', {
             templateUrl: 'app/admin/academy/views/models.html',

@@ -31,9 +31,9 @@ export class CourseController {
                 private OrderResource:IOrderResource, private mediaObserver:IMediaObserverFactory,
                 private mdDialog:ng.material.IDialogService, private Upload:ng.angularFileUpload.IUploadService,
                 private $timeout:ng.ITimeoutService, private ModelResource:IModelResource,
-                private constants:IConstants, private CommentResource:ICommentResource,private $anchorScroll:ng.IAnchorScrollService) {
+                private constants:IConstants, private CommentResource:ICommentResource, private $anchorScroll:ng.IAnchorScrollService) {
 
-        this.course = CourseResource.get( {id: $routeParams.id, populate: "comments"} );
+        this.course = CourseResource.get({id: $routeParams.id, populate: "comments"});
 
         this.order = new OrderResource();
 
@@ -45,7 +45,7 @@ export class CourseController {
 
 
     backToHome():void {
-        this.$location.url( '/home' );
+        this.$location.url('/home');
     }
 
     scrollToComments():void {
@@ -65,34 +65,34 @@ export class CourseController {
 
     saveModelPhoto(file, photoName):void {
         if (!file) return;
-        this.fileUpload( file ).then( (response)=> {
+        this.fileUpload(file).then((response)=> {
             this.newModel[photoName] = response.data.url;
-        } ).catch( (err)=> {
-            this.$log.debug( "fail upload file..." + err );
-        } )
+        }).catch((err)=> {
+            this.$log.debug("fail upload file..." + err);
+        })
     }
 
     fileUpload(file) {
-        return this.Upload.upload<{url:string}>( {
+        return this.Upload.upload<{url:string}>({
             method: 'POST',
             url: this.constants.photoUrl,
             data: {file: file}
-        } );
+        });
     }
 
     submitModel():void {
         this.newModel.$save()
-            .then( () => {
+            .then(() => {
                 this.showModelConfirm();
-            } )
-            .catch( (err) => {
-                    this.$log.error( err );
+            })
+            .catch((err) => {
+                    this.$log.error(err);
                 }
-            ).finally( ()=> {
-            this.$timeout( ()=> {
+            ).finally(()=> {
+            this.$timeout(()=> {
                 this.hideModelForm();
-            } );
-        } );
+            });
+        });
 
     }
 
@@ -100,11 +100,11 @@ export class CourseController {
 
         this.mdDialog.show(
             this.mdDialog.alert()
-                .clickOutsideToClose( true )
-                .title( 'Вашу заявку стати моделлю прийнято. ' )
-                .textContent( 'На протязі дня з вами зв`яжеться координатор курсів. Дякуємо.' )
-                .ariaLabel( 'Вашу заявку прийнято.j ' )
-                .ok( 'Закрити' )
+                .clickOutsideToClose(true)
+                .title('Вашу заявку стати моделлю прийнято. ')
+                .textContent('На протязі дня з вами зв`яжеться координатор курсів. Дякуємо.')
+                .ariaLabel('Вашу заявку прийнято.j ')
+                .ok('Закрити')
         );
 
     }
@@ -112,11 +112,11 @@ export class CourseController {
     showOrderConfirm():void {
         this.mdDialog.show(
             this.mdDialog.alert()
-                .clickOutsideToClose( true )
-                .title( 'Вашу заявку прийнято. ' )
-                .textContent( 'На протязі дня з вами зв`яжеться координатор курсів. Дякуємо.' )
-                .ariaLabel( 'Вашу заявку прийнято. ' )
-                .ok( 'Закрити' )
+                .clickOutsideToClose(true)
+                .title('Вашу заявку прийнято. ')
+                .textContent('На протязі дня з вами зв`яжеться координатор курсів. Дякуємо.')
+                .ariaLabel('Вашу заявку прийнято. ')
+                .ok('Закрити')
         );
 
     }
@@ -124,31 +124,36 @@ export class CourseController {
     submitOrder():void {
         if (this.order.email || this.order.phone || this.order.name) {
             this.order.event_id = this.course._id;
+            this.order.event_name = this.course.name;
+            this.order.event_dates = this.course.courseModulesDates;
             this.order.date = new Date().toJSON();
             this.order.$save()
-                .then( () => {
+                .then(() => {
                     this.hideForm();
                     this.showOrderConfirm();
-                } )
-                .catch( (err) => {
-                    this.$log.error( err );
-                } );
+                })
+                .catch((err) => {
+                    this.$log.error(err);
+                })
+                .finally(() => {
+                    this.order = new this.OrderResource();
+                });
         }
     }
 
     submitComment():void {
 
-        this.CourseResource.addComment( {id: this.course._id}, this.newComment ).$promise.then( () => {
-                this.showCommentConfirm();
-            } )
-            .catch( (err) => {
-                    this.$log.error( err );
+        this.CourseResource.addComment({id: this.course._id}, this.newComment).$promise.then(() => {
+            this.showCommentConfirm();
+        })
+            .catch((err) => {
+                    this.$log.error(err);
                 }
-            ).finally( ()=> {
-            this.$timeout( ()=> {
+            ).finally(()=> {
+            this.$timeout(()=> {
                 this.newComment = new this.CommentResource();
-            } );
-        } );
+            });
+        });
 
 
     }
@@ -156,11 +161,11 @@ export class CourseController {
     showCommentConfirm():void {
         this.mdDialog.show(
             this.mdDialog.alert()
-                .clickOutsideToClose( true )
-                .title( 'Дякуємо за відгук.' )
-                .textContent( 'Ваш відгук з`явиться на сайті після модерації.' )
-                .ariaLabel( 'Дякуємо за відгук.' )
-                .ok( 'Закрити' )
+                .clickOutsideToClose(true)
+                .title('Дякуємо за відгук.')
+                .textContent('Ваш відгук з`явиться на сайті після модерації.')
+                .ariaLabel('Дякуємо за відгук.')
+                .ok('Закрити')
         );
 
     }
@@ -174,16 +179,16 @@ export class CourseController {
     };
 
     showMediaObserver(items, index):void {
-        this.mediaObserver.observe( items, index );
+        this.mediaObserver.observe(items, index);
     }
 
     private getBlankModel() {
-        return new this.ModelResource( {
+        return new this.ModelResource({
             fasPhotoUrl: '../content/images/fas.jpg',
             profilePhotoUrl: '../content/images/prifile.jpg',
             backPhotoUrl: '../content/images/back.jpg',
             fullSizePhotoUrl: '../content/images/fullsize.jpg'
-        } );
+        });
     }
 
 }
