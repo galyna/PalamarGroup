@@ -1,21 +1,10 @@
 import {Router} from "express";
 import {Course} from "../models/course";
-import {Comment} from "../models/comment";
+
 
 let api = Router();
 
 api.route('/comment')
-    //course comments list
-    .get(async(req, res) => {
-        let params = req.params; //{id:''}
-        try {
-            let comments = await Course.find({"_id": params.id}, {"_id": 1, "comments": 1});
-            res.json({comments: comments});
-        } catch (err) {
-            res.status(500).json(err);
-        }
-    })
-    //create comment in course
     .post(async(req: any, res) => {
         let course, comment;
         try {
@@ -23,13 +12,28 @@ api.route('/comment')
         } catch (err) {
             res.status(500).json(err);
         }
-        try{
-            comment = await new Comment(req.body).save();
-        }catch (err) {
+
+        try {
+            course.comments.push(req.body);
+            await course.save();
+            res.json({course: course});
+        } catch (err) {
             res.status(500).json(err);
         }
+
+    })
+    //create comment in course
+    .put(async(req: any, res) => {
+        let course, comment;
         try {
-            course.comments.push(comment.id);
+            course = await Course.findOne({"_id": req.courseId});
+        } catch (err) {
+            res.status(500).json(err);
+        }
+
+        try {
+            comment =  course.comments.id(req.body._id);
+            course.comments.splice(course.comments.indexOf(comment),1,req.body);
             await course.save();
             res.json({course: course});
         } catch (err) {
@@ -38,4 +42,28 @@ api.route('/comment')
 
     });
 
+api.route('/comment/:commentId')
+    .delete(async(req: any, res) => {
+        let course, comment;
+        try {
+            course = await Course.findOne({"_id": req.courseId});
+        } catch (err) {
+            res.status(500).json(err);
+        }
+
+        try {
+
+          course.comments.id(req.params.commentId).remove();
+            await course.save();
+            res.json({course: course});
+        } catch (err) {
+            res.status(500).json(err);
+        }
+
+    })
+
+    //create comment in course
+
+
 export let courseApi = api;
+

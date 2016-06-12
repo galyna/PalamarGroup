@@ -1,50 +1,103 @@
 /**
  * Created by Galyna on 14.05.2016.
  */
-import {IComment, ICommentResource, CommentResourceName} from "../../../resources/comment.resource";
+import {ICourse, ICourseResource, CourseResourceName} from "../../../resources/course.resource";
+import IComment = pg.models.IComment;
+
+interface IConfirmMsg {
+    isVisible:string;
+    isNotVisible:string;
+    isAnswered:string;
+    isNotAnswered:string
+}
+
 
 export class AcademyCommentController {
 
-    static $inject = [CommentResourceName, '$log'];
+    static $inject = [CourseResourceName, '$log', '$mdToast','$location'];
     static componentName = 'AcademyCommentController';
 
-    comments:IComment[];
-    newComment:IComment;
+    comments:any;
 
-    constructor(private CommentResource: ICommentResource, private $log:ng.ILogService) {
-        this.comments = this.CommentResource.query();
-        this.newComment= new CommentResource();
+    confirmMsg:IConfirmMsg;
+
+    constructor(private CourseResource:ICourseResource, private $log:ng.ILogService,
+                private $mdToast:ng.material.IToastService,private $location:ng.ILocationService) {
+        this.comments = this.CourseResource.getComments();
+
+        this.setConfirmMsg();
     }
-    createComment(form:ng.IFormController):void {
-        this.$log.debug("createComment ...$valid" + form.$valid);
-        if (form.$valid) {
-            this.newComment.$save()
-                .then((comment)=> {
-                    this.$log.debug("success createComment...");
-                    this.comments.push(comment);
-                })
-                .catch((err)=> {
-                    this.$log.debug("fail createComment..." + err);
-                });
+
+    showCourse(id:string):void {
+        this.$location.url( '/course/'+id );
+    }
+
+    deleteComment(comment:any):void {
+
+        this.CourseResource.deleteComment( {id: comment.courseId, commentId: comment._id} ).$promise.then( () => {
+                this.comments.splice( this.comments.indexOf( comment ), 1 );
+            } )
+            .catch( (err) => {
+                    this.$log.error( err );
+                }
+            )
+
+
+    }
+
+    //noinspection JSMethodCanBeStatic
+    showComment(comment:any):void {
+        let newComment={
+            _id:comment._id,
+            name: comment.name,
+            text: comment.text,
+            date:comment.date,
+            isVisible:! comment.isVisible,
+            isModerated: comment.isModerated,
         }
-    }
-
-    deleteComment(comment: IComment):void {
-        comment.$delete().then(()=> {
-            this.comments.splice(this.comments.indexOf(comment), 1);
-        });
+        this.CourseResource.editComment( {id: comment.courseId}, newComment ).$promise.then( () => {
+                if (comment.isVisible) {
+                    this.$mdToast.showSimple( this.confirmMsg.isVisible );
+                } else {
+                    this.$mdToast.showSimple( this.confirmMsg.isNotVisible );
+                }
+            } )
+            .catch( (err) => {
+                    this.$mdToast.showSimple( err.message );
+                }
+            )
     }
 
     //noinspection JSMethodCanBeStatic
-    showComment(comment:IComment):void {
-        comment.isVisible=true;
-        comment.$save();
-    }
-    
-    //noinspection JSMethodCanBeStatic
-    answerComment(comment:IComment):void {
-        comment.answered=true;
-        comment.$save();
+    moderateComment(comment:any):void {
+        let newComment={
+            _id:comment._id,
+            name: comment.name,
+            text: comment.text,
+            date:comment.date,
+            isVisible: comment.isVisible,
+            isModerated:! comment.isModerated,
+        }
+        this.CourseResource.editComment( {id: comment.courseId}, newComment ).$promise.then( () => {
+                if (comment.isModerated) {
+                    this.$mdToast.showSimple( this.confirmMsg.isAnswered );
+                } else {
+                    this.$mdToast.showSimple( this.confirmMsg.isNotAnswered );
+                }
+            } )
+            .catch( (err) => {
+                    this.$mdToast.showSimple( err.message );
+                }
+            )
+
     }
 
+    private setConfirmMsg():void {
+        this.confirmMsg = {
+            isVisible: 'Дозволено показати відгук на сайті',
+            isNotVisible: 'Заборонено показувати відгук на сайті',
+            isAnswered: 'Відгук перевірено',
+            isNotAnswered: 'Відгук не перевірено'
+        };
+    }
 }

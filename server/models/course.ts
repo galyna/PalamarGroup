@@ -15,6 +15,14 @@ let VideoSchema = new Schema({
     order: Number
 });
 
+let CommentSchema = new Schema({
+    name: String,
+    text: String,
+    date:Date,
+    isVisible: {type:Boolean, default: false},
+    isModerated: {type:Boolean, default: false},
+});
+
 let CourseSchema = new Schema({
     name: String,
     description: String,
@@ -29,10 +37,7 @@ let CourseSchema = new Schema({
     },
     courseModulesDates: [Date],
     isVisible: Boolean,
-    comments: [{
-        type: Schema.Types.ObjectId,
-        ref: "Comment"
-    }]
+    comments: [CommentSchema]
 });
 
 CourseSchema.post('remove', (course:ICourseModel) => {

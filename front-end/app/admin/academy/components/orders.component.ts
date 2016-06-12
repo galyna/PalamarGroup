@@ -1,6 +1,7 @@
 import {IOrderResource, IOrder} from "../../../resources/order.resource";
 let template = `
 <md-list flex>
+    <md-subheader class="md-no-sticky">Записи на курс</md-subheader>
     <md-list-item class="md-2-line" ng-repeat="order in $ctrl.orders" ng-click="$ctrl.showEditOrderDialog($event, order)">
         <div class="md-list-item-text" layout="column">
             <h3>{{::order.name||'Анонім'}} {{::order.phone||order.email}}</h3>

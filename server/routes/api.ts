@@ -12,11 +12,11 @@ import {Course} from '../models/course';
 import {Order} from '../models/order';
 import {Model} from '../models/model';
 import {SalonClient} from '../models/salon.client';
-import {Comment} from '../models/comment';
 import {emailEndpoint} from "./email.endpoint";
 import IOrder = pg.models.IOrder;
 import {orderOptions} from "./order.endpoint";
 import {courseApi} from "./course.endpoint";
+import {courseGetCommentsApi} from "./comment.endpoint";
 
 let api = express.Router();
 
@@ -59,17 +59,18 @@ let readOnlyOptions = {
 };
 
 restify.serve(api, Contact, Object.assign({}, readOnlyOptions));
-
+api.use('/course/comments', courseGetCommentsApi);
 restify.serve(api, Course);
 api.use('/course/:id', (req: any, res, next) => {
     req.courseId = req.params.id;
+ 
     next();
 }, courseApi);
 
 restify.serve(api, Model, Object.assign({}, readOnlyOptions));
 restify.serve(api, Order, orderOptions);
 restify.serve(api, SalonClient, Object.assign({}, readOnlyOptions));
-restify.serve(api, Comment, Object.assign({}, readOnlyOptions));
+
 api.use('/user', userEndpoint);
 api.use('/photo', photoEndpoint);
 api.use('/email', emailEndpoint);

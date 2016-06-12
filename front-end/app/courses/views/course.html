@@ -92,13 +92,13 @@
 
     <div flex="75" flex-xs="100" flex-sm="92" layout-align="center center">
         <a id="comments"></a>
-        <div flex layout layout-wrap layout-align="center ">
+        <div flex layout layout-wrap layout-align="center " ng-if="vm.showComments()">
             <h3>Відгуки</h3>
         </div>
         <div layout layout-wrap layout-align=" start">
             <md-list class="md-dense" flex>
                 <md-divider></md-divider>
-                <md-list-item class="md-2-line" ng-repeat="comment in vm.course.comments track by $index">
+                <md-list-item class="md-2-line" ng-if="comment.isVisible" ng-repeat="comment in vm.course.comments track by $index">
                     <md-divider></md-divider>
                     <div class="md-list-item-text md-padding" layout="column">
                         <b class=" md-padding">{{ comment.name }}</b>
@@ -124,6 +124,7 @@
                 <input id="text" ng-model="vm.newComment.text" type="text" name="text">
             </md-input-container>
             <div layout="row" layout-align="end center" md-whiteframe="4">
+                <md-button ng-click="vm.newComment.text='';vm.newComment.name='';" class=" md-raised detail-cancel-btn">Cкасувати</md-button>
                 <md-button ng-click="vm.submitComment()" class="  order-btn">Зберегти</md-button>
             </div>
 

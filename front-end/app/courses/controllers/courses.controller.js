@@ -38,8 +38,10 @@ System.register(["../../resources/course.resource"], function(exports_1, context
                     this.courses = this.CourseResource.query();
                     this.courses.$promise.then(function (courses) {
                         angular.forEach(courses, function (course) {
-                            _this.createDatesMap(course);
-                            _this.setCalendarContent(course);
+                            if (course.isVisible) {
+                                _this.createDatesMap(course);
+                                _this.setCalendarContent(course);
+                            }
                         });
                     });
                 };

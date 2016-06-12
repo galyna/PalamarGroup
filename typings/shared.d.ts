@@ -90,8 +90,9 @@ declare module pg {
             _id?: any;
             name: string;
             text: string;
+            date:string;
             isVisible: boolean;
-            answered: boolean;
+            isModerated: boolean;
         }
     }
 }
