@@ -3,11 +3,11 @@ import {IRootScope} from "../typings";
 
 httpInterceptorConfig.$inject = ['$httpProvider'];
 export function httpInterceptorConfig($httpProvider: ng.IHttpProvider) {
-    $httpProvider.interceptors.push(httpInterceptor);
+    $httpProvider.interceptors.push(loadingInterceptor);
 }
 
-httpInterceptor.$inject = ['$q', '$rootScope'];
-function httpInterceptor ($q: ng.IQService, $rootScope: IRootScope) {
+loadingInterceptor.$inject = ['$q', '$rootScope'];
+function loadingInterceptor ($q: ng.IQService, $rootScope: IRootScope) {
     return {
         request: function (config: ng.IRequestConfig) {
             $rootScope.loading = true;

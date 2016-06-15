@@ -18,7 +18,6 @@ import {coursesModule} from './courses/courses.module';
 import './templates';
 
 //components
-import {httpInterceptorConfig} from './app.interceptor';
 import {routesConfig} from './app.routes';
 import {appConfig, materialConfig} from './app.config';
 import {appRun} from './app.run';
@@ -40,7 +39,6 @@ let app = angular.module('yuliaPalamarApp', [
     adminModule.name,
     coursesModule.name
 ])
-    .config(httpInterceptorConfig)
     .config(routesConfig)
     .config(appConfig)
     .config(materialConfig)

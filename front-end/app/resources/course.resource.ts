@@ -8,9 +8,9 @@ export interface ICourse extends ng.resource.IResource<ICourse>, pg.models.ICour
 }
 
 export interface ICourseResource extends ng.resource.IResourceClass<ICourse> {
-    addComment({id:string}, comment:any):ICourse;
-    editComment({id:string}, comment:any):ICourse;
-    deleteComment({id:string, commentId:string}):ICourse;
+    addComment(params: {id:string}, comment:any):ICourse;
+    editComment(params: {id:string}, comment:any):ICourse;
+    deleteComment(params: {id: string, commentId: string}):ICourse;
     getComments():[any];
 }
 
@@ -37,11 +37,11 @@ export function CourseResource($resource:ng.resource.IResourceService, constants
         url: `${constants.apiUrl}/course/comments`,
 
     };
-    return <ICourseResource>$resource( `${constants.apiUrl}/course/:id`, {id: '@_id'},
+    return <ICourseResource>$resource(`${constants.apiUrl}/course/:id`, {id: '@_id'},
         {
             addComment: addCommentDescriptor,
             getComments: getCommentsDescriptor,
             deleteComment: deleteCommentDescriptor,
             editComment: editCommentDescriptor
-        } );
+        });
 }

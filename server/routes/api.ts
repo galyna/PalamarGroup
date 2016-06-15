@@ -17,39 +17,42 @@ import IOrder = pg.models.IOrder;
 import {orderOptions} from "./order.endpoint";
 import {courseApi} from "./course.endpoint";
 import {courseGetCommentsApi} from "./comment.endpoint";
+import {Request} from "express-serve-static-core";
+import {Response} from "express";
 
 let api = express.Router();
 
-restify.defaults({
+let restifyDefaults = {
     prefix: '',
     version: '',
     limit: 20, //max and default query limit
     findOneAndUpdate: false,
     findOneAndRemove: false,
     //distinct queries can't be used with totalCountHeader enabled
-    // totalCountHeader: true,
+    totalCountHeader: true,
     onError: (err, req, res) => {
         const statusCode = req.erm.statusCode; // 400 or 404
         res.status(statusCode).json({
             message: err.message
         });
     },
-    // postRead: function (req, res, next) {
-    //     const result = req.erm.result;         // unfiltered document, object or array
-    //     const statusCode = req.erm.statusCode; // 200
-    //
-    //     if(statusCode == 200 && Array.isArray(result)){
-    //         req.erm.result = {
-    //             data: result,
-    //             limit: parseInt(req.query.limit) || 20, //TODO: remove hardcode
-    //             sort: req.query.sort,
-    //             skip: req.query.skip || 0,
-    //             totalCount: req.erm.totalCount
-    //         }
-    //     }
-    //     next();
-    // }
-});
+
+    postRead: (req, res: Response, next) => {
+        if(req.erm.totalCount){
+            //TODO: remove hardcode
+            let perPage = req.query.perPage || 20;
+            let page = req.query.page || 1;
+            res.set({
+                'X-Total-Count': req.erm.totalCount,
+                'X-Per-Page': perPage,
+                'X-Page': page
+            });
+        }
+        next();
+    }
+};
+
+restify.defaults(restifyDefaults);
 
 
 let readOnlyOptions = {
@@ -58,14 +61,24 @@ let readOnlyOptions = {
     preDelete: [currentUser.is('admin')]
 };
 
+//expr-mongoose-restify understands only skip/limit
+api.use((req, res, next) => {
+    //TODO: remove hardcode
+    req.query.limit = (req.query.perPage || 20) + '';
+    if(req.query.page){
+        req.query.skip = (req.query.limit * (req.query.page - 1)) + "";
+    }
+    next();
+});
+
 restify.serve(api, Contact, Object.assign({}, readOnlyOptions));
+
 api.use('/course/comments', courseGetCommentsApi);
-restify.serve(api, Course);
 api.use('/course/:id', (req: any, res, next) => {
     req.courseId = req.params.id;
- 
     next();
 }, courseApi);
+restify.serve(api, Course);
 
 restify.serve(api, Model, Object.assign({}, readOnlyOptions));
 restify.serve(api, Order, orderOptions);

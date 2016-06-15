@@ -1,21 +1,23 @@
 import {adminModule} from "../../../../app/admin/admin.module";
-import {AdminOrdersComponentName, AdminOrdersController} from "../../../../app/admin/academy/components/orders.component";
+import {
+    AdminOrdersComponentName,
+    AdminOrdersController
+} from "../../../../app/admin/academy/components/orders.component";
 import {IOrder, OrderResourceName, IOrderResource} from "../../../../app/resources/order.resource";
 import {testData} from "testData";
 
 
 describe(adminModule.name + " module", () => {
     describe(AdminOrdersComponentName, () => {
-        let scope, $componentController: ng.IComponentControllerService,
-            orders: IOrder[], component: AdminOrdersController,
-            orderResource: IOrderResource;
+        let $componentController:ng.IComponentControllerService,
+            component:AdminOrdersController, orderResource:IOrderResource,
+            orders:IOrder[];
 
         beforeEach(() => {
             angular.mock.module(adminModule.name);
         });
 
         beforeEach(inject(($injector) => {
-            scope = $injector.get('$rootScope').$new();
             $componentController = $injector.get('$componentController');
             orderResource = $injector.get(OrderResourceName);
             orders = testData.Order.map((rawOrder) => {
@@ -24,7 +26,7 @@ describe(adminModule.name + " module", () => {
         }));
 
         it("getOrderTitle should return name + start date + end date", () => {
-            component = $componentController<AdminOrdersController, {orders: IOrder[]}>(AdminOrdersComponentName,
+            component = $componentController<AdminOrdersController, {orders:IOrder[]}>(AdminOrdersComponentName,
                 null,
                 {orders: []}
             );

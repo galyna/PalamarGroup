@@ -30,6 +30,7 @@ import {
     SalonClientFormComponentOptions
 } from "./academy/components/salon.client.form.component";
 import {AdminOrdersComponentName, AdminOrdersComponentOptions} from "./academy/components/orders.component";
+import {uiModule} from "../ui/ui.module";
 
 
 let app = angular.module('admin', [
@@ -37,8 +38,10 @@ let app = angular.module('admin', [
     'ngMaterial',
     'ngFileUpload',
     'ngImgCrop',
+
     coreModule.name,
-    resourcesModule.name
+    resourcesModule.name,
+    uiModule.name
 ])
     .config(adminRoutes)
     .controller(AdminController.componentName, AdminController)

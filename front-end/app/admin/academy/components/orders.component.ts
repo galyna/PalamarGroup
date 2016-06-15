@@ -1,5 +1,15 @@
-import {IOrderResource, IOrder} from "../../../resources/order.resource";
+import {IOrderResource, IOrder, OrderResourceName} from "../../../resources/order.resource";
+import {PagingServiceName, PagingService} from "../../../ui/admin.paging";
 let template = `
+<md-toolbar md-scroll-shrink ng-if="true">
+    <div class="md-toolbar-tools">
+      <pg-admin-paging
+    params="$ctrl.paging"
+    on-prev="$ctrl.prev()"
+    on-next="$ctrl.next()"
+    ></pg-admin-paging>
+    </div>
+  </md-toolbar>
 <md-list flex>
     <md-subheader class="md-no-sticky">Записи на курс</md-subheader>
     <md-list-item class="md-2-line" ng-repeat="order in $ctrl.orders" ng-click="$ctrl.showEditOrderDialog($event, order)">
@@ -12,7 +22,6 @@ let template = `
         <!--<md-icon class="md-secondary" md-svg-icon="action:ic_delete_24px"></md-icon>-->
         <md-divider></md-divider>
     </md-list-item>
-    <p><a ng-click="$ctrl.loadMore()" class="more-link">Показати більше</a></p>
 </md-list>
 `;
 
@@ -70,9 +79,10 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 
 class EditOrderDialogController {
 
-    private order: IOrder;
-    private originalOrder: IOrder;
-    constructor(private $mdDialog:ng.material.IDialogService, order:IOrder){
+    private order:IOrder;
+    private originalOrder:IOrder;
+
+    constructor(private $mdDialog:ng.material.IDialogService, order:IOrder) {
         this.order = angular.copy(order);
         this.originalOrder = order;
     }
@@ -91,16 +101,22 @@ class EditOrderDialogController {
 
 export class AdminOrdersController {
 
-    static $inject = ["$filter", "$mdDialog", "$mdToast", "$mdMedia"];
+    static $inject = ["$filter", "$mdDialog", "$mdToast", "$mdMedia", OrderResourceName, PagingServiceName];
 
-    orders: IOrderResource[];
+    orders:IOrder[];
+    paging:any;
 
-    constructor(private $filter: ng.IFilterService, private $mdDialog:ng.material.IDialogService, private $mdToast: ng.material.IToastService,
-                private $mdMedia:ng.material.IMedia) {
+    constructor(private $filter:ng.IFilterService, private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService,
+                private $mdMedia:ng.material.IMedia, private orderResource:IOrderResource, 
+                private pagingService: PagingService) {
 
     }
 
-    showEditOrderDialog(ev: MouseEvent, order: IOrder) {
+    $onInit() {
+        this.showPage();
+    }
+
+    showEditOrderDialog(ev:MouseEvent, order:IOrder) {
         // var useFullScreen = (this.$mdMedia('sm') || this.$mdMedia('xs'));
         this.$mdDialog.show({
             controller: EditOrderDialogController,
@@ -117,22 +133,38 @@ export class AdminOrdersController {
         }).then((order) => this.saveOrder(order));
     }
 
-    saveOrder(order: IOrder){
+    saveOrder(order:IOrder) {
         order.$save().then(() => {
             this.$mdToast.showSimple(`Order saved`);
         }).catch((err) => {
             this.$mdToast.showSimple(err.message);
         });
     }
-    
-    getOrderTitle(order:IOrder){
+
+    getOrderTitle(order:IOrder) {
         let format = "yy.M.d";
         let firstDate = this.$filter('date')(order.event_dates[0], format);
         let lastDate = this.$filter('date')(order.event_dates[order.event_dates.length - 1], format);
         return order.event_name + " " + firstDate + "-" + lastDate;
     }
-}
 
+    prev() {
+        this.showPage(this.pagingService.prevPage());
+    }
+
+    next() {
+        this.showPage(this.pagingService.nextPage());
+    }
+
+    private showPage(page = 1) {
+        this.orders = this.orderResource.query({page: page},
+            (res, headers) => {
+                let {total, page, perPage} = this.pagingService.parseHeaders(headers);
+                this.pagingService.update({page: page, perPage: perPage, total: total});
+                this.paging = angular.copy(this.pagingService.params());
+            });
+    }
+}
 
 export let AdminOrdersComponentName = 'pgAdminOrders';
 export let AdminOrdersComponentOptions:ng.IComponentOptions = {
