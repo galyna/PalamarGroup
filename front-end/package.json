@@ -13,6 +13,7 @@
     "angular-resource": "^1.5.6",
     "angular-route": "^1.5.6",
     "angular-sanitize": "^1.5.6",
+    "angular-youtube-embed": "^1.2.0",
     "material-design-icons": "^2.2.3",
     "ng-file-upload": "^12.0.4",
     "ng-img-crop-full-extended": "^0.5.4",

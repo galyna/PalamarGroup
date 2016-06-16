@@ -1,5 +1,7 @@
 //modules
+import 'youtube-iframe-api';
 import 'angular';
+import 'angular-youtube-embed';
 import {pgCalendarModule} from '../calendar/calendar.module';
 
 //components
@@ -10,7 +12,10 @@ import {
     PagingServiceName, PagingService
 } from "./admin.paging";
 
-export let uiModule = angular.module('ui', [pgCalendarModule.name])
+export let uiModule = angular.module('ui', [
+    'youtube-embed',
+    pgCalendarModule.name
+])
     .factory(MediaObserverFactoryName, MediaObserverFactory)
     .directive(chooseFileButtonDirectiveName, chooseFileButtonDirectiveFactory)
     .service(PagingServiceName, PagingService)

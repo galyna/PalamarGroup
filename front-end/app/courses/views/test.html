@@ -1,30 +1,26 @@
-<div ng-include="'app/admin/academy/views/left.menu.html'"></div>
-<md-tabs>
-    <md-tab label="Контакти">
-        <div ng-repeat="item in vm.salons" ng-click="null" layout="row" class=" md-margin">
+<style>
+    .embed-responsive {
+        position: relative;
+        display: block;
+        height: 0;
+        padding: 0;
+        overflow: hidden;
+    }
 
-            <div layout="column">
-                <span ng-if="item.name"><b>ім`я:</b> {{item.name}}</span>
-                <span ng-if="item.phone"><b>телефон: </b>{{item.phone}}</span>
-                <span ng-if="item.email"><b>email</b>: <a href="mailto:{{item.email}}">{{item.email}}</a></span>
+    .embed-responsive.embed-responsive-16by9 {
+        padding-bottom: 56.25%;
+    }
 
-                <div layout="row" layout-align="center end">
-                    <md-button class="  md-raised" ng-click="vm.deleteSalon(item)">Видалити</md-button>
-                    <md-button class=" md-primary md-raised" ng-click="vm.showEditForm(item)">Редагувати
-                    </md-button>
-                </div>
-            </div>
-
-        </div>
-        <div flex ng-if="vm.showSalonEditForm"
-             ng-include="'app/admin/academy/views/salon.client.edit.form.html'"></div>
-    </md-tab>
-    <md-tab label="Додати контакт">
-        <div ng-include="'app/admin/academy/views/salon.client.create.form.html'"></div>
-    </md-tab>
-    <md-tab label="Email розсилка">
-        <md-card>
-            <md-card-content ng-include="'app/admin/academy/views/email.adv.form.html'"></md-card-content>
-        </md-card>
-    </md-tab>
-</md-tabs>
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+</style>
+<div class="embed-responsive embed-responsive-16by9">
+    <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}" video-id="'sMKoNBRZM1M'"></youtube-video>
+</div>
