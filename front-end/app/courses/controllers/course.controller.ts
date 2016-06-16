@@ -16,7 +16,7 @@ export class CourseController {
 
     static $inject = ['$log', '$routeParams', '$location', CourseResourceName,
         OrderResourceName, MediaObserverFactoryName, '$mdDialog', 'Upload',
-        '$timeout', ModelResourceName, 'constants', '$anchorScroll',];
+        '$timeout', ModelResourceName, 'constants', '$anchorScroll', "$filter"];
     static componentName = 'CourseController';
 
     course:ICourse;
@@ -25,6 +25,8 @@ export class CourseController {
     modelFormVisible:boolean;
     newModel:IModel;
     newComment:any;
+    localURL:string;
+    localContentURL:string;
 
 
     constructor(private $log:ng.ILogService, $routeParams:IRouteParams,
@@ -32,7 +34,7 @@ export class CourseController {
                 private OrderResource:IOrderResource, private mediaObserver:IMediaObserverFactory,
                 private mdDialog:ng.material.IDialogService, private Upload:ng.angularFileUpload.IUploadService,
                 private $timeout:ng.ITimeoutService, private ModelResource:IModelResource,
-                private constants:IConstants, private $anchorScroll:ng.IAnchorScrollService) {
+                private constants:IConstants, private $anchorScroll:ng.IAnchorScrollService, private $filter) {
 
         this.course = CourseResource.get( {id: $routeParams.id} );
 
@@ -41,9 +43,42 @@ export class CourseController {
         this.newComment = this.getBlankComment();
 
         this.newModel = this.getBlankModel();
-
+        
+      //  this.localURL = $location.absUrl();
+       // this.localContentURL= $location.protocol() + "://" + $location.host() + ":" + $location.port();
+        //TODO
+        this.localURL = 'http://54.191.26.39:8080';
+        this.localContentURL= 'http://54.191.26.39:8080';
     }
 
+    getFBDescription():string {
+        if (this.course.courseModulesDates) {
+            let desc = "Запрошуємо на курс, який проволиться у Львові. Дати проведення: ";
+            desc += this.course.courseModulesDates.map( (modulesDate)=> {
+                    return this.$filter( 'date' )( modulesDate, "dd.MM.yyyy" );
+                } ).join( ', ' ) + ". ";
+
+            desc += this.course.description;
+            return desc.slice( 0, 949 );
+
+        } else {
+            return "";
+        }
+        ;
+    }
+
+    getDates():string {
+        if (this.course.courseModulesDates) {
+
+            return this.course.courseModulesDates.map( (modulesDate)=> {
+                    return this.$filter( 'date' )( modulesDate, "dd.MM.yyyy" );
+                } ).join( ', ' ) + ". ";
+
+        } else {
+            return "";
+        }
+        ;
+    }
 
     backToHome():void {
         this.$location.url( '/home' );
@@ -55,11 +90,16 @@ export class CourseController {
         this.$anchorScroll();
     }
 
-    showComments():Boolean {
 
-        return this.course.comments.some( (element)=> {
-            return element.isVisible
-        } );
+    showComments():Boolean {
+        if (this.course.comments) {
+            return this.course.comments.some( function (value, index, _ary) {
+                return value.isVisible;
+            } );
+        } else {
+            return false;
+        }
+
     }
 
     showModelForm():void {
@@ -150,7 +190,7 @@ export class CourseController {
     }
 
     submitComment():void {
-        this.newComment.date= new Date();
+        this.newComment.date = new Date();
         this.CourseResource.addComment( {id: this.course._id}, this.newComment ).$promise.then( () => {
                 this.showCommentConfirm();
             } )

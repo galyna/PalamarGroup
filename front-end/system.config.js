@@ -21,6 +21,7 @@ System.config({
         'angular-material': 'node_modules/angular-material/angular-material.js',
         'ng-file-upload': 'node_modules/ng-file-upload/dist/ng-file-upload.js',
         'ng-img-crop-full-extended': 'node_modules/ng-img-crop-full-extended/compile/minified/ng-img-crop.js',
+        'angular-socialshare': 'node_modules/angular-socialshare/dist/angular-socialshare.js',
         'angular-youtube-embed': 'node_modules/angular-youtube-embed/src/angular-youtube-embed.js'
 
     },

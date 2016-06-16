@@ -12,7 +12,8 @@
         </md-input-container>
         <md-input-container class="md-block">
             <label for="description">Опис</label>
-            <input ng-model="vm.editCourseModel.description" id="description" name="description">
+            <textarea ng-model="vm.editCourseModel.description" id="description" name="description" required ></textarea>
+
         </md-input-container>
         <md-input-container class="md-block ">
             <label for="order">Порядок відображення</label>
@@ -84,8 +85,8 @@
                         <input id="photoName" ng-model="item.name" name="photoName"/>
                     </md-input-container>
                     <md-input-container class="md-block  ">
-                        <label for="ord">Порядок відображення</label>
-                        <input id="ord" ng-model="item.order" type="number"/>
+                        <label for="gord">Порядок відображення</label>
+                        <input id="gord" ng-model="item.order" type="number"/>
                     </md-input-container>
                     <md-button class="  md-raised"
                                ng-click="vm.deleteFromList(vm.editCourseModel.hearFormsPhotos,item)">
