@@ -1,7 +1,7 @@
 @import "theme";
 
-$shadow-sosial: 0 1px 3px 0 rgba($primary, .2), 0 1px 1px 0 rgba($primary, .14), 0 2px 1px -1px rgba($primary, .12) !default;
-$shadow-sosial-active: 0 3px 5px 0 rgba($primary, .2), 0 3px 3px 0 rgba($primary, .14), 0 4px 3px -3px rgba($primary, .12) !default;
+$shadow-social: 0 1px 3px 0 rgba(white, .2), 0 1px 1px 0 rgba(white, .14), 0 2px 1px -1px rgba(white, .12) !default;
+$shadow-social-active: 0 3px 5px 0 rgba(white, .2), 0 3px 3px 0 rgba(white, .14), 0 4px 3px -3px rgba(white, .12) !default;
 @font-face {
   font-family: microsquare; /* Гарнитура шрифта */
   src: url('../fonts/ufonts.com_microsquare-ex-regular.ttf'); /* Путь к файлу со шрифтом */
@@ -105,34 +105,35 @@ md-tabs md-ink-bar {
 }
 
 .md-social-image {
-  padding: 5px;
+  width: 30px;
+  margin: 5px;
+  height: 30px;
   transition: transform 0.5s;
 
 
   &:hover {
     transform: scale(1.5, 1.5);
-    transition: transform 0.1s;
+    transition: transform 0.2s;
   }
 
 }
-.social-image-container {
 
-  height: 45px;
-
-}
 
 .social-image {
-width: 34px;
+width: 30px;
   margin: 5px;
-  height: 34px;
+  height: 30px;
   border-width: 2px;
-  border-radius: 2px;
-  background-color:  rgba($primary, 0.8);
-  box-shadow: $shadow-sosial;
+  border-radius: 20px;
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  transition-property: box-shadow, transform;
+  box-sizing: border-box;
+  box-shadow: $shadow-social;
   &:hover {
-    transform: scale(1.2, 1.2);
-    transition: transform 0.17s;
-    box-shadow: $shadow-sosial-active;
+    transform: scale(1.5, 1.5);
+    transition: transform 0.2s;
+    box-shadow: $shadow-social-active;
   }
 
 }

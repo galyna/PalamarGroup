@@ -104,12 +104,7 @@
         }
       ],
       "hearFormsPhotos": [
-        {
-          "name": "Назва форми",
-          "url": "/api/photo/2a096283-973c-4824-9d1b-ec7887d48164.jpg",
-          "order": 0,
-          "_id": "5710a7dcd307a76811b5e2ca"
-        },
+
         {
           "name": "Назва форми",
           "url": "/api/photo/8d5594bd-4072-4aa6-b86e-629b62bffdb6.jpg",
@@ -122,6 +117,12 @@
           "order": 0,
           "_id": "5710b660d307a76811b5e2cf"
         }
+        {
+          "name": "Назва форми",
+          "url": "/api/photo/b37d7458-00db-4481-9776-b9c5bd67b0e5.jpg",
+          "order": 0,
+          "_id": "5710b660d307a76811b5e2d1"
+        },
       ],
       "videos": []
     },

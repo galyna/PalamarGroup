@@ -23,7 +23,7 @@
                             <span>Поділитись &nbsp;&nbsp;</span>
                             <div class="social-image-container"  layout="row"
                                  layout-align="center center">
-                                <a href="" class="social-image"
+                                <a href=""
                                    socialshare
                                    socialshare-type="feed"
                                    socialshare-provider="facebook"
@@ -32,32 +32,35 @@
                                    socialshare-description="{{vm.getFBDescription()}}"
                                    socialshare-media="{{vm.getFBMadia()}}"
                                    socialshare-url="{{vm.localURL}}">
-                                    <md-icon class="md-social-image" md-svg-src="../content/images/face.svg"></md-icon>
+                                    <md-icon class="social-image" md-svg-src="../content/images/face.svg"></md-icon>
                                 </a>
-                                <a href="" class="social-image"
-                                   socialshare
-                                   socialshare-provider="google"
-                                   socialshare-url="{{vm.localURL}}">
-                                    <md-icon class="md-social-image" md-svg-src="../content/images/vk-social-logotype.svg"></md-icon>
-                                </a>
-                                <a href="" class="social-image"
-                                   socialshare
-                                   socialshare-provider="twitter"
-                                   socialshare-text="{{ 'Запрошуємо на курс '+ vm.course.name.toUpperCase() }}"
-                                   socialshare-hashtags=""
-                                   socialshare-url="{{vm.localURL}}">
-                                    <md-icon class="md-social-image" md-svg-src="../content/images/twi.svg"></md-icon>
-                                </a>
-
-                                <a href="" class="social-image"
+                                <a href=""
                                    socialshare
                                    socialshare-provider="vk"
                                    socialshare-text="{{ vm.course.name.toUpperCase()}}"
                                    socialshare-description="{{vm.getFBDescription()}}"
                                    socialshare-media='{{vm.getFBMadia()}}'
                                    socialshare-url="{{vm.localURL}}">
-                                    <md-icon class="md-social-image" md-svg-src="../content/images/goo.svg"></md-icon>
+                                    <md-icon class="social-image" md-svg-src="../content/images/vk-social-logotype.svg"></md-icon>
                                 </a>
+                                <a href=""
+                                   socialshare
+                                   socialshare-provider="twitter"
+                                   socialshare-text="{{ 'Запрошуємо на курс '+ vm.course.name.toUpperCase() }}"
+                                   socialshare-hashtags=""
+                                   socialshare-url="{{vm.localURL}}">
+                                    <md-icon class="social-image" md-svg-src="../content/images/twi.svg"></md-icon>
+                                </a>
+                                <a href=""
+                                   socialshare
+                                   socialshare-provider="google"
+                                   socialshare-url="{{vm.localURL}}">
+                                    <md-icon class="social-image" md-svg-src="../content/images/goo.svg"></md-icon>
+
+                                </a>
+
+
+
                             </div>
 
 
