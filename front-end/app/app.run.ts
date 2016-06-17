@@ -1,10 +1,16 @@
 import {IRootScope} from "../typings";
 appRun.$inject = ['$http', '$templateCache', '$rootScope', '$location'];
-export function appRun($http: ng.IHttpService, $templateCache: ng.ITemplateCacheService,
-$rootScope: IRootScope, $location: ng.ILocationService) {
+export function appRun($http:ng.IHttpService, $templateCache:ng.ITemplateCacheService,
+                       $rootScope:IRootScope, $location:ng.ILocationService) {
 
     $rootScope.isAdminZone = () => {
-        return $location.path().indexOf('/admin') === 0;
+        return $location.path().indexOf( '/admin' ) === 0;
+    };
+
+    $rootScope.socialParams = {
+        title: "",
+        image: "",
+        description: ""
     };
 
     var urls = [
@@ -15,7 +21,7 @@ $rootScope: IRootScope, $location: ng.ILocationService) {
     ];
     // Pre-fetch icons sources by URL and cache in the $templateCache...
     // subsequent $http calls will look there first.
-    angular.forEach(urls, function (url) {
-        $http.get(url, {cache: $templateCache});
-    });
+    angular.forEach( urls, function (url) {
+        $http.get( url, {cache: $templateCache} );
+    } );
 }

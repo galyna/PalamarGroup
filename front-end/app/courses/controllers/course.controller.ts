@@ -6,6 +6,7 @@ import {IModelResource, IModel, ModelResourceName} from "../../resources/model.r
 import {IOrder, IOrderResource, OrderResourceName} from "../../resources/order.resource";
 
 import {IMediaObserverFactory, MediaObserverFactoryName} from "../../ui/mediaObserver.service";
+import {IRootScope} from "../../../typings";
 
 
 interface IRouteParams extends ng.route.IRouteParamsService {
@@ -16,7 +17,7 @@ export class CourseController {
 
     static $inject = ['$log', '$routeParams', '$location', CourseResourceName,
         OrderResourceName, MediaObserverFactoryName, '$mdDialog', 'Upload',
-        '$timeout', ModelResourceName, 'constants', '$anchorScroll', "$filter"];
+        '$timeout', ModelResourceName, 'constants', '$anchorScroll', "$filter", '$rootScope'];
     static componentName = 'CourseController';
 
     course:ICourse;
@@ -34,21 +35,26 @@ export class CourseController {
                 private OrderResource:IOrderResource, private mediaObserver:IMediaObserverFactory,
                 private mdDialog:ng.material.IDialogService, private Upload:ng.angularFileUpload.IUploadService,
                 private $timeout:ng.ITimeoutService, private ModelResource:IModelResource,
-                private constants:IConstants, private $anchorScroll:ng.IAnchorScrollService, private $filter) {
+                private constants:IConstants, private $anchorScroll:ng.IAnchorScrollService, private $filter, $rootScope:IRootScope) {
 
+        //  this.localURL = $location.absUrl();
+        // this.localContentURL= $location.protocol() + "://" + $location.host() + ":" + $location.port();
+        //TODO
+        this.localURL = 'http://54.191.26.39:8080';
+        this.localContentURL = 'http://54.191.26.39:8080';
         this.course = CourseResource.get( {id: $routeParams.id} );
+        this.course.$promise.then( (course)=> {
+            $rootScope.socialParams.image = this.localContentURL + course.hearFormsPhotos[0].url;
+            $rootScope.socialParams.title =  course.name;
+            $rootScope.socialParams.description =  this.getFBDescription();
+        } );
 
         this.order = new OrderResource();
 
         this.newComment = this.getBlankComment();
 
         this.newModel = this.getBlankModel();
-        
-      //  this.localURL = $location.absUrl();
-       // this.localContentURL= $location.protocol() + "://" + $location.host() + ":" + $location.port();
-        //TODO
-        this.localURL = 'http://54.191.26.39:8080';
-        this.localContentURL= 'http://54.191.26.39:8080';
+
     }
 
     getFBDescription():string {
@@ -67,12 +73,10 @@ export class CourseController {
         ;
     }
 
-    getDates():string {
+    getFBMadia():string {
         if (this.course.courseModulesDates) {
 
-            return this.course.courseModulesDates.map( (modulesDate)=> {
-                    return this.$filter( 'date' )( modulesDate, "dd.MM.yyyy" );
-                } ).join( ', ' ) + ". ";
+            return this.localContentURL + this.course.hearFormsPhotos[0].url;
 
         } else {
             return "";

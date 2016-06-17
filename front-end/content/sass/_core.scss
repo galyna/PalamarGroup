@@ -1,5 +1,7 @@
 @import "theme";
 
+$shadow-sosial: 0 1px 3px 0 rgba($primary, .2), 0 1px 1px 0 rgba($primary, .14), 0 2px 1px -1px rgba($primary, .12) !default;
+$shadow-sosial-active: 0 3px 5px 0 rgba($primary, .2), 0 3px 3px 0 rgba($primary, .14), 0 4px 3px -3px rgba($primary, .12) !default;
 @font-face {
   font-family: microsquare; /* Гарнитура шрифта */
   src: url('../fonts/ufonts.com_microsquare-ex-regular.ttf'); /* Путь к файлу со шрифтом */
@@ -74,7 +76,8 @@ md-input-container .md-input-messages-animation {
 .md-button.md-default-theme.md-fab, .md-button.md-fab {
   background: rgba($primary, 0.8);
 }
-a.md-button.md-default-theme.md-fab:not([disabled]):hover, a.md-button.md-fab:not([disabled]):hover, .md-button.md-default-theme.md-fab:not([disabled]):hover, .md-button.md-fab:not([disabled]):hover{
+
+a.md-button.md-default-theme.md-fab:not([disabled]):hover, a.md-button.md-fab:not([disabled]):hover, .md-button.md-default-theme.md-fab:not([disabled]):hover, .md-button.md-fab:not([disabled]):hover {
   background: rgba($primary, 0.4);
 }
 
@@ -99,4 +102,37 @@ md-tabs .md-tab.md-active {
 md-tabs md-ink-bar {
   color: $primary;
   background-color: $primary
+}
+
+.md-social-image {
+  padding: 5px;
+  transition: transform 0.5s;
+
+
+  &:hover {
+    transform: scale(1.5, 1.5);
+    transition: transform 0.1s;
+  }
+
+}
+.social-image-container {
+
+  height: 45px;
+
+}
+
+.social-image {
+width: 34px;
+  margin: 5px;
+  height: 34px;
+  border-width: 2px;
+  border-radius: 2px;
+  background-color:  rgba($primary, 0.8);
+  box-shadow: $shadow-sosial;
+  &:hover {
+    transform: scale(1.2, 1.2);
+    transition: transform 0.17s;
+    box-shadow: $shadow-sosial-active;
+  }
+
 }

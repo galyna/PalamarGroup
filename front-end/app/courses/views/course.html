@@ -18,23 +18,51 @@
                     <md-card-title-media>
                         <img hide-sm show-gt-sm hide-xs class="md-card-image md-padding"
                              ng-src="{{::vm.course.author.photoUrl}}"/>
-                        <a href=""
-                           socialshare
-                           socialshare-provider="twitter"
-                           socialshare-text="{{ 'Запрошуємо на курс '+ vm.course.name.toUpperCase() }}"
-                           socialshare-hashtags=""
-                           socialshare-url="{{vm.localURL}}">
-                            Share twitter
-                        </a>
-                        <a href=""
-                           socialshare
-                           socialshare-type="feed"
-                           socialshare-provider="vk"
-                           socialshare-text="{{ vm.course.name.toUpperCase()}}"
+                        <div   layout="column" layout-gt-md="row"
+                                layout-align="center center">
+                            <span>Поділитись &nbsp;&nbsp;</span>
+                            <div class="social-image-container"  layout="row"
+                                 layout-align="center center">
+                                <a href="" class="social-image"
+                                   socialshare
+                                   socialshare-type="feed"
+                                   socialshare-provider="facebook"
+                                   socialshare-text="{{ vm.course.name.toUpperCase()}}"
+                                   socialshare-caption="PALAMAR GROUP ACADEMY"
+                                   socialshare-description="{{vm.getFBDescription()}}"
+                                   socialshare-media="{{vm.getFBMadia()}}"
+                                   socialshare-url="{{vm.localURL}}">
+                                    <md-icon class="md-social-image" md-svg-src="../content/images/face.svg"></md-icon>
+                                </a>
+                                <a href="" class="social-image"
+                                   socialshare
+                                   socialshare-provider="google"
+                                   socialshare-url="{{vm.localURL}}">
+                                    <md-icon class="md-social-image" md-svg-src="../content/images/vk-social-logotype.svg"></md-icon>
+                                </a>
+                                <a href="" class="social-image"
+                                   socialshare
+                                   socialshare-provider="twitter"
+                                   socialshare-text="{{ 'Запрошуємо на курс '+ vm.course.name.toUpperCase() }}"
+                                   socialshare-hashtags=""
+                                   socialshare-url="{{vm.localURL}}">
+                                    <md-icon class="md-social-image" md-svg-src="../content/images/twi.svg"></md-icon>
+                                </a>
 
-                           socialshare-url="{{vm.localURL}}">
-                            VK
-                        </a>
+                                <a href="" class="social-image"
+                                   socialshare
+                                   socialshare-provider="vk"
+                                   socialshare-text="{{ vm.course.name.toUpperCase()}}"
+                                   socialshare-description="{{vm.getFBDescription()}}"
+                                   socialshare-media='{{vm.getFBMadia()}}'
+                                   socialshare-url="{{vm.localURL}}">
+                                    <md-icon class="md-social-image" md-svg-src="../content/images/goo.svg"></md-icon>
+                                </a>
+                            </div>
+
+
+                        </div>
+
                     </md-card-title-media>
                     <md-card-title-text>
                         <span class="md-headline">Автор {{ ::vm.course.author.name}}</span>
@@ -43,24 +71,13 @@
                         <span class="md-headline">Ціна {{ ::vm.course.price}}  грн</span>
                         <span class="md-subhead"> {{::vm.course.description}}</span>
                         <div flex layout layout-wrap layout-align="end center">
-                            <a href=""
-                               socialshare
-                               socialshare-type="feed"
-                               socialshare-provider="facebook"
-                               socialshare-text="{{ vm.course.name.toUpperCase()}}"
-                               socialshare-caption="PALAMAR GROUP ACADEMY"
-                               socialshare-description="{{vm.getFBDescription()}}"
-                               socialshare-media="{{vm.localContentURL + vm.course.hearFormsPhotos[0].url}}"
-                               socialshare-url="{{vm.localURL}}">
-                                Share me
-                            </a>
-
-
 
 
                             <md-button class="  order-btn"
                                        aria-label="Відгуки" ng-click="vm.scrollToComments()">
                                 Відгуки
+
+
                             </md-button>
                             <md-button ng-show="!vm.formVisible" class="  order-btn"
                                        aria-label="Play" ng-click="vm.showForm()">
