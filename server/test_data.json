@@ -116,13 +116,13 @@
           "url": "/api/photo/237d0e6a-2a07-4710-9d9b-c5c3f0c95fb2.jpg",
           "order": 0,
           "_id": "5710b660d307a76811b5e2cf"
-        }
+        },
         {
           "name": "Назва форми",
           "url": "/api/photo/b37d7458-00db-4481-9776-b9c5bd67b0e5.jpg",
           "order": 0,
           "_id": "5710b660d307a76811b5e2d1"
-        },
+        }
       ],
       "videos": []
     },
