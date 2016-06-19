@@ -4,6 +4,13 @@ declare module "express-serve-static-core" {
     }
 }
 
+declare module "express-slash" {
+    import {RequestHandler} from "express-serve-static-core";
+    function slash(statusCode?: number): RequestHandler;
+    namespace slash {}
+    export = slash;
+}
+
 declare module "express-restify-mongoose" {
     import {RequestHandler} from "express-serve-static-core";
     //noinspection ReservedWordAsName
