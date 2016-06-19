@@ -38,7 +38,7 @@
     "karma-phantomjs-launcher": "^1.0.0",
     "karma-systemjs": "^0.13.0",
     "phantomjs-prebuilt": "^2.1.7",
-    "systemjs-builder": "^0.15.16",
+    "systemjs-builder": "^0.15.23",
     "typescript": "^1.8.10",
     "typings": "^0.8.1"
   },

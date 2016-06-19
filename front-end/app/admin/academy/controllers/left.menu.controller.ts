@@ -14,33 +14,33 @@ export class LeftMenuController {
     }
 
     navToCources():void {
-        this.$location.url('/admin/academy/courses');
+        this.$location.url('/academy/courses');
         this.$route.reload();
     }
 
     navToOrders():void {
-        this.$location.url('/admin/academy/orders');
+        this.$location.url('/academy/orders');
         this.$route.reload();
     }
 
     navToModels():void {
-        this.$location.url('/admin/academy/models');
+        this.$location.url('/academy/models');
         this.$route.reload();
     }
 
     navToDelivery():void {
-        this.$location.url('/admin/academy/delivery');
+        this.$location.url('/academy/delivery');
         this.$route.reload();
     }
 
     navToContacts():void {
-        this.$location.url('/admin/academy/contacts');
+        this.$location.url('/academy/contacts');
         this.$route.reload();
     }
 
 
     navToComments():void {
-        this.$location.url('/admin/academy/comments');
+        this.$location.url('/academy/comments');
         this.$route.reload();
     }
 }

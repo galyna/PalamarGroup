@@ -12,7 +12,6 @@ module.exports = function (config) {
                     'angular-mocks': 'node_modules/angular-mocks/angular-mocks.js',
                     'phantomjs-polyfill': 'node_modules/phantomjs-polyfill/bind-polyfill.js',
                     'testData': 'tests/testData.js'
-
                 }
             },
             serveFiles: [
@@ -28,6 +27,8 @@ module.exports = function (config) {
                 'node_modules/ng-file-upload/dist/ng-file-upload.js',
                 'node_modules/ng-img-crop-full-extended/compile/minified/ng-img-crop.js',
                 'node_modules/angular-mocks/angular-mocks.js',
+                'node_modules/angular-socialshare/dist/angular-socialshare.js',
+                'node_modules/angular-youtube-embed/src/angular-youtube-embed.js',
                 'tests/testData.js'
             ]
         },

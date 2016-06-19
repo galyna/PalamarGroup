@@ -10,8 +10,10 @@ import 'angular-messages';
 import 'angular-material';
 import 'angular-animate';
 import 'ng-file-upload';
+import 'ng-img-crop-full-extended';
 import {coreModule} from "../core/core.module";
 import {resourcesModule} from "../resources/resources.module";
+import '../templates';
 
 //components
 import {adminRoutes} from './admin.routes';
@@ -22,7 +24,6 @@ import {AcademyDeliveryController} from './academy/controllers/delivery.controll
 import {AcademyCommentController} from './academy/controllers/comments.controller';
 import {AcademyContactsController} from './academy/controllers/contacts.controller';
 import {AdminController} from './controllers/admin.controller';
-import {LeftMenuController} from './academy/controllers/left.menu.controller';
 import {DeliveryService} from "./academy/services/delivery.service";
 import {EmailAdvComponentName, EmailAdvComponentOptions} from "./academy/components/email.adv.component";
 import {
@@ -31,6 +32,10 @@ import {
 } from "./academy/components/salon.client.form.component";
 import {AdminOrdersComponentName, AdminOrdersComponentOptions} from "./academy/components/orders.component";
 import {uiModule} from "../ui/ui.module";
+import {AdminCoursesComponentName, AdminCoursesComponentOptions} from "./academy/components/courses.component";
+import {AdminCourseComponentName, AdminCourseComponentOptions} from "./academy/components/course.component";
+import {HeaderComponentName, HeaderComponentOptions} from "./components/header.component";
+import {LeftSidenavComponentName, LeftSidenavComponentOptions} from "./components/left.sidenav.component";
 
 
 let app = angular.module('admin', [
@@ -39,6 +44,7 @@ let app = angular.module('admin', [
     'ngFileUpload',
     'ngImgCrop',
 
+    'templates',
     coreModule.name,
     resourcesModule.name,
     uiModule.name
@@ -51,8 +57,11 @@ let app = angular.module('admin', [
     .controller(AcademyDeliveryController.componentName, AcademyDeliveryController)
     .controller(AcademyCommentController.componentName, AcademyCommentController)
     .controller(AcademyContactsController.componentName, AcademyContactsController)
-    .controller(LeftMenuController.componentName, LeftMenuController)
     .service(DeliveryService.componentName, DeliveryService)
+    .component(HeaderComponentName, HeaderComponentOptions)
+    .component(LeftSidenavComponentName, LeftSidenavComponentOptions)
+    .component(AdminCoursesComponentName, AdminCoursesComponentOptions)
+    .component(AdminCourseComponentName, AdminCourseComponentOptions)
     .component(EmailAdvComponentName, EmailAdvComponentOptions)
     .component(AdminOrdersComponentName, AdminOrdersComponentOptions)
     .component(SalonClientFormComponentName, SalonClientFormComponentOptions);

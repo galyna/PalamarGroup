@@ -4,6 +4,7 @@ import api from './routes/api';
 import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
 import {setupRouter} from './routes/setup.endpoint';
+import * as slash from 'express-slash';
 let multipart = require('connect-multiparty');
 
 let app = express();
@@ -26,10 +27,13 @@ app.use('/api', api);
 
 //static content
 if(process.env.TYPE == 'prod'){
+    app.use('/admin', express.static('../front-end/dist/admin.html'));
     app.use('/', express.static('../front-end/dist'));
 }else {
+    app.use('/admin/', express.static('../front-end/admin.html'));
     app.use('/', express.static('../front-end'));
 }
+app.use(slash());
 
 app.listen(port);
 console.log('api is running at localhost:' + port);

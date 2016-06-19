@@ -8,47 +8,38 @@ import {AcademyCommentController} from "./academy/controllers/comments.controlle
 adminRoutes.$inject = ['$routeProvider'];
 export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
     $routeProvider
-        .when('/admin', {
-            templateUrl: 'app/admin/views/admin.html',
-            controller: AdminController.componentName,
-            controllerAs: "vm"
-        })
-        .when('/admin/academy', {
-            templateUrl: 'app/admin/academy/views/courses.html',
-            controller: AcademyCoursesController.componentName,
-            controllerAs: "vm"
-        })
-        .when('/admin/salon', {
+        .when('/salon', {
             templateUrl: 'app/admin/salon/views/salon.html',
             controller: AcademyCoursesController.componentName,
             controllerAs: "vm"
         })
-        .when('/admin/academy/orders', {
+        .when('/academy/orders', {
             template: '<pg-admin-orders></pg-admin-orders>'
         })
-        .when('/admin/academy/models', {
+        .when('/academy/models', {
             templateUrl: 'app/admin/academy/views/models.html',
             controller: AcademyModelController.componentName,
             controllerAs: "vm"
         })
-        .when('/admin/academy/delivery', {
+        .when('/academy/delivery', {
             templateUrl: 'app/admin/academy/views/delivery.html',
             controller: AcademyDeliveryController.componentName,
             controllerAs: "vm"
         })
-        .when('/admin/academy/contacts', {
+        .when('/academy/contacts', {
             templateUrl: 'app/admin/academy/views/contacts.html',
             controller: AcademyContactsController.componentName,
             controllerAs: "vm"
         })
-        .when('/admin/academy/comments', {
+        .when('/academy/comments', {
             templateUrl: 'app/admin/academy/views/comments.html',
             controller: AcademyCommentController.componentName,
             controllerAs: "vm"
         })
-        .when('/admin/academy/courses', {
-            templateUrl: 'app/admin/academy/views/courses.html',
-            controller: AcademyCoursesController.componentName,
-            controllerAs: "vm"
+        .when('/academy/courses', {
+            template: "<pg-admin-courses></pg-admin-courses>"
+        })
+        .otherwise({
+            redirectTo: '/academy/courses'
         });
 }

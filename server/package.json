@@ -12,6 +12,7 @@
     "e-pochta-sms-api": "0.0.2",
     "express": "^4.13.4",
     "express-restify-mongoose": "^4.0.2",
+    "express-slash": "^2.0.1",
     "jsonwebtoken": "^5.7.0",
     "mongoose": "^4.4.8",
     "node-uuid": "^1.4.7",

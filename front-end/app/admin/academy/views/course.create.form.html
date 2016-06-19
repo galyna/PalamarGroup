@@ -28,16 +28,16 @@
         <!--dates-->
         <div class="md-dense" flex>
             <md-subheader class="md-no-sticky">Дати модулів</md-subheader>
-            <div class="md-1-line" ng-repeat="date in vm.newCourseModel.courseModulesDates track by $index">
+            <div class="md-1-line" ng-repeat="date in vm.courseToSave.courseModulesDates track by $index">
                 {{ date| date:'dd.MM.yyyy'}}
-                <md-button class="  md-raised" ng-click="vm.deleteFromList(vm.newCourseModel.courseModulesDates,date)">
+                <md-button class="  md-raised" ng-click="vm.deleteFromList(vm.courseToSave.courseModulesDates,date)">
                     Видалити
                 </md-button>
             </div>
         </div>
         <label for="price">Додати дату</label>
         <md-datepicker ng-model="vm.newCourseModel.newDateModel"></md-datepicker>
-        <md-button class="md-raised" ng-click="vm.saveModuleDate(vm.newCourseModel,vm.newCourseModel.newDateModel)">
+        <md-button class="md-raised" ng-click="vm.saveModuleDate(vm.courseToSave,vm.courseToSave.newDateModel)">
             Зберегти
         </md-button>
         <md-divider></md-divider>
@@ -50,7 +50,7 @@
         <div>
             <label for="price">Фото автора</label>
             <div>
-                <img ng-src="{{vm.newCourseModel.author.photoUrl}}"/>
+                <img ng-src="{{vm.courseToSave.author.photoUrl}}"/>
                 <br/>
                 <div ng-if="vm.showAuthorPhotoUpload">
                     <md-button ngf-select ng-model="authorPhotoFile" accept="image/*" class="md-raised">
@@ -65,7 +65,7 @@
                     </div>
 
                     <md-button class="md-primary"
-                               ng-click="vm.uploadAuthorPhoto(croppedDataUrl, authorPhotoFile.name,vm.newCourseModel)">
+                               ng-click="vm.uploadAuthorPhoto(croppedDataUrl, authorPhotoFile.name,vm.courseToSave)">
                         Завантажити
                     </md-button>
                 </div>
@@ -76,7 +76,7 @@
         <!--hearForm-->
         <div flex>
             <md-subheader class="md-no-sticky">Форми модулів</md-subheader>
-            <div layout="row"  ng-repeat="item in vm.newCourseModel.hearFormsPhotos track by $index"
+            <div layout="row"  ng-repeat="item in vm.courseToSave.hearFormsPhotos track by $index"
                           ng-click="null">
                 <img ng-src="{{item.url}}"/>
                 <div layout="column">
@@ -89,7 +89,7 @@
                         <input id="ord" ng-model="item.order" type="number"/>
                     </md-input-container>
                     <md-button class="  md-raised"
-                               ng-click="vm.deleteFromList(vm.newCourseModel.hearFormsPhotos,item)">
+                               ng-click="vm.deleteFromList(vm.courseToSave.hearFormsPhotos,item)">
                         Видалити
                     </md-button>
                 </div>
@@ -111,7 +111,7 @@
                     </img-crop>
                 </div>
                 <md-button class="md-primary"
-                           ng-click="vm.uploadCollPhoto(croppedHearFormsFile, hearFormsFile.name,vm.newCourseModel.hearFormsPhotos)">
+                           ng-click="vm.uploadCollPhoto(croppedHearFormsFile, hearFormsFile.name,vm.courseToSave.hearFormsPhotos)">
                     Завантажити
                 </md-button>
             </div>
@@ -121,7 +121,7 @@
         <!--history-->
         <div flex>
             <md-subheader class="md-no-sticky">Форми історії попередніх модулів</md-subheader>
-            <div layout="row" ng-repeat="item in vm.newCourseModel.historyPhotos track by $index"
+            <div layout="row" ng-repeat="item in vm.courseToSave.historyPhotos track by $index"
                  ng-click="null">
                 <img ng-src="{{item.url}}" class="module-history-img"/>
                 <div layout="column">
@@ -134,7 +134,7 @@
                         <input id="ord" ng-model="item.order" type="number"/>
                     </md-input-container>
                     <md-button class="  md-raised"
-                               ng-click="vm.deleteFromList(vm.newCourseModel.historyPhotos,item)">
+                               ng-click="vm.deleteFromList(vm.courseToSave.historyPhotos,item)">
                         Видалити
                     </md-button>
                 </div>
@@ -156,7 +156,7 @@
                     </img-crop>
                 </div>
                 <md-button class="md-primary"
-                           ng-click="vm.uploadCollPhoto(croppedHistoryPhotoFile, historyPhotoFile.name,vm.newCourseModel.historyPhotos)">
+                           ng-click="vm.uploadCollPhoto(croppedHistoryPhotoFile, historyPhotoFile.name,vm.courseToSave.historyPhotos)">
                     Завантажити
                 </md-button>
             </div>

@@ -11,10 +11,10 @@ export class AdminController {
 
     }
     navToAcademy():void {
-        this.$location.url('/admin/academy');
+        this.$location.url('/academy');
     }
     navToSalon():void {
-        this.$location.url('/admin/salon');
+        this.$location.url('/salon');
     }
 }
 

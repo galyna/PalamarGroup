@@ -2,14 +2,8 @@
  * Created by Galyna on 16.03.2016.
  */
 
-appConfig.$inject = ['$compileProvider'];
-export function appConfig($compileProvider) {
-    $compileProvider.debugInfoEnabled(false);
-}
-
-materialConfig.$inject = ['$mdThemingProvider', '$mdIconProvider'];
-export function materialConfig($mdThemingProvider:ng.material.IThemingProvider,
-                               $mdIconProvider:ng.material.IIconProvider) {
+materialConfig.$inject = ['$mdThemingProvider'];
+export function materialConfig($mdThemingProvider:ng.material.IThemingProvider) {
 
 
     // var customBackground = {
@@ -33,11 +27,4 @@ export function materialConfig($mdThemingProvider:ng.material.IThemingProvider,
     //         customBackground);
     // $mdThemingProvider.theme('default')
     //     .primaryPalette('customBackground');
-
-    $mdIconProvider
-        .iconSet("action", "/content/images/icons/svg-sprite-action.svg")
-        .iconSet("social", "/content/images/icons/svg-sprite-social.svg")
-        .iconSet("communication", "/content/images/icons/svg-sprite-communication.svg")
-        .iconSet("navigation", "/content/images/icons/svg-sprite-navigation.svg")
-        .iconSet("av", "/content/images/icons/svg-sprite-av.svg")
 }

@@ -1,5 +1,4 @@
 //modules
-import 'youtube-iframe-api';
 import 'angular';
 import 'angular-youtube-embed';
 import {pgCalendarModule} from '../calendar/calendar.module';
