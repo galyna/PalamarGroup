@@ -5,7 +5,8 @@ import {IPhotoModel, PhotoSchema} from "./photo.schema";
 export interface ICourseModel extends pg.models.ICourse, Document{
     hearFormsPhotos: IPhotoModel[],
     historyPhotos: IPhotoModel[],
-    _id: any;
+    courseModulesDates: string,
+    _id: any
 }
 
 

@@ -18,7 +18,6 @@ import '../templates';
 //components
 import {adminRoutes} from './admin.routes';
 import {AcademyOrdersController} from './academy/controllers/orders.controller';
-import {AcademyCoursesController} from './academy/controllers/courses.controller';
 import {AcademyModelController} from './academy/controllers/models.controller';
 import {AcademyDeliveryController} from './academy/controllers/delivery.controller';
 import {AcademyCommentController} from './academy/controllers/comments.controller';
@@ -51,7 +50,6 @@ let app = angular.module('admin', [
 ])
     .config(adminRoutes)
     .controller(AdminController.componentName, AdminController)
-    .controller(AcademyCoursesController.componentName, AcademyCoursesController)
     .controller(AcademyOrdersController.componentName, AcademyOrdersController)
     .controller(AcademyModelController.componentName, AcademyModelController)
     .controller(AcademyDeliveryController.componentName, AcademyDeliveryController)

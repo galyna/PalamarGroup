@@ -1,18 +1,17 @@
-import {AcademyCoursesController} from './academy/controllers/courses.controller';
 import {AcademyModelController} from './academy/controllers/models.controller';
 import {AcademyDeliveryController} from './academy/controllers/delivery.controller';
 import {AcademyContactsController} from './academy/controllers/contacts.controller';
-import {AdminController} from './controllers/admin.controller';
 import {AcademyCommentController} from "./academy/controllers/comments.controller";
+import {AdminCourseComponentUrl} from "./academy/components/course.component";
 
 adminRoutes.$inject = ['$routeProvider'];
 export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
     $routeProvider
-        .when('/salon', {
-            templateUrl: 'app/admin/salon/views/salon.html',
-            controller: AcademyCoursesController.componentName,
-            controllerAs: "vm"
-        })
+        // .when('/salon', {
+        //     templateUrl: 'app/admin/salon/views/salon.html',
+        //     controller: AcademyCoursesController.componentName,
+        //     controllerAs: "vm"
+        // })
         .when('/academy/orders', {
             template: '<pg-admin-orders></pg-admin-orders>'
         })
@@ -37,8 +36,9 @@ export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
             controllerAs: "vm"
         })
         .when('/academy/courses', {
-            template: "<pg-admin-courses></pg-admin-courses>"
+            template: "<pg-admin-courses layout='column' ng-cloak></pg-admin-courses>"
         })
+        .when(AdminCourseComponentUrl, { template: "<pg-admin-course layout flex></pg-admin-course>" })
         .otherwise({
             redirectTo: '/academy/courses'
         });

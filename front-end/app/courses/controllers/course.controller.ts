@@ -177,7 +177,8 @@ export class CourseController {
         if (this.order.email || this.order.phone || this.order.name) {
             this.order.event_id = this.course._id;
             this.order.event_name = this.course.name;
-            this.order.event_dates = this.course.courseModulesDates;
+            //TODO: change order.event_dates to Date[] like in CourseResourse
+            this.order.event_dates = this.course.courseModulesDates.map((date) => date.toJSON());
             this.order.date = new Date().toJSON();
             this.order.$save()
                 .then( () => {

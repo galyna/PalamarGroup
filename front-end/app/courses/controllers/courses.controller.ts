@@ -67,16 +67,16 @@ export class CoursesController {
 
     setCalendarContent(course:ICourse) {
         angular.forEach( course.courseModulesDates, (courseDate) => {
-            var cDate = new Date( courseDate );
             let content = this.setCoursesCalendarTemplate( course.hearFormsPhotos[0].url, course.name );
-            this.pgCalendarData.setDayContent( cDate, this.$sce.trustAsHtml( content ) );
+            this.pgCalendarData.setDayContent( courseDate, this.$sce.trustAsHtml( content ) );
         } );
     }
 
 
     createDatesMap(course:ICourse) {
+        //TODO: change coursesDateMap.date to Date[] like in CourseResourse
         let coursesDateChunk = course.courseModulesDates.map( (date) => {
-            return {coursesId: course._id, date: date}
+            return {coursesId: course._id, date: date.toJSON()}
         } );
         this.coursesDateMap = this.coursesDateMap.concat( coursesDateChunk );
     }

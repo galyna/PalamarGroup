@@ -1,7 +1,9 @@
 import IPhoto = pg.models.IPhoto;
 import {ICourseResource, ICourse, CourseResourceName} from "../../../resources/course.resource";
+import {AdminCourseComponentUrl} from "./course.component";
 
-const template = `<md-button ng-click="$ctrl.showEditForm()" ng-if="!$ctrl.courseToSave"
+const template = `
+<md-button ng-click="$ctrl.showEditForm()" ng-if="!$ctrl.courseToSave"
            class="md-fab md-fab-fixed md-primary md-fab-bottom-right" aria-label="new">
     <md-icon md-svg-icon="content:ic_add_24px"></md-icon>
     <md-tooltip>Додати курс</md-tooltip>
@@ -30,21 +32,18 @@ const template = `<md-button ng-click="$ctrl.showEditForm()" ng-if="!$ctrl.cours
     </md-list>
 </div>
 <pg-admin-course ng-if="$ctrl.courseToSave" on-cancel="$ctrl.cancel($event)" on-save="$ctrl.saveCourse($event)"
-                 course="$ctrl.courseToSave"></pg-admin-course>`;
+                 course="$ctrl.courseToSave"></pg-admin-course>
+`;
 
 export class AdminCoursesController {
 
-    static $inject = [CourseResourceName, '$log', 'Upload', '$timeout', '$location', '$mdDialog',
+    static $inject = [CourseResourceName, '$log', '$timeout', '$location', '$mdDialog',
         '$mdToast'];
 
     courses:ICourse[];
-    courseToSave:ICourse;
-    showHistoryPhotoUpload:boolean;
-    showFormPhotoUpload:boolean;
-    showAuthorPhotoUpload:boolean;
 
     constructor(private CourseResource:ICourseResource, private $log:ng.ILogService,
-                private Upload, private $timeout:ng.ITimeoutService, private $location:ng.ILocationService,
+                private $timeout:ng.ITimeoutService, private $location:ng.ILocationService,
                 private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService) {
         this.courses = this.getCourses();
     }
@@ -55,86 +54,10 @@ export class AdminCoursesController {
     }
 
     showEditForm(course = new this.CourseResource()) {
-        this.courseToSave = course;
+        let id = course._id || "";
+        let url = AdminCourseComponentUrl.replace(':id', id);
+        this.$location.url(url);
     }
-
-    cancel() {
-        this.courseToSave = undefined;
-    }
-
-    saveCourse({course}: {course:ICourse}) {
-        course.$save()
-            .then((course) => {
-                this.$mdToast.showSimple(`курс ${course.name} збережено`);
-            })
-            .catch((err)=> {
-                this.$log.error(err);
-                this.showErrorToast();
-            })
-            .finally(()=> {
-                this.courses = this.getCourses();
-                this.courseToSave = undefined;
-            });
-    }
-
-    //course image upload start
-    uploadAuthorPhoto(dataUrl, name, model:ICourse):void {
-        this.Upload.upload({
-            method: 'POST',
-            url: '/api/photo',
-            data: {
-                file: this.Upload.dataUrltoBlob(dataUrl, name)
-            }
-
-        }).then((response)=> {
-            this.$timeout(()=> {
-                model.author.photoUrl = response.data.url;
-            });
-        }).catch((err)=> {
-            this.$log.debug("fail upload file..." + err);
-        }).finally(()=> {
-            this.$timeout(()=> {
-                this.showAuthorPhotoUpload = false;
-            });
-        });
-    }
-
-    //TODO: add file param type
-    uploadCollPhoto(dataUrl, name, collection:IPhoto[]):void {
-        this.Upload.upload({
-            method: 'POST',
-            url: '/api/photo',
-            data: {
-                file: this.Upload.dataUrltoBlob(dataUrl, name)
-            }
-
-        }).then((response)=> {
-            this.$timeout(()=> {
-                collection.push({
-                    name: "",
-                    url: response.data.url,
-                    order: 0
-                });
-            });
-        }).catch((err)=> {
-            this.$log.debug("fail upload file..." + err);
-        }).finally(()=> {
-            this.$timeout(()=> {
-                this.showFormPhotoUpload = false;
-                this.showHistoryPhotoUpload = false;
-            });
-        });
-    }
-
-    //course image upload end
-
-    //course date start
-    //noinspection JSMethodCanBeStatic
-    saveModuleDate(model:ICourse, date:Date):void {
-        model.courseModulesDates.push(date.toJSON());
-    }
-
-    //course date end
 
     showDeleteDialog(ev, course:ICourse) {
         let confirm = this.$mdDialog.confirm()
@@ -170,7 +93,9 @@ export class AdminCoursesController {
         delete newCourse._id;
         newCourse.courseModulesDates = [];
         newCourse.isVisible = false;
-        this.showEditForm(course);
+        newCourse.$save()
+            .then(this.showEditForm.bind(this))
+            .catch(this.showErrorToast.bind(this));
     }
 
     //noinspection JSMethodCanBeStatic

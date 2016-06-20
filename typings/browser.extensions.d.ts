@@ -1,4 +1,6 @@
-// declare module "angular-material" {
-//     var _: string;
-//     export = _;
-// }
+declare namespace angular.angularFileUpload {
+    interface IUploadService {
+        dataUrltoBlob(dataurl: string, name: string):Blob;
+    }  
+} 
+
