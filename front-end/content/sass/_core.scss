@@ -15,7 +15,7 @@ $shadow-social-active: 0 3px 5px 0 rgba(white, .2), 0 3px 3px 0 rgba(white, .14)
 body {
   min-width: 212px;
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Gotham SSm A", "Gotham SSm B", sans-serif;
   font-weight: lighter;
 
   @media (min-width: $layout-breakpoint-md) {
@@ -36,8 +36,8 @@ body {
   overflow-y: auto;
 }
 
-
 .fit-screen-wrap {
+
   position: relative;
   display: table-cell;
   vertical-align: middle;
@@ -71,11 +71,6 @@ body {
   text-align: center;
 
   .screen {
-    //-webkit-filter:   blur(3px) ;
-    //-moz-filter:   blur(3px) ;
-    //-o-filter:  blur(3px) ;
-    //-ms-filter:  blur(3px) ;
-    //filter: blur(3px) ;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -89,6 +84,16 @@ body {
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
     background-size: cover;
+    -webkit-filter: contrast(150%);
+    -moz-filter: contrast(150%);
+    -o-filter: contrast(150%);
+
+    filter: contrast(150%);
+
+    background: linear-gradient(
+                    rgba(0, 0, 0, 0.9),
+                    rgba(0, 0, 0, 0.9)
+    );
 
     @media (max-width: $layout-breakpoint-md) {
       display: none;
@@ -102,25 +107,88 @@ body {
   }
   color: whitesmoke;
 
-  .overlay {
-    -webkit-filter: blur(2px);
-    -moz-filter: blur(2px);
-    -o-filter: blur(2px);
-    -ms-filter: blur(2px);
-    filter: blur(2px);
-  }
 }
 
 .page-header {
-  background-color: rgb(33, 33, 33);
+
+  .fit-screen-wrap {
+    position: relative;
+    display: table-cell;
+    vertical-align: top;
+    z-index: 2;
+    @media (max-width: $layout-breakpoint-md) {
+      vertical-align: middle;
+
+    }
+
+  }
+  .page-header-wrap {
+    background: rgba(white, 0.6);
+    z-index: 3;
+    color: black;
+    font-family: 'microsquare', sans-serif;
+  }
+  .logo-img {
+
+    width: 170px;
+
+    @media (max-width: $layout-breakpoint-xs) {
+      width: 70px;;
+
+    }
+    @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-md) {
+      width: 110px;
+    }
+
+    @media (min-width: $layout-breakpoint-md) {
+      width: 170px;
+    }
+  }
+  .featured-area-subtitle {
+    font-size: 1em;
+    line-height: 1em;
+
+    @media (max-width: $layout-breakpoint-xs) {
+      font-size: 16px;
+    }
+    @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-md) {
+      font-size: 20px;
+    }
+    @media (min-width: $layout-breakpoint-md) {
+      font-size: 36px;
+    }
+
+  }
+
+  h1.featured-area-title {
+
+    width: auto;
+    font-size: 6.1428em;
+    font-weight: 900;
+    line-height: 1em;
+    text-transform: uppercase;
+    margin: 0;
+
+    @media (max-width: $layout-breakpoint-xs) {
+      font-size: 28px;
+
+    }
+    @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-md) {
+      font-size: 36px;
+    }
+
+    @media (min-width: $layout-breakpoint-md) {
+      font-size: 65px;
+    }
+
+  }
+
   .overlay {
 
-    -webkit-filter: blur(02px);
-    -moz-filter: blur(20px);
-    -o-filter: blur(20px);
-    -ms-filter: blur(20px);
-    filter: blur(20px);
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/bg_header.jpg") no-repeat center center fixed;
+    @media (max-width: $layout-breakpoint-md) {
+      background: url("../images/bg/slider/s3.png") no-repeat center center fixed;
+
+    }
   }
 }
 
@@ -142,48 +210,6 @@ body {
   min-height: 100vh;
   margin-bottom: 0px;
 }
-
-.featured-area-subtitle {
-  font-size: 1em;
-  font-family: 'microsquare'; /* Гарнитура шрифта */
-  color: #fff;
-  line-height: 1em;
-
-  @media (max-width: $layout-breakpoint-xs) {
-    font-size: 16px;
-  }
-  @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-md) {
-    font-size: 18px;
-  }
-  @media (min-width: $layout-breakpoint-md) {
-    font-size: 24px;
-  }
-
-}
-
-h1.featured-area-title {
-  font-family: 'microsquare'; /* Гарнитура шрифта */
-  font-size: 6.1428em;
-  font-weight: 400;
-  color: #fff;
-  line-height: 1em;
-  text-transform: uppercase;
-  margin: 0;
-
-  @media (max-width: $layout-breakpoint-xs) {
-    font-size: 36px;
-
-  }
-  @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-md) {
-    font-size: 45px;
-  }
-
-  @media (min-width: $layout-breakpoint-md) {
-    font-size: 56px;
-  }
-
-}
-
 
 md-input-container .md-input-messages-animation {
   max-width: 300px;
@@ -250,8 +276,4 @@ md-tabs md-ink-bar {
     box-shadow: $shadow-social-active;
   }
 
-}
-
-.md-fab-fixed {
-  position: fixed !important;
 }
