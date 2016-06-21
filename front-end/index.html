@@ -75,6 +75,7 @@
 
 </div>
 
+
 <div class="page-container">
     <div class="fit-screen-wrap">
         <div class="container">
@@ -85,12 +86,9 @@
     </div>
 </div>
 
-<div class="page-footer" style="background-color: rgb(33, 33, 33);">
-
+<div class="page-footer"  ng-if="!$root.isAdminZone()">
     <div class="fit-screen-wrap">
-        <div class="container">
-
-            <div class="page-header-wrap animate-fadeIn"  ng-if="!$root.isAdminZone()" flex="none" class="md-whiteframe-z5 md-padding" layout="column" layout-gt-md="row"
+            <div class="page-header-wrap animate-fadeIn"  flex="none" class="md-whiteframe-z5 md-padding" layout="column" layout-gt-md="row"
                  layout-align="center center">
 
 
@@ -116,7 +114,7 @@
 
 
             </div>
-        </div>
+
 
     </div>
 </div>
