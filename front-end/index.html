@@ -29,69 +29,34 @@
 
 <body ng-cloak layout="column">
 
-<!--<header layout="row"  class="md-whiteframe-z4">-->
-<!--&lt;!&ndash;<video src flex class="header-bg"/>&ndash;&gt;-->
-<!--<div  flex class="header-bg"/>-->
-<!--&lt;!&ndash;<img class="bg" src="../content/images/bg/IMG_6790_1.jpg"/>&ndash;&gt;-->
-<!--<a href="/" layout="column" layout-align="center center">-->
-
-
-<!--<div flex>-->
-<!--PALAMAR GROUP-->
-<!--</div>-->
-<!--<div class="subheader">-->
-<!--beauty parlour & academy-->
-<!--</div>-->
-<!--</a>-->
-<!--<md-progress-linear md-mode='indeterminate' class="header-loading" ng-show="$root.loading"></md-progress-linear>-->
-<!--<video class="screen mute" id="tv"  autoplay loop="true" >-->
-<!--<source type="video/mp4" src="../content/images/bg/bd.mp4">-->
-
-<!--</video>-->
-<!--</header>-->
-
+<!--header-->
 <div class="container-wrapper">
-
-    <div class="page-header" style="background-color: rgb(33, 33, 33);">
-
+    <div class="page-header" >
         <div class="fit-screen-wrap">
-            <div class="container">
-
                 <div class="page-header-wrap animate-fadeIn">
                     <h1 class="featured-area-title">PALAMAR GROUP</span></h1>
-                    <div data-height="30" style="height: 30px;"></div>
                     <div class="featured-area-subtitle">
                         beauty parlour & academy
                     </div>
                 </div>
-            </div>
-            <video  class="screen " muted autoplay  loop="true">
-                <source type="video/mp4" src="../content/images/bg/bd.mp4">
-
+            <video  class="screen" muted autoplay  loop="true">
+                <source type="video/mp4" src="../content/images/bg/bd.mp4" />
             </video>
         </div>
+        <div  class="overlay"></div>
     </div>
-
-
 </div>
-
-
+<!--content-->
 <div class="page-container">
     <div class="fit-screen-wrap">
-        <div class="container">
-
             <ng-view  flex ng-if="!$root.isAdminZone();"></ng-view>
-        </div>
-
     </div>
 </div>
-
-<div class="page-footer"  ng-if="!$root.isAdminZone()">
+<!--footer-->
+<div class="page-footer"  ng-if="!$root.isAdminZone()" class="md-whiteframe-z4">
     <div class="fit-screen-wrap">
-            <div class="page-header-wrap animate-fadeIn"  flex="none" class="md-whiteframe-z5 md-padding" layout="column" layout-gt-md="row"
+            <div class="page-header-wrap animate-fadeIn"  flex="none"  layout="column" layout-gt-md="row"
                  layout-align="center center">
-
-
                 <div>
                     <a href="https://www.facebook.com/hashtag/palamar_group" target="_blank">
                         <md-icon class="md-social-image" md-svg-src="../content/images/face.svg"></md-icon>
@@ -114,57 +79,8 @@
 
 
             </div>
-
-
     </div>
+    <div  class="overlay"></div>
 </div>
-
-
-
-<!--<header layout="row"  class="md-whiteframe-z4">-->
-
-
-<!--&lt;!&ndash;<a href="/" layout="column" layout-align="center center">&ndash;&gt;-->
-
-
-<!--&lt;!&ndash;<div flex>&ndash;&gt;-->
-<!--&lt;!&ndash;PALAMAR GROUP&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;<div class="subheader">&ndash;&gt;-->
-<!--&lt;!&ndash;beauty parlour & academy&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;</a>&ndash;&gt;-->
-<!--&lt;!&ndash;<md-progress-linear md-mode='indeterminate' class="header-loading" ng-show="$root.loading"></md-progress-linear>&ndash;&gt;-->
-
-<!--</header>-->
-
-<!--<main  flex  layout="column"-->
-<!--layout-align="center center">-->
-<!--<ng-view class="main" flex="grow" ng-if="!$root.isAdminZone();"></ng-view>-->
-
-<!--<footer ng-if="!$root.isAdminZone()" flex="none" class="md-whiteframe-z5 md-padding" layout="column" layout-gt-md="row"-->
-<!--layout-align="center center">-->
-
-<!--<div>-->
-<!--<a href="https://www.facebook.com/hashtag/palamar_group" target="_blank">-->
-<!--<md-icon class="md-social-image" md-svg-src="../content/images/face.svg"></md-icon>-->
-<!--</a>-->
-<!--<a href="https://www.instagram.com/palamar_group/" target="_blank">-->
-<!--<md-icon class="md-social-image" md-svg-src="../content/images/insta.svg"></md-icon>-->
-<!--</a>-->
-<!--<a href="https://www.twitter.com/palamar_group/" target="_blank">-->
-<!--<md-icon class="md-social-image" md-svg-src="../content/images/twi.svg"></md-icon>-->
-<!--</a>-->
-<!--<a href="https://www.google.com/" target="_blank">-->
-<!--<md-icon class="md-social-image" md-svg-src="../content/images/goo.svg"></md-icon>-->
-<!--</a>-->
-<!--</div>-->
-<!--<div layout="column" layout-gt-xs="row" class="md-padding"><span>вул.Щирецька 36&nbsp;</span> <span>&nbsp; 067 264 62 16 &nbsp;</span><span>&nbsp; 097 246 01 74</span>-->
-<!--</div>-->
-
-<!--</footer>-->
-<!--</main>-->
-
-
 </body>
 </html>

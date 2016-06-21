@@ -36,16 +36,28 @@ body {
   overflow-y: auto;
 }
 
-.container {
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
 
-  &:before, .container:after {
-    content: " ";
-    display: table;
-  }
+.fit-screen-wrap {
+  position: relative;
+  display: table-cell;
+  vertical-align: middle;
+  z-index: 2;
+}
+
+.overlay {
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  -webkit-background-size: 100% auto;
+  -moz-background-size: 100% auto;
+  -ms-background-size: 100% auto;
+  -o-background-size: 100% auto;
+  background-size: 100% auto;
+
 }
 
 .page-header, .page-footer, .page-container {
@@ -57,25 +69,13 @@ body {
   overflow: hidden;
   overflow-y: auto;
   text-align: center;
-  -webkit-background-size: 100% auto;
-  -moz-background-size: 100% auto;
-  -ms-background-size: 100% auto;
-  -o-background-size: 100% auto;
-  background-size: 100% auto;
-  background-color: rgba($primary, 0.15);
-  .fit-screen-wrap {
-    position: relative;
-    display: table-cell;
-    vertical-align: middle;
-    z-index: 2;
-  }
 
   .screen {
-    -webkit-filter:   blur(3px) ;
-    -moz-filter:   blur(3px) ;
-    -o-filter:  blur(3px) ;
-    -ms-filter:  blur(3px) ;
-    filter: blur(3px) ;
+    //-webkit-filter:   blur(3px) ;
+    //-moz-filter:   blur(3px) ;
+    //-o-filter:  blur(3px) ;
+    //-ms-filter:  blur(3px) ;
+    //filter: blur(3px) ;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -96,28 +96,45 @@ body {
   }
 }
 
-.page-header {
-  background: url("../images/bg/bg_header.jpg") no-repeat center center fixed;
-  color: $primary;
-}
-.page-footer {
-  background: url("../images/bg/IMG_6790_1.jpg") no-repeat center center fixed;
-  color: whitesmoke;
-  -webkit-filter: blur(3px);
-  -moz-filter: blur(3px);
-  -o-filter: blur(3px);
-  -ms-filter: blur(3px);
-  filter: blur(3px);
+.page-header, .page-footer {
   a {
     text-decoration: none;
   }
-  .fit-screen-wrap{
-    filter: none;
-    -webkit-filter: none;
-    -moz-filter: none;
-    -o-filter: none;
-    -ms-filter: none;
+  color: whitesmoke;
+
+  .overlay {
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
   }
+}
+
+.page-header {
+  background-color: rgb(33, 33, 33);
+  .overlay {
+
+    -webkit-filter: blur(02px);
+    -moz-filter: blur(20px);
+    -o-filter: blur(20px);
+    -ms-filter: blur(20px);
+    filter: blur(20px);
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/bg_header.jpg") no-repeat center center fixed;
+  }
+}
+
+.page-footer {
+
+  .overlay {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../images/bg/IMG_6790_1.jpg") no-repeat center center fixed;
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+  }
+
 }
 
 .page-container {
@@ -136,10 +153,10 @@ body {
     font-size: 16px;
   }
   @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-md) {
-    font-size: 20px;
+    font-size: 18px;
   }
   @media (min-width: $layout-breakpoint-md) {
-    font-size: 30px;
+    font-size: 24px;
   }
 
 }
@@ -158,11 +175,11 @@ h1.featured-area-title {
 
   }
   @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-md) {
-    font-size: 56px;
+    font-size: 45px;
   }
 
   @media (min-width: $layout-breakpoint-md) {
-    font-size: 112px;
+    font-size: 56px;
   }
 
 }
