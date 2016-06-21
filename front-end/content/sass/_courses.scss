@@ -4,9 +4,11 @@
 .courses-main {
   box-sizing: border-box;
   font-size: 21px;
-  img {
-    max-width: 100%;
-  }
+  overflow: visible;
+  min-height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 
   card-image-container {
     display: block;
@@ -23,6 +25,8 @@
   }
 
   md-card {
+    flex-grow: 1;
+    min-width: 25%;
     position: relative;
     display: block;
     md-card-content {
@@ -35,74 +39,75 @@
       background-color: rgba($primary, 0.7);
     }
 
-    @media (min-width: 1280px) and (max-width: 1930px) {
-
-      &.flex-gt-md-22 {
-
-        max-height: 100%;
-        box-sizing: border-box;
-        flex: 2 30%;
-      }
-
-    }
-
-    @media (min-width: 600px) and (max-width: 1279px) {
-      // Custom setting since ngMaterial 1.0.0 only
-      // supports percentage increments of 5
-      // 2-column table
-      &.flex-gt-sm-46 {
-        // max-width: 24% !important;
-        // Disable to all varying sizes in Cards
-        max-height: 100%;
-        box-sizing: border-box;
-        flex: 2 36%;
-      }
-      &:first-child, &:nth-child(2) {
-        flex: 2 36%;
-      }
-
-      .detail-btn {
-        width: 70%;
-        height: 40px;
-        color: floralwhite;
-
-        &:hover {
-          color: black;
-        }
-      }
-      md-card-content {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        height: 31%;
-        font-size: 17px;
-        color: whitesmoke;
-        background-color: rgba($primary, 0.7);
-      }
-    }
-
-    @media (min-width: 900px) and (max-width: 1279px) {
-      .detail-btn {
-        width: 70%;
-
-        color: floralwhite;
-
-        &:hover {
-          color: black;
-        }
-      }
-      md-card-content {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        height: 27%;
-        font-size: 20px;
-        color: whitesmoke;
-        background-color: rgba($primary, 0.7);
-      }
-    }
+    //@media (min-width: 1280px) and (max-width: 1930px) {
+    //  &.flex-gt-sm-46 {
+    //    // max-width: 24% !important;
+    //    // Disable to all varying sizes in Cards
+    //    max-height: 100%;
+    //    box-sizing: border-box;
+    //    flex: 3 24%;
+    //  }
+    //
+    //
+    //}
+    //
+    //@media (min-width: 600px) and (max-width: 1279px) {
+    //  // Custom setting since ngMaterial 1.0.0 only
+    //  // supports percentage increments of 5
+    //  // 2-column table
+    //  &.flex-gt-sm-46 {
+    //    // max-width: 24% !important;
+    //    // Disable to all varying sizes in Cards
+    //    max-height: 100%;
+    //    box-sizing: border-box;
+    //    flex: 2 36%;
+    //  }
+    //  &:first-child, &:nth-child(2) {
+    //    flex: 2 36%;
+    //  }
+    //
+    //  .detail-btn {
+    //    width: 70%;
+    //    height: 40px;
+    //    color: floralwhite;
+    //
+    //    &:hover {
+    //      color: black;
+    //    }
+    //  }
+    //  md-card-content {
+    //    position: absolute;
+    //    bottom: 0;
+    //    right: 0;
+    //    left: 0;
+    //    height: 31%;
+    //    font-size: 17px;
+    //    color: whitesmoke;
+    //    background-color: rgba($primary, 0.7);
+    //  }
+    //}
+    //
+    //@media (min-width: 900px) and (max-width: 1279px) {
+    //  .detail-btn {
+    //    width: 70%;
+    //
+    //    color: floralwhite;
+    //
+    //    &:hover {
+    //      color: black;
+    //    }
+    //  }
+    //  md-card-content {
+    //    position: absolute;
+    //    bottom: 0;
+    //    right: 0;
+    //    left: 0;
+    //    height: 27%;
+    //    font-size: 20px;
+    //    color: whitesmoke;
+    //    background-color: rgba($primary, 0.7);
+    //  }
+    //}
 
     // Need this for specificity to override defaults
     // 1-column Table
@@ -346,6 +351,7 @@
 .course-name {
   height: 65px;
 }
+
 .model-card md-card {
 
   position: relative;
