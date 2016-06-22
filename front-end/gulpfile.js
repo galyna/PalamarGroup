@@ -116,6 +116,7 @@ gulp.task('prod:html', function () {
 gulp.task('prod:content', function () {
     gulp.src(['content/**/*', '!content/sass/**/*', '!content/sass/'])
         .pipe(gulp.dest('dist/content/'));
+    gulp.src(['palamar_logo.ico']).pipe(gulp.dest('dist'));
 });
 
 gulp.task('prod:clean', function () {

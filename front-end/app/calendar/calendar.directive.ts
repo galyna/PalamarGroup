@@ -1,9 +1,10 @@
 import {IPgCalendarDataService, PgCalendarData} from "./calendar.data.service";
 import {IPgCalendarFactory} from "./calendar.factory";
 
-pgCalendarDirective.$inject = ["$compile", "$parse", "$http", "$q", "pgCalendar", "pgCalendarData"];
+pgCalendarDirective.$inject = ["$compile", "$parse", "$http", "$q", "$templateCache", "pgCalendar", "pgCalendarData"];
 export function pgCalendarDirective($compile:ng.ICompileService, $parse:ng.IParseService,
                                     $http:ng.IHttpService, $q:ng.IQService,
+                                    $templateCache:ng.ITemplateCacheService,
                                     pgCalendar, CalendarData:IPgCalendarDataService) {
 
     var defaultTemplate = "/* calendar.html */";
@@ -198,9 +199,11 @@ export function pgCalendarDirective($compile:ng.ICompileService, $parse:ng.IPars
                 // Allows fetching of dynamic templates via $http.
                 if ($scope.templateUrl) {
                     $http
-                        .get($scope.templateUrl)
-                        .success(deferred.resolve)
-                        .error(deferred.reject);
+                        .get($scope.templateUrl, {cache: $templateCache})
+                        .then((res) => {
+                            deferred.resolve(res.data)
+                        })
+                        .catch(deferred.reject);
                 } else {
                     deferred.resolve($scope.template() || defaultTemplate);
                 }

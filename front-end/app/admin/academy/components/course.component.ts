@@ -8,6 +8,10 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                 <md-tooltip>Курси</md-tooltip>
             </md-button>
             <span flex></span>
+            <md-button ng-click="$ctrl.cancel()" ng-disabled="saveCourseForm.$pristine">
+                <span>Скасувати</span>
+                <md-tooltip>Скасувати зміни</md-tooltip>
+            </md-button>
             <md-button type="submit" class="md-raised">Зберегти</md-button>
         </div>
     </md-toolbar>
@@ -198,7 +202,8 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
 class AdminCourseController {
     
     static $inject = ["$log", "$routeParams", "$mdToast", "$timeout", "Upload", "CourseResource"];
-    
+
+    originalCourse: ICourse;
     course: ICourse;
     newDate: Date;
     showHistoryPhotoUpload:boolean;
@@ -212,10 +217,19 @@ class AdminCourseController {
     
     $onInit(){
         if(this.$routeParams["id"]){
-            this.course = this.CourseResource.get({id: this.$routeParams["id"]});
+            this.CourseResource.get({id: this.$routeParams["id"]}).$promise
+                .then((course) => {
+                    this.originalCourse = course;
+                    this.course = angular.copy(this.originalCourse);
+                });
         }else{
-            this.course = new this.CourseResource();
+            this.originalCourse = new this.CourseResource();
+            this.course = angular.copy(this.originalCourse);
         }
+    }
+
+    cancel(){
+        this.course = angular.copy(this.originalCourse);
     }
 
     saveCourse(form: ng.IFormController){

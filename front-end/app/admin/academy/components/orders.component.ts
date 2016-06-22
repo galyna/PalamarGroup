@@ -166,6 +166,7 @@ export class AdminOrdersController {
     }
 }
 
+export let AdminOrdersComponentUrl = '/academy/orders';
 export let AdminOrdersComponentName = 'pgAdminOrders';
 export let AdminOrdersComponentOptions:ng.IComponentOptions = {
     controller: AdminOrdersController,

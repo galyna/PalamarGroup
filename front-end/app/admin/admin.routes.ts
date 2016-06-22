@@ -3,18 +3,17 @@ import {AcademyDeliveryController} from './academy/controllers/delivery.controll
 import {AcademyContactsController} from './academy/controllers/contacts.controller';
 import {AcademyCommentController} from "./academy/controllers/comments.controller";
 import {AdminCourseComponentUrl} from "./academy/components/course.component";
+import {AdminCoursesComponentUrl} from "./academy/components/courses.component";
+import {AdminOrdersComponentUrl} from "./academy/components/orders.component";
+import {testComponentUrl} from "./components/test.component";
 
 adminRoutes.$inject = ['$routeProvider'];
 export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
     $routeProvider
-        // .when('/salon', {
-        //     templateUrl: 'app/admin/salon/views/salon.html',
-        //     controller: AcademyCoursesController.componentName,
-        //     controllerAs: "vm"
-        // })
-        .when('/academy/orders', {
-            template: '<pg-admin-orders></pg-admin-orders>'
-        })
+        .when(AdminOrdersComponentUrl, {template: '<pg-admin-orders></pg-admin-orders>'})
+        .when(AdminCoursesComponentUrl, {template: "<pg-admin-courses layout='column' ng-cloak></pg-admin-courses>"})
+        .when(AdminCourseComponentUrl, {template: "<pg-admin-course layout flex></pg-admin-course>"})
+        .when(testComponentUrl, {template: '<pg-test></pg-test>'})
         .when('/academy/models', {
             templateUrl: 'app/admin/academy/views/models.html',
             controller: AcademyModelController.componentName,
@@ -35,10 +34,11 @@ export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
             controller: AcademyCommentController.componentName,
             controllerAs: "vm"
         })
-        .when('/academy/courses', {
-            template: "<pg-admin-courses layout='column' ng-cloak></pg-admin-courses>"
-        })
-        .when(AdminCourseComponentUrl, { template: "<pg-admin-course layout flex></pg-admin-course>" })
+        // .when('/salon', {
+        //     templateUrl: 'app/admin/salon/views/salon.html',
+        //     controller: AcademyCoursesController.componentName,
+        //     controllerAs: "vm"
+        // })
         .otherwise({
             redirectTo: '/academy/courses'
         });

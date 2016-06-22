@@ -35,6 +35,7 @@ import {AdminCoursesComponentName, AdminCoursesComponentOptions} from "./academy
 import {AdminCourseComponentName, AdminCourseComponentOptions} from "./academy/components/course.component";
 import {HeaderComponentName, HeaderComponentOptions} from "./components/header.component";
 import {LeftSidenavComponentName, LeftSidenavComponentOptions} from "./components/left.sidenav.component";
+import {testComponentName, testComponentOptions} from "./components/test.component";
 
 
 let app = angular.module('admin', [
@@ -62,6 +63,7 @@ let app = angular.module('admin', [
     .component(AdminCourseComponentName, AdminCourseComponentOptions)
     .component(EmailAdvComponentName, EmailAdvComponentOptions)
     .component(AdminOrdersComponentName, AdminOrdersComponentOptions)
-    .component(SalonClientFormComponentName, SalonClientFormComponentOptions);
+    .component(SalonClientFormComponentName, SalonClientFormComponentOptions)
+    .component(testComponentName, testComponentOptions);
 
 export let adminModule = app;

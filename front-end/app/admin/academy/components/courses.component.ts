@@ -108,6 +108,7 @@ export class AdminCoursesController {
     }
 }
 
+export let AdminCoursesComponentUrl = "/academy/courses";
 export let AdminCoursesComponentName = "pgAdminCourses";
 export let AdminCoursesComponentOptions = {
     template: template,
