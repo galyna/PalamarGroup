@@ -1,13 +1,18 @@
-const template = `<image-container layout ngf-select="$ctrl.onSelect($file, $invalidFiles)" accept="image/*">
-    <img ngf-thumbnail="$ctrl.model || $ctrl.thumb">
-</image-container>`;
+const template = `
+    <img ngf-src="$ctrl.model || $ctrl.thumb">
+    <image-container layout="center center" ngf-select="$ctrl.onSelect($file, $invalidFiles)" accept="image/*">
+        <md-icon md-svg-icon="content:ic_create_24px"></md-icon>
+    </image-container>`;
 
 const dialogTemplate = `<md-dialog>
-    <md-dialog-content style="width:20vw;height:20vh;">
+    <md-dialog-content style="width:70vw;height:70vh;">
          <img-crop area-type="rectangle"  
                   init-max-area="true"
                   image="$ctrl.inFile"
-                  result-blob="$ctrl.outFile" 
+                  result-image-size="'max'"
+                  result-image-format="'image/jpeg'"
+                  result-blob="$ctrl.outFile"
+                   aspect-ratio="$ctrl.aspectRatio"
                   result-image="trash" 
                   ng-init="$ctrl.outFile=null"></img-crop>
     </md-dialog-content>
@@ -60,9 +65,7 @@ export class ImageInputComponentController{
     onSelect($file, $invalidFiles){
         if(!$file) return;
         if(!this.crop){
-            this.ngModel.$setViewValue($file);
-            this.ngModel.$render();
-            return;
+            return this.setViewValue($file);
         }
         this.$mdDialog.show({
             template: dialogTemplate,
@@ -70,15 +73,19 @@ export class ImageInputComponentController{
             controllerAs: "$ctrl",
             bindToController: true,
             locals: {
-                inFile: $file
+                inFile: $file,
+                aspectRatio: this.aspectRatio
             }
-        }).then((file) => {
-            this.model = file;
-        });
+        }).then(($file) => this.setViewValue($file));
+    }
+
+    setViewValue(value) {
+        this.ngModel.$setViewValue(value);
+        this.ngModel.$render();
     }
 
     render() {
-        this.model = angular.copy(this.ngModel.$viewValue || null);
+        this.model = this.ngModel.$viewValue;
     }
 
 }
@@ -92,6 +99,6 @@ export let ImageInputComponentOptions: ng.IComponentOptions = {
     },
     bindings: {
         crop: "@",
-        onUpdate: "&"
+        "aspectRatio": "@"
     }
 };

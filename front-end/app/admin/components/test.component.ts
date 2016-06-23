@@ -1,11 +1,11 @@
 const template = `<div layout="column" class="md-padding">
-    <pg-image-input ng-model="$ctrl.img" on-update="$ctrl.update({url: url})" style="width:50%;"></pg-image-input>
+    <pg-image-input crop="true" aspect-ratio="1" ng-model="$ctrl.img" style="width:50%;">
+    </pg-image-input>
     
-    <md-input-container>
-    <label>Layout</label>
-    <input ng-model="$ctrl.layout">
-</md-input-container>
-    <!--<p>model: {{$ctrl.img}}</p>-->
+     <md-input-container>
+    <label>img: {{$ctrl.img}}</label>
+    <input ng-model="$ctrl.img">
+    </md-input-container>
     <md-input-container>
     <label>Url</label>
     <input ng-model="$ctrl.model.url">
@@ -28,7 +28,13 @@ export class TestComponentController {
     model:any;
     img: any;
 
-    constructor() {
+    static $inject = ["$rootScope"];
+    
+    constructor($rootScope) {
+        // $rootScope.$watch(()=>this.img, (val) => {
+        //    console.log(val);
+        // });
+        this.img = "/content/images/avatar-placeholder.png";
         this.model = {
             url: '',
             name: 'name',
