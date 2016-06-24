@@ -10,7 +10,8 @@ import {
     adminPagingComponentName, adminPagingComponentOptions,
     PagingServiceName, PagingService
 } from "./admin.paging";
-import {ImageInputComponentName, ImageInputComponentOptions} from "./image.input.component";
+import {
+    ImageInputDirectiveName, imageInputDirectiveFactory} from "./image.input.directive";
 
 export let uiModule = angular.module('ui', [
     'youtube-embed',
@@ -20,4 +21,4 @@ export let uiModule = angular.module('ui', [
     .directive(chooseFileButtonDirectiveName, chooseFileButtonDirectiveFactory)
     .service(PagingServiceName, PagingService)
     .component(adminPagingComponentName, adminPagingComponentOptions)
-    .component(ImageInputComponentName, ImageInputComponentOptions);
+    .directive(ImageInputDirectiveName, imageInputDirectiveFactory);

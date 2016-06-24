@@ -1,5 +1,6 @@
+import {PhotoService, PhotoServiceName} from "../../resources/photo.service";
 const template = `<div layout="column" class="md-padding">
-    <pg-image-input crop="true" aspect-ratio="1" ng-model="$ctrl.img" style="width:50%;">
+    <pg-image-input url="$ctrl.model.url" on-update="$ctrl.updatePhoto(blob)" style="width:50%;">
     </pg-image-input>
     
      <md-input-container>
@@ -28,19 +29,24 @@ export class TestComponentController {
     model:any;
     img: any;
 
-    static $inject = ["$rootScope"];
+    static $inject = ["$rootScope", PhotoServiceName];
     
-    constructor($rootScope) {
+    constructor($rootScope, private photoService: PhotoService) {
         // $rootScope.$watch(()=>this.img, (val) => {
         //    console.log(val);
         // });
-        this.img = "/content/images/avatar-placeholder.png";
+        // this.img = "/content/images/avatar-placeholder.png";
         this.model = {
-            url: '',
+            url: '/api/photo/asdsasad.jpg',
             name: 'name',
             order: 123,
             description: 'some descr'
         }
+    }
+    updatePhoto(blob:Blob){
+        return this.photoService.save(blob)
+            .then((url)=>this.model.url = url)
+            .catch((err)=>console.log(err));
     }
 }
 

@@ -1,5 +1,6 @@
 import {ICourse, ICourseResource} from "../../../resources/course.resource";
 import IPhoto = pg.models.IPhoto;
+import {PhotoServiceName, PhotoService} from "../../../resources/photo.service";
 const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCourse(saveCourseForm)" flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
@@ -63,38 +64,16 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
         </md-tab>
         <md-tab label="Автор">
             <md-card>
-                <md-card-content>
-                    <md-input-container class="md-block ">
-                        <label for="nameauthor">Ім’я автора</label>
-                        <input id="nameauthor" ng-model="$ctrl.course.author.name" name="nameauthor"/>
+                <md-card-content layout-sm="row" layout-gt-sm>
+                    <pg-image-input
+                    flex-sm="50"
+                    ng-model="$ctrl.course.author.photoUrl"
+                    aspect-ratio="1"
+                    crop="true"></pg-image-input>
+                    <md-input-container flex>
+                        <label>Ім’я автора</label>
+                        <input ng-model="$ctrl.course.author.name"/>
                     </md-input-container>
-                    <div>
-                        <label for="price">Фото автора</label>
-                        <img ng-src="{{$ctrl.course.author.photoUrl}}"/>
-                        <br/>
-                        <md-button ng-if="!$ctrl.showAuthorPhotoUpload" class="md-raised"
-                                   ng-click="$ctrl.showAuthorPhotoUpload=true">
-                            Змінити фото автора
-                        </md-button>
-                        <div ng-if="$ctrl.showAuthorPhotoUpload">
-                            <md-button ngf-select ng-model="authorPhotoFile" accept="image/*" class="md-raised">
-                                Вибрати файл
-                            </md-button>
-                            <div ngf-drop ng-model="authorPhotoFile" ngf-pattern="image/*"
-                                 class="cropArea">
-                                <img-crop area-type="rectangle" result-image-size="{w:300,h:300}" aspect-ratio="1"
-                                          init-max-area="true"
-                                          image="authorPhotoFile  | ngfDataUrl"
-                                          result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
-                                </img-crop>
-                            </div>
-
-                            <md-button class="md-primary"
-                                       ng-click="$ctrl.uploadAuthorPhoto(croppedDataUrl, authorPhotoFile.name,$ctrl.course)">
-                                Завантажити
-                            </md-button>
-                        </div>
-                    </div>                    
                 </md-card-content>
             </md-card>
         </md-tab>
@@ -102,9 +81,13 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
             <md-card>
                 <md-card-content>
                     <div flex>
-                        <md-subheader class="md-no-sticky">Форми модулів</md-subheader>
-                        <div layout="row" ng-repeat="item in $ctrl.course.hearFormsPhotos" ng-click="null">
-                            <img ng-src="{{item.url}}"/>
+                        <div style="max-height:400px" layout flex ng-repeat="item in $ctrl.course.hearFormsPhotos" ng-click="null">
+                            <pg-image-input
+                            layout="column"
+                    flex-sm="50"
+                    ng-model="item.url"
+                    aspect-ratio="1"
+                    crop="true"></pg-image-input>
                             <div layout="column">
                                 <md-input-container class="md-block  ">
                                     <label for="photoName">Назва форми</label>
@@ -201,7 +184,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
 
 class AdminCourseController {
     
-    static $inject = ["$log", "$routeParams", "$mdToast", "$timeout", "Upload", "CourseResource"];
+    static $inject = ["$log", "$routeParams", "$mdToast", "$timeout", PhotoServiceName, "CourseResource"];
 
     originalCourse: ICourse;
     course: ICourse;
@@ -212,7 +195,7 @@ class AdminCourseController {
     
     constructor(private $log: ng.ILogService, private $routeParams: ng.route.IRouteParamsService, 
                 private $mdToast: ng.material.IToastService, private $timeout: ng.ITimeoutService, 
-                private Upload:ng.angularFileUpload.IUploadService,
+                private photoService:PhotoService,
                 private CourseResource: ICourseResource){}
     
     $onInit(){
@@ -244,51 +227,35 @@ class AdminCourseController {
             });
     }
 
-    uploadAuthorPhoto(dataUrl, name, model:ICourse){
-        this.Upload.upload<{url: string}>({
-            method: 'POST',
-            url: '/api/photo',
-            data: {
-                file: this.Upload.dataUrltoBlob(dataUrl, name)
-            }
-        }).then((response)=> {
-            this.$timeout(()=> {
-                model.author.photoUrl = response.data.url;
-            });
-        }).catch((err)=> {
-            this.$log.debug("fail upload file..." + err);
-        }).finally(()=> {
-            this.$timeout(()=> {
-                this.showAuthorPhotoUpload = false;
-            });
-        });
+    deleteAuthorPhoto(){
+        this.course.author.photoUrl = "";
     }
 
     //TODO: add file param type
     uploadCollPhoto(dataUrl, name, collection:IPhoto[]):void {
-        this.Upload.upload<{url: string}>({
-            method: 'POST',
-            url: '/api/photo',
-            data: {
-                file: this.Upload.dataUrltoBlob(dataUrl, name)
-            }
-
-        }).then((response)=> {
-            this.$timeout(()=> {
-                collection.push({
-                    name: "",
-                    url: response.data.url,
-                    order: 0
-                });
-            });
-        }).catch((err)=> {
-            this.$log.debug("fail upload file..." + err);
-        }).finally(()=> {
-            this.$timeout(()=> {
-                this.showFormPhotoUpload = false;
-                this.showHistoryPhotoUpload = false;
-            });
-        });
+        // this.Upload.upload<{url: string}>({
+        //     method: 'POST',
+        //     url: '/api/photo',
+        //     data: {
+        //         file: this.Upload.dataUrltoBlob(dataUrl, name)
+        //     }
+        //
+        // }).then((response)=> {
+        //     this.$timeout(()=> {
+        //         collection.push({
+        //             name: "",
+        //             url: response.data.url,
+        //             order: 0
+        //         });
+        //     });
+        // }).catch((err)=> {
+        //     this.$log.debug("fail upload file..." + err);
+        // }).finally(()=> {
+        //     this.$timeout(()=> {
+        //         this.showFormPhotoUpload = false;
+        //         this.showHistoryPhotoUpload = false;
+        //     });
+        // });
     }
 
     //noinspection JSMethodCanBeStatic
@@ -303,6 +270,11 @@ class AdminCourseController {
 
     showErrorToast(text = 'Помилка, спробуйте пізніше') {
         this.$mdToast.showSimple(text);
+    }
+
+    //noinspection JSMethodCanBeStatic
+    deleteFromList(list:any[], item:any) {
+        list.splice(list.indexOf(item), 1);
     }
 }
 
