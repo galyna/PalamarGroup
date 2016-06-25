@@ -86,7 +86,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                             layout="column"
                     flex-sm="50"
                     ng-model="item.url"
-                    aspect-ratio="1"
+                    result-image-size="{w:2000,h:800}"
                     crop="true"></pg-image-input>
                             <div layout="column">
                                 <md-input-container class="md-block  ">
@@ -114,7 +114,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                             </md-button>
                             <div ngf-drop ng-model="hearFormsFile" ngf-pattern="image/*"
                                  class="cropArea">
-                                <img-crop area-type="rectangle" result-image-size="{w:403,h:604}" aspect-ratio="0.67"
+                                <img-crop area-type="rectangle"  result-image-size="{w:1020,h:620}" aspect-ratio="1.63"
                                           init-max-area="true"
                                           image="hearFormsFile  | ngfDataUrl"
                                           result-image="croppedHearFormsFile" ng-init="croppedHearFormsFile=''">

@@ -1,0 +1,106 @@
+@import "theme";
+
+.courses-main {
+  position: relative;
+
+  .overlay {
+
+    -webkit-filter: blur(15px);
+    -moz-filter: blur(15px);
+    -o-filter: blur(15px);
+    filter: blur(15px);
+    z-index: 0;
+  }
+  .overlay-top {
+    @extend .overlay;
+    z-index: 1;
+    background-color: rgba(white, 0.8);
+  }
+
+  .course-bg {
+
+    z-index: 2;
+
+  }
+
+  md-card.md-default-theme, md-card {
+    height: 500px;
+    z-index: 3;
+    padding: 0;
+    -webkit-filter: contrast(110%);
+    -moz-filter: contrast(110%);
+    -o-filter: contrast(110%);
+    -webkit-background-size: 100% auto;
+    -moz-background-size: 100% auto;
+    -ms-background-size: 100% auto;
+    -o-background-size: 100% auto;
+    background-size: 100% auto;
+    margin: 40px;
+    transition: transform 0.2s;
+    &:hover {
+      @extend .md-whiteframe-16dp;
+      transform: translate(0%, -2%);
+
+    }
+
+    .card-desc {
+      background: linear-gradient(
+                      rgba(0, 0, 0, 0.6),
+                      rgba(0, 0, 0, 0.1)
+      );
+      min-width: 300px;
+
+    }
+
+    md-card-content {
+      height: 500px;
+      overflow: hidden;
+      padding: 0;
+
+      md-card-title-text {
+
+        color: whitesmoke;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .card-media {
+      min-width: 300px;
+
+
+      overflow: hidden;
+      padding: 0;
+      img {
+        width: 100%
+      }
+    }
+
+    .descr-container {
+      max-height: 116px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+    }
+
+    .md-raised {
+      border-style: solid;
+      border-color: white;
+      border-width: 5px;
+      background-color: transparent;
+      color: white;
+width:170px;
+      margin: 8px;
+      font-size: 26px;
+      border-radius: 0px;
+
+      &:hover {
+
+        color:  black;
+        @extend .md-whiteframe-16dp;
+      }
+    }
+  }
+
+}
+

@@ -1,0 +1,63 @@
+<div class="courses-main" layout="row" layout-align="center center">
+    <div layout="column" layout-align="center center">
+        <div class="course-bg" layout-align="center center" flex
+             ng-repeat="course in vm.courses track by $index" ng-if="::course.isVisible">
+
+            <div layout="row" layout-align="center center">
+                <md-card ng-if=" $first || $odd" flex="70" md-whiteframe="3" class="md-margin"
+                         ng-style="{'background-image':'url({{course.hearFormsPhotos[0].url}})'}">
+
+                    <md-card-content layout="row" layout-align="start none">
+                        <div class="card-media " flex="40"></div>
+                        <div class="card-desc " flex="60" flex layout="column" layout-align="center center">
+                            <md-card-title flex>
+                                <md-card-title-text flex layout-align="space-around center">
+                                    <div class="md-display-1">{{::course.name}}</div>
+                                    <div class="descr-container">
+                                        <div class="md-title">{{::course.description}}</div>
+                                    </div>
+                                </md-card-title-text>
+                            </md-card-title>
+                            <md-card-actions flex="25">
+                                <md-button class=" md-display-1 md-raised " aria-label="Details"
+                                           ng-click="vm.showDetails(course._id)">
+                                    Деталі
+                                </md-button>
+                            </md-card-actions>
+                        </div>
+                    </md-card-content>
+
+                </md-card>
+
+                <md-card ng-if=" !$first && !$odd" flex="70" md-whiteframe="3" class="md-margin"
+                         ng-style="{'background-image':'url({{course.hearFormsPhotos[0].url}})'}">
+                    <!--<div class="overlay-top "></div>-->
+                    <md-card-content layout="row" layout-align="start none">
+                        <div class="card-desc " flex="60" flex layout="column" layout-align="center center">
+                            <md-card-title flex>
+                                <md-card-title-text flex layout-align="space-around center">
+                                    <div class="md-display-1">{{::course.name}}</div>
+                                    <div class="descr-container">
+                                        <div class="md-title">{{::course.description}}</div>
+
+                                    </div>
+                                </md-card-title-text>
+
+                            </md-card-title>
+
+                            <md-card-actions flex="25">
+                                <md-button class=" md-display-1 md-raised " aria-label="Details"
+                                           ng-click="vm.showDetails(course._id)">
+                                    Деталі
+                                </md-button>
+                            </md-card-actions>
+                        </div>
+                        <div class="card-media " flex="40"></div>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+    </div>
+</div>
+
+

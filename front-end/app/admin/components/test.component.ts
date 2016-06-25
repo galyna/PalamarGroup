@@ -43,7 +43,7 @@ export class TestComponentController {
             description: 'some descr'
         }
     }
-    updatePhoto(blob:Blob){
+    updatePhoto(blob:File){
         return this.photoService.save(blob)
             .then((url)=>this.model.url = url)
             .catch((err)=>console.log(err));

@@ -5,7 +5,7 @@ System.register(['./controllers/courses.controller', './controllers/course.contr
     function coursesRoutes($routeProvider) {
         $routeProvider
             .when('/courses', {
-            templateUrl: 'app/courses/views/courses.html',
+            templateUrl: 'app/courses/views/coursrs.cards.html',
             controller: courses_controller_1.CoursesController.componentName,
             controllerAs: "vm"
         })

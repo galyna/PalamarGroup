@@ -60,10 +60,11 @@ export class CoursesController {
                         this.createDatesMap( course );
                         this.setCalendarContent( course );
                     }
-                });
+                } );
             }
         );
     }
+
 
     setCalendarContent(course:ICourse) {
         angular.forEach( course.courseModulesDates, (courseDate) => {

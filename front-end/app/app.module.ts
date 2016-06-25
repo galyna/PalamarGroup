@@ -11,7 +11,7 @@ import 'angular-material';
 import 'angular-animate';
 import 'ng-file-upload';
 import 'ng-img-crop-full-extended';
-import 'angular-socialshare';
+//import 'angular-socialshare';
 import {uiModule} from './ui/ui.module';
 import {usersModule} from './users/users.module';
 import {coursesModule} from './courses/courses.module';
@@ -31,7 +31,7 @@ let app = angular.module('yuliaPalamarApp', [
     'ngRoute',
     'ngFileUpload',
     'ngImgCrop',
-    '720kb.socialshare',
+   // '720kb.socialshare',
     
     'templates',
     coreModule.name,
