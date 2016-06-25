@@ -111,11 +111,11 @@ body {
 }
 
 .page-header {
-
+  background: rgba(white, 0.6);
   .fit-screen-wrap {
     position: relative;
     display: table-cell;
-    vertical-align: top;
+    vertical-align: middle;
     z-index: 2;
     @media (max-width: $layout-breakpoint-md) {
       vertical-align: middle;
@@ -124,9 +124,9 @@ body {
 
   }
   .page-header-wrap {
-    background: rgba(white, 0.6);
+  //  background: rgba(white, 0.6);
     z-index: 3;
-    color: black;
+    color: floralwhite;
     font-family: 'microsquare', sans-serif;
   }
   .logo-img {
@@ -175,11 +175,11 @@ body {
 
     }
     @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-md) {
-      font-size: 36px;
+      font-size: 66px;
     }
 
     @media (min-width: $layout-breakpoint-md) {
-      font-size: 65px;
+      font-size: 75px;
     }
 
   }

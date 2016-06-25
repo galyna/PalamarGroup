@@ -1,0 +1,269 @@
+@import "theme";
+
+.course {
+  box-sizing: border-box;
+  font-size: 17px;
+  img {
+    max-width: 100%;
+  }
+
+  card-image-container {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .md-card-image {
+    transition: transform 0.5s;
+    &:hover {
+      transform: scale(1.1, 1.1);
+      transition: transform 0.5s;
+    }
+  }
+
+  md-card {
+    position: relative;
+    display: block;
+    md-card-content {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 20%;
+      color: whitesmoke;
+      background-color: rgba($primary, 0.7);
+    }
+
+    // Custom setting since ngMaterial 1.0.0 only
+    // supports percentage increments of 5
+    // 4-column Table, except Row 1 to be 2-Columns
+
+    @media (min-width: 1280px) and (max-width: 1930px) {
+
+      // Custom setting since ngMaterial 1.0.0 only
+      // supports percentage increments of 5
+      // 2-column table
+      &.flex-gt-md-22 {
+        // max-width: 24% !important;
+        // Disable to all varying sizes in Cards
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 2 18%;
+      }
+
+    }
+
+    @media (min-width: 600px) and (max-width: 1279px) {
+      // Custom setting since ngMaterial 1.0.0 only
+      // supports percentage increments of 5
+      // 2-column table
+      &.flex-gt-sm-46 {
+        // max-width: 24% !important;
+        // Disable to all varying sizes in Cards
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 2 36%;
+      }
+      &:first-child, &:nth-child(2) {
+        flex: 2 36%;
+      }
+    }
+
+    // Need this for specificity to override defaults
+    // 1-column Table
+    @media (max-width: 599px) {
+      &.flex-xs-80 {
+        flex: 1 80%;
+        // Special override for the 1st & 2nd child default resizing
+        &:first-child, &:nth-child(2) {
+          flex: 1 80%;
+        }
+      }
+    }
+
+  }
+}
+
+.course-inner {
+  md-card md-card-content {
+    color: whitesmoke;
+    height: 13%;
+
+  }
+}
+
+.course-divider {
+  background-color: $accent-50;
+}
+
+.courses-history {
+  box-sizing: border-box;
+
+  img {
+    max-width: 100%;
+  }
+  card-image-container {
+    display: block;
+    overflow: hidden;
+  }
+
+  .md-card-image {
+    transition: transform 0.5s;
+    &:hover {
+      transform: scale(1.1, 1.1);
+      transition: transform 0.5s;
+    }
+  }
+
+  md-card {
+    position: relative;
+    display: block;
+    md-card-content {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 12%;
+      color: white;
+      background-color: rgba($primary, 0.7);
+    }
+
+
+    @media (min-width: 1280px) and (max-width: 1930px) {
+
+      &.flex-gt-md-22 {
+
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 2 46%;
+      }
+      &:first-child, &:nth-child(2) {
+        flex: 2 46%;
+      }
+    }
+    @media (min-width: 600px) and (max-width: 1930px) {
+
+      &.flex-gt-sm-46 {
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 2 46%;
+      }
+      &:first-child, &:nth-child(2) {
+        flex: 2 46%;
+      }
+    }
+
+    @media (max-width: 599px) {
+      &.flex-xs-80 {
+        flex: 1 80%;
+        // Special override for the 1st & 2nd child default resizing
+        &:first-child, &:nth-child(2) {
+          flex: 1 80%;
+        }
+      }
+    }
+
+  }
+}
+
+@media (max-width: 599px) {
+  .order-btn {
+    width: 100%;
+    min-width: 100%;
+  }
+  .detail-btn {
+    width: 90%;
+    margin-left:5% ;
+    margin-right:5% ;
+  }
+
+  .detail-cancel-btn {
+    min-width: 100%;
+  }
+
+}
+
+@media (max-width: 278px) {
+  .detail-btn {
+    display: none;
+  }
+}
+
+.detail-btn {
+  min-width: 150px;
+  border-radius: 1px;
+  color: floralwhite;
+  background-color: rgba(255, 255, 255, 0.15);
+  &:hover {
+    color: black;
+  }
+}
+
+.order-btn {
+  color: floralwhite;
+  background-color: rgba($primary, 0.8);
+  &:hover {
+    color: black;
+    background-color: rgba($primary, 0.7);
+    transition: transform 0.2s;
+  }
+}
+
+.course-name {
+  height: 65px;
+}
+
+.model-card md-card {
+
+  position: relative;
+  display: block;
+  md-card-content {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 30%;
+    min-height: 100px;
+
+    color: white;
+    background-color: rgba($primary, 0.7);
+  }
+
+
+  @media (min-width: 1280px) and (max-width: 1930px) {
+
+    &.flex-gt-md-22 {
+
+      max-height: 100%;
+      box-sizing: border-box;
+      flex: 2 46%;
+    }
+    &:first-child, &:nth-child(2) {
+      flex: 2 46%;
+    }
+  }
+  @media (min-width: 600px) and (max-width: 1930px) {
+
+    &.flex-gt-sm-46 {
+      max-height: 100%;
+      box-sizing: border-box;
+      flex: 2 46%;
+    }
+    &:first-child, &:nth-child(2) {
+      flex: 2 46%;
+    }
+  }
+
+  @media (max-width: 599px) {
+    &.flex-xs-80 {
+      flex: 1 80%;
+      // Special override for the 1st & 2nd child default resizing
+      &:first-child, &:nth-child(2) {
+        flex: 1 80%;
+      }
+    }
+  }
+
+
+}
+
