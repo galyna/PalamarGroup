@@ -1,0 +1,115 @@
+@import "theme";
+
+.courses-details {
+///course description
+  md-card.md-default-theme, md-card {
+    padding: 0;
+    margin: 20px;
+
+    @media (max-width: $layout-breakpoint-xs) {
+      margin-left: 0px;
+      margin-right: 0px;
+
+    }
+
+    md-card-content {
+      overflow: hidden;
+      padding: 0;
+
+      md-card-title-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .card-media {
+      position: relative;
+      z-index: 1;
+      mim-width: 200px;
+      height: 320px;
+      overflow: hidden;
+      padding: 0;
+
+      @media (max-width: $layout-breakpoint-xs) {
+        min-width: 90vw;
+      }
+
+      img {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -100;
+
+      }
+    }
+  }
+
+  .md-button.md-default-theme.md-raised:not([disabled]):hover, .md-button.md-raised:not([disabled]):hover {
+    color: white;
+    border-color: black;
+    background-color: black;
+    @extend .md-whiteframe-14dp;
+
+  }
+  .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .md-button.md-raised.xs-selected:not([disabled]):hover {
+    color: black;
+    border-color: white;
+    background-color: white;
+    @extend .md-whiteframe-14dp;
+  }
+  .md-raised.xs-selected {
+    color: white;
+    border: white;
+    background-color: black;
+    @extend .md-whiteframe-14dp;
+
+  }
+  .md-raised {
+    border-style: solid;
+    border-color: black;
+    border-width: 3px;
+    background-color: transparent;
+    color: black;
+    height: 50px;
+    //width: 90vw;
+    margin: 8px;
+    font-size: 26px;
+    border-radius: 0px;
+    transition: background-color 1s;
+    @extend .md-whiteframe-3dp;
+
+    @media (max-width: $layout-breakpoint-xs) {
+
+      min-width: 90vw;
+
+    }
+
+  }
+  ///course description
+
+  ///course img grid
+
+  .gridListCourses md-grid-list {
+    margin: 8px;
+    md-grid-tile {
+      transition: all 400ms ease-out 50ms;
+      overflow: hidden;
+      img{
+        position: absolute;
+        left: 0;
+        top:0;
+        width: 100%;
+        height: auto;
+      }
+    }
+
+  }
+
+}
+
+
+

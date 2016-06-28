@@ -1,0 +1,239 @@
+<div class="courses-details">
+    <div layout="row" layout-align="center start">
+        <!--lg md sm-->
+        <div hide-xs="true" layout="column">
+            <!--lg md sm-->
+            <div class="md-margin" layout="row">
+                <div flex="50" class="md-padding"><img src="{{::vm.course.author.photoUrl}}"/></div>
+                <div class="md-padding description-container" flex layout="column" layout-align="start space-between">
+                    <div class="md-display-1">{{::vm.course.name}}</div>
+                    <div layout="column" class="md-padding description-container" layout-align="start space-between">
+                        <div class="md-padding" layout="row" layout-align="space-between start">
+                            <div class="md-title">Автор:</div>
+                            <div class="md-title">{{ ::vm.course.author.name}}</div>
+                        </div>
+                        <div class="md-padding" layout="row" layout-align="space-between start">
+                            <div class="md-title" class="md-padding">Дати:</div>
+                            <div class="md-title"><span class="md-subhead"
+                                                        ng-repeat="date in ::vm.course.courseModulesDates track by $index">{{ date| date:'dd.MM'}} </span>
+                            </div>
+                        </div>
+                        <div class="md-padding" layout="row" layout-align="space-between start">
+                            <div class="md-title" class="md-padding">Ціна:</div>
+                            <div class="md-title">{{::vm.course.price}} грн.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="md-padding" layout="row" layout-align="space-between start">
+                <md-button ng-show="!vm.formVisible" class=" xs-selected md-raised "
+                           aria-label="Play" ng-click="vm.showForm()">
+                    Записатись
+                </md-button>
+                <md-button class="  md-raised "
+                           aria-label="Відгуки" ng-click="vm.scrollToComments()">
+                    Відгуки
+                </md-button>
+                <md-button ng-show="!vm.formVisible" class="   md-raised "
+                           aria-label="Play" ng-click="vm.showModelForm()">
+                    Стати моделлю
+                </md-button>
+            </div>
+        </div>
+
+        <!--xs-->
+        <md-card hide-gt-xs="true" md-whiteframe="8" layout-fill="true">
+            <md-card-content layout="column">
+                <div class="card-media "><img src="{{::vm.course.author.photoUrl}}"/></div>
+                <div class="card-desc " layout="column" layout-align="space-around center">
+                    <md-card-title>
+                        <md-card-title-text layout-align="space-around center">
+                            <div layout="column" class="md-padding description-container"
+                                 layout-align="start space-between">
+                                <div class="md-display-1 md-margin">{{::vm.course.name}}</div>
+                                <div class="md-padding " layout="row" layout-align="space-between start">
+                                    <div class="md-title">Автор:</div>
+                                    <div class="md-title">{{ ::vm.course.author.name}}</div>
+                                </div>
+                                <div class="md-padding" layout="row" layout-align="space-between start">
+
+                                    <div class="md-title" class="md-padding">Дати:</div>
+                                    <div class="md-title"><span class="md-title"
+                                                                ng-repeat="date in ::vm.course.courseModulesDates track by $index">{{ date| date:'dd.MM'}} </span>
+                                    </div>
+                                </div>
+                                <div class="md-padding" layout="row" layout-align="space-between start">
+
+                                    <div class="md-title" class="md-padding">Ціна:</div>
+                                    <div class="md-title">{{::vm.course.price}} грн.</div>
+                                </div>
+
+
+                            </div>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-button ng-show="!vm.formVisible" class=" xs-selected md-raised "
+                               aria-label="Play" ng-click="vm.showForm()">
+                        Записатись
+                    </md-button>
+                    <md-button class="  md-raised "
+                               aria-label="Відгуки" ng-click="vm.scrollToComments()">
+                        Відгуки
+                    </md-button>
+                    <md-button ng-show="!vm.formVisible" class="   md-raised "
+                               aria-label="Play" ng-click="vm.showModelForm()">
+                        Стати моделлю
+                    </md-button>
+                </div>
+            </md-card-content>
+
+        </md-card>
+    </div>
+    <!--hearFormsPhotos-->
+    <div layout="row" layout-align="center start">
+        <div class=" gridListCourses" flex flex-gt-md="70" flex-md="90">
+            <md-grid-list
+                    md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="4"
+                    md-row-height-gt-md="1:1" md-row-height="1:1"
+                    md-gutter="8px" md-gutter-gt-sm="4px">
+                <md-grid-tile ng-repeat="tile in vm.course.hearFormsPhotos"
+                              md-rowspan="{{1}}"
+                              md-colspan="{{1}}"
+                              md-colspan-sm="1"
+                              md-colspan-xs="1"
+                              class="grid-media">
+                    <img src="{{::tile.url}}"/>
+                    <md-grid-tile-footer ng-if="tile.name"><h3>{{tile.name}}</h3></md-grid-tile-footer>
+                </md-grid-tile>
+            </md-grid-list>
+        </div>
+    </div>
+    <!--historyPhotos-->
+    <div layout="row" layout-align="center start">
+
+        <div class=" gridListCourses" flex flex-gt-md="70" flex-md="90">
+
+            <md-grid-list
+
+                    md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="3"
+                    md-row-height-gt-md="5:3" md-row-height="5:3"
+                    md-gutter="8px" md-gutter-gt-sm="4px">
+                <md-grid-tile ng-repeat="tile in vm.course.historyPhotos"
+                              md-rowspan="{{1}}"
+                              md-colspan="{{1}}"
+                              md-colspan-sm="1"
+                              md-colspan-xs="1"
+                              class="grid-media">
+                    <img src="{{::tile.url}}"/>
+
+                    <md-grid-tile-footer ng-if="tile.name"><h3>{{tile.name}}</h3></md-grid-tile-footer>
+                </md-grid-tile>
+            </md-grid-list>
+
+
+        </div>
+    </div>
+</div>
+
+
+<!--<div hide-xs="true" layout="column">-->
+<!--&lt;!&ndash;lg md sm&ndash;&gt;-->
+<!--<div class="md-margin" layout="row">-->
+
+<!--<div flex="50" class="md-padding"><img src="{{::vm.course.author.photoUrl}}"/></div>-->
+<!--<div class="md-padding description-container" flex layout="column" layout-align="start space-between">-->
+<!--<div class="md-display-1">{{::vm.course.name}}</div>-->
+<!--<div layout="column" class="md-padding description-container" layout-align="start space-between">-->
+<!--<div class="md-padding" layout="row" layout-align="space-between start">-->
+<!--<div class="md-title">Автор:</div>-->
+<!--<div class="md-title">{{ ::vm.course.author.name}}</div>-->
+<!--</div>-->
+<!--<div class="md-padding" layout="row" layout-align="space-between start">-->
+
+<!--<div class="md-title" class="md-padding">Дати:</div>-->
+<!--<div class="md-title"><span class="md-subhead"-->
+<!--ng-repeat="date in ::vm.course.courseModulesDates track by $index">{{ date| date:'dd.MM'}} </span>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="md-padding" layout="row" layout-align="space-between start">-->
+
+<!--<div class="md-title" class="md-padding">Ціна:</div>-->
+<!--<div class="md-title">{{::vm.course.price}} грн.</div>-->
+<!--</div>-->
+
+
+<!--</div>-->
+
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="md-padding" layout="row" layout-align="space-between start">-->
+
+<!--<md-button ng-show="!vm.formVisible" class=" xs-selected md-raised "-->
+<!--aria-label="Play" ng-click="vm.showForm()">-->
+<!--Записатись-->
+<!--</md-button>-->
+<!--<md-button class="  md-raised "-->
+<!--aria-label="Відгуки" ng-click="vm.scrollToComments()">-->
+<!--Відгуки-->
+<!--</md-button>-->
+
+<!--<md-button ng-show="!vm.formVisible" class="   md-raised "-->
+<!--aria-label="Play" ng-click="vm.showModelForm()">-->
+<!--Стати моделлю-->
+<!--</md-button>-->
+<!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash;xs&ndash;&gt;-->
+<!--<md-card hide-gt-xs="true" md-whiteframe="8" layout-fill="true">-->
+<!--<md-card-content layout="column">-->
+<!--<div class="card-media "><img src="{{::vm.course.author.photoUrl}}"/></div>-->
+<!--<div class="card-desc " layout="column" layout-align="space-around center">-->
+<!--<md-card-title>-->
+<!--<md-card-title-text layout-align="space-around center">-->
+<!--<div layout="column" class="md-padding description-container"-->
+<!--layout-align="start space-between">-->
+<!--<div class="md-display-1 md-margin">{{::vm.course.name}}</div>-->
+<!--<div class="md-padding " layout="row" layout-align="space-between start">-->
+<!--<div class="md-title">Автор:</div>-->
+<!--<div class="md-title">{{ ::vm.course.author.name}}</div>-->
+<!--</div>-->
+<!--<div class="md-padding" layout="row" layout-align="space-between start">-->
+
+<!--<div class="md-title" class="md-padding">Дати:</div>-->
+<!--<div class="md-title"><span class="md-title"-->
+<!--ng-repeat="date in ::vm.course.courseModulesDates track by $index">{{ date| date:'dd.MM'}} </span>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="md-padding" layout="row" layout-align="space-between start">-->
+
+<!--<div class="md-title" class="md-padding">Ціна:</div>-->
+<!--<div class="md-title">{{::vm.course.price}} грн.</div>-->
+<!--</div>-->
+
+
+<!--</div>-->
+<!--</md-card-title-text>-->
+<!--</md-card-title>-->
+<!--<md-button ng-show="!vm.formVisible" class=" xs-selected md-raised "-->
+<!--aria-label="Play" ng-click="vm.showForm()">-->
+<!--Записатись-->
+<!--</md-button>-->
+<!--<md-button class="  md-raised "-->
+<!--aria-label="Відгуки" ng-click="vm.scrollToComments()">-->
+<!--Відгуки-->
+<!--</md-button>-->
+
+<!--<md-button ng-show="!vm.formVisible" class="   md-raised "-->
+<!--aria-label="Play" ng-click="vm.showModelForm()">-->
+<!--Стати моделлю-->
+<!--</md-button>-->
+<!--</div>-->
+<!--</md-card-content>-->
+
+<!--</md-card>-->
+
+
+</div>
+
+

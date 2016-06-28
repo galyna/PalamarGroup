@@ -10,7 +10,7 @@ export function coursesRoutes($routeProvider:ng.route.IRouteProvider) {
             controllerAs: "vm"
         })
         .when('/course/:id', {
-            templateUrl: 'app/courses/views/course.html',
+            templateUrl: 'app/courses/views/courses.details.html',
             controller: CourseController.componentName,
             controllerAs: "vm"
         })

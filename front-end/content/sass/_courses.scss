@@ -1,11 +1,10 @@
 @import "theme";
 
+
+
 .course {
   box-sizing: border-box;
-  font-size: 17px;
-  img {
-    max-width: 100%;
-  }
+
 
   card-image-container {
     display: block;
@@ -13,13 +12,13 @@
     cursor: pointer;
   }
 
-  .md-card-image {
-    transition: transform 0.5s;
-    &:hover {
-      transform: scale(1.1, 1.1);
-      transition: transform 0.5s;
-    }
-  }
+  //.md-card-image {
+  //  transition: transform 0.5s;
+  //  &:hover {
+  //    transform: scale(1.1, 1.1);
+  //    transition: transform 0.5s;
+  //  }
+  //}
 
   md-card {
     position: relative;
@@ -34,66 +33,8 @@
       background-color: rgba($primary, 0.7);
     }
 
-    // Custom setting since ngMaterial 1.0.0 only
-    // supports percentage increments of 5
-    // 4-column Table, except Row 1 to be 2-Columns
-
-    @media (min-width: 1280px) and (max-width: 1930px) {
-
-      // Custom setting since ngMaterial 1.0.0 only
-      // supports percentage increments of 5
-      // 2-column table
-      &.flex-gt-md-22 {
-        // max-width: 24% !important;
-        // Disable to all varying sizes in Cards
-        max-height: 100%;
-        box-sizing: border-box;
-        flex: 2 18%;
-      }
-
-    }
-
-    @media (min-width: 600px) and (max-width: 1279px) {
-      // Custom setting since ngMaterial 1.0.0 only
-      // supports percentage increments of 5
-      // 2-column table
-      &.flex-gt-sm-46 {
-        // max-width: 24% !important;
-        // Disable to all varying sizes in Cards
-        max-height: 100%;
-        box-sizing: border-box;
-        flex: 2 36%;
-      }
-      &:first-child, &:nth-child(2) {
-        flex: 2 36%;
-      }
-    }
-
-    // Need this for specificity to override defaults
-    // 1-column Table
-    @media (max-width: 599px) {
-      &.flex-xs-80 {
-        flex: 1 80%;
-        // Special override for the 1st & 2nd child default resizing
-        &:first-child, &:nth-child(2) {
-          flex: 1 80%;
-        }
-      }
-    }
 
   }
-}
-
-.course-inner {
-  md-card md-card-content {
-    color: whitesmoke;
-    height: 13%;
-
-  }
-}
-
-.course-divider {
-  background-color: $accent-50;
 }
 
 .courses-history {

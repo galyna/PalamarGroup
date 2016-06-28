@@ -10,7 +10,7 @@ System.register(['./controllers/courses.controller', './controllers/course.contr
             controllerAs: "vm"
         })
             .when('/course/:id', {
-            templateUrl: 'app/courses/views/course.html',
+            templateUrl: 'app/courses/views/courses.details.html',
             controller: course_controller_1.CourseController.componentName,
             controllerAs: "vm"
         })

@@ -114,7 +114,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                             </md-button>
                             <div ngf-drop ng-model="hearFormsFile" ngf-pattern="image/*"
                                  class="cropArea">
-                                <img-crop area-type="rectangle"   aspect-ratio="1.63"
+                                <img-crop area-type="rectangle" result-image-size="{w:403,h:604}" aspect-ratio="0.67"
                                           init-max-area="true"
                                           image="hearFormsFile  | ngfDataUrl"
                                           result-image="croppedHearFormsFile" ng-init="croppedHearFormsFile=''">
@@ -183,8 +183,8 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
 </form>`;
 
 class AdminCourseController {
-    
-    static $inject = ["$log", "$routeParams", "$mdToast", "$timeout", PhotoServiceName, "CourseResource"];
+
+    static $inject = ["$log", "$routeParams", "$mdToast", "$timeout", PhotoServiceName, "CourseResource","Upload"];
 
     originalCourse: ICourse;
     course: ICourse;
@@ -192,12 +192,12 @@ class AdminCourseController {
     showHistoryPhotoUpload:boolean;
     showFormPhotoUpload:boolean;
     showAuthorPhotoUpload:boolean;
-    
-    constructor(private $log: ng.ILogService, private $routeParams: ng.route.IRouteParamsService, 
-                private $mdToast: ng.material.IToastService, private $timeout: ng.ITimeoutService, 
+
+    constructor(private $log: ng.ILogService, private $routeParams: ng.route.IRouteParamsService,
+                private $mdToast: ng.material.IToastService, private $timeout: ng.ITimeoutService,
                 private photoService:PhotoService,
-                private CourseResource: ICourseResource){}
-    
+                private CourseResource: ICourseResource,private Upload:ng.angularFileUpload.IUploadService){}
+
     $onInit(){
         if(this.$routeParams["id"]){
             this.CourseResource.get({id: this.$routeParams["id"]}).$promise
@@ -233,29 +233,29 @@ class AdminCourseController {
 
     //TODO: add file param type
     uploadCollPhoto(dataUrl, name, collection:IPhoto[]):void {
-        // this.Upload.upload<{url: string}>({
-        //     method: 'POST',
-        //     url: '/api/photo',
-        //     data: {
-        //         file: this.Upload.dataUrltoBlob(dataUrl, name)
-        //     }
-        //
-        // }).then((response)=> {
-        //     this.$timeout(()=> {
-        //         collection.push({
-        //             name: "",
-        //             url: response.data.url,
-        //             order: 0
-        //         });
-        //     });
-        // }).catch((err)=> {
-        //     this.$log.debug("fail upload file..." + err);
-        // }).finally(()=> {
-        //     this.$timeout(()=> {
-        //         this.showFormPhotoUpload = false;
-        //         this.showHistoryPhotoUpload = false;
-        //     });
-        // });
+        this.Upload.upload<{url: string}>({
+            method: 'POST',
+            url: '/api/photo',
+            data: {
+                file: this.Upload.dataUrltoBlob(dataUrl, name)
+            }
+
+        }).then((response)=> {
+            this.$timeout(()=> {
+                collection.push({
+                    name: "",
+                    url: response.data.url,
+                    order: 0
+                });
+            });
+        }).catch((err)=> {
+            this.$log.debug("fail upload file..." + err);
+        }).finally(()=> {
+            this.$timeout(()=> {
+                this.showFormPhotoUpload = false;
+                this.showHistoryPhotoUpload = false;
+            });
+        });
     }
 
     //noinspection JSMethodCanBeStatic
@@ -263,7 +263,7 @@ class AdminCourseController {
         this.course.courseModulesDates.push(date);
         this.newDate = null;
     }
-    
+
     deleteDate(date: Date){
         this.course.courseModulesDates.splice(this.course.courseModulesDates.indexOf(date), 1);
     }
