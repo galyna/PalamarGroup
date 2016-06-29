@@ -1,27 +1,48 @@
-<form ng-show="vm.orderFormVisible" name="orderForm" class="md-padding" novalidate ng-submit="">
-    <md-input-container class="md-block">
-        <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
-        <label for="name">Як до вас звертатися</label>
-        <input id="name" ng-model="vm.order.name" type="text" name="name">
-    </md-input-container>
-    <md-input-container class="md-block">
-        <md-icon md-svg-icon="communication:ic_email_24px"></md-icon>
-        <label for="email">email</label>
-        <input id="email" ng-model="vm.order.email" type="text" name="email">
-    </md-input-container>
-    <md-input-container class="md-block">
-        <md-icon md-svg-icon="communication:ic_phonelink_ring_24px"></md-icon>
-        <label for="phone">Телефон</label>
-        <input id="phone" ng-model="vm.order.phone" type="text" name="phone">
-    </md-input-container>
-    <md-input-container class="md-block">
-        <label for="comment">Додаткова інформація</label>
-        <input id="comment" ng-model="vm.order.comment" type="text" name="phone">
-    </md-input-container>
-    <p>Після запису на модуль з Вами звяжеться координатор для узгодження деталей</p>
-    <div flex layout layout-wrap layout-align="end center">
-        <md-button ng-click="vm.hideForm()"  class="md-raised detail-cancel-btn">Скасувати</md-button>
-        <md-button ng-click="vm.submitOrder()"  class="order-btn">Відправити</md-button>
-    </div>
 
-</form>
+<md-dialog aria-label="ЗАПИСАТИСЬ НА БЛОК" >
+    <md-toolbar class="md-hue-2">
+        <div class="md-toolbar-tools md-padding ">
+            <h2 class=" md-padding ">ЗАПИСАТИСЬ НА БЛОК</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.cancel()">
+                <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <form name="orderForm" class="md-padding " novalidate ng-submit="vm.submitOrder(orderForm)">
+        <md-dialog-content>
+            <md-dialog-content-body>
+                <md-input-container class="md-block">
+                    <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
+                    <label for="name">Як до вас звертатися</label>
+                    <input id="name" ng-model="vm.order.name" type="text" name="name">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <md-icon md-svg-icon="communication:ic_email_24px"></md-icon>
+                    <label for="email">email</label>
+                    <input id="email" ng-model="vm.order.email" type="text" name="email">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
+                    <label for="phone">Телефон</label>
+                    <input id="phone" ng-model="vm.order.phone" type="text" name="phone">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
+                    <label for="comment">Додаткова інформація</label>
+                    <textarea  id="comment" ng-model="vm.order.comment"  name="comment"></textarea>
+                </md-input-container>
+                    <p class=" md-headline">Після запису на модуль з Вами звяжеться координатор для узгодження деталей</p>
+            </md-dialog-content-body>
+        </md-dialog-content>
+        <md-dialog-actions show-xs="true" hide  class="md-padding " layout="column"  md-whiteframe="2" >
+            <md-button ng-click="vm.cancel();vm.newComment.text='';vm.newComment.name='';" class=" md-raised ">CКАСУВАТИ</md-button>
+            <md-button type="submit" class=" xs-selected md-raised md-headline">ЗАПИСАТИСЬ</md-button>
+        </md-dialog-actions>
+        <md-dialog-actions hide-xs="true"  class="md-padding "  layout="row" md-whiteframe="2" >
+            <md-button  ng-click="vm.cancel();vm.newComment.text='';vm.newComment.name='';" class="md-headline md-raised ">CКАСУВАТИ</md-button>
+            <md-button type="submit" class="xs-selected md-raised md-headline">ЗАПИСАТИСЬ</md-button>
+        </md-dialog-actions>
+
+    </form>
+</md-dialog>

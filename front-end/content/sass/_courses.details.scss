@@ -1,7 +1,47 @@
 @import "theme";
 
+
+.comments-form{
+
+}
 .courses-details {
-///course description
+
+  card-image-container {
+
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+
+
+  .content-block {
+    min-height: 450px;
+    background-color: white;
+  }
+  .description-container {
+  //  min-width: 350px;
+    background-color: white;
+  }
+  .author-container {
+    min-width: 250px;
+    position: relative;
+    .author-name {
+      position: absolute;
+      bottom: 0px;
+      left: 0;
+      right: 0;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: auto;
+    }
+  }
+  ///course description
   md-card.md-default-theme, md-card {
     padding: 0;
     margin: 20px;
@@ -48,60 +88,20 @@
     }
   }
 
-  .md-button.md-default-theme.md-raised:not([disabled]):hover, .md-button.md-raised:not([disabled]):hover {
-    color: white;
-    border-color: black;
-    background-color: black;
-    @extend .md-whiteframe-14dp;
 
-  }
-  .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .md-button.md-raised.xs-selected:not([disabled]):hover {
-    color: black;
-    border-color: white;
-    background-color: white;
-    @extend .md-whiteframe-14dp;
-  }
-  .md-raised.xs-selected {
-    color: white;
-    border: white;
-    background-color: black;
-    @extend .md-whiteframe-14dp;
-
-  }
-  .md-raised {
-    border-style: solid;
-    border-color: black;
-    border-width: 3px;
-    background-color: transparent;
-    color: black;
-    height: 50px;
-    //width: 90vw;
-    margin: 8px;
-    font-size: 26px;
-    border-radius: 0px;
-    transition: background-color 1s;
-    @extend .md-whiteframe-3dp;
-
-    @media (max-width: $layout-breakpoint-xs) {
-
-      min-width: 90vw;
-
-    }
-
-  }
   ///course description
 
   ///course img grid
 
   .gridListCourses md-grid-list {
-    margin: 8px;
+    margin: 16px;
     md-grid-tile {
       transition: all 400ms ease-out 50ms;
       overflow: hidden;
-      img{
+      img {
         position: absolute;
         left: 0;
-        top:0;
+        top: 0;
         width: 100%;
         height: auto;
       }
@@ -109,6 +109,51 @@
 
   }
 
+  .page-delimiter {
+    position: relative;
+    display: table;
+    width: calc(99vw - 10px);
+    height: 300px;
+    color: white;
+    overflow: hidden;
+    overflow-y: auto;
+    text-align: center;
+
+    .fit-screen-wrap {
+      position: relative;
+      display: table-cell;
+      vertical-align: middle;
+      z-index: 2;
+    }
+
+    .overlay {
+      z-index: 1;
+      -webkit-filter: blur(5px);
+      -moz-filter: blur(5px);
+      -o-filter: blur(5px);
+      -ms-filter: blur(5px);
+      filter: blur(5px);
+
+    }
+    .overlay-history {
+      @extend .overlay;
+
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/slider/s9.png") no-repeat center center fixed;
+    }
+    .overlay-comments {
+      @extend .overlay;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/slider/s10.png") no-repeat center center fixed;
+    }
+    .overlay-description {
+      @extend .overlay;
+
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/slider/s11.png") no-repeat center center fixed;
+    }
+    .overlay-forms {
+      @extend .overlay;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/slider/s12.png") no-repeat center center fixed;
+    }
+  }
 }
 
 

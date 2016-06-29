@@ -17,13 +17,12 @@ export class CourseController {
 
     static $inject = ['$log', '$routeParams', '$location', CourseResourceName,
         OrderResourceName, MediaObserverFactoryName, '$mdDialog', 'Upload',
-        '$timeout', ModelResourceName, 'constants', '$anchorScroll', "$filter", '$rootScope'];
+        '$timeout', ModelResourceName, 'constants', '$anchorScroll', "$filter",
+        '$rootScope', '$templateCache', '$mdMedia'];
     static componentName = 'CourseController';
 
     course:ICourse;
     order:IOrder;
-    orderFormVisible:boolean;
-    modelFormVisible:boolean;
     newModel:IModel;
     newComment:any;
     localURL:string;
@@ -35,7 +34,9 @@ export class CourseController {
                 private OrderResource:IOrderResource, private mediaObserver:IMediaObserverFactory,
                 private mdDialog:ng.material.IDialogService, private Upload:ng.angularFileUpload.IUploadService,
                 private $timeout:ng.ITimeoutService, private ModelResource:IModelResource,
-                private constants:IConstants, private $anchorScroll:ng.IAnchorScrollService, private $filter, $rootScope:IRootScope) {
+                private constants:IConstants, private $anchorScroll:ng.IAnchorScrollService,
+                private $filter, $rootScope:IRootScope, private $templateCache:ng.ITemplateCacheService,
+                private $mdMedia:mg.material.IMenuService) {
 
         //  this.localURL = $location.absUrl();
         // this.localContentURL= $location.protocol() + "://" + $location.host() + ":" + $location.port();
@@ -45,8 +46,8 @@ export class CourseController {
         this.course = CourseResource.get( {id: $routeParams.id} );
         this.course.$promise.then( (course)=> {
             $rootScope.socialParams.image = this.localContentURL + course.hearFormsPhotos[0].url;
-            $rootScope.socialParams.title =  course.name;
-            $rootScope.socialParams.description =  this.getFBDescription();
+            $rootScope.socialParams.title = course.name;
+            $rootScope.socialParams.description = this.getFBDescription();
         } );
 
         this.order = new OrderResource();
@@ -106,14 +107,23 @@ export class CourseController {
 
     }
 
-    showModelForm():void {
+    showModelDialog($event):void {
         this.newModel = this.getBlankModel();
-        this.modelFormVisible = true;
+
+        this.mdDialog.show( {
+            template: this.$templateCache.get( "app/courses/views/model.form.html" ),
+            clickOutsideToClose: true,
+            bindToController: true,
+            controller: CourseController.componentName,
+            controllerAs: 'vm',
+            fullscreen: true,
+            parent: angular.element( document.querySelector( 'ng-view' ) ),
+            targetEvent: $event,
+        } );
+
+
     }
 
-    hideModelForm():void {
-        this.modelFormVisible = false;
-    };
 
     saveModelPhoto(file, photoName):void {
         if (!file) return;
@@ -132,20 +142,17 @@ export class CourseController {
         } );
     }
 
+
     submitModel():void {
         this.newModel.$save()
             .then( () => {
+                this.mdDialog.hide();
                 this.showModelConfirm();
             } )
             .catch( (err) => {
                     this.$log.error( err );
                 }
-            ).finally( ()=> {
-            this.$timeout( ()=> {
-                this.hideModelForm();
-            } );
-        } );
-
+            );
     }
 
     showModelConfirm():void {
@@ -161,6 +168,20 @@ export class CourseController {
 
     }
 
+    showOrderDialog($event):void {
+       
+        this.mdDialog.show( {
+            template: this.$templateCache.get( "app/courses/views/order.html" ),
+            clickOutsideToClose: true,
+            bindToController: true,
+            controller: CourseController.componentName,
+            controllerAs: 'vm',
+            parent: angular.element( document.querySelector( 'ng-view' ) ),
+            targetEvent: $event,
+        } );
+
+    }
+
     showOrderConfirm():void {
         this.mdDialog.show(
             this.mdDialog.alert()
@@ -173,16 +194,16 @@ export class CourseController {
 
     }
 
-    submitOrder():void {
+    submitOrder(form):void {
         if (this.order.email || this.order.phone || this.order.name) {
             this.order.event_id = this.course._id;
             this.order.event_name = this.course.name;
             //TODO: change order.event_dates to Date[] like in CourseResourse
-            this.order.event_dates = this.course.courseModulesDates.map((date) => date.toJSON());
+            this.order.event_dates = this.course.courseModulesDates.map( (date) => date.toJSON() );
             this.order.date = new Date().toJSON();
             this.order.$save()
                 .then( () => {
-                    this.hideForm();
+                    this.mdDialog.hide();
                     this.showOrderConfirm();
                 } )
                 .catch( (err) => {
@@ -194,9 +215,27 @@ export class CourseController {
         }
     }
 
+    cancel():void {
+        this.mdDialog.hide();
+    }
+
+    showCommentDialog($event):void {
+        this.mdDialog.show( {
+            template: this.$templateCache.get( "app/courses/views/comment.form.html" ),
+            clickOutsideToClose: true,
+            bindToController: true,
+            controller: CourseController.componentName,
+            controllerAs: 'vm',
+            parent: angular.element( document.querySelector( 'ng-view' ) ),
+            targetEvent: $event,
+        } );
+
+    }
+
     submitComment():void {
         this.newComment.date = new Date();
         this.CourseResource.addComment( {id: this.course._id}, this.newComment ).$promise.then( () => {
+                this.mdDialog.hide();
                 this.showCommentConfirm();
             } )
             .catch( (err) => {
@@ -223,13 +262,6 @@ export class CourseController {
 
     }
 
-    showForm():void {
-        this.orderFormVisible = true;
-    }
-
-    hideForm():void {
-        this.orderFormVisible = false;
-    };
 
     showMediaObserver(items, index):void {
         this.mediaObserver.observe( items, index );

@@ -24,12 +24,12 @@ body {
   }
 }
 
-
 *:before, *:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 .overlay {
 
   position: absolute;
@@ -60,7 +60,6 @@ body {
   z-index: 2;
 }
 
-
 .page-header, .page-footer, .page-container {
   position: relative;
   display: table;
@@ -69,7 +68,7 @@ body {
   min-height: 100vh;
   overflow: hidden;
   overflow-y: auto;
-  text-align: center;
+
 
   .screen {
     position: absolute;
@@ -103,6 +102,7 @@ body {
 }
 
 .page-header, .page-footer {
+  text-align: center;
   a {
     text-decoration: none;
   }
@@ -112,19 +112,8 @@ body {
 
 .page-header {
   background: rgba(white, 0.6);
-  .fit-screen-wrap {
-    position: relative;
-    display: table-cell;
-    vertical-align: middle;
-    z-index: 2;
-    @media (max-width: $layout-breakpoint-md) {
-      vertical-align: middle;
 
-    }
-
-  }
   .page-header-wrap {
-  //  background: rgba(white, 0.6);
     z-index: 3;
     color: floralwhite;
     font-family: 'microsquare', sans-serif;
@@ -197,11 +186,11 @@ body {
 
   .overlay {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../images/bg/IMG_6790_1.jpg") no-repeat center center fixed;
-    -webkit-filter: blur(2px);
-    -moz-filter: blur(2px);
-    -o-filter: blur(2px);
-    -ms-filter: blur(2px);
-    filter: blur(2px);
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
   }
 
 }
@@ -275,6 +264,61 @@ md-tabs md-ink-bar {
     transform: scale(1.5, 1.5);
     transition: transform 0.2s;
     box-shadow: $shadow-social-active;
+  }
+
+}
+
+md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar), md-toolbar.md-hue-2:not(.md-menu-toolbar) {
+  background-color: rgba($primary, 0.8);
+}
+.md-button.md-default-theme.md-accent.md-raised, .md-button.md-accent.md-raised, .md-button.md-default-theme.md-accent.md-fab, .md-button.md-accent.md-fab{  background-color: rgba($primary,1);}
+
+.md-button.md-default-theme.md-raised:not([disabled]):hover, .md-button.md-raised:not([disabled]):hover {
+  color: white;
+  border-color: black;
+  background-color: black;
+  @extend .md-whiteframe-14dp;
+
+}
+.md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .md-button.md-raised.xs-selected:not([disabled]):hover {
+   color: black;
+   border-color: white;
+   background-color: white;
+   @extend .md-whiteframe-14dp;
+ }
+.md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .md-button.md-raised.xs-selected:not([disabled]) {
+  min-width: 150px;
+  color: white;
+  border: white;
+  background-color: black;
+  @extend .md-whiteframe-14dp;
+}
+.md-raised.xs-selected {
+  min-width: 150px;
+  color: white;
+  border: white;
+  background-color: black;
+  @extend .md-whiteframe-14dp;
+
+}
+.md-raised {
+  border-style: solid;
+  border-color: black;
+  border-width: 3px;
+  background-color: transparent;
+  color: black;
+  height: 50px;
+  //width: 90vw;
+  margin: 8px;
+  font-size: 26px;
+  border-radius: 0px;
+  transition: background-color 1s;
+  @extend .md-whiteframe-3dp;
+
+  @media (max-width: $layout-breakpoint-xs) {
+
+    min-width: 90vw;
+
   }
 
 }
