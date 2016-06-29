@@ -36,12 +36,9 @@ export class CourseController {
                 private mdDialog:ng.material.IDialogService, private Upload:ng.angularFileUpload.IUploadService,
                 private $timeout:ng.ITimeoutService, private ModelResource:IModelResource,
                 private constants:IConstants, private $anchorScroll:ng.IAnchorScrollService, private $filter, $rootScope:IRootScope) {
-
-        //  this.localURL = $location.absUrl();
-        // this.localContentURL= $location.protocol() + "://" + $location.host() + ":" + $location.port();
-        //TODO
-        this.localURL = 'http://54.191.26.39:8080';
-        this.localContentURL = 'http://54.191.26.39:8080';
+        
+        this.localURL = constants.host;
+        this.localContentURL = constants.host;
         this.course = CourseResource.get( {id: $routeParams.id} );
         this.course.$promise.then( (course)=> {
             $rootScope.socialParams.image = this.localContentURL + course.hearFormsPhotos[0].url;
@@ -75,13 +72,10 @@ export class CourseController {
 
     getFBMadia():string {
         if (this.course.courseModulesDates) {
-
             return this.localContentURL + this.course.hearFormsPhotos[0].url;
-
         } else {
             return "";
         }
-        ;
     }
 
     backToHome():void {

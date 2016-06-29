@@ -1,6 +1,7 @@
 import IModel = pg.models.IModel;
 
 export interface IConstants {
+    host: string,
     baseUrl:string,
     apiUrl:string,
     uploadDir:string,
@@ -9,6 +10,7 @@ export interface IConstants {
 }
 
 export let constants:IConstants = {
+    host: 'http://staging.palamar.com.ua',
     baseUrl: '/',
     apiUrl: '/api',
     uploadDir: '/content/uploads',
