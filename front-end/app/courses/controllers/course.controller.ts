@@ -105,7 +105,7 @@ export class CourseController {
         this.newModel = this.getBlankModel();
 
         this.mdDialog.show( {
-            template: this.$templateCache.get( "app/courses/views/model.form.html" ).toString(),
+            template: this.$templateCache.get( "app/courses/views/model.form.html" ),
             clickOutsideToClose: true,
             bindToController: true,
             controller: CourseController.componentName,
@@ -165,7 +165,7 @@ export class CourseController {
     showOrderDialog($event):void {
        
         this.mdDialog.show( {
-            template: this.$templateCache.get( "app/courses/views/order.html" ).toString(),
+            template: this.$templateCache.get( "app/courses/views/order.html" ),
             clickOutsideToClose: true,
             bindToController: true,
             controller: CourseController.componentName,
@@ -215,7 +215,7 @@ export class CourseController {
 
     showCommentDialog($event):void {
         this.mdDialog.show( {
-            template: this.$templateCache.get( "app/courses/views/comment.form.html" ).toString(),
+            template: this.$templateCache.get( "app/courses/views/comment.form.html" ),
             clickOutsideToClose: true,
             bindToController: true,
             controller: CourseController.componentName,
