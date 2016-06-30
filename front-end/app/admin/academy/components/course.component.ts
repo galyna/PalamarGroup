@@ -240,22 +240,22 @@ class AdminCourseController {
     }
 
     uploadAuthorPhoto(dataUrl, name, model):void  {
-        var _this = this;
-        this.Upload.upload({
+        this.Upload.upload<{url: string}>({
             method: 'POST',
             url: '/api/photo',
             data: {
                 file: this.Upload.dataUrltoBlob(dataUrl, name)
             }
-        }).then(function (response) {
-            _this.$timeout(function () {
+
+        }).then((response)=> {
+            this.$timeout(()=> {
                 model.author.photoUrl = response.data.url;
             });
         }).catch(function (err) {
-            _this.$log.debug("fail upload file..." + err);
+            this.$log.debug("fail upload file..." + err);
         }).finally(function () {
-            _this.$timeout(function () {
-                _this.showAuthorPhotoUpload = false;
+            this.$timeout(function () {
+                this.showAuthorPhotoUpload = false;
             });
         });
     };

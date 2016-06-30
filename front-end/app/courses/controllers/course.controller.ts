@@ -36,15 +36,8 @@ export class CourseController {
                 private $timeout:ng.ITimeoutService, private ModelResource:IModelResource,
                 private constants:IConstants, private $anchorScroll:ng.IAnchorScrollService,
                 private $filter, $rootScope:IRootScope, private $templateCache:ng.ITemplateCacheService,
-                private $mdMedia:mg.material.IMenuService) {
+                private $mdMedia:ng.material.IMenuService) {
 
-        //  this.localURL = $location.absUrl();
-        // this.localContentURL= $location.protocol() + "://" + $location.host() + ":" + $location.port();
-        //TODO
-        this.localURL = 'http://54.191.26.39:8080';
-        this.localContentURL = 'http://54.191.26.39:8080';
-                private constants:IConstants, private $anchorScroll:ng.IAnchorScrollService, private $filter, $rootScope:IRootScope) {
-        
         this.localURL = constants.host;
         this.localContentURL = constants.host;
         this.course = CourseResource.get( {id: $routeParams.id} );
@@ -112,7 +105,7 @@ export class CourseController {
         this.newModel = this.getBlankModel();
 
         this.mdDialog.show( {
-            template: this.$templateCache.get( "app/courses/views/model.form.html" ),
+            template: this.$templateCache.get( "app/courses/views/model.form.html" ).toString(),
             clickOutsideToClose: true,
             bindToController: true,
             controller: CourseController.componentName,
@@ -172,7 +165,7 @@ export class CourseController {
     showOrderDialog($event):void {
        
         this.mdDialog.show( {
-            template: this.$templateCache.get( "app/courses/views/order.html" ),
+            template: this.$templateCache.get( "app/courses/views/order.html" ).toString(),
             clickOutsideToClose: true,
             bindToController: true,
             controller: CourseController.componentName,
@@ -222,7 +215,7 @@ export class CourseController {
 
     showCommentDialog($event):void {
         this.mdDialog.show( {
-            template: this.$templateCache.get( "app/courses/views/comment.form.html" ),
+            template: this.$templateCache.get( "app/courses/views/comment.form.html" ).toString(),
             clickOutsideToClose: true,
             bindToController: true,
             controller: CourseController.componentName,
