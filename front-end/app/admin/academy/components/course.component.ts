@@ -63,25 +63,33 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
             </md-card>
         </md-tab>
         <md-tab label="Автор">
-            <md-card>
-                <md-card-content layout-sm="row" layout-gt-sm>
-                    <pg-image-input
-                    flex-sm="50"
-                    ng-model="$ctrl.course.author.photoUrl"
-                    aspect-ratio="1"
-                    crop="true"></pg-image-input>
-                    <md-input-container flex>
-                        <label>Ім’я автора</label>
-                        <input ng-model="$ctrl.course.author.name"/>
-                    </md-input-container>
-                </md-card-content>
-            </md-card>
+            <label for="price">Фото автора</label>
+            <img ng-src="{{$ctrl.course.author.photoUrl}}"/>
+            <br/>
+
+            <div>
+                <md-button ngf-select ng-model="authorPhotoFile" accept="image/*" class="md-raised">
+                    Вибрати файл
+                </md-button>
+                <div ngf-drop ng-model="authorPhotoFile" ngf-pattern="image/*"
+                     class="cropArea">
+                    <img-crop area-type="rectangle" result-image-size="{w:500,h:500}" aspect-ratio="1" init-max-area="true"
+                              image="authorPhotoFile  | ngfDataUrl"
+                              result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+                    </img-crop>
+                </div>
+
+                <md-button class="md-primary"
+                           ng-click="$ctrl.uploadAuthorPhoto(croppedDataUrl, authorPhotoFile.name,$ctrl.course)">
+                    Завантажити
+                </md-button>
+            </div>
         </md-tab>
         <md-tab label="Медіа">
             <md-card>
                 <md-card-content>
                     <div flex>
-                        <div style="max-height:400px" layout flex ng-repeat="item in $ctrl.course.hearFormsPhotos" ng-click="null">
+                        <div style="max-height:400px;overflow: hidden;" layout flex ng-repeat="item in $ctrl.course.hearFormsPhotos" ng-click="null">
                             <pg-image-input
                             layout="column"
                     flex-sm="50"
@@ -231,6 +239,26 @@ class AdminCourseController {
         this.course.author.photoUrl = "";
     }
 
+    uploadAuthorPhoto(dataUrl, name, model):void  {
+        var _this = this;
+        this.Upload.upload({
+            method: 'POST',
+            url: '/api/photo',
+            data: {
+                file: this.Upload.dataUrltoBlob(dataUrl, name)
+            }
+        }).then(function (response) {
+            _this.$timeout(function () {
+                model.author.photoUrl = response.data.url;
+            });
+        }).catch(function (err) {
+            _this.$log.debug("fail upload file..." + err);
+        }).finally(function () {
+            _this.$timeout(function () {
+                _this.showAuthorPhotoUpload = false;
+            });
+        });
+    };
     //TODO: add file param type
     uploadCollPhoto(dataUrl, name, collection:IPhoto[]):void {
         this.Upload.upload<{url: string}>({
