@@ -2,23 +2,42 @@
   "User": [
     {
       "email": "admin@email.com",
+      "name": "admin",
       "password": "admin",
       "roles": [
         "admin"
       ]
     },
     {
-      "email": "moderator@email.com",
-      "password": "moderator",
+      "email": "academyModerator@email.com",
+      "password": "academyModerator",
+      "name": "academyModerator",
       "roles": [
-        "moderator"
+        "academyModerator"
       ]
     },
     {
-      "email": "user@email.com",
-      "password": "user",
+      "email": "academyUser@email.com",
+      "password": "academyUser",
+      "name": "academyUser",
       "roles": [
-        "user"
+        "academyUser"
+      ]
+    },
+    {
+      "email": "salonModerator@email.com",
+      "password": "salonModerator",
+      "name": "salonModerator",
+      "roles": [
+        "salonModerator"
+      ]
+    },
+    {
+      "email": "salonUser@email.com",
+      "password": "salonUser",
+      "name": "salonUser",
+      "roles": [
+        "salonUser"
       ]
     }
   ],

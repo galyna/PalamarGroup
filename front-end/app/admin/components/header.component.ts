@@ -7,7 +7,8 @@ let template = `<md-toolbar class="md-hue-2">
         <h2>Palamar Group</h2>
         <input type="text" placeholder="search">
         <span flex></span>
-        <span>Login|Logout</span>
+        <span ng-if="$root.user">{{$root.user.email}} <md-button ng-click="$root.logout()">Logout</md-button></span>
+        <span ng-if="!$root.user"><md-button ng-click="$root.login()">Login</md-button></span>
     </div>
 </md-toolbar>`;
 

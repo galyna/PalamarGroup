@@ -1,13 +1,13 @@
-import authenticate from "../auth/authenticate";
-import currentUser from '../auth/current_user';
+import {currentUser} from '../auth/current_user';
 import {Router} from 'express';
 import {photoService} from '../services/photo.service';
+import {auth} from "../auth/auth";
 let photoApi = Router();
 let uuid = require('node-uuid');
 let fs = require('fs');
 
 photoApi.route('/')
-    .post(authenticate, currentUser.is('admin'), function (req, res, next) {
+    .post(auth, currentUser.is('admin'), function (req, res, next) {
             if (!req.files || !req.files.file) {
                 res.status(400).json({error: {message: 'No files attached'}});
             }
@@ -39,7 +39,7 @@ photoApi.route('/:name')
             }
         });
     })
-    .delete(authenticate, currentUser.is('admin'),
+    .delete(auth, currentUser.is('admin'),
         async function(req, res){
             try{
                 await photoService.remove(req.params.name);

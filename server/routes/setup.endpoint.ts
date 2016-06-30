@@ -1,6 +1,5 @@
+import * as express from 'express';
 var data = require('../test_data.json');
-var express = require('express');
-var bcrypt = require('bcrypt-nodejs');
 
 export var setupRouter = express.Router();
 
@@ -8,9 +7,11 @@ setupRouter.get('/', function(){
     
 });
 
-function encryptPasswords(modelData) {
-    for(var i=0; i < modelData.length; i++){
-        modelData[i].password = bcrypt.hashSync(modelData[i].password, null, null);
+function encryptPasswords(User, usersData) {
+    let userModel = new User();
+    for(var i=0; i < usersData.length; i++){
+        let userData = usersData[i];
+        userModel.setPassword.call(userData, userData.password);
     }
 }
 
@@ -38,7 +39,7 @@ setupRouter.get('/:model', function (req, res) {
         .then(function(){
             console.log( fileName + ' collection dropped during setup');
             if(fileName === 'user'){
-                encryptPasswords(modelData);
+                encryptPasswords(Model, modelData);
             }
 
             return Model.create(modelData).then(function (items) {

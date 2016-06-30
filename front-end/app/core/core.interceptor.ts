@@ -20,11 +20,11 @@ function loadingInterceptor ($q: ng.IQService, $rootScope: IRootScope) {
         },
         requestError: function (rejection) {
             $rootScope.loading = false;
-            $q.reject(rejection);
+            return $q.reject(rejection);
         },
         responseError: function (rejection) {
             $rootScope.loading = false;
-            $q.reject(rejection);
+            return $q.reject(rejection);
         }
     };
 }

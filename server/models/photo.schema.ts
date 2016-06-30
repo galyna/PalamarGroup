@@ -4,6 +4,7 @@ import {Document} from "mongoose";
 
 export interface IPhotoModel extends pg.models.IPhoto, Document{
     _id: any;
+    __url: any;
 }
 
 export let PhotoSchema = new Schema({
@@ -19,7 +20,7 @@ export let PhotoSchema = new Schema({
 });
 
 //cleanup unneeded photos
-PhotoSchema.post('save', async (photo) => {
+PhotoSchema.post('save', async (photo: IPhotoModel) => {
     if(photo.__url && (photo.__url != photo.url)){
         let oldUrl = photo.__url;
         await photoService.removeByUrl(oldUrl);
@@ -27,7 +28,7 @@ PhotoSchema.post('save', async (photo) => {
     }
 });
 
-PhotoSchema.post('remove', (photo) => {
+PhotoSchema.post('remove', (photo: IPhotoModel) => {
     photoService.removeByUrl(photo.url);
 });
 //cleanup unneeded photos end

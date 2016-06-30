@@ -1,12 +1,13 @@
-import authenticate from "../auth/authenticate";
-import currentUser from '../auth/current_user';
+import {currentUser} from '../auth/current_user';
 import {Router} from "express";
 import * as bcrypt from 'bcrypt-nodejs';
 import {User} from '../models/user';
+import {auth} from "../auth/auth";
+
 let userApi = Router();
 
 userApi.route('/')
-    .get(authenticate, currentUser.is('admin'), async (req, res) => {
+    .get(auth, currentUser.is('admin'), async (req, res) => {
         try{
             let users = await User.find({}, {"email": 1, "roles": 1});
             res.json({users: users});
@@ -45,7 +46,7 @@ userApi.route('/')
     });
 
 userApi.route('/:id')
-    .get(authenticate, currentUser.is('admin'), async (req, res) => {
+    .get(auth, currentUser.is('admin'), async (req, res) => {
         try {
             let user = await User.findOne({_id: req.params.id});
             if (!user) {
@@ -57,8 +58,8 @@ userApi.route('/:id')
             res.status(500).json(err);
         }
     })
-    .delete(authenticate, currentUser.is('admin'), (req, res) => {
-        User.findByIdAndRemove(req.params.id).then((user) => {
+    .delete(auth, currentUser.is('admin'), (req, res) => {
+        User.findByIdAndRemove(req.params.id).exec().then((user) => {
             if(!user) {
                 res.status(404)
             }
@@ -66,11 +67,11 @@ userApi.route('/:id')
         })
     })
     //TODO: add update password flow
-    .put(authenticate, currentUser.is('admin'), (req, res) => {
+    .put(auth, currentUser.is('admin'), (req, res) => {
         var updateRequest = Object.assign({}, req.body);
         updateRequest.password = bcrypt.hashSync(updateRequest.password);
         delete updateRequest.id;
-        User.findOneAndUpdate({_id: req.params._id}, updateRequest)
+        User.findOneAndUpdate({_id: req.params._id}, updateRequest).exec()
             .then((user) => {
                 if(!user) {
                     res.status(404).send({error: {message: "User not found"}});

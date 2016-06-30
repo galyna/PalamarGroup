@@ -1,4 +1,4 @@
-import config from "../config";
+import {config} from "../config";
 import {SMSAPI, Stat, ISMSAPIOptions} from "e-pochta-sms-api";
 
 let smsOptions: ISMSAPIOptions = config.ePochta.gatewayOptions;

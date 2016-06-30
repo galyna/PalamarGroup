@@ -61,8 +61,9 @@ declare module pg {
         export interface IUser {
             _id?: any;
             email: string,
-            password: string,
-            roles: string[]
+            hash: string,
+            salt: string,
+            roles: UserRoles[]
         }
 
         export interface IModel {
@@ -95,4 +96,11 @@ declare module pg {
             isModerated: boolean;
         }
     }
+    
+    type UserRoles = 
+        'admin' 
+        | 'academyModerator' 
+        | 'academyUser'
+        | 'salonModerator'
+        | 'salonUser';
 }

@@ -60,7 +60,7 @@ api.route('/comment/:commentId')
             res.status(500).json(err);
         }
 
-    })
+    });
 
     //create comment in course
 
