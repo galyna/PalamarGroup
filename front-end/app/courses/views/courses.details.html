@@ -43,7 +43,7 @@
                                    socialshare-description="{{vm.getFBDescription()}}"
                                    socialshare-media="{{vm.getFBMadia()}}"
                                    socialshare-url="{{vm.localURL}}">
-                                    <md-icon class="social-image" md-svg-src="../content/images/face.svg"></md-icon>
+                                    <md-icon class="social-image" md-svg-src="../content/images/icons/social/face.svg"></md-icon>
                                 </a>
                                 <a href=""
                                    socialshare
@@ -53,7 +53,7 @@
                                    socialshare-media='{{vm.getFBMadia()}}'
                                    socialshare-url="{{vm.localURL}}">
                                     <md-icon class="social-image"
-                                             md-svg-src="../content/images/vk-social-logotype.svg"></md-icon>
+                                             md-svg-src="../content/images/icons/social/vk-social-logotype.svg"></md-icon>
                                 </a>
                                 <a href=""
                                    socialshare
@@ -61,13 +61,13 @@
                                    socialshare-text="{{ 'Запрошуємо на курс '+ vm.course.name.toUpperCase() }}"
                                    socialshare-hashtags=""
                                    socialshare-url="{{vm.localURL}}">
-                                    <md-icon class="social-image" md-svg-src="../content/images/twi.svg"></md-icon>
+                                    <md-icon class="social-image" md-svg-src="../content/images/icons/social/twi.svg"></md-icon>
                                 </a>
                                 <a href=""
                                    socialshare
                                    socialshare-provider="google"
                                    socialshare-url="{{vm.localURL}}">
-                                    <md-icon class="social-image" md-svg-src="../content/images/goo.svg"></md-icon>
+                                    <md-icon class="social-image" md-svg-src="../content/images/icons/social/goo.svg"></md-icon>
 
                                 </a>
 
@@ -116,7 +116,50 @@
                                     <div class="md-title">{{::vm.course.price}} грн.</div>
                                 </div>
 
+                                <div class="md-padding" layout="column" layout-gt-sm="row" layout-align="space-between center">
+                                    <div flex class="md-title">Поділитись &nbsp;&nbsp;</div>
+                                    <div class="social-image-container" layout="row"
+                                         layout-align="center center">
+                                        <a href=""
+                                           socialshare
+                                           socialshare-type="feed"
+                                           socialshare-provider="facebook"
+                                           socialshare-text="{{ vm.course.name.toUpperCase()}}"
+                                           socialshare-caption="PALAMAR GROUP ACADEMY"
+                                           socialshare-description="{{vm.getFBDescription()}}"
+                                           socialshare-media="{{vm.getFBMadia()}}"
+                                           socialshare-url="{{vm.localURL}}">
+                                            <md-icon class="social-image" md-svg-src="../content/images/icons/social/face.svg"></md-icon>
+                                        </a>
+                                        <a href=""
+                                           socialshare
+                                           socialshare-provider="vk"
+                                           socialshare-text="{{ vm.course.name.toUpperCase()}}"
+                                           socialshare-description="{{vm.getFBDescription()}}"
+                                           socialshare-media='{{vm.getFBMadia()}}'
+                                           socialshare-url="{{vm.localURL}}">
+                                            <md-icon class="social-image"
+                                                     md-svg-src="../content/images/icons/social/vk-social-logotype.svg"></md-icon>
+                                        </a>
+                                        <a href=""
+                                           socialshare
+                                           socialshare-provider="twitter"
+                                           socialshare-text="{{ 'Запрошуємо на курс '+ vm.course.name.toUpperCase() }}"
+                                           socialshare-hashtags=""
+                                           socialshare-url="{{vm.localURL}}">
+                                            <md-icon class="social-image" md-svg-src="../content/images/icons/social/twi.svg"></md-icon>
+                                        </a>
+                                        <a href=""
+                                           socialshare
+                                           socialshare-provider="google"
+                                           socialshare-url="{{vm.localURL}}">
+                                            <md-icon class="social-image" md-svg-src="../content/images/icons/social/goo.svg"></md-icon>
 
+                                        </a>
+
+
+                                    </div>
+                                </div>
                             </div>
                         </md-card-title-text>
                     </md-card-title>

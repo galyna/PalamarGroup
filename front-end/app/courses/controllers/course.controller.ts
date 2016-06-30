@@ -273,10 +273,10 @@ export class CourseController {
 
     private getBlankModel() {
         return new this.ModelResource( {
-            fasPhotoUrl: '../content/images/fas.jpg',
-            profilePhotoUrl: '../content/images/prifile.jpg',
-            backPhotoUrl: '../content/images/back.jpg',
-            fullSizePhotoUrl: '../content/images/fullsize.jpg'
+            fasPhotoUrl: '../content/images/models/fas.jpg',
+            profilePhotoUrl: '../content/images/models/prifile.jpg',
+            backPhotoUrl: '../content/images/models/back.jpg',
+            fullSizePhotoUrl: '../content/images/models/fullsize.jpg'
         } );
     }
 
