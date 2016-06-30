@@ -16,7 +16,7 @@ const template = `<div layout="column" flex>
 
 export class ImageInputComponentController {
 
-    static $inject = ["$mdDialog", "$mdToast", "$timeout", "$scope", "$element", "$attr", "ngModel", PhotoServiceName];
+    static $inject = ["$mdDialog", "$mdToast", "$timeout", "$scope", "$element", "$attr", "ngModel", "resultImageSize", PhotoServiceName];
     static THUMB = "/content/images/avatar-placeholder.png";
 
     //bindings
@@ -28,7 +28,7 @@ export class ImageInputComponentController {
 
     constructor(private $mdDialog:ng.material.IDialogService, private $mdToast, private $timeout: ng.ITimeoutService,
                 private $scope, private $element: ng.IAugmentedJQuery, private $attr: ng.IAttributes,
-                private ngModel:ng.INgModelController,  private photoService:PhotoService) {
+                private ngModel:ng.INgModelController, public resultImageSize, private photoService:PhotoService) {
 
         this.crop = $attr['crop'];
         this.aspectRatio = $attr['aspectRatio'];
@@ -52,7 +52,8 @@ export class ImageInputComponentController {
                 bindToController: true,
                 locals: {
                     inFile: file,
-                    aspectRatio: this.aspectRatio
+                    aspectRatio: this.aspectRatio,
+                    resultImageSize: this.resultImageSize
                 }
             }).then((file) => {
                 this.file = file;
@@ -97,10 +98,11 @@ export class ImageInputComponentController {
 
 const dialogTemplate = `<md-dialog>
     <md-dialog-content style="width:70vw;height:70vh;">
+ {{$ctrl.resultImageSize}}
          <img-crop area-type="rectangle"  
                   init-max-area="true"
                   image="$ctrl.inFile"
-                  result-image-size="'max'"
+                  result-image-size="$ctrl.resultImageSize"
                   result-image-format="'image/jpeg'"
                   result-blob="$ctrl.blob"
                   aspect-ratio="$ctrl.aspectRatio"
@@ -157,13 +159,15 @@ export function imageInputDirectiveFactory($controller: ng.IControllerService) {
         require: ['ngModel'],
         scope: {
             crop: "@",
-            aspectRatio: "@"
+            aspectRatio: "@",
+            resultImageSize: "=",
         },
         link: (scope, elem, attrs, ctrls) => {
             scope.$ctrl = $controller(ImageInputComponentController, {
                 $scope: scope,
                 $element: elem,
                 $attr: attrs,
+                resultImageSize: scope.resultImageSize,
                 ngModel: ctrls[0]
             });
         }
