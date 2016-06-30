@@ -43,11 +43,15 @@ export class CourseController {
         //TODO
         this.localURL = 'http://54.191.26.39:8080';
         this.localContentURL = 'http://54.191.26.39:8080';
+                private constants:IConstants, private $anchorScroll:ng.IAnchorScrollService, private $filter, $rootScope:IRootScope) {
+        
+        this.localURL = constants.host;
+        this.localContentURL = constants.host;
         this.course = CourseResource.get( {id: $routeParams.id} );
         this.course.$promise.then( (course)=> {
             $rootScope.socialParams.image = this.localContentURL + course.hearFormsPhotos[0].url;
-            $rootScope.socialParams.title = course.name;
-            $rootScope.socialParams.description = this.getFBDescription();
+            $rootScope.socialParams.title =  course.name;
+            $rootScope.socialParams.description =  this.getFBDescription();
         } );
 
         this.order = new OrderResource();
@@ -76,13 +80,10 @@ export class CourseController {
 
     getFBMadia():string {
         if (this.course.courseModulesDates) {
-
             return this.localContentURL + this.course.hearFormsPhotos[0].url;
-
         } else {
             return "";
         }
-        ;
     }
 
     backToHome():void {
@@ -199,7 +200,7 @@ export class CourseController {
             this.order.event_id = this.course._id;
             this.order.event_name = this.course.name;
             //TODO: change order.event_dates to Date[] like in CourseResourse
-            this.order.event_dates = this.course.courseModulesDates.map( (date) => date.toJSON() );
+            this.order.event_dates = this.course.courseModulesDates.map((date) => date.toJSON());
             this.order.date = new Date().toJSON();
             this.order.$save()
                 .then( () => {
