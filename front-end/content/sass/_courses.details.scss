@@ -1,54 +1,48 @@
 @import "theme";
 
-
-.comments-form{
+.comments-form {
 
 }
+
 .courses-details {
 
   card-image-container {
-
     overflow: hidden;
     cursor: pointer;
   }
 
-
-
-  .content-block {
-    min-height: 450px;
-    background-color: white;
-  }
-  .description-container {
-  //  min-width: 350px;
-    background-color: white;
-  }
-  .author-container {
-    min-width: 250px;
-    position: relative;
-    .author-name {
-      position: absolute;
-      bottom: 0px;
-      left: 0;
-      right: 0;
-      color: white;
-      background-color: rgba(0, 0, 0, 0.6);
-    }
-    img {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: auto;
-    }
-  }
-  ///course description
   md-card.md-default-theme, md-card {
+    min-height: 500px;
+    z-index: 3;
     padding: 0;
+    min-width: 70vw;
     margin: 20px;
+    transition: transform 0.4s;
+
+    &:hover {
+      @extend .md-whiteframe-16dp;
+      transform: translate(0%, -1%);
+
+    }
 
     @media (max-width: $layout-breakpoint-xs) {
       margin-left: 0px;
       margin-right: 0px;
+
+    }
+    .card-desc-top {
+      background:rgba( $primary,0.8);
+      color: white;
+    }
+    .card-desc {
+      background: white;
+      min-width: 200px;
+      width: 100%;
+      z-index: 2;
+      @media (max-width: $layout-breakpoint-xs) {
+       // min-height: 500px;
+
+      }
 
     }
 
@@ -65,13 +59,17 @@
     .card-media {
       position: relative;
       z-index: 1;
-      mim-width: 200px;
-      height: 320px;
+      height: 500px;
       overflow: hidden;
       padding: 0;
 
-      @media (max-width: $layout-breakpoint-xs) {
-        min-width: 90vw;
+      .author-name {
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        width: 100%;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.6);
       }
 
       img {
@@ -86,10 +84,17 @@
 
       }
     }
+
   }
 
-
-  ///course description
+  .content-block {
+    min-height: 450px;
+    background-color: white;
+  }
+  .description-container {
+    //  min-width: 350px;
+    background-color: white;
+  }
 
   ///course img grid
 
@@ -154,7 +159,60 @@
       background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/slider/s12.png") no-repeat center center fixed;
     }
   }
+
+  .md-button.md-default-theme.md-accent.md-raised, .md-button.md-accent.md-raised, .md-button.md-default-theme.md-accent.md-fab, .md-button.md-accent.md-fab {
+    background-color: rgba($primary, 1);
+  }
+
+  .md-button.md-default-theme.md-raised:not([disabled]):hover, .md-button.md-raised:not([disabled]):hover {
+    color: white;
+    border-color: black;
+    background-color: black;
+    @extend .md-whiteframe-14dp;
+
+  }
+  .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .md-button.md-raised.xs-selected:not([disabled]):hover {
+    color: black;
+    border-color: white;
+    background-color: white;
+    @extend .md-whiteframe-14dp;
+  }
+  .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .md-button.md-raised.xs-selected:not([disabled]) {
+
+    color: white;
+    border: white;
+    background-color: black;
+    @extend .md-whiteframe-14dp;
+  }
+  .md-raised.xs-selected {
+
+    color: white;
+    border: white;
+    background-color: black;
+    @extend .md-whiteframe-14dp;
+
+  }
+  .md-raised {
+    display: block;
+    border-style: solid;
+    border-color: black;
+    border-width: 3px;
+    background-color: transparent;
+    color: black;
+    height: 56px;
+    min-width: 100%;
+    margin: 16px;
+    font-size: 26px;
+    border-radius: 0px;
+    transition: background-color 1s;
+    @extend .md-whiteframe-3dp;
+
+    @media (max-width: $layout-breakpoint-xs) {
+
+      min-width: 90vw;
+
+    }
+  }
+
 }
-
-
 

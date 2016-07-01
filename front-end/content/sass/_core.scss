@@ -271,54 +271,5 @@ md-tabs md-ink-bar {
 md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar), md-toolbar.md-hue-2:not(.md-menu-toolbar) {
   background-color: rgba($primary, 0.8);
 }
-.md-button.md-default-theme.md-accent.md-raised, .md-button.md-accent.md-raised, .md-button.md-default-theme.md-accent.md-fab, .md-button.md-accent.md-fab{  background-color: rgba($primary,1);}
 
-.md-button.md-default-theme.md-raised:not([disabled]):hover, .md-button.md-raised:not([disabled]):hover {
-  color: white;
-  border-color: black;
-  background-color: black;
-  @extend .md-whiteframe-14dp;
 
-}
-.md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .md-button.md-raised.xs-selected:not([disabled]):hover {
-   color: black;
-   border-color: white;
-   background-color: white;
-   @extend .md-whiteframe-14dp;
- }
-.md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .md-button.md-raised.xs-selected:not([disabled]) {
-  min-width: 150px;
-  color: white;
-  border: white;
-  background-color: black;
-  @extend .md-whiteframe-14dp;
-}
-.md-raised.xs-selected {
-  min-width: 150px;
-  color: white;
-  border: white;
-  background-color: black;
-  @extend .md-whiteframe-14dp;
-
-}
-.md-raised {
-  border-style: solid;
-  border-color: black;
-  border-width: 3px;
-  background-color: transparent;
-  color: black;
-  height: 50px;
-  //width: 90vw;
-  margin: 8px;
-  font-size: 26px;
-  border-radius: 0px;
-  transition: background-color 1s;
-  @extend .md-whiteframe-3dp;
-
-  @media (max-width: $layout-breakpoint-xs) {
-
-    min-width: 90vw;
-
-  }
-
-}

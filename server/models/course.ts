@@ -16,6 +16,11 @@ let VideoSchema = new Schema({
     order: Number
 });
 
+let DaySchema = new Schema({
+    date: Date,
+    program: String,
+});
+
 let CommentSchema = new Schema({
     name: String,
     text: String,
@@ -36,7 +41,8 @@ let CourseSchema = new Schema({
         name: String,
         photoUrl: String
     },
-    courseModulesDates: [Date],
+    days: [DaySchema],
+    courseModulesDates:[Date],
     isVisible: Boolean,
     comments: [CommentSchema]
 });
