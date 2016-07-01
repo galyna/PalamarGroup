@@ -26,13 +26,13 @@ emailEndpoint.route('/adv/:courseId')
 
         let course: ICourseModel, salonClients: ISalonClient[];
         try {
-            course = await Course.findOne({_id: id});
+            course = await Course.findOne({_id: id}).exec();
         } catch(err) {
             res.status(404).end();
         }
 
         try{
-            salonClients = await SalonClient.find({});
+            salonClients = await SalonClient.find({}).exec();
             if(salonClients.length === 0){
                 //TODO: better error handling
                 return res.status(400).end();

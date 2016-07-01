@@ -3,37 +3,33 @@ import {ICourseResource, ICourse, CourseResourceName} from "../../../resources/c
 import {AdminCourseComponentUrl} from "./course.component";
 
 const template = `
-<md-button ng-click="$ctrl.showEditForm()" ng-if="!$ctrl.courseToSave"
+<md-button ng-click="$ctrl.showEditForm()" ng-disabled="!$root.it.can('modifyAcademy');"
            class="md-fab md-fab-fixed md-primary md-fab-bottom-right" aria-label="new">
     <md-icon md-svg-icon="content:ic_add_24px"></md-icon>
     <md-tooltip>Додати курс</md-tooltip>
 </md-button>
-<div ng-if="!$ctrl.courseToSave">
-
+<div>
     <md-list>
-        <md-list-item class="md-2-line" ng-repeat="course in $ctrl.courses" ng-click="$ctrl.showEditForm(course)">
+        <md-list-item class="md-2-line" ng-repeat="course in $ctrl.courses" ng-click="$root.it.can('modifyAcademy') && $ctrl.showEditForm(course)">
             <img ng-src="{{::course.hearFormsPhotos[0].url}}" class="md-avatar" alt="No photo"/>
             <div class="md-list-item-text" layout="column">
                 <h3>{{::course.name}}</h3>
                 <p>{{::$ctrl.getCourseDates(course)}}</p>
             </div>
-            <md-icon ng-click="$ctrl.showEditForm(course)" class="md-secondary" md-svg-icon="content:ic_create_24px">
-                <md-tooltip>Редагувати</md-tooltip>
+            <md-icon ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="$ctrl.showEditForm(course)" class="md-secondary" md-svg-icon="content:ic_create_24px">
+                <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Редагувати</md-tooltip>
             </md-icon>
-            <md-icon ng-click="$ctrl.cloneCourse(course)" class="md-secondary" md-svg-icon="av:ic_library_add_24px">
-                <md-tooltip>Клонувати</md-tooltip>
+            <md-icon ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="$ctrl.cloneCourse(course)" class="md-secondary" md-svg-icon="av:ic_library_add_24px">
+                <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Клонувати</md-tooltip>
             </md-icon>
-            <md-icon ng-click="$ctrl.showDeleteDialog($event, course)" class="md-secondary"
+            <md-icon ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="$ctrl.showDeleteDialog($event, course)" class="md-secondary"
                      md-svg-icon="action:ic_delete_24px">
-                <md-tooltip>Видалити</md-tooltip>
+                <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Видалити</md-tooltip>
             </md-icon>
             <md-divider></md-divider>
         </md-list-item>
     </md-list>
-</div>
-<pg-admin-course ng-if="$ctrl.courseToSave" on-cancel="$ctrl.cancel($event)" on-save="$ctrl.saveCourse($event)"
-                 course="$ctrl.courseToSave"></pg-admin-course>
-`;
+</div>`;
 
 export class AdminCoursesController {
 

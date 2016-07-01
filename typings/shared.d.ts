@@ -70,6 +70,11 @@ declare module pg {
             email:string,
             password:string,
             roles:string[]
+            _id?: any;
+            email: string,
+            hash: string,
+            salt: string,
+            roles: UserRoles[]
         }
 
         export interface IModel {
@@ -102,4 +107,11 @@ declare module pg {
             isModerated:boolean;
         }
     }
+    
+    type UserRoles = 
+        'admin' 
+        | 'academyModerator' 
+        | 'academyUser'
+        | 'salonModerator'
+        | 'salonUser';
 }

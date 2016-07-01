@@ -1,4 +1,4 @@
-import config from '../config';
+import {config} from '../config';
 let uuid = require('node-uuid');
 let fs = require('fs');
 let path = require('path');

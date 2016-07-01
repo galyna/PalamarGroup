@@ -36,6 +36,8 @@ import {AdminCourseComponentName, AdminCourseComponentOptions} from "./academy/c
 import {HeaderComponentName, HeaderComponentOptions} from "./components/header.component";
 import {LeftSidenavComponentName, LeftSidenavComponentOptions} from "./components/left.sidenav.component";
 import {testComponentName, testComponentOptions} from "./components/test.component";
+import {adminRun} from "./admin.run";
+import {usersModule} from "../users/users.module";
 
 
 let app = angular.module('admin', [
@@ -47,9 +49,11 @@ let app = angular.module('admin', [
     'templates',
     coreModule.name,
     resourcesModule.name,
-    uiModule.name
+    uiModule.name,
+    usersModule.name
 ])
     .config(adminRoutes)
+    .run(adminRun)
     .controller(AdminController.componentName, AdminController)
     .controller(AcademyOrdersController.componentName, AcademyOrdersController)
     .controller(AcademyModelController.componentName, AcademyModelController)

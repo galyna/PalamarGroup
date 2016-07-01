@@ -1,12 +1,11 @@
 import * as express from 'express';
-import * as jwt from 'jsonwebtoken';
 import * as restify from 'express-restify-mongoose';
-import currentUser from '../auth/current_user';
+import passport = require("passport");
+import {currentUser} from '../auth/current_user';
 import userEndpoint from './user.endpoint';
 import photoEndpoint from './photo.endpoint';
-import * as bcrypt from 'bcrypt-nodejs';
+
 //models
-import {User} from '../models/user';
 import {Contact} from '../models/contact';
 import {Course} from '../models/course';
 import {Order} from '../models/order';
@@ -17,7 +16,6 @@ import IOrder = pg.models.IOrder;
 import {orderOptions} from "./order.endpoint";
 import {courseApi} from "./course.endpoint";
 import {courseGetCommentsApi} from "./comment.endpoint";
-import {Request} from "express-serve-static-core";
 import {Response} from "express";
 
 let api = express.Router();
@@ -88,35 +86,29 @@ api.use('/user', userEndpoint);
 api.use('/photo', photoEndpoint);
 api.use('/email', emailEndpoint);
 
-api.post('/authenticate', async (req, res) => {
-    let email = req.body.email;
-    let password = req.body.password;
-    if (!email || !password) {
-        return res.status(403);
-    }
-    try {
-        let user = await User.findOne({email: email});
-        if (!user) return res.status(403).send({error: {message: 'Wrong email and/or password'}});
-        bcrypt.compare(req.body.password, user.password, (err, result) => {
-            if (err) {
-                return res.status(500).send({error: err});
-            }
-            if (!result) return res.status(403).send({error: {message: 'Wrong email and/or password'}});
-            let signOptions = {
-                expiresIn: (1440 * 60).toString() //1 day
-            };
-            let token = jwt.sign(user.toObject(), 'secretKey', signOptions);
+api.post('/authenticate', (req, res, next) => {
+
+    passport.authenticate('local', (err, user, info) => {
+        var token;
+
+        // If Passport throws/catches an error
+        if (err) {
+            res.status(404).json(err);
+            return;
+        }
+
+        // If a user is found
+        if(user){
+            token = user.generateJwt();
+            res.status(200);
             res.json({
-                token: token,
-                user: {
-                    email: user.email,
-                    id: user._id
-                }
+                "token" : token
             });
-        });
-    } catch (err) {
-        res.status(500).send({error: err});
-    }
+        } else {
+            // If user is not found
+            res.status(401).json(info);
+        }
+    })(req, res, next);
 });
 
 export default api;
