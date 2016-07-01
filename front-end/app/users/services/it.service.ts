@@ -20,7 +20,7 @@ export class ItService{
         return actionFn.call(this, user);
     }
     
-    itAsync(role){
+    isAsync(role){
         return this.is(role) ? this.$q.resolve() : this.$q.reject({code: 401});
     }
 

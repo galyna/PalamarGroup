@@ -1,7 +1,7 @@
 export class AuthService{
 
     static $inject = ['$http', '$window', '$rootScope'];
-    static tokenKey = 'x-auth-token';
+    static tokenKey = 'Authorization';
     static loginUrl = '/api/authenticate';
     
     constructor(private $http, private $window, private $rootScope){
@@ -17,7 +17,7 @@ export class AuthService{
     }
 
     setTokenHeader(token){
-        this.$http.defaults.headers.common[AuthService.tokenKey] = token;
+        this.$http.defaults.headers.common[AuthService.tokenKey] = `Bearer ${token}`;
     }
 
     logout() {
