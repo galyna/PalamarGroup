@@ -2,16 +2,16 @@
 
     <!--author-->
 
-    <div layout="row" flex layout-align="center center">
+    <div layout="row" flex layout-align="center center" class=" md-padding ">
         <md-card flex-gt-md="60" flex="100" md-whiteframe="5">
             <md-card-content layuot="column" layout-gt-sm="row">
-                <div class="card-desc-top " flex hide-gt-sm="true"  layout="column" layout-align=" space-around center">
-                <md-card-title>
-                <md-card-title-text flex layout="column" layout-align=" space-around center" >
-                <div class="md-display-1">Блок</div>
-                <div class="md-display-1">{{::vm.course.name}}</div>
-                </md-card-title-text>
-                </md-card-title>
+                <div class="card-desc-top " flex hide-gt-sm="true" layout="column" layout-align=" space-around center">
+                    <md-card-title>
+                        <md-card-title-text flex layout="column" layout-align=" space-around center">
+                            <div class="md-display-1">Блок</div>
+                            <div class="md-display-1">{{::vm.course.name}}</div>
+                        </md-card-title-text>
+                    </md-card-title>
                 </div>
                 <div flex class=" card-media">
                     <img src="{{vm.course.author.photoUrl}}"/>
@@ -21,25 +21,32 @@
                     </div>
                 </div>
                 <div flex class="card-desc " flex-gt-sm="50" layout="column" layout-align=" space-between center">
-                    <md-card-title hide show-gt-sm="true">
-                        <md-card-title-text flex layout="column" layout-align=" space-around center">
+                    <md-card-title layout="column" layout-align="space-around center">
+                        <md-card-title-text hide show-gt-sm="true" flex layout="column"
+                                            layout-align=" space-around center">
                             <div class="md-display-1">Блок</div>
                             <div class="md-display-1">{{::vm.course.name}}</div>
                         </md-card-title-text>
+                        <div flex class="md-title " flex layout="row" layout-align=" space-around center">
+                            <div class=" md-padding">Вартість</div>
+                            <div flex>{{::vm.course.price}} грн.</div>
+                        </div>
                     </md-card-title>
 
-                    <div flex layuot="column" >
+                    <div flex layuot="column">
+
+                        <md-button class="md-raised " aria-label="Play" ng-click="vm.showModelDialog($event)">
+                            Стати моделлю
+                        </md-button>
                         <md-button class=" md-raised xs-selected " aria-label="Play"
                                    ng-click="vm.showOrderDialog($event)">
                             Записатись
                         </md-button>
-                        <md-button class="md-raised " aria-label="Play" ng-click="vm.showModelDialog($event)">
-                            Стати моделлю
-                        </md-button>
                         <md-button class=" md-raised " aria-label="Відгуки" ng-click="vm.scrollToComments()">
                             Відгуки
                         </md-button>
-                        <div class="md-padding md-margin" layout="column" layout-gt-sm="row" layout-align="center center">
+                        <div class="md-padding md-margin" layout="column" layout-gt-sm="row"
+                             layout-align="center center">
                             <div flex class="md-title md-padding">Поділитись</div>
                             <div class="social-image-container" layout="row"
                                  layout-align="center center">
@@ -92,18 +99,34 @@
         </md-card>
     </div>
 
+    <div layout="row" flex >
+        <div class="page-delimiter" flex>
+            <div flex>
+                <div class="" ng-repeat="day in ::vm.course.days track by $index">
+                    <div layout="row" class=" program-block md-margin" layout-align=" center center">
+                        <div flex="50" layout="row" layout-align="  end">
+                            <div class="date-block ">
+                                <span class="date-text md-title">{{ day.date| date:'dd.MM'}}</span>
+                            </div>
+                        </div>
+                        <div flex="50" class="md-padding md-headline " layout="row" layout-align="  start end">{{
+                            day.program}}
+                        </div>
+                    </div>
 
-    <!--<div class="md-padding" layout="row" layout-align="space-between start">-->
-    <!--<md-headline class="md-headline" >Ціна:</md-headline>-->
-    <!--<div class="md-headline">{{::vm.course.price}} грн.</div>-->
-    <!--</div>-->
-    <!--hearFormsPhotos-->
-    <div layout="row" flex ng-if="vm.course.hearFormsPhotos.length>0">
-        <div class="page-delimiter" ng-if="vm.course.hearFormsPhotos.length>0" flex>
-            <div class="fit-screen-wrap">
-                <div class="md-display-1">Фото матеріал блоку</div>
+
+                </div>
             </div>
             <div class="overlay-forms"></div>
+        </div>
+    </div>
+
+    <div layout="row" flex ng-if="vm.course.historyPhotos.length>0">
+        <div class="page-delimiter" flex>
+            <div class="fit-screen-wrap invers header">
+                <div class="md-display-1">Медіа матеріали блоку</div>
+            </div>
+
         </div>
     </div>
     <div layout="row" class="content-block" layout-align="center center" ng-if="vm.course.hearFormsPhotos.length>0">
@@ -129,30 +152,33 @@
     </div>
 
     <!--description-->
-    <div layout="row" flex ng-if="vm.course.hearFormsPhotos.length>0">
-        <div class="page-delimiter" ng-if="vm.course.hearFormsPhotos.length>0" flex>
-            <div class="fit-screen-wrap">
-                <div class="md-display-1">Програма</div>
+
+    <div layout="row" flex >
+        <div class="page-delimiter content-block"  flex>
+            <div class="fit-screen-wrap" layout="column">
+
+                    <div layout="row" layout-align="center center">
+                        <div flex="50" hide-xs="true" flex-sm="70" flex-sx="90"
+                             class="md-display-1 md-margin md-padding">
+                            {{vm.course.description}}
+                        </div>
+                        <div hide-gt-xs="true" flex class="md-headline md-margin md-padding">{{vm.course.description}}
+                        </div>
+
+                </div>
             </div>
             <div class="overlay-description"></div>
         </div>
     </div>
-    <div layout="row" class="content-block" layout-align="center center">
-        <div flex="50" hide-xs="true" flex-sm="70" flex-sx="90" class="md-display-1 md-margin md-padding">
-            {{vm.course.description}}
-        </div>
-        <div hide-gt-xs="true" flex class="md-headline md-margin md-padding">{{vm.course.description}}
-        </div>
-    </div>
+
 
     <!--historyPhotos-->
     <div layout="row" flex ng-if="vm.course.historyPhotos.length>0">
         <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap">
+            <div class="fit-screen-wrap invers header">
                 <div class="md-display-1">Як проходили попередні блоки</div>
             </div>
-            <div class="overlay-history"></div>
-            <div class="overlay-img"></div>
+
         </div>
     </div>
     <div layout="row" class="content-block" layout-align="center center" ng-if="vm.course.historyPhotos.length>0">
@@ -180,7 +206,7 @@
     <!--Comments-->
     <div layout="row" flex>
         <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap">
+            <div class="fit-screen-wrap header-super">
                 <div class="md-display-1">Відгуки</div>
             </div>
             <div class="overlay-comments"></div>
@@ -209,8 +235,8 @@
 
                 </md-list>
             </div>
-            <div layout="row" layout-align="center center" layout-align-gt-sm="end center">
-                <md-button ng-click="vm.showCommentDialog($event)" class="xs-selected md-raised ">Додати відгук
+            <div layout="row"  layout-align-gt-sm="end center">
+                <md-button flex flex-gt-sm="45" flex-gt-md="25"  ng-click="vm.showCommentDialog($event)" class="xs-selected md-raised ">Додати відгук
                 </md-button>
             </div>
         </div>

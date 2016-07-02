@@ -1,10 +1,37 @@
 @import "theme";
 
-.comments-form {
-
-}
-
 .courses-details {
+  .card-desc-top {
+    background: rgba($primary, 0.8);
+    color: white;
+  }
+
+  .program-block {
+    position: relative;
+    color: white;
+    vertical-align: middle;
+    z-index: 2;
+    color: white;
+
+    .date-block {
+      background-color: black;
+      border-color: white;
+      border-style: solid;
+      border-width: 3px;
+      height: 90px;
+      border-radius: 50%;
+      width: 90px;
+
+      position: relative;
+
+      .date-text {
+        left: 20%;
+        position: absolute;
+        top: 40%;
+        vertical-align: middle;
+      }
+    }
+  }
 
   card-image-container {
     overflow: hidden;
@@ -31,7 +58,7 @@
 
     }
     .card-desc-top {
-      background:rgba( $primary,0.8);
+      background: rgba($primary, 0.8);
       color: white;
     }
     .card-desc {
@@ -40,7 +67,7 @@
       width: 100%;
       z-index: 2;
       @media (max-width: $layout-breakpoint-xs) {
-       // min-height: 500px;
+        // min-height: 500px;
 
       }
 
@@ -85,6 +112,18 @@
       }
     }
 
+    .md-raised {
+
+      min-width: 100%;
+
+      @media (max-width: $layout-breakpoint-sm) {
+        min-width: 70vw;
+
+      }
+      @media (max-width: $layout-breakpoint-xs) {
+        min-width: 90vw;
+      }
+    }
   }
 
   .content-block {
@@ -118,7 +157,7 @@
     position: relative;
     display: table;
     width: calc(99vw - 10px);
-    height: 300px;
+
     color: white;
     overflow: hidden;
     overflow-y: auto;
@@ -129,6 +168,18 @@
       display: table-cell;
       vertical-align: middle;
       z-index: 2;
+    }
+    .header {
+      height: 150px;
+
+    }
+    .header-super {
+      height: 300px;
+
+    }
+    .invers {
+      background-color: white;
+      color: black;
     }
 
     .overlay {
@@ -200,13 +251,17 @@
     background-color: transparent;
     color: black;
     height: 56px;
-    min-width: 100%;
+    width: 100%;
     margin: 16px;
     font-size: 26px;
     border-radius: 0px;
     transition: background-color 1s;
     @extend .md-whiteframe-3dp;
 
+    @media (max-width: $layout-breakpoint-sm) {
+      min-width: 70vw;
+
+    }
     @media (max-width: $layout-breakpoint-xs) {
 
       min-width: 90vw;

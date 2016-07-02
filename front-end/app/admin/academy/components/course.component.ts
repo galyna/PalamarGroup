@@ -45,20 +45,34 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                         </md-input-container>
                     </div>
                     <div>
-                        <md-subheader class="md-no-sticky">Дати модулів</md-subheader>
-                        <div ng-repeat="date in $ctrl.course.courseModulesDates">
-                            <md-datepicker ng-model="date" md-open-on-focus></md-datepicker>
-                            <md-button class="md-icon-button" ng-click="$ctrl.deleteDate(date)">
+                       <div class="md-block" >
+                        <md-subheader class="md-no-sticky">Дати блоків</md-subheader>                       
+                        <div ng-repeat="day in $ctrl.course.days" >
+                         <md-divider></md-divider>
+                         <div layout="row">
+                        <div class="md-margin md-padding "  id="program" name="program" >{{day.date|  date:"dd.MM.yyyy"}}</div>                          
+                        <div class="md-margin md-padding "  id="program" name="program" >{{day.program}}</div>
+                            <md-button class="md-icon-button" ng-click="$ctrl.deleteDate(day)">
                                 <md-icon md-svg-src="action:ic_delete_24px"></md-icon>
                             </md-button>
                         </div>
-                        <div flex-gt-xs>
-                            <md-datepicker ng-model="$ctrl.newDate" 
-                                           ng-change="$ctrl.addDate($ctrl.newDate)" 
-                                           md-placeholder="Додати"
-                                           md-open-on-focus></md-datepicker>
                         </div>
-                    </div>
+                     </div>
+                      <md-subheader class="md-no-sticky">Додати дату </md-subheader>
+                       <div layout="row" class="md-block"> 
+                          <md-datepicker ng-model="$ctrl.newDate"                            
+                            md-placeholder="Дата"
+                             md-open-on-focus></md-datepicker>
+                       </div>   
+                       <md-input-container layout="row" class="md-block">                                                                      
+                             <label for="newProgram">Програма</label>
+                             <textarea ng-model="$ctrl.newProgram" id="newProgram" name="newProgram" ></textarea>                        
+                       </md-input-container>    
+                       <md-input-container  class="md-block">             
+                             <md-button class="md-primary"  ng-click="$ctrl.addDate()">
+                               Додати
+                            </md-button>
+                    </md-input-container>    
                 </md-card-content>
             </md-card>
         </md-tab>
@@ -217,6 +231,7 @@ class AdminCourseController {
     originalCourse:ICourse;
     course:ICourse;
     newDate:Date;
+    newProgram:string;
     showHistoryPhotoUpload:boolean;
     showFormPhotoUpload:boolean;
     showAuthorPhotoUpload:boolean;
@@ -309,13 +324,16 @@ class AdminCourseController {
     }
 
     //noinspection JSMethodCanBeStatic
-    addDate(date:Date) {
-        this.course.courseModulesDates.push( date );
+    addDate() {
+        this.course.courseModulesDates.push( this.newDate );
+        this.course.days.push( {date: this.newDate, program: this.newProgram} );
         this.newDate = null;
+        this.newProgram = null;
     }
 
-    deleteDate(date:Date) {
-        this.course.courseModulesDates.splice( this.course.courseModulesDates.indexOf( date ), 1 );
+    deleteDate(day:any) {
+        this.course.courseModulesDates.splice( this.course.courseModulesDates.indexOf( day.date ), 1 );
+        this.course.days.splice( this.course.days.indexOf( day ), 1 );
     }
 
     showErrorToast(text = 'Помилка, спробуйте пізніше') {
