@@ -213,6 +213,9 @@ a.md-button.md-default-theme.md-fab:not([disabled]):hover, a.md-button.md-fab:no
   background: rgba($primary, 0.4);
 }
 
+.description-container {
+  background-color: white;
+}
 /**
  * Hide when Angular is not yet loaded and initialized
  */

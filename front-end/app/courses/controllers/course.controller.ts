@@ -18,7 +18,7 @@ export class CourseController {
     static $inject = ['$log', '$routeParams', '$location', CourseResourceName,
         OrderResourceName, MediaObserverFactoryName, '$mdDialog', 'Upload',
         '$timeout', ModelResourceName, 'constants', '$anchorScroll', "$filter",
-        '$rootScope', '$templateCache', '$mdMedia'];
+        '$rootScope', '$templateCache', '$mdMedia','orderByFilter'];
     static componentName = 'CourseController';
 
     course:ICourse;
@@ -36,7 +36,7 @@ export class CourseController {
                 private $timeout:ng.ITimeoutService, private ModelResource:IModelResource,
                 private constants:IConstants, private $anchorScroll:ng.IAnchorScrollService,
                 private $filter, $rootScope:IRootScope, private $templateCache:ng.ITemplateCacheService,
-                private $mdMedia:ng.material.IMenuService) {
+                private $mdMedia:ng.material.IMenuService,private orderByFilter:ng.IFilterOrderBy) {
 
         this.localURL = constants.host;
         this.localContentURL = constants.host;
@@ -45,6 +45,9 @@ export class CourseController {
             $rootScope.socialParams.image = this.localContentURL + course.hearFormsPhotos[0].url;
             $rootScope.socialParams.title =  course.name;
             $rootScope.socialParams.description =  this.getFBDescription();
+
+            course.hearFormsPhotos=this.orderByFilter(course.hearFormsPhotos,"order");
+            course.historyPhotos=this.orderByFilter(course.historyPhotos,"order");
         } );
 
         this.order = new OrderResource();

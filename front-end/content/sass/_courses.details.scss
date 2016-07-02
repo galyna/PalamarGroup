@@ -117,7 +117,7 @@
       min-width: 100%;
 
       @media (max-width: $layout-breakpoint-sm) {
-        min-width: 70vw;
+        min-width: 60vw;
 
       }
       @media (max-width: $layout-breakpoint-xs) {
@@ -131,7 +131,6 @@
     background-color: white;
   }
   .description-container {
-    //  min-width: 350px;
     background-color: white;
   }
 
@@ -224,7 +223,7 @@
   }
   .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .md-button.md-raised.xs-selected:not([disabled]):hover {
     color: black;
-    border-color: white;
+    border-color: black;
     background-color: white;
     @extend .md-whiteframe-14dp;
   }
@@ -251,15 +250,15 @@
     background-color: transparent;
     color: black;
     height: 56px;
-
     margin: 16px;
+    min-width: 100%;
     font-size: 26px;
     border-radius: 0px;
-    transition: background-color 1s;
+    transition: background-color 0.3s;
     @extend .md-whiteframe-3dp;
 
     @media (max-width: $layout-breakpoint-sm) {
-      min-width: 70vw;
+      min-width: 60vw;
 
     }
     @media (max-width: $layout-breakpoint-xs) {

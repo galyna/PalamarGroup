@@ -1,9 +1,40 @@
-<div class="courses" layout="row" layout-align="center center">
+<div class="courses description-container" layout="row" layout-align="center center">
     <div layout="column" layout-align="center center">
         <div class="course-bg" layout-align="center center" flex
              ng-repeat="course in vm.courses track by $index" ng-if="::course.isVisible">
-            <div layout="row" layout-align="center center">
-                <md-card ng-if=" $first || $odd" hide-xs="true" flex-gt-md="70" flex-md="90" md-whiteframe="5"
+            <div hide show-gt-sm="true" layout="row" layout-align="center center">
+                <md-card ng-if="$first && !$odd" flex-gt-md="70" flex-md="90" md-whiteframe="5"
+                         class="md-margin">
+                    <md-card-content layout="row" layout-align="start none">
+                        <div class="card-desc " flex="50" flex layout="column" layout-align="center center">
+                            <md-card-title flex>
+                                <md-card-title-text flex layout-align="space-around center">
+                                    <div class="md-display-1">{{::course.name}}</div>
+                                    <div class=" program-block " layout="row">
+                                        <div class="date-block "
+                                             ng-repeat="day in ::course.courseModulesDates track by $index">
+                                            <span class="date-text ">{{ day| date:'dd.MM'}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="descr-container">
+                                        <div class="md-title">{{::course.description}}</div>
+
+                                    </div>
+                                </md-card-title-text>
+
+                            </md-card-title>
+                            <md-card-actions flex="25">
+                                <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
+                                           ng-click="vm.showDetails(course._id)">
+                                    Деталі
+                                </md-button>
+                            </md-card-actions>
+                        </div>
+                        <div class="card-media " flex="50"><img src="{{course.hearFormsPhotos[0].url}}"/></div>
+                    </md-card-content>
+
+                </md-card>
+                <md-card ng-if="$odd " flex-gt-md="70" flex-md="90" md-whiteframe="5"
                          class="md-margin"
                 >
                     <md-card-content layout="row" layout-align="start none">
@@ -12,13 +43,19 @@
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
                                     <div class="md-display-1">{{::course.name}}</div>
+                                    <div class=" program-block " layout="row">
+                                        <div class="date-block "
+                                             ng-repeat="day in ::course.courseModulesDates track by $index">
+                                            <span class="date-text ">{{ day| date:'dd.MM'}}</span>
+                                        </div>
+                                    </div>
                                     <div class="descr-container">
                                         <div class="md-title">{{::course.description}}</div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-actions flex="25">
-                                <md-button class=" md-display-1 md-raised " aria-label="Details"
+                                <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
                                            ng-click="vm.showDetails(course._id)">
                                     Деталі
                                 </md-button>
@@ -27,7 +64,7 @@
                     </md-card-content>
 
                 </md-card>
-                <md-card ng-if=" !$first && !$odd" hide-xs="true" flex-gt-md="70" flex-md="90" md-whiteframe="5"
+                <md-card ng-if="!$first && !$odd" flex-gt-md="70" flex-md="90" md-whiteframe="5"
                          class="md-margin"
                 >
                     <md-card-content layout="row" layout-align="start none">
@@ -35,16 +72,20 @@
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
                                     <div class="md-display-1">{{::course.name}}</div>
+                                    <div class=" program-block " layout="row">
+                                        <div class="date-block "
+                                             ng-repeat="day in ::course.courseModulesDates track by $index">
+                                            <span class="date-text ">{{ day| date:'dd.MM'}}</span>
+                                        </div>
+                                    </div>
                                     <div class="descr-container">
                                         <div class="md-title">{{::course.description}}</div>
 
                                     </div>
                                 </md-card-title-text>
-
                             </md-card-title>
-
                             <md-card-actions flex="25">
-                                <md-button class=" md-display-1 md-raised " aria-label="Details"
+                                <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
                                            ng-click="vm.showDetails(course._id)">
                                     Деталі
                                 </md-button>
@@ -53,17 +94,24 @@
                         <div class="card-media " flex="50"><img src="{{course.hearFormsPhotos[0].url}}"/></div>
                     </md-card-content>
                 </md-card>
-
-                <md-card  hide-gt-xs="true" md-whiteframe="8" layout-fill="true">
+            </div>
+            <div hide-gt-sm="true" layout="row" layout-align="center center">
+                <md-card md-whiteframe="8" layout-fill="true">
                     <md-card-content layout="column">
                         <div class="card-media "><img src="{{course.hearFormsPhotos[0].url}}"/></div>
                         <div class="card-desc " layout="column" layout-align="space-around center">
                             <md-card-title>
                                 <md-card-title-text layout-align="space-around center">
                                     <div class="md-display-1">{{::course.name}}</div>
+
                                 </md-card-title-text>
                             </md-card-title>
-                            <md-button class=" md-display-1 md-raised " aria-label="Details"
+                            <div class=" program-block md-padding " layout="row">
+                                <div class="date-block " ng-repeat="day in ::course.courseModulesDates track by $index">
+                                    <span class="date-text ">{{ day| date:'dd.MM'}}</span>
+                                </div>
+                            </div>
+                            <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
                                        ng-click="vm.showDetails(course._id)">Деталі
                             </md-button>
                         </div>

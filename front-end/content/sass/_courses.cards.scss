@@ -1,7 +1,34 @@
 @import "theme";
 
 .courses {
+  .program-block {
+    position: relative;
+    color: white;
+    vertical-align: middle;
+    z-index: 2;
+    color: white;
 
+    .date-block {
+      background-color:rgba( $primary,0.9);
+      border-color: rgba( $primary,0.7);
+      border-style: solid;
+      margin: 3px;
+      border-width: 3px;
+      height: 50px;
+      border-radius: 50%;
+      width: 50px;
+      position: relative;
+      @extend .md-whiteframe-5dp;
+
+      .date-text {
+        font-weight: 900;
+        left: 4pt;
+        position: absolute;
+        top: 32%;
+        vertical-align: middle;
+      }
+    }
+  }
   md-card.md-default-theme, md-card {
     min-height: 500px;
     z-index: 3;
@@ -9,6 +36,10 @@
     min-width: 70vw;
     margin: 20px;
     transition: transform 0.4s;
+
+    //@media (max-width: $layout-breakpoint-gt-lg) {
+    //  height: 700px;
+    //}
 
     &:hover {
       @extend .md-whiteframe-16dp;
@@ -19,7 +50,7 @@
     @media (max-width: $layout-breakpoint-xs) {
       margin-left: 0px;
       margin-right: 0px;
-      mix-height: 505px;
+
     }
 
     .card-desc {
@@ -27,8 +58,19 @@
       min-width: 300px;
       z-index: 2;
       @media (max-width: $layout-breakpoint-xs) {
-        mix-height: 505px;
+        mix-height: 500px;
 
+      }
+
+    }
+
+    md-card-content {
+      overflow: hidden;
+      padding: 0;
+
+      md-card-title-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
@@ -45,11 +87,9 @@
     .card-media {
       position: relative;
       z-index: 1;
-      mim-width: 300px;
       height: 500px;
       overflow: hidden;
       padding: 0;
-
 
 
       img {
@@ -66,36 +106,69 @@
     }
     .descr-container {
       max-height: 116px;
+      width: 70%;
+      text-align: center;
       overflow: hidden;
       text-overflow: ellipsis;
 
     }
 
+    .md-button.md-default-theme.md-accent.md-raised, .md-button.md-accent.md-raised, .md-button.md-default-theme.md-accent.md-fab, .md-button.md-accent.md-fab {
+      background-color: rgba($primary, 1);
+    }
+
     .md-button.md-default-theme.md-raised:not([disabled]):hover, .md-button.md-raised:not([disabled]):hover {
       color: white;
-      border: none;
+      border-color: black;
+      background-color: black;
+      @extend .md-whiteframe-14dp;
+
+    }
+    .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .md-button.md-raised.xs-selected:not([disabled]):hover {
+      color: black;
+      border-color: black;
+      background-color: white;
+      @extend .md-whiteframe-14dp;
+    }
+    .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .md-button.md-raised.xs-selected:not([disabled]) {
+
+      color: white;
+      border: white;
       background-color: black;
       @extend .md-whiteframe-14dp;
     }
+    .md-raised.xs-selected {
+
+      color: white;
+      border: white;
+      background-color: black;
+      @extend .md-whiteframe-14dp;
+    }
+
     .md-raised {
+      display: block;
       border-style: solid;
       border-color: black;
       border-width: 3px;
       background-color: transparent;
       color: black;
-      height: 50px;
-      width: 170px;
-      margin: 8px;
+      height: 56px;
+      margin: 16px;
+      min-width: 200px;
       font-size: 26px;
       border-radius: 0px;
-      transition: background-color 1s;
+      transition: background-color 0.3s;
       @extend .md-whiteframe-3dp;
-
       @media (max-width: $layout-breakpoint-xs) {
-        margin-bottom: 16px;
+        margin-bottom: 22px;
+        min-width: 90vw;
 
       }
+      @media (max-width: $layout-breakpoint-sm) {
+        margin-bottom: 22px;
 
+
+      }
     }
   }
 }
