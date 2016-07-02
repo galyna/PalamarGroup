@@ -1,7 +1,5 @@
 <div class="courses-details" layout="column">
-
     <!--author-->
-
     <div layout="row" flex layout-align="center center" >
         <md-card flex-gt-md="60" flex-gt-lg="40" flex-sm="70"flex="100" md-whiteframe="5">
             <md-card-content layuot="column" layout-gt-sm="row">
@@ -120,7 +118,6 @@
             <div class="overlay-forms"></div>
         </div>
     </div>
-
     <div layout="row" flex ng-if="vm.course.historyPhotos.length>0">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
@@ -150,9 +147,7 @@
             </md-grid-list>
         </div>
     </div>
-
     <!--description-->
-
     <div layout="row" flex >
         <div class="page-delimiter content-block"  flex>
             <div class="fit-screen-wrap" layout="column">
@@ -170,8 +165,6 @@
             <div class="overlay-description"></div>
         </div>
     </div>
-
-
     <!--historyPhotos-->
     <div layout="row" flex ng-if="vm.course.historyPhotos.length>0">
         <div class="page-delimiter" flex>
@@ -202,7 +195,6 @@
 
         </div>
     </div>
-
     <!--Comments-->
     <div layout="row" flex>
         <div class="page-delimiter" flex>
@@ -214,12 +206,10 @@
         </div>
     </div>
     <div id="a001" ng-class="{'ontent-block':vm.showComments()}" layout="row" layout-align="center center">
-
         <div flex="70" flex-xs="100" flex-sm="92">
             <a id="comments"></a>
             <div ng-if="vm.showComments()">
                 <md-list class="md-dense" flex>
-
                     <md-list-item class="md-2-line" ng-if="comment.isVisible"
                                   ng-repeat="comment in vm.course.comments track by $index">
                         <md-divider></md-divider>
@@ -236,8 +226,10 @@
                 </md-list>
             </div>
             <div layout="row"  layout-align-gt-sm="end center">
-                <md-button flex flex-gt-sm="45" flex-gt-md="25"  ng-click="vm.showCommentDialog($event)" class="comment-btn xs-selected md-raised ">Додати відгук
-                </md-button>
+                <div lflex flex-gt-sm="45" flex-gt-md="25">
+                    <md-button   ng-click="vm.showCommentDialog($event)" class="comment-btn xs-selected md-raised ">Додати відгук
+                    </md-button>
+                </div>
             </div>
         </div>
     </div>
