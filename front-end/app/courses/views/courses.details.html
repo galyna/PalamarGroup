@@ -2,7 +2,7 @@
 
     <!--author-->
 
-    <div layout="row" flex layout-align="center center" class=" md-padding ">
+    <div layout="row" flex layout-align="center center" >
         <md-card flex-gt-md="60" flex="100" md-whiteframe="5">
             <md-card-content layuot="column" layout-gt-sm="row">
                 <div class="card-desc-top " flex hide-gt-sm="true" layout="column" layout-align=" space-around center">
@@ -101,15 +101,15 @@
 
     <div layout="row" flex >
         <div class="page-delimiter" flex>
-            <div flex>
+            <div flex class="md-padding">
                 <div class="" ng-repeat="day in ::vm.course.days track by $index">
                     <div layout="row" class=" program-block md-margin" layout-align=" center center">
-                        <div flex="50" layout="row" layout-align="  end">
+                        <div flex="50" flex-gt-sm="20" layout="row" layout-align="  end">
                             <div class="date-block ">
                                 <span class="date-text md-title">{{ day.date| date:'dd.MM'}}</span>
                             </div>
                         </div>
-                        <div flex="50" class="md-padding md-headline " layout="row" layout-align="  start end">{{
+                        <div flex="50" flex-gt-sm="20" class="md-padding md-headline " layout="row" layout-align="  space-around end">{{
                             day.program}}
                         </div>
                     </div>
@@ -236,7 +236,7 @@
                 </md-list>
             </div>
             <div layout="row"  layout-align-gt-sm="end center">
-                <md-button flex flex-gt-sm="45" flex-gt-md="25"  ng-click="vm.showCommentDialog($event)" class="xs-selected md-raised ">Додати відгук
+                <md-button flex flex-gt-sm="45" flex-gt-md="25"  ng-click="vm.showCommentDialog($event)" class="comment-btn xs-selected md-raised ">Додати відгук
                 </md-button>
             </div>
         </div>
