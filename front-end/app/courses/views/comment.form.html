@@ -5,12 +5,12 @@
 
             <h2 class=" md-padding md-headline">ДОДАТИ ВІДГУК</h2>
             <span flex></span>
-            <md-button class="md-icon-button" ng-click="vm.cancel()">
+            <md-button class="md-icon-button" ng-click="vm.cancel()" >
                 <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>
             </md-button>
         </div>
     </md-toolbar>
-    <form name="commentForm" class="md-padding " flex
+    <form name="commentForm" class="md-padding pop-form" flex
 
           novalidate ng-submit="vm.submitComment(commentForm)">
         <md-dialog-content  flex>
@@ -35,11 +35,11 @@
         </md-dialog-content>
 
         <md-dialog-actions show-xs="true" hide  class="md-padding " layout="column"  md-whiteframe="2" >
-            <md-button ng-click="vm.cancel();vm.newComment.text='';vm.newComment.name='';" class=" md-raised ">CКАСУВАТИ</md-button>
+            <md-button ng-click="vm.cancel()" class=" md-raised ">CКАСУВАТИ</md-button>
             <md-button type="submit" class=" xs-selected md-raised md-headline">ДОДАТИ</md-button>
         </md-dialog-actions>
         <md-dialog-actions hide-xs="true"  class="md-padding "  layout="row" md-whiteframe="2" >
-            <md-button  ng-click="vm.cancel();vm.newComment.text='';vm.newComment.name='';" class="md-headline md-raised ">CКАСУВАТИ</md-button>
+            <md-button  ng-click="vm.cancel()" class="md-headline md-raised ">CКАСУВАТИ</md-button>
             <md-button type="submit" class="xs-selected md-raised md-headline">ДОДАТИ</md-button>
         </md-dialog-actions>
     </form>

@@ -268,5 +268,39 @@
     }
   }
   .comment-btn { width: auto;}
+
 }
 
+.pop-form {  .md-button.md-default-theme.md-accent.md-raised, .md-button.md-accent.md-raised, .md-button.md-default-theme.md-accent.md-fab, .md-button.md-accent.md-fab {
+  background-color: rgba($primary, 1);
+}
+
+  .md-button.md-default-theme.md-raised:not([disabled]):hover, .md-button.md-raised:not([disabled]):hover {
+    color: white;
+    border-color: black;
+    background-color: black;
+    @extend .md-whiteframe-14dp;
+
+  }
+  .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .md-button.md-raised.xs-selected:not([disabled]):hover {
+    color: black;
+    border-color: black;
+    background-color: white;
+    @extend .md-whiteframe-14dp;
+  }
+  .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .md-button.md-raised.xs-selected:not([disabled]) {
+
+    color: white;
+    border: white;
+    background-color: black;
+    @extend .md-whiteframe-14dp;
+  }
+  .md-raised.xs-selected {
+
+    color: white;
+    border: white;
+    background-color: black;
+    @extend .md-whiteframe-14dp;
+
+  }
+ }

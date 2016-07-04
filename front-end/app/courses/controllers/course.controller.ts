@@ -223,8 +223,6 @@ export class CourseController {
             controllerAs: 'vm',
             parent: angular.element( document.body ),
             targetEvent: $event,
-            cancel: null,
-            title: null
         } );
 
     }
