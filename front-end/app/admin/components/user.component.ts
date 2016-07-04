@@ -3,18 +3,26 @@ import {IUserResource, IUser, UserResourceName} from "../../resources/user.resou
 const newPassTemplate = `
 <md-dialog aria-label="">
   <form name="newPasswordForm" ng-cloak>
+  <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Введіть новий пароль</h2>
+        <span flex></span>
+      </div>
+    </md-toolbar>
     <md-dialog-content>
+    <div class="md-dialog-content">
     <md-input-container class="md-block">
         <label>Новий пароль</label>
-        <input type="password" ng-model="$ctrl.newPassword" />
+        <input type="password" ng-model="$ctrl.newPassword" required />
     </md-input-container>
+</div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
       <span flex></span>
       <md-button ng-click="$ctrl.cancel();">
        Відміна
       </md-button>
-      <md-button ng-disabled="!newPasswordForm.$valid" ng-click="$ctrl.ok($ctrl.newPassword);">
+      <md-button ng-disabled="!newPasswordForm.$valid" ng-click="$ctrl.ok($ctrl.newPassword);" class="md-raised md-primary">
         Зберегти
       </md-button>
     </md-dialog-actions>
