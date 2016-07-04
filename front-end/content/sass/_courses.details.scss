@@ -271,7 +271,11 @@
 
 }
 
-.pop-form {  .md-button.md-default-theme.md-accent.md-raised, .md-button.md-accent.md-raised, .md-button.md-default-theme.md-accent.md-fab, .md-button.md-accent.md-fab {
+.pop-form {
+  .md-button.md-default-theme.md-accent.md-raised,
+  .md-button.md-accent.md-raised,
+  .md-button.md-default-theme.md-accent.md-fab,
+  .md-button.md-accent.md-fab {
   background-color: rgba($primary, 1);
 }
 
@@ -303,4 +307,82 @@
     @extend .md-whiteframe-14dp;
 
   }
+
+  .md-raised {
+    display: block;
+    border-style: solid;
+    border-color: black;
+    border-width: 3px;
+    background-color: transparent;
+    color: black;
+    min-height: 56px;
+    margin: 16px;
+    min-width: 200px;
+    width: auto;
+    font-size: 26px;
+    border-radius: 0px;
+    transition: background-color 0.3s;
+    @extend .md-whiteframe-3dp;
+
+
+    @media (max-width: $layout-breakpoint-xs) {
+      min-width: 90vw;
+    }
+
+  }
+
+  .model-save{padding: 20px}
  }
+
+.model-card {
+
+  md-card {
+
+    position: relative;
+    display: block;
+    md-card-content {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 30%;
+      min-height: 100px;
+
+      color: white;
+      background-color: rgba($primary, 0.7);
+    }
+
+    @media (min-width: $layout-breakpoint-md)  {
+
+      &.flex-gt-md-22 {
+
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 1 22%;
+      }
+
+    }
+    @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-md) {
+
+      &.flex-gt-sm-46 {
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 2 43%;
+      }
+      &:first-child, &:nth-child(2) {
+        flex: 2 43%;
+      }
+    }
+
+    @media (max-width: $layout-breakpoint-xs) {
+      &.flex-xs-80 {
+        flex: 1 80%;
+        // Special override for the 1st & 2nd child default resizing
+        &:first-child, &:nth-child(2) {
+          flex: 1 80%;
+        }
+      }
+    }
+  }
+
+}

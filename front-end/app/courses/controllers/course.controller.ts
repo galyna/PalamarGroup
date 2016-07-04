@@ -113,7 +113,6 @@ export class CourseController {
             bindToController: true,
             controller: CourseController.componentName,
             controllerAs: 'vm',
-            fullscreen: true,
             parent: angular.element( document.body ),
             targetEvent: $event
         } );

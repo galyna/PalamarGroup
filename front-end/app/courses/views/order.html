@@ -1,5 +1,5 @@
 
-<md-dialog aria-label="ЗАПИСАТИСЬ НА БЛОК" >
+<md-dialog aria-label="ЗАПИСАТИСЬ НА БЛОК" flex-sm="85" flex-xs="95" flex-gt-sm="65"  layout="column" >
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools md-padding ">
             <h2 class=" md-padding ">ЗАПИСАТИСЬ НА БЛОК</h2>
@@ -9,7 +9,7 @@
             </md-button>
         </div>
     </md-toolbar>
-    <form name="orderForm" class="md-padding pop-form" novalidate ng-submit="vm.submitOrder(orderForm)">
+    <form name="orderForm" class="md-padding pop-form" novalidate flex>
         <md-dialog-content>
             <md-dialog-content-body>
                 <md-input-container class="md-block">
@@ -35,14 +35,8 @@
                     <p class=" md-headline">Після запису на модуль з Вами звяжеться координатор для узгодження деталей</p>
             </md-dialog-content-body>
         </md-dialog-content>
-        <md-dialog-actions show-xs="true" hide  class="md-padding " layout="column"  md-whiteframe="2" >
-            <md-button ng-click="vm.cancel()" class=" md-raised ">CКАСУВАТИ</md-button>
-            <md-button type="submit" class=" xs-selected md-raised md-headline">ЗАПИСАТИСЬ</md-button>
+        <md-dialog-actions  class="md-padding " layout-align-xs="center-center"   md-whiteframe="2" >
+            <md-button ng-click="vm.submitOrder(orderForm)" class=" xs-selected md-raised md-headline">ЗАПИСАТИСЬ</md-button>
         </md-dialog-actions>
-        <md-dialog-actions hide-xs="true"  class="md-padding "  layout="row" md-whiteframe="2" >
-            <md-button  ng-click="vm.cancel()" class="md-headline md-raised ">CКАСУВАТИ</md-button>
-            <md-button type="submit" class="xs-selected md-raised md-headline">ЗАПИСАТИСЬ</md-button>
-        </md-dialog-actions>
-
     </form>
 </md-dialog>

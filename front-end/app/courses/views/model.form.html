@@ -1,4 +1,4 @@
-<md-dialog aria-label="ЗАПИСАТИСЬ НА БЛОК" flex-sm="85" flex-xs="95" flex-gt-sm="65">
+<md-dialog aria-label="ЗАПИСАТИСЬ НА БЛОК"  layout="column"  flex-sm="85" flex-xs="95" flex-gt-sm="65" flex>
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools md-padding ">
             <h2 class=" md-padding ">ЗАПОВНІТЬ АНКЕТУ ЩОБ СТАТИ МОДЕЛЛЮ</h2>
@@ -8,7 +8,7 @@
             </md-button>
         </div>
     </md-toolbar>
-    <form name="orderForm" class="md-padding ng-margin pop-form" novalidate ng-submit="vm.submitModel(orderForm)">
+    <form name="orderForm" class="md-padding  pop-form" novalidate flex layout="column">
         <md-dialog-content>
             <md-dialog-content-body>
                 <md-input-container class="md-block">
@@ -107,9 +107,11 @@
                 </div>
             </md-dialog-content-body>
         </md-dialog-content>
-        <md-dialog-actions class="md-padding"   layuot="row" md-whiteframe="4">
-            <md-button lass=" md-raised md-headline" ng-click="vm.cancel()">CКАСУВАТИ</md-button>
-            <md-button type="submit" class="xs-selected md-raised md-headline">НАДІСЛАТИ</md-button>
+
+        <md-dialog-actions   class="md-padding model-save" layout-align-xs="center-center"  md-whiteframe="2" >
+            <md-button ng-click="vm.submitModel(orderForm)"  class="xs-selected md-raised md-margin">НАДІСЛАТИ</md-button>
         </md-dialog-actions>
+
+
     </form>
 </md-dialog>

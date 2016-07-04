@@ -1,24 +1,22 @@
-<md-dialog aria-label="ДОДАТИ ВІДГУК" layout="column"  flex-sm="85" flex-md="65" flex-xs="95" flex-gt-sm="35"
- flex >
+<md-dialog aria-label="ДОДАТИ ВІДГУК" layout="column" flex-sm="85" flex-md="65" flex-xs="95" flex-gt-sm="35"
+           flex>
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools md-padding ">
 
             <h2 class=" md-padding md-headline">ДОДАТИ ВІДГУК</h2>
             <span flex></span>
-            <md-button class="md-icon-button" ng-click="vm.cancel()" >
+            <md-button class="md-icon-button" ng-click="vm.cancel()">
                 <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>
             </md-button>
         </div>
     </md-toolbar>
-    <form name="commentForm" class="md-padding pop-form" flex
-
-          novalidate ng-submit="vm.submitComment(commentForm)">
-        <md-dialog-content  flex>
+    <form name="commentForm" class="md-padding pop-form" flex novalidate>
+        <md-dialog-content flex>
             <md-dialog-content-body layout="column" layout-align="center stretch" flex>
                 <md-input-container flex="40">
                     <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
                     <label class="md-headline" for="nameС">Ім`я </label>
-                    <input  class="md-headline" id="nameС" ng-model="vm.newComment.name" name="name" required/>
+                    <input class="md-headline" id="nameС" ng-model="vm.newComment.name" name="name" required/>
                     <div ng-messages="commentForm.name.$error" role="alert"
                          ng-show="commentForm.name.$touched && commentForm.name.$invalid ">
                         <div class="md-headline" ng-message="required">
@@ -29,19 +27,15 @@
                 <md-input-container flex>
                     <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
                     <label class="md-headline" for="textС">Відгук</label>
-                      <textarea  class="md-headline" id="textС" ng-model="vm.newComment.text"  name="text"></textarea>
+                    <textarea class="md-headline" id="textС" ng-model="vm.newComment.text" name="text"></textarea>
                 </md-input-container>
             </md-dialog-content-body>
         </md-dialog-content>
+        <md-dialog-actions  class="md-padding " layout-align-xs="center-center"  md-whiteframe="2">
+            <md-button ng-click="vm.submitComment(commentForm)" class=" xs-selected md-raised md-headline">ДОДАТИ
+            </md-button>
+        </md-dialog-actions>
 
-        <md-dialog-actions show-xs="true" hide  class="md-padding " layout="column"  md-whiteframe="2" >
-            <md-button ng-click="vm.cancel()" class=" md-raised ">CКАСУВАТИ</md-button>
-            <md-button type="submit" class=" xs-selected md-raised md-headline">ДОДАТИ</md-button>
-        </md-dialog-actions>
-        <md-dialog-actions hide-xs="true"  class="md-padding "  layout="row" md-whiteframe="2" >
-            <md-button  ng-click="vm.cancel()" class="md-headline md-raised ">CКАСУВАТИ</md-button>
-            <md-button type="submit" class="xs-selected md-raised md-headline">ДОДАТИ</md-button>
-        </md-dialog-actions>
     </form>
 </md-dialog>
 
