@@ -38,6 +38,8 @@ import {LeftSidenavComponentName, LeftSidenavComponentOptions} from "./component
 import {testComponentName, testComponentOptions} from "./components/test.component";
 import {adminRun} from "./admin.run";
 import {usersModule} from "../users/users.module";
+import {usersComponentName, usersComponentOptions} from "./components/users.component";
+import {userComponentName, userComponentOptions} from "./components/user.component";
 
 
 let app = angular.module('admin', [
@@ -68,6 +70,8 @@ let app = angular.module('admin', [
     .component(EmailAdvComponentName, EmailAdvComponentOptions)
     .component(AdminOrdersComponentName, AdminOrdersComponentOptions)
     .component(SalonClientFormComponentName, SalonClientFormComponentOptions)
+    .component(usersComponentName, usersComponentOptions)
+    .component(userComponentName, userComponentOptions)
     .component(testComponentName, testComponentOptions);
 
 export let adminModule = app;

@@ -83,7 +83,7 @@ export let adminPagingComponentOptions:ng.IComponentOptions = {
     }
 };
 
-interface IPagingHelperParams {
+export interface IPagingHelperParams {
     page?:number,
     perPage?:number,
     total?:number
