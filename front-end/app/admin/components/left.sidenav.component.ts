@@ -1,4 +1,5 @@
 import {ItServiceName, ItService} from "../../users/services/it.service";
+import {usersComponentUrl} from "./users.component";
 let template = `<md-sidenav
         md-component-id="pgLeftSidenav"
         md-is-locked-open="$mdMedia('gt-sm')"
@@ -81,9 +82,16 @@ export class LeftSidenavComponentController {
                         visible: ()=>{
                             return true;
                         }
-                    },
+                    }
                 ]
             },
+            {
+                text: 'Користувачі',
+                url: usersComponentUrl,
+                visible: ()=>{
+                    return this.it.is('admin');
+                }
+            }
 
         ]
     }

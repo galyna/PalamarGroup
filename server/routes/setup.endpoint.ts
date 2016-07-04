@@ -7,13 +7,13 @@ setupRouter.get('/', function(){
     
 });
 
-function encryptPasswords(User, usersData) {
-    let userModel = new User();
-    for(var i=0; i < usersData.length; i++){
-        let userData = usersData[i];
-        userModel.setPassword.call(userData, userData.password);
-    }
-}
+// function encryptPasswords(User, usersData) {
+//     let userModel = new User();
+//     for(var i=0; i < usersData.length; i++){
+//         let userData = usersData[i];
+//         userModel.setPassword.call(userData, userData.password);
+//     }
+// }
 
 
 function modelNameReplacer(match){
@@ -38,9 +38,9 @@ setupRouter.get('/:model', function (req, res) {
     Model.remove({})
         .then(function(){
             console.log( fileName + ' collection dropped during setup');
-            if(fileName === 'user'){
-                encryptPasswords(Model, modelData);
-            }
+            // if(fileName === 'user'){
+            //     encryptPasswords(Model, modelData);
+            // }
 
             return Model.create(modelData).then(function (items) {
                 res.status(201).json(items);

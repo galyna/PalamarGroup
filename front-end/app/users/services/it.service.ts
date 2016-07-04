@@ -33,28 +33,28 @@ export class ItService{
     }
 
     private academyUser(user){
-        let acceptedRoles: pg.UserRoles[] = ['admin', 'academyModerator', 'academyUser'];
+        let acceptedRoles: pg.UserRole[] = ['admin', 'academyModerator', 'academyUser'];
         return user.roles.some((role) => {
             return acceptedRoles.indexOf(role) > -1;
         });
     }
 
     private salonUser(user){
-        let acceptedRoles: pg.UserRoles[] = ['admin', 'salonModerator', 'salonUser'];
+        let acceptedRoles: pg.UserRole[] = ['admin', 'salonModerator', 'salonUser'];
         return user.roles.some((role) => {
             return acceptedRoles.indexOf(role) > -1;
         });
     }
 
     private academyModerator(user){
-        let acceptedRoles: pg.UserRoles[] = ['admin', 'academyModerator'];
+        let acceptedRoles: pg.UserRole[] = ['admin', 'academyModerator'];
         return user.roles.some((role) => {
             return acceptedRoles.indexOf(role) > -1;
         });
     }
 
     private salonModerator(user){
-        let acceptedRoles: pg.UserRoles[] = ['admin', 'salonModerator'];
+        let acceptedRoles: pg.UserRole[] = ['admin', 'salonModerator'];
         return user.roles.some((role) => {
             return acceptedRoles.indexOf(role) > -1;
         });

@@ -11,6 +11,23 @@ declare module "express-slash" {
     export = slash;
 }
 
+declare module "connect-roles"{
+    import {RequestHandler} from "express-serve-static-core";
+
+    interface ConnectRoles {
+        use(verb: string, cb: (req) => boolean): void,
+        is(verb: string): RequestHandler,
+        can(verb: string): RequestHandler
+    }
+    
+    interface ConnectRolesConstructor {
+        new (): ConnectRoles;
+    }
+    
+    var ConnectRoles: ConnectRolesConstructor;
+    export = ConnectRoles;
+}
+
 declare module "express-restify-mongoose" {
     import {RequestHandler} from "express-serve-static-core";
     //noinspection ReservedWordAsName
@@ -29,11 +46,11 @@ declare module "express-restify-mongoose" {
         lean?: boolean,
         findOneAndUpdate?: boolean,
         findOneAndRemove?: boolean,
-        preMiddleware?: RequestHandler | [(req, res, next) => any],
-        preCreate?: (req, res, next) => any | [(req, res, next) => any],
-        preRead?: (req, res, next) => any | [(req, res, next) => any],
-        preUpdate?: (req, res, next) => any | [(req, res, next) => any],
-        preDelete?: (req, res, next) => any | [(req, res, next) => any],
+        preMiddleware?: RequestHandler | RequestHandler[],
+        preCreate?: RequestHandler | RequestHandler[],
+        preRead?: RequestHandler | RequestHandler[],
+        preUpdate?: RequestHandler | RequestHandler[],
+        preDelete?: RequestHandler | RequestHandler[],
         access?: (req, done?) => string,
         contextFilter?:  (model, req, done) => any,
         postCreate?: (req, res, next) => any | [(req, res, next) => any],

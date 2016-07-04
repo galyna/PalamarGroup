@@ -2,7 +2,6 @@ import * as express from 'express';
 import * as restify from 'express-restify-mongoose';
 import passport = require("passport");
 import {currentUser} from '../auth/current_user';
-import userEndpoint from './user.endpoint';
 import photoEndpoint from './photo.endpoint';
 
 //models
@@ -13,10 +12,13 @@ import {Model} from '../models/model';
 import {SalonClient} from '../models/salon.client';
 import {emailEndpoint} from "./email.endpoint";
 import IOrder = pg.models.IOrder;
-import {orderOptions} from "./order.endpoint";
+import {orderOptions} from "./order.options";
 import {courseApi} from "./course.endpoint";
 import {courseGetCommentsApi} from "./comment.endpoint";
 import {Response} from "express";
+import {User} from "../models/user";
+import {auth} from "../auth/auth";
+import {userOptions} from "./user.options";
 
 let api = express.Router();
 
@@ -54,9 +56,9 @@ restify.defaults(restifyDefaults);
 
 
 let readOnlyOptions = {
-    preCreate: [currentUser.is('admin')],
-    preUpdate: [currentUser.is('admin')],
-    preDelete: [currentUser.is('admin')]
+    preCreate: [auth, currentUser.is('admin')],
+    preUpdate: [auth, currentUser.is('admin')],
+    preDelete: [auth, currentUser.is('admin')]
 };
 
 //expr-mongoose-restify understands only skip/limit
@@ -78,11 +80,11 @@ api.use('/course/:id', (req: any, res, next) => {
 }, courseApi);
 restify.serve(api, Course);
 
+restify.serve(api, User, userOptions);
 restify.serve(api, Model, Object.assign({}, readOnlyOptions));
 restify.serve(api, Order, orderOptions);
 restify.serve(api, SalonClient, Object.assign({}, readOnlyOptions));
 
-api.use('/user', userEndpoint);
 api.use('/photo', photoEndpoint);
 api.use('/email', emailEndpoint);
 

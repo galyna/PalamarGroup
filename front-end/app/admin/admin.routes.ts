@@ -7,6 +7,8 @@ import {AdminCoursesComponentUrl} from "./academy/components/courses.component";
 import {AdminOrdersComponentUrl} from "./academy/components/orders.component";
 import {testComponentUrl} from "./components/test.component";
 import {ItServiceName, ItService} from "../users/services/it.service";
+import {usersComponentUrl, usersComponentOptions} from "./components/users.component";
+import {userComponentUrl} from "./components/user.component";
 
 adminRoutes.$inject = ['$routeProvider'];
 export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
@@ -27,6 +29,19 @@ export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
             template: "<pg-admin-course layout flex></pg-admin-course>",
             resolve: {
                 auth: [ItServiceName, (it: ItService) => it.canAsync('modifyAcademy')]
+            }
+        })
+        
+        .when(usersComponentUrl, {
+            template: "<pg-users layout='column'></pg-users>",
+            resolve: {
+                auth: [ItServiceName, (it: ItService) => it.isAsync('admin')]
+            }
+        })
+        .when(userComponentUrl, {
+            template: "<pg-user layout flex></pg-user>",
+            resolve: {
+                auth: [ItServiceName, (it: ItService) => it.isAsync('admin')]
             }
         })
         .when(testComponentUrl, {

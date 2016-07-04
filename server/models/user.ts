@@ -1,12 +1,13 @@
 import {Document, Schema, model} from "mongoose";
-import crypto = require("crypto");
 import jwt = require('jsonwebtoken');
+import bcrypt = require("bcrypt-nodejs");
 import {config} from "../config";
+
+const SALT_WORK_FACTOR = 10;
 
 interface IUserModel extends pg.models.IUser, Document{
     _id: any,
-    setPassword: (password) => void,
-    validPassword: (password) => boolean,
+    validPassword: (password: string) => Promise<boolean>,
     generateJwt: () => void
 }
 
@@ -16,22 +17,39 @@ let UserSchema = new Schema({
         unique: true,
         required: true
     },
-    hash: String,
-    salt: String,
+    name: String,
+    password: {type:String, required: true, access: 'private'},
     roles: [String]
 });
 
-UserSchema.methods.setPassword = function(password){
-    this.salt = crypto.randomBytes(16).toString('hex');
-    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
-};
+UserSchema.pre("save", function (next) {
+    let user = this;
+    // only hash the password if it has been modified (or is new)
+    if (!user.isModified('password')) return next();
+
+    // generate a salt
+    bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
+        if (err) return next(err);
+
+        // hash the password along with our new salt
+        bcrypt.hash(user.password, salt, null, function (err, hash) {
+            if (err) return next(err);
+
+            // override the cleartext password with the hashed one
+            user.password = hash;
+            next();
+        });
+    });
+
+});
 
 UserSchema.methods.validPassword = function(password) {
-    if(!this.hash || !this.salt){
-        return false;
-    }
-    let hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
-    return this.hash === hash;
+    return new Promise((resolve, reject) => {
+        bcrypt.compare(password, this.password, function (err, isMatch) {
+            if (err) reject(err);
+            resolve(isMatch);
+        });
+    });
 };
 
 UserSchema.methods.generateJwt = function() {

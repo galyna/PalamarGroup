@@ -66,15 +66,11 @@ declare module pg {
         }
 
         export interface IUser {
-            _id?:any;
-            email:string,
-            password:string,
-            roles:string[]
             _id?: any;
             email: string,
-            hash: string,
-            salt: string,
-            roles: UserRoles[]
+            name: string,
+            password: string,
+            roles: UserRole[]
         }
 
         export interface IModel {
@@ -108,7 +104,7 @@ declare module pg {
         }
     }
     
-    type UserRoles = 
+    type UserRole = 
         'admin' 
         | 'academyModerator' 
         | 'academyUser'
