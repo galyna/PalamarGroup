@@ -78,18 +78,13 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
         </md-tab>
         <md-tab label="Автор">
         <md-card>
-                <md-card-content layout-sm="row" layout-gt-sm>
-                      <img ng-src="{{$ctrl.course.author.photoUrl}}" class="module-history-img" />
+                <md-card-content layout-sm="row" layout-gt-sm>                    
                             <div layout="column">
+                              <img ng-src="{{$ctrl.course.author.photoUrl}}" class="module-history-img" />
                                 <md-input-container class="md-block  ">
                                      <label>Ім’я автора</label>
                         <input ng-model="$ctrl.course.author.name"/>
-                                </md-input-container>
-                                <md-input-container class="md-block  ">
-                                    <label for="ord">Порядок відображення</label>
-                                    <input id="ord" ng-model="item.order" type="number"/>
-                                </md-input-container>
-                              
+                                </md-input-container>                                                             
                             </div>
                     <div>
                         <md-button ng-if="!$ctrl.showAuthorPhotoUpload" class="md-raised"
@@ -158,7 +153,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                             </md-button>
                             <div ngf-drop ng-model="hearFormsPhotoFile" ngf-pattern="image/*"
                                  class="cropArea">
-                                <img-crop area-type="rectangle" result-image-size="{w:500,h:550}" aspect-ratio="1"
+                                <img-crop area-type="rectangle" result-image-size="{w:500,h:500}" aspect-ratio="1"
                                           init-max-area="true"
                                           image="hearFormsPhotoFile  | ngfDataUrl"
                                           result-image="croppedhearFormsPhotoFile" ng-init="croppedhearFormsPhotoFile=''">

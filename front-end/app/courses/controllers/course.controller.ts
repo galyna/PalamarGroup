@@ -105,18 +105,17 @@ export class CourseController {
     }
 
     showModelDialog($event):void {
-        // this.newModel = this.getBlankModel();
-        //
-        // this.mdDialog.show( {
-        //     template: this.$templateCache.get( "app/courses/views/model.form.html" ),
-        //     clickOutsideToClose: true,
-        //     bindToController: true,
-        //     controller: CourseController.componentName,
-        //     controllerAs: 'vm',
-        //     fullscreen: true,
-        //     parent: angular.element( document.querySelector( 'ng-view' ) ),
-        //     targetEvent: $event
-        // } );
+        this.newModel = this.getBlankModel();
+
+        this.mdDialog.show( {
+            template: this.$templateCache.get( "app/courses/views/model.form.html" ),
+            clickOutsideToClose: true,
+            bindToController: true,
+            controller: CourseController.componentName,
+            controllerAs: 'vm',
+            parent: angular.element( document.body ),
+            targetEvent: $event
+        } );
     }
 
 
@@ -165,15 +164,15 @@ export class CourseController {
 
     showOrderDialog($event):void {
        
-        // this.mdDialog.show( {
-        //     template: this.$templateCache.get( "app/courses/views/order.html" ),
-        //     clickOutsideToClose: true,
-        //     bindToController: true,
-        //     controller: CourseController.componentName,
-        //     controllerAs: 'vm',
-        //     parent: angular.element( document.querySelector( 'ng-view' ) ),
-        //     targetEvent: $event,
-        // } );
+        this.mdDialog.show( {
+            template: this.$templateCache.get( "app/courses/views/order.html" ),
+            clickOutsideToClose: true,
+            bindToController: true,
+            controller: CourseController.componentName,
+            controllerAs: 'vm',
+            parent: angular.element( document.body ),
+            targetEvent: $event,
+        } );
 
     }
 
@@ -215,17 +214,15 @@ export class CourseController {
     }
 
     showCommentDialog($event):void {
-        // this.mdDialog.show( {
-        //     template: this.$templateCache.get( "app/courses/views/comment.form.html" ),
-        //     clickOutsideToClose: true,
-        //     bindToController: true,
-        //     controller: CourseController.componentName,
-        //     controllerAs: 'vm',
-        //     parent: angular.element( document.querySelector( 'ng-view' ) ),
-        //     targetEvent: $event,
-        //     cancel: null,
-        //     title: null
-        // } );
+        this.mdDialog.show( {
+            template: this.$templateCache.get( "app/courses/views/comment.form.html" ),
+            clickOutsideToClose: true,
+            bindToController: true,
+            controller: CourseController.componentName,
+            controllerAs: 'vm',
+            parent: angular.element( document.body ),
+            targetEvent: $event,
+        } );
 
     }
 

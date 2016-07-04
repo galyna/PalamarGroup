@@ -101,16 +101,10 @@
                         <div class="card-media "><img src="{{course.hearFormsPhotos[0].url}}"/></div>
                         <div class="card-desc " layout="column" layout-align="space-around center">
                             <md-card-title>
-                                <md-card-title-text layout-align="space-around center">
+                                <md-card-title-text >
                                     <div class="md-display-1">{{::course.name}}</div>
-
                                 </md-card-title-text>
                             </md-card-title>
-                            <div class=" program-block md-padding " layout="row">
-                                <div class="date-block " ng-repeat="day in ::course.courseModulesDates track by $index">
-                                    <span class="date-text ">{{ day| date:'dd.MM'}}</span>
-                                </div>
-                            </div>
                             <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
                                        ng-click="vm.showDetails(course._id)">Деталі
                             </md-button>
