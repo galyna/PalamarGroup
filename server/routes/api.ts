@@ -1,8 +1,10 @@
+import {Response} from "express";
 import * as express from 'express';
 import * as restify from 'express-restify-mongoose';
-import passport = require("passport");
 import {currentUser} from '../auth/current_user';
 import photoEndpoint from './photo.endpoint';
+import {auth} from "../auth/auth";
+import passport = require("passport");
 
 //models
 import {Contact} from '../models/contact';
@@ -10,15 +12,15 @@ import {Course} from '../models/course';
 import {Order} from '../models/order';
 import {Model} from '../models/model';
 import {SalonClient} from '../models/salon.client';
+import {User} from "../models/user";
+
+//endpoints
 import {emailEndpoint} from "./email.endpoint";
-import IOrder = pg.models.IOrder;
 import {orderOptions} from "./order.options";
 import {courseApi} from "./course.endpoint";
 import {courseGetCommentsApi} from "./comment.endpoint";
-import {Response} from "express";
-import {User} from "../models/user";
-import {auth} from "../auth/auth";
-import {userOptions} from "./user.options";
+import {userOptions, userApi} from "./user.endpoint";
+import IOrder = pg.models.IOrder;
 
 let api = express.Router();
 
@@ -80,7 +82,9 @@ api.use('/course/:id', (req: any, res, next) => {
 }, courseApi);
 restify.serve(api, Course);
 
+api.use('/user', userApi);
 restify.serve(api, User, userOptions);
+
 restify.serve(api, Model, Object.assign({}, readOnlyOptions));
 restify.serve(api, Order, orderOptions);
 restify.serve(api, SalonClient, Object.assign({}, readOnlyOptions));

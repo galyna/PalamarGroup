@@ -5,7 +5,7 @@ import {config} from "../config";
 
 const SALT_WORK_FACTOR = 10;
 
-interface IUserModel extends pg.models.IUser, Document{
+export interface IUserModel extends pg.models.IUser, Document{
     _id: any,
     validPassword: (password: string) => Promise<boolean>,
     generateJwt: () => void

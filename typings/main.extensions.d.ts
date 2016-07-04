@@ -53,13 +53,13 @@ declare module "express-restify-mongoose" {
         preDelete?: RequestHandler | RequestHandler[],
         access?: (req, done?) => string,
         contextFilter?:  (model, req, done) => any,
-        postCreate?: (req, res, next) => any | [(req, res, next) => any],
-        postRead?: (req, res, next) => any | [(req, res, next) => any],
-        postUpdate?: (req, res, next) => any | [(req, res, next) => any],
-        postDelete?: (req, res, next) => any | [(req, res, next) => any],
-        outputFn?: (req, res, next) => any,
+        postCreate?: RequestHandler | RequestHandler[],
+        postRead?: RequestHandler | RequestHandler[],
+        postUpdate?: RequestHandler | RequestHandler[],
+        postDelete?: RequestHandler | RequestHandler[],
+        outputFn?: RequestHandler,
         postProcess?: (req, res) => any,
-        onError?: (req, res, next) => any,
+        onError?: RequestHandler,
         limit?: number
     }
 
