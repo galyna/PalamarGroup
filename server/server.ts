@@ -69,7 +69,7 @@ app.use((err: any, req, res, next) => {
 if (process.env.TYPE !== 'prod') {
     app.use((err:any, req, res, next) => {
         res.status(err.status || 500);
-        res.render('error', {
+        res.json('error', {
             message: err.message,
             error: err
         });
@@ -80,7 +80,7 @@ if (process.env.TYPE !== 'prod') {
 // no stacktraces leaked to user
 app.use((err:any, req, res, next) => {
     res.status(err.status || 500);
-    res.render('error', {
+    res.json('error', {
         message: err.message,
         error: {}
     });
