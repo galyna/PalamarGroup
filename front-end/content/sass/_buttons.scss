@@ -1,0 +1,95 @@
+.md-social-image {
+  width: 30px;
+  margin: 5px;
+  height: 30px;
+  transition: transform 0.5s;
+
+  &:hover {
+    transform: scale(1.5, 1.5);
+    transition: transform 0.2s;
+  }
+
+}
+
+.social-image {
+  width: 30px;
+  margin: 5px;
+  height: 30px;
+  border-width: 2px;
+  border-radius: 20px;
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  transition-property: box-shadow, transform;
+  box-sizing: border-box;
+  box-shadow: $shadow-social;
+  &:hover {
+    transform: scale(1.5, 1.5);
+    transition: transform 0.2s;
+    box-shadow: $shadow-social-active;
+  }
+
+}
+
+.md-button.md-default-theme.md-fab, .md-button.md-fab {
+  background: rgba($primary, 0.8);
+}
+
+a.md-button.md-default-theme.md-fab:not([disabled]):hover, a.md-button.md-fab:not([disabled]):hover, .md-button.md-default-theme.md-fab:not([disabled]):hover, .md-button.md-fab:not([disabled]):hover {
+  background: rgba($primary, 0.4);
+}
+
+.md-button.md-default-theme.md-accent.md-raised,
+.md-button.md-accent.md-raised,
+.md-button.md-default-theme.md-accent.md-fab,
+.md-button.md-accent.md-fab {
+  background-color: rgba($primary, 1);
+}
+
+.md-button.md-default-theme.md-raised:not([disabled]):hover, .md-button.md-raised:not([disabled]):hover {
+  color: white;
+  border-color: black;
+  background-color: black;
+  @extend .md-whiteframe-14dp;
+
+}
+.md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .md-button.md-raised.xs-selected:not([disabled]):hover {
+  color: black;
+  border-color: black;
+  background-color: white;
+  @extend .md-whiteframe-14dp;
+}
+.md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .md-button.md-raised.xs-selected:not([disabled]) {
+
+  color: white;
+  border: white;
+  background-color: black;
+  @extend .md-whiteframe-14dp;
+}
+.md-raised.xs-selected {
+
+  color: white;
+  border: white;
+  background-color: black;
+  @extend .md-whiteframe-14dp;
+}
+
+.md-raised {
+  display: block;
+  border-style: solid;
+  border-color: black;
+  border-width: 3px;
+  background-color: transparent;
+  color: black;
+  min-height: 56px;
+  margin: 16px;
+  min-width: 200px;
+  width: auto;
+  font-size: 26px;
+  border-radius: 0px;
+  transition: background-color 0.3s;
+  @extend .md-whiteframe-3dp;
+
+  @media (max-width: $layout-breakpoint-xs) {
+    min-width: 90vw;
+  }
+}

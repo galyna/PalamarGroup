@@ -1,6 +1,7 @@
 @import "theme";
 
 .courses {
+
   .program-block {
     position: relative;
     color: white;
@@ -29,11 +30,12 @@
       }
     }
   }
+
   md-card.md-default-theme, md-card {
     min-height: 500px;
     z-index: 3;
     padding: 0;
-    min-width: 70vw;
+    min-width: 60vw;
     margin: 20px;
     transition: transform 0.4s;
 
@@ -60,25 +62,6 @@
 
     }
 
-    md-card-content {
-      overflow: hidden;
-      padding: 0;
-
-      md-card-title-text {
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-
-    md-card-content {
-      overflow: hidden;
-      padding: 0;
-
-      md-card-title-text {
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
 
     .card-media {
       position: relative;
@@ -87,17 +70,7 @@
       overflow: hidden;
       padding: 0;
 
-      img {
-        position: absolute;
-        top: 0%;
-        left: 0%;
-        min-width: 100%;
-        min-height: 100%;
-        width: auto;
-        height: auto;
-        z-index: -100;
 
-      }
     }
     .descr-container {
       max-height: 116px;
@@ -108,52 +81,11 @@
 
     }
 
-    .md-button.md-default-theme.md-accent.md-raised, .md-button.md-accent.md-raised, .md-button.md-default-theme.md-accent.md-fab, .md-button.md-accent.md-fab {
-      background-color: rgba($primary, 1);
-    }
-
-    .md-button.md-default-theme.md-raised:not([disabled]):hover, .md-button.md-raised:not([disabled]):hover {
-      color: white;
-      border-color: black;
-      background-color: black;
-      @extend .md-whiteframe-14dp;
-
-    }
-    .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .md-button.md-raised.xs-selected:not([disabled]):hover {
-      color: black;
-      border-color: black;
-      background-color: white;
-      @extend .md-whiteframe-14dp;
-    }
-    .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .md-button.md-raised.xs-selected:not([disabled]) {
-
-      color: white;
-      border: white;
-      background-color: black;
-      @extend .md-whiteframe-14dp;
-    }
-    .md-raised.xs-selected {
-
-      color: white;
-      border: white;
-      background-color: black;
-      @extend .md-whiteframe-14dp;
-    }
 
     .md-raised {
-      display: block;
-      border-style: solid;
-      border-color: black;
-      border-width: 3px;
-      background-color: transparent;
-      color: black;
-      height: 56px;
-      margin: 16px;
+
       min-width: 200px;
-      font-size: 26px;
-      border-radius: 0px;
-      transition: background-color 0.3s;
-      @extend .md-whiteframe-3dp;
+
       @media (max-width: $layout-breakpoint-xs) {
         margin-bottom: 22px;
         min-width: 90vw;
@@ -161,8 +93,6 @@
       }
       @media (max-width: $layout-breakpoint-sm) {
         margin-bottom: 22px;
-
-
       }
     }
   }

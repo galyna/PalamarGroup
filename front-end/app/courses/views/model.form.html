@@ -27,17 +27,20 @@
                     <input id="phone" ng-model="vm.newModel.phone" type="text" name="phone">
                 </md-input-container>
                 <md-input-container class="md-block">
-                    <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
-                    <label for="comment">Додаткова інформація</label>
-                    <textarea  id="comment" ng-model="vm.newModel.comment"  name="comment"></textarea>
+                <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
+                <label for="comment">Додаткова інформація</label>
+                <textarea  id="comment" ng-model="vm.newModel.comment"  name="comment"></textarea>
+            </md-input-container>
+                <md-input-container class="md-block">
+                    <span class="md-headline">Завантажте свої фото у різних ракурсах як на прикладі нижче.</span>
                 </md-input-container>
-                <p class="md-headline">Завантажте свої фото у різних ракурсах як на прикладі нижче.</p>
-                <div class="course course-inner model-card " layout="row" layout-wrap layout-align="center ">
+
+                <div class=" model-card " layout="row" layout-wrap layout-align="center ">
                     <md-card class="md-margin" flex-gt-md="22" flex-md="46"
                              flex-gt-sm="46" flex-xs="80">
-                        <card-image-container>
-                            <img ng-src="{{vm.newModel.fasPhotoUrl}}" class="md-card-image">
-                        </card-image-container>
+
+                            <img ng-src="{{vm.newModel.fasPhotoUrl}}" >
+
                         <md-card-content layout="column" layout-align="center center">
                             <span class="md-headline" >Фото ан фас</span>
                             <choose-file-button>

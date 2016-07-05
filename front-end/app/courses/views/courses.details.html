@@ -1,7 +1,7 @@
 <div class="courses-details" layout="column">
     <!--author-->
     <div layout="row" flex layout-align="center center" >
-        <md-card flex-gt-md="60" flex-gt-lg="40" flex-sm="70"flex="100" md-whiteframe="5">
+        <md-card flex-gt-md="60" flex-gt-lg="40" flex-sm="70" flex="100" md-whiteframe="5">
             <md-card-content layuot="column" layout-gt-sm="row">
                 <div class="card-desc-top " flex hide-gt-sm="true" layout="column" layout-align=" space-around center">
                     <md-card-title>
@@ -97,7 +97,7 @@
         </md-card>
     </div>
 
-    <div layout="row" flex >
+    <div layout="row" flex ng-if="vm.course.days.length>0" >
         <div class="page-delimiter" flex>
             <div flex class="md-padding">
                 <div class="" ng-repeat="day in ::vm.course.days track by $index">
@@ -127,7 +127,7 @@
         </div>
     </div>
     <div layout="row" class="content-block" layout-align="center center" ng-if="vm.course.hearFormsPhotos.length>0">
-        <div class=" gridListCourses" flex flex-gt-md="70" flex-md="90">
+        <div class=" gridListCourses" flex flex-gt-md="60" flex-md="90">
             <md-grid-list
                     md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="3"
                     md-row-height-gt-md="1:1" md-row-height="1:1"
@@ -139,7 +139,7 @@
                               md-colspan-xs="1" ng-click="::vm.showMediaObserver(vm.course.hearFormsPhotos, $index)"
                               class="grid-media">
                     <card-image-container>
-                        <img src="{{::tile.url}}"/>
+                        <img src="{{::tile.url}}" class="md-card-image"/>
                     </card-image-container>
 
                     <md-grid-tile-footer ng-if="tile.name"><h3>{{tile.name}}</h3></md-grid-tile-footer>
@@ -148,12 +148,12 @@
         </div>
     </div>
     <!--description-->
-    <div layout="row" flex >
+    <div layout="row" flex  ng-if="vm.course.description">
         <div class="page-delimiter content-block"  flex>
             <div class="fit-screen-wrap" layout="column">
 
                     <div layout="row" layout-align="center center">
-                        <div flex="50" hide-xs="true" flex-sm="70" flex-sx="90"
+                        <div flex="50" hide-xs="true" flex-gt-sm="60" flex-sx="90"
                              class="md-display-1 md-margin md-padding">
                             {{vm.course.description}}
                         </div>
@@ -175,7 +175,7 @@
         </div>
     </div>
     <div layout="row" class="content-block" layout-align="center center" ng-if="vm.course.historyPhotos.length>0">
-        <div class=" gridListCourses" flex flex-gt-md="70" flex-md="90">
+        <div class=" gridListCourses" flex flex-gt-md="60" flex-md="90">
             <md-grid-list md-cols="1" md-cols-sm="1" md-cols-md="2" md-cols-gt-md="2"
                           md-row-height-gt-md="5:3" md-row-height="5:3"
                           md-gutter="8px" md-gutter-gt-sm="4px">
@@ -186,7 +186,7 @@
                               md-colspan-xs="1" ng-click="::vm.showMediaObserver(vm.course.historyPhotos, $index)"
                               class="grid-media">
                     <card-image-container>
-                        <img src="{{::tile.url}}"/>
+                        <img src="{{::tile.url}}" class="md-card-image"/>
                     </card-image-container>
                     <md-grid-tile-footer ng-if="tile.name"><h3>{{tile.name}}</h3></md-grid-tile-footer>
                 </md-grid-tile>
@@ -206,7 +206,7 @@
         </div>
     </div>
     <div id="a001" ng-class="{'ontent-block':vm.showComments()}" layout="row" layout-align="center center">
-        <div flex="70" flex-xs="100" flex-sm="92">
+        <div flex="60" flex-xs="100" flex-sm="90">
             <a id="comments"></a>
             <div ng-if="vm.showComments()">
                 <md-list class="md-dense" flex>
@@ -225,11 +225,11 @@
 
                 </md-list>
             </div>
-            <div layout="row"  layout-align-gt-sm="end center">
-                <div lflex flex-gt-sm="45" flex-gt-md="25">
+            <div layout="row" layout-align="  end center" layout-align-xs="  center">
+
                     <md-button   ng-click="vm.showCommentDialog($event)" class="comment-btn xs-selected md-raised ">Додати відгук
                     </md-button>
-                </div>
+
             </div>
         </div>
     </div>

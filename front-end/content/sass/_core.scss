@@ -52,6 +52,11 @@ body {
   overflow-y: auto;
 }
 
+card-image-container {
+  overflow: hidden;
+  cursor: pointer;
+}
+
 .fit-screen-wrap {
 
   position: relative;
@@ -60,157 +65,59 @@ body {
   z-index: 2;
 }
 
-.page-header, .page-footer, .page-container {
-  position: relative;
-  display: table;
-  width: 100%;
-  height: 100vh;
-  min-height: 100vh;
-  overflow: hidden;
-  overflow-y: auto;
-
-
-  .screen {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -100;
-    -ms-transform: translateX(-50%) translateY(-50%);
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
-    background-size: cover;
-    -webkit-filter: contrast(150%);
-    -moz-filter: contrast(150%);
-    -o-filter: contrast(150%);
-
-    filter: contrast(150%);
-
-    background: linear-gradient(
-                    rgba(0, 0, 0, 0.9),
-                    rgba(0, 0, 0, 0.9)
-    );
-
-    @media (max-width: $layout-breakpoint-md) {
-      display: none;
-    }
-  }
-}
-
-.page-header, .page-footer {
-  text-align: center;
-  a {
-    text-decoration: none;
-  }
-  color: whitesmoke;
-
-}
-
-.page-header {
-  background: rgba(white, 0.6);
-
-  .page-header-wrap {
-    z-index: 3;
-    color: floralwhite;
-    font-family: 'microsquare', sans-serif;
-  }
-  .logo-img {
-
-    width: 170px;
-
-    @media (max-width: $layout-breakpoint-xs) {
-      width: 70px;;
-
-    }
-    @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-md) {
-      width: 110px;
-    }
-
-    @media (min-width: $layout-breakpoint-md) {
-      width: 170px;
-    }
-  }
-  .featured-area-subtitle {
-    font-size: 1em;
-    line-height: 1em;
-
-    @media (max-width: $layout-breakpoint-xs) {
-      font-size: 16px;
-    }
-    @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-md) {
-      font-size: 20px;
-    }
-    @media (min-width: $layout-breakpoint-md) {
-      font-size: 36px;
-    }
-
-  }
-
-  h1.featured-area-title {
-
-    width: auto;
-    font-size: 6.1428em;
-    font-weight: 900;
-    line-height: 1em;
-    text-transform: uppercase;
-    margin: 0;
-
-    @media (max-width: $layout-breakpoint-xs) {
-      font-size: 28px;
-
-    }
-    @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-md) {
-      font-size: 66px;
-    }
-
-    @media (min-width: $layout-breakpoint-md) {
-      font-size: 75px;
-    }
-
-  }
-
-  .overlay {
-
-    @media (max-width: $layout-breakpoint-md) {
-      background: url("../images/bg/slider/s3.png") no-repeat center center fixed;
-
-    }
-  }
-}
-
-.page-footer {
-
-  .overlay {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../images/bg/IMG_6790_1.jpg") no-repeat center center fixed;
-    -webkit-filter: blur(5px);
-    -moz-filter: blur(5px);
-    -o-filter: blur(5px);
-    -ms-filter: blur(5px);
-    filter: blur(5px);
-  }
-
-}
-
-.page-container {
-  height: 100%;
-  min-height: 100vh;
-  margin-bottom: 0px;
-}
-
 md-input-container .md-input-messages-animation {
   max-width: 300px;
 }
 
-.md-button.md-default-theme.md-fab, .md-button.md-fab {
-  background: rgba($primary, 0.8);
+///common card
+md-card.md-default-theme, md-card {
+  z-index: 3;
+  padding: 0;
+  margin: 20px;
+
+  @media (max-width: $layout-breakpoint-xs) {
+    margin-left: 0px;
+    margin-right: 0px;
+
+  }
+
+  md-card-content {
+    overflow: hidden;
+    padding: 0;
+
+    md-card-title-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .card-media {
+    position: relative;
+    z-index: 1;
+    height: 500px;
+    overflow: hidden;
+    padding: 0;
+
+    img {
+      position: absolute;
+      top: 0%;
+      left: 0%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -100;
+
+    }
+  }
 }
 
-a.md-button.md-default-theme.md-fab:not([disabled]):hover, a.md-button.md-fab:not([disabled]):hover, .md-button.md-default-theme.md-fab:not([disabled]):hover, .md-button.md-fab:not([disabled]):hover {
-  background: rgba($primary, 0.4);
+.md-card-image {
+  transition: transform 0.5s;
+  &:hover {
+    transform: scale(1.1, 1.1);
+    transition: transform 0.5s;
+  }
 }
 
 .description-container {
@@ -223,13 +130,6 @@ a.md-button.md-default-theme.md-fab:not([disabled]):hover, a.md-button.md-fab:no
   display: none !important;
 }
 
-.header-loading {
-  z-index: 39;
-  background-color: rgba($primary, 0.15);
-  position: absolute;
-  bottom: 0
-}
-
 md-tabs .md-tab.md-active {
   color: $primary
 }
@@ -239,37 +139,6 @@ md-tabs md-ink-bar {
   background-color: $primary
 }
 
-.md-social-image {
-  width: 30px;
-  margin: 5px;
-  height: 30px;
-  transition: transform 0.5s;
-
-  &:hover {
-    transform: scale(1.5, 1.5);
-    transition: transform 0.2s;
-  }
-
-}
-
-.social-image {
-  width: 30px;
-  margin: 5px;
-  height: 30px;
-  border-width: 2px;
-  border-radius: 20px;
-  -webkit-filter: invert(100%);
-  filter: invert(100%);
-  transition-property: box-shadow, transform;
-  box-sizing: border-box;
-  box-shadow: $shadow-social;
-  &:hover {
-    transform: scale(1.5, 1.5);
-    transition: transform 0.2s;
-    box-shadow: $shadow-social-active;
-  }
-
-}
 
 md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar), md-toolbar.md-hue-2:not(.md-menu-toolbar) {
   background-color: rgba($primary, 0.8);
