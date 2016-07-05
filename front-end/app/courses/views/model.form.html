@@ -1,4 +1,4 @@
-<md-dialog aria-label="ЗАПИСАТИСЬ НА БЛОК"  layout="column"  flex-sm="85" flex-xs="95" flex-gt-sm="65" flex>
+<md-dialog aria-label="ЗАПИСАТИСЬ НА БЛОК" layout="column" flex-sm="85" flex-xs="95" flex-gt-sm="65" flex>
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools md-padding ">
             <h2 class=" md-padding ">ЗАПОВНІТЬ АНКЕТУ ЩОБ СТАТИ МОДЕЛЛЮ</h2>
@@ -27,10 +27,10 @@
                     <input id="phone" ng-model="vm.newModel.phone" type="text" name="phone">
                 </md-input-container>
                 <md-input-container class="md-block">
-                <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
-                <label for="comment">Додаткова інформація</label>
-                <textarea  id="comment" ng-model="vm.newModel.comment"  name="comment"></textarea>
-            </md-input-container>
+                    <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
+                    <label for="comment">Додаткова інформація</label>
+                    <textarea id="comment" ng-model="vm.newModel.comment" name="comment"></textarea>
+                </md-input-container>
                 <md-input-container class="md-block">
                     <span class="md-headline">Завантажте свої фото у різних ракурсах як на прикладі нижче.</span>
                 </md-input-container>
@@ -39,10 +39,10 @@
                     <md-card class="md-margin" flex-gt-md="22" flex-md="46"
                              flex-gt-sm="46" flex-xs="80">
 
-                            <img ng-src="{{vm.newModel.fasPhotoUrl}}" >
+                        <img ng-src="{{vm.newModel.fasPhotoUrl}}">
 
                         <md-card-content layout="column" layout-align="center center">
-                            <span class="md-headline" >Фото ан фас</span>
+                            <span class="md-headline">Фото ан фас</span>
                             <choose-file-button>
                                 <md-button aria-label="Upload a file" class="detail-btn  ">
                                     Виберіть файл
@@ -57,10 +57,10 @@
                              flex-gt-sm="46" flex-xs="80">
                         <card-image-container>
                             <img ng-src="{{vm.newModel.profilePhotoUrl}}"
-                                 class="md-card-image">
+                            >
                         </card-image-container>
                         <md-card-content layout="column" layout-align="center center">
-                            <span class="md-headline" >Фото в профіль</span>
+                            <span class="md-headline">Фото в профіль</span>
                             <choose-file-button>
                                 <md-button aria-label="Upload a file" class="detail-btn  ">
                                     Виберіть файл
@@ -74,7 +74,7 @@
                     <md-card class="md-margin" flex-gt-md="22" flex-md="46"
                              flex-gt-sm="46" flex-xs="80">
                         <card-image-container>
-                            <img ng-src="{{vm.newModel.backPhotoUrl}}" class="md-card-image">
+                            <img ng-src="{{vm.newModel.backPhotoUrl}}">
                         </card-image-container>
                         <md-card-content layout="column" layout-align="center center">
                             <span class="md-headline">Фото вид ззаду</span>
@@ -92,11 +92,11 @@
                     <md-card class="md-margin" flex-gt-md="22" flex-md="46"
                              flex-gt-sm="46" flex-xs="80">
                         <card-image-container>
-                            <img ng-src="{{vm.newModel.fullSizePhotoUrl}}" class="md-card-image">
+                            <img ng-src="{{vm.newModel.fullSizePhotoUrl}}">
                         </card-image-container>
 
                         <md-card-content class="model-card-content" layout="column" layout-align="center center">
-                            <span class="md-headline" >Фото в повний ріст</span>
+                            <span class="md-headline">Фото в повний ріст</span>
                             <choose-file-button>
                                 <md-button aria-label="Upload a file" class="detail-btn  ">
                                     Виберіть файл
@@ -111,8 +111,9 @@
             </md-dialog-content-body>
         </md-dialog-content>
 
-        <md-dialog-actions   class="md-padding model-save" layout-align-xs="center-center"  md-whiteframe="2" >
-            <md-button ng-click="vm.submitModel(orderForm)"  class="xs-selected md-raised md-margin">НАДІСЛАТИ</md-button>
+        <md-dialog-actions class="md-padding model-save" layout-align-xs="center-center" md-whiteframe="2">
+            <md-button ng-click="vm.submitModel(orderForm)" class="xs-selected md-raised md-margin">НАДІСЛАТИ
+            </md-button>
         </md-dialog-actions>
 
 
