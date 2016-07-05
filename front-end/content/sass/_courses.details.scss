@@ -1,6 +1,7 @@
 @import "theme";
 
 .courses-details {
+
   .card-desc-top {
     background: rgba($primary, 0.8);
     color: white;
@@ -33,30 +34,14 @@
     }
   }
 
-  card-image-container {
-    overflow: hidden;
-    cursor: pointer;
-  }
-
   md-card.md-default-theme, md-card {
     min-height: 500px;
     z-index: 3;
     padding: 0;
-    min-width: 70vw;
+    min-width: 60vw;
     margin: 20px;
-    transition: transform 0.4s;
 
-    &:hover {
-      @extend .md-whiteframe-16dp;
-      transform: translate(0%, -1%);
 
-    }
-
-    @media (max-width: $layout-breakpoint-xs) {
-      margin-left: 0px;
-      margin-right: 0px;
-
-    }
     .card-desc-top {
       background: rgba($primary, 0.8);
       color: white;
@@ -66,30 +51,10 @@
       min-width: 200px;
       width: 100%;
       z-index: 2;
-      @media (max-width: $layout-breakpoint-xs) {
-        // min-height: 500px;
 
-      }
-
-    }
-
-    md-card-content {
-      overflow: hidden;
-      padding: 0;
-
-      md-card-title-text {
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
     }
 
     .card-media {
-      position: relative;
-      z-index: 1;
-      height: 500px;
-      overflow: hidden;
-      padding: 0;
-
       .author-name {
         position: absolute;
         bottom: 0px;
@@ -99,17 +64,6 @@
         background-color: rgba(0, 0, 0, 0.6);
       }
 
-      img {
-        position: absolute;
-        top: 0%;
-        left: 0%;
-        min-width: 100%;
-        min-height: 100%;
-        width: auto;
-        height: auto;
-        z-index: -100;
-
-      }
     }
 
     .md-raised {
@@ -130,12 +84,8 @@
     min-height: 450px;
     background-color: white;
   }
-  .description-container {
-    background-color: white;
-  }
 
   ///course img grid
-
   .gridListCourses md-grid-list {
     margin: 16px;
     md-grid-tile {
@@ -210,133 +160,17 @@
     }
   }
 
-  .md-button.md-default-theme.md-accent.md-raised, .md-button.md-accent.md-raised, .md-button.md-default-theme.md-accent.md-fab, .md-button.md-accent.md-fab {
-    background-color: rgba($primary, 1);
-  }
-
-  .md-button.md-default-theme.md-raised:not([disabled]):hover, .md-button.md-raised:not([disabled]):hover {
-    color: white;
-    border-color: black;
-    background-color: black;
-    @extend .md-whiteframe-14dp;
-
-  }
-  .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .md-button.md-raised.xs-selected:not([disabled]):hover {
-    color: black;
-    border-color: black;
-    background-color: white;
-    @extend .md-whiteframe-14dp;
-  }
-  .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .md-button.md-raised.xs-selected:not([disabled]) {
-
-    color: white;
-    border: white;
-    background-color: black;
-    @extend .md-whiteframe-14dp;
-  }
-  .md-raised.xs-selected {
-
-    color: white;
-    border: white;
-    background-color: black;
-    @extend .md-whiteframe-14dp;
-
-  }
-  .md-raised {
-    display: block;
-    border-style: solid;
-    border-color: black;
-    border-width: 3px;
-    background-color: transparent;
-    color: black;
-    height: 56px;
-    margin: 16px;
-    min-width: 100%;
-    font-size: 26px;
-    border-radius: 0px;
-    transition: background-color 0.3s;
-    @extend .md-whiteframe-3dp;
-
-    @media (max-width: $layout-breakpoint-sm) {
-      min-width: 60vw;
-
-    }
-    @media (max-width: $layout-breakpoint-xs) {
-
-      min-width: 90vw;
-
-    }
-  }
-  .comment-btn { width: auto;}
+  .comment-btn { min-width: 300px;margin-right: 0;}
 
 }
 
 .pop-form {
-  .md-button.md-default-theme.md-accent.md-raised,
-  .md-button.md-accent.md-raised,
-  .md-button.md-default-theme.md-accent.md-fab,
-  .md-button.md-accent.md-fab {
-  background-color: rgba($primary, 1);
-}
-
-  .md-button.md-default-theme.md-raised:not([disabled]):hover, .md-button.md-raised:not([disabled]):hover {
-    color: white;
-    border-color: black;
-    background-color: black;
-    @extend .md-whiteframe-14dp;
-
-  }
-  .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .md-button.md-raised.xs-selected:not([disabled]):hover {
-    color: black;
-    border-color: black;
-    background-color: white;
-    @extend .md-whiteframe-14dp;
-  }
-  .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .md-button.md-raised.xs-selected:not([disabled]) {
-
-    color: white;
-    border: white;
-    background-color: black;
-    @extend .md-whiteframe-14dp;
-  }
-  .md-raised.xs-selected {
-
-    color: white;
-    border: white;
-    background-color: black;
-    @extend .md-whiteframe-14dp;
-
-  }
-
-  .md-raised {
-    display: block;
-    border-style: solid;
-    border-color: black;
-    border-width: 3px;
-    background-color: transparent;
-    color: black;
-    min-height: 56px;
-    margin: 16px;
-    min-width: 200px;
-    width: auto;
-    font-size: 26px;
-    border-radius: 0px;
-    transition: background-color 0.3s;
-    @extend .md-whiteframe-3dp;
-
-
-    @media (max-width: $layout-breakpoint-xs) {
-      min-width: 90vw;
-    }
-
-  }
-
   .model-save{padding: 20px}
  }
 
 .model-card {
-
-  md-card {
+  box-sizing: border-box;
+  md-card.md-default-theme,   md-card {
 
     position: relative;
     display: block;
@@ -367,10 +201,10 @@
       &.flex-gt-sm-46 {
         max-height: 100%;
         box-sizing: border-box;
-        flex: 2 43%;
+        flex: 1 43%;
       }
       &:first-child, &:nth-child(2) {
-        flex: 2 43%;
+        flex: 1 43%;
       }
     }
 

@@ -3,7 +3,7 @@
         <div class="course-bg" layout-align="center center" flex
              ng-repeat="course in vm.courses track by $index" ng-if="::course.isVisible">
             <div hide show-gt-sm="true" layout="row" layout-align="center center">
-                <md-card ng-if="$first && !$odd" flex-gt-md="70" flex-md="90" md-whiteframe="5"
+                <md-card ng-if="$first && !$odd" flex-gt-md="60" flex-gt-lg="40" flex-sm="70"  md-whiteframe="5"
                          class="md-margin">
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-desc " flex="50" flex layout="column" layout-align="center center">
@@ -30,15 +30,14 @@
                                 </md-button>
                             </md-card-actions>
                         </div>
-                        <div class="card-media " flex="50"><img src="{{course.hearFormsPhotos[0].url}}"/></div>
+                        <div class="card-media " flex="50"><img src="{{course.hearFormsPhotos[0].url}}" class="md-card-image" /></div>
                     </md-card-content>
 
                 </md-card>
-                <md-card ng-if="$odd " flex-gt-md="70" flex-md="90" md-whiteframe="5"
-                         class="md-margin"
+                <md-card ng-if="$odd " flex-gt-md="60" flex-gt-lg="40" flex-sm="70"  md-whiteframe="5" class="md-margin"
                 >
                     <md-card-content layout="row" layout-align="start none">
-                        <div flex="50" class="card-media "><img src="{{course.hearFormsPhotos[0].url}}"/></div>
+                        <div flex="50" class="card-media "><img src="{{course.hearFormsPhotos[0].url}}" class="md-card-image"/></div>
                         <div class="card-desc " flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
@@ -62,9 +61,8 @@
                             </md-card-actions>
                         </div>
                     </md-card-content>
-
                 </md-card>
-                <md-card ng-if="!$first && !$odd" flex-gt-md="70" flex-md="90" md-whiteframe="5"
+                <md-card ng-if="!$first && !$odd" flex-gt-md="60" flex-gt-lg="40" flex-sm="70" flex="100" md-whiteframe="5"
                          class="md-margin"
                 >
                     <md-card-content layout="row" layout-align="start none">
@@ -91,14 +89,14 @@
                                 </md-button>
                             </md-card-actions>
                         </div>
-                        <div class="card-media " flex="50"><img src="{{course.hearFormsPhotos[0].url}}"/></div>
+                        <div class="card-media " flex="50"><img src="{{course.hearFormsPhotos[0].url}}" class="md-card-image"/></div>
                     </md-card-content>
                 </md-card>
             </div>
             <div hide-gt-sm="true" layout="row" layout-align="center center">
-                <md-card md-whiteframe="8" layout-fill="true">
+                <md-card md-whiteframe="8" >
                     <md-card-content layout="column">
-                        <div class="card-media "><img src="{{course.hearFormsPhotos[0].url}}"/></div>
+                        <div class="card-media "><img src="{{course.hearFormsPhotos[0].url}}" class="md-card-image" /></div>
                         <div class="card-desc " layout="column" layout-align="space-around center">
                             <md-card-title>
                                 <md-card-title-text >
