@@ -14,7 +14,6 @@ import 'ng-img-crop-full-extended';
 import 'angular-socialshare';
 import 'ngSmoothScroll';
 import {uiModule} from './ui/ui.module';
-import {usersModule} from './users/users.module';
 import {coursesModule} from './courses/courses.module';
 import './templates';
 
@@ -38,7 +37,6 @@ let app = angular.module('yuliaPalamarApp', [
     coreModule.name,
     resourcesModule.name,
     uiModule.name,
-    usersModule.name,
     coursesModule.name
 ])
     .config(routesConfig)
