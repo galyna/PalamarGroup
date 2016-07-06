@@ -12,6 +12,7 @@ import 'angular-animate';
 import 'ng-file-upload';
 import 'ng-img-crop-full-extended';
 import 'angular-socialshare';
+import 'ngSmoothScroll';
 import {uiModule} from './ui/ui.module';
 import {usersModule} from './users/users.module';
 import {coursesModule} from './courses/courses.module';
@@ -32,7 +33,7 @@ let app = angular.module('yuliaPalamarApp', [
     'ngFileUpload',
     'ngImgCrop',
    '720kb.socialshare',
-    
+    'smoothScroll',
     'templates',
     coreModule.name,
     resourcesModule.name,

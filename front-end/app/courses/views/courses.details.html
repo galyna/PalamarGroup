@@ -1,6 +1,6 @@
-<div class="courses-details" layout="column">
+<div class="courses-details description-container" layout="column">
     <!--author-->
-    <div layout="row" flex layout-align="center center" >
+    <div layout="row"  flex layout-align="center center">
         <md-card flex-gt-md="60" flex-gt-lg="40" flex-sm="70" flex="100" md-whiteframe="5">
             <md-card-content layuot="column" layout-gt-sm="row">
                 <div class="card-desc-top " flex hide-gt-sm="true" layout="column" layout-align=" space-around center">
@@ -22,8 +22,8 @@
                     <md-card-title layout="column" layout-align="space-around center">
                         <md-card-title-text hide show-gt-sm="true" flex layout="column"
                                             layout-align=" space-around center">
-                            <div class="md-display-1">Блок</div>
-                            <div class="md-display-1">{{::vm.course.name}}</div>
+
+                            <div class="md-display-3">{{::vm.course.name}}</div>
                         </md-card-title-text>
                         <div flex class="md-title " flex layout="row" layout-align=" space-around center">
                             <div class=" md-padding">Вартість</div>
@@ -31,16 +31,17 @@
                         </div>
                     </md-card-title>
 
-                    <div flex layuot="column">
+                    <div flex layuot="column" layout-align="space-between stretch">
 
-                        <md-button class="md-raised " aria-label="Play" ng-click="vm.showModelDialog($event)">
+                        <md-button class="md-raised " flex aria-label="Play" ng-click="vm.showModelDialog($event)">
                             Стати моделлю
                         </md-button>
                         <md-button class=" md-raised xs-selected " aria-label="Play"
                                    ng-click="vm.showOrderDialog($event)">
                             Записатись
                         </md-button>
-                        <md-button class=" md-raised  " aria-label="Відгуки" ng-click="vm.scrollToComments()">
+                        <md-button scroll-to="comments" easing="easeInOutCubic"
+                                   duration="1500" class=" md-raised  " aria-label="Відгуки">
                             Відгуки
                         </md-button>
                         <div class="md-padding md-margin" layout="column" layout-gt-sm="row"
@@ -97,36 +98,31 @@
         </md-card>
     </div>
 
-    <div layout="row" flex ng-if="vm.course.days.length>0" >
-        <div class="page-delimiter" flex>
-            <div flex class="md-padding">
-                <div class="" ng-repeat="day in ::vm.course.days track by $index">
-                    <div layout="row" class=" program-block md-margin" layout-align=" center center">
-                        <div flex="50" flex-gt-sm="20" layout="row" layout-align="  end">
-                            <div class="date-block ">
-                                <span class="date-text md-title">{{ day.date| date:'dd.MM'}}</span>
-                            </div>
-                        </div>
-                        <div flex="50" flex-gt-sm="20" class="md-padding md-headline " layout="row" layout-align="  space-around end">{{
-                            day.program}}
+
+    <div layout="row" flex ng-if="vm.course.days.length>0">
+        <div class="page-delimiter content-block" flex>
+            <div class="fit-screen-wrap" layout="column">
+                <div flex="none" layout="row" class="md-padding program-block  " layout-align=" center center">
+                    <div ng-repeat="day in ::vm.course.days track by $index">
+                        <div class="date-block md-margin " layout="column" layout-align=" center center">
+                            <div  class=" md-display-2">{{ day.date| date:'dd.MM'}}</div>
+                            <div  class="md-subhead  ">{{day.program}}</div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
-            <div class="overlay-forms"></div>
+            <div class="overlay-history"></div>
         </div>
     </div>
     <div layout="row" flex ng-if="vm.course.historyPhotos.length>0">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
-                <div class="md-display-1">Медіа матеріали блоку</div>
+                <div class="md-display-2"> Mатеріали блоку</div>
             </div>
 
         </div>
     </div>
-    <div layout="row" class="content-block" layout-align="center center" ng-if="vm.course.hearFormsPhotos.length>0">
+    <div layout="row"  layout-align="center center" ng-if="vm.course.hearFormsPhotos.length>0">
         <div class=" gridListCourses" flex flex-gt-md="60" flex-md="90">
             <md-grid-list
                     md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="3"
@@ -148,17 +144,17 @@
         </div>
     </div>
     <!--description-->
-    <div layout="row" flex  ng-if="vm.course.description">
-        <div class="page-delimiter content-block"  flex>
+    <div layout="row" flex ng-if="vm.course.description">
+        <div class="page-delimiter content-block" flex>
             <div class="fit-screen-wrap" layout="column">
 
-                    <div layout="row" layout-align="center center">
-                        <div flex="50" hide-xs="true" flex-gt-sm="60" flex-sx="90"
-                             class="md-display-1 md-margin md-padding">
-                            {{vm.course.description}}
-                        </div>
-                        <div hide-gt-xs="true" flex class="md-headline md-margin md-padding">{{vm.course.description}}
-                        </div>
+                <div layout="row" layout-align="center center">
+                    <div flex="50" hide-xs="true" flex-gt-sm="60" flex-sx="90"
+                         class="md-display-1 md-margin md-padding">
+                        {{vm.course.description}}
+                    </div>
+                    <div hide-gt-xs="true" flex class="md-headline md-margin md-padding">{{vm.course.description}}
+                    </div>
 
                 </div>
             </div>
@@ -196,18 +192,18 @@
         </div>
     </div>
     <!--Comments-->
-    <div layout="row" flex>
+    <div layout="row" flex ng-if="vm.showComments()">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap header-super">
-                <div class="md-display-1">Відгуки</div>
+                <div class="md-display-3">Відгуки</div>
             </div>
             <div class="overlay-comments"></div>
             <!-- ng-style="{'background-image':'url({{vm.course.historyPhotos[0].url}})'}"></div>-->
         </div>
     </div>
-    <div id="a001" ng-class="{'ontent-block':vm.showComments()}" layout="row" layout-align="center center">
+    <div id="comments" ng-class="{'content-block':vm.showComments()}" layout="row" layout-align="center center">
         <div flex="60" flex-xs="100" flex-sm="90">
-            <a id="comments"></a>
+
             <div ng-if="vm.showComments()">
                 <md-list class="md-dense" flex>
                     <md-list-item class="md-2-line" ng-if="comment.isVisible"
@@ -227,8 +223,9 @@
             </div>
             <div layout="row" layout-align="  end center" layout-align-xs="  center">
 
-                    <md-button   ng-click="vm.showCommentDialog($event)" class="comment-btn xs-selected md-raised ">Додати відгук
-                    </md-button>
+                <md-button ng-click="vm.showCommentDialog($event)" class="comment-btn xs-selected md-raised ">Додати
+                    відгук
+                </md-button>
 
             </div>
         </div>

@@ -2,33 +2,9 @@
 
 .courses {
 
-  .program-block {
-    position: relative;
-    color: white;
-    vertical-align: middle;
-    z-index: 2;
-    color: white;
-
-    .date-block {
-      background-color:rgba( $primary,0.9);
-      border-color: rgba( $primary,0.7);
-      border-style: solid;
-      margin: 3px;
-      border-width: 3px;
-      height: 50px;
-      border-radius: 50%;
-      width: 50px;
-      position: relative;
-      @extend .md-whiteframe-5dp;
-
-      .date-text {
-        font-weight: 900;
-        left: 4pt;
-        position: absolute;
-        top: 32%;
-        vertical-align: middle;
-      }
-    }
+  .overlay-bg {
+    @extend .overlay;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/slider/s5.png") no-repeat center center fixed;
   }
 
   md-card.md-default-theme, md-card {
@@ -88,7 +64,7 @@
 
       @media (max-width: $layout-breakpoint-xs) {
         margin-bottom: 22px;
-        min-width: 90vw;
+       width: 90%;
 
       }
       @media (max-width: $layout-breakpoint-sm) {
@@ -96,6 +72,36 @@
       }
     }
   }
+
+  //.program-block {
+  //  position: relative;
+  //  color: white;
+  //  vertical-align: middle;
+  //  z-index: 2;
+  //  color: white;
+  //
+  //  .date-block {
+  //    background-color:rgba( $primary,0.9);
+  //    border-color: rgba( $primary,0.7);
+  //    border-style: solid;
+  //    margin: 3px;
+  //    border-width: 3px;
+  //    height: 50px;
+  //    border-radius: 50%;
+  //    width: 50px;
+  //    position: relative;
+  //    @extend .md-whiteframe-5dp;
+  //
+  //    .date-text {
+  //      font-weight: 900;
+  //      left: 4pt;
+  //      position: absolute;
+  //      top: 32%;
+  //      vertical-align: middle;
+  //    }
+  //  }
+  //}
+
 }
 
 

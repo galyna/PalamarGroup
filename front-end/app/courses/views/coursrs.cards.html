@@ -9,13 +9,13 @@
                         <div class="card-desc " flex="50" flex layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
-                                    <div class="md-display-1">{{::course.name}}</div>
-                                    <div class=" program-block " layout="row">
-                                        <div class="date-block "
-                                             ng-repeat="day in ::course.courseModulesDates track by $index">
-                                            <span class="date-text ">{{ day| date:'dd.MM'}}</span>
-                                        </div>
-                                    </div>
+                                    <div class="md-display-3">{{::course.name}}</div>
+                                    <!--<div class=" program-block " layout="row">-->
+                                        <!--<div class="date-block "-->
+                                             <!--ng-repeat="day in ::course.courseModulesDates track by $index">-->
+                                            <!--<span class="date-text ">{{ day| date:'dd.MM'}}</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
                                     <div class="descr-container">
                                         <div class="md-title">{{::course.description}}</div>
 
@@ -34,20 +34,14 @@
                     </md-card-content>
 
                 </md-card>
-                <md-card ng-if="$odd " flex-gt-md="60" flex-gt-lg="40" flex-sm="70"  md-whiteframe="5" class="md-margin"
-                >
+                <md-card ng-if="$odd " flex-gt-md="60" flex-gt-lg="40" flex-sm="70"  md-whiteframe="5" class="md-margin">
                     <md-card-content layout="row" layout-align="start none">
                         <div flex="50" class="card-media "><img src="{{course.hearFormsPhotos[0].url}}" class="md-card-image"/></div>
                         <div class="card-desc " flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
-                                    <div class="md-display-1">{{::course.name}}</div>
-                                    <div class=" program-block " layout="row">
-                                        <div class="date-block "
-                                             ng-repeat="day in ::course.courseModulesDates track by $index">
-                                            <span class="date-text ">{{ day| date:'dd.MM'}}</span>
-                                        </div>
-                                    </div>
+                                    <div class="md-display-3">{{::course.name}}</div>
+
                                     <div class="descr-container">
                                         <div class="md-title">{{::course.description}}</div>
                                     </div>
@@ -69,13 +63,7 @@
                         <div class="card-desc " flex="50" flex layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
-                                    <div class="md-display-1">{{::course.name}}</div>
-                                    <div class=" program-block " layout="row">
-                                        <div class="date-block "
-                                             ng-repeat="day in ::course.courseModulesDates track by $index">
-                                            <span class="date-text ">{{ day| date:'dd.MM'}}</span>
-                                        </div>
-                                    </div>
+                                    <div class="md-display-3">{{::course.name}}</div>
                                     <div class="descr-container">
                                         <div class="md-title">{{::course.description}}</div>
 
@@ -92,7 +80,9 @@
                         <div class="card-media " flex="50"><img src="{{course.hearFormsPhotos[0].url}}" class="md-card-image"/></div>
                     </md-card-content>
                 </md-card>
+                <div class="overlay-bg"></div>
             </div>
+
             <div hide-gt-sm="true" layout="row" layout-align="center center">
                 <md-card md-whiteframe="8" >
                     <md-card-content layout="column">

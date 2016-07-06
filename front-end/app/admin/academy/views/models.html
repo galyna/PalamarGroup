@@ -1,7 +1,7 @@
 <md-subheader class="md-no-sticky">Моделі</md-subheader>
 <md-tabs md-stretch-tabs="always" md-dynamic-height >
     <md-tab label="Моделі">
-        <div ng-if="!vm.showModelCreateForm && !vm.showModelEditForm" ng-repeat="item in vm.models" ng-click="null" layout="row"
+        <div ng-if="!vm.showModelCreateForm && !vm.showModelEditForm" ng-repeat="item in vm.models track by $index" ng-click="null" layout="row"
              class=" md-margin">
             <img ng-src="{{item.fasPhotoUrl}}?{{$index}}" class="module-avatar"/>
             <img ng-src="{{item.profilePhotoUrl}}?{{$index}}" class="module-avatar"/>

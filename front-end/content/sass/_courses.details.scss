@@ -8,24 +8,29 @@
   }
 
   .program-block {
-    position: relative;
-    color: white;
-    vertical-align: middle;
-    z-index: 2;
-    color: white;
+    display: flex;
+
+    z-index: 3;
+
+    flex-wrap: wrap;
 
     .date-block {
+      box-sizing: border-box;
       background-color: black;
-      border-color: white;
-      border-style: solid;
-      border-width: 3px;
-      height: 90px;
-      border-radius: 50%;
-      width: 90px;
 
-      position: relative;
+      height: 200px;
+      color: white;
+      border-radius: 50%;
+      width: 200px;
+      text-align: center;
 
       .date-text {
+        left: 20%;
+        position: absolute;
+        top: 40%;
+        vertical-align: middle;
+      }
+      .date {
         left: 20%;
         position: absolute;
         top: 40%;
@@ -40,7 +45,6 @@
     padding: 0;
     min-width: 60vw;
     margin: 20px;
-
 
     .card-desc-top {
       background: rgba($primary, 0.8);
@@ -67,22 +71,14 @@
     }
 
     .md-raised {
-
-      min-width: 100%;
-
-      @media (max-width: $layout-breakpoint-sm) {
-        min-width: 60vw;
-
-      }
-      @media (max-width: $layout-breakpoint-xs) {
-        min-width: 90vw;
-      }
+      margin:16px;
+      width: 100%;
     }
   }
 
   .content-block {
-    min-height: 450px;
-    background-color: white;
+    min-height: 500px;
+
   }
 
   ///course img grid
@@ -106,7 +102,6 @@
     position: relative;
     display: table;
     width: 100%;
-
     color: white;
     overflow: hidden;
     overflow-y: auto;
@@ -123,7 +118,11 @@
 
     }
     .header-super {
-      height: 300px;
+      height: 200px;
+
+    }
+    .header-long {
+      height: 500px;
 
     }
     .invers {
@@ -133,11 +132,6 @@
 
     .overlay {
       z-index: 1;
-      -webkit-filter: blur(5px);
-      -moz-filter: blur(5px);
-      -o-filter: blur(5px);
-      -ms-filter: blur(5px);
-      filter: blur(5px);
 
     }
     .overlay-history {
@@ -152,7 +146,7 @@
     .overlay-description {
       @extend .overlay;
 
-      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/slider/s11.png") no-repeat center center fixed;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/slider/s10.png") no-repeat center center fixed;
     }
     .overlay-forms {
       @extend .overlay;
@@ -160,17 +154,12 @@
     }
   }
 
-  .comment-btn { min-width: 300px;margin-right: 0;}
-
 }
 
-.pop-form {
-  .model-save{padding: 20px}
- }
 
 .model-card {
   box-sizing: border-box;
-  md-card.md-default-theme,   md-card {
+  md-card.md-default-theme, md-card {
 
     position: relative;
     display: block;
@@ -186,7 +175,7 @@
       background-color: rgba($primary, 0.7);
     }
 
-    @media (min-width: $layout-breakpoint-md)  {
+    @media (min-width: $layout-breakpoint-md) {
 
       &.flex-gt-md-22 {
 

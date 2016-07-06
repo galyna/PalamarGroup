@@ -9,7 +9,7 @@ interface IEditIModelModel extends IModel {
 
 export class AcademyModelController {
 
-    static $inject = [ModelResourceName, '$log', 'Upload', '$timeout', '$location', 'constants'];
+    static $inject = [ModelResourceName, '$log', 'Upload', '$timeout', '$location', 'constants', "$mdToast"];
     static componentName = 'AcademyModelController';
 
     models:IModel[];
@@ -22,7 +22,7 @@ export class AcademyModelController {
 
     constructor(private ModelResource: IModelResource, private $log:ng.ILogService,
                 private Upload:ng.angularFileUpload.IUploadService, private $timeout:ng.ITimeoutService,
-                private $location:ng.ILocationService, private constants:IConstants) {
+                private $location:ng.ILocationService, private constants:IConstants,private $mdToast:ng.material.IToastService) {
 
         this.models = ModelResource.query();
 
@@ -43,10 +43,12 @@ export class AcademyModelController {
             this.newModelModel.$save()
                 .then((model)=> {
                     this.$log.debug("success createModel...");
+                    this.$mdToast.showSimple( `модель збережено` );
                     this.models.push(model);
                 })
                 .catch((err)=> {
                     this.$log.debug("fail createModel..." + err);
+                    this.$mdToast.showSimple( `помилка при збереженні моделі` );
                 })
                 .finally(()=> {
                     this.showModelCreateForm = false;
@@ -89,6 +91,7 @@ export class AcademyModelController {
     saveEditModelPhoto(file, photoName):void {
         this.fileUpload(file).then((response)=> {
             this.editModelModel[photoName] = response.data.url;
+            this.$mdToast.showSimple( `фото збережено` );
         }).catch((err)=> {
             this.$log.debug("fail upload file..." + err);
         })
@@ -97,6 +100,7 @@ export class AcademyModelController {
     saveNewModelPhoto(file, photoName):void {
         this.fileUpload(file).then((response)=> {
             this.newModelModel[photoName] = response.data.url;
+            this.$mdToast.showSimple( `фото збережено` );
         }).catch((err)=> {
             this.$log.debug("fail upload file..." + err);
         })
@@ -121,14 +125,14 @@ export class AcademyModelController {
     deleteFromList(list:any[], item:any):void {
         list.splice(list.indexOf(item), 1);
     }
-    
-    private getBlankModel(){
-        return new this.ModelResource({
-            fasPhotoUrl: '../content/images/fas.jpg',
-            profilePhotoUrl: '../content/images/prifile.jpg',
-            backPhotoUrl: '../content/images/back.jpg',
-            fullSizePhotoUrl: '../content/images/fullsize.jpg'
-        });
+
+    private getBlankModel() {
+        return new this.ModelResource( {
+            fasPhotoUrl: '../content/images/models/fas.jpg',
+            profilePhotoUrl: '../content/images/models/prifile.jpg',
+            backPhotoUrl: '../content/images/models/back.jpg',
+            fullSizePhotoUrl: '../content/images/models/fullsize.jpg'
+        } );
     }
 
 }

@@ -1,3 +1,24 @@
+.down-btn {
+  position: absolute;
+  left:calc(50% - 30px);
+  z-index: 3;
+  bottom: -37px;
+
+  @extend .md-whiteframe-8dp;
+}
+.up-btn {
+
+  position: absolute;
+  left:calc(50% - 30px);
+  z-index: 3;
+  top: -35px;
+
+  @extend .md-whiteframe-8dp;
+  md-icon{  -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);}
+}
+
 .md-social-image {
   width: 30px;
   margin: 5px;
@@ -30,20 +51,16 @@
 
 }
 
-.md-button.md-default-theme.md-fab, .md-button.md-fab {
-  background: rgba($primary, 0.8);
+.md-button.md-default-theme.md-fab, .md-button.md-fab , .md-button.md-fab .md-focused{
+  background: white;
 }
 
 a.md-button.md-default-theme.md-fab:not([disabled]):hover, a.md-button.md-fab:not([disabled]):hover, .md-button.md-default-theme.md-fab:not([disabled]):hover, .md-button.md-fab:not([disabled]):hover {
-  background: rgba($primary, 0.4);
+  background: white;
+  @extend .md-whiteframe-14dp;
 }
 
-.md-button.md-default-theme.md-accent.md-raised,
-.md-button.md-accent.md-raised,
-.md-button.md-default-theme.md-accent.md-fab,
-.md-button.md-accent.md-fab {
-  background-color: rgba($primary, 1);
-}
+
 
 .md-button.md-default-theme.md-raised:not([disabled]):hover, .md-button.md-raised:not([disabled]):hover {
   color: white;
@@ -52,25 +69,28 @@ a.md-button.md-default-theme.md-fab:not([disabled]):hover, a.md-button.md-fab:no
   @extend .md-whiteframe-14dp;
 
 }
+
 .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .md-button.md-raised.xs-selected:not([disabled]):hover {
   color: black;
   border-color: black;
   background-color: white;
   @extend .md-whiteframe-14dp;
 }
+
 .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .md-button.md-raised.xs-selected:not([disabled]) {
 
   color: white;
   border: white;
   background-color: black;
-  @extend .md-whiteframe-14dp;
+  @extend .md-whiteframe-8dp;
 }
+
 .md-raised.xs-selected {
 
   color: white;
   border: white;
   background-color: black;
-  @extend .md-whiteframe-14dp;
+  @extend .md-whiteframe-8dp;
 }
 
 .md-raised {
@@ -81,8 +101,8 @@ a.md-button.md-default-theme.md-fab:not([disabled]):hover, a.md-button.md-fab:no
   background-color: transparent;
   color: black;
   min-height: 56px;
-  margin: 16px;
-  min-width: 200px;
+
+  min-width: 150px;
   width: auto;
   font-size: 26px;
   border-radius: 0px;
@@ -90,6 +110,10 @@ a.md-button.md-default-theme.md-fab:not([disabled]):hover, a.md-button.md-fab:no
   @extend .md-whiteframe-3dp;
 
   @media (max-width: $layout-breakpoint-xs) {
-    min-width: 90vw;
+    width: 90%;
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 18px;
   }
+
 }

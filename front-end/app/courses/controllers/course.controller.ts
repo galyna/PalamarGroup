@@ -17,7 +17,7 @@ export class CourseController {
 
     static $inject = ['$log', '$routeParams', '$location', CourseResourceName,
         OrderResourceName, MediaObserverFactoryName, '$mdDialog', 'Upload',
-        '$timeout', ModelResourceName, 'constants', '$anchorScroll', "$filter",
+        '$timeout', ModelResourceName, 'constants',  "$filter",
         '$rootScope', '$templateCache', '$mdMedia','orderByFilter'];
     static componentName = 'CourseController';
 
@@ -34,7 +34,7 @@ export class CourseController {
                 private OrderResource:IOrderResource, private mediaObserver:IMediaObserverFactory,
                 private mdDialog:ng.material.IDialogService, private Upload:ng.angularFileUpload.IUploadService,
                 private $timeout:ng.ITimeoutService, private ModelResource:IModelResource,
-                private constants:IConstants, private $anchorScroll:ng.IAnchorScrollService,
+                private constants:IConstants,
                 private $filter, $rootScope:IRootScope, private $templateCache:ng.ITemplateCacheService,
                 private $mdMedia:ng.material.IMenuService,private orderByFilter:ng.IFilterOrderBy) {
 
@@ -84,12 +84,6 @@ export class CourseController {
 
     backToHome():void {
         this.$location.url( '/home' );
-    }
-
-    scrollToComments():void {
-        this.$location.hash( 'comments' );
-        // call $anchorScroll()
-        this.$anchorScroll();
     }
 
 

@@ -27,13 +27,13 @@
 
 </head>
 
-<body ng-cloak layout="column" ng-class=" md-margin">
+<body ng-cloak layout="column" >
 
 <!--header-->
-<div class="container-wrapper">
+<div class="container-wrapper description-container ">
     <div class="page-header">
         <div class="fit-screen-wrap">
-            <div class="page-header-wrap animate-fadeIn" layout="row" layout-align="center center">
+            <div class="page-header-wrap " layout="row" layout-align="center center">
                 <img class="logo-img md-padding" src="../content/images/logo/palamar_logo.png"/>
                 <div class="md-padding">
                     <h1 class="featured-area-title"> PALAMAR GROUP</h1>
@@ -49,24 +49,26 @@
 
         </div>
         <div class="overlay"></div>
-        <md-button class=" md-fab  down-btn" aria-label="up" >
+        <md-button scroll-to="mainContent" easing="easeInOutCubic"
+                   duration="1000" class=" md-fab  down-btn" aria-label="down">
             <md-icon class=""
-                     md-svg-src="navigation:ic_expand_more_24px"></md-icon>
+                     md-svg-src="navigation:ic_arrow_downward_24px"></md-icon>
         </md-button>
     </div>
 </div>
 
-<div class="page-container">
+<div class="page-container description-container">
     <div class="fit-screen-wrap">
-        <ng-view flex ng-if="!$root.isAdminZone();"></ng-view>
+        <ng-view id="mainContent" flex ng-if="!$root.isAdminZone();"></ng-view>
     </div>
 </div>
 <!--footer-->
-<div class="page-footer" ng-if="!$root.isAdminZone()" class="md-whiteframe-z4">
+<div class="page-footer " ng-if="!$root.isAdminZone()" class="md-whiteframe-z4">
     <div class="fit-screen-wrap">
-        <md-button class=" md-fab  " aria-label="up" >
-            <md-icon class="social-image"
-                     md-svg-src="navigation:ic_expand_less_24px"></md-icon>
+        <md-button class=" md-fab  up-btn" scroll-to="mainContent" easing="easeInOutCubic"
+                   duration="1800"  aria-label="up">
+            <md-icon class=""
+                     md-svg-src="navigation:ic_arrow_downward_24px"></md-icon>
         </md-button>
         <div class="page-header-wrap md-display-1" flex="none" layout="column" layout-gt-md="row"
              layout-align="center center">
@@ -88,12 +90,15 @@
                 <div class="featured-area-subtitle">
                     <span>вул.Щирецька 36&nbsp;</span> <span>&nbsp; 067 264 62 16 &nbsp;</span><span>&nbsp; 097 246 01 74</span>
                 </div>
+                <!--<div class="widget"><div class="opening-time">-->
+                    <!--<h4 class="footer-widget-title">OPENING TIME</h4><dl><dt>Monday</dt><dd>08:00 - 17:30</dd></dl><dl><dt>Tuesday</dt><dd>08:00 - 17:30</dd></dl><dl><dt>Wednesday</dt><dd>08:00 - 17:30</dd></dl><dl><dt>Thursday</dt><dd>08:00 - 17:30</dd></dl><dl><dt>Friday</dt><dd>08:00 - 17:30</dd></dl><dl><dt>Saturday</dt><dd>12:00 - 17:30</dd></dl><dl><dt>Sunday</dt><dd>CLOSED</dd></dl></div>-->
+                <!--</div>-->
             </div>
 
 
         </div>
     </div>
-    <div class="overlay"></div>
+    <div class="overlay "></div>
 </div>
 </body>
 </html>
