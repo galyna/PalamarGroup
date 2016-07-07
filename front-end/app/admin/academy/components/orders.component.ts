@@ -138,7 +138,6 @@ export class AdminOrdersController {
     }
 
     showEditOrderDialog(ev:MouseEvent, order:IOrder) {
-        // var useFullScreen = (this.$mdMedia('sm') || this.$mdMedia('xs'));
         this.$mdDialog.show({
             controller: EditOrderDialogController,
             controllerAs: '$ctrl',
@@ -150,7 +149,6 @@ export class AdminOrdersController {
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose: true,
-            // fullscreen: useFullScreen
         }).then((order) => this.saveOrder(order));
     }
 
@@ -204,7 +202,7 @@ export class AdminOrdersController {
     }
 
     private showPage(page = 1) {
-        this.orders = this.orderResource.query({page: page},
+        this.orders = this.orderResource.query({page: page, sort: {"answered":1, "date": -1}},
             (res, headers) => {
                 let {total, page, perPage} = this.pagingService.parseHeaders(headers);
                 this.pagingService.update({page: page, perPage: perPage, total: total});
@@ -217,8 +215,5 @@ export let AdminOrdersComponentUrl = '/academy/orders';
 export let AdminOrdersComponentName = 'pgAdminOrders';
 export let AdminOrdersComponentOptions:ng.IComponentOptions = {
     controller: AdminOrdersController,
-    template: template,
-    bindings: {
-        orders: "<"
-    }
+    template: template
 };
