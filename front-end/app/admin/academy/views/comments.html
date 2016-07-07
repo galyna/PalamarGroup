@@ -16,24 +16,28 @@
 
         </div>
 
-        <div class="md-secondary">
+        <div class="md-secondary md-margin">
         <md-checkbox  ng-model="comment.isVisible"
                      ng-click="vm.showComment(comment)">
 
         </md-checkbox>
-        <md-tooltip md-direction="top">
+        <md-tooltip >
             Показати відгук на сайті
         </md-tooltip>
         </div>
-        <div class="md-secondary">
+        <div class="md-secondary md-margin">
         <md-checkbox  ng-model="comment.isModerated"
                      ng-click="vm.moderateComment(comment)">
         </md-checkbox>
-            <md-tooltip md-direction="top">
+            <md-tooltip >
                 Відгук пройшов модрацію
             </md-tooltip>
         </div>
-        <md-button class=" md-secondary" ng-click="vm.deleteComment(comment)">Видалити</md-button>
+        <md-icon ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="vm.showDeleteDialog($event, comment)" class="md-secondary"
+                 md-svg-icon="action:ic_delete_24px">
+            <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Видалити</md-tooltip>
+        </md-icon>
+
         <md-divider></md-divider>
     </md-list-item>
 </md-list>

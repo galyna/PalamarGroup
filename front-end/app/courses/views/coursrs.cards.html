@@ -63,7 +63,7 @@
                         <div class="card-desc " flex="50" flex layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
-                                    <div class="md-display-3">{{::course.name}}</div>
+                                    <div class="md-display-1">{{::course.name}}</div>
                                     <div class="descr-container">
                                         <div class="md-title">{{::course.description}}</div>
 
@@ -84,6 +84,7 @@
             </div>
 
             <div hide-gt-sm="true" layout="row" layout-align="center center">
+                <div class="overlay-bg"></div>
                 <md-card md-whiteframe="8" >
                     <md-card-content layout="column">
                         <div class="card-media "><img src="{{course.hearFormsPhotos[0].url}}" class="md-card-image" /></div>

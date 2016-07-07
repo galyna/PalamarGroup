@@ -1,7 +1,7 @@
 import {IOrderResource, IOrder, OrderResourceName} from "../../../resources/order.resource";
 import {PagingServiceName, PagingService} from "../../../ui/admin.paging";
 let template = `
-<md-toolbar md-scroll-shrink ng-if="true">
+<md-toolbar  ng-if="true">
     <div class="md-toolbar-tools">
       <pg-admin-paging
     params="$ctrl.paging"
@@ -10,6 +10,7 @@ let template = `
     ></pg-admin-paging>
     </div>
   </md-toolbar>
+
 <md-list flex>
     <md-subheader class="md-no-sticky">Записи на курс</md-subheader>
     <md-list-item class="md-2-line" ng-repeat="order in $ctrl.orders" ng-click="$ctrl.showEditOrderDialog($event, order)">
@@ -17,12 +18,32 @@ let template = `
             <h3>{{::order.name||'Анонім'}} {{::order.phone||order.email}}</h3>
             <p>{{::$ctrl.getOrderTitle(order)}}</p>
         </div>
-        <md-checkbox class="md-secondary" ng-model="order.answered" ng-click="$ctrl.saveOrder(order)"></md-checkbox>
-        <md-icon class="md-secondary" ng-click="$ctrl.showEditOrderDialog($event, order)" md-svg-icon="communication:ic_message_24px"></md-icon>
-        <!--<md-icon class="md-secondary" md-svg-icon="action:ic_delete_24px"></md-icon>-->
+        <div class="md-secondary md-margin">
+        <md-checkbox  ng-model="order.answered" ng-click="$ctrl.saveOrder(order)"></md-checkbox>
+        <md-tooltip >
+         Замовнику передзвонили
+        </md-tooltip>
+         </div>
+  
+        <div class="md-secondary md-margin">
+         <md-checkbox ng-model="order.booked" ng-click="$ctrl.saveOrder(order)"></md-checkbox>  
+          <md-tooltip md-direction="top">
+        Участь у заході підтверджено
+        </md-tooltip>
+        </div>
+                
+        <md-icon class="md-secondary "  ng-click="$ctrl.showEditOrderDialog($event, order)" md-svg-icon="communication:ic_message_24px"> 
+         <md-tooltip > Деталі</md-tooltip></md-icon>
+          
+         <md-icon class="md-secondary " ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="$ctrl.showDeleteDialog($event, order)" 
+                     md-svg-icon="action:ic_delete_24px">
+                <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Видалити</md-tooltip>  
+            </md-icon>
+
         <md-divider></md-divider>
     </md-list-item>
 </md-list>
+
 `;
 
 let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
@@ -54,12 +75,12 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                         {{$ctrl.order.comment}}
                     </p>
                 </md-subheader>
-                <div flex="2">
-                    <md-checkbox ng-model="$ctrl.order.answered">Оброблено</md-checkbox>
-                    <md-checkbox ng-model="$ctrl.order.booked">Booked</md-checkbox>
+                <div flex="2" layout="column" class="md-margin">
+                    <md-checkbox ng-model="$ctrl.order.answered">Замовнику передзвонили</md-checkbox>                     
+                    <md-checkbox ng-model="$ctrl.order.booked">Участь у заході підтверджено</md-checkbox>                    
                     <md-input-container>
-                        <label>Admin comment</label>
-                        <textarea ng-model="$ctrl.order.adminComment"></textarea>
+                        <label>Коментар адміністратора</label>
+                        <textarea ng-model="$ctrl.order.admin_comment"></textarea>
                     </md-input-container>
                 </div>
             </div>
@@ -67,10 +88,10 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
         <md-dialog-actions layout="row">
             <span flex></span>
             <md-button ng-click="$ctrl.cancel()" aria-label="cancel">
-                Cancel
+                Відмінити
             </md-button>
             <md-button type="submit" aria-label="save">
-                Save
+                Зберегти
             </md-button>
         </md-dialog-actions>
     </form>
@@ -107,7 +128,7 @@ export class AdminOrdersController {
     paging:any;
 
     constructor(private $filter:ng.IFilterService, private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService,
-                private $mdMedia:ng.material.IMedia, private orderResource:IOrderResource, 
+                private $mdMedia:ng.material.IMedia, private orderResource:IOrderResource,
                 private pagingService: PagingService) {
 
     }
@@ -134,15 +155,41 @@ export class AdminOrdersController {
     }
 
     saveOrder(order:IOrder) {
+
         order.$save().then(() => {
-            this.$mdToast.showSimple(`Order saved`);
+            this.$mdToast.showSimple(`Запис збережено`);
         }).catch((err) => {
             this.$mdToast.showSimple(err.message);
         });
     }
 
+    showDeleteDialog(ev, order:IOrder) {
+        let confirm = this.$mdDialog.confirm()
+            .title("Підтвердження дії")
+            .textContent(`Ви дійсно бажаєте видалити Запис ${order.name}?`)
+            .ariaLabel("Підтвердження дії")
+            .targetEvent(ev)
+            .ok('Так')
+            .cancel('Ні');
+
+        return this.$mdDialog.show(confirm)
+            .then(() => {
+                return this.deleteOrder(order);
+            });
+    }
+    deleteOrder(order:IOrder) {
+
+        order.$delete().then(() => {
+            this.$mdToast.showSimple(`Замовлення видалено`);
+        }).catch((err) => {
+            this.$mdToast.showSimple(err.message);
+        }).finally(()=> {
+            this.showPage(this.pagingService.currentPage());
+        });;
+    }
+
     getOrderTitle(order:IOrder) {
-        let format = "yy.M.d";
+        let format = "dd.MM.yyyy";
         let firstDate = this.$filter('date')(order.event_dates[0], format);
         let lastDate = this.$filter('date')(order.event_dates[order.event_dates.length - 1], format);
         return order.event_name + " " + firstDate + "-" + lastDate;

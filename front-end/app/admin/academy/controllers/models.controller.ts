@@ -9,7 +9,8 @@ interface IEditIModelModel extends IModel {
 
 export class AcademyModelController {
 
-    static $inject = [ModelResourceName, '$log', 'Upload', '$timeout', '$location', 'constants', "$mdToast"];
+    static $inject = [ModelResourceName, '$log', 'Upload', '$timeout', '$location', 'constants',
+        "$mdToast", '$mdDialog'];
     static componentName = 'AcademyModelController';
 
     models:IModel[];
@@ -22,7 +23,8 @@ export class AcademyModelController {
 
     constructor(private ModelResource: IModelResource, private $log:ng.ILogService,
                 private Upload:ng.angularFileUpload.IUploadService, private $timeout:ng.ITimeoutService,
-                private $location:ng.ILocationService, private constants:IConstants,private $mdToast:ng.material.IToastService) {
+                private $location:ng.ILocationService, private constants:IConstants,
+                private $mdToast:ng.material.IToastService, private $mdDialog:ng.material.IDialogService) {
 
         this.models = ModelResource.query();
 
@@ -68,9 +70,11 @@ export class AcademyModelController {
                 .then(()=> {
                     this.models.splice(this.editModelModel.oldIndex, 1, this.editModelModel);
                     this.editModelModel = <IEditIModelModel>{};
+                    this.$mdToast.showSimple( `модель збережено` );
                 })
                 .catch((err)=> {
                     this.$log.debug("fail editCourse..." + err);
+                    this.$mdToast.showSimple( `помилка при збереженні моделі` );
                 })
                 .finally(()=> {
                     this.showModelEditForm = false;
@@ -113,11 +117,25 @@ export class AcademyModelController {
             data: {file: file}
         });
     }
-    
 
+    showDeleteDialog(ev, model:IModel) {
+        let confirm = this.$mdDialog.confirm()
+            .title("Підтвердження дії")
+            .textContent(`Ви дійсно бажаєте видалити модель ${model.name?model.name:""}?`)
+            .ariaLabel("Підтвердження дії")
+            .targetEvent(ev)
+            .ok('Так')
+            .cancel('Ні');
+
+        return this.$mdDialog.show(confirm)
+            .then(() => {
+                return this.deleteModel(model);
+            });
+    }
     deleteModel(model:IModel):void {
         model.$delete().then(()=> {
             this.models.splice(this.models.indexOf(model), 1);
+            this.$mdToast.showSimple( `модель видалено` );
         });
     }
 

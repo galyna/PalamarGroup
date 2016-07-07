@@ -4,7 +4,7 @@
 
   .overlay-bg {
     @extend .overlay;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/slider/s5.png") no-repeat center center fixed;
+    background: linear-gradient(rgba(white, 0.6), rgba(white, 0.6)), url("../images/bg/slider/s5.png") no-repeat center center fixed;
   }
 
   md-card.md-default-theme, md-card {

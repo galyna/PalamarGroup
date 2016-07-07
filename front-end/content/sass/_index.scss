@@ -131,8 +131,12 @@
 .page-footer {
 
   .overlay {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../images/bg/IMG_6790_1.jpg") no-repeat center center fixed;
-
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../images/bg/IMG_6844.jpg") no-repeat center center fixed;
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px);
   }
 
 }

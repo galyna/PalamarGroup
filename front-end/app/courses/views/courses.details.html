@@ -99,7 +99,7 @@
     </div>
 
 
-    <div layout="row" flex ng-if="vm.course.days.length>0">
+    <div layout="row" flex ng-if="vm.course.days">
         <div class="page-delimiter content-block" flex>
             <div class="fit-screen-wrap" layout="column">
                 <div flex="none" layout="row" class="md-padding program-block  " layout-align=" center center">
@@ -111,10 +111,10 @@
                     </div>
                 </div>
             </div>
-            <div class="overlay-history"></div>
+            <div class="overlay-days"></div>
         </div>
     </div>
-    <div layout="row" flex ng-if="vm.course.historyPhotos.length>0">
+    <div layout="row" flex ng-if="vm.course.hearFormsPhotos">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
                 <div class="md-display-2"> Mатеріали блоку</div>
@@ -122,7 +122,7 @@
 
         </div>
     </div>
-    <div layout="row"  layout-align="center center" ng-if="vm.course.hearFormsPhotos.length>0">
+    <div layout="row"  layout-align="center center" ng-if="vm.course.hearFormsPhotos">
         <div class=" gridListCourses" flex flex-gt-md="60" flex-md="90">
             <md-grid-list
                     md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="3"
@@ -162,7 +162,7 @@
         </div>
     </div>
     <!--historyPhotos-->
-    <div layout="row" flex ng-if="vm.course.historyPhotos.length>0">
+    <div layout="row" flex ng-if="vm.course.historyPhotos">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
                 <div class="md-display-1">Як проходили попередні блоки</div>
@@ -170,7 +170,7 @@
 
         </div>
     </div>
-    <div layout="row" class="content-block" layout-align="center center" ng-if="vm.course.historyPhotos.length>0">
+    <div layout="row" class="content-block" layout-align="center center" ng-if="vm.course.historyPhotos">
         <div class=" gridListCourses" flex flex-gt-md="60" flex-md="90">
             <md-grid-list md-cols="1" md-cols-sm="1" md-cols-md="2" md-cols-gt-md="2"
                           md-row-height-gt-md="5:3" md-row-height="5:3"
@@ -190,6 +190,7 @@
 
 
         </div>
+
     </div>
     <!--Comments-->
     <div layout="row" flex ng-if="vm.showComments()">

@@ -8,13 +8,14 @@ interface IConfirmMsg {
     isVisible:string;
     isNotVisible:string;
     isAnswered:string;
-    isNotAnswered:string
+    isNotAnswered:string;
+    isDeleted:string
 }
 
 
 export class AcademyCommentController {
 
-    static $inject = [CourseResourceName, '$log', '$mdToast','$location'];
+    static $inject = [CourseResourceName, '$log', '$mdToast','$location','$mdDialog'];
     static componentName = 'AcademyCommentController';
 
     comments:any;
@@ -22,20 +23,36 @@ export class AcademyCommentController {
     confirmMsg:IConfirmMsg;
 
     constructor(private CourseResource:ICourseResource, private $log:ng.ILogService,
-                private $mdToast:ng.material.IToastService,private $location:ng.ILocationService) {
+                private $mdToast:ng.material.IToastService,private $location:ng.ILocationService,
+                private $mdDialog:ng.material.IDialogService) {
         this.comments = this.CourseResource.getComments();
 
         this.setConfirmMsg();
     }
 
     showCourse(id:string):void {
-        this.$location.url( '/course/'+id );
+        this.$location.url( '/academy/course/'+id );
     }
 
+    showDeleteDialog(ev, comment:any) {
+        let confirm = this.$mdDialog.confirm()
+            .title("Підтвердження дії")
+            .textContent(`Ви дійсно бажаєте видалити dsluer ${comment.text?comment.text:""}?`)
+            .ariaLabel("Підтвердження дії")
+            .targetEvent(ev)
+            .ok('Так')
+            .cancel('Ні');
+
+        return this.$mdDialog.show(confirm)
+            .then(() => {
+                return this.deleteComment(comment);
+            });
+    }
     deleteComment(comment:any):void {
 
         this.CourseResource.deleteComment( {id: comment.courseId, commentId: comment._id} ).$promise.then( () => {
                 this.comments.splice( this.comments.indexOf( comment ), 1 );
+            this.$mdToast.showSimple( this.confirmMsg.isDeleted);
             } )
             .catch( (err) => {
                     this.$log.error( err );
@@ -94,6 +111,7 @@ export class AcademyCommentController {
 
     private setConfirmMsg():void {
         this.confirmMsg = {
+            isDeleted: 'Відгук видалено',
             isVisible: 'Дозволено показати відгук на сайті',
             isNotVisible: 'Заборонено показувати відгук на сайті',
             isAnswered: 'Відгук перевірено',

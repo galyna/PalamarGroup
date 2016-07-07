@@ -69,13 +69,13 @@ export class LeftSidenavComponentController {
                             return true;
                         }
                     },
-                    {
-                        text: 'Контакти',
-                        url: '/academy/contacts',
-                        visible: ()=>{
-                            return true;
-                        }
-                    },
+                    // {
+                    //     text: 'Контакти',
+                    //     url: '/academy/contacts',
+                    //     visible: ()=>{
+                    //         return true;
+                    //     }
+                    // },
                     {
                         text: 'Відгуки',
                         url: '/academy/comments',

@@ -118,7 +118,7 @@
 
     }
     .header-super {
-      height: 200px;
+      height: 350px;
 
     }
     .header-long {
@@ -134,23 +134,41 @@
       z-index: 1;
 
     }
-    .overlay-history {
+    .overlay-bg {
       @extend .overlay;
+      background: linear-gradient(rgba(white, 0.4), rgba(white, 0.4)), url("../images/bg/slider/s5.png") no-repeat center center fixed;
+    }
 
-      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/slider/s9.png") no-repeat center center fixed;
+    .overlay-days {
+      @extend .overlay;
+      -webkit-filter: blur(1px);
+      -moz-filter: blur(1px);
+      -o-filter: blur(1px);
+      -ms-filter: blur(1px);
+      filter: blur(1px);
+      background: linear-gradient(rgba(black, 0.4), rgba(black, 0.4)), url("../images/bg/IMG_7095.jpg") no-repeat center center fixed;
     }
     .overlay-comments {
       @extend .overlay;
-      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/slider/s10.png") no-repeat center center fixed;
+      -webkit-filter: blur(1px);
+      -moz-filter: blur(1px);
+      -o-filter: blur(1px);
+      -ms-filter: blur(1px);
+      filter: blur(1px);
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/IMG_6790_1.jpg") no-repeat center center fixed;
     }
     .overlay-description {
       @extend .overlay;
-
-      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/slider/s10.png") no-repeat center center fixed;
+      -webkit-filter: blur(1px);
+      -moz-filter: blur(1px);
+      -o-filter: blur(1px);
+      -ms-filter: blur(1px);
+      filter: blur(1px);
+      background: linear-gradient(rgba(black, 0.4), rgba(black, 0.4)), url("../images/bg/IMG_6914.jpg") no-repeat center center fixed;
     }
     .overlay-forms {
       @extend .overlay;
-      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/slider/s12.png") no-repeat center center fixed;
+      background: linear-gradient(rgba(white, 0.6), rgba(white, 0.6)), url("../images/bg/slider/s12.png") no-repeat center center fixed;
     }
   }
 
