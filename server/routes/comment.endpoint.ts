@@ -8,23 +8,12 @@ let getCommentsApi = Router();
 
 getCommentsApi.route( '/' )
     //course comments list
-    .get( async(req, res) => {
+    .get( async(req, res, next) => {
         try {
-            // let comments = await Course.find( {comments: {$exists: true, $not: {$size: 0}}}, {
-            //     comments: 1,
-            //     _id: 1,
-            //     name: 1
-            // } )
-
-            Course.aggregate( [
-
-                {
-                    $match: {comments: {$not: {$size: 0}}}
-
-                }, {   // SELECT
-                    $unwind: "$comments",
-                }, {
-                    $project: {
+            let comments = await Course.aggregate([
+                {$match: {comments: {$not: {$size: 0}}}},
+                {$unwind: "$comments"},
+                {$project: {
                         _id: "$comments._id",
                         name: "$comments.name",
                         isModerated: "$comments.isModerated",
@@ -35,18 +24,16 @@ getCommentsApi.route( '/' )
                         courseId: '$_id',
                         courseDates:"$courseModulesDates",
                         courseName: '$name'
-                    }
-                }], (err, courses) => {
-                if (!courses) {
-                    res.status( 404 ).send( {error: {message: "User not found"}} );
-                }
-                res.json( courses )
-            } );
-
+                    }}
+            ]).exec();
+            if (!comments) {
+                res.status(404).end();
+            }
+            res.json(comments);
         } catch (err) {
-            res.status( 500 ).json( err );
+            next(err);
         }
-    } )
+    });
 
 
 export let courseGetCommentsApi = getCommentsApi;

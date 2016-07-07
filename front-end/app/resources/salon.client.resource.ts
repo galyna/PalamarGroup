@@ -13,7 +13,7 @@ SalonClientResource.$inject = ['$resource', 'constants'];
 export function SalonClientResource($resource: ng.resource.IResourceService, constants: IConstants){
     let getGroupsDescriptor: IActionDescriptor = {
         method: "GET",
-        params: {distinct : "group"},
+        url: `${constants.apiUrl}/salonclient/groups`,
         isArray: true
     };
 

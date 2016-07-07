@@ -102,6 +102,13 @@ declare module pg {
             isVisible:boolean;
             isModerated:boolean;
         }
+
+        export interface IAdminComment extends IComment{
+            isCourseVisible: boolean,
+            courseId: string,
+            courseDates:string[],
+            courseName: string
+        }
     }
     
     type UserRole = 
