@@ -2,21 +2,16 @@
     <div layout="column" layout-align="center center">
         <div class="course-bg" layout-align="center center" flex
              ng-repeat="course in vm.courses track by $index" ng-if="::course.isVisible">
-            <div hide show-gt-sm="true" layout="row" layout-align="center center">
+            <div hide show-gt-xs="true" layout="row" layout-align="center center">
                 <md-card ng-if="$first && !$odd" flex-gt-md="60" flex-gt-lg="40" flex-sm="70"  md-whiteframe="5"
                          class="md-margin">
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-desc " flex="50" flex layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
-                                    <div class="md-display-3">{{::course.name}}</div>
-                                    <!--<div class=" program-block " layout="row">-->
-                                        <!--<div class="date-block "-->
-                                             <!--ng-repeat="day in ::course.courseModulesDates track by $index">-->
-                                            <!--<span class="date-text ">{{ day| date:'dd.MM'}}</span>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                    <div class="descr-container">
+                                    <div class="md-display-2">{{::course.name}}</div>
+
+                                    <div hide-sm="true" class="descr-container">
                                         <div class="md-title">{{::course.description}}</div>
 
                                     </div>
@@ -40,9 +35,9 @@
                         <div class="card-desc " flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
-                                    <div class="md-display-3">{{::course.name}}</div>
+                                    <div class="md-display-2">{{::course.name}}</div>
 
-                                    <div class="descr-container">
+                                    <div hide-sm="true" class="descr-container">
                                         <div class="md-title">{{::course.description}}</div>
                                     </div>
                                 </md-card-title-text>
@@ -63,8 +58,8 @@
                         <div class="card-desc " flex="50" flex layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
-                                    <div class="md-display-1">{{::course.name}}</div>
-                                    <div class="descr-container">
+                                    <div class="md-display-2">{{::course.name}}</div>
+                                    <div hide-sm="true" class="descr-container">
                                         <div class="md-title">{{::course.description}}</div>
 
                                     </div>
@@ -83,7 +78,7 @@
                 <div class="overlay-bg"></div>
             </div>
 
-            <div hide-gt-sm="true" layout="row" layout-align="center center">
+            <div hide-gt-xs="true" layout="row" layout-align="center center">
                 <div class="overlay-bg"></div>
                 <md-card md-whiteframe="8" >
                     <md-card-content layout="column">

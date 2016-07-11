@@ -11,7 +11,6 @@
     min-height: 500px;
     z-index: 3;
     padding: 0;
-    min-width: 60vw;
     margin: 20px;
     transition: transform 0.4s;
 
@@ -21,23 +20,28 @@
 
     }
 
-    @media (max-width: $layout-breakpoint-xs) {
+    @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm) {
+
+      min-height: 300px;
+      min-width: 600px;
       margin-left: 0px;
       margin-right: 0px;
-
     }
 
+    @media (max-width: 500px) {
+      margin-left: 0px;
+      margin-right: 0px;
+      height: 300px;
+      min-width: 300px;
+
+    }
     .card-desc {
       background: white;
       min-width: 300px;
       z-index: 2;
-      @media (max-width: $layout-breakpoint-xs) {
-        mix-height: 500px;
-
-      }
-
+      vertical-align: middle;
+      text-align: center;
     }
-
 
     .card-media {
       position: relative;
@@ -46,17 +50,33 @@
       overflow: hidden;
       padding: 0;
 
+      @media (max-width: $layout-breakpoint-sm) {
+        height: 300px;
+        width: 300px;
+        img {
+          height: 300px;
+        }
+      }
 
+      @media (max-width: 500px) {
+        height: 300px;
+        img {
+          height: 300px;
+          width: 300px
+        }
+      }
     }
+
     .descr-container {
       max-height: 116px;
       width: 70%;
       text-align: center;
       overflow: hidden;
       text-overflow: ellipsis;
-
+      .md-display-1 {
+        font-weight: bold
+      }
     }
-
 
     .md-raised {
 
@@ -64,7 +84,7 @@
 
       @media (max-width: $layout-breakpoint-xs) {
         margin-bottom: 22px;
-       width: 90%;
+        width: 90%;
 
       }
       @media (max-width: $layout-breakpoint-sm) {
@@ -72,7 +92,6 @@
       }
     }
   }
-
 
 }
 

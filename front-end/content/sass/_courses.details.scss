@@ -43,8 +43,20 @@
     min-height: 500px;
     z-index: 3;
     padding: 0;
-    min-width: 60vw;
     margin: 20px;
+
+    vertical-align: middle;
+
+    @media ( $layout-breakpoint-xs) {
+      margin: 0px;
+      width: 300px;
+
+    }
+    @media ( $layout-breakpoint-sm) {
+      margin: 0px;
+      min-width: 90vw;
+
+    }
 
     .card-desc-top {
       background: rgba($primary, 0.8);
@@ -55,7 +67,12 @@
       min-width: 200px;
       width: 100%;
       z-index: 2;
+      vertical-align: middle;
+      @media (max-width: $layout-breakpoint-xs) {
+        margin: 0px;
+        width: 300px;
 
+      }
     }
 
     .card-media {
@@ -67,11 +84,18 @@
         color: white;
         background-color: rgba(0, 0, 0, 0.6);
       }
-
+      @media (max-width: $layout-breakpoint-xs) {
+        height: 300px;
+        width: 300px;
+        img {
+          height: 300px;
+          width: 300px
+        }
+      }
     }
 
     .md-raised {
-      margin:16px;
+      margin:16px 0 16px 0 ;
       width: 100%;
     }
   }
