@@ -1,10 +1,11 @@
-import {Response} from "express";
 import * as express from 'express';
 import * as restify from 'express-restify-mongoose';
 import {currentUser} from '../auth/current_user';
 import photoEndpoint from './photo.endpoint';
 import {auth} from "../auth/auth";
 import passport = require("passport");
+import {config} from "../config";
+import {paging} from "../services/paging.service";
 
 //models
 import {Contact} from '../models/contact';
@@ -23,12 +24,13 @@ import {userOptions, userApi} from "./user.endpoint";
 import IOrder = pg.models.IOrder;
 import {salonClientApi} from "./salon.client.endpoint";
 
+
 let api = express.Router();
 
 let restifyDefaults = {
     prefix: '',
     version: '',
-    limit: 20, //max and default query limit
+    limit: config.defaultQueryLimit, //max and default query limit
     findOneAndUpdate: false,
     findOneAndRemove: false,
     //distinct queries can't be used with totalCountHeader enabled
@@ -39,20 +41,7 @@ let restifyDefaults = {
             message: err.message
         });
     },
-
-    postRead: (req, res: Response, next) => {
-        if(req.erm.totalCount){
-            //TODO: remove hardcode
-            let perPage = req.query.perPage || 20;
-            let page = req.query.page || 1;
-            res.set({
-                'X-Total-Count': req.erm.totalCount,
-                'X-Per-Page': perPage,
-                'X-Page': page
-            });
-        }
-        next();
-    }
+    postRead: paging.postRead
 };
 
 restify.defaults(restifyDefaults);
@@ -64,15 +53,8 @@ let readOnlyOptions = {
     preDelete: [auth, currentUser.is('admin')]
 };
 
-//expr-mongoose-restify understands only skip/limit
-api.use((req, res, next) => {
-    //TODO: remove hardcode
-    req.query.limit = (req.query.perPage || 20) + '';
-    if(req.query.page){
-        req.query.skip = (req.query.limit * (req.query.page - 1)) + "";
-    }
-    next();
-});
+
+api.use(paging.preRead);
 
 restify.serve(api, Contact, Object.assign({}, readOnlyOptions));
 

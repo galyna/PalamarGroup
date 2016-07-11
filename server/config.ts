@@ -6,6 +6,7 @@ export let config = {
     appSecret: 'secretKey',
     uploadDir: path.join(__dirname, 'uploads'),
     uploadsUrl: 'api/photo',
+    defaultQueryLimit: 20,
     ePochta: {
         gatewayOptions: {
             publicKey: "68718f1c032ac94bfea8f305bd1849a1",

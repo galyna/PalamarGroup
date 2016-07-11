@@ -11,7 +11,7 @@ export interface ICourseResource extends ng.resource.IResourceClass<ICourse> {
     addComment(params: {id:string}, comment:any):ICourse;
     editComment(params: {id:string}, comment:any):ICourse;
     deleteComment(params: {id: string, commentId: string}):ICourse;
-    getComments():[any];
+    getComments:ng.resource.IResourceArrayMethod<pg.models.IAdminComment>;
 }
 
 export let CourseResourceName = 'CourseResource';

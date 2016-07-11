@@ -1,8 +1,9 @@
 /**
  * Created by Galyna on 14.05.2016.
  */
-import {ICourse, ICourseResource, CourseResourceName} from "../../../resources/course.resource";
+import {ICourseResource, CourseResourceName} from "../../../resources/course.resource";
 import IComment = pg.models.IComment;
+import {PagingService, PagingServiceName, IPagingHelperParams} from "../../../ui/admin.paging";
 
 interface IConfirmMsg {
     isVisible:string;
@@ -15,17 +16,17 @@ interface IConfirmMsg {
 
 export class AcademyCommentController {
 
-    static $inject = [CourseResourceName, '$log', '$mdToast','$location','$mdDialog'];
+    static $inject = [CourseResourceName, '$log', '$mdToast','$location','$mdDialog', PagingServiceName];
     static componentName = 'AcademyCommentController';
 
     comments:any;
-
+    paging: IPagingHelperParams;
     confirmMsg:IConfirmMsg;
 
     constructor(private CourseResource:ICourseResource, private $log:ng.ILogService,
                 private $mdToast:ng.material.IToastService,private $location:ng.ILocationService,
-                private $mdDialog:ng.material.IDialogService) {
-        this.comments = this.CourseResource.getComments();
+                private $mdDialog:ng.material.IDialogService, private pagingService:PagingService) {
+        this.showPage();
 
         this.setConfirmMsg();
     }
@@ -107,6 +108,23 @@ export class AcademyCommentController {
                 }
             )
 
+    }
+
+    prev() {
+        this.showPage(this.pagingService.prevPage());
+    }
+
+    next() {
+        this.showPage(this.pagingService.nextPage());
+    }
+
+    private showPage(page = 1) {
+        this.comments = this.CourseResource.getComments({page: page, sort: {"isModerated":-1}},
+            (res, headers) => {
+                let {total, page, perPage} = this.pagingService.parseHeaders(headers);
+                this.pagingService.update({page: page, perPage: perPage, total: total});
+                this.paging = angular.copy(this.pagingService.params());
+            });
     }
 
     private setConfirmMsg():void {
