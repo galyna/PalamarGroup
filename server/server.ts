@@ -61,6 +61,8 @@ app.use((err: any, req, res, next) => {
     if (err.name === 'UnauthorizedError') {
         res.status(401);
         res.json({"message" : err.name + ": " + err.message});
+    }else{
+        next(err);
     }
 });
 
@@ -69,7 +71,7 @@ app.use((err: any, req, res, next) => {
 if (process.env.TYPE !== 'prod') {
     app.use((err:any, req, res, next) => {
         res.status(err.status || 500);
-        res.json('error', {
+        res.json({
             message: err.message,
             error: err
         });
@@ -80,7 +82,7 @@ if (process.env.TYPE !== 'prod') {
 // no stacktraces leaked to user
 app.use((err:any, req, res, next) => {
     res.status(err.status || 500);
-    res.json('error', {
+    res.json({
         message: err.message,
         error: {}
     });
