@@ -74,7 +74,7 @@ export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
         .when('/academy/comments', {
             templateUrl: 'app/admin/academy/views/comments.html',
             controller: AcademyCommentController.componentName,
-            controllerAs: "vm",
+            controllerAs: "$ctrl",
             resolve: {
                 auth: [ItServiceName, (it: ItService) => it.canAsync('readAcademy')]
             }

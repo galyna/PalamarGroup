@@ -1,39 +1,34 @@
-<md-list flex>
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <pg-admin-paging
+                params="$ctrl.paging"
+                on-prev="$ctrl.prev()"
+                on-next="$ctrl.next()"
+        ></pg-admin-paging>
+    </div>
+</md-toolbar>
+<md-list flex class="comments-list">
     <md-subheader class="md-no-sticky">Відгуки</md-subheader>
-    <md-list-item class="md-3-line" ng-repeat="comment in vm.comments" layout layout-wrap layout-align="center ">
-        <div class="md-list-item-text" layout="row">
-            <div class="md-list-item-text" layout="column">
-                <h3>Автор відгуку: {{::comment.name||'Анонім'}}</h3>
-                <h3>Дата відгуку: {{::comment.date| date:'dd.MM.yyyy'}}</h3>
-                <h3>Текст: {{comment.text}}</h3>
-            </div>
-            <div class="md-list-item-text" layout="column">
-                <h3>Назва курсу: {{::comment.courseName}}</h3>
-                <p >Дати курсу: <span  class="md-subhead" ng-repeat="date in ::comment.courseDates track by $index">{{ date| date:'dd.MM.yyyy'}} </span>
-                </p>
-                <md-button class=" md-primary" ng-click="vm.showCourse(comment.courseId)">Відкрити курс</md-button>
-            </div>
-
+    <md-list-item class="md-3-line md-long-text" ng-class="{new:!comment.isModerated}"
+                  ng-repeat="comment in $ctrl.comments" ng-click="$ctrl.moderateComment(comment)">
+        <div class="md-list-item-text">
+            <h3>{{::comment.name||'Анонім'}} {{::comment.date| date:'dd.MM.yyyy'}}</h3>
+            <p>{{comment.text}}</p>
         </div>
 
-        <div class="md-secondary md-margin">
-        <md-checkbox  ng-model="comment.isVisible"
-                     ng-click="vm.showComment(comment)">
-
-        </md-checkbox>
-        <md-tooltip >
-            Показати відгук на сайті
-        </md-tooltip>
-        </div>
-        <div class="md-secondary md-margin">
-        <md-checkbox  ng-model="comment.isModerated"
-                     ng-click="vm.moderateComment(comment)">
-        </md-checkbox>
-            <md-tooltip >
-                Відгук пройшов модрацію
+        <md-checkbox ng-model="comment.isVisible"
+                     ng-click="$ctrl.showComment(comment)">
+            <md-tooltip>
+                Показати відгук на сайті
             </md-tooltip>
-        </div>
-        <md-icon ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="vm.showDeleteDialog($event, comment)" class="md-secondary"
+        </md-checkbox>
+        <md-icon ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="$ctrl.showEditDialog($event, comment)"
+                 class="md-secondary"
+                 md-svg-icon="content:ic_create_24px">
+            <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Редагувати</md-tooltip>
+        </md-icon>
+        <md-icon ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="$ctrl.showDeleteDialog($event, comment)"
+                 class="md-secondary"
                  md-svg-icon="action:ic_delete_24px">
             <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Видалити</md-tooltip>
         </md-icon>

@@ -87,27 +87,23 @@ export class AcademyCommentController {
     }
 
     //noinspection JSMethodCanBeStatic
-    moderateComment(comment:any):void {
+    moderateComment(comment:pg.models.IAdminComment) {
+        if(comment.isModerated) return;
+        comment.isModerated = true;
         let newComment={
             _id:comment._id,
             name: comment.name,
             text: comment.text,
             date:comment.date,
             isVisible: comment.isVisible,
-            isModerated:! comment.isModerated,
-        }
-        this.CourseResource.editComment( {id: comment.courseId}, newComment ).$promise.then( () => {
-                if (comment.isModerated) {
-                    this.$mdToast.showSimple( this.confirmMsg.isAnswered );
-                } else {
-                    this.$mdToast.showSimple( this.confirmMsg.isNotAnswered );
-                }
-            } )
-            .catch( (err) => {
-                    this.$mdToast.showSimple( err.message );
-                }
-            )
-
+            isModerated:comment.isModerated,
+        };
+        this.CourseResource.editComment( {id: comment.courseId}, newComment ).$promise.then(() => {
+            this.$mdToast.showSimple( this.confirmMsg.isAnswered );
+        })
+        .catch( (err) => {
+            this.$mdToast.showSimple( err.message );
+        });
     }
 
     prev() {
@@ -119,7 +115,7 @@ export class AcademyCommentController {
     }
 
     private showPage(page = 1) {
-        this.comments = this.CourseResource.getComments({page: page, sort: {"isModerated":-1}},
+        this.comments = this.CourseResource.getComments({page: page, sort: {"date":1}},
             (res, headers) => {
                 let {total, page, perPage} = this.pagingService.parseHeaders(headers);
                 this.pagingService.update({page: page, perPage: perPage, total: total});

@@ -11,3 +11,15 @@
   width:560px;
   height:550px;
 }
+
+.comments-list{
+  md-list-item{
+    margin: 0 !important;
+    &.new{
+      background: lightgray;
+      h3, p{
+        font-weight: bold !important;
+      }
+    }
+  }
+}

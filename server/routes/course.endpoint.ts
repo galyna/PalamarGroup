@@ -22,24 +22,23 @@ api.route('/comment')
         }
 
     })
-    //create comment in course
-    .put(async(req: any, res) => {
+    .put(async(req: any, res, next) => {
         let course, comment;
         try {
             course = await Course.findOne({"_id": req.courseId});
         } catch (err) {
-            res.status(500).json(err);
+            return next(err);
         }
 
         try {
-            comment =  course.comments.id(req.body._id);
-            course.comments.splice(course.comments.indexOf(comment),1,req.body);
+            comment = course.comments.id(req.body._id);
+            Object.assign(comment, req.body);
+            // course.comments.splice(course.comments.indexOf(comment),1,req.body);
             await course.save();
-            res.json({course: course});
+            res.end();
         } catch (err) {
-            res.status(500).json(err);
+            next(err);
         }
-
     });
 
 api.route('/comment/:commentId')
