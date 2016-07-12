@@ -20,7 +20,6 @@ import {adminRoutes} from './admin.routes';
 import {AcademyOrdersController} from './academy/controllers/orders.controller';
 import {AcademyModelController} from './academy/controllers/models.controller';
 import {AcademyDeliveryController} from './academy/controllers/delivery.controller';
-import {AcademyCommentController} from './academy/controllers/comments.controller';
 import {AcademyContactsController} from './academy/controllers/contacts.controller';
 import {AdminController} from './controllers/admin.controller';
 import {DeliveryService} from "./academy/services/delivery.service";
@@ -40,6 +39,7 @@ import {adminRun} from "./admin.run";
 import {usersModule} from "../users/users.module";
 import {usersComponentName, usersComponentOptions} from "./components/users.component";
 import {userComponentName, userComponentOptions} from "./components/user.component";
+import {CommentsComponentName, CommentsComponentOptions} from "./academy/components/comments.component";
 
 
 let app = angular.module('admin', [
@@ -60,7 +60,6 @@ let app = angular.module('admin', [
     .controller(AcademyOrdersController.componentName, AcademyOrdersController)
     .controller(AcademyModelController.componentName, AcademyModelController)
     .controller(AcademyDeliveryController.componentName, AcademyDeliveryController)
-    .controller(AcademyCommentController.componentName, AcademyCommentController)
     .controller(AcademyContactsController.componentName, AcademyContactsController)
     .service(DeliveryService.componentName, DeliveryService)
     .component(HeaderComponentName, HeaderComponentOptions)
@@ -72,6 +71,7 @@ let app = angular.module('admin', [
     .component(SalonClientFormComponentName, SalonClientFormComponentOptions)
     .component(usersComponentName, usersComponentOptions)
     .component(userComponentName, userComponentOptions)
+    .component(CommentsComponentName, CommentsComponentOptions)
     .component(testComponentName, testComponentOptions);
 
 export let adminModule = app;

@@ -1,14 +1,14 @@
 import {AcademyModelController} from './academy/controllers/models.controller';
 import {AcademyDeliveryController} from './academy/controllers/delivery.controller';
 import {AcademyContactsController} from './academy/controllers/contacts.controller';
-import {AcademyCommentController} from "./academy/controllers/comments.controller";
 import {AdminCourseComponentUrl} from "./academy/components/course.component";
 import {AdminCoursesComponentUrl} from "./academy/components/courses.component";
 import {AdminOrdersComponentUrl} from "./academy/components/orders.component";
 import {testComponentUrl} from "./components/test.component";
 import {ItServiceName, ItService} from "../users/services/it.service";
-import {usersComponentUrl, usersComponentOptions} from "./components/users.component";
+import {usersComponentUrl} from "./components/users.component";
 import {userComponentUrl} from "./components/user.component";
+import {CommentsComponentUrl} from "./academy/components/comments.component";
 
 adminRoutes.$inject = ['$routeProvider'];
 export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
@@ -71,10 +71,8 @@ export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
                 auth: [ItServiceName, (it: ItService) => it.canAsync('readAcademy')]
             }
         })
-        .when('/academy/comments', {
-            templateUrl: 'app/admin/academy/views/comments.html',
-            controller: AcademyCommentController.componentName,
-            controllerAs: "$ctrl",
+        .when(CommentsComponentUrl, {
+            template: '<pg-comments></pg-comments>',
             resolve: {
                 auth: [ItServiceName, (it: ItService) => it.canAsync('readAcademy')]
             }
