@@ -139,16 +139,14 @@ export class AdminOrdersController {
 
     showEditOrderDialog(ev:MouseEvent, order:IOrder) {
         this.$mdDialog.show({
+            template: editOrderDialogTemplate,
             controller: EditOrderDialogController,
             controllerAs: '$ctrl',
             bindToController: true,
             locals: {
                 order: order
             },
-            template: editOrderDialogTemplate,
-            parent: angular.element(document.body),
             targetEvent: ev,
-            clickOutsideToClose: true,
         }).then((order) => this.saveOrder(order));
     }
 

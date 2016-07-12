@@ -1,11 +1,74 @@
 import {ICourseResource, CourseResourceName} from "../../../resources/course.resource";
 import IComment = pg.models.IComment;
 import {PagingService, PagingServiceName, IPagingHelperParams} from "../../../ui/admin.paging";
+import IAdminComment = pg.models.IAdminComment;
 
-const editDialogTemplate = ``;
+const editDialogTemplate = `<md-dialog aria-label="Comment edit">
+    <form name="editForm" ng-submit="$ctrl.save(editForm)">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Редагування відгуку</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="$ctrl.cancel()">
+                    <md-icon md-svg-src="navigation:ic_close_24px" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+            <p>{{$ctrl.comment.courseName}} <span ng-repeat="date in $ctrl.comment.courseDates">{{date|date:'d.M.yy'}} </span></p>
+                <md-input-container class="md-block">
+                    <label>Автор</label>
+                    <input type="text" ng-model="$ctrl.comment.name">
+                </md-input-container>
+                <md-datepicker ng-model="$ctrl.comment.date" md-placeholder="Дата"></md-datepicker>
+                <md-input-container class="md-block">
+                    <label>Відгук</label>
+                    <textarea ng-model="$ctrl.comment.text"></textarea>
+                </md-input-container>
+                <md-checkbox class="md-block" ng-model="$ctrl.comment.isVisible">
+                    Видимий
+                </md-checkbox>
+                
+                <!--<md-select ng-model="$ctrl.comment.courseId">-->
+                    <!--<md-option ng-repeat="course in $ctrl.courses" ng-value="course.id">{{course.name}}</md-option>-->
+                <!--</md-select>-->
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="$ctrl.cancel()" aria-label="cancel">
+                Відмінити
+            </md-button>
+            <md-button type="submit" aria-label="save">
+                Зберегти
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>`;
 
-class EditDialogController{
+class EditDialogController {
 
+    static $inject = ['$mdDialog', 'comment'];
+
+    private comment:IAdminComment;
+    private originalComment:IAdminComment;
+
+    constructor(private $mdDialog:ng.material.IDialogService, comment:IAdminComment) {
+        this.comment = angular.copy(comment);
+        this.originalComment = comment;
+    }
+
+    save($form:ng.IFormController) {
+        if ($form.$valid) {
+            angular.extend(this.originalComment, this.comment);
+            this.$mdDialog.hide(this.originalComment);
+        }
+    }
+
+    cancel() {
+        this.$mdDialog.cancel();
+    }
 }
 
 const template = `<md-toolbar>
@@ -22,7 +85,7 @@ const template = `<md-toolbar>
 <md-list flex class="comments-list">
     
     <md-list-item class="md-3-line md-long-text" ng-class="{new:!comment.isModerated}"
-                  ng-repeat="comment in $ctrl.comments" ng-click="$ctrl.moderateComment(comment)">
+                  ng-repeat="comment in $ctrl.comments" ng-click="$ctrl.showEditDialog($event, comment)">
         <div class="md-list-item-text">
             <h3>{{::comment.name||'Анонім'}} {{::comment.date| date:'dd.MM.yyyy'}}</h3>
             <p>{{comment.text}}</p>
@@ -34,12 +97,12 @@ const template = `<md-toolbar>
                 Показати відгук на сайті
             </md-tooltip>
         </md-checkbox>
-        <md-icon ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="$ctrl.showEditDialog($event, comment)"
+        <md-icon ng-click="$ctrl.showEditDialog($event, comment)"
                  class="md-secondary" aria-label="edit"
                  md-svg-icon="content:ic_create_24px">
             <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Редагувати</md-tooltip>
         </md-icon>
-        <md-icon ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="$ctrl.showDeleteDialog($event, comment)"
+        <md-icon ng-click="$ctrl.showDeleteDialog($event, comment)"
                  class="md-secondary" aria-label="delete"
                  md-svg-icon="action:ic_delete_24px">
             <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Видалити</md-tooltip>
@@ -54,20 +117,21 @@ interface IConfirmMsg {
     isNotVisible:string;
     isAnswered:string;
     isNotAnswered:string;
-    isDeleted:string
+    isDeleted:string,
+    isSaved: string
 }
 
 export class CommentsComponentController {
 
-    static $inject = [CourseResourceName, '$log', '$mdToast','$location','$mdDialog', PagingServiceName];
+    static $inject = [CourseResourceName, '$log', '$mdToast', '$location', '$mdDialog', PagingServiceName];
     static componentName = 'AcademyCommentController';
 
-    comments:any;
-    paging: IPagingHelperParams;
+    comments:pg.models.IAdminComment[];
+    paging:IPagingHelperParams;
     confirmMsg:IConfirmMsg;
 
     constructor(private CourseResource:ICourseResource, private $log:ng.ILogService,
-                private $mdToast:ng.material.IToastService,private $location:ng.ILocationService,
+                private $mdToast:ng.material.IToastService, private $location:ng.ILocationService,
                 private $mdDialog:ng.material.IDialogService, private pagingService:PagingService) {
         this.showPage();
 
@@ -75,31 +139,38 @@ export class CommentsComponentController {
     }
 
     showCourse(id:string):void {
-        this.$location.url( '/academy/course/'+id );
+        this.$location.url('/academy/course/' + id);
     }
 
-    showEditDialog(course:pg.models.IAdminComment, ev:MouseEvent){
+    showEditDialog(ev:MouseEvent, comment:pg.models.IAdminComment) {
+        this.moderateComment(comment);
         this.$mdDialog.show({
             template: editDialogTemplate,
             controller: EditDialogController,
             controllerAs: '$ctrl',
             bindToController: true,
             locals: {
-                course: course
+                comment: comment
             },
             targetEvent: ev,
             clickOutsideToClose: true,
         }).then((comment) => this.saveComment(comment));
     }
 
-    saveComment(comment:pg.models.IAdminComment){
-
+    saveComment(comment:pg.models.IAdminComment) {
+        this.CourseResource.editComment({id: comment.courseId}, this.convertToDbComment(comment)).$promise
+            .then(()=>{
+                this.$mdToast.showSimple(this.confirmMsg.isSaved);
+            })
+            .catch((err) => {
+                this.$mdToast.showSimple(err.message);
+            });
     }
 
     showDeleteDialog(ev, comment:pg.models.IAdminComment) {
         let confirm = this.$mdDialog.confirm()
             .title("Підтвердження дії")
-            .textContent(`Ви дійсно бажаєте видалити dsluer ${comment.text?comment.text:""}?`)
+            .textContent(`Ви дійсно бажаєте видалити dsluer ${comment.text ? comment.text : ""}?`)
             .ariaLabel("Підтвердження дії")
             .targetEvent(ev)
             .ok('Так')
@@ -113,12 +184,12 @@ export class CommentsComponentController {
 
     deleteComment(comment:pg.models.IAdminComment) {
 
-        this.CourseResource.deleteComment( {id: comment.courseId, commentId: comment._id} ).$promise.then( () => {
-            this.comments.splice( this.comments.indexOf( comment ), 1 );
-            this.$mdToast.showSimple( this.confirmMsg.isDeleted);
-        } )
-            .catch( (err) => {
-                    this.$log.error( err );
+        this.CourseResource.deleteComment({id: comment.courseId, commentId: comment._id}).$promise.then(() => {
+            this.comments.splice(this.comments.indexOf(comment), 1);
+            this.$mdToast.showSimple(this.confirmMsg.isDeleted);
+        })
+            .catch((err) => {
+                    this.$log.error(err);
                 }
             )
 
@@ -127,36 +198,34 @@ export class CommentsComponentController {
 
     //noinspection JSMethodCanBeStatic
     showComment(comment:pg.models.IAdminComment) {
-        let newComment={
-            _id:comment._id,
+        let newComment = {
+            _id: comment._id,
             name: comment.name,
             text: comment.text,
-            date:comment.date,
-            isVisible:! comment.isVisible,
+            date: comment.date,
+            isVisible: !comment.isVisible,
             isModerated: comment.isModerated,
         }
-        this.CourseResource.editComment( {id: comment.courseId}, newComment ).$promise.then( () => {
+        this.CourseResource.editComment({id: comment.courseId}, newComment).$promise.then(() => {
             if (comment.isVisible) {
-                this.$mdToast.showSimple( this.confirmMsg.isVisible );
+                this.$mdToast.showSimple(this.confirmMsg.isVisible);
             } else {
-                this.$mdToast.showSimple( this.confirmMsg.isNotVisible );
+                this.$mdToast.showSimple(this.confirmMsg.isNotVisible);
             }
-        } )
-            .catch( (err) => {
-                    this.$mdToast.showSimple( err.message );
+        })
+            .catch((err) => {
+                    this.$mdToast.showSimple(err.message);
                 }
             )
     }
 
     //noinspection JSMethodCanBeStatic
     moderateComment(comment:pg.models.IAdminComment) {
-        if(comment.isModerated) return;
+        if (comment.isModerated) return;
         comment.isModerated = true;
-        this.CourseResource.editComment({id: comment.courseId}, {isModerated:true}).$promise.then(() => {
-            this.$mdToast.showSimple(this.confirmMsg.isAnswered);
-        })
-            .catch( (err) => {
-                this.$mdToast.showSimple( err.message );
+        this.CourseResource.editComment({id: comment.courseId}, {isModerated: true}).$promise
+            .catch((err) => {
+                this.$mdToast.showSimple(err.message);
             });
     }
 
@@ -169,7 +238,7 @@ export class CommentsComponentController {
     }
 
     private showPage(page = 1) {
-        this.comments = this.CourseResource.getComments({page: page, sort: {"date":1}},
+        this.comments = this.CourseResource.getComments({page: page, sort: {"date": 1}},
             (res, headers) => {
                 let {total, page, perPage} = this.pagingService.parseHeaders(headers);
                 this.pagingService.update({page: page, perPage: perPage, total: total});
@@ -177,13 +246,25 @@ export class CommentsComponentController {
             });
     }
 
-    private setConfirmMsg():void {
+    private convertToDbComment(comment:pg.models.IAdminComment){
+        return <pg.models.IComment>{
+            _id:comment._id,
+            name:comment.name,
+            text:comment.text,
+            date:comment.date,
+            isVisible:comment.isVisible,
+            isModerated:comment.isModerated
+        }
+    }
+
+    private setConfirmMsg() {
         this.confirmMsg = {
             isDeleted: 'Відгук видалено',
             isVisible: 'Дозволено показати відгук на сайті',
             isNotVisible: 'Заборонено показувати відгук на сайті',
             isAnswered: 'Відгук перевірено',
-            isNotAnswered: 'Відгук не перевірено'
+            isNotAnswered: 'Відгук не перевірено',
+            isSaved: 'Відгук збережено'
         };
     }
 }
