@@ -3,7 +3,7 @@ import IComment = pg.models.IComment;
 import {PagingService, PagingServiceName, IPagingHelperParams} from "../../../ui/admin.paging";
 import IAdminComment = pg.models.IAdminComment;
 
-const editDialogTemplate = `<md-dialog aria-label="Comment edit">
+const editDialogTemplate = `<md-dialog aria-label="Comment edit" flex="80">
     <form name="editForm" ng-submit="$ctrl.save(editForm)">
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -16,20 +16,22 @@ const editDialogTemplate = `<md-dialog aria-label="Comment edit">
         </md-toolbar>
         <md-dialog-content>
             <div class="md-dialog-content">
-            <p>{{$ctrl.comment.courseName}} <span ng-repeat="date in $ctrl.comment.courseDates">{{date|date:'d.M.yy'}} </span></p>
+            <h3>{{$ctrl.comment.courseName}} <span>{{$ctrl.comment.courseDates|courseDates}} </span></h3>
                 <md-input-container class="md-block">
                     <label>Автор</label>
                     <input type="text" ng-model="$ctrl.comment.name">
                 </md-input-container>
-                <md-datepicker ng-model="$ctrl.comment.date" md-placeholder="Дата"></md-datepicker>
+                
                 <md-input-container class="md-block">
                     <label>Відгук</label>
                     <textarea ng-model="$ctrl.comment.text"></textarea>
                 </md-input-container>
+                <div layout="row">
+                <md-datepicker ng-model="$ctrl.comment.date" md-placeholder="Дата"></md-datepicker>
                 <md-checkbox class="md-block" ng-model="$ctrl.comment.isVisible">
                     Видимий
                 </md-checkbox>
-                
+</div>
                 <!--<md-select ng-model="$ctrl.comment.courseId">-->
                     <!--<md-option ng-repeat="course in $ctrl.courses" ng-value="course.id">{{course.name}}</md-option>-->
                 <!--</md-select>-->
@@ -153,7 +155,7 @@ export class CommentsComponentController {
                 comment: comment
             },
             targetEvent: ev,
-            clickOutsideToClose: true,
+            parent: angular.element(document.body),
         }).then((comment) => this.saveComment(comment));
     }
 

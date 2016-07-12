@@ -12,13 +12,15 @@ import {
 } from "./admin.paging";
 import {
     ImageInputDirectiveName, imageInputDirectiveFactory} from "./image.input.directive";
+import {courseDatesFilterName, courseDatesFilter} from "./course.dates.filter";
 
 export let uiModule = angular.module('ui', [
     'youtube-embed',
     pgCalendarModule.name
 ])
     .factory(MediaObserverFactoryName, MediaObserverFactory)
-    .directive(chooseFileButtonDirectiveName, chooseFileButtonDirectiveFactory)
     .service(PagingServiceName, PagingService)
     .component(adminPagingComponentName, adminPagingComponentOptions)
+    .filter(courseDatesFilterName, courseDatesFilter)
+    .directive(chooseFileButtonDirectiveName, chooseFileButtonDirectiveFactory)
     .directive(ImageInputDirectiveName, imageInputDirectiveFactory);

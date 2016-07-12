@@ -146,6 +146,7 @@ export class AdminOrdersController {
             locals: {
                 order: order
             },
+            parent: angular.element(document.body),
             targetEvent: ev,
         }).then((order) => this.saveOrder(order));
     }
