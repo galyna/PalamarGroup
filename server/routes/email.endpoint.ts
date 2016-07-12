@@ -163,7 +163,7 @@ emailEndpoint.route( '/adv/:courseId' )
 
 </body>
 </html>`;
-                // src="${config.origin + '/content/images/logo/palamar_logo.png'}"
+
                 try {
                     await emailService.send( {
                         to: contact.email,
