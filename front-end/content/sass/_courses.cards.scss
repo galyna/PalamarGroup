@@ -8,7 +8,7 @@
   }
 
   md-card.md-default-theme, md-card {
-
+    min-height: 500px;
     transition: transform 0.4s;
 
     &:hover {
@@ -16,7 +16,10 @@
       transform: translate(0%, -1%);
     }
 
+    @media (min-width: $layout-breakpoint-md) {
+      height: 500px;
 
+    }
 
     @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm) {
       min-height: 300px;
@@ -25,7 +28,7 @@
       margin-right: 0px;
     }
 
-    @media ($layout-breakpoint-xs) {
+    @media (min-width: $layout-breakpoint-xs) {
       margin-left: 0px;
       margin-right: 0px;
       height: 300px;
@@ -36,33 +39,56 @@
     .card-desc {
       background: white;
       min-width: 300px;
+
       z-index: 2;
       vertical-align: middle;
       text-align: center;
 
+      @media (min-width: $layout-breakpoint-lg) {
+        height: 500px;
+        min-width: 500px;
+      }
 
-      @media (min-width: $layout-breakpoint-md)  {
-        min-height: 500px;
+      @media (min-width: $layout-breakpoint-md) {
+        height: 500px;
+        width: 500px;
       }
 
       @media (max-width: $layout-breakpoint-xs) {
-        max-width: 300px;
-      }
+      max-width: 300px;
+    }
       @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm) {
-        min-height: 300px;
+        max-width: 300px;
       }
     }
 
     .card-media {
       position: relative;
       z-index: 1;
-
+      height: 500px;
       overflow: hidden;
       padding: 0;
 
-      @media (min-width: $layout-breakpoint-md)  {
-        min-height: 500px;
+      @media (max-width: $layout-breakpoint-xs) {
+        height: 300px;
+        max-width: 300px;
+        img {
+          height: 300px;
+          width: 300px
+        }
+
       }
+
+      @media (min-width: $layout-breakpoint-md) {
+        height: 500px;
+        width: 500px;
+
+      }
+      @media (min-width: $layout-breakpoint-lg) {
+        height: 500px;
+        min-width: 500px;
+      }
+
       @media (max-width: $layout-breakpoint-sm) {
         height: 300px;
         max-width: 300px;
