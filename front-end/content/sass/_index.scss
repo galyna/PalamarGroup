@@ -11,7 +11,6 @@
   position: relative;
   display: table;
   width: 100%;
-  min-height: 95vh;
   overflow: hidden;
   overflow-y: auto;
 
@@ -60,8 +59,10 @@
   background: rgba(white, 0.6);
 
   .page-header-wrap {
+
+    min-height: 100vh;
     z-index: 3;
-    color: floralwhite;
+    color: white;
     font-family: 'microsquare', sans-serif;
   }
   .logo-img {
@@ -130,6 +131,12 @@
 
 .page-footer {
 
+  .page-header-wrap {
+    min-height: 100vh;
+    z-index: 3;
+    color: white;
+    font-family: 'microsquare', sans-serif;
+  }
   .overlay {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../images/bg/IMG_6844.jpg") no-repeat center center fixed;
     -webkit-filter: blur(1px);
@@ -144,7 +151,7 @@
 .page-container {
   height: 100%;
   min-height: 100vh;
-  margin-bottom: 40px;
+
 
 
 

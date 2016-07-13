@@ -52,9 +52,9 @@ html{ background-color: white;}
 }
 
 .container-wrapper {
-  min-height: 100vh;
   overflow: hidden;
   overflow-y: auto;
+  min-height: 100vh;
 }
 
 card-image-container {
@@ -79,11 +79,9 @@ md-card.md-default-theme, md-card {
   z-index: 3;
   padding: 0;
   margin: 20px;
-
   @media (max-width: $layout-breakpoint-xs) {
     margin-left: 0px;
     margin-right: 0px;
-
   }
 
   md-card-content {
@@ -91,6 +89,7 @@ md-card.md-default-theme, md-card {
     padding: 0;
 
     md-card-title-text {
+      padding: 0;
       overflow: hidden;
       text-overflow: ellipsis;
     }
@@ -99,7 +98,6 @@ md-card.md-default-theme, md-card {
   .card-media {
     position: relative;
     z-index: 1;
-    height: 500px;
     overflow: hidden;
     padding: 0;
 
