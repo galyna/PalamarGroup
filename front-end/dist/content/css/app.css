@@ -4550,7 +4550,7 @@ md-tooltip {
 .md-whiteframe-2dp {
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12); }
 
-.md-whiteframe-3dp, .courses md-card.md-default-theme .md-raised, .courses md-card .md-raised, .courses-details .md-raised {
+.md-whiteframe-3dp, .page-header .md-raised, .page-footer .md-raised, .courses-details .md-raised, .courses .md-raised, .pop-form .md-raised {
   box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 3px 3px -2px rgba(0, 0, 0, 0.12); }
 
 .md-whiteframe-4dp, .md-whiteframe-z2 {
@@ -4565,7 +4565,7 @@ md-tooltip {
 .md-whiteframe-7dp, .md-whiteframe-z3 {
   box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12); }
 
-.md-whiteframe-8dp {
+.md-whiteframe-8dp, .down-btn, .up-btn, .page-header .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .page-header .md-button.md-raised.xs-selected:not([disabled]), .page-footer .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .page-footer .md-button.md-raised.xs-selected:not([disabled]), .courses-details .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .courses-details .md-button.md-raised.xs-selected:not([disabled]), .courses .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .courses .md-button.md-raised.xs-selected:not([disabled]), .pop-form .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .pop-form .md-button.md-raised.xs-selected:not([disabled]), .page-header .md-raised.xs-selected, .page-footer .md-raised.xs-selected, .courses-details .md-raised.xs-selected, .courses .md-raised.xs-selected, .pop-form .md-raised.xs-selected {
   box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12); }
 
 .md-whiteframe-9dp {
@@ -4583,13 +4583,13 @@ md-tooltip {
 .md-whiteframe-13dp, .md-whiteframe-z5 {
   box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12); }
 
-.md-whiteframe-14dp, .courses md-card.md-default-theme .md-button.md-default-theme.md-raised:not([disabled]):hover, .courses md-card.md-default-theme .md-button.md-raised:not([disabled]):hover, .courses md-card .md-button.md-default-theme.md-raised:not([disabled]):hover, .courses md-card .md-button.md-raised:not([disabled]):hover, .courses-details .md-button.md-default-theme.md-raised:not([disabled]):hover, .courses-details .md-button.md-raised:not([disabled]):hover, .courses-details .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .courses-details .md-button.md-raised.xs-selected:not([disabled]):hover, .courses-details .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .courses-details .md-button.md-raised.xs-selected:not([disabled]), .courses-details .md-raised.xs-selected {
+.md-whiteframe-14dp, .page-header a.md-button.md-default-theme.md-fab:not([disabled]):hover, .page-header a.md-button.md-fab:not([disabled]):hover, .page-header .md-button.md-default-theme.md-fab:not([disabled]):hover, .page-header .md-button.md-fab:not([disabled]):hover, .page-footer a.md-button.md-default-theme.md-fab:not([disabled]):hover, .page-footer a.md-button.md-fab:not([disabled]):hover, .page-footer .md-button.md-default-theme.md-fab:not([disabled]):hover, .page-footer .md-button.md-fab:not([disabled]):hover, .courses-details a.md-button.md-default-theme.md-fab:not([disabled]):hover, .courses-details a.md-button.md-fab:not([disabled]):hover, .courses-details .md-button.md-default-theme.md-fab:not([disabled]):hover, .courses-details .md-button.md-fab:not([disabled]):hover, .courses a.md-button.md-default-theme.md-fab:not([disabled]):hover, .courses a.md-button.md-fab:not([disabled]):hover, .courses .md-button.md-default-theme.md-fab:not([disabled]):hover, .courses .md-button.md-fab:not([disabled]):hover, .pop-form a.md-button.md-default-theme.md-fab:not([disabled]):hover, .pop-form a.md-button.md-fab:not([disabled]):hover, .pop-form .md-button.md-default-theme.md-fab:not([disabled]):hover, .pop-form .md-button.md-fab:not([disabled]):hover, .page-header .md-button.md-default-theme.md-raised:not([disabled]):hover, .page-header .md-button.md-raised:not([disabled]):hover, .page-footer .md-button.md-default-theme.md-raised:not([disabled]):hover, .page-footer .md-button.md-raised:not([disabled]):hover, .courses-details .md-button.md-default-theme.md-raised:not([disabled]):hover, .courses-details .md-button.md-raised:not([disabled]):hover, .courses .md-button.md-default-theme.md-raised:not([disabled]):hover, .courses .md-button.md-raised:not([disabled]):hover, .pop-form .md-button.md-default-theme.md-raised:not([disabled]):hover, .pop-form .md-button.md-raised:not([disabled]):hover, .page-header .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .page-header .md-button.md-raised.xs-selected:not([disabled]):hover, .page-footer .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .page-footer .md-button.md-raised.xs-selected:not([disabled]):hover, .courses-details .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .courses-details .md-button.md-raised.xs-selected:not([disabled]):hover, .courses .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .courses .md-button.md-raised.xs-selected:not([disabled]):hover, .pop-form .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .pop-form .md-button.md-raised.xs-selected:not([disabled]):hover {
   box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2), 0px 14px 21px 2px rgba(0, 0, 0, 0.14), 0px 5px 26px 4px rgba(0, 0, 0, 0.12); }
 
 .md-whiteframe-15dp {
   box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2), 0px 15px 22px 2px rgba(0, 0, 0, 0.14), 0px 6px 28px 5px rgba(0, 0, 0, 0.12); }
 
-.md-whiteframe-16dp, .courses md-card.md-default-theme:hover, .courses md-card:hover, .courses-details md-card.md-default-theme:hover, .courses-details md-card:hover {
+.md-whiteframe-16dp, .courses md-card.md-default-theme:hover, .courses md-card:hover {
   box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12); }
 
 .md-whiteframe-17dp {
@@ -12140,12 +12140,15 @@ body {
     body {
       font-size: 13px; } }
 
+html {
+  background-color: white; }
+
 *:before, *:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-.overlay, .courses-details .page-delimiter .overlay-history, .courses-details .page-delimiter .overlay-comments, .courses-details .page-delimiter .overlay-description, .courses-details .page-delimiter .overlay-forms {
+.overlay, .courses .overlay-bg, .courses-details .page-delimiter .overlay-bg, .courses-details .page-delimiter .overlay-days, .courses-details .page-delimiter .overlay-comments, .courses-details .page-delimiter .overlay-description, .courses-details .page-delimiter .overlay-forms {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -12159,9 +12162,13 @@ body {
   background-size: 100% auto; }
 
 .container-wrapper {
-  min-height: 100vh;
   overflow: hidden;
-  overflow-y: auto; }
+  overflow-y: auto;
+  min-height: 100vh; }
+
+card-image-container {
+  overflow: hidden;
+  cursor: pointer; }
 
 .fit-screen-wrap {
   position: relative;
@@ -12169,12 +12176,163 @@ body {
   vertical-align: middle;
   z-index: 2; }
 
+md-input-container .md-input-messages-animation {
+  max-width: 300px; }
+
+md-card.md-default-theme, md-card {
+  z-index: 3;
+  padding: 0;
+  margin: 20px; }
+  @media (max-width: 600px) {
+    md-card.md-default-theme, md-card {
+      margin-left: 0px;
+      margin-right: 0px; } }
+  md-card.md-default-theme md-card-content, md-card md-card-content {
+    overflow: hidden;
+    padding: 0; }
+    md-card.md-default-theme md-card-content md-card-title-text, md-card md-card-content md-card-title-text {
+      padding: 0;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+  md-card.md-default-theme .card-media, md-card .card-media {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    padding: 0; }
+    md-card.md-default-theme .card-media img, md-card .card-media img {
+      position: absolute;
+      top: 0%;
+      left: 0%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -100; }
+
+.md-card-image {
+  transition: transform 0.5s; }
+  .md-card-image:hover {
+    transform: scale(1.1, 1.1);
+    transition: transform 0.5s; }
+
+.description-container {
+  background-color: white; }
+
+/**
+ * Hide when Angular is not yet loaded and initialized
+ */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important; }
+
+md-tabs .md-tab.md-active {
+  color: #000000; }
+
+md-tabs md-ink-bar {
+  color: #000000;
+  background-color: #000000; }
+
+md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar), md-toolbar.md-hue-2:not(.md-menu-toolbar) {
+  background-color: rgba(0, 0, 0, 0.8); }
+
+.down-btn {
+  position: absolute;
+  left: calc(50% - 30px);
+  z-index: 3;
+  bottom: 40px; }
+
+.up-btn {
+  position: absolute;
+  left: calc(50% - 30px);
+  z-index: 3;
+  top: 40px; }
+  .up-btn md-icon {
+    -ms-transform: rotate(180deg);
+    /* IE 9 */
+    -webkit-transform: rotate(180deg);
+    /* Chrome, Safari, Opera */
+    transform: rotate(180deg); }
+
+.md-social-image {
+  width: 30px;
+  margin: 5px;
+  height: 30px;
+  transition: transform 0.5s; }
+  .md-social-image:hover {
+    transform: scale(1.5, 1.5);
+    transition: transform 0.2s; }
+
+.page-header .md-button.md-default-theme.md-fab, .page-header .md-button.md-fab, .page-header .md-button.md-fab, .page-header .md-focused, .page-footer .md-button.md-default-theme.md-fab, .page-footer .md-button.md-fab, .page-footer .md-button.md-fab, .page-footer .md-focused, .courses-details .md-button.md-default-theme.md-fab, .courses-details .md-button.md-fab, .courses-details .md-button.md-fab, .courses-details .md-focused, .courses .md-button.md-default-theme.md-fab, .courses .md-button.md-fab, .courses .md-button.md-fab, .courses .md-focused, .pop-form .md-button.md-default-theme.md-fab, .pop-form .md-button.md-fab, .pop-form .md-button.md-fab, .pop-form .md-focused {
+  background: white; }
+
+.page-header a.md-button.md-default-theme.md-fab:not([disabled]):hover, .page-header a.md-button.md-fab:not([disabled]):hover, .page-header .md-button.md-default-theme.md-fab:not([disabled]):hover, .page-header .md-button.md-fab:not([disabled]):hover, .page-footer a.md-button.md-default-theme.md-fab:not([disabled]):hover, .page-footer a.md-button.md-fab:not([disabled]):hover, .page-footer .md-button.md-default-theme.md-fab:not([disabled]):hover, .page-footer .md-button.md-fab:not([disabled]):hover, .courses-details a.md-button.md-default-theme.md-fab:not([disabled]):hover, .courses-details a.md-button.md-fab:not([disabled]):hover, .courses-details .md-button.md-default-theme.md-fab:not([disabled]):hover, .courses-details .md-button.md-fab:not([disabled]):hover, .courses a.md-button.md-default-theme.md-fab:not([disabled]):hover, .courses a.md-button.md-fab:not([disabled]):hover, .courses .md-button.md-default-theme.md-fab:not([disabled]):hover, .courses .md-button.md-fab:not([disabled]):hover, .pop-form a.md-button.md-default-theme.md-fab:not([disabled]):hover, .pop-form a.md-button.md-fab:not([disabled]):hover, .pop-form .md-button.md-default-theme.md-fab:not([disabled]):hover, .pop-form .md-button.md-fab:not([disabled]):hover {
+  background: white; }
+
+.page-header .md-button.md-default-theme.md-raised:not([disabled]):hover, .page-header .md-button.md-raised:not([disabled]):hover, .page-footer .md-button.md-default-theme.md-raised:not([disabled]):hover, .page-footer .md-button.md-raised:not([disabled]):hover, .courses-details .md-button.md-default-theme.md-raised:not([disabled]):hover, .courses-details .md-button.md-raised:not([disabled]):hover, .courses .md-button.md-default-theme.md-raised:not([disabled]):hover, .courses .md-button.md-raised:not([disabled]):hover, .pop-form .md-button.md-default-theme.md-raised:not([disabled]):hover, .pop-form .md-button.md-raised:not([disabled]):hover {
+  color: white;
+  border-color: black;
+  background-color: black; }
+
+.page-header .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .page-header .md-button.md-raised.xs-selected:not([disabled]):hover, .page-footer .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .page-footer .md-button.md-raised.xs-selected:not([disabled]):hover, .courses-details .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .courses-details .md-button.md-raised.xs-selected:not([disabled]):hover, .courses .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .courses .md-button.md-raised.xs-selected:not([disabled]):hover, .pop-form .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .pop-form .md-button.md-raised.xs-selected:not([disabled]):hover {
+  color: black;
+  border-color: black;
+  background-color: white; }
+
+.page-header .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .page-header .md-button.md-raised.xs-selected:not([disabled]), .page-footer .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .page-footer .md-button.md-raised.xs-selected:not([disabled]), .courses-details .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .courses-details .md-button.md-raised.xs-selected:not([disabled]), .courses .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .courses .md-button.md-raised.xs-selected:not([disabled]), .pop-form .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .pop-form .md-button.md-raised.xs-selected:not([disabled]) {
+  color: white;
+  border: white;
+  background-color: black; }
+
+.page-header .md-raised.xs-selected, .page-footer .md-raised.xs-selected, .courses-details .md-raised.xs-selected, .courses .md-raised.xs-selected, .pop-form .md-raised.xs-selected {
+  color: white;
+  border: white;
+  background-color: black; }
+
+.page-header .md-raised, .page-footer .md-raised, .courses-details .md-raised, .courses .md-raised, .pop-form .md-raised {
+  display: block;
+  border-style: solid;
+  border-color: black;
+  border-width: 3px;
+  background-color: transparent;
+  color: black;
+  min-height: 56px;
+  min-width: 150px;
+  width: auto;
+  font-size: 26px;
+  border-radius: 0px;
+  transition: background-color 0.3s; }
+  @media (max-width: 600px) {
+    .page-header .md-raised, .page-footer .md-raised, .courses-details .md-raised, .courses .md-raised, .pop-form .md-raised {
+      width: 90%;
+      margin-left: 0;
+      margin-right: 0;
+      font-size: 18px; } }
+
+.social-image {
+  width: 30px;
+  margin: 5px;
+  height: 30px;
+  border-width: 2px;
+  border-radius: 20px;
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  transition-property: box-shadow, transform;
+  box-sizing: border-box;
+  box-shadow: 0 1px 3px 0 rgba(255, 255, 255, 0.2), 0 1px 1px 0 rgba(255, 255, 255, 0.14), 0 2px 1px -1px rgba(255, 255, 255, 0.12); }
+  .social-image:hover {
+    transform: scale(1.5, 1.5);
+    transition: transform 0.2s;
+    box-shadow: 0 3px 5px 0 rgba(255, 255, 255, 0.2), 0 3px 3px 0 rgba(255, 255, 255, 0.14), 0 4px 3px -3px rgba(255, 255, 255, 0.12); }
+
+.header-loading {
+  z-index: 39;
+  background-color: rgba(0, 0, 0, 0.15);
+  position: absolute;
+  bottom: 0; }
+
 .page-header, .page-footer, .page-container {
   position: relative;
   display: table;
   width: 100%;
-  height: 100vh;
-  min-height: 100vh;
   overflow: hidden;
   overflow-y: auto; }
   .page-header .screen, .page-footer .screen, .page-container .screen {
@@ -12209,8 +12367,9 @@ body {
 .page-header {
   background: rgba(255, 255, 255, 0.6); }
   .page-header .page-header-wrap {
+    min-height: 100vh;
     z-index: 3;
-    color: floralwhite;
+    color: white;
     font-family: 'microsquare', sans-serif; }
   .page-header .logo-img {
     width: 170px; }
@@ -12252,343 +12411,190 @@ body {
       .page-header h1.featured-area-title {
         font-size: 75px; } }
   @media (max-width: 1280px) {
-    .page-header .overlay, .page-header .courses-details .page-delimiter .overlay-history, .courses-details .page-delimiter .page-header .overlay-history, .page-header .courses-details .page-delimiter .overlay-comments, .courses-details .page-delimiter .page-header .overlay-comments, .page-header .courses-details .page-delimiter .overlay-description, .courses-details .page-delimiter .page-header .overlay-description, .page-header .courses-details .page-delimiter .overlay-forms, .courses-details .page-delimiter .page-header .overlay-forms {
+    .page-header .overlay, .page-header .courses .overlay-bg, .courses .page-header .overlay-bg, .page-header .courses-details .page-delimiter .overlay-bg, .courses-details .page-delimiter .page-header .overlay-bg, .page-header .courses-details .page-delimiter .overlay-days, .courses-details .page-delimiter .page-header .overlay-days, .page-header .courses-details .page-delimiter .overlay-comments, .courses-details .page-delimiter .page-header .overlay-comments, .page-header .courses-details .page-delimiter .overlay-description, .courses-details .page-delimiter .page-header .overlay-description, .page-header .courses-details .page-delimiter .overlay-forms, .courses-details .page-delimiter .page-header .overlay-forms {
       background: url("../images/bg/slider/s3.png") no-repeat center center fixed; } }
 
-.page-footer .overlay, .page-footer .courses-details .page-delimiter .overlay-history, .courses-details .page-delimiter .page-footer .overlay-history, .page-footer .courses-details .page-delimiter .overlay-comments, .courses-details .page-delimiter .page-footer .overlay-comments, .page-footer .courses-details .page-delimiter .overlay-description, .courses-details .page-delimiter .page-footer .overlay-description, .page-footer .courses-details .page-delimiter .overlay-forms, .courses-details .page-delimiter .page-footer .overlay-forms {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../images/bg/IMG_6790_1.jpg") no-repeat center center fixed;
-  -webkit-filter: blur(5px);
-  -moz-filter: blur(5px);
-  -o-filter: blur(5px);
-  -ms-filter: blur(5px);
-  filter: blur(5px); }
+.page-footer .page-header-wrap {
+  min-height: 100vh;
+  z-index: 3;
+  color: white;
+  font-family: 'microsquare', sans-serif; }
+
+.page-footer .overlay, .page-footer .courses .overlay-bg, .courses .page-footer .overlay-bg, .page-footer .courses-details .page-delimiter .overlay-bg, .courses-details .page-delimiter .page-footer .overlay-bg, .page-footer .courses-details .page-delimiter .overlay-days, .courses-details .page-delimiter .page-footer .overlay-days, .page-footer .courses-details .page-delimiter .overlay-comments, .courses-details .page-delimiter .page-footer .overlay-comments, .page-footer .courses-details .page-delimiter .overlay-description, .courses-details .page-delimiter .page-footer .overlay-description, .page-footer .courses-details .page-delimiter .overlay-forms, .courses-details .page-delimiter .page-footer .overlay-forms {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../images/bg/IMG_6844.jpg") no-repeat center center fixed;
+  -webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(1px); }
 
 .page-container {
   height: 100%;
-  min-height: 100vh;
-  margin-bottom: 0px; }
+  min-height: 100vh; }
 
-md-input-container .md-input-messages-animation {
-  max-width: 300px; }
-
-.md-button.md-default-theme.md-fab, .md-button.md-fab {
-  background: rgba(0, 0, 0, 0.8); }
-
-a.md-button.md-default-theme.md-fab:not([disabled]):hover, a.md-button.md-fab:not([disabled]):hover, .md-button.md-default-theme.md-fab:not([disabled]):hover, .md-button.md-fab:not([disabled]):hover {
-  background: rgba(0, 0, 0, 0.4); }
-
-/**
- * Hide when Angular is not yet loaded and initialized
- */
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important; }
-
-.header-loading {
-  z-index: 39;
-  background-color: rgba(0, 0, 0, 0.15);
-  position: absolute;
-  bottom: 0; }
-
-md-tabs .md-tab.md-active {
-  color: #000000; }
-
-md-tabs md-ink-bar {
-  color: #000000;
-  background-color: #000000; }
-
-.md-social-image {
-  width: 30px;
-  margin: 5px;
-  height: 30px;
-  transition: transform 0.5s; }
-  .md-social-image:hover {
-    transform: scale(1.5, 1.5);
-    transition: transform 0.2s; }
-
-.social-image {
-  width: 30px;
-  margin: 5px;
-  height: 30px;
-  border-width: 2px;
-  border-radius: 20px;
-  -webkit-filter: invert(100%);
-  filter: invert(100%);
-  transition-property: box-shadow, transform;
-  box-sizing: border-box;
-  box-shadow: 0 1px 3px 0 rgba(255, 255, 255, 0.2), 0 1px 1px 0 rgba(255, 255, 255, 0.14), 0 2px 1px -1px rgba(255, 255, 255, 0.12); }
-  .social-image:hover {
-    transform: scale(1.5, 1.5);
-    transition: transform 0.2s;
-    box-shadow: 0 3px 5px 0 rgba(255, 255, 255, 0.2), 0 3px 3px 0 rgba(255, 255, 255, 0.14), 0 4px 3px -3px rgba(255, 255, 255, 0.12); }
-
-md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar), md-toolbar.md-hue-2:not(.md-menu-toolbar) {
-  background-color: rgba(0, 0, 0, 0.8); }
+.courses .overlay-bg {
+  background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url("../images/bg/slider/s5.png") no-repeat center center fixed; }
 
 .courses md-card.md-default-theme, .courses md-card {
   min-height: 500px;
-  z-index: 3;
-  padding: 0;
-  min-width: 70vw;
-  margin: 20px;
   transition: transform 0.4s; }
   .courses md-card.md-default-theme:hover, .courses md-card:hover {
     transform: translate(0%, -1%); }
-  @media (max-width: 600px) {
+  @media (min-width: 1280px) {
+    .courses md-card.md-default-theme, .courses md-card {
+      height: 500px; } }
+  @media (min-width: 600px) and (max-width: 960px) {
+    .courses md-card.md-default-theme, .courses md-card {
+      min-height: 300px;
+      min-width: 600px;
+      margin-left: 0px;
+      margin-right: 0px; } }
+  @media (min-width: 600px) {
     .courses md-card.md-default-theme, .courses md-card {
       margin-left: 0px;
       margin-right: 0px;
-      mix-height: 505px; } }
+      height: 300px;
+      max-width: 300px; } }
   .courses md-card.md-default-theme .card-desc, .courses md-card .card-desc {
     background: white;
     min-width: 300px;
-    z-index: 2; }
+    z-index: 2;
+    vertical-align: middle;
+    text-align: center; }
+    @media (min-width: 1920px) {
+      .courses md-card.md-default-theme .card-desc, .courses md-card .card-desc {
+        height: 500px;
+        min-width: 500px; } }
+    @media (min-width: 1280px) {
+      .courses md-card.md-default-theme .card-desc, .courses md-card .card-desc {
+        height: 500px;
+        width: 500px; } }
     @media (max-width: 600px) {
       .courses md-card.md-default-theme .card-desc, .courses md-card .card-desc {
-        mix-height: 505px; } }
-  .courses md-card.md-default-theme md-card-content, .courses md-card md-card-content {
-    overflow: hidden;
-    padding: 0; }
-    .courses md-card.md-default-theme md-card-content md-card-title-text, .courses md-card md-card-content md-card-title-text {
-      overflow: hidden;
-      text-overflow: ellipsis; }
+        max-width: 300px; } }
+    @media (min-width: 600px) and (max-width: 960px) {
+      .courses md-card.md-default-theme .card-desc, .courses md-card .card-desc {
+        max-width: 300px; } }
   .courses md-card.md-default-theme .card-media, .courses md-card .card-media {
     position: relative;
     z-index: 1;
-    mim-width: 300px;
     height: 500px;
     overflow: hidden;
     padding: 0; }
-    .courses md-card.md-default-theme .card-media img, .courses md-card .card-media img {
-      position: absolute;
-      top: 0%;
-      left: 0%;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
-      z-index: -100; }
+    @media (max-width: 600px) {
+      .courses md-card.md-default-theme .card-media, .courses md-card .card-media {
+        height: 300px;
+        max-width: 300px; }
+        .courses md-card.md-default-theme .card-media img, .courses md-card .card-media img {
+          height: 300px;
+          width: 300px; } }
+    @media (min-width: 1280px) {
+      .courses md-card.md-default-theme .card-media, .courses md-card .card-media {
+        height: 500px;
+        width: 500px; } }
+    @media (min-width: 1920px) {
+      .courses md-card.md-default-theme .card-media, .courses md-card .card-media {
+        height: 500px;
+        min-width: 500px; } }
+    @media (max-width: 960px) {
+      .courses md-card.md-default-theme .card-media, .courses md-card .card-media {
+        height: 300px;
+        max-width: 300px; }
+        .courses md-card.md-default-theme .card-media img, .courses md-card .card-media img {
+          height: 300px;
+          width: 300px; } }
   .courses md-card.md-default-theme .descr-container, .courses md-card .descr-container {
     max-height: 116px;
+    width: 70%;
+    text-align: center;
     overflow: hidden;
     text-overflow: ellipsis; }
-  .courses md-card.md-default-theme .md-button.md-default-theme.md-raised:not([disabled]):hover, .courses md-card.md-default-theme .md-button.md-raised:not([disabled]):hover, .courses md-card .md-button.md-default-theme.md-raised:not([disabled]):hover, .courses md-card .md-button.md-raised:not([disabled]):hover {
-    color: white;
-    border: none;
-    background-color: black; }
   .courses md-card.md-default-theme .md-raised, .courses md-card .md-raised {
-    border-style: solid;
-    border-color: black;
-    border-width: 3px;
-    background-color: transparent;
-    color: black;
-    height: 50px;
-    width: 170px;
-    margin: 8px;
-    font-size: 26px;
-    border-radius: 0px;
-    transition: background-color 1s; }
+    min-width: 200px; }
     @media (max-width: 600px) {
       .courses md-card.md-default-theme .md-raised, .courses md-card .md-raised {
-        margin-bottom: 16px; } }
+        margin-bottom: 22px;
+        width: 90%; } }
+    @media (max-width: 960px) {
+      .courses md-card.md-default-theme .md-raised, .courses md-card .md-raised {
+        margin-bottom: 22px; } }
 
-.course {
-  box-sizing: border-box; }
-  .course card-image-container {
-    display: block;
-    overflow: hidden;
-    cursor: pointer; }
-  .course md-card {
-    position: relative;
-    display: block; }
-    .course md-card md-card-content {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      height: 20%;
-      color: whitesmoke;
-      background-color: rgba(0, 0, 0, 0.7); }
-
-.courses-history {
-  box-sizing: border-box; }
-  .courses-history img {
-    max-width: 100%; }
-  .courses-history card-image-container {
-    display: block;
-    overflow: hidden; }
-  .courses-history .md-card-image {
-    transition: transform 0.5s; }
-    .courses-history .md-card-image:hover {
-      transform: scale(1.1, 1.1);
-      transition: transform 0.5s; }
-  .courses-history md-card {
-    position: relative;
-    display: block; }
-    .courses-history md-card md-card-content {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      height: 12%;
-      color: white;
-      background-color: rgba(0, 0, 0, 0.7); }
-    @media (min-width: 1280px) and (max-width: 1930px) {
-      .courses-history md-card.flex-gt-md-22 {
-        max-height: 100%;
-        box-sizing: border-box;
-        flex: 2 46%; }
-      .courses-history md-card:first-child, .courses-history md-card:nth-child(2) {
-        flex: 2 46%; } }
-    @media (min-width: 600px) and (max-width: 1930px) {
-      .courses-history md-card.flex-gt-sm-46 {
-        max-height: 100%;
-        box-sizing: border-box;
-        flex: 2 46%; }
-      .courses-history md-card:first-child, .courses-history md-card:nth-child(2) {
-        flex: 2 46%; } }
-    @media (max-width: 599px) {
-      .courses-history md-card.flex-xs-80 {
-        flex: 1 80%; }
-        .courses-history md-card.flex-xs-80:first-child, .courses-history md-card.flex-xs-80:nth-child(2) {
-          flex: 1 80%; } }
-
-@media (max-width: 599px) {
-  .order-btn {
-    width: 100%;
-    min-width: 100%; }
-  .detail-btn {
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%; }
-  .detail-cancel-btn {
-    min-width: 100%; } }
-
-@media (max-width: 278px) {
-  .detail-btn {
-    display: none; } }
-
-.detail-btn {
-  min-width: 150px;
-  border-radius: 1px;
-  color: floralwhite;
-  background-color: rgba(255, 255, 255, 0.15); }
-  .detail-btn:hover {
-    color: black; }
-
-.order-btn {
-  color: floralwhite;
-  background-color: rgba(0, 0, 0, 0.8); }
-  .order-btn:hover {
-    color: black;
-    background-color: rgba(0, 0, 0, 0.7);
-    transition: transform 0.2s; }
-
-.course-name {
-  height: 65px; }
-
-.model-card md-card {
-  position: relative;
-  display: block; }
-  .model-card md-card md-card-content {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    height: 30%;
-    min-height: 100px;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.7); }
-  @media (min-width: 1280px) {
-    .model-card md-card.flex-gt-md-22 {
-      max-height: 100%;
-      box-sizing: border-box;
-      flex: 1 22%; } }
-  @media (min-width: 600px) and (max-width: 1280px) {
-    .model-card md-card.flex-gt-sm-46 {
-      max-height: 100%;
-      box-sizing: border-box;
-      flex: 2 43%; }
-    .model-card md-card:first-child, .model-card md-card:nth-child(2) {
-      flex: 2 43%; } }
-  @media (max-width: 600px) {
-    .model-card md-card.flex-xs-80 {
-      flex: 1 80%; }
-      .model-card md-card.flex-xs-80:first-child, .model-card md-card.flex-xs-80:nth-child(2) {
-        flex: 1 80%; } }
+.courses-details .card-desc-top {
+  background: rgba(0, 0, 0, 0.8);
+  color: white; }
 
 .courses-details .program-block {
-  z-index: 2; }
+  display: flex;
+  z-index: 3;
+  flex-wrap: wrap; }
   .courses-details .program-block .date-block {
-    min-height: 45px;
+    box-sizing: border-box;
     background-color: black;
+    height: 200px;
     color: white;
     border-radius: 50%;
-    position: relative; }
+    width: 200px;
+    text-align: center; }
     .courses-details .program-block .date-block .date-text {
+      left: 20%;
       position: absolute;
-      top: 50%;
+      top: 40%;
+      vertical-align: middle; }
+    .courses-details .program-block .date-block .date {
+      left: 20%;
+      position: absolute;
+      top: 40%;
       vertical-align: middle; }
 
-.courses-details card-image-container {
-  overflow: hidden;
-  cursor: pointer; }
-
 .courses-details md-card.md-default-theme, .courses-details md-card {
-  min-height: 500px;
   z-index: 3;
   padding: 0;
-  min-width: 70vw;
-  margin: 20px;
-  transition: transform 0.4s; }
-  .courses-details md-card.md-default-theme:hover, .courses-details md-card:hover {
-    transform: translate(0%, -1%); }
-  @media (max-width: 600px) {
+  vertical-align: middle; }
+  @media (600px) {
     .courses-details md-card.md-default-theme, .courses-details md-card {
-      margin-left: 0px;
-      margin-right: 0px; } }
+      margin: 0px;
+      width: 300px; } }
+  @media (960px) {
+    .courses-details md-card.md-default-theme, .courses-details md-card {
+      margin: 0px;
+      min-width: 90vw; } }
   .courses-details md-card.md-default-theme .card-desc-top, .courses-details md-card .card-desc-top {
     background: rgba(0, 0, 0, 0.8);
     color: white; }
   .courses-details md-card.md-default-theme .card-desc, .courses-details md-card .card-desc {
     background: white;
     min-width: 200px;
+    max-height: 500px;
     width: 100%;
-    z-index: 2; }
-  .courses-details md-card.md-default-theme md-card-content, .courses-details md-card md-card-content {
-    overflow: hidden;
-    padding: 0; }
-    .courses-details md-card.md-default-theme md-card-content md-card-title-text, .courses-details md-card md-card-content md-card-title-text {
-      overflow: hidden;
-      text-overflow: ellipsis; }
-  .courses-details md-card.md-default-theme .card-media, .courses-details md-card .card-media {
-    position: relative;
-    z-index: 1;
-    height: 500px;
-    overflow: hidden;
-    padding: 0; }
-    .courses-details md-card.md-default-theme .card-media .author-name, .courses-details md-card .card-media .author-name {
-      position: absolute;
-      bottom: 0px;
-      left: 0;
-      width: 100%;
-      color: white;
-      background-color: rgba(0, 0, 0, 0.6); }
-    .courses-details md-card.md-default-theme .card-media img, .courses-details md-card .card-media img {
-      position: absolute;
-      top: 0%;
-      left: 0%;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
-      z-index: -100; }
+    z-index: 2;
+    vertical-align: middle; }
+    @media (max-width: 600px) {
+      .courses-details md-card.md-default-theme .card-desc, .courses-details md-card .card-desc {
+        margin: 0px;
+        width: 300px; } }
+  .courses-details md-card.md-default-theme .card-media .author-name, .courses-details md-card .card-media .author-name {
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6); }
+  @media (min-width: 600px) {
+    .courses-details md-card.md-default-theme .card-media, .courses-details md-card .card-media {
+      height: 500px; } }
+  @media (max-width: 600px) {
+    .courses-details md-card.md-default-theme .card-media, .courses-details md-card .card-media {
+      height: 300px;
+      width: 300px; }
+      .courses-details md-card.md-default-theme .card-media img, .courses-details md-card .card-media img {
+        height: 300px;
+        width: 300px; } }
+  .courses-details md-card.md-default-theme .md-raised, .courses-details md-card .md-raised {
+    margin: 16px 0 16px 0;
+    width: 100%; }
 
 .courses-details .content-block {
-  min-height: 450px;
-  background-color: white; }
-
-.courses-details .description-container {
-  background-color: white; }
+  min-height: 500px; }
 
 .courses-details .gridListCourses md-grid-list {
   margin: 16px; }
@@ -12605,8 +12611,7 @@ md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar), md-toolbar.md-hue-2:
 .courses-details .page-delimiter {
   position: relative;
   display: table;
-  width: calc(99vw - 10px);
-  height: 300px;
+  width: 100%;
   color: white;
   overflow: hidden;
   overflow-y: auto;
@@ -12616,61 +12621,74 @@ md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar), md-toolbar.md-hue-2:
     display: table-cell;
     vertical-align: middle;
     z-index: 2; }
-  .courses-details .page-delimiter .overlay, .courses-details .page-delimiter .overlay-history, .courses-details .page-delimiter .overlay-comments, .courses-details .page-delimiter .overlay-description, .courses-details .page-delimiter .overlay-forms {
-    z-index: 1;
-    -webkit-filter: blur(5px);
-    -moz-filter: blur(5px);
-    -o-filter: blur(5px);
-    -ms-filter: blur(5px);
-    filter: blur(5px); }
-  .courses-details .page-delimiter .overlay-history {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/slider/s9.png") no-repeat center center fixed; }
+  .courses-details .page-delimiter .header {
+    height: 150px; }
+  .courses-details .page-delimiter .header-super {
+    height: 350px; }
+  .courses-details .page-delimiter .header-long {
+    height: 500px; }
+  .courses-details .page-delimiter .invers {
+    background-color: white;
+    color: black; }
+  .courses-details .page-delimiter .overlay, .courses-details .page-delimiter .overlay-bg, .courses-details .page-delimiter .overlay-days, .courses-details .page-delimiter .overlay-comments, .courses-details .page-delimiter .overlay-description, .courses-details .page-delimiter .overlay-forms {
+    z-index: 1; }
+  .courses-details .page-delimiter .overlay-bg {
+    background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url("../images/bg/slider/s5.png") no-repeat center center fixed; }
+  .courses-details .page-delimiter .overlay-days {
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px);
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../images/bg/IMG_7095.jpg") no-repeat center center fixed; }
   .courses-details .page-delimiter .overlay-comments {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/slider/s10.png") no-repeat center center fixed; }
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px);
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/IMG_6790_1.jpg") no-repeat center center fixed; }
   .courses-details .page-delimiter .overlay-description {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/slider/s11.png") no-repeat center center fixed; }
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px);
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../images/bg/IMG_6914.jpg") no-repeat center center fixed; }
   .courses-details .page-delimiter .overlay-forms {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/bg/slider/s12.png") no-repeat center center fixed; }
+    background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url("../images/bg/slider/s12.png") no-repeat center center fixed; }
 
-.courses-details .md-button.md-default-theme.md-accent.md-raised, .courses-details .md-button.md-accent.md-raised, .courses-details .md-button.md-default-theme.md-accent.md-fab, .courses-details .md-button.md-accent.md-fab {
-  background-color: black; }
-
-.courses-details .md-button.md-default-theme.md-raised:not([disabled]):hover, .courses-details .md-button.md-raised:not([disabled]):hover {
-  color: white;
-  border-color: black;
-  background-color: black; }
-
-.courses-details .md-button.md-default-theme.md-raised.xs-selected:not([disabled]):hover, .courses-details .md-button.md-raised.xs-selected:not([disabled]):hover {
-  color: black;
-  border-color: white;
-  background-color: white; }
-
-.courses-details .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .courses-details .md-button.md-raised.xs-selected:not([disabled]) {
-  color: white;
-  border: white;
-  background-color: black; }
-
-.courses-details .md-raised.xs-selected {
-  color: white;
-  border: white;
-  background-color: black; }
-
-.courses-details .md-raised {
-  display: block;
-  border-style: solid;
-  border-color: black;
-  border-width: 3px;
-  background-color: transparent;
-  color: black;
-  height: 56px;
-  min-width: 100%;
-  margin: 16px;
-  font-size: 26px;
-  border-radius: 0px;
-  transition: background-color 1s; }
-  @media (max-width: 600px) {
-    .courses-details .md-raised {
-      min-width: 90vw; } }
+.model-card {
+  box-sizing: border-box; }
+  .model-card md-card.md-default-theme, .model-card md-card {
+    position: relative;
+    display: block; }
+    .model-card md-card.md-default-theme md-card-content, .model-card md-card md-card-content {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 30%;
+      min-height: 100px;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.7); }
+    @media (min-width: 1280px) {
+      .model-card md-card.md-default-theme.flex-gt-md-22, .model-card md-card.flex-gt-md-22 {
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 1 22%; } }
+    @media (min-width: 600px) and (max-width: 1280px) {
+      .model-card md-card.md-default-theme.flex-gt-sm-46, .model-card md-card.flex-gt-sm-46 {
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 1 43%; }
+      .model-card md-card.md-default-theme:first-child, .model-card md-card.md-default-theme:nth-child(2), .model-card md-card:first-child, .model-card md-card:nth-child(2) {
+        flex: 1 43%; } }
+    @media (max-width: 600px) {
+      .model-card md-card.md-default-theme.flex-xs-80, .model-card md-card.flex-xs-80 {
+        flex: 1 80%; }
+        .model-card md-card.md-default-theme.flex-xs-80:first-child, .model-card md-card.md-default-theme.flex-xs-80:nth-child(2), .model-card md-card.flex-xs-80:first-child, .model-card md-card.flex-xs-80:nth-child(2) {
+          flex: 1 80%; } }
 
 pg-image-input > div {
   position: relative; }
@@ -12788,6 +12806,10 @@ media-observer {
       user-select: none;
       /* Likely future */ }
 
+.model-avatar {
+  max-height: 200%;
+  width: 200px; }
+
 .module-avatar {
   height: 200px; }
 
@@ -12805,6 +12827,13 @@ media-observer {
   overflow: hidden;
   width: 560px;
   height: 550px; }
+
+.comments-list md-list-item {
+  margin: 0 !important; }
+  .comments-list md-list-item.new {
+    background: lightgray; }
+    .comments-list md-list-item.new h3, .comments-list md-list-item.new p {
+      font-weight: bold !important; }
 
 pg-calendar {
   display: block;
@@ -12862,7 +12891,7 @@ pg-calendar {
         font-size: 18px;
         padding: 0px;
         overflow: hidden; }
-      pg-calendar md-content > md-content.agenda .hovereffect .overlay, pg-calendar md-content > md-content.agenda .hovereffect .courses-details .page-delimiter .overlay-history, .courses-details .page-delimiter pg-calendar md-content > md-content.agenda .hovereffect .overlay-history, pg-calendar md-content > md-content.agenda .hovereffect .courses-details .page-delimiter .overlay-comments, .courses-details .page-delimiter pg-calendar md-content > md-content.agenda .hovereffect .overlay-comments, pg-calendar md-content > md-content.agenda .hovereffect .courses-details .page-delimiter .overlay-description, .courses-details .page-delimiter pg-calendar md-content > md-content.agenda .hovereffect .overlay-description, pg-calendar md-content > md-content.agenda .hovereffect .courses-details .page-delimiter .overlay-forms, .courses-details .page-delimiter pg-calendar md-content > md-content.agenda .hovereffect .overlay-forms {
+      pg-calendar md-content > md-content.agenda .hovereffect .overlay, pg-calendar md-content > md-content.agenda .hovereffect .courses .overlay-bg, .courses pg-calendar md-content > md-content.agenda .hovereffect .overlay-bg, pg-calendar md-content > md-content.agenda .hovereffect .courses-details .page-delimiter .overlay-bg, .courses-details .page-delimiter pg-calendar md-content > md-content.agenda .hovereffect .overlay-bg, pg-calendar md-content > md-content.agenda .hovereffect .courses-details .page-delimiter .overlay-days, .courses-details .page-delimiter pg-calendar md-content > md-content.agenda .hovereffect .overlay-days, pg-calendar md-content > md-content.agenda .hovereffect .courses-details .page-delimiter .overlay-comments, .courses-details .page-delimiter pg-calendar md-content > md-content.agenda .hovereffect .overlay-comments, pg-calendar md-content > md-content.agenda .hovereffect .courses-details .page-delimiter .overlay-description, .courses-details .page-delimiter pg-calendar md-content > md-content.agenda .hovereffect .overlay-description, pg-calendar md-content > md-content.agenda .hovereffect .courses-details .page-delimiter .overlay-forms, .courses-details .page-delimiter pg-calendar md-content > md-content.agenda .hovereffect .overlay-forms {
         opacity: 1;
         display: flex;
         flex-direction: column;
@@ -12929,7 +12958,7 @@ pg-calendar {
           overflow: visible;
           padding: 3px;
           opacity: 1; }
-        pg-calendar md-content > md-content.calendar .touch-device .overlay, pg-calendar md-content > md-content.calendar .touch-device .courses-details .page-delimiter .overlay-history, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .touch-device .overlay-history, pg-calendar md-content > md-content.calendar .touch-device .courses-details .page-delimiter .overlay-comments, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .touch-device .overlay-comments, pg-calendar md-content > md-content.calendar .touch-device .courses-details .page-delimiter .overlay-description, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .touch-device .overlay-description, pg-calendar md-content > md-content.calendar .touch-device .courses-details .page-delimiter .overlay-forms, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .touch-device .overlay-forms {
+        pg-calendar md-content > md-content.calendar .touch-device .overlay, pg-calendar md-content > md-content.calendar .touch-device .courses .overlay-bg, .courses pg-calendar md-content > md-content.calendar .touch-device .overlay-bg, pg-calendar md-content > md-content.calendar .touch-device .courses-details .page-delimiter .overlay-bg, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .touch-device .overlay-bg, pg-calendar md-content > md-content.calendar .touch-device .courses-details .page-delimiter .overlay-days, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .touch-device .overlay-days, pg-calendar md-content > md-content.calendar .touch-device .courses-details .page-delimiter .overlay-comments, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .touch-device .overlay-comments, pg-calendar md-content > md-content.calendar .touch-device .courses-details .page-delimiter .overlay-description, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .touch-device .overlay-description, pg-calendar md-content > md-content.calendar .touch-device .courses-details .page-delimiter .overlay-forms, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .touch-device .overlay-forms {
           opacity: 1;
           display: flex;
           flex-direction: column;
@@ -12964,7 +12993,7 @@ pg-calendar {
           box-shadow: 0 8px 25px 0 rgba(0, 0, 0, 0.5), 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 15px 8px -1px rgba(0, 0, 0, 0.2);
           transform: scale(1.5);
           z-index: 2; }
-          pg-calendar md-content > md-content.calendar .hovereffect:hover .overlay, pg-calendar md-content > md-content.calendar .hovereffect:hover .courses-details .page-delimiter .overlay-history, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .hovereffect:hover .overlay-history, pg-calendar md-content > md-content.calendar .hovereffect:hover .courses-details .page-delimiter .overlay-comments, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .hovereffect:hover .overlay-comments, pg-calendar md-content > md-content.calendar .hovereffect:hover .courses-details .page-delimiter .overlay-description, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .hovereffect:hover .overlay-description, pg-calendar md-content > md-content.calendar .hovereffect:hover .courses-details .page-delimiter .overlay-forms, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .hovereffect:hover .overlay-forms {
+          pg-calendar md-content > md-content.calendar .hovereffect:hover .overlay, pg-calendar md-content > md-content.calendar .hovereffect:hover .courses .overlay-bg, .courses pg-calendar md-content > md-content.calendar .hovereffect:hover .overlay-bg, pg-calendar md-content > md-content.calendar .hovereffect:hover .courses-details .page-delimiter .overlay-bg, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .hovereffect:hover .overlay-bg, pg-calendar md-content > md-content.calendar .hovereffect:hover .courses-details .page-delimiter .overlay-days, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .hovereffect:hover .overlay-days, pg-calendar md-content > md-content.calendar .hovereffect:hover .courses-details .page-delimiter .overlay-comments, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .hovereffect:hover .overlay-comments, pg-calendar md-content > md-content.calendar .hovereffect:hover .courses-details .page-delimiter .overlay-description, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .hovereffect:hover .overlay-description, pg-calendar md-content > md-content.calendar .hovereffect:hover .courses-details .page-delimiter .overlay-forms, .courses-details .page-delimiter pg-calendar md-content > md-content.calendar .hovereffect:hover .overlay-forms {
             opacity: 1;
             display: flex;
             flex-direction: column;
