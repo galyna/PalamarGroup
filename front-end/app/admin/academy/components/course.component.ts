@@ -294,7 +294,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
 
 class AdminCourseController {
 
-    static $inject = ["$log", "$routeParams", "$mdToast", "$timeout", PhotoServiceName, "CourseResource", "Upload", '$sce'];
+    static $inject = ["$log", "$routeParams", "$mdToast", "$timeout", PhotoServiceName, "CourseResource", "Upload"];
 
     originalCourse:ICourse;
     course:ICourse;
@@ -307,7 +307,7 @@ class AdminCourseController {
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
                 private photoService:PhotoService,
-                private CourseResource:ICourseResource, private Upload:ng.angularFileUpload.IUploadService, $sce) {
+                private CourseResource:ICourseResource, private Upload:ng.angularFileUpload.IUploadService) {
     }
 
     $onInit() {

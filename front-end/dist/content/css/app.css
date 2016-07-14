@@ -12234,6 +12234,16 @@ md-tabs md-ink-bar {
 md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar), md-toolbar.md-hue-2:not(.md-menu-toolbar) {
   background-color: rgba(0, 0, 0, 0.8); }
 
+.embed-responsive-item {
+  position: absolute;
+  margin-top: 8px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0; }
+
 .down-btn {
   position: absolute;
   left: calc(50% - 30px);
@@ -12834,6 +12844,25 @@ media-observer {
     background: lightgray; }
     .comments-list md-list-item.new h3, .comments-list md-list-item.new p {
       font-weight: bold !important; }
+
+.embed-responsive {
+  position: relative;
+  display: block;
+  height: 0;
+  padding: 0;
+  overflow: hidden; }
+
+.embed-responsive.embed-responsive-16by9 {
+  padding-bottom: 56.25%; }
+
+.embed-responsive-item {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0; }
 
 pg-calendar {
   display: block;

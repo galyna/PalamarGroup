@@ -30,10 +30,7 @@ System.config({
         'youtube-iframe-api': 'https://www.youtube.com/iframe_api'
     },
     meta: {
-        'ng-img-crop-full-extended': {
-            deps: ['angular'],
-            format: "global"
-        },
+     
         'ng-img-crop-full-extended': {
             deps: ['angular'],
             format: "global"
