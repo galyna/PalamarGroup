@@ -13,6 +13,7 @@ import 'ng-file-upload';
 import 'ng-img-crop-full-extended';
 import 'angular-socialshare';
 import 'ngSmoothScroll';
+import 'angular-youtube-embed';
 import {uiModule} from './ui/ui.module';
 import {coursesModule} from './courses/courses.module';
 import './templates';
@@ -34,6 +35,7 @@ let app = angular.module('yuliaPalamarApp', [
    '720kb.socialshare',
     'smoothScroll',
     'templates',
+    'youtube-embed',
     coreModule.name,
     resourcesModule.name,
     uiModule.name,

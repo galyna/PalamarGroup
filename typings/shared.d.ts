@@ -40,6 +40,7 @@ declare module pg {
             videos:IVideo[],
             hearFormsPhotos:IPhoto[],
             historyPhotos:IPhoto[],
+            avatar: string,
             author:{
                 name:string,
                 photoUrl:string
