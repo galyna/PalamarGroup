@@ -17,6 +17,11 @@
   md-icon{  -ms-transform: rotate(180deg); /* IE 9 */
     -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
     transform: rotate(180deg);}
+
+  @media (max-width: $layout-breakpoint-xs) {
+    top: 20px;
+  }
+
 }
 
 .md-social-image {
