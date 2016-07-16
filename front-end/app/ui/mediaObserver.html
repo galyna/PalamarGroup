@@ -14,28 +14,28 @@
                                              md-svg-src="../content/images/icons/social/face.svg"></md-icon>
                                 </a>
                   <a href=""
-                                   socialshare
-                                   socialshare-provider="vk"
-                                   socialshare-text="{{ vm.socialParams.title}}"
-                                   socialshare-description="{{vm.socialParams.description}}"
-                                   socialshare-media='{{vm.socialParams.image}}'
-                                   socialshare-url="{{vm.socialParams.target}}">
+                     socialshare
+                     socialshare-provider="vk"
+                     socialshare-text="{{ vm.socialParams.title}}"
+                     socialshare-description="{{vm.socialParams.description}}"
+                     socialshare-media='{{vm.socialParams.image}}'
+                     socialshare-url="{{vm.socialParams.target}}">
                                     <md-icon class="md-social-image"
                                              md-svg-src="../content/images/icons/social/vk-social-logotype.svg"></md-icon>
                                 </a>
                   <a href=""
-                                   socialshare
-                                   socialshare-provider="twitter"
-                                   socialshare-text="{{ 'Запрошуємо на блок '+ vm.socialParams.title }}"
-                                   socialshare-hashtags=""
-                                   socialshare-url="{{vm.socialParams.target}}">
+                     socialshare
+                     socialshare-provider="twitter"
+                     socialshare-text="{{ 'Запрошуємо на блок '+ vm.socialParams.title }}"
+                     socialshare-hashtags=""
+                     socialshare-url="{{vm.socialParams.target}}">
                                     <md-icon class="md-social-image"
                                              md-svg-src="../content/images/icons/social/twi.svg"></md-icon>
                                 </a>
                   <a href=""
-                                   socialshare
-                                   socialshare-provider="google"
-                                   socialshare-url="{{vm.socialParams.target}}">
+                     socialshare
+                     socialshare-provider="google"
+                     socialshare-url="{{vm.socialParams.target}}">
                                     <md-icon class="md-social-image"
                                              md-svg-src="../content/images/icons/social/goo.svg"></md-icon>
 
@@ -65,3 +65,16 @@
         </next>
     </div>
 </media-observer>
+<md-dialog class="menu-dialog " aria-label="menu" layout="column" layout-align="center center">
+    <div layout="row" class="close-row"><span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()">
+            <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close menu"></md-icon>
+        </md-button>
+    </div>
+
+    <md-button ng-click="vm.courses()" class=" md-raised md-display-3">БЛОКИ
+    </md-button>
+    <md-button ng-click="vm.calendar()" class=" md-raised md-display-3">КАЛАНДАР
+    </md-button>
+
+</md-dialog>

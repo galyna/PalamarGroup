@@ -9,18 +9,7 @@ export function pgCalendarDirective($compile:ng.ICompileService, $parse:ng.IPars
 
     var defaultTemplate = "/* calendar.html */";
 
-    //TODO: refactor css. Currently it is in app.scss
-    // var injectCss = function () {
-    //     var styleId = "calendarMdCss";
-    //     if (!document.getElementById(styleId)) {
-    //         var head = document.getElementsByTagName("head")[0];
-    //         var css = document.createElement("style");
-    //         css.type = "text/css";
-    //         css.id = styleId;
-    //         css.innerHTML = "/* angular-material-calendar.css */";
-    //         head.insertBefore(css, head.firstChild);
-    //     }
-    // };
+
 
     return {
         restrict: "E",
