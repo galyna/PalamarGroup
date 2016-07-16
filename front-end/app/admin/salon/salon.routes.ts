@@ -8,13 +8,13 @@ export function salonRoutes($routeProvider:ng.route.IRouteProvider) {
         .when(MastersComponentUrl, {
             template: '<pg-masters></pg-masters>',
             resolve: {
-                auth: [ItServiceName, (it: ItService) => it.canAsync('readAcademy')]
+                auth: [ItServiceName, (it: ItService) => it.canAsync('readSalon')]
             }
         })
         .when(MasterComponentUrl, {
             template: '<pg-master></pg-master>',
             resolve: {
-                auth: [ItServiceName, (it: ItService) => it.canAsync('readAcademy')]
+                auth: [ItServiceName, (it: ItService) => it.canAsync('readSalon')]
             }
         });
 }

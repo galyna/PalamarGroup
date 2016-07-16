@@ -89,7 +89,7 @@ export class LeftSidenavComponentController {
                 text: 'Салон',
                 opened: false,
                 visible: ()=> {
-                    return this.it.is('academyUser')
+                    return this.it.is('salonUser')
                 },
                 items: [
                     {
