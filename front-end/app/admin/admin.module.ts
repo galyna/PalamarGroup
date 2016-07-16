@@ -40,6 +40,7 @@ import {usersModule} from "../users/users.module";
 import {usersComponentName, usersComponentOptions} from "./components/users.component";
 import {userComponentName, userComponentOptions} from "./components/user.component";
 import {CommentsComponentName, CommentsComponentOptions} from "./academy/components/comments.component";
+import {salonModule} from "./salon/salon.module";
 
 
 let app = angular.module('admin', [
@@ -52,7 +53,8 @@ let app = angular.module('admin', [
     coreModule.name,
     resourcesModule.name,
     uiModule.name,
-    usersModule.name
+    usersModule.name,
+    salonModule.name
 ])
     .config(adminRoutes)
     .run(adminRun)

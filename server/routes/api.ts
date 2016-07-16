@@ -23,6 +23,7 @@ import {courseGetCommentsApi} from "./comment.endpoint";
 import {userOptions, userApi} from "./user.endpoint";
 import IOrder = pg.models.IOrder;
 import {salonClientApi} from "./salon.client.endpoint";
+import {Master} from "../models/master";
 
 
 let api = express.Router();
@@ -68,9 +69,9 @@ restify.serve(api, Course);
 api.use('/user', userApi);
 restify.serve(api, User, userOptions);
 
-restify.serve(api, Model, Object.assign({}, readOnlyOptions));
+restify.serve(api, Model, readOnlyOptions);
 restify.serve(api, Order, orderOptions);
-
+restify.serve(api, Master, readOnlyOptions);
 api.use('/salonclient', salonClientApi);
 restify.serve(api, SalonClient, Object.assign({}, readOnlyOptions));
 
