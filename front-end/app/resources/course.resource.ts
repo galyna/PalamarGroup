@@ -7,6 +7,11 @@ export interface ICourse extends ng.resource.IResource<ICourse>, pg.models.ICour
     courseModulesDates: Date[]
 }
 
+export interface IAdminComment extends pg.models.IAdminComment {
+    date: Date,
+    courseDates: Date[]
+}
+
 export interface ICourseResource extends ng.resource.IResourceClass<ICourse> {
     addComment(params: {id:string}, comment:any):ICourse;
     editComment(params: {id:string}, comment:any):ICourse;
@@ -69,6 +74,16 @@ export function CourseResource($resource:ng.resource.IResourceService, constants
         method: "GET",
         isArray: true,
         url: `${constants.apiUrl}/course/comments`,
+        transformResponse: (data) => {
+            let comments = <pg.models.IAdminComment[]>JSON.parse(data);
+            comments.forEach((comment)=>{
+                comment.date = new Date(comment.date);
+                comment.courseDates = comment.courseDates.map((dateStr) => {
+                    return new Date(dateStr);
+                });
+            });
+            return <IAdminComment[]>comments;
+        }
     };
     
     

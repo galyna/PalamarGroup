@@ -1057,5 +1057,22 @@
       "date": "2016-06-10T13:04:15.610Z",
       "__v": 0
     }
+  ],
+  "Master": [
+    {
+      "name": "Ostap Nagovitsyn",
+      "photo": {
+        "name": "",
+        "url": "/api/photo/6651dfbe-e084-489f-9a52-581252e12207.jpg",
+        "order": 0,
+        "_id": "57879a2fd54068841c4b9069"
+      },
+      "services": ["do nothing", "watch movies", "eat", "sleep"],
+      "works": [],
+      "contacts": {
+        "phone": "123345670",
+        "facebook": "http://facebook.com/someid"
+      }
+    }
   ]
 }

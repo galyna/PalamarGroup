@@ -8,6 +8,18 @@ export class PhotoService {
 
     }
 
+    dataUrltoFile(dataUrl: string, name: string){
+        let blob = this.Upload.dataUrltoBlob(dataUrl, name);
+        return this.blobToFile(blob, name);
+    }
+    
+    blobToFile(theBlob: Blob, fileName:string): File {
+        var b: any = theBlob;
+        b.lastModifiedDate = new Date();
+        b.name = fileName;
+        return <File>theBlob;
+    }
+
     save(file:File) {
         return this.Upload.upload<{url:string}>({
             method: 'POST',

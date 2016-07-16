@@ -1,6 +1,18 @@
 declare module pg {
     module models {
 
+        export interface IMaster {
+            _id: any,
+            name: string,
+            photo: IPhoto,
+            services: string[],
+            works: IPhoto[],
+            contacts: {
+                phone: string,
+                facebook: string,
+            }
+        }
+        
         export interface IContact {
             _id?:any;
             name:string,
@@ -99,7 +111,7 @@ declare module pg {
             _id?:any;
             name:string;
             text:string;
-            date:string;
+            date:any;
             isVisible:boolean;
             isModerated:boolean;
         }
@@ -107,7 +119,7 @@ declare module pg {
         export interface IAdminComment extends IComment{
             isCourseVisible: boolean,
             courseId: string,
-            courseDates:string[],
+            courseDates:any[],
             courseName: string
         }
     }

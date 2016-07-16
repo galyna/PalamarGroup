@@ -12,12 +12,14 @@ import {SalonClientResourceName, SalonClientResource} from "./salon.client.resou
 import {EmailService} from "./email.service";
 import {PhotoServiceName, PhotoService} from "./photo.service";
 import {UserResourceName, UserResource} from "./user.resource";
+import {MasterResourceName, MasterResource} from "./master.resource";
 
 export let resourcesModule = angular.module('resources', ['ngResource', coreModule.name])
     .factory(CourseResourceName, CourseResource)
     .factory(ModelResourceName, ModelResource)
     .factory(ContactResourceName, ContactResource)
     .factory(SalonClientResourceName, SalonClientResource)
+    .factory(MasterResourceName, MasterResource)
     .factory(OrderResourceName, OrderResource)
     .service(UserResourceName, UserResource)
     .service(EmailService.componentName, EmailService)

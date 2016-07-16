@@ -4,7 +4,7 @@ import {PagingService, PagingServiceName, IPagingHelperParams} from "../../../ui
 import IAdminComment = pg.models.IAdminComment;
 
 const editDialogTemplate = `<md-dialog aria-label="Comment edit" flex="80">
-    <form name="editForm" ng-submit="$ctrl.save(editForm)">
+    <form name="editForm" ng-submit="$ctrl.save(editForm)" novalidate>
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2>Редагування відгуку</h2>
@@ -19,15 +19,15 @@ const editDialogTemplate = `<md-dialog aria-label="Comment edit" flex="80">
             <h3>{{$ctrl.comment.courseName}} <span>{{$ctrl.comment.courseDates|courseDates}} </span></h3>
                 <md-input-container class="md-block">
                     <label>Автор</label>
-                    <input type="text" ng-model="$ctrl.comment.name">
+                    <input type="text" ng-model="$ctrl.comment.name" required>
                 </md-input-container>
                 
                 <md-input-container class="md-block">
                     <label>Відгук</label>
-                    <textarea ng-model="$ctrl.comment.text"></textarea>
+                    <textarea ng-model="$ctrl.comment.text" required></textarea>
                 </md-input-container>
                 <div layout="row">
-                <md-datepicker ng-model="$ctrl.comment.date" md-placeholder="Дата"></md-datepicker>
+                <md-datepicker ng-model="$ctrl.comment.date" md-placeholder="Дата" required></md-datepicker>
                 <md-checkbox class="md-block" ng-model="$ctrl.comment.isVisible">
                     Видимий
                 </md-checkbox>

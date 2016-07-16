@@ -86,6 +86,20 @@ export class LeftSidenavComponentController {
                 ]
             },
             {
+                text: 'Салон',
+                opened: false,
+                visible: ()=> {
+                    return this.it.is('salonUser')
+                },
+                items: [
+                    {
+                        text: 'Майстри',
+                        visible: () => true,
+                        url: '/salon/masters',
+                    }
+                ]
+            },
+            {
                 text: 'Користувачі',
                 url: usersComponentUrl,
                 visible: ()=>{
