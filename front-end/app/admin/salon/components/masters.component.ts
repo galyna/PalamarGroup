@@ -21,7 +21,7 @@ const template = `<md-toolbar>
 
 <md-list flex>
     <md-list-item class="md-2-line" ng-repeat="master in $ctrl.masters"
-                  ng-click="$ctrl.showEditOrderDialog($event, master)">
+                  ng-click="$ctrl.editMaster(master)">
                   <img ng-src="{{master.photo}}" class="md-avatar" alt="{{master.name}}" />
         <div class="md-list-item-text" layout="column">
             <h3>{{::master.name}}</h3>
