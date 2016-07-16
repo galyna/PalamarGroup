@@ -11,7 +11,7 @@ const template = `
 <div>
     <md-list>
         <md-list-item class="md-2-line" ng-repeat="course in $ctrl.courses" ng-click="$root.it.can('modifyAcademy') && $ctrl.showEditForm(course)">
-            <img ng-src="{{::course.hearFormsPhotos[0].url}}" class="md-avatar" alt="No photo"/>
+            <img ng-src="{{::course.avatar}}" class="md-avatar" alt="No photo"/>
             <div class="md-list-item-text" layout="column">
                 <h3>{{::course.name}}</h3>
                 <p>{{::$ctrl.getCourseDates(course)}}</p>

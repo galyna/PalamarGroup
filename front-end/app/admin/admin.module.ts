@@ -11,6 +11,7 @@ import 'angular-material';
 import 'angular-animate';
 import 'ng-file-upload';
 import 'ng-img-crop-full-extended';
+import 'angular-youtube-embed';
 import {coreModule} from "../core/core.module";
 import {resourcesModule} from "../resources/resources.module";
 import '../templates';
@@ -48,7 +49,7 @@ let app = angular.module('admin', [
     'ngMaterial',
     'ngFileUpload',
     'ngImgCrop',
-
+    'youtube-embed',
     'templates',
     coreModule.name,
     resourcesModule.name,

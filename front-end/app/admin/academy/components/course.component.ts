@@ -76,6 +76,37 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                 </md-card-content>
             </md-card>
         </md-tab>
+        <md-tab label="Аватар">
+        <md-card>
+                 <md-card-content layout-sm="row" layout-gt-sm>                    
+                            <div layout="column">
+                              <img ng-src="{{$ctrl.course.avatar}}" class="module-history-img" />
+                                
+                    <div>
+                        <md-button ng-if="!$ctrl.showAuthorPhotoUpload" class="md-raised"
+                                   ng-click="$ctrl.showAuthorPhotoUpload=true">
+                            Змінити фото 
+                        </md-button>
+                        <div ng-if="$ctrl.showAuthorPhotoUpload" class="md-padding md-margin">
+                            <md-button ngf-select ng-model="hearFormsPhotoFile" accept="image/*" class="md-raised">
+                                Вибрати файл
+                            </md-button>        
+                              <md-button class="md-primary"
+                                       ng-click="$ctrl.uploadAvatarPhoto(croppedhearFormsPhotoFile, hearFormsPhotoFile.name,$ctrl.course)">
+                                Завантажити
+                            </md-button>
+                            <div ngf-drop ng-model="hearFormsPhotoFile" ngf-pattern="image/*"
+                                 class="cropArea">
+                                <img-crop area-type="rectangle" result-image-size="{w:500,h:500}" aspect-ratio="1"
+                                          init-max-area="true"
+                                          image="hearFormsPhotoFile  | ngfDataUrl"
+                                          result-image="croppedhearFormsPhotoFile" ng-init="croppedhearFormsPhotoFile=''">
+                                </img-crop>
+                            </div>
+
+                        </div>
+                    </div> 
+                </md-card-content>                  
         <md-tab label="Автор">
         <md-card>
                 <md-card-content layout-sm="row" layout-gt-sm>                    
@@ -113,7 +144,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                 </md-card-content>
             </md-card>
         </md-tab>
-        <md-tab label="Медіа">
+        <md-tab label="Фото">
          
        <md-card>
                 <md-card-content>
@@ -153,7 +184,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                             </md-button>
                             <div ngf-drop ng-model="hearFormsPhotoFile" ngf-pattern="image/*"
                                  class="cropArea">
-                                <img-crop area-type="rectangle" result-image-size="{w:500,h:500}" aspect-ratio="1"
+                                <img-crop area-type="rectangle" result-image-size="{w:800,h:800}" aspect-ratio="1"
                                           init-max-area="true"
                                           image="hearFormsPhotoFile  | ngfDataUrl"
                                           result-image="croppedhearFormsPhotoFile" ng-init="croppedhearFormsPhotoFile=''">
@@ -161,6 +192,48 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                             </div>
 
                         </div>
+                    </div>                    
+                </md-card-content>
+            </md-card>                 
+          
+        </md-tab>
+         <md-tab label="Відео">
+        
+       <md-card>
+                <md-card-content layout="row">
+                    <div flex="60">
+                        <md-subheader class="md-no-sticky">Відео</md-subheader>
+                         <div class="md-padding md-margin"  ng-repeat="item in $ctrl.course.videos track by $index"
+                             ng-click="null">
+                           <div  class="embed-responsive embed-responsive-16by9">
+               <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}" video-id="item.url"></youtube-video>
+                              </div>
+                            <div layout="column">
+                                <md-input-container class="md-block  ">
+                                    <label for="historyNme">Назва форми</label>
+                                    <input id="historyNme" ng-model="item.name" name="historyNme"/>
+                                </md-input-container>
+                                <md-input-container class="md-block  ">
+                                    <label for="ord">Порядок відображення</label>
+                                    <input id="ord" ng-model="item.order" type="number"/>
+                                </md-input-container>
+                                <md-button class="  md-raised"
+                                           ng-click="$ctrl.deleteFromList($ctrl.course.videos,item)">
+                                    Видалити
+                                </md-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div flex>
+                    <md-input-container class="md-block  ">
+                                    <label for="videoId">ID</label>
+                                    <input id="videoId" ng-model="videoId" name="videoId"/>
+                                </md-input-container>
+                        <md-button class="md-raised"
+                                   ng-click="$ctrl.addVideo(videoId)">
+                            Додати відео 
+                        </md-button>
+                       
                     </div>                    
                 </md-card-content>
             </md-card>                 
@@ -201,7 +274,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                             </md-button>
                             <div ngf-drop ng-model="historyPhotoFile" ngf-pattern="image/*"
                                  class="cropArea">
-                                <img-crop area-type="rectangle" result-image-size="{w:960,h:720}" aspect-ratio="1.33"
+                                <img-crop area-type="rectangle" result-image-size="{w:1060,h:820}" aspect-ratio="1.33"
                                           init-max-area="true"
                                           image="historyPhotoFile  | ngfDataUrl"
                                           result-image="croppedHistoryPhotoFile" ng-init="croppedHistoryPhotoFile=''">
@@ -269,6 +342,42 @@ class AdminCourseController {
     deleteAuthorPhoto() {
         this.course.author.photoUrl = "";
     }
+
+    addVideo(id) {
+        this.course.videos.push( {
+            name: "",
+            url: id,
+            order: 0
+        } );
+        this.course.$save()
+            .then( (course) => {
+                this.$mdToast.showSimple( `курс ${course.name} збережено` );
+            } )
+            .catch( (err)=> {
+                this.$log.error( err );
+                this.showErrorToast();
+            } );
+    }
+
+    uploadAvatarPhoto(dataUrl, name, model):void {
+        this.Upload.upload<{url:string}>( {
+            method: 'POST',
+            url: '/api/photo',
+            data: {
+                file: this.Upload.dataUrltoBlob( dataUrl, name )
+            }
+        } ).then( (response)=> {
+            this.$timeout( ()=> {
+                model.avatar = response.data.url;
+            } );
+        } ).catch( function (err) {
+            this.$log.debug( "fail upload file..." + err );
+        } ).finally( function () {
+            this.$timeout( function () {
+                this.showAuthorPhotoUpload = false;
+            } );
+        } );
+    };
 
     uploadAuthorPhoto(dataUrl, name, model):void {
         this.Upload.upload<{url:string}>( {

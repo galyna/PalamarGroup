@@ -70,7 +70,7 @@ export class CoursesController {
 
     setCalendarContent(course:ICourse) {
         angular.forEach( course.courseModulesDates, (courseDate) => {
-            let content = this.setCoursesCalendarTemplate( course.hearFormsPhotos[0].url, course.name );
+            let content = this.setCoursesCalendarTemplate( course.avatar, course.name );
             this.pgCalendarData.setDayContent( courseDate, this.$sce.trustAsHtml( content ) );
         } );
     }

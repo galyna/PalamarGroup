@@ -17,16 +17,15 @@ export class CourseController {
 
     static $inject = ['$log', '$routeParams', '$location', CourseResourceName,
         OrderResourceName, MediaObserverFactoryName, '$mdDialog', 'Upload',
-        '$timeout', ModelResourceName, 'constants',  "$filter",
-        '$rootScope', '$templateCache', '$mdMedia','orderByFilter'];
+        '$timeout', ModelResourceName, 'constants', "$filter",
+        '$rootScope', '$templateCache', '$mdMedia', 'orderByFilter'];
     static componentName = 'CourseController';
 
     course:ICourse;
     order:IOrder;
     newModel:IModel;
     newComment:any;
-    localURL:string;
-    localContentURL:string;
+    socialParams:any;
 
 
     constructor(private $log:ng.ILogService, $routeParams:IRouteParams,
@@ -35,19 +34,15 @@ export class CourseController {
                 private mdDialog:ng.material.IDialogService, private Upload:ng.angularFileUpload.IUploadService,
                 private $timeout:ng.ITimeoutService, private ModelResource:IModelResource,
                 private constants:IConstants,
-                private $filter, $rootScope:IRootScope, private $templateCache:ng.ITemplateCacheService,
-                private $mdMedia:ng.material.IMenuService,private orderByFilter:ng.IFilterOrderBy) {
+                private $filter, private $rootScope:IRootScope, private $templateCache:ng.ITemplateCacheService,
+                private $mdMedia:ng.material.IMenuService, private orderByFilter:ng.IFilterOrderBy) {
 
-        this.localURL = constants.host;
-        this.localContentURL = constants.host;
         this.course = CourseResource.get( {id: $routeParams.id} );
         this.course.$promise.then( (course)=> {
-            $rootScope.socialParams.image = this.localContentURL + course.hearFormsPhotos[0].url;
-            $rootScope.socialParams.title =  course.name;
-            $rootScope.socialParams.description =  this.getFBDescription();
 
-            course.hearFormsPhotos=this.orderByFilter(course.hearFormsPhotos,"order");
-            course.historyPhotos=this.orderByFilter(course.historyPhotos,"order");
+            this.setSocialParams( course );
+            course.hearFormsPhotos = this.orderByFilter( course.hearFormsPhotos, "order" );
+            course.historyPhotos = this.orderByFilter( course.historyPhotos, "order" );
         } );
 
         this.order = new OrderResource();
@@ -58,29 +53,33 @@ export class CourseController {
 
     }
 
-    getFBDescription():string {
-        if (this.course.courseModulesDates) {
-            let desc = "Запрошуємо на курс, який проволиться у Львові. Дати проведення: ";
-            desc += this.course.courseModulesDates.map( (modulesDate)=> {
-                    return this.$filter( 'date' )( modulesDate, "dd.MM.yyyy" );
-                } ).join( ', ' ) + ". ";
-
-            desc += this.course.description;
-            return desc.slice( 0, 949 );
-
-        } else {
-            return "";
-        }
-        ;
+    setSocialParams(course:ICourse) {
+        this.$rootScope.socialParams.host = this.constants.host;
+        this.$rootScope.socialParams.target = this.constants.host + "/#/course/" + course._id;
+        this.$rootScope.socialParams.image = this.constants.host + course.hearFormsPhotos[0].url;
+        this.$rootScope.socialParams.title = course.name;
+        this.$rootScope.socialParams.description = this.getFBDescription( course );
+        this.socialParams = angular.copy( this.$rootScope.socialParams, this.socialParams );
     }
 
-    getFBMadia():string {
+    getDatesPeriod(course:ICourse) {
         if (this.course.courseModulesDates) {
-            return this.localContentURL + this.course.hearFormsPhotos[0].url;
+            let format = "dd.MM.yyyy";
+            let firstDate = this.$filter( 'date' )( course.courseModulesDates[0], format );
+            let lastDate = this.$filter( 'date' )( course.courseModulesDates[course.courseModulesDates.length - 1], format );
+            return firstDate + " - " + lastDate;
         } else {
             return "";
         }
     }
+
+    getFBDescription(course:ICourse):string {
+        let desc = "Запрошуємо на курс, який проволиться у Львові. Дати проведення: ";
+        desc += this.getDatesPeriod( course );
+        desc += ". " + this.course.description;
+        return desc.slice( 0, 920 );
+    }
+
 
     backToHome():void {
         this.$location.url( '/home' );
@@ -157,7 +156,7 @@ export class CourseController {
     }
 
     showOrderDialog($event):void {
-       
+
         this.mdDialog.show( {
             template: this.$templateCache.get( "app/courses/views/order.html" ).toString(),
             clickOutsideToClose: true,
@@ -187,7 +186,7 @@ export class CourseController {
             this.order.event_id = this.course._id;
             this.order.event_name = this.course.name;
             //TODO: change order.event_dates to Date[] like in CourseResourse
-            this.order.event_dates = this.course.courseModulesDates.map((date) => date.toJSON());
+            this.order.event_dates = this.course.courseModulesDates.map( (date) => date.toJSON() );
             this.order.date = new Date().toJSON();
             this.order.$save()
                 .then( () => {
@@ -223,9 +222,9 @@ export class CourseController {
     submitComment():void {
         this.newComment.date = new Date();
         this.CourseResource.addComment( {id: this.course._id}, this.newComment ).$promise.then( () => {
-                this.mdDialog.hide();
-                this.showCommentConfirm();
-            } )
+            this.mdDialog.hide();
+            this.showCommentConfirm();
+        } )
             .catch( (err) => {
                     this.$log.error( err );
                 }
@@ -252,7 +251,7 @@ export class CourseController {
 
 
     showMediaObserver(items, index):void {
-        this.mediaObserver.observe( items, index );
+        this.mediaObserver.observe( items, index, this.socialParams );
     }
 
     private getBlankComment() {

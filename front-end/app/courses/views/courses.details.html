@@ -1,7 +1,7 @@
 <div class="courses-details description-container" layout="column">
     <!--author-->
     <div layout="row"  flex layout-align="center center">
-        <md-card flex-gt-md="60" flex-gt-lg="40" flex-sm="60" flex-xs="none" flex md-whiteframe="5">
+        <md-card flex-gt-md="60"  flex-sm="60" flex-xs="none" flex md-whiteframe="5">
             <md-card-content layuot="column" layout-gt-sm="row">
                 <div class="card-desc-top " flex hide-gt-sm="true" layout="column" layout-align=" space-around center">
                     <md-card-title>
@@ -11,19 +11,19 @@
                         </md-card-title-text>
                     </md-card-title>
                 </div>
-                <div flex class=" card-media">
+                <div  class=" card-media" flex-gt-sm="50">
                     <img src="{{vm.course.author.photoUrl}}"/>
                     <div class="md-padding author-name" layout="column" layout-align="space-around center">
                         <div class="md-headline">Автор</div>
                         <div class="md-headline">{{ ::vm.course.author.name}}</div>
                     </div>
                 </div>
-                <div flex class="card-desc " flex-gt-sm="50" layout="column" layout-align=" space-between center">
+                <div  class="card-desc " flex-gt-sm="50" layout="column" layout-align=" space-between center">
                     <md-card-title layout="column" layout-align="space-around center">
                         <md-card-title-text hide show-gt-sm="true" flex layout="column"
                                             layout-align=" space-around center">
 
-                            <div class="md-display-3">{{::vm.course.name}}</div>
+                            <div class="md-display-1">{{::vm.course.name}}</div>
                         </md-card-title-text>
                         <div flex class="md-title " flex layout="row" layout-align=" space-around center">
                             <div class=" md-padding">Вартість</div>
@@ -53,37 +53,37 @@
                                    socialshare
                                    socialshare-type="feed"
                                    socialshare-provider="facebook"
-                                   socialshare-text="{{ vm.course.name.toUpperCase()}}"
+
                                    socialshare-caption="PALAMAR GROUP ACADEMY"
-                                   socialshare-description="{{vm.getFBDescription()}}"
-                                   socialshare-media="{{vm.getFBMadia()}}"
-                                   socialshare-url="{{vm.localURL}}">
+                                   socialshare-description="{{vm.socialParams.description}}"
+                                   socialshare-media="{{vm.socialParams.image}}"
+                                   socialshare-url="{{vm.socialParams.target}}">
                                     <md-icon class="social-image"
                                              md-svg-src="../content/images/icons/social/face.svg"></md-icon>
                                 </a>
                                 <a href=""
                                    socialshare
                                    socialshare-provider="vk"
-                                   socialshare-text="{{ vm.course.name.toUpperCase()}}"
-                                   socialshare-description="{{vm.getFBDescription()}}"
-                                   socialshare-media='{{vm.getFBMadia()}}'
-                                   socialshare-url="{{vm.localURL}}">
+                                   socialshare-text="{{ vm.socialParams.title}}"
+                                   socialshare-description="{{vm.socialParams.description}}"
+                                   socialshare-media='{{vm.socialParams.image}}'
+                                   socialshare-url="{{vm.socialParams.target}}">
                                     <md-icon class="social-image"
                                              md-svg-src="../content/images/icons/social/vk-social-logotype.svg"></md-icon>
                                 </a>
                                 <a href=""
                                    socialshare
                                    socialshare-provider="twitter"
-                                   socialshare-text="{{ 'Запрошуємо на курс '+ vm.course.name.toUpperCase() }}"
+                                   socialshare-text="{{ 'Запрошуємо на блок '+ vm.socialParams.title }}"
                                    socialshare-hashtags=""
-                                   socialshare-url="{{vm.localURL}}">
+                                   socialshare-url="{{vm.socialParams.target}}">
                                     <md-icon class="social-image"
                                              md-svg-src="../content/images/icons/social/twi.svg"></md-icon>
                                 </a>
                                 <a href=""
                                    socialshare
                                    socialshare-provider="google"
-                                   socialshare-url="{{vm.localURL}}">
+                                   socialshare-url="{{vm.socialParams.target}}">
                                     <md-icon class="social-image"
                                              md-svg-src="../content/images/icons/social/goo.svg"></md-icon>
 
@@ -114,7 +114,7 @@
             <div class="overlay-days"></div>
         </div>
     </div>
-    <div layout="row" flex ng-if="vm.course.hearFormsPhotos">
+    <div layout="row" flex ng-if="vm.course.hearFormsPhotos.length>0">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
                 <div class="md-display-2"> Mатеріали блоку</div>
@@ -122,7 +122,7 @@
 
         </div>
     </div>
-    <div layout="row"  layout-align="center center" ng-if="vm.course.hearFormsPhotos">
+    <div layout="row"  layout-align="center center" ng-if="vm.course.hearFormsPhotos.length>0">
         <div class=" gridListCourses" flex flex-gt-md="60" flex-md="90">
             <md-grid-list
                     md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="3"
@@ -143,6 +143,26 @@
             </md-grid-list>
         </div>
     </div>
+    <div layout="row"  layout-align="center center" ng-if="vm.course.videos.length>0">
+        <div class=" gridListCourses" flex flex-gt-md="60" flex-md="90">
+            <md-grid-list md-cols="1" md-cols-sm="1" md-cols-md="1" md-cols-gt-md="1"
+                          md-row-height-gt-md="5:3" md-row-height="5:3"
+                          >
+                <md-grid-tile ng-repeat="tile in vm.course.videos track by $index"
+                              md-rowspan="{{1}}"
+                              md-colspan="{{1}}"
+                              md-colspan-sm="1"
+                              md-colspan-xs="1"
+                              class="grid-media">
+                          <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}" video-id="tile.url"></youtube-video>
+                    <md-grid-tile-footer ng-if="tile.name"><h3>{{tile.name}}</h3></md-grid-tile-footer>
+                </md-grid-tile>
+            </md-grid-list>
+
+
+        </div>
+
+    </div>
     <!--description-->
     <div layout="row" flex ng-if="vm.course.description">
         <div class="page-delimiter content-block" flex>
@@ -162,7 +182,7 @@
         </div>
     </div>
     <!--historyPhotos-->
-    <div layout="row" flex ng-if="vm.course.historyPhotos">
+    <div layout="row" flex ng-if="vm.course.historyPhotos.length>0">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
                 <div class="md-display-1">Як проходили попередні блоки</div>
@@ -170,7 +190,7 @@
 
         </div>
     </div>
-    <div layout="row" class="content-block" layout-align="center center" ng-if="vm.course.historyPhotos">
+    <div layout="row" class="content-block" layout-align="center center" ng-if="vm.course.historyPhotos.length>0">
         <div class=" gridListCourses" flex flex-gt-md="60" flex-md="90">
             <md-grid-list md-cols="1" md-cols-sm="1" md-cols-md="2" md-cols-gt-md="2"
                           md-row-height-gt-md="5:3" md-row-height="5:3"

@@ -4,43 +4,62 @@
 
   .overlay-bg {
     @extend .overlay;
-    background: linear-gradient(rgba(white, 0.6), rgba(white, 0.6)), url("../images/bg/slider/s5.png") no-repeat center center fixed;
+    background: linear-gradient(rgba(white, 0.8), rgba(white, 0.7)), url("../images/bg/slider/s5.png") no-repeat center center fixed;
   }
 
   md-card.md-default-theme, md-card {
     min-height: 500px;
-    z-index: 3;
-    padding: 0;
-    margin: 20px;
     transition: transform 0.4s;
 
     &:hover {
       @extend .md-whiteframe-16dp;
       transform: translate(0%, -1%);
+    }
+
+    @media (min-width: $layout-breakpoint-md) {
+      height: 500px;
 
     }
 
     @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm) {
-
       min-height: 300px;
       min-width: 600px;
       margin-left: 0px;
       margin-right: 0px;
     }
 
-    @media (max-width: 500px) {
+    @media (min-width: $layout-breakpoint-xs) {
       margin-left: 0px;
       margin-right: 0px;
       height: 300px;
-      min-width: 300px;
+      max-width: 300px;
 
     }
+
     .card-desc {
       background: white;
       min-width: 300px;
+
       z-index: 2;
       vertical-align: middle;
       text-align: center;
+
+      @media (min-width: $layout-breakpoint-lg) {
+        height: 500px;
+        min-width: 500px;
+      }
+
+      @media (min-width: $layout-breakpoint-md) {
+        height: 500px;
+        width: 500px;
+      }
+
+      @media (max-width: $layout-breakpoint-xs) {
+      max-width: 300px;
+    }
+      @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm) {
+        max-width: 300px;
+      }
     }
 
     .card-media {
@@ -50,16 +69,29 @@
       overflow: hidden;
       padding: 0;
 
-      @media (max-width: $layout-breakpoint-sm) {
+      @media (max-width: $layout-breakpoint-xs) {
         height: 300px;
-        width: 300px;
+        max-width: 300px;
         img {
           height: 300px;
+          width: 300px
         }
+
       }
 
-      @media (max-width: 500px) {
+      @media (min-width: $layout-breakpoint-md) {
+        height: 500px;
+        width: 500px;
+
+      }
+      @media (min-width: $layout-breakpoint-lg) {
+        height: 500px;
+        min-width: 500px;
+      }
+
+      @media (max-width: $layout-breakpoint-sm) {
         height: 300px;
+        max-width: 300px;
         img {
           height: 300px;
           width: 300px
@@ -73,9 +105,7 @@
       text-align: center;
       overflow: hidden;
       text-overflow: ellipsis;
-      .md-display-1 {
-        font-weight: bold
-      }
+
     }
 
     .md-raised {

@@ -2,7 +2,7 @@
   position: absolute;
   left:calc(50% - 30px);
   z-index: 3;
-  bottom: -37px;
+  bottom: 40px;
 
   @extend .md-whiteframe-8dp;
 }
@@ -11,12 +11,17 @@
   position: absolute;
   left:calc(50% - 30px);
   z-index: 3;
-  top: -35px;
+  top: 40px;
 
   @extend .md-whiteframe-8dp;
   md-icon{  -ms-transform: rotate(180deg); /* IE 9 */
     -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
     transform: rotate(180deg);}
+
+  @media (max-width: $layout-breakpoint-xs) {
+    top: 20px;
+  }
+
 }
 
 .md-social-image {

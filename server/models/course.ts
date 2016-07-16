@@ -37,6 +37,7 @@ let CourseSchema = new Schema({
     videos: [VideoSchema],
     hearFormsPhotos: [PhotoSchema],
     historyPhotos: [PhotoSchema],
+    avatar: String,
     author: {
         name: String,
         photoUrl: String
