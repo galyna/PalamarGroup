@@ -10,5 +10,5 @@ export let MasterResourceName = 'MasterResource';
 
 MasterResource.$inject = ['$resource', 'constants'];
 export function MasterResource($resource:ng.resource.IResourceService, constants:IConstants) {
-    return <IMasterResource>$resource(`\${constants.apiUrl}/master/:id`, {id: '@_id'});
+    return <IMasterResource>$resource(`${constants.apiUrl}/master/:id`, {id: '@_id'});
 }
