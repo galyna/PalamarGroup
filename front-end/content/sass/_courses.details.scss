@@ -3,6 +3,74 @@
 .courses-details {
   .top-info {
     padding: 20px 0;
+
+    md-card.md-default-theme, md-card {
+
+      z-index: 3;
+      padding: 0;
+
+      vertical-align: middle;
+
+      @media (max-width: $layout-breakpoint-xs) {
+        margin-left: 0px;
+        margin-right: 0px;
+        width: 300px;
+
+      }
+      @media (max-width: $layout-breakpoint-sm) {
+        margin-left: 0px;
+        margin-right: 0px;
+
+
+      }
+
+      .card-desc-top {
+        background: rgba($primary, 0.8);
+        color: white;
+      }
+      .card-desc {
+        background: white;
+        min-width: 200px;
+        max-height: 500px;
+        width: 100%;
+        z-index: 2;
+        vertical-align: middle;
+        @media (max-width: $layout-breakpoint-xs) {
+          margin: 0px;
+          width: 300px;
+
+        }
+      }
+
+      .card-media {
+        .author-name {
+          position: absolute;
+          bottom: 0px;
+          left: 0;
+          width: 100%;
+          color: white;
+          background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        @media (min-width: $layout-breakpoint-xs) {
+          height: 500px;
+        }
+
+        @media (max-width: $layout-breakpoint-xs) {
+          height: 300px;
+          width: 300px;
+          img {
+            height: 300px;
+            width: 300px
+          }
+        }
+      }
+
+      .md-raised {
+        margin: 16px 0 16px 0;
+        width: 100%;
+      }
+    }
   }
   .card-desc-top {
     background: rgba($primary, 0.8);
@@ -41,73 +109,7 @@
     }
   }
 
-  md-card.md-default-theme, md-card {
 
-    z-index: 3;
-    padding: 0;
-
-    vertical-align: middle;
-
-    @media (max-width: $layout-breakpoint-xs) {
-      margin-left: 0px;
-      margin-right: 0px;
-      width: 300px;
-
-    }
-    @media (max-width: $layout-breakpoint-sm) {
-      margin-left: 0px;
-      margin-right: 0px;
-      min-width: 90vw;
-
-    }
-
-    .card-desc-top {
-      background: rgba($primary, 0.8);
-      color: white;
-    }
-    .card-desc {
-      background: white;
-      min-width: 200px;
-      max-height: 500px;
-      width: 100%;
-      z-index: 2;
-      vertical-align: middle;
-      @media (max-width: $layout-breakpoint-xs) {
-        margin: 0px;
-        width: 300px;
-
-      }
-    }
-
-    .card-media {
-      .author-name {
-        position: absolute;
-        bottom: 0px;
-        left: 0;
-        width: 100%;
-        color: white;
-        background-color: rgba(0, 0, 0, 0.6);
-      }
-
-      @media (min-width: $layout-breakpoint-xs) {
-        height: 500px;
-      }
-
-      @media (max-width: $layout-breakpoint-xs) {
-        height: 300px;
-        width: 300px;
-        img {
-          height: 300px;
-          width: 300px
-        }
-      }
-    }
-
-    .md-raised {
-      margin: 16px 0 16px 0;
-      width: 100%;
-    }
-  }
 
   .content-block {
     min-height: 500px;
@@ -281,7 +283,7 @@
 
     }
 
-    @media (min-width: $layout-breakpoint-sm) and (max-width: $layout-breakpoint-md) {
+    @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-md) {
 
       &.flex-gt-xs-46 {
         max-height: 100%;

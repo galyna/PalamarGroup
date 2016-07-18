@@ -1,7 +1,7 @@
 <div class="courses-details description-container" layout="column">
     <!--author-->
     <div layout="row" class="top-info" flex layout-align="center center">
-        <md-card flex-gt-md="60" flex-sm="60" flex-xs="none" flex md-whiteframe="5">
+        <md-card flex-gt-md="60" flex-sm="80" flex-xs="none" flex md-whiteframe="5">
             <md-card-content layuot="column" layout-gt-sm="row">
                 <div class="card-desc-top " flex hide-gt-sm="true" layout="column" layout-align=" space-around center">
                     <md-card-title>
@@ -126,10 +126,12 @@
         </div>
     </div>
     <div layout="row" layout-align="center center" ng-if="vm.course.hearFormsPhotos.length>0">
-        <div class=" gridListCourses" flex flex-gt-md="60" flex-md="90">
+
+        <div class=" gridListCourses" flex flex-gt-md="60" flex-md="80">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="course in vm.course.hearFormsPhotos"
-                         class="md-margin " flex-gt-md="22" flex-md="22" flex-gt-xs="46" flex-xs="80" ng-click="::vm.showMediaObserver(vm.course.hearFormsPhotos, $index)">
+                         class="md-margin " flex-gt-md="22" flex-md="22" flex-gt-xs="46" flex-xs="80"
+                         ng-click="::vm.showMediaObserver(vm.course.hearFormsPhotos, $index)">
                     <card-image-container>
                         <img ng-src="{{::course.url}}" class="md-card-image">
                     </card-image-container>
@@ -141,10 +143,11 @@
         </div>
 
     </div>
+
     <div layout="row" layout-align="center center" ng-if="vm.course.videos.length>0">
-        <div flex flex-gt-md="60" flex-md="90">
-            <div  layout="column"  layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" class="  courses-videos"  data-aos="zoom-in-up"
+        <div flex flex-gt-md="60" flex-md="80" >
+            <div layout="column" layout-margin layout layout-wrap layout-align="center center">
+                <md-card md-whiteframe="6" class="  courses-videos" data-aos="zoom-in-up"
                          ng-repeat="video in vm.course.videos track by $index"
                          flex>
                     <div flex class="embed-responsive embed-responsive-16by9">
@@ -188,12 +191,13 @@
 
         </div>
     </div>
-    <div layout="row"  layout-align="center center" ng-if="vm.course.historyPhotos.length>0">
-        <div class=" gridListCourses"  flex-gt-md="60" flex-md="90">
+    <div layout="row" layout-align="center center" ng-if="vm.course.historyPhotos.length>0">
+        <div class=" gridListCourses" flex-gt-md="60" flex-md="90">
 
-            <div class="courses-history"  layout-margin layout layout-wrap layout-align="center center">
+            <div class="courses-history" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="course in vm.course.historyPhotos"
-                         class="md-margin " flex-gt-xs="46" flex-xs="80" ng-click="::vm.showMediaObserver(vm.course.historyPhotos, $index)">
+                         class="md-margin " flex-gt-xs="46" flex-xs="80"
+                         ng-click="::vm.showMediaObserver(vm.course.historyPhotos, $index)">
                     <card-image-container>
                         <img ng-src="{{::course.url}}" class="md-card-image">
                     </card-image-container>
