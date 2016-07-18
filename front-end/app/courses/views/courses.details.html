@@ -211,7 +211,7 @@
     <div layout="row" flex ng-if="vm.showComments()">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap header-super">
-                <div class="md-display-3">Відгуки</div>
+                <div data-aos="zoom-out" class="md-display-3">Відгуки</div>
             </div>
             <div class="overlay-comments"></div>
             <!-- ng-style="{'background-image':'url({{vm.course.historyPhotos[0].url}})'}"></div>-->
@@ -220,7 +220,7 @@
     <div id="comments" ng-class="{'content-block':vm.showComments()}" layout="row" layout-align="center center">
         <div flex="60" flex-xs="100" flex-sm="90">
 
-            <div ng-if="vm.showComments()">
+            <div data-aos="fade-up" ng-if="vm.showComments()">
                 <md-list class="md-dense" flex>
                     <md-list-item class="md-2-line" ng-if="comment.isVisible"
                                   ng-repeat="comment in vm.course.comments track by $index">
