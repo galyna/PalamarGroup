@@ -63,7 +63,7 @@
   cursor: pointer;
 
    @media (max-height: $layout-breakpoint-xs) {
-
+     margin: 8px 0px 0px 8px;
        font-size: 36px;
 
    }
@@ -190,7 +190,8 @@
     background-color: transparent;
     color: black;
     min-height: 56px;
-
+    padding-right:15px ;
+    padding-left:15px ;
     min-width: 150px;
     width: auto;
     font-size: 26px;

@@ -23,14 +23,18 @@ System.config({
         'ng-img-crop-full-extended': 'node_modules/ng-img-crop-full-extended/compile/minified/ng-img-crop.js',
         'angular-socialshare': 'node_modules/angular-socialshare/dist/angular-socialshare.js',
         'angular-youtube-embed': 'node_modules/angular-youtube-embed/src/angular-youtube-embed.js',
-        'ngSmoothScroll': 'node_modules/ngSmoothScroll/lib/angular-smooth-scroll.js'
+        'ngSmoothScroll': 'node_modules/ngSmoothScroll/lib/angular-smooth-scroll.js',
+        'aos':'node_modules/aos/dist/aos.js'
       
     },
+    
     map: {
         'youtube-iframe-api': 'https://www.youtube.com/iframe_api'
     },
     meta: {
-     
+        'aos': {
+            format: "global"
+        },
         'ng-img-crop-full-extended': {
             deps: ['angular'],
             format: "global"

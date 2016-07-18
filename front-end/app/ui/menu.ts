@@ -1,3 +1,4 @@
+import {CourseCalendarComponentUrl} from "../courses/components/course.calendar.component";
 const template = `<div id="nav-icon4" ng-click="$ctrl.toggleMenu($event)">
   <span></span>
   <span></span>
@@ -39,7 +40,7 @@ export class MenuComponentController {
     }
 
     calendar():void {
-        this.$location.url( '/courses' );
+        this.$location.url( CourseCalendarComponentUrl );
         this.mdDialog.hide();
         angular.element( document.querySelector( menuBtnSelector ) ).toggleClass( 'open' );
     }

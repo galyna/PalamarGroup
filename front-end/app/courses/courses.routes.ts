@@ -1,5 +1,6 @@
 import {CoursesController} from './controllers/courses.controller';
 import {CourseController} from './controllers/course.controller';
+import {CourseCalendarComponentUrl} from "./components/course.calendar.component";
 
 coursesRoutes.$inject = ['$routeProvider'];
 export function coursesRoutes($routeProvider:ng.route.IRouteProvider) {
@@ -13,6 +14,9 @@ export function coursesRoutes($routeProvider:ng.route.IRouteProvider) {
             templateUrl: 'app/courses/views/courses.details.html',
             controller: CourseController.componentName,
             controllerAs: "vm"
+        })
+        .when(CourseCalendarComponentUrl, {
+            template: '<pg-course-calendar></pg-course-calendar>',
         })
         .when('/test', {
             templateUrl: 'app/courses/views/test.html',

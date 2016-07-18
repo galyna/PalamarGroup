@@ -1,7 +1,7 @@
 <div class="courses-details description-container" layout="column">
     <!--author-->
-    <div layout="row"  flex layout-align="center center">
-        <md-card flex-gt-md="60"  flex-sm="60" flex-xs="none" flex md-whiteframe="5">
+    <div layout="row" class="top-info" flex layout-align="center center">
+        <md-card flex-gt-md="60" flex-sm="60" flex-xs="none" flex md-whiteframe="5">
             <md-card-content layuot="column" layout-gt-sm="row">
                 <div class="card-desc-top " flex hide-gt-sm="true" layout="column" layout-align=" space-around center">
                     <md-card-title>
@@ -11,14 +11,16 @@
                         </md-card-title-text>
                     </md-card-title>
                 </div>
-                <div  class=" card-media" flex-gt-sm="50">
+                <div class=" card-media" layout="column" data-aos="fade-right" data-aos-easing="ease-out-cubic"
+                     flex-gt-sm="50" layout-align="center center">
                     <img src="{{vm.course.author.photoUrl}}"/>
                     <div class="md-padding author-name" layout="column" layout-align="space-around center">
                         <div class="md-headline">Автор</div>
                         <div class="md-headline">{{ ::vm.course.author.name}}</div>
                     </div>
                 </div>
-                <div  class="card-desc " flex-gt-sm="50" layout="column" layout-align=" space-between center">
+                <div class="card-desc " data-aos="fade-left" data-aos-easing="ease-out-cubic" flex-gt-sm="50"
+                     layout="column" layout-align=" space-between center">
                     <md-card-title layout="column" layout-align="space-around center">
                         <md-card-title-text hide show-gt-sm="true" flex layout="column"
                                             layout-align=" space-around center">
@@ -98,15 +100,15 @@
         </md-card>
     </div>
 
-
     <div layout="row" flex ng-if="vm.course.days">
         <div class="page-delimiter content-block" flex>
             <div class="fit-screen-wrap" layout="column">
                 <div flex="none" layout="row" class="md-padding program-block  " layout-align=" center center">
                     <div ng-repeat="day in ::vm.course.days track by $index">
-                        <div class="date-block md-margin " layout="column" layout-align=" center center">
-                            <div  class=" md-display-2">{{ day.date| date:'dd.MM'}}</div>
-                            <div  class="md-subhead  ">{{day.program}}</div>
+                        <div class="date-block md-margin " data-aos="fade-up" layout="column"
+                             layout-align=" center center">
+                            <div class=" md-display-2">{{ day.date| date:'dd.MM'}}</div>
+                            <div class="md-subhead  ">{{day.program}}</div>
                         </div>
                     </div>
                 </div>
@@ -114,6 +116,7 @@
             <div class="overlay-days"></div>
         </div>
     </div>
+
     <div layout="row" flex ng-if="vm.course.hearFormsPhotos.length>0">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
@@ -122,58 +125,52 @@
 
         </div>
     </div>
-    <div layout="row"  layout-align="center center" ng-if="vm.course.hearFormsPhotos.length>0">
+    <div layout="row" layout-align="center center" ng-if="vm.course.hearFormsPhotos.length>0">
         <div class=" gridListCourses" flex flex-gt-md="60" flex-md="90">
-            <md-grid-list
-                    md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="3"
-                    md-row-height-gt-md="1:1" md-row-height="1:1"
-                    md-gutter="8px" md-gutter-gt-sm="4px">
-                <md-grid-tile ng-repeat="tile in vm.course.hearFormsPhotos"
-                              md-rowspan="{{1}}"
-                              md-colspan="{{1}}"
-                              md-colspan-sm="1"
-                              md-colspan-xs="1" ng-click="::vm.showMediaObserver(vm.course.hearFormsPhotos, $index)"
-                              class="grid-media">
+            <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+                <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="course in vm.course.hearFormsPhotos"
+                         class="md-margin " flex-gt-md="22" flex-md="22" flex-gt-xs="46" flex-xs="80" ng-click="::vm.showMediaObserver(vm.course.hearFormsPhotos, $index)">
                     <card-image-container>
-                        <img src="{{::tile.url}}" class="md-card-image"/>
+                        <img ng-src="{{::course.url}}" class="md-card-image">
                     </card-image-container>
-
-                    <md-grid-tile-footer ng-if="tile.name"><h3>{{tile.name}}</h3></md-grid-tile-footer>
-                </md-grid-tile>
-            </md-grid-list>
-        </div>
-    </div>
-    <div layout="row"  layout-align="center center" ng-if="vm.course.videos.length>0">
-        <div class=" gridListCourses" flex flex-gt-md="60" flex-md="90">
-            <md-grid-list md-cols="1" md-cols-sm="1" md-cols-md="1" md-cols-gt-md="1"
-                          md-row-height-gt-md="5:3" md-row-height="5:3"
-                          >
-                <md-grid-tile ng-repeat="tile in vm.course.videos track by $index"
-                              md-rowspan="{{1}}"
-                              md-colspan="{{1}}"
-                              md-colspan-sm="1"
-                              md-colspan-xs="1"
-                              class="grid-media">
-                          <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}" video-id="tile.url"></youtube-video>
-                    <md-grid-tile-footer ng-if="tile.name"><h3>{{tile.name}}</h3></md-grid-tile-footer>
-                </md-grid-tile>
-            </md-grid-list>
-
-
+                    <md-card-content layout="column" flex="100" layout-align="center center">
+                        <span class="  md-margin">{{::course.name}}</span>
+                    </md-card-content>
+                </md-card>
+            </div>
         </div>
 
     </div>
-    <!--description-->
+    <div layout="row" layout-align="center center" ng-if="vm.course.videos.length>0">
+        <div flex flex-gt-md="60" flex-md="90">
+            <div  layout="column"  layout-margin layout layout-wrap layout-align="center center">
+                <md-card md-whiteframe="6" class="  courses-videos"  data-aos="zoom-in-up"
+                         ng-repeat="video in vm.course.videos track by $index"
+                         flex>
+                    <div flex class="embed-responsive embed-responsive-16by9">
+                        <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
+                                       video-id="video.url"></youtube-video>
+                    </div>
+                    <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
+                        <span class="  md-margin">{{::video.name}}</span>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+
+    </div>
+
     <div layout="row" flex ng-if="vm.course.description">
         <div class="page-delimiter content-block" flex>
-            <div class="fit-screen-wrap" layout="column">
+            <div data-aos="zoom-out" class="fit-screen-wrap" layout="column">
 
                 <div layout="row" layout-align="center center">
-                    <div flex="50" hide-xs="true" flex-gt-sm="60" flex-sx="90"
+                    <div data-aos="zoom-out" flex="50" hide-xs="true" flex-gt-sm="60" flex-sx="90"
                          class="md-display-1 md-margin md-padding">
                         {{vm.course.description}}
                     </div>
-                    <div hide-gt-xs="true" flex class="md-headline md-margin md-padding">{{vm.course.description}}
+                    <div data-aos="zoom-out" hide-gt-xs="true" data-aos="zoom-out" flex
+                         class="md-headline md-margin md-padding">{{vm.course.description}}
                     </div>
 
                 </div>
@@ -181,6 +178,7 @@
             <div class="overlay-description"></div>
         </div>
     </div>
+
     <!--historyPhotos-->
     <div layout="row" flex ng-if="vm.course.historyPhotos.length>0">
         <div class="page-delimiter" flex>
@@ -190,26 +188,23 @@
 
         </div>
     </div>
-    <div layout="row" class="content-block" layout-align="center center" ng-if="vm.course.historyPhotos.length>0">
-        <div class=" gridListCourses" flex flex-gt-md="60" flex-md="90">
-            <md-grid-list md-cols="1" md-cols-sm="1" md-cols-md="2" md-cols-gt-md="2"
-                          md-row-height-gt-md="5:3" md-row-height="5:3"
-                          md-gutter="8px" md-gutter-gt-sm="4px">
-                <md-grid-tile ng-repeat="tile in vm.course.historyPhotos"
-                              md-rowspan="{{1}}"
-                              md-colspan="{{1}}"
-                              md-colspan-sm="1"
-                              md-colspan-xs="1" ng-click="::vm.showMediaObserver(vm.course.historyPhotos, $index)"
-                              class="grid-media">
+    <div layout="row"  layout-align="center center" ng-if="vm.course.historyPhotos.length>0">
+        <div class=" gridListCourses"  flex-gt-md="60" flex-md="90">
+
+            <div class="courses-history"  layout-margin layout layout-wrap layout-align="center center">
+                <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="course in vm.course.historyPhotos"
+                         class="md-margin " flex-gt-xs="46" flex-xs="80" ng-click="::vm.showMediaObserver(vm.course.historyPhotos, $index)">
                     <card-image-container>
-                        <img src="{{::tile.url}}" class="md-card-image"/>
+                        <img ng-src="{{::course.url}}" class="md-card-image">
                     </card-image-container>
-                    <md-grid-tile-footer ng-if="tile.name"><h3>{{tile.name}}</h3></md-grid-tile-footer>
-                </md-grid-tile>
-            </md-grid-list>
+                    <md-card-content ng-if="course.name" layout="column" flex="100" layout-align="center center">
+                        <span class="  md-margin">{{::course.name}}</span>
+                    </md-card-content>
+                </md-card>
 
-
+            </div>
         </div>
+
 
     </div>
     <!--Comments-->

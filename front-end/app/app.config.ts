@@ -4,8 +4,7 @@
 
 materialConfig.$inject = ['$mdThemingProvider'];
 export function materialConfig($mdThemingProvider:ng.material.IThemingProvider) {
-
-
+    
     // var customBackground = {
     //     '50': '#737373',
     //     '100': '#666666',

@@ -274,7 +274,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                             </md-button>
                             <div ngf-drop ng-model="historyPhotoFile" ngf-pattern="image/*"
                                  class="cropArea">
-                                <img-crop area-type="rectangle" result-image-size="{w:1060,h:820}" aspect-ratio="1.33"
+                                <img-crop area-type="rectangle" result-image-size="{w:1300,h:900}" aspect-ratio="1.33"
                                           init-max-area="true"
                                           image="historyPhotoFile  | ngfDataUrl"
                                           result-image="croppedHistoryPhotoFile" ng-init="croppedHistoryPhotoFile=''">

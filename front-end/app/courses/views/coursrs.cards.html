@@ -1,13 +1,13 @@
 <div class="courses description-container" layout="row" layout-align="center center">
     <div layout="column" layout-align="center center">
-        <div class="course-bg" layout-align="center center" flex
+        <div class="course-bg " layout-align="center center" flex
              ng-repeat="course in vm.courses track by $index" ng-if="::course.isVisible">
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
                 <md-card ng-if="$first && !$odd" flex-md="90"  flex-sm="70" flex="100"  md-whiteframe="5"
                          >
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media " flex="50"><img src="{{::course.avatar}}" class="md-card-image"/></div>
-                        <div class="card-desc " flex="50" layout="column" layout-align="center center">
+                        <div class="card-media " data-aos="fade-right"  data-aos-easing="ease-out-cubic" data-aos-once="true"   flex="50"><img src="{{::course.avatar}}" class="md-card-image " /></div>
+                        <div class="card-desc " data-aos="fade-left"  data-aos-easing="ease-out-cubic" data-aos-once="true" flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
                                     <div hide show-md="true" class="md-display-1">{{::course.name}}</div>
@@ -30,7 +30,7 @@
                 </md-card>
                 <md-card ng-if="$odd " flex-md="90"  flex-sm="70" flex="100" md-whiteframe="5" >
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-desc " flex="50" flex layout="column" layout-align="center center">
+                        <div class="card-desc " data-aos="fade-right"  data-aos-easing="ease-out-cubic" data-aos-once="true" flex="50" flex layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
                                     <div hide show-md="true" class="md-display-1">{{::course.name}}</div>
@@ -48,15 +48,15 @@
                                 </md-button>
                             </md-card-actions>
                         </div>
-                        <div class="card-media " flex="50"><img src="{{::course.avatar}}" class="md-card-image"/></div>
+                        <div class="card-media " data-aos="fade-left"  data-aos-easing="ease-out-cubic" data-aos-once="true"  flex="50"><img src="{{::course.avatar}}" class="md-card-image"/></div>
                     </md-card-content>
                 </md-card>
                 <md-card ng-if="!$first && !$odd" flex-md="90"  flex-sm="70" flex="100" md-whiteframe="5"
 
                 >
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media " flex="50"><img src="{{::course.avatar}}" class="md-card-image"/></div>
-                        <div class="card-desc " flex="50"  layout="column" layout-align="center center">
+                        <div class="card-media " data-aos="fade-right" data-aos-once="true"  data-aos-easing="ease-out-cubic"flex="50"><img src="{{::course.avatar}}" class="md-card-image"/></div>
+                        <div class="card-desc " flex="50" data-aos="fade-left" data-aos-once="true"  data-aos-easing="ease-out-cubic" layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
                                     <div hide show-md="true" class="md-display-1">{{::course.name}}</div>
@@ -85,7 +85,7 @@
                 <md-card md-whiteframe="8" >
                     <md-card-content layout="column">
                         <div class="card-media "><img src="{{::course.avatar}}" class="md-card-image" /></div>
-                        <div class="card-desc " layout="column" layout-align="space-around center">
+                        <div class="card-desc " data-aos="fade-up" data-aos-once="true"  data-aos-easing="ease-out-cubic" layout="column" layout-align="space-around center">
                             <md-card-title>
                                 <md-card-title-text >
                                     <div class="md-display-1">{{::course.name}}</div>

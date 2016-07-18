@@ -1,0 +1,115 @@
+import {CourseResourceName, ICourseResource} from "../../resources/course.resource";
+import {IPgCalendarDataService} from "../../calendar/calendar.data.service";
+import ICourse = pg.models.ICourse;
+
+
+const template = `<div layout="row" flex layout-align="center stretch"> <pg-calendar 
+                             calendar-direction="$ctrl.calendarDirection"
+                             on-prev-month="prevMonth"
+                             on-next-month="nextMonth"
+                             on-day-click="$ctrl.dayClick(date)"
+                             title-format="'MMMM y'"
+                             ng-model='selectedDate'
+                             day-format="'d'"
+                             day-label-format="'EEE'"
+                             day-label-tooltip-format="'EEEE'"
+                             day-tooltip-format="'fullDate'"
+                             week-starts-on="firstDayOfWeek"
+                             day-content="setDayContent"
+                             template-url="'app/calendar/calendar.html'"></pg-calendar> </div>`;
+
+
+export interface ICourseDates {
+    date:string;
+    coursesId:any;
+}
+
+
+export class CalendarComponentController {
+
+    static $inject = ['pgCalendarData', CourseResourceName,'$sce',  '$location','orderByFilter'];
+
+    courses:ICourse[];
+    calendarDirection = 'horizontal';
+    coursesDateMap:ICourseDates[];
+
+    constructor( private pgCalendarData:IPgCalendarDataService,
+                 private CourseResource:ICourseResource,private $sce, private $location,private orderByFilter:ng.IFilterOrderBy) {
+        
+        this.getCourses();
+    }
+
+
+    setCoursesCalendarTemplate(picture, name) {
+        if (!!('ontouchstart' in window)) {
+            return ` <div class="touch-device course-marker">
+                       <img  src="${picture}" alt="">
+                      <div class="overlay">
+                     <h2>${name}</h2>                    
+                       </div>                  
+                    </div>`
+        } else {
+            return ` <div class="hovereffect course-marker">
+                       <img  src="${picture}" alt="">
+                      <div class="overlay">
+                     <h2>${name}</h2>
+                      <button class="md-button detail-btn" aria-label="Play" >
+                            Деталі
+                        </button>
+                       </div>                  
+                    </div>`
+
+        }
+    }
+
+    getCourses() {
+        this.coursesDateMap = [];
+        this.courses = this.CourseResource.query();
+        this.courses.$promise.then( (courses) => {
+                this.courses=this.orderByFilter(courses,"order")
+                angular.forEach( courses, (course) => {
+                    if (course.isVisible) {
+                        this.createDatesMap( course );
+                        this.setCalendarContent( course );
+                    }
+                } );
+            }
+        );
+    }
+
+
+    setCalendarContent(course:ICourse) {
+        angular.forEach( course.courseModulesDates, (courseDate) => {
+            let content = this.setCoursesCalendarTemplate( course.avatar, course.name );
+            this.pgCalendarData.setDayContent( courseDate, this.$sce.trustAsHtml( content ) );
+        } );
+    }
+
+
+    createDatesMap(course:ICourse) {
+        //TODO: change coursesDateMap.date to Date[] like in CourseResourse
+        let coursesDateChunk = course.courseModulesDates.map( (date) => {
+            return {coursesId: course._id, date: date.toJSON()}
+        } );
+        this.coursesDateMap = this.coursesDateMap.concat( coursesDateChunk );
+    }
+
+    dayClick(date:Date) {
+        angular.forEach( this.coursesDateMap, (course) => {
+            var cDate = new Date( course.date );
+            if (cDate.getDate() == date.getDate() && cDate.getFullYear() == date.getFullYear() && cDate.getMonth() == date.getMonth()) {
+                this.$location.url( '/course/' + course.coursesId );
+                return;
+            }
+
+        } );
+
+    }
+}
+
+export let CourseCalendarComponentUrl = "/calendar";
+export let CourseCalendarComponentName = 'pgCourseCalendar';
+export let CourseCalendarComponentOptions = {
+    template: template,
+    controller: CalendarComponentController
+};

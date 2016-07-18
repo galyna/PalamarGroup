@@ -1,7 +1,9 @@
 @import "theme";
 
 .courses-details {
-
+  .top-info {
+    padding: 20px 0;
+  }
   .card-desc-top {
     background: rgba($primary, 0.8);
     color: white;
@@ -44,16 +46,17 @@
     z-index: 3;
     padding: 0;
 
-
     vertical-align: middle;
 
-    @media ( $layout-breakpoint-xs) {
-      margin: 0px;
+    @media (max-width: $layout-breakpoint-xs) {
+      margin-left: 0px;
+      margin-right: 0px;
       width: 300px;
 
     }
-    @media ( $layout-breakpoint-sm) {
-      margin: 0px;
+    @media (max-width: $layout-breakpoint-sm) {
+      margin-left: 0px;
+      margin-right: 0px;
       min-width: 90vw;
 
     }
@@ -86,7 +89,7 @@
         background-color: rgba(0, 0, 0, 0.6);
       }
 
-      @media ( min-width: $layout-breakpoint-xs) {
+      @media (min-width: $layout-breakpoint-xs) {
         height: 500px;
       }
 
@@ -101,30 +104,13 @@
     }
 
     .md-raised {
-      margin:16px 0 16px 0 ;
+      margin: 16px 0 16px 0;
       width: 100%;
     }
   }
 
   .content-block {
     min-height: 500px;
-
-  }
-
-  ///course img grid
-  .gridListCourses md-grid-list {
-    margin: 16px;
-    md-grid-tile {
-      transition: all 400ms ease-out 50ms;
-      overflow: hidden;
-      img {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: auto;
-      }
-    }
 
   }
 
@@ -202,8 +188,177 @@
     }
   }
 
+  .embed-responsive {
+    position: relative;
+    display: block;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .embed-responsive.embed-responsive-16by9 {
+    padding-bottom: 56.25%;
+  }
+
+  .embed-responsive-item {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+
+  }
 }
 
+.courses-videos {
+  box-sizing: border-box;
+  min-height: 100%;
+  min-width: 100%;
+  padding: 0;
+  margin: 0;
+  md-card-content {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 12%;
+    color: white;
+    background-color: rgba($primary, 0.7);
+  }
+
+  md-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: block;
+  }
+}
+
+.courses-hear-forms {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0 0 20px 0;
+
+  img {
+    max-width: 100%;
+  }
+  card-image-container {
+    display: block;
+    overflow: hidden;
+  }
+
+  md-card.md-default-theme, md-card {
+    position: relative;
+    display: block;
+    transition: top 0.3s linear;
+    top: 0px;
+    &:hover {
+      @extend .md-whiteframe-12dp;
+      transition: top 0.3s linear;
+      top: -3px;
+    }
+
+    md-card-content {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 12%;
+      color: white;
+      background-color: rgba($primary, 0.7);
+    }
+
+    @media (min-width: $layout-breakpoint-md) {
+
+      &.flex-gt-md-22 {
+
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 1 25%;
+      }
+
+    }
+
+    @media (min-width: $layout-breakpoint-sm) and (max-width: $layout-breakpoint-md) {
+
+      &.flex-gt-xs-46 {
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 1 43%;
+      }
+      &:first-child, &:nth-child(2) {
+        flex: 1 43%;
+      }
+    }
+
+    @media (max-width: $layout-breakpoint-xs) {
+      &.flex-xs-80 {
+        flex: 1 80%;
+        // Special override for the 1st & 2nd child default resizing
+        &:first-child, &:nth-child(2) {
+          flex: 1 80%;
+        }
+      }
+    }
+  }
+}
+
+.courses-history {
+  box-sizing: border-box;
+  padding: 0 0 20px 0;
+
+  card-image-container {
+    display: block;
+    overflow: hidden;
+  }
+
+  md-card {
+    position: relative;
+    display: block;
+    transition: top 0.3s linear;
+    top: 0px;
+
+    &:hover {
+      @extend .md-whiteframe-12dp;
+      transition: top 0.3s linear;
+      top: -3px;
+    }
+
+    md-card-content {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 12%;
+      color: white;
+      background-color: rgba($primary, 0.7);
+    }
+
+    @media (min-width: $layout-breakpoint-xs) {
+
+      &.flex-gt-xs-46 {
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 1 30%;
+      }
+      &:first-child, &:nth-child(2) {
+        flex: 1 46%;
+      }
+    }
+
+    @media (max-width: $layout-breakpoint-xs) {
+      &.flex-xs-80 {
+        flex: 1 80%;
+        // Special override for the 1st & 2nd child default resizing
+        &:first-child, &:nth-child(2) {
+          flex: 1 80%;
+        }
+      }
+    }
+  }
+}
 
 .model-card {
   box-sizing: border-box;
