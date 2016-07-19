@@ -4,9 +4,11 @@ declare namespace angular.angularFileUpload {
     }  
 }
 
-declare module "AOS" {
+declare module "aos" {
     interface AOSConstructor {
-        new (): any;
+        new (): any,
+        init():any,
+        refresh():any
     }
     let AOS: AOSConstructor;
     export = AOS;
