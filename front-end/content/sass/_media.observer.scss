@@ -10,7 +10,7 @@ media-observer {
   background: rgb(0, 0, 0);
   color: white;
   display: none;
-  z-index: 4;
+  z-index: 5;
   overflow: auto;
 
   &.visible {
@@ -33,10 +33,13 @@ media-observer {
   .top-menu {
     height: 24px;
     padding: 12px;
+    margin: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: rgba(255,255,255,0.5);
+
+    a{text-decoration: none}
   }
 
   .container {
