@@ -5,11 +5,20 @@
     padding: 20px 0;
 
     md-card.md-default-theme, md-card {
-
       z-index: 3;
       padding: 0;
 
       vertical-align: middle;
+
+      @media (min-width: $layout-breakpoint-md) {
+        max-height: 500px;
+
+        &.flex-gt-md-60 {
+          max-width: 1000px;
+
+        }
+
+      }
 
       @media (max-width: $layout-breakpoint-xs) {
         margin-left: 0px;
@@ -20,7 +29,7 @@
       @media (max-width: $layout-breakpoint-sm) {
         margin-left: 0px;
         margin-right: 0px;
-
+        max-width: 500px;
 
       }
 
@@ -50,6 +59,9 @@
           width: 100%;
           color: white;
           background-color: rgba(0, 0, 0, 0.6);
+        }
+        @media (min-width: $layout-breakpoint-sm) {
+          min-width: 500px;
         }
 
         @media (min-width: $layout-breakpoint-xs) {
@@ -108,8 +120,6 @@
       }
     }
   }
-
-
 
   .content-block {
     min-height: 500px;
