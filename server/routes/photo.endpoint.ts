@@ -7,7 +7,7 @@ let uuid = require('node-uuid');
 let fs = require('fs');
 
 photoApi.route('/')
-    .post(auth, currentUser.is('admin'), function (req, res, next) {
+    .post(function (req, res, next) {
             if (!req.files || !req.files.file) {
                 res.status(400).json({error: {message: 'No files attached'}});
             }
