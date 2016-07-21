@@ -90,10 +90,7 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
 }
 
 .page-header, .page-footer {
-  * {
-    margin: 0;
-    padding: 0;
-  }
+
   text-align: center;
   a {
     text-decoration: none;
@@ -104,7 +101,10 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
 
 .page-header {
   background: rgba(white, 0.6);
-
+  * {
+    margin: 0;
+    padding: 0;
+  }
   .page-header-wrap {
 
     min-height: 100vh;

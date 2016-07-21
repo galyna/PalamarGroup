@@ -258,6 +258,12 @@
 
   img {
     max-width: 100%;
+    overflow: hidden;
+  }
+
+  card-image-container {
+    display: block;
+    overflow: hidden;
   }
 
   md-card.md-default-theme, md-card {
@@ -265,11 +271,14 @@
     display: block;
     transition: top 0.3s linear;
     top: 0px;
+
     &:hover {
       @extend .md-whiteframe-12dp;
       transition: top 0.3s linear;
       top: -3px;
     }
+
+
 
     md-card-content {
       position: absolute;
@@ -279,6 +288,7 @@
       height: 12%;
       color: white;
       background-color: rgba($primary, 0.7);
+      overflow: hidden;
     }
 
     @media (min-width: $layout-breakpoint-md) {
@@ -321,6 +331,10 @@
   padding: 0 0 20px 0;
 
 
+  card-image-container {
+    display: block;
+    overflow: hidden;
+  }
 
   md-card {
     position: relative;
@@ -370,6 +384,12 @@
 
 .model-card {
   box-sizing: border-box;
+
+  card-image-container {
+    overflow: hidden;
+    cursor: pointer;
+  }
+
   md-card.md-default-theme, md-card {
 
     position: relative;
