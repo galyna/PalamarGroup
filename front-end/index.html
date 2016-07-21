@@ -66,12 +66,11 @@
 
 </div>
 <!--footer-->
-<div class="page-footer " ng-if="!$root.isAdminZone()" class="md-whiteframe-z4">
+<div class="page-footer " ng-if="!$root.isAdminZone()" class="md-whiteframe-z4" flex="70">
     <div class="fit-screen-wrap">
 
-        <div class="page-header-wrap md-display-1" flex="none" layout="column" layout-gt-md="row"
-             layout-align="center center">
-            <div>
+        <div  class="page-header-wrap"  layout="column"  flex layout-align="center center">
+            <div data-aos="flip-left" data-aos-once="true"   >
                 <a href="https://www.facebook.com/hashtag/palamar_group" target="_blank">
                     <md-icon class="md-social-image" md-svg-src="../content/images/icons/social/face.svg"></md-icon>
                 </a>
@@ -80,8 +79,8 @@
                 </a>
 
             </div>
-            <div layout="column" layout-gt-xs="row" class="md-padding">
-                <div class="featured-area-subtitle">
+            <div layout="column" layout-gt-xs="row" class="md-padding  md-display-1">
+                <div data-aos="flip-right" data-aos-once="true"    class="featured-area-subtitle">
                     <span>вул.Щирецька 36&nbsp;</span> <span>&nbsp; 067 264 62 16 &nbsp;</span><span>&nbsp; 097 246 01 74</span>
                 </div>
                 <!--<div class="widget"><div class="opening-time">-->
@@ -93,6 +92,11 @@
         </div>
     </div>
     <div class="overlay "></div>
+    <md-button scroll-to="mainContent" easing="easeInOutCubic"
+               duration="1000" class=" md-fab  up-btn" aria-label="down">
+        <md-icon class=""
+                 md-svg-src="navigation:ic_arrow_downward_24px"></md-icon>
+    </md-button>
 </div>
 </body>
 </html>

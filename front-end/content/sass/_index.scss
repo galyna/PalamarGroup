@@ -198,11 +198,18 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
 
   .page-header-wrap {
     min-height: 100vh;
-    z-index: 3;
+    z-index: 108;
     color: white;
     font-family: 'microsquare', sans-serif;
+    padding: 20px;
+    @media (max-width: $layout-breakpoint-xs) {
+     .md-display-1{font-size: 28px;}
+
+    }
   }
+  .fit-screen-wrap {z-index: 61;}
   .overlay {
+    z-index: 60;
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../images/bg/IMG_6844.jpg") no-repeat center center fixed;
     -webkit-filter: blur(1px);
     -moz-filter: blur(1px);
