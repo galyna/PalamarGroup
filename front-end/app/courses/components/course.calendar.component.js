@@ -11,12 +11,13 @@ System.register(["../../resources/course.resource"], function(exports_1, context
         execute: function() {
             template = "<div layout=\"row\" flex layout-align=\"center stretch\"> <pg-calendar \n                             calendar-direction=\"$ctrl.calendarDirection\"\n                             on-prev-month=\"prevMonth\"\n                             on-next-month=\"nextMonth\"\n                             on-day-click=\"$ctrl.dayClick(date)\"\n                             title-format=\"'MMMM y'\"\n                             ng-model='selectedDate'\n                             day-format=\"'d'\"\n                             day-label-format=\"'EEE'\"\n                             day-label-tooltip-format=\"'EEEE'\"\n                             day-tooltip-format=\"'fullDate'\"\n                             week-starts-on=\"firstDayOfWeek\"\n                             day-content=\"setDayContent\"\n                             template-url=\"'app/calendar/calendar.html'\"></pg-calendar> </div>";
             CalendarComponentController = (function () {
-                function CalendarComponentController(pgCalendarData, CourseResource, $sce, $location, orderByFilter) {
+                function CalendarComponentController(pgCalendarData, CourseResource, $sce, $location, orderByFilter, smoothScroll) {
                     this.pgCalendarData = pgCalendarData;
                     this.CourseResource = CourseResource;
                     this.$sce = $sce;
                     this.$location = $location;
                     this.orderByFilter = orderByFilter;
+                    this.smoothScroll = smoothScroll;
                     this.calendarDirection = 'horizontal';
                     this.getCourses();
                 }
@@ -40,7 +41,17 @@ System.register(["../../resources/course.resource"], function(exports_1, context
                                 _this.setCalendarContent(course);
                             }
                         });
+                        _this.scrollToMain();
                     });
+                };
+                CalendarComponentController.prototype.scrollToMain = function () {
+                    var options = {
+                        duration: 2000,
+                        easing: 'easeInQuad',
+                        offset: 0,
+                    };
+                    var element = document.getElementById('mainContent');
+                    this.smoothScroll(element, options);
                 };
                 CalendarComponentController.prototype.setCalendarContent = function (course) {
                     var _this = this;
@@ -66,7 +77,7 @@ System.register(["../../resources/course.resource"], function(exports_1, context
                         }
                     });
                 };
-                CalendarComponentController.$inject = ['pgCalendarData', course_resource_1.CourseResourceName, '$sce', '$location', 'orderByFilter'];
+                CalendarComponentController.$inject = ['pgCalendarData', course_resource_1.CourseResourceName, '$sce', '$location', 'orderByFilter', 'smoothScroll'];
                 return CalendarComponentController;
             }());
             exports_1("CalendarComponentController", CalendarComponentController);

@@ -1,0 +1,66 @@
+/*dialog*/
+
+@media (max-width: $layout-breakpoint-md) {
+  md-dialog.md-dialog-fullscreen {
+    min-height: 100%;
+    min-width: 100%;
+    border-radius: 0;
+  }
+}
+
+@media (max-width: $layout-breakpoint-lg) {
+  md-dialog.md-dialog-fullscreen {
+    min-height: 100%;
+    min-width: 100%;
+    border-radius: 0;
+  }
+}
+
+md-dialog .md-actions, md-dialog md-dialog-actions {
+  @media (max-width: $layout-breakpoint-xs) {
+    padding-left: 8px;
+  }
+}
+md-dialog.md-default-theme, md-dialog {
+  border-radius: 0px;
+  .md-title {
+    font-size: 36px
+  }
+  p {
+    font-size: 24px
+  }
+}
+
+md-input-container.md-default-theme.md-input-focused:not(.md-input-invalid) .md-input,
+md-input-container.md-input-focused:not(.md-input-invalid) .md-input,
+md-input-container.md-default-theme.md-input-resized:not(.md-input-invalid) .md-input,
+md-input-container.md-input-resized:not(.md-input-invalid) .md-input {
+  border-color: $primary;
+  color: $primary;
+}
+
+md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused label,
+md-input-container:not(.md-input-invalid).md-input-focused label {
+  color: $primary;
+}
+
+md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused > md-icon,
+md-input-container:not(.md-input-invalid).md-input-focused > md-icon {
+  color: $primary;
+}
+
+md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar), md-toolbar.md-hue-2:not(.md-menu-toolbar) {
+  background-color: rgba($primary, 0.8);
+}
+
+md-tabs .md-tab.md-active {
+  color: $primary
+}
+
+md-tabs md-ink-bar {
+  color: $primary;
+  background-color: $primary
+}
+
+
+

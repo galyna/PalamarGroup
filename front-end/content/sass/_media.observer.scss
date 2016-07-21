@@ -5,12 +5,12 @@ media-observer {
   $animation-duration: 0.3s;
 
   position: fixed;
-  width: 100vw;
-  height: 100vh;
+  width: 100vw ;
+  height:100vh;
   background: rgb(0, 0, 0);
   color: white;
   display: none;
-  z-index: 5;
+  z-index: 82;
   overflow: auto;
 
   &.visible {
@@ -32,7 +32,6 @@ media-observer {
 
   .top-menu {
     height: 24px;
-    padding: 12px;
     margin: 20px;
     display: flex;
     justify-content: space-between;
@@ -40,11 +39,15 @@ media-observer {
     color: rgba(255,255,255,0.5);
 
     a{text-decoration: none}
+
+    @media (max-width: $layout-breakpoint-xs) {
+      margin: 10px;
+    }
   }
 
   .container {
     display: flex;
-    height: calc(100% - 72px);
+    height: calc(100% - 102px);
     padding-bottom: 0;
   }
 

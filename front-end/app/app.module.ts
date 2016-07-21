@@ -41,6 +41,7 @@ let app = angular.module('yuliaPalamarApp', [
     resourcesModule.name,
     uiModule.name,
     coursesModule.name
+
 ])
     .config(routesConfig)
     .config(materialConfig)

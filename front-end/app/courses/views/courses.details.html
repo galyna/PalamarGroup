@@ -1,4 +1,7 @@
+
+
 <div class="courses-details description-container" layout="column">
+
     <!--author-->
     <div layout="row" class="top-info" flex layout-align="center center">
         <md-card flex-md="90"  flex-gt-md="60"  flex-xs="none" flex md-whiteframe="5">
@@ -11,7 +14,7 @@
                         </md-card-title-text>
                     </md-card-title>
                 </div>
-                <div class=" card-media" layout="column" data-aos="fade-right" data-aos-easing="ease-out-cubic"
+                <div class=" card-media" layout="column" data-aos="fade-right" data-aos-once="true" data-aos-easing="ease-out-cubic"
                      flex-gt-sm="50" layout-align="center center">
                     <img src="{{vm.course.author.photoUrl}}"/>
                     <div class="md-padding author-name" layout="column" layout-align="space-around center">
@@ -19,7 +22,7 @@
                         <div class="md-headline">{{ ::vm.course.author.name}}</div>
                     </div>
                 </div>
-                <div class="card-desc " data-aos="fade-left" data-aos-easing="ease-out-cubic" flex-gt-sm="50"
+                <div  class="card-desc " data-aos="fade-left" data-aos-easing="ease-out-cubic" data-aos-once="true" flex-gt-sm="50"
                      layout="column" layout-align=" space-between center">
                     <md-card-title layout="column" layout-align="space-around center">
                         <md-card-title-text hide show-gt-sm="true" flex layout="column"
@@ -98,14 +101,15 @@
                 </div>
             </md-card-content>
         </md-card>
+
     </div>
 
     <div layout="row" flex ng-if="vm.course.days">
         <div class="page-delimiter content-block" flex>
-            <div class="fit-screen-wrap" layout="column">
+            <div class="fit-screen-wrap header-long " layout="column">
                 <div flex="none" layout="row" class="md-padding program-block  " layout-align=" center center">
                     <div ng-repeat="day in ::vm.course.days track by $index">
-                        <div class="date-block md-margin " data-aos="fade-up" layout="column"
+                        <div class="date-block md-margin " data-aos="fade-up" data-aos-once="true" layout="column"
                              layout-align=" center center">
                             <div class=" md-display-2">{{ day.date| date:'dd.MM'}}</div>
                             <div class="md-subhead  ">{{day.program}}</div>
@@ -113,11 +117,20 @@
                     </div>
                 </div>
             </div>
-            <div class="overlay-days"></div>
+            <div id="trigger-right" class="overlay-days"></div>
+            <md-button hide show-gt-xs="true" class=" md-fab  side-up-btn"
+                       data-aos="fade-left" data-aos-easing="ease-in-out-back"
+                       data-aos-anchor="#trigger-right"
+                       data-aos-anchor-placement="top-center" data-aos-delay="100" scroll-to="mainContent"
+                       easing="easeInOutCubic"
+                       duration="1800" aria-label="up">
+                <md-icon class=""
+                         md-svg-src="navigation:ic_arrow_downward_24px"></md-icon>
+            </md-button>
         </div>
     </div>
 
-    <div layout="row" flex ng-if="vm.course.hearFormsPhotos.length>0">
+    <div  layout="row" flex ng-if="vm.course.hearFormsPhotos.length>0">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
                 <div class="md-display-2"> Mатеріали блоку</div>
@@ -125,11 +138,12 @@
 
         </div>
     </div>
+
     <div layout="row" layout-align="center center" ng-if="vm.course.hearFormsPhotos.length>0">
 
-        <div class=" gridListCourses" flex flex-gt-md="60" flex-md="80">
+        <div  flex flex-gt-md="60" flex-md="80">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="course in vm.course.hearFormsPhotos"
+                <md-card md-whiteframe="6" data-aos="zoom-in-up" data-aos-once="true" ng-repeat="course in vm.course.hearFormsPhotos"
                          class="md-margin " flex-gt-md="22" flex-md="22" flex-gt-xs="46" flex-xs="80"
                          ng-click="::vm.showMediaObserver(vm.course.hearFormsPhotos, $index)">
                     <card-image-container>
@@ -147,7 +161,7 @@
     <div layout="row" layout-align="center center" ng-if="vm.course.videos.length>0">
         <div flex flex-gt-md="60" flex-md="80" >
             <div layout="column" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" class="  courses-videos" data-aos="zoom-in-up"
+                <md-card md-whiteframe="6" class="  courses-videos" data-aos="zoom-in-up" data-aos-once="true"
                          ng-repeat="video in vm.course.videos track by $index"
                          flex>
                     <div flex class="embed-responsive embed-responsive-16by9">
@@ -165,15 +179,15 @@
 
     <div layout="row" flex ng-if="vm.course.description">
         <div class="page-delimiter content-block" flex>
-            <div data-aos="zoom-out" class="fit-screen-wrap" layout="column">
+            <div  class="fit-screen-wrap header-long " layout="column">
 
                 <div layout="row" layout-align="center center">
-                    <div data-aos="zoom-out" flex="50" hide-xs="true" flex-gt-sm="60" flex-sx="90"
+                    <div data-aos="flip-right" data-aos-once="true"  hide-xs="true" flex="60" flex-gt-sm="50"
                          class="md-display-1 md-margin md-padding">
                         {{vm.course.description}}
                     </div>
-                    <div data-aos="zoom-out" hide-gt-xs="true" data-aos="zoom-out" flex
-                         class="md-headline md-margin md-padding">{{vm.course.description}}
+                    <div data-aos="flip-right" data-aos-once="true" hide-gt-xs="true"  flex="70"
+                         class="md-headline ">{{vm.course.description}}
                     </div>
 
                 </div>
@@ -192,10 +206,10 @@
         </div>
     </div>
     <div layout="row" layout-align="center center" ng-if="vm.course.historyPhotos.length>0">
-        <div class=" gridListCourses" flex-gt-md="60" flex-md="90">
+        <div  flex-gt-md="60" flex-md="90">
 
             <div class="courses-history" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="course in vm.course.historyPhotos"
+                <md-card md-whiteframe="6" data-aos-once="true" data-aos="zoom-in-up" ng-repeat="course in vm.course.historyPhotos"
                          class="md-margin " flex-gt-xs="46" flex-xs="80"
                          ng-click="::vm.showMediaObserver(vm.course.historyPhotos, $index)">
                     <card-image-container>
@@ -215,7 +229,7 @@
     <div layout="row" flex ng-if="vm.showComments()">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap header-super">
-                <div data-aos="zoom-out" class="md-display-3">Відгуки</div>
+                <div data-aos="zoom-out" data-aos-once="true" class="md-display-3">Відгуки</div>
             </div>
             <div class="overlay-comments"></div>
             <!-- ng-style="{'background-image':'url({{vm.course.historyPhotos[0].url}})'}"></div>-->
@@ -224,7 +238,7 @@
     <div id="comments" ng-class="{'content-block':vm.showComments()}" layout="row" layout-align="center center">
         <div flex="60" flex-xs="100" flex-sm="90">
 
-            <div data-aos="fade-up" ng-if="vm.showComments()">
+            <div data-aos="fade-up" data-aos-once="true" ng-if="vm.showComments()">
                 <md-list class="md-dense" flex>
                     <md-list-item class="md-2-line" ng-if="comment.isVisible"
                                   ng-repeat="comment in vm.course.comments track by $index">

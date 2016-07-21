@@ -4,7 +4,9 @@
 
   .top-info {
     padding: 20px 0;
-
+    @media (max-width: $layout-breakpoint-xs) {
+      padding: 10px 0;
+    }
     md-card.md-default-theme, md-card {
       z-index: 3;
       padding: 0;
@@ -84,6 +86,7 @@
   .card-desc-top {
     background: rgba($primary, 0.8);
     color: white;
+    text-align: center;
   }
 
   .program-block {
@@ -256,10 +259,6 @@
   img {
     max-width: 100%;
   }
-  card-image-container {
-    display: block;
-    overflow: hidden;
-  }
 
   md-card.md-default-theme, md-card {
     position: relative;
@@ -321,10 +320,7 @@
   box-sizing: border-box;
   padding: 0 0 20px 0;
 
-  card-image-container {
-    display: block;
-    overflow: hidden;
-  }
+
 
   md-card {
     position: relative;

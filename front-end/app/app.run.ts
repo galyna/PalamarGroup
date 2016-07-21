@@ -1,11 +1,11 @@
 import {IRootScope} from "../typings";
 import AOS from "aos";
 
-appRun.$inject = ['$rootScope'];
-export function appRun($rootScope:IRootScope) {
+appRun.$inject = ['$rootScope','$timeout'];
+export function appRun($rootScope:IRootScope,$timeout) {
     $rootScope.socialParams = {
-        host:"",
-        target:"",
+        host: "",
+        target: "",
         title: "",
         image: "",
         description: ""
@@ -13,9 +13,16 @@ export function appRun($rootScope:IRootScope) {
 
     //create a new instance
     AOS.init();
+    //
+    // $window.onload = function(e) {
+    //
+    //     AOS.refresh();
+    // }
 
-    $rootScope.$on('$routeChangeEnd', function (next, current) {
-        //when the view changes sync wow
-          AOS.refresh();
-    });
+    $rootScope.$on( '$routeChangeSuccess', function () {
+       $timeout( ()=> {
+            AOS.refresh();
+        }, 10);
+
+    } );
 }

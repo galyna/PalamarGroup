@@ -1,20 +1,6 @@
-@media (max-width: $layout-breakpoint-md) {
-  md-dialog.md-dialog-fullscreen {
-    min-height: 100%;
-    min-width: 100%;
-    border-radius: 0;
-  }
-}
 
-@media (max-width: $layout-breakpoint-lg) {
-  md-dialog.md-dialog-fullscreen {
-    min-height: 100%;
-    min-width: 100%;
-    border-radius: 0;
-  }
-}
 
-.menu-dialog {
+md-dialog.md-dialog-fullscreen.menu-dialog {
   padding-top: 40px;
   background-color: rgba(white, 0.92);
   text-align: center;
@@ -23,7 +9,7 @@
     cursor: pointer;
     color: $primary;
     margin: 5% 0 5% 0;
-    min-height:70px;
+    min-height: 70px;
 
     width: 50vw;
     padding-top: 40px;
@@ -56,8 +42,6 @@
 
     }
   }
-
-
 }
 
 .header-loading {
@@ -106,6 +90,10 @@
 }
 
 .page-header, .page-footer {
+  * {
+    margin: 0;
+    padding: 0;
+  }
   text-align: center;
   a {
     text-decoration: none;
@@ -137,6 +125,7 @@
     }
 
     @media (min-width: $layout-breakpoint-md) {
+      margin: 20px;
       width: 170px;
     }
   }
@@ -179,7 +168,24 @@
 
   }
 
-  .overlay {
+  .overlay-header {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 1;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background-size: cover;
+    -webkit-filter: contrast(150%);
+    -moz-filter: contrast(150%);
+    -o-filter: contrast(150%);
+    filter: contrast(150%);
 
     @media (max-width: $layout-breakpoint-md) {
       background: url("../images/bg/slider/s3.png") no-repeat center center fixed;
@@ -207,8 +213,3 @@
 
 }
 
-.page-container {
-
-
-
-}

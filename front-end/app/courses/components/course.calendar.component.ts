@@ -27,15 +27,16 @@ export interface ICourseDates {
 
 export class CalendarComponentController {
 
-    static $inject = ['pgCalendarData', CourseResourceName,'$sce',  '$location','orderByFilter'];
+    static $inject = ['pgCalendarData', CourseResourceName, '$sce', '$location', 'orderByFilter', 'smoothScroll'];
 
     courses:ICourse[];
     calendarDirection = 'horizontal';
     coursesDateMap:ICourseDates[];
 
-    constructor( private pgCalendarData:IPgCalendarDataService,
-                 private CourseResource:ICourseResource,private $sce, private $location,private orderByFilter:ng.IFilterOrderBy) {
-        
+    constructor(private pgCalendarData:IPgCalendarDataService,
+                private CourseResource:ICourseResource, private $sce,
+                private $location, private orderByFilter:ng.IFilterOrderBy, private smoothScroll) {
+
         this.getCourses();
     }
 
@@ -66,17 +67,31 @@ export class CalendarComponentController {
         this.coursesDateMap = [];
         this.courses = this.CourseResource.query();
         this.courses.$promise.then( (courses) => {
-                this.courses=this.orderByFilter(courses,"order")
+
+                this.courses = this.orderByFilter( courses, "order" );
                 angular.forEach( courses, (course) => {
                     if (course.isVisible) {
                         this.createDatesMap( course );
                         this.setCalendarContent( course );
                     }
                 } );
+
+                this.scrollToMain();
             }
         );
     }
 
+
+    scrollToMain() {
+        var options = {
+            duration: 2000,
+            easing: 'easeInQuad',
+            offset: 0,
+
+        }
+        var element = document.getElementById( 'mainContent' );
+        this.smoothScroll( element, options );
+    }
 
     setCalendarContent(course:ICourse) {
         angular.forEach( course.courseModulesDates, (courseDate) => {

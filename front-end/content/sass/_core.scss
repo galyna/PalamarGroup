@@ -17,7 +17,7 @@ body {
   font-size: 14px;
   font-family: "Gotham SSm A", "Gotham SSm B", sans-serif;
   font-weight: lighter;
-
+margin: 0;
   @media (min-width: $layout-breakpoint-md) {
     font-size: 13px;
 
@@ -38,7 +38,6 @@ html{ background-color: white;}
 
 
 .overlay {
-
   position: absolute;
   top: 0;
   bottom: 0;
@@ -72,9 +71,6 @@ card-image-container {
   z-index: 2;
 }
 
-md-input-container .md-input-messages-animation {
-  max-width: 300px;
-}
 
 ///common card
 md-card.md-default-theme, md-card {
@@ -135,18 +131,28 @@ md-card.md-default-theme, md-card {
   display: none !important;
 }
 
-md-tabs .md-tab.md-active {
-  color: $primary
+
+.embed-responsive {
+
+  position: relative;
+  display: block;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
-md-tabs md-ink-bar {
-  color: $primary;
-  background-color: $primary
+.embed-responsive.embed-responsive-16by9 {
+  padding-bottom: 56.25%;
 }
 
-
-md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar), md-toolbar.md-hue-2:not(.md-menu-toolbar) {
-  background-color: rgba($primary, 0.8);
+.embed-responsive-item {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 
