@@ -44,11 +44,11 @@ html{ background-color: white;}
   right: 0;
   left: 0;
   z-index: 1;
-  -webkit-background-size: 100% auto;
-  -moz-background-size: 100% auto;
-  -ms-background-size: 100% auto;
-  -o-background-size: 100% auto;
-  background-size: 100% auto;
+  -moz-background-size:cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 
 }
 

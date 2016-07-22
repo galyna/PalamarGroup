@@ -162,10 +162,6 @@
       z-index: 1;
 
     }
-    .overlay-bg {
-      @extend .overlay;
-      background: linear-gradient(rgba(white, 0.4), rgba(white, 0.4)), url("../images/bg/slider/s5.png") no-repeat center center fixed;
-    }
 
     .overlay-days {
       @extend .overlay;
@@ -174,7 +170,28 @@
       -o-filter: blur(1px);
       -ms-filter: blur(1px);
       filter: blur(1px);
-      background: linear-gradient(rgba(black, 0.4), rgba(black, 0.4)), url("../images/bg/IMG_7095.jpg") no-repeat center center fixed;
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_full.jpg") no-repeat center center fixed;
+
+
+      @media (max-height: 400px) and (max-width: 723px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_723_482.jpg") no-repeat center center fixed;
+      }
+
+      @media (min-height: 400px) and (max-height: 642px) and (max-width: 963px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_963_642.jpg") no-repeat center center fixed;
+      }
+
+      @media (min-height: 600px) and (max-height: 802px) and (max-width: 1203px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1203_802.jpg") no-repeat center center fixed;
+      }
+
+      @media (min-height: 700px) and (max-height: 1026px) and (max-width: 1539px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1539_1026.jpg") no-repeat center center fixed;
+      }
+
+      @media (min-height: 900px) and (max-height: 1286px) and (max-width: 1923px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1923_1282.jpg") no-repeat center center fixed;
+      }
     }
     .overlay-comments {
       @extend .overlay;
@@ -183,8 +200,31 @@
       -o-filter: blur(1px);
       -ms-filter: blur(1px);
       filter: blur(1px);
-      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/IMG_6790_1.jpg") no-repeat center center fixed;
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_full.jpg") no-repeat center center fixed;
+
+
+      @media (max-height: 400px) and (max-width: 720px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_720_480.jpg") no-repeat center center fixed;
+      }
+
+      @media (min-height: 400px) and (max-height: 640px) and (max-width: 960px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_960_640.jpg") no-repeat center center fixed;
+      }
+
+      @media (min-height: 600px) and (max-height: 800px) and (max-width: 1200px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1200_800.jpg") no-repeat center center fixed;
+      }
+
+      @media (min-height: 700px) and (max-height: 1024px) and (max-width: 1536px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1536_1024.jpg") no-repeat center center fixed;
+      }
+
+      @media (min-height: 900px) and (max-height: 1286px) and (max-width: 1923px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1923_1282.jpg") no-repeat center center fixed;
+      }
+
     }
+
     .overlay-description {
       @extend .overlay;
       -webkit-filter: blur(1px);
@@ -192,12 +232,30 @@
       -o-filter: blur(1px);
       -ms-filter: blur(1px);
       filter: blur(1px);
-      background: linear-gradient(rgba(black, 0.4), rgba(black, 0.4)), url("../images/bg/IMG_6914.jpg") no-repeat center center fixed;
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_full.jpg") no-repeat center center fixed;
+
+
+      @media (max-height: 400px) and (max-width: 723px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_723_482.jpg") no-repeat center center fixed;
+      }
+
+      @media (min-height: 400px) and (max-height: 642px) and (max-width: 963px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_963_642.jpg") no-repeat center center fixed;
+      }
+
+      @media (min-height: 600px) and (max-height: 802px) and (max-width: 1203px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1203_802.jpg") no-repeat center center fixed;
+      }
+
+      @media (min-height: 700px) and (max-height: 1026px) and (max-width: 1539px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1539_1026.jpg") no-repeat center center fixed;
+      }
+
+      @media (min-height: 900px) and (max-height: 1286px) and (max-width: 1923px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1923_1282.jpg") no-repeat center center fixed;
+      }
     }
-    .overlay-forms {
-      @extend .overlay;
-      background: linear-gradient(rgba(white, 0.6), rgba(white, 0.6)), url("../images/bg/slider/s12.png") no-repeat center center fixed;
-    }
+
   }
 
 }
@@ -224,7 +282,6 @@
     height: 100%;
     position: relative;
     display: block;
-
 
     .embed-responsive {
       position: relative;
@@ -278,8 +335,6 @@
       top: -3px;
     }
 
-
-
     md-card-content {
       position: absolute;
       bottom: 0;
@@ -329,7 +384,6 @@
 .courses-history {
   box-sizing: border-box;
   padding: 0 0 20px 0;
-
 
   card-image-container {
     display: block;

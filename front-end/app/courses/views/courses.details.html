@@ -105,7 +105,7 @@
     </div>
 
     <div layout="row" flex ng-if="vm.course.days">
-        <div class="page-delimiter content-block" flex>
+        <div class="page-delimiter content-block" id="trigger-right" flex>
             <div class="fit-screen-wrap header-long " layout="column">
                 <div flex="none" layout="row" class="md-padding program-block  " layout-align=" center center">
                     <div ng-repeat="day in ::vm.course.days track by $index">
@@ -117,7 +117,9 @@
                     </div>
                 </div>
             </div>
-            <div id="trigger-right" class="overlay-days"></div>
+
+
+            <div  class="overlay-days"> <figure ></figure></div>
             <md-button hide show-gt-xs="true" class=" md-fab  side-up-btn"
                        data-aos="fade-left" data-aos-easing="ease-in-out-back"
                        data-aos-anchor="#trigger-right"
