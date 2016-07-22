@@ -114,20 +114,18 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
   }
   .logo-img {
 
-    width: 170px;
+    width: 110px;
 
     @media (max-width: $layout-breakpoint-xs) {
       width: 70px;;
 
     }
-    @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-md) {
+    @media (min-width: $layout-breakpoint-sm)  {
       width: 110px;
+margin: 20px;
     }
 
-    @media (min-width: $layout-breakpoint-md) {
-      margin: 20px;
-      width: 170px;
-    }
+
   }
   .featured-area-subtitle {
     font-size: 1em;
