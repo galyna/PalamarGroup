@@ -59,8 +59,10 @@ export class MenuComponentController {
                 targetEvent: $event,
                 fullscreen: true
             } );
+
             menuBtn.toggleClass( 'open' );
         } else {
+           
             this.mdDialog.hide();
             menuBtn.toggleClass( 'open' );
         }

@@ -46,7 +46,7 @@ System.register(["../../resources/course.resource"], function(exports_1, context
                 };
                 CalendarComponentController.prototype.scrollToMain = function () {
                     var options = {
-                        duration: 2000,
+                        duration: 700,
                         easing: 'easeInQuad',
                         offset: 0,
                     };

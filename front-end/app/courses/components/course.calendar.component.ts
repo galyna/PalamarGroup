@@ -84,7 +84,7 @@ export class CalendarComponentController {
 
     scrollToMain() {
         var options = {
-            duration: 2000,
+            duration: 700,
             easing: 'easeInQuad',
             offset: 0,
 
