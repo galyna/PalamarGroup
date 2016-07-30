@@ -8,16 +8,36 @@ const template = `<div id="nav-icon4" ng-click="$ctrl.toggleMenu($event)">
 `;
 const menuBtnSelector = "#nav-icon4";
 
-const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout="column" layout-align="center center">
-  
-    <div ng-click="vm.courses()" class=" pg-menu-item md-display-3">БЛОКИ
-    
+const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout="column"  layout-align="center stretch"
+
+  >
+    <div class="pg-menu-section"  >
+        <div class="pg-menu-section-title" ng-click="vm.courses()" >САЛОН</div>
+        <div layout="column" layout-gt-sm="row" >
+            <div flex ng-click="vm.courses()" class=" pg-menu-item ">ПЕРЕВТІЛЕННЯ
+
+            </div>
+
+            <div flex ng-click="vm.calendar()" class=" pg-menu-item ">КОНТАКТИ
+
+            </div>
+              <div flex ng-click="vm.calendar()" class=" pg-menu-item ">КОНТАКТИ
+
+            </div>
+        </div>
     </div>
-    
-    <div ng-click="vm.calendar()" class=" pg-menu-item md-display-3">КАЛАНДАР
-  
+    <div class=" pg-menu-section" >
+        <div class="pg-menu-section-title" ng-click="vm.courses()" >АКАДЕМІЯ</div>
+        <div layout="column" layout-gt-sm="row"  >
+            <div flex ng-click="vm.courses()" class=" pg-menu-item ">БЛОКИ
+
+            </div>
+
+            <div flex ng-click="vm.calendar()" class=" pg-menu-item ">КАЛАНДАР
+
+            </div>
+        </div>
     </div>
-    
 
 </md-dialog>
     `;
@@ -62,7 +82,7 @@ export class MenuComponentController {
 
             menuBtn.toggleClass( 'open' );
         } else {
-           
+
             this.mdDialog.hide();
             menuBtn.toggleClass( 'open' );
         }

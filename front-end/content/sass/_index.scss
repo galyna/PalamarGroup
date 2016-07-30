@@ -1,47 +1,78 @@
 
-
 md-dialog.md-dialog-fullscreen.menu-dialog {
-  padding-top: 40px;
+ max-height: 100%;
   background-color: rgba(white, 0.92);
   text-align: center;
+
   .pg-menu-item {
     @extend .md-whiteframe-8dp;
     cursor: pointer;
-    color: $primary;
-    margin: 5% 0 5% 0;
-    min-height: 70px;
+    padding: 5% 0 5% 0;
 
-    width: 50vw;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    border-color: $primary;
-    border-width: 5px;
-    border-style: solid;
     border-radius: 0px;
     vertical-align: middle;
     transition: background-color 0.3s;
+    font-size: 30px;
+    color: white;
+
+    background-color: $primary;
 
     &:hover {
-      color: white;
-      border-color: black;
-      background-color: black;
-      @extend .md-whiteframe-24dp;
+      color: black;
+      border-color: white;
+      background-color: white;
+      @extend .md-whiteframe-16dp;
+      @media (min-width: $layout-breakpoint-md) {
+
+
+      }
     }
 
-    @media (max-height: $layout-breakpoint-xs) {
-      padding-top: 20px;
-      padding-bottom: 20px;
-      font-size: 36px;
-
+    @media (max-width: $layout-breakpoint-xs) {
+      padding-top: 1.5%;
+      padding-bottom: 1.5%;
+      margin: 1px ;
+      font-size: 16px;
     }
     @media (max-width: $layout-breakpoint-sm) {
-      color: white;
-      border-color: black;
-      background-color: black;
-      width: 100vw;
+      padding-top: 1.5%;
+      padding-bottom: 1.5%;
+      margin: 1px ;
+      font-size: 20px;
+    }
+    @media (min-width: $layout-breakpoint-md) {
+      margin: 1px ;
 
     }
   }
+
+  .pg-menu-section {
+    margin: 5% 0 0 0;
+    width: 100%;
+    display: table;
+
+    .pg-menu-section-title {
+
+      cursor: pointer;
+      font-size: 46px;
+      padding-top: 2%;
+      padding-bottom: 2%;
+      font-weight: bold;
+
+      @media (max-width: $layout-breakpoint-xs) {
+        padding-top: 1%;
+        padding-bottom: 1%;
+        font-size: 20px;
+      }
+      @media (max-width: $layout-breakpoint-sm) {
+        font-size: 26px;
+        padding-top: 2%;
+        padding-bottom: 2%;
+      }
+    }
+
+  }
+
 }
 
 .header-loading {
@@ -120,11 +151,10 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
       width: 70px;;
 
     }
-    @media (min-width: $layout-breakpoint-sm)  {
+    @media (min-width: $layout-breakpoint-sm) {
       width: 110px;
-margin: 20px;
+      margin: 20px;
     }
-
 
   }
   .featured-area-subtitle {
@@ -185,10 +215,6 @@ margin: 20px;
     -o-filter: contrast(150%);
     filter: contrast(150%);
 
-    @media (max-width: $layout-breakpoint-md) {
-      background: url("../images/bg/slider/s3.png") no-repeat center center fixed;
-
-    }
   }
 }
 
@@ -201,11 +227,15 @@ margin: 20px;
     font-family: 'microsquare', sans-serif;
     padding: 20px;
     @media (max-width: $layout-breakpoint-xs) {
-     .md-display-1{font-size: 28px;}
+      .md-display-1 {
+        font-size: 28px;
+      }
 
     }
   }
-  .fit-screen-wrap {z-index: 61;}
+  .fit-screen-wrap {
+    z-index: 61;
+  }
   .overlay {
     z-index: 60;
 
@@ -215,7 +245,6 @@ margin: 20px;
     -ms-filter: blur(1px);
     filter: blur(1px);
     background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_full.jpg") no-repeat center center fixed;
-
 
     @media (max-height: 400px) and (max-width: 723px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_723_482.jpg") no-repeat center center fixed;
