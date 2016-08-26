@@ -2,7 +2,7 @@ import {IMaster, MasterResourceName, IMasterResource} from "../../../resources/m
 import {PhotoServiceName, PhotoService} from "../../../resources/photo.service";
 import IPhoto = pg.models.IPhoto;
 
-const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
+const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button" ng-href="#/salon/masters">
@@ -17,7 +17,7 @@ const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveFor
             <md-button type="submit" class="md-raised">Зберегти</md-button>
         </div>
     </md-toolbar>
-    <md-tabs flex="grow" md-border-bottom>
+    <md-tabs md-stretch-tabs="always" md-dynamic-height>
         <md-tab label="Інфо">
             <md-card>
                 <md-card-content>
@@ -28,23 +28,23 @@ const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveFor
                 </md-card-content>
             </md-card>
         </md-tab>
-        <md-tab label="Аватар">
+        <md-tab label="Аватар" flex>
             <md-card>
                 <md-card-content layout-sm="row" layout-gt-sm>
                     <div layout="column">
                         <img ng-src="{{$ctrl.master.photo.url}}" class="module-history-img"/>
 
                         <div>
-                            <md-button ng-if="!$ctrl.showPhotoUpload" class="md-raised"
-                                       ng-click="$ctrl.showPhotoUpload=true">
+                            <md-button ng-if="!$ctrl.showAuthorPhotoUpload" class="md-raised"
+                                       ng-click="$ctrl.showAuthorPhotoUpload=true">
                                 Змінити фото
                             </md-button>
-                            <div ng-if="$ctrl.showPhotoUpload" class="md-padding md-margin">
+                            <div ng-if="$ctrl.showAuthorPhotoUpload" class="md-padding md-margin">
                                 <md-button ngf-select ng-model="hearFormsPhotoFile" accept="image/*" class="md-raised">
                                     Вибрати файл
                                 </md-button>
                                 <md-button class="md-primary"
-                                           ng-click="$ctrl.uploadPhoto(croppedhearFormsPhotoFile, hearFormsPhotoFile.name,$ctrl.master)">
+                                           ng-click="$ctrl.uploadAvatarPhoto(croppedhearFormsPhotoFile, hearFormsPhotoFile.name,$ctrl.master)">
                                     Завантажити
                                 </md-button>
                                 <div ngf-drop ng-model="hearFormsPhotoFile" ngf-pattern="image/*"
@@ -63,7 +63,57 @@ const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveFor
             </md-card>
         </md-tab>
         <md-tab label="Роботи">
-            author works pictures
+            <md-card>
+                <md-card-content>
+                    <div flex>
+                        <md-subheader class="md-no-sticky">Форми блоків</md-subheader>
+                        <div class="md-padding md-margin" layout="row"
+                             ng-repeat="item in $ctrl.master.works track by $index"
+                             ng-click="null">
+                            <img ng-src="{{item.url}}" class="module-history-img"/>
+                            <div layout="column">
+                                <md-input-container class="md-block  ">
+                                    <label for="historyNme">Назва роботи</label>
+                                    <input id="historyNme" ng-model="item.name" name="historyNme"/>
+                                </md-input-container>
+                                <md-input-container class="md-block  ">
+                                    <label for="ord">Порядок відображення</label>
+                                    <input id="ord" ng-model="item.order" type="number"/>
+                                </md-input-container>
+                                <md-button class="  md-raised"
+                                           ng-click="$ctrl.deleteFromList($ctrl.master.works ,item)">
+                                    Видалити
+                                </md-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <md-button ng-if="!$ctrl.showFormPhotoUpload" class="md-raised"
+                                   ng-click="$ctrl.showFormPhotoUpload=true">
+                            Додати фото
+                        </md-button>
+                        <div ng-if="$ctrl.showFormPhotoUpload" class="md-padding md-margin">
+                            <md-button ngf-select ng-model="masrerNewWork" accept="image/*" class="md-raised">
+                                Вибрати файл
+                            </md-button>
+                            <md-button class="md-primary" ng-show="masrerNewWork"
+                                       ng-click="$ctrl.uploadCollPhoto(croppedhearFormsPhotoFile, masrerNewWork.name,$ctrl.master.works)">
+                                Завантажити
+                            </md-button>
+                            <div ngf-drop ng-model="masrerNewWork" ngf-pattern="image/*"
+                                 class="cropArea">
+                                <img-crop area-type="rectangle" result-image-size="{w:800,h:800}" aspect-ratio="1"
+                                          init-max-area="true"
+                                          image="masrerNewWork  | ngfDataUrl"
+                                          result-image="croppedhearFormsPhotoFile"
+                                          ng-init="croppedhearFormsPhotoFile=''">
+                                </img-crop>
+                            </div>
+
+                        </div>
+                    </div>
+                </md-card-content>
+            </md-card>
         </md-tab>
     </md-tabs>
 </form>`;
@@ -84,31 +134,31 @@ export class MasterComponentController {
 
     $onInit() {
         if (this.$routeParams["id"]) {
-            this.MasterResource.get({id: this.$routeParams["id"]}).$promise
-                .then((master) => {
+            this.MasterResource.get( {id: this.$routeParams["id"]} ).$promise
+                .then( (master) => {
                     this.originalMaster = master;
-                    this.master = angular.copy(this.originalMaster);
-                });
+                    this.master = angular.copy( this.originalMaster );
+                } );
         } else {
             this.originalMaster = new this.MasterResource();
-            this.master = angular.copy(this.originalMaster);
+            this.master = angular.copy( this.originalMaster );
         }
     }
 
     cancel() {
-        this.master = angular.copy(this.originalMaster);
+        this.master = angular.copy( this.originalMaster );
     }
 
     save(form:ng.IFormController) {
         if (form.$invalid) return;
         this.master.$save()
-            .then((master) => {
-                this.$mdToast.showSimple(`Дані майстра збережено`);
-            })
-            .catch((err)=> {
-                this.$log.error(err);
+            .then( (master) => {
+                this.$mdToast.showSimple( `Дані майстра збережено` );
+            } )
+            .catch( (err)=> {
+                this.$log.error( err );
                 this.showErrorToast();
-            });
+            } );
     }
 
     deletePhoto() {
@@ -116,40 +166,42 @@ export class MasterComponentController {
     }
 
     uploadPhoto(dataUrl, name, model) {
-        this.photoService.save(this.photoService.dataUrltoFile(dataUrl, name))
-            .then((url)=> {
-                model.photo.url = url;
-            }).catch((err) => {
-                this.$log.debug("fail upload file..." + err);
-            }).finally(() => {
-                this.$timeout(() => {
-                    this.showPhotoUpload = false;
-                });
-            });
+        this.photoService.save( this.photoService.dataUrltoFile( dataUrl, name ) )
+            .then( (url)=> {
+                model.photo = {
+                    url: url
+                }
+            } ).catch( (err) => {
+            this.$log.debug( "fail upload file..." + err );
+        } ).finally( () => {
+            this.$timeout( () => {
+                this.showPhotoUpload = false;
+            } );
+        } );
     };
 
     //TODO: add file param type
     uploadCollPhoto(dataUrl, name, collection:IPhoto[]) {
-        this.photoService.save(this.photoService.dataUrltoFile(dataUrl, name)).then((url)=> {
-            collection.push({
+        this.photoService.save( this.photoService.dataUrltoFile( dataUrl, name ) ).then( (url)=> {
+            collection.push( {
                 name: "",
                 url: url,
                 order: 0
-            });
-        }).catch((err)=> {
-            this.$log.debug("fail upload file..." + err);
-        }).finally(()=> {
+            } );
+        } ).catch( (err)=> {
+            this.$log.debug( "fail upload file..." + err );
+        } ).finally( ()=> {
             this.showWorkUpload = false;
-        });
+        } );
     }
 
     showErrorToast(text = 'Помилка, спробуйте пізніше') {
-        this.$mdToast.showSimple(text);
+        this.$mdToast.showSimple( text );
     }
 
     //noinspection JSMethodCanBeStatic
     deleteFromList(list:any[], item:any) {
-        list.splice(list.indexOf(item), 1);
+        list.splice( list.indexOf( item ), 1 );
     }
 }
 

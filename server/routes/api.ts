@@ -14,6 +14,7 @@ import {Order} from '../models/order';
 import {Model} from '../models/model';
 import {SalonClient} from '../models/salon.client';
 import {User} from "../models/user";
+import {Master} from "../models/master";
 
 //endpoints
 import {emailEndpoint} from "./email.endpoint";
@@ -23,7 +24,7 @@ import {courseGetCommentsApi} from "./comment.endpoint";
 import {userOptions, userApi} from "./user.endpoint";
 import IOrder = pg.models.IOrder;
 import {salonClientApi} from "./salon.client.endpoint";
-import {Master} from "../models/master";
+
 
 
 let api = express.Router();
