@@ -17,6 +17,7 @@ import 'aos';
 import 'angular-youtube-embed';
 import {uiModule} from './ui/ui.module';
 import {coursesModule} from './courses/courses.module';
+import {salonModule} from './salon/salon.module';
 import './templates';
 
 //components
@@ -40,7 +41,8 @@ let app = angular.module('yuliaPalamarApp', [
     coreModule.name,
     resourcesModule.name,
     uiModule.name,
-    coursesModule.name
+    coursesModule.name,
+    salonModule.name
 
 ])
     .config(routesConfig)

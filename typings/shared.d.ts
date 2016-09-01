@@ -1,18 +1,30 @@
 declare module pg {
     module models {
 
+        export interface IFavor {
+            _id:any,
+            name:string,
+            category:string
+            defPrice:number
+        }
+
+        export interface IMasterFavor {
+            favor:any,
+            price:number
+        }
+
         export interface IMaster {
-            _id: any,
-            name: string,
-            photo: IPhoto,
-            services: string[],
-            works: IPhoto[],
-            contacts: {
-                phone: string,
-                facebook: string,
+            _id:any,
+            name:string,
+            photo:IPhoto,
+            services:IMasterFavor[],
+            works:IPhoto[],
+            contacts:{
+                phone:string,
+                facebook:string,
             }
         }
-        
+
         export interface IContact {
             _id?:any;
             name:string,
@@ -52,12 +64,12 @@ declare module pg {
             videos:IVideo[],
             hearFormsPhotos:IPhoto[],
             historyPhotos:IPhoto[],
-            avatar: string,
+            avatar:string,
             author:{
                 name:string,
                 photoUrl:string
             },
-            days: IDay[],
+            days:IDay[],
             courseModulesDates:any[],
             isVisible:boolean,
             comments:IComment[]
@@ -79,11 +91,11 @@ declare module pg {
         }
 
         export interface IUser {
-            _id?: any;
-            email: string,
-            name: string,
-            password: string,
-            roles: UserRole[]
+            _id?:any;
+            email:string,
+            name:string,
+            password:string,
+            roles:UserRole[]
         }
 
         export interface IModel {
@@ -116,18 +128,22 @@ declare module pg {
             isModerated:boolean;
         }
 
-        export interface IAdminComment extends IComment{
-            isCourseVisible: boolean,
-            courseId: string,
+        export interface IAdminComment extends IComment {
+            isCourseVisible:boolean,
+            courseId:string,
             courseDates:any[],
-            courseName: string
+            courseName:string
         }
     }
-    
-    type UserRole = 
-        'admin' 
-        | 'academyModerator' 
-        | 'academyUser'
-        | 'salonModerator'
-        | 'salonUser';
+
+    type UserRole =
+        'admin'
+            | 'academyModerator'
+            | 'academyUser'
+            | 'salonModerator'
+            | 'salonUser';
+
 }
+
+
+

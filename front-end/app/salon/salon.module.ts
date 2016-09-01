@@ -12,9 +12,9 @@ import {salonRoutes} from './salon.routes';
 import {SalonHomeComponentName,SalonHomeComponentOptions} from "./components/salon.home.component";
 
 
-let app = angular.module('courses', [ 'ngMaterial', resourcesModule.name])
+let app = angular.module('salon', [ 'ngMaterial', resourcesModule.name])
     .config(salonRoutes)
     .component(SalonHomeComponentName,SalonHomeComponentOptions );
-export let coursesModule = app;
+export let salonModule = app;
 
 

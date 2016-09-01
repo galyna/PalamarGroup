@@ -1,4 +1,6 @@
 import {CourseCalendarComponentUrl} from "../courses/components/course.calendar.component";
+import {SalonHomeComponentUrl} from "../salon/components/salon.home.component";
+
 const template = `<div id="nav-icon4" ng-click="$ctrl.toggleMenu($event)">
   <span></span>
   <span></span>
@@ -8,27 +10,36 @@ const template = `<div id="nav-icon4" ng-click="$ctrl.toggleMenu($event)">
 `;
 const menuBtnSelector = "#nav-icon4";
 
-const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout="column"  layout-align="center stretch"
+const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout="column" layout-align="center stretch"
 
-  >
-    <div class="pg-menu-section"  >
-        <div class="pg-menu-section-title" ng-click="vm.courses()" >САЛОН</div>
-        <div layout="column" layout-gt-sm="row" >
-            <div flex ng-click="vm.courses()" class=" pg-menu-item ">ПЕРЕВТІЛЕННЯ
+>
+    <div class="pg-menu-section">
+        <div class="pg-menu-section-title" ng-click="vm.courses()">САЛОН</div>
+        <div layout="column" layout-gt-sm="row">
+            <div flex ng-click="vm.goToURL(SalonHomeComponentUrl)" class=" pg-menu-item ">ГОЛОВНА
+
+            </div>
+            <div flex ng-click="vm.courses()" class=" pg-menu-item ">ПОСЛУГИ
 
             </div>
 
+            <div flex ng-click="vm.calendar()" class=" pg-menu-item ">КОМАНДА
+            </div>
+            <div flex ng-click="vm.calendar()" class=" pg-menu-item ">ПРАЙС
+
+            </div>
+            <div flex ng-click="vm.calendar()" class=" pg-menu-item ">ПЕРЕВТІЛЕННЯ
+
+            </div>
+   
             <div flex ng-click="vm.calendar()" class=" pg-menu-item ">КОНТАКТИ
-
-            </div>
-              <div flex ng-click="vm.calendar()" class=" pg-menu-item ">КОНТАКТИ
 
             </div>
         </div>
     </div>
-    <div class=" pg-menu-section" >
-        <div class="pg-menu-section-title" ng-click="vm.courses()" >АКАДЕМІЯ</div>
-        <div layout="column" layout-gt-sm="row"  >
+    <div class=" pg-menu-section">
+        <div class="pg-menu-section-title" ng-click="vm.courses()">АКАДЕМІЯ</div>
+        <div layout="column" layout-gt-sm="row">
             <div flex ng-click="vm.courses()" class=" pg-menu-item ">БЛОКИ
 
             </div>
@@ -52,7 +63,11 @@ export class MenuComponentController {
 
     }
 
-
+    goToURL(url):void {
+        this.$location.url( SalonHomeComponentUrl );
+        this.mdDialog.hide();
+        angular.element( document.querySelector( menuBtnSelector ) ).toggleClass( 'open' );
+    }
     courses():void {
         this.$location.url( '/course' );
         this.mdDialog.hide();

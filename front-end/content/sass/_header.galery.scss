@@ -192,25 +192,6 @@
     }
   }
 
-  @-webkit-keyframes slideShow {
-    0% {
-      opacity: 0;
-      -webkit-transform: scale(1);
-    }
-    5% {
-      opacity: 1
-    }
-    25% {
-      opacity: 1;
-    }
-    30% {
-      opacity: 0;
-      -webkit-transform: scale(1.1);
-    }
-    100% {
-      opacity: 0;
-      -webkit-transformm: scale(1);
-    }
-  }
+
 
 }

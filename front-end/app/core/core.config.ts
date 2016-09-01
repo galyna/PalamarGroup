@@ -1,12 +1,11 @@
-import IModel = pg.models.IModel;
 
 export interface IConstants {
     host: string,
     baseUrl:string,
     apiUrl:string,
     uploadDir:string,
-    photoUrl:string
-    newModel:IModel
+    photoUrl:string,
+    favorCategories:string[]
 }
 
 export let constants:IConstants = {
@@ -15,17 +14,8 @@ export let constants:IConstants = {
     apiUrl: '/api',
     uploadDir: '/content/uploads',
     photoUrl: '/api/photo',
-    //TODO: what's that? move to the corresponding location
-    newModel: {
-        name: '',
-        phone: '',
-        email: '',
-        address: '',
-        fasPhotoUrl: '../content/images/fas.jpg',
-        profilePhotoUrl: '../content/images/prifile.jpg',
-        backPhotoUrl: '../content/images/back.jpg',
-        fullSizePhotoUrl: '../content/images/fullsize.jpg'
-    }
+    favorCategories:["Стрижки","Нігтьова естетика","Візаж"]
+
 };
 
 debugConfig.$inject = ['$compileProvider'];

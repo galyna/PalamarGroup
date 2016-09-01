@@ -1,5 +1,7 @@
 import {Document, Schema, model} from "mongoose";
 import {PhotoSchema, IPhotoModel} from "./photo.schema";
+import {FavorSchema} from "./favor";
+
 
 export interface IMasterModel extends pg.models.IMaster, Document{
     photo: IPhotoModel,
@@ -9,7 +11,10 @@ export interface IMasterModel extends pg.models.IMaster, Document{
 let MasterSchema = new Schema({
     name: String,
     photo: PhotoSchema,
-    services: [String],
+    services:[{
+        favor:{type: Schema.Types.ObjectId, ref: 'Favor' },
+        price:Number
+    }],
     works: [PhotoSchema],
     contacts: {
         phone: String,

@@ -13,6 +13,7 @@ import {EmailService} from "./email.service";
 import {PhotoServiceName, PhotoService} from "./photo.service";
 import {UserResourceName, UserResource} from "./user.resource";
 import {MasterResourceName, MasterResource} from "./master.resource";
+import {FavorResourceName, FavorResource} from "./favor.resource";
 
 export let resourcesModule = angular.module('resources', ['ngResource', coreModule.name])
     .factory(CourseResourceName, CourseResource)
@@ -22,5 +23,6 @@ export let resourcesModule = angular.module('resources', ['ngResource', coreModu
     .factory(MasterResourceName, MasterResource)
     .factory(OrderResourceName, OrderResource)
     .service(UserResourceName, UserResource)
+    .service(FavorResourceName, FavorResource)
     .service(EmailService.componentName, EmailService)
     .service(PhotoServiceName, PhotoService);
