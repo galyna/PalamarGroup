@@ -47,6 +47,10 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
             <div flex ng-click="vm.calendar()" class=" pg-menu-item ">КАЛАНДАР
 
             </div>
+             <div flex ng-click="vm.calendar()" class=" pg-menu-item ">КОНТАКТИ
+
+            </div>
+     
         </div>
     </div>
 

@@ -14,7 +14,7 @@ export let constants:IConstants = {
     apiUrl: '/api',
     uploadDir: '/content/uploads',
     photoUrl: '/api/photo',
-    favorCategories:["Стрижки","Нігтьова естетика","Візаж"]
+    favorCategories:["ПЕРУКАРСЬКІ ПОСЛУГИ","НІГТЬВА ЕСТЕТИКА","ВІЗАЖ"]
 
 };
 

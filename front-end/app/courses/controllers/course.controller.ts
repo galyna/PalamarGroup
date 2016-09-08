@@ -57,7 +57,7 @@ export class CourseController {
 
     scrollToMain() {
         var options = {
-            duration: 700,
+            duration: 400,
             easing: 'easeInQuad',
             offset: 0,
 
