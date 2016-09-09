@@ -13,7 +13,7 @@ const menuBtnSelector = "#nav-icon4";
 const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout="column" layout-align="center stretch"
 
 >
-    <div class="pg-menu-section">
+   <!-- <div class="pg-menu-section">
         <div class="pg-menu-section-title" ng-click="vm.courses()">САЛОН</div>
         <div layout="column" layout-gt-sm="row">
             <div flex ng-click="vm.goToURL(SalonHomeComponentUrl)" class=" pg-menu-item ">ГОЛОВНА
@@ -36,20 +36,19 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
 
             </div>
         </div>
-    </div>
+    </div>-->
     <div class=" pg-menu-section">
-        <div class="pg-menu-section-title" ng-click="vm.courses()">АКАДЕМІЯ</div>
+        <div class="pg-menu-section-title" ng-click="vm.courses()"></div>
         <div layout="column" layout-gt-sm="row">
-            <div flex ng-click="vm.courses()" class=" pg-menu-item ">БЛОКИ
+            <div flex ng-click="vm.courses()" class=" pg-menu-item ">НАВЧАЛЬННЯ
 
             </div>
 
-            <div flex ng-click="vm.calendar()" class=" pg-menu-item ">КАЛАНДАР
-
+            <div flex ng-click="vm.calendar()" class=" pg-menu-item ">КАЛАЕНДАР
             </div>
-             <div flex ng-click="vm.calendar()" class=" pg-menu-item ">КОНТАКТИ
+            <!-- <div flex ng-click="vm.calendar()" class=" pg-menu-item ">КОНТАКТИ
 
-            </div>
+            </div>-->
      
         </div>
     </div>
