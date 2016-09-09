@@ -11,7 +11,7 @@ export interface ICourseDates {
 
 export class CoursesController {
 
-    static $inject = ['$scope', '$sce', '$location', 'pgCalendarData', CourseResourceName, '$mdMedia','orderByFilter'];
+    static $inject = ['$scope', '$sce', '$location', 'pgCalendarData', CourseResourceName, '$mdMedia', 'orderByFilter'];
     static componentName = 'CoursesController';
     courses:ICourse[];
     calendarDirection = 'horizontal';
@@ -19,7 +19,7 @@ export class CoursesController {
 
 
     constructor($scope, private $sce, private $location, private pgCalendarData:IPgCalendarDataService,
-                private CourseResource:ICourseResource, private $mdMedia,private orderByFilter:ng.IFilterOrderBy) {
+                private CourseResource:ICourseResource, private $mdMedia, private orderByFilter:ng.IFilterOrderBy) {
 
         $scope.$on( "$destroy", () => {
             this.courses = null;
@@ -55,12 +55,14 @@ export class CoursesController {
         this.coursesDateMap = [];
         this.courses = this.CourseResource.query();
         this.courses.$promise.then( (courses) => {
-            this.courses=this.orderByFilter(courses,"order")
+                this.courses = this.orderByFilter( courses, "order" )
                 angular.forEach( courses, (course) => {
                     if (course.isVisible) {
                         this.createDatesMap( course );
                         this.setCalendarContent( course );
-                        course.hearFormsPhotos=this.orderByFilter(course.hearFormsPhotos,"order")
+                        course.hearFormsPhotos = this.orderByFilter( course.hearFormsPhotos, "order" )
+                    } else {
+                        this.courses.splice( this.courses.indexOf( course ), 1 );
                     }
                 } );
             }
