@@ -69,7 +69,7 @@ export class CourseController {
     setSocialParams(course:ICourse) {
         this.$rootScope.socialParams.host = this.constants.host;
         this.$rootScope.socialParams.target = this.constants.host + "/#/course/" + course._id;
-        this.$rootScope.socialParams.image = this.constants.host + course.hearFormsPhotos[0].url;
+        this.$rootScope.socialParams.image = this.constants.host + course.avatar;
         this.$rootScope.socialParams.title = course.name;
         this.$rootScope.socialParams.description = this.getFBDescription( course );
         this.socialParams = angular.copy( this.$rootScope.socialParams, this.socialParams );
