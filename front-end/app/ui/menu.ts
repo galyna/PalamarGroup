@@ -13,7 +13,7 @@ const menuBtnSelector = "#nav-icon4";
 const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout="column" layout-align="center stretch"
 
 >
-   <!-- <div class="pg-menu-section">
+  <div class="pg-menu-section">
         <div class="pg-menu-section-title" ng-click="vm.courses()">САЛОН</div>
         <div layout="column" layout-gt-sm="row">
             <div flex ng-click="vm.goToURL(SalonHomeComponentUrl)" class=" pg-menu-item ">ГОЛОВНА
@@ -36,7 +36,7 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
 
             </div>
         </div>
-    </div>-->
+    </div>
     <div class=" pg-menu-section">
         <div class="pg-menu-section-title" ng-click="vm.courses()"></div>
         <div layout="column" layout-gt-sm="row">

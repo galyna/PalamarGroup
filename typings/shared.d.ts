@@ -4,8 +4,9 @@ declare module pg {
         export interface IFavor {
             _id:any,
             name:string,
-            category:string
-            defPrice:number
+            category:string,
+            defPrice:number,
+            photo:IPhoto
         }
 
         export interface IMasterFavor {

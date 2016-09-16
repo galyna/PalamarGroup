@@ -22,8 +22,9 @@ const template = `<md-toolbar>
 </md-button>
 
 <md-list flex>
-    <md-list-item class="md-2-line" ng-repeat="favor in $ctrl.favors"  ng-click="$ctrl.showEditFavorDialog($event, favor)"
+    <md-list-item class="md-2-line" ng-repeat="favor in $ctrl.favors"  ng-click="$ctrl.editFavor( favor)"
     >
+     <img ng-src="{{favor.photo.url}}" class="md-avatar" alt="{{favor.name}}" />
         <div class="md-list-item-text" layout="column">
             <h3>Категорія</h3>
             <p>{{::favor.category}}</p>
@@ -36,10 +37,7 @@ const template = `<md-toolbar>
             <h3>Ціна</h3>
             <p>{{::favor.defPrice}} грн.</p>
         </div>
-        <md-icon class="md-secondary " ng-click="$ctrl.showEditFavorDialog($event, favor)"
-                 md-svg-icon="communication:ic_message_24px">
-            <md-tooltip> Деталі</md-tooltip>
-        </md-icon>
+  
         <md-icon class="md-secondary " ng-disabled="::!$root.it.can('modifyAcademy')"
                  ng-click="$ctrl.showDeleteDialog($event, favor)"
                  md-svg-icon="action:ic_delete_24px">
@@ -50,88 +48,11 @@ const template = `<md-toolbar>
 </md-list>
 `;
 
-let addFavorDialogTemplate = `<md-dialog aria-label="Add favor" ng-cloak>
-    <form name="favorEditForm" ng-submit="$ctrl.save(favorEditForm)">
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2>{{$ctrl.favor.event_name}}</h2>
-                <span flex></span>
-                <md-button class="md-icon-button" ng-click="$ctrl.cancel()">
-                    <md-icon md-svg-src="navigation:ic_close_24px" aria-label="Close dialog"></md-icon>
-                </md-button>
-            </div>
-
-        </md-toolbar>
-        <md-dialog-content>
-            <div class="md-dialog-content" layout="row">
-                <md-subheader flex="1">
-
-                    <md-input-container>
-                        <label>Категорія</label>
-                        <md-select ng-model="$ctrl.favor.category" >
-                            <md-option ng-repeat="cat in $ctrl.categories" ng-value="cat.name"
-                   >
-                                {{cat.name}}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-                    <!--TODO add validation-->
-                    </md-input-container>
-                    <md-input-container class="md-block ">
-                        <label for="name">Назва</label>
-                        <input id="name" ng-model="$ctrl.favor.name" name="name"/>
-                        <!--TODO add validation-->
-                    </md-input-container>
-                    <md-input-container class="md-block">
-                        <label for="defPrice">Ціна</label>
-                        <input type="number" ng-model="$ctrl.favor.defPrice" id="defPrice" name="defPrice" />
-                    </md-input-container>
-                </md-subheader>
-
-            </div>
-        </md-dialog-content>
-        <md-dialog-actions layout="row">
-            <span flex></span>
-            <md-button ng-click="$ctrl.cancel()" aria-label="cancel">
-                Відмінити
-            </md-button>
-            <md-button type="submit" aria-label="save">
-                Зберегти
-            </md-button>
-        </md-dialog-actions>
-    </form>
-</md-dialog>
-`;
-
-class EditFavorDialogController {
-
-    private favor:IFavor;
-    private originalFavor:IFavor;
-    categories:any;
-
-    constructor(private $mdDialog:ng.material.IDialogService, favor:IFavor, private constants:IConstants) {
-        this.favor = angular.copy( favor );
-        this.originalFavor = favor;
-        this.categories = constants.favorCategories.map( function (category) {
-            return {name: category};
-        } );
-    }
-
-    save($form:ng.IFormController) {
-        if ($form.$valid) {
-            angular.extend( this.originalFavor, this.favor );
-            this.$mdDialog.hide( this.originalFavor );
-        }
-    }
-
-    cancel() {
-        this.$mdDialog.cancel();
-    }
-}
 
 export class FavorsComponentController {
 
-    static $inject = ["$filter", "$mdDialog", "$mdToast", "$mdMedia", FavorResourceName, PagingServiceName, 'constants'];
+    static $inject = ["$filter", "$mdDialog", "$mdToast", "$mdMedia",
+        FavorResourceName, PagingServiceName, 'constants', "$location"];
     favors:IFavor[];
     paging:any;
 
@@ -139,44 +60,21 @@ export class FavorsComponentController {
     constructor(private $filter:ng.IFilterService,
                 private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService,
                 private $mdMedia:ng.material.IMedia, private favorResource:IFavorResource,
-                private pagingService:PagingService, private constants:IConstants) {
+                private pagingService:PagingService, private constants:IConstants,private $location:ng.ILocationService) {
     }
 
     $onInit() {
         this.showPage();
     }
 
-    addFavor() {
-        var favor = new this.favorResource();
-        favor.category = this.constants.favorCategories[0];
-        favor.defPrice = 200;
-
-        this.$mdDialog.show( {
-            template: addFavorDialogTemplate,
-            controller: EditFavorDialogController,
-            controllerAs: '$ctrl',
-            bindToController: true,
-            locals: {
-                favor: favor
-            },
-            parent: angular.element( document.body ),
-
-        } ).then( (favor) => this.saveFavor( favor ) );
+    addFavor(){
+        this.$location.path("/salon/favor");
     }
 
-    showEditFavorDialog(ev:MouseEvent, favor:IFavor) {
-        this.$mdDialog.show( {
-            template: addFavorDialogTemplate,
-            controller: EditFavorDialogController,
-            controllerAs: '$ctrl',
-            bindToController: true,
-            locals: {
-                favor: favor
-            },
-            parent: angular.element( document.body ),
-            targetEvent: ev,
-        } ).then( (favor) => this.saveFavor( favor ) );
+    editFavor(favor: IFavor){
+        this.$location.path(`/salon/favor/${favor._id}`);
     }
+
 
     saveFavor(favor:IFavor) {
 

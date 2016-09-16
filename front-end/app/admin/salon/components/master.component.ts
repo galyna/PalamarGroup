@@ -44,7 +44,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                                     Вибрати файл
                                 </md-button>
                                 <md-button class="md-primary"
-                                           ng-click="$ctrl.uploadAvatarPhoto(croppedhearFormsPhotoFile, hearFormsPhotoFile.name,$ctrl.master)">
+                                           ng-click="$ctrl.uploadPhoto(croppedhearFormsPhotoFile, hearFormsPhotoFile.name,$ctrl.master)">
                                     Завантажити
                                 </md-button>
                                 <div ngf-drop ng-model="hearFormsPhotoFile" ngf-pattern="image/*"

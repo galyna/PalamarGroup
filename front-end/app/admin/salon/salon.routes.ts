@@ -2,6 +2,7 @@ import {MastersComponentUrl} from "./components/masters.component";
 import {ItServiceName, ItService} from "../../users/services/it.service";
 import {MasterComponentUrl} from "./components/master.component";
 import {FavorsComponentUrl} from "./components/favors.component";
+import {FavorComponentUrl} from "./components/favor.component";
 
 salonRoutes.$inject = ['$routeProvider'];
 export function salonRoutes($routeProvider:ng.route.IRouteProvider) {
@@ -23,5 +24,11 @@ export function salonRoutes($routeProvider:ng.route.IRouteProvider) {
             resolve: {
                 auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
             }
-        } );
+        } )
+        .when( FavorComponentUrl, {
+            template: '<pg-favor></pg-favor>',
+            resolve: {
+                auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
+            }
+        } )
 }

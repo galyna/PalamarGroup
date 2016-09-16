@@ -55,229 +55,42 @@
   ],
   "Course": [
     {
-      "_id": "570e9fe813bb7a0c1d01fc84",
-      "name": "РІВНІ",
-      "description": "Теоретично - практичний семінар з відпрацюванням форм жіночих стрижок від Тетяни Літвінової.\n Проводитиметься з 10 жовтня по 14 жовтня 2016 року.\nКурс призначений для тих майстрів , які прагнуть досягти абсолютної чистоти і точності в своїй роботі . Даний курс включає в себе класичні техніки стрижок і численні варіанти їх комбінацій .",
-      "price": 5000,
-      "order": 3,
-      "isVisible": true,
-      "__v": 3,
-      "avatar": "/api/photo/0c36055d-7678-442d-96a8-62a4cc805fcd.jpg",
-      "comments": [
-        {
-          "_id": "577421f1a5d5186018099614",
-          "name": "gg",
-          "text": "ggg",
-          "date": "2016-06-29T19:30:57.709Z",
-          "isModerated": true,
-          "isVisible": true
-        },
-        {
-          "_id": "577426bea5d5186018099615",
-          "name": "cvbn",
-          "text": "cvbn",
-          "date": "2016-06-29T19:51:26.018Z",
-          "isModerated": true,
-          "isVisible": true
-        },
-        {
-          "_id": "577434d1a5d5186018099618",
-          "name": "",
-          "text": "",
-          "date": "2016-06-29T20:51:29.605Z",
-          "isModerated": false,
-          "isVisible": true
-        },
-        {
-          "_id": "57743c0da5d518601809961a",
-          "name": "",
-          "text": "bnnnnnnnnnnnnnnnnnnnnnnn",
-          "date": "2016-06-29T21:22:21.132Z",
-          "isModerated": false,
-          "isVisible": true
-        },
-        {
-          "name": "",
-          "text": "",
-          "date": "2016-06-29T22:33:03.664Z",
-          "_id": "57744c9fa5d518601809961b",
-          "isModerated": false,
-          "isVisible": false
-        },
-        {
-          "name": "",
-          "text": "",
-          "date": "2016-06-29T23:03:01.597Z",
-          "_id": "577453a5a5d518601809961d",
-          "isModerated": false,
-          "isVisible": false
-        },
-        {
-          "name": "",
-          "text": "egh",
-          "date": "2016-06-29T23:12:12.876Z",
-          "_id": "577455cca5d518601809961f",
-          "isModerated": false,
-          "isVisible": false
-        }
-      ],
-      "courseModulesDates": [
-        "2016-10-09T21:00:00.000Z",
-        "2016-10-10T21:00:00.000Z",
-        "2016-10-11T21:00:00.000Z",
-        "2016-10-12T21:00:00.000Z",
-        "2016-10-13T21:00:00.000Z"
-      ],
-      "days": [
-        {
-          "date": "2016-10-09T21:00:00.000Z",
-          "_id": "57d13c7f048e194703dd13bc"
-        },
-        {
-          "date": "2016-10-10T21:00:00.000Z",
-          "program": null,
-          "_id": "57d13c7f048e194703dd13bb"
-        },
-        {
-          "date": "2016-10-11T21:00:00.000Z",
-          "program": null,
-          "_id": "57d13c7f048e194703dd13ba"
-        },
-        {
-          "date": "2016-10-12T21:00:00.000Z",
-          "program": null,
-          "_id": "57d13c7f048e194703dd13b9"
-        },
-        {
-          "date": "2016-10-13T21:00:00.000Z",
-          "program": null,
-          "_id": "57d13ca7048e194703dd13bd"
-        }
-      ],
+      "_id": "57d08912048e194703dd13a3",
+      "isVisible": false,
+      "name": "FASHION-СТИЛІСТИКА",
+      "description": "Курси стилістів включають в себе ознайомлення з історичними віхами розвитку костюма , візажу та зачісок , а також припускають розгляд походження стилів і їх класифікацію за групами .",
+      "__v": 0,
+      "order": 5,
+      "price": 4000,
+      "avatar": "/api/photo/350c3900-7457-4ac0-ad10-cd59cbfbab03.jpg",
+      "comments": [],
+      "courseModulesDates": [],
+      "days": [],
       "author": {
-        "name": "Тетяна Літвінова",
-        "photoUrl": "/api/photo/0ffb4322-8d3d-486b-a079-b6a3a633a496.jpg"
+        "name": "Тетяна Єгунян",
+        "photoUrl": "/api/photo/7093819c-ed32-4704-8961-99461c8f9b2d.jpg"
       },
-      "historyPhotos": [
-        {
-          "name": "",
-          "url": "/api/photo/6651dfbe-e084-489f-9a52-581252e12207.jpg",
-          "order": 0,
-          "_id": "57879a2fd54068841c4b9067"
-        },
-        {
-          "name": "",
-          "url": "/api/photo/afecae20-1ed8-4608-be3b-dae43860930e.jpg",
-          "order": 0,
-          "_id": "57879a2fd54068841c4b9066"
-        }
-      ],
-      "hearFormsPhotos": [
-        {
-          "name": "Прямий зріз",
-          "url": "/api/photo/17b52c2b-497f-49b7-a5a1-cb4cc38089ec.jpg",
-          "order": 0,
-          "_id": "57868827459029d0004ea4a6"
-        },
-        {
-          "name": "Паж",
-          "url": "/api/photo/254081d7-db78-4711-9cb5-068367c04eea.jpg",
-          "order": 0,
-          "_id": "57868827459029d0004ea4a5"
-        },
-        {
-          "name": "Боб",
-          "url": "/api/photo/7f18771b-40f2-414f-85e6-c62e3335ec91.jpg",
-          "order": 0,
-          "_id": "57868827459029d0004ea4a4"
-        },
-        {
-          "name": "Діагональ вперед",
-          "url": "/api/photo/c4ce6f7c-754a-4929-b999-bc8af7f0396a.jpg",
-          "order": 0,
-          "_id": "57868827459029d0004ea4a3"
-        },
-        {
-          "name": "Паж",
-          "url": "/api/photo/ee234865-6bcd-4fc8-aae8-e5db3daab4cc.jpg",
-          "order": 0,
-          "_id": "5786883d459029d0004ea4a7"
-        },
-        {
-          "name": "Прямий зріз",
-          "url": "/api/photo/0077a6fd-160c-4262-ba1d-f1fab639ad45.jpg",
-          "order": 0,
-          "_id": "57868a71459029d0004ea4bd"
-        }
-      ],
-      "videos": [
-        {
-          "name": "Прямий зріз",
-          "url": "kdTTS6ElpTY",
-          "order": 0,
-          "_id": "57878f6dd54068841c4b9060"
-        }
-      ]
+      "historyPhotos": [],
+      "hearFormsPhotos": [],
+      "videos": []
     },
     {
-      "_id": "570ea14e13bb7a0c1d01fc87",
-      "name": "MAN CONTEMP",
-      "description": "Теоретично - практичний семінар з відпрацюванням форм чоловічих стрижок від SAYPLE EDUCATION.\n Проводитиметься з 27 вересня по 30 вересня 2016 року.\nВ даний час чоловіки прагнуть виглядати вишукано і сучасно , звертаючи уваги не тільки на одяг , а й на імідж вцілому , який , як відомо , створює перше враження про особу . Важливою деталлю іміджу є стрижка , яка правильно підкреслює риси обличчя і ідеально підходить структурі волосся . Оригінальна і сучасна чоловіча стрижка відповідає справжнім трендам і може бути виконана тільки досвідченими майстрами!",
-      "price": 5000,
-      "order": 1,
-      "isVisible": true,
-      "__v": 3,
-      "avatar": "/api/photo/99808501-2aeb-4491-9dd4-353e5db89960.jpg",
+      "_id": "57d08c64048e194703dd13a9",
+      "isVisible": false,
+      "name": "ТЕОРІЯ КОЛЬРУ",
+      "description": "У програмі курсу детально розглядається теорія кольору на основі авторської системи розуміння квітів по Іоханессу Іттону і пропонується формула розрахунку колірного образу.\n\nЗавдяки цьому, після закінчення навчання випускник цілком може претендувати на популярну сьогодні в салонах посаду колірного консультанта, чиїм основним завданням є робота з колірними драпіровками і складання колірної астрології індивідуального стилю людини. Тим більше, що крім іншого, в рамках курсу також вивчаються правила вибору фактури і тканини, пропорції і силуетні лінії, класифікація фігур і фокусні точки людини.",
+      "__v": 0,
+      "avatar": "/api/photo/5d326e4d-96d2-4487-a93d-f2f39d436cc4.jpg",
+      "order": 6,
+      "price": 4000,
       "comments": [],
-      "courseModulesDates": [
-        "2016-04-20T21:00:00.000Z",
-        "2016-04-18T21:00:00.000Z",
-        "2016-04-14T14:28:06.118Z",
-        "2016-04-14T14:28:06.118Z",
-        "2016-09-26T21:00:00.000Z",
-        "2016-09-27T21:00:00.000Z",
-        "2016-09-29T21:00:00.000Z",
-        "2016-09-29T21:00:00.000Z"
-      ],
-      "days": [
-        {
-          "date": "2016-09-26T21:00:00.000Z",
-          "_id": "57d07e20048e194703dd1391"
-        },
-        {
-          "date": "2016-09-27T21:00:00.000Z",
-          "program": null,
-          "_id": "57d07e20048e194703dd1390"
-        },
-        {
-          "date": "2016-09-28T21:00:00.000Z",
-          "program": null,
-          "_id": "57d07e20048e194703dd138e"
-        },
-        {
-          "date": "2016-09-29T21:00:00.000Z",
-          "program": null,
-          "_id": "57d07e88048e194703dd1392"
-        }
-      ],
+      "courseModulesDates": [],
+      "days": [],
       "author": {
-        "name": "Леонід Седюков",
-        "photoUrl": "/api/photo/7bc299e5-74de-4a07-a8b9-c28b392fd2c5.jpg"
+        "name": "Тетяна Єгунян",
+        "photoUrl": "/api/photo/ffa49ada-3a3e-41ce-9e5f-d995f33117b2.jpg"
       },
-      "historyPhotos": [
-        {
-          "name": "Модуль у 2016 році",
-          "url": "/api/photo/adf9a30c-f397-46ca-89d9-d75ce5428800.jpg",
-          "order": 0,
-          "_id": "578687bb459029d0004ea4a1"
-        },
-        {
-          "name": "",
-          "url": "/api/photo/2faf93d7-0554-4b21-8464-2fff0eee331a.jpg",
-          "order": 0,
-          "_id": "5786895e459029d0004ea4b2"
-        }
-      ],
+      "historyPhotos": [],
       "hearFormsPhotos": [],
       "videos": []
     },
@@ -426,28 +239,46 @@
         }
       ],
       "author": {
-        "name": "Юлія Куницька",
-        "photoUrl": "/api/photo/577166f0-1663-47d5-8774-829418c0708c.jpg"
+        "name": ".ЮЛІЯ ПАЛАМАР",
+        "photoUrl": "/api/photo/94d2e79d-a493-4700-91ca-7bf6e8ad5e94.jpg"
       },
       "historyPhotos": [],
       "hearFormsPhotos": [
         {
-          "name": "Андеркат",
-          "url": "/api/photo/6c31c387-8ff9-48e6-92d5-afdf1522bfdd.jpg",
-          "order": 0,
-          "_id": "578688f4459029d0004ea4ad"
+          "name": "",
+          "url": "/api/photo/f47f7ad5-1e8e-44b9-a6a5-58000f010ddb.jpg",
+          "order": 3,
+          "_id": "57d28e597978ab1bd8078ff5"
         },
         {
-          "name": "Андеркат",
-          "url": "/api/photo/7235cc54-b863-402b-a0e3-10a13bc2e52a.jpg",
-          "order": 0,
-          "_id": "578688f4459029d0004ea4ac"
+          "name": "",
+          "url": "/api/photo/a540133a-ed47-4d04-99d3-d896f276dd99.jpg",
+          "order": 1,
+          "_id": "57d28e847978ab1bd8078ff6"
         },
         {
-          "name": "Андеркат",
-          "url": "/api/photo/fb13cfe4-cef6-4bac-8343-e25e44d53dc6.jpg",
+          "name": "",
+          "url": "/api/photo/26504942-a5e5-49bf-ae1d-feb94984ec7b.jpg",
           "order": 0,
-          "_id": "578688f4459029d0004ea4ab"
+          "_id": "57d290257978ab1bd8078ff9"
+        },
+        {
+          "name": "",
+          "url": "/api/photo/eac66243-dea1-4068-a570-930bc013fddc.jpg",
+          "order": 4,
+          "_id": "57d290257978ab1bd8078ff8"
+        },
+        {
+          "name": "",
+          "url": "/api/photo/53a4c8bc-afe8-48ea-86c3-99a8c7c61f93.jpg",
+          "order": 5,
+          "_id": "57d290257978ab1bd8078ff7"
+        },
+        {
+          "name": "",
+          "url": "/api/photo/4f09b597-8742-4449-9ac1-0471b0c5e06b.jpg",
+          "order": 6,
+          "_id": "57d291677978ab1bd8078ffa"
         }
       ],
       "videos": []
@@ -459,7 +290,7 @@
       "price": 3000,
       "order": 7,
       "isVisible": true,
-      "__v": 6,
+      "__v": 15,
       "avatar": "/api/photo/49d9d945-054d-4aeb-be74-502e5243a9fa.jpg",
       "comments": [],
       "courseModulesDates": [
@@ -489,21 +320,57 @@
       "hearFormsPhotos": [
         {
           "name": "",
-          "url": "/api/photo/54c7cf8f-bec4-4dda-bbde-c61f64256a42.jpg",
-          "order": 0,
-          "_id": "57d082cd048e194703dd139a"
+          "url": "/api/photo/474d3f19-6159-4c3c-8250-8f9de62a97fe.jpg",
+          "order": 5,
+          "_id": "57d292b67978ab1bd8078ffd"
         },
         {
           "name": "",
-          "url": "/api/photo/b9b14e8b-c7e9-40ae-b884-551f71453c40.jpg",
-          "order": 1,
-          "_id": "57d0831a048e194703dd139c"
+          "url": "/api/photo/51af558b-da04-4261-8901-22b700c17dd9.jpg",
+          "order": 8,
+          "_id": "57d295547978ab1bd8079000"
         },
         {
           "name": "",
-          "url": "/api/photo/4f9c10ca-ff8d-4557-b64f-b60b9879c097.jpg",
+          "url": "/api/photo/46e80e91-c669-451e-8bfe-7eb99637a00e.jpg",
           "order": 2,
-          "_id": "57d08382048e194703dd139d"
+          "_id": "57d2959e7978ab1bd8079001"
+        },
+        {
+          "name": "",
+          "url": "/api/photo/42d0b6cd-620b-4425-a1f2-33bea101a80c.jpg",
+          "order": 0,
+          "_id": "57d295ca7978ab1bd8079002"
+        },
+        {
+          "name": "",
+          "url": "/api/photo/76c15a5c-a30d-4bc1-8366-5c28678af7e1.jpg",
+          "order": 3,
+          "_id": "57d296287978ab1bd8079003"
+        },
+        {
+          "name": "",
+          "url": "/api/photo/84fbd98b-4187-4e26-b145-b6265ffe9674.jpg",
+          "order": 7,
+          "_id": "57d2983c7978ab1bd8079005"
+        },
+        {
+          "name": "",
+          "url": "/api/photo/a69b6a98-6fe0-47f6-a1e5-8a76e15eee12.jpg",
+          "order": 4,
+          "_id": "57d298bf7978ab1bd8079006"
+        },
+        {
+          "name": "",
+          "url": "/api/photo/4628526e-c5d6-42bd-8871-6aaf666baf8d.jpg",
+          "order": 9,
+          "_id": "57d298fe7978ab1bd8079007"
+        },
+        {
+          "name": "",
+          "url": "/api/photo/0fb7f4a1-118f-433d-b2a4-602dd67e88b1.jpg",
+          "order": 10,
+          "_id": "57d29b2d7978ab1bd8079008"
         }
       ],
       "videos": []
@@ -515,7 +382,7 @@
       "price": 5000,
       "order": 2,
       "isVisible": true,
-      "__v": 3,
+      "__v": 4,
       "avatar": "/api/photo/767e3f46-477d-4b89-a91f-194820fcd51c.jpg",
       "comments": [],
       "courseModulesDates": [
@@ -562,71 +429,53 @@
       "historyPhotos": [],
       "hearFormsPhotos": [
         {
-          "name": "Андеркат",
-          "url": "/api/photo/7b141460-66cc-47da-9820-272e4e869d10.jpg",
+          "name": "",
+          "url": "/api/photo/7f2044d6-6390-499d-9f76-62db19354142.jpg",
           "order": 0,
-          "_id": "57868a0d459029d0004ea4ba"
+          "_id": "57d29e4a7978ab1bd8079009"
         },
         {
-          "name": "Андеркат",
-          "url": "/api/photo/aff6b0d1-3842-44a8-9f13-72fd6ef9731e.jpg",
-          "order": 0,
-          "_id": "57868a0d459029d0004ea4b9"
+          "name": "",
+          "url": "/api/photo/68512f11-9770-4fd5-9753-8a79bc8e4bab.jpg",
+          "order": 2,
+          "_id": "57d29e937978ab1bd807900a"
         },
         {
-          "name": "Андеркат",
-          "url": "/api/photo/573e0ed6-2baf-41fb-8153-53939c3ce68a.jpg",
+          "name": "",
+          "url": "/api/photo/d7fd01f2-bd99-4cfa-b31d-c820d13e4640.jpg",
           "order": 0,
-          "_id": "57868a0d459029d0004ea4b8"
+          "_id": "57d29f047978ab1bd807900d"
+        },
+        {
+          "name": "",
+          "url": "/api/photo/4d35a8a9-e8b6-418f-b5d7-c2a52b6035f0.jpg",
+          "order": 0,
+          "_id": "57d29f047978ab1bd807900c"
+        },
+        {
+          "name": "",
+          "url": "/api/photo/e67780ea-cf74-4f45-a4a4-0a02e1379c6e.jpg",
+          "order": 0,
+          "_id": "57d29f047978ab1bd807900b"
+        },
+        {
+          "name": "",
+          "url": "/api/photo/befd4fca-e878-45ec-a436-a86a8bb93094.jpg",
+          "order": 0,
+          "_id": "57d29f387978ab1bd807900e"
         }
       ],
       "videos": []
-    },
-    {
-      "_id": "57d08912048e194703dd13a3",
-      "isVisible": false,
-      "name": "FASHION-СТИЛІСТИКА",
-      "description": "Курси стилістів включають в себе ознайомлення з історичними віхами розвитку костюма , візажу та зачісок , а також припускають розгляд походження стилів і їх класифікацію за групами .",
-      "comments": [],
-      "courseModulesDates": [],
-      "days": [],
-      "historyPhotos": [],
-      "hearFormsPhotos": [],
-      "videos": [],
-      "__v": 2,
-      "order": 5,
-      "price": 4000,
-      "avatar": "/api/photo/350c3900-7457-4ac0-ad10-cd59cbfbab03.jpg",
-      "author": {
-        "name": "Тетяна Єгунян",
-        "photoUrl": "/api/photo/7093819c-ed32-4704-8961-99461c8f9b2d.jpg"
-      }
-    },
-    {
-      "_id": "57d08c64048e194703dd13a9",
-      "isVisible": false,
-      "name": "ТЕОРІЯ КОЛЬРУ",
-      "description": "У програмі курсу детально розглядається теорія кольору на основі авторської системи розуміння квітів по Іоханессу Іттону і пропонується формула розрахунку колірного образу.\n\nЗавдяки цьому, після закінчення навчання випускник цілком може претендувати на популярну сьогодні в салонах посаду колірного консультанта, чиїм основним завданням є робота з колірними драпіровками і складання колірної астрології індивідуального стилю людини. Тим більше, що крім іншого, в рамках курсу також вивчаються правила вибору фактури і тканини, пропорції і силуетні лінії, класифікація фігур і фокусні точки людини.",
-      "comments": [],
-      "courseModulesDates": [],
-      "days": [],
-      "historyPhotos": [],
-      "hearFormsPhotos": [],
-      "videos": [],
-      "__v": 0,
-      "author": {
-        "name": "Тетяна Єгунян",
-        "photoUrl": "/api/photo/ffa49ada-3a3e-41ce-9e5f-d995f33117b2.jpg"
-      },
-      "avatar": "/api/photo/5d326e4d-96d2-4487-a93d-f2f39d436cc4.jpg",
-      "order": 6,
-      "price": 4000
     },
     {
       "_id": "57d090fd048e194703dd13aa",
       "name": "STEP 1",
       "isVisible": true,
       "description": "Теоретично - практичний семінар з відпрацюванням форм жіночі стрижок від SAYPLE EDUCATION.\n Проводитиметься з 24 жовтня по 28 жовтня 2016 року.",
+      "__v": 0,
+      "avatar": "/api/photo/35ffb389-a764-433b-a5a0-ed830ad28614.png",
+      "price": 5000,
+      "order": 4,
       "comments": [],
       "courseModulesDates": [
         "2016-10-23T21:00:00.000Z",
@@ -660,6 +509,10 @@
           "_id": "57d09390048e194703dd13b2"
         }
       ],
+      "author": {
+        "name": "Павло Смірнов",
+        "photoUrl": "/api/photo/506badac-ce68-4581-9f5a-630ba0d42618.png"
+      },
       "historyPhotos": [],
       "hearFormsPhotos": [
         {
@@ -681,14 +534,68 @@
           "_id": "57d09350048e194703dd13b1"
         }
       ],
-      "videos": [],
-      "__v": 5,
-      "author": {
-        "name": "Павло Смірнов"
-      },
-      "avatar": "/api/photo/35ffb389-a764-433b-a5a0-ed830ad28614.png",
+      "videos": []
+    },
+    {
+      "_id": "570ea14e13bb7a0c1d01fc87",
+      "name": "MAN CONTEMP",
+      "description": "Теоретично - практичний семінар з відпрацюванням форм чоловічих стрижок від SAYPLE EDUCATION.\n Проводитиметься з 27 вересня по 30 вересня 2016 року.\nВ даний час чоловіки прагнуть виглядати вишукано і сучасно , звертаючи уваги не тільки на одяг , а й на імідж вцілому , який , як відомо , створює перше враження про особу . Важливою деталлю іміджу є стрижка , яка правильно підкреслює риси обличчя і ідеально підходить структурі волосся . Оригінальна і сучасна чоловіча стрижка відповідає справжнім трендам і може бути виконана тільки досвідченими майстрами!",
       "price": 5000,
-      "order": 4
+      "order": 1,
+      "isVisible": true,
+      "__v": 1,
+      "avatar": "/api/photo/99808501-2aeb-4491-9dd4-353e5db89960.jpg",
+      "comments": [],
+      "courseModulesDates": [
+        "2016-04-20T21:00:00.000Z",
+        "2016-04-18T21:00:00.000Z",
+        "2016-04-14T14:28:06.118Z",
+        "2016-04-14T14:28:06.118Z",
+        "2016-09-26T21:00:00.000Z",
+        "2016-09-27T21:00:00.000Z",
+        "2016-09-28T21:00:00.000Z",
+        "2016-09-29T21:00:00.000Z"
+      ],
+      "days": [
+        {
+          "date": "2016-09-26T21:00:00.000Z",
+          "_id": "57d07e20048e194703dd1391"
+        },
+        {
+          "date": "2016-09-27T21:00:00.000Z",
+          "program": null,
+          "_id": "57d07e20048e194703dd1390"
+        },
+        {
+          "date": "2016-09-28T21:00:00.000Z",
+          "_id": "57d19e5fdac7b11dc8945cf3"
+        },
+        {
+          "date": "2016-09-29T21:00:00.000Z",
+          "program": null,
+          "_id": "57d19e5fdac7b11dc8945cf2"
+        }
+      ],
+      "author": {
+        "name": "Леонід Седюков",
+        "photoUrl": "/api/photo/7bc299e5-74de-4a07-a8b9-c28b392fd2c5.jpg"
+      },
+      "historyPhotos": [
+        {
+          "name": "Модуль у 2016 році",
+          "url": "/api/photo/adf9a30c-f397-46ca-89d9-d75ce5428800.jpg",
+          "order": 0,
+          "_id": "578687bb459029d0004ea4a1"
+        },
+        {
+          "name": "",
+          "url": "/api/photo/2faf93d7-0554-4b21-8464-2fff0eee331a.jpg",
+          "order": 0,
+          "_id": "5786895e459029d0004ea4b2"
+        }
+      ],
+      "hearFormsPhotos": [],
+      "videos": []
     },
     {
       "_id": "57d13e14048e194703dd13be",
@@ -698,6 +605,7 @@
       "avatar": "/api/photo/35ffb389-a764-433b-a5a0-ed830ad28614.png",
       "price": 5000,
       "order": 8,
+      "__v": 0,
       "comments": [],
       "courseModulesDates": [
         "2017-02-05T22:00:00.000Z",
@@ -764,8 +672,7 @@
           "_id": "57d09350048e194703dd13b1"
         }
       ],
-      "videos": [],
-      "__v": 1
+      "videos": []
     },
     {
       "_id": "57d142d5048e194703dd13c5",
@@ -775,6 +682,7 @@
       "avatar": "/api/photo/35ffb389-a764-433b-a5a0-ed830ad28614.png",
       "price": 3000,
       "order": 6,
+      "__v": 0,
       "comments": [],
       "courseModulesDates": [],
       "days": [
@@ -834,8 +742,7 @@
           "_id": "57d09350048e194703dd13b1"
         }
       ],
-      "videos": [],
-      "__v": 0
+      "videos": []
     }
   ],
   "SalonClient": [
