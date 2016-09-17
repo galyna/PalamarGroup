@@ -5,7 +5,7 @@ import {PhotoServiceName, PhotoService} from "../../../resources/photo.service";
 import IPhoto = pg.models.IPhoto;
 
 
- const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
+const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button" ng-href="#/salon/favors">
@@ -28,23 +28,23 @@ import IPhoto = pg.models.IPhoto;
                         <label for="name">Назва</label>
                         <input id="name" ng-model="$ctrl.favor.name" name="name"/>
                     </md-input-container>
-                      <md-input-container>
+                    <md-input-container>
                         <label>Категорія</label>
-                        <md-select ng-model="$ctrl.favor.category" >
-                            <md-option ng-repeat="cat in $ctrl.categories" ng-value="cat.name"
-                   >
-                                {{cat.name}}
+                        <md-select ng-model="$ctrl.favor.category" ng-model-options="{trackBy: '$value._id'}">
+                            <md-option ng-repeat="n in $ctrl.categories" ng-value="n">
+                                {{ n.name }}
                             </md-option>
                         </md-select>
+                     
                     </md-input-container>
                     <!--TODO add validation-->
                     </md-input-container>
-                 
+
                     <md-input-container class="md-block">
                         <label for="defPrice">Ціна</label>
-                        <input type="number" ng-model="$ctrl.favor.defPrice" id="defPrice" name="defPrice" />
+                        <input type="number" ng-model="$ctrl.favor.defPrice" id="defPrice" name="defPrice"/>
                     </md-input-container>
-                    
+
                 </md-card-content>
             </md-card>
         </md-tab>
@@ -82,7 +82,7 @@ import IPhoto = pg.models.IPhoto;
                 </md-card-content>
             </md-card>
         </md-tab>
-       
+
     </md-tabs>
 </form>`;
 
@@ -90,7 +90,7 @@ import IPhoto = pg.models.IPhoto;
 export class FavorComponentController {
 
     static $inject = ["$log", "$routeParams", "$mdToast", "$timeout",
-        FavorResourceName, 'constants',PhotoServiceName];
+        FavorResourceName, 'constants', PhotoServiceName];
 
     originalFavor:IFavor;
     favor:IFavor;
@@ -100,10 +100,10 @@ export class FavorComponentController {
 
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
-                 private favorResource:IFavorResource,
-                private constants:IConstants,private photoService:PhotoService) {
+                private favorResource:IFavorResource,
+                private constants:IConstants, private photoService:PhotoService) {
     }
-    
+
 
     $onInit() {
         if (this.$routeParams["id"]) {
@@ -116,11 +116,9 @@ export class FavorComponentController {
             this.originalFavor = new this.favorResource();
             this.favor = angular.copy( this.originalFavor );
         }
-        this.categories = this.constants.favorCategories.map( function (category) {
-            return {name: category};
-        } );
+        this.categories = this.constants.favorCategories;
     }
-    
+
     uploadPhoto(dataUrl, name, model) {
         this.photoService.save( this.photoService.dataUrltoFile( dataUrl, name ) )
             .then( (url)=> {
@@ -135,7 +133,7 @@ export class FavorComponentController {
             } );
         } );
     };
-    
+
     showErrorToast(text = 'Помилка, спробуйте пізніше') {
         this.$mdToast.showSimple( text );
     }
@@ -155,9 +153,8 @@ export class FavorComponentController {
                 this.showErrorToast();
             } );
     }
- 
 
-      
+
 }
 
 export let FavorComponentUrl = "/salon/favor/:id?";

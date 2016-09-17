@@ -6,6 +6,8 @@ import {MastersComponentName, MastersComponentOptions} from "./components/master
 import {MasterComponentOptions, MasterComponentName} from "./components/master.component";
 import {FavorsComponentName,FavorsComponentOptions} from "./components/favors.component";
 import {FavorComponentName,FavorComponentOptions} from "./components/favor.component";
+import {TransformComponentName,TransformComponentOptions} from "./components/transform.component";
+import {TransformsComponentName,TransformsComponentOptions} from "./components/transforms.component";
 
 export let salonModule = angular.module( 'salon', [
     'ngRoute'
@@ -14,4 +16,6 @@ export let salonModule = angular.module( 'salon', [
     .component( MastersComponentName, MastersComponentOptions )
     .component( MasterComponentName, MasterComponentOptions )
     .component( FavorComponentName, FavorComponentOptions )
-    .component( FavorsComponentName, FavorsComponentOptions );
+    .component( FavorsComponentName, FavorsComponentOptions )
+.component( TransformComponentName, TransformComponentOptions )
+.component( TransformsComponentName, TransformsComponentOptions );

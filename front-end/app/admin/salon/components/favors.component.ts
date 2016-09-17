@@ -27,7 +27,7 @@ const template = `<md-toolbar>
      <img ng-src="{{favor.photo.url}}" class="md-avatar" alt="{{favor.name}}" />
         <div class="md-list-item-text" layout="column">
             <h3>Категорія</h3>
-            <p>{{::favor.category}}</p>
+            <p>{{::favor.category.name}}</p>
         </div>
         <div class="md-list-item-text" layout="column">
             <h3>Назва</h3>
@@ -53,10 +53,10 @@ export class FavorsComponentController {
 
     static $inject = ["$filter", "$mdDialog", "$mdToast", "$mdMedia",
         FavorResourceName, PagingServiceName, 'constants', "$location"];
+    
     favors:IFavor[];
     paging:any;
-
-
+    
     constructor(private $filter:ng.IFilterService,
                 private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService,
                 private $mdMedia:ng.material.IMedia, private favorResource:IFavorResource,

@@ -49,7 +49,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                                 </md-button>
                                 <div ngf-drop ng-model="hearFormsPhotoFile" ngf-pattern="image/*"
                                      class="cropArea">
-                                    <img-crop area-type="rectangle" result-image-size="{w:500,h:500}" aspect-ratio="1"
+                                    <img-crop area-type="rectangle" result-image-size="{w:1000,h:1000}" aspect-ratio="1"
                                               init-max-area="true"
                                               image="hearFormsPhotoFile  | ngfDataUrl"
                                               result-image="croppedhearFormsPhotoFile"

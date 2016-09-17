@@ -14,6 +14,7 @@ import {PhotoServiceName, PhotoService} from "./photo.service";
 import {UserResourceName, UserResource} from "./user.resource";
 import {MasterResourceName, MasterResource} from "./master.resource";
 import {FavorResourceName, FavorResource} from "./favor.resource";
+import {TransformResourceName, TransformResource} from "./transform.resource";
 
 export let resourcesModule = angular.module('resources', ['ngResource', coreModule.name])
     .factory(CourseResourceName, CourseResource)
@@ -24,5 +25,6 @@ export let resourcesModule = angular.module('resources', ['ngResource', coreModu
     .factory(OrderResourceName, OrderResource)
     .service(UserResourceName, UserResource)
     .service(FavorResourceName, FavorResource)
+    .service(TransformResourceName, TransformResource)
     .service(EmailService.componentName, EmailService)
     .service(PhotoServiceName, PhotoService);

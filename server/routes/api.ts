@@ -16,6 +16,7 @@ import {SalonClient} from '../models/salon.client';
 import {User} from "../models/user";
 import {Master} from "../models/master";
 import {Favor} from "../models/favor";
+import {Transform} from "../models/transform";
 
 //endpoints
 import {emailEndpoint} from "./email.endpoint";
@@ -77,6 +78,7 @@ restify.serve(api, Master, readOnlyOptions);
 api.use('/salonclient', salonClientApi);
 restify.serve(api, SalonClient, Object.assign({}, readOnlyOptions));
 restify.serve(api, Favor);
+restify.serve(api, Transform);
 
 api.use('/photo', photoEndpoint);
 api.use('/email', emailEndpoint);

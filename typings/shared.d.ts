@@ -1,10 +1,18 @@
 declare module pg {
     module models {
 
+        export interface ITransform {
+            _id:any,
+            name:string,
+            order:number,
+            videos:IVideo[],
+            photos:IPhoto[],
+        }
+
         export interface IFavor {
             _id:any,
             name:string,
-            category:string,
+            category: { _id: string, name: string},
             defPrice:number,
             photo:IPhoto
         }

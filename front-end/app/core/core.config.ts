@@ -1,11 +1,10 @@
-
 export interface IConstants {
-    host: string,
+    host:string,
     baseUrl:string,
     apiUrl:string,
     uploadDir:string,
     photoUrl:string,
-    favorCategories:string[]
+    favorCategories:any[]
 }
 
 export let constants:IConstants = {
@@ -14,22 +13,24 @@ export let constants:IConstants = {
     apiUrl: '/api',
     uploadDir: '/content/uploads',
     photoUrl: '/api/photo',
-    favorCategories:["ПЕРУКАРСЬКІ ПОСЛУГИ","НІГТЬВА ЕСТЕТИКА","ВІЗАЖ"]
-
+    favorCategories: [
+        {_id: "hear", name: "ПЕРУКАРСЬКІ ПОСЛУГИ"},
+        {_id: "neils", name: "НІГТЬОВА ЕСТЕТИКА"},
+        {_id: "makeup", name: "ВІЗАЖ"}]
 };
 
 debugConfig.$inject = ['$compileProvider'];
 export function debugConfig($compileProvider) {
-    $compileProvider.debugInfoEnabled(false);
+    $compileProvider.debugInfoEnabled( false );
 }
 
 materialConfig.$inject = ['$mdIconProvider'];
 export function materialConfig($mdIconProvider:ng.material.IIconProvider) {
     $mdIconProvider
-        .iconSet("action", "/content/images/icons/svg-sprite-action.svg")
-        .iconSet("social", "/content/images/icons/svg-sprite-social.svg")
-        .iconSet("communication", "/content/images/icons/svg-sprite-communication.svg")
-        .iconSet("content", "/content/images/icons/svg-sprite-content.svg")
-        .iconSet("navigation", "/content/images/icons/svg-sprite-navigation.svg")
-        .iconSet("av", "/content/images/icons/svg-sprite-av.svg")
+        .iconSet( "action", "/content/images/icons/svg-sprite-action.svg" )
+        .iconSet( "social", "/content/images/icons/svg-sprite-social.svg" )
+        .iconSet( "communication", "/content/images/icons/svg-sprite-communication.svg" )
+        .iconSet( "content", "/content/images/icons/svg-sprite-content.svg" )
+        .iconSet( "navigation", "/content/images/icons/svg-sprite-navigation.svg" )
+        .iconSet( "av", "/content/images/icons/svg-sprite-av.svg" )
 }

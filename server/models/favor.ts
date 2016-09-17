@@ -13,7 +13,7 @@ export interface IFavorModel extends pg.models.IFavor, Document{
 
 export let FavorSchema = new Schema({
     name: String,
-    category: String,
+    category: { _id: String, name: String},
     defPrice: Number,
     photo: PhotoSchema,
 });
