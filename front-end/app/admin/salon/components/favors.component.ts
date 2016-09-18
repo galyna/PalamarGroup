@@ -74,20 +74,7 @@ export class FavorsComponentController {
     editFavor(favor: IFavor){
         this.$location.path(`/salon/favor/${favor._id}`);
     }
-
-
-    saveFavor(favor:IFavor) {
-
-        favor.$save().then( () => {
-            this.$mdToast.showSimple( `Послугу збережено` );
-        } ).catch( (err) => {
-            this.$mdToast.showSimple( err.message );
-        } ).finally( ()=> {
-            this.showPage( this.pagingService.currentPage() );
-        } );
-        ;
-    }
-
+    
     showDeleteDialog(ev, favor:IFavor) {
         let confirm = this.$mdDialog.confirm()
             .title( "Підтвердження дії" )

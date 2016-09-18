@@ -1,15 +1,16 @@
-import {FavorResourceName, IFavorResource, IFavor} from "../../../resources/favor.resource";
+import {ContactResourceName,IContactResource,IContact} from "../../../resources/contact.resource";
 import {IConstants} from "../../../core/core.config";
 import {PhotoServiceName, PhotoService} from "../../../resources/photo.service";
 import IPhoto = pg.models.IPhoto;
 
 
+
 const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" ng-href="#/salon/favors">
+            <md-button class="md-icon-button" ng-href="#/academy/contacts">
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
-                <md-tooltip>Послуги</md-tooltip>
+                <md-tooltip>Контакти академії</md-tooltip>
             </md-button>
             <span flex></span>
             <md-button ng-click="$ctrl.cancel()" ng-disabled="saveForm.$pristine">
@@ -25,33 +26,29 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                 <md-card-content>
                     <md-input-container class="md-block ">
                         <label for="name">Назва</label>
-                        <input id="name" ng-model="$ctrl.favor.name" name="name"/>
+                        <input id="name" ng-model="$ctrl.contact.name" name="name"/>
+                    </md-input-container>
+                     <md-input-container>
+                        <label>Телефон</label>
+                        <input id="name" ng-model="$ctrl.contact.phone" name="name"/>
                     </md-input-container>
                     <md-input-container>
-                        <label>Категорія</label>
-                        <md-select ng-model="$ctrl.favor.category" ng-model-options="{trackBy: '$value._id'}">
-                            <md-option ng-repeat="n in $ctrl.categories" ng-value="n">
-                                {{ n.name }}
-                            </md-option>
-                        </md-select>
-                     
+                        <label>Email</label>
+                        <input id="name" ng-model="$ctrl.contact.email" name="name"/>
                     </md-input-container>
-                    <!--TODO add validation-->
+                     <md-input-container>
+                        <label>Адреса</label>
+                        <input id="name" ng-model="$ctrl.contact.address" name="name"/>
                     </md-input-container>
-
-                    <md-input-container class="md-block">
-                        <label for="defPrice">Ціна</label>
-                        <input type="number" ng-model="$ctrl.favor.defPrice" id="defPrice" name="defPrice"/>
-                    </md-input-container>
-
+                                 
                 </md-card-content>
             </md-card>
         </md-tab>
-        <md-tab label="Ісонка" flex>
+        <md-tab label="Аватарка" flex>
             <md-card>
                 <md-card-content layout-sm="row" layout-gt-sm>
                     <div layout="column">
-                        <img ng-src="{{$ctrl.favor.photo.url}}" class="module-history-img"/>
+                        <img ng-src="{{$ctrl.contact.photo.url}}" class="module-history-img"/>
 
                         <div>
                             <md-button ng-if="!$ctrl.showAuthorPhotoUpload" class="md-raised"
@@ -63,7 +60,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                                     Вибрати файл
                                 </md-button>
                                 <md-button class="md-primary"
-                                           ng-click="$ctrl.uploadPhoto(croppedhearFormsPhotoFile, hearFormsPhotoFile.name,$ctrl.favor)">
+                                           ng-click="$ctrl.uploadPhoto(croppedhearFormsPhotoFile, hearFormsPhotoFile.name,$ctrl.contact)">
                                     Завантажити
                                 </md-button>
                                 <div ngf-drop ng-model="hearFormsPhotoFile" ngf-pattern="image/*"
@@ -86,42 +83,42 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
 </form>`;
 
 
-export class FavorComponentController {
+export class ContactComponentController {
 
     static $inject = ["$log", "$routeParams", "$mdToast", "$timeout",
-        FavorResourceName, 'constants', PhotoServiceName];
+        ContactResourceName, 'constants', PhotoServiceName];
 
-    originalFavor:IFavor;
-    favor:IFavor;
+    originalContact:IContact;
+    contact:IContact;
     showPhotoUpload:boolean;
-    categories:any;
+
 
 
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
-                private favorResource:IFavorResource,
+                private contactResource:IContactResource,
                 private constants:IConstants, private photoService:PhotoService) {
     }
 
 
     $onInit() {
         if (this.$routeParams["id"]) {
-            this.favorResource.get( {id: this.$routeParams["id"]} ).$promise
+            this.contactResource.get( {id: this.$routeParams["id"]} ).$promise
                 .then( (favor) => {
-                    this.originalFavor = favor;
-                    this.favor = angular.copy( this.originalFavor );
+                    this.originalContact = favor;
+                    this.contact = angular.copy( this.originalContact );
                 } );
         } else {
-            this.originalFavor = new this.favorResource();
-            this.favor = angular.copy( this.originalFavor );
+            this.originalContact = new this.contactResource();
+            this.contact = angular.copy( this.originalContact );
         }
-        this.categories = this.constants.favorCategories;
+
     }
 
-    uploadPhoto(dataUrl, name, model) {
+    uploadPhoto(dataUrl, name) {
         this.photoService.save( this.photoService.dataUrltoFile( dataUrl, name ) )
             .then( (url)=> {
-                model.photo = {
+                this.contact.photo = {
                     url: url
                 }
             } ).catch( (err) => {
@@ -138,14 +135,14 @@ export class FavorComponentController {
     }
 
     cancel() {
-        this.favor = angular.copy( this.originalFavor );
+        this.contact = angular.copy( this.originalContact );
     }
 
     save(form:ng.IFormController) {
         if (form.$invalid) return;
-        this.favor.$save()
+        this.contact.$save()
             .then( (favor) => {
-                this.$mdToast.showSimple( `Дані послуги збережено` );
+                this.$mdToast.showSimple( `Дані контакту збережено` );
             } )
             .catch( (err)=> {
                 this.$log.error( err );
@@ -156,9 +153,9 @@ export class FavorComponentController {
 
 }
 
-export let FavorComponentUrl = "/salon/favor/:id?";
-export let FavorComponentName = 'pgFavor';
-export let FavorComponentOptions = {
+export let ContactComponentUrl = "/academy/contact/:id?";
+export let ContactComponentName = 'pgContact';
+export let ContactComponentOptions = {
     template: template,
-    controller: FavorComponentController
+    controller: ContactComponentController
 };

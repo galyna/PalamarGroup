@@ -39,7 +39,7 @@ declare module pg {
             name:string,
             email:string,
             phone:string,
-            photo:string,
+            photo:IPhoto,
             address:string,
             isAcademy:boolean
         }

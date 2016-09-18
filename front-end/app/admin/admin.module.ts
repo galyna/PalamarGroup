@@ -42,6 +42,8 @@ import {usersComponentName, usersComponentOptions} from "./components/users.comp
 import {userComponentName, userComponentOptions} from "./components/user.component";
 import {CommentsComponentName, CommentsComponentOptions} from "./academy/components/comments.component";
 import {salonModule} from "./salon/salon.module";
+import {ContactsComponentName, ContactsComponentOptions} from "./academy/components/contacts.component";
+import {ContactComponentName, ContactComponentOptions} from "./academy/components/contact.component";
 
 
 let app = angular.module('admin', [
@@ -75,6 +77,8 @@ let app = angular.module('admin', [
     .component(usersComponentName, usersComponentOptions)
     .component(userComponentName, userComponentOptions)
     .component(CommentsComponentName, CommentsComponentOptions)
-    .component(testComponentName, testComponentOptions);
+    .component(userComponentName, userComponentOptions)
+    .component(ContactsComponentName, ContactsComponentOptions)
+    .component(ContactComponentName, ContactComponentOptions);
 
 export let adminModule = app;

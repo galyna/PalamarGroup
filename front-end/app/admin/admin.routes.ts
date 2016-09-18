@@ -9,6 +9,8 @@ import {ItServiceName, ItService} from "../users/services/it.service";
 import {usersComponentUrl} from "./components/users.component";
 import {userComponentUrl} from "./components/user.component";
 import {CommentsComponentUrl} from "./academy/components/comments.component";
+import {ContactComponentUrl} from "./academy/components/contact.component";
+import {ContactsComponentUrl} from "./academy/components/contacts.component";
 
 adminRoutes.$inject = ['$routeProvider'];
 export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
@@ -63,16 +65,21 @@ export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
                 auth: [ItServiceName, (it: ItService) => it.canAsync('readAcademy')]
             }
         })
-        .when('/academy/contacts', {
-            templateUrl: 'app/admin/academy/views/contacts.html',
-            controller: AcademyContactsController.componentName,
-            controllerAs: "vm",
+ 
+        .when(CommentsComponentUrl, {
+            template: '<pg-comments></pg-comments>',
             resolve: {
                 auth: [ItServiceName, (it: ItService) => it.canAsync('readAcademy')]
             }
         })
-        .when(CommentsComponentUrl, {
-            template: '<pg-comments></pg-comments>',
+        .when(ContactsComponentUrl, {
+            template: '<pg-contacts></pg-contacts>',
+            resolve: {
+                auth: [ItServiceName, (it: ItService) => it.canAsync('readAcademy')]
+            }
+        })
+        .when(ContactComponentUrl, {
+            template: '<pg-contact></pg-contact>',
             resolve: {
                 auth: [ItServiceName, (it: ItService) => it.canAsync('readAcademy')]
             }

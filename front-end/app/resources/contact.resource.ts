@@ -1,6 +1,6 @@
 import {IConstants} from "../core/core.config";
 
-export interface IContact extends ng.resource.IResource<IContact>, pg.models.ICourse{}
+export interface IContact extends ng.resource.IResource<IContact>, pg.models.IContact{}
 
 export interface IContactResource extends ng.resource.IResourceClass<IContact>{}
 

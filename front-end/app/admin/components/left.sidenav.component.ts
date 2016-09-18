@@ -36,7 +36,7 @@ export class LeftSidenavComponentController {
         this.items = [
             {
                 text: 'Академія',
-                opened: false,
+                opened: true,
                 visible: ()=>{
                     return this.it.is('academyUser')
                 },
@@ -69,13 +69,13 @@ export class LeftSidenavComponentController {
                             return true;
                         }
                     },
-                    // {
-                    //     text: 'Контакти',
-                    //     url: '/academy/contacts',
-                    //     visible: ()=>{
-                    //         return true;
-                    //     }
-                    // },
+                    {
+                        text: 'Контакти',
+                        url: '/academy/contacts',
+                        visible: ()=>{
+                            return true;
+                        }
+                    },
                     {
                         text: 'Відгуки',
                         url: '/academy/comments',
@@ -87,7 +87,7 @@ export class LeftSidenavComponentController {
             },
             {
                 text: 'Салон',
-                opened: true,
+                opened: false,
                 visible: ()=> {
                     return this.it.is('salonUser')
                 },

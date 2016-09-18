@@ -60,7 +60,7 @@ let readOnlyOptions = {
 
 api.use(paging.preRead);
 
-restify.serve(api, Contact, Object.assign({}, readOnlyOptions));
+restify.serve(api, Contact);
 
 api.use('/course/comments', courseGetCommentsApi);
 api.use('/course/:id', (req: any, res, next) => {
