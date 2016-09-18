@@ -1,6 +1,7 @@
 import IUploadPromise = angular.angularFileUpload.IUploadPromise;
 import {MasterResourceName, IMasterResource, IMaster} from "../../resources/master.resource";
 import {FavorResourceName, IFavorResource, IFavor} from "../../resources/favor.resource";
+import {IConstants} from "../../core/core.config";
 
 
 const template = `<div class="courses-details description-container" layout="column">
@@ -15,37 +16,17 @@ const template = `<div class="courses-details description-container" layout="col
     <div layout="row" layout-align="center center">
         <div flex flex-gt-md="60" flex-md="80">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" data-aos="zoom-in-up"
+                <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="category in $ctrl.categories"
                          class="md-margin " flex-gt-md="22" flex-md="22" flex-gt-xs="46" flex-xs="80"
-                         ng-click="::$ctrl.showFavors('ПЕРУКАРСЬКІ ПОСЛУГИ')">
+                         ng-click="::$ctrl.showFavors(category._id)">
                     <card-image-container>
-                        <img ng-src="/content/images/services/product-1.jpg" class="md-card-image">
+                        <img ng-src="{{'/content/images/services/'+category._id+'.jpg'}}" class="md-card-image">
                     </card-image-container>
                     <md-card-content layout="column" flex="100" layout-align="center center">
-                        <span class="  md-margin">ПЕРУКАРСЬКІ ПОСЛУГИ</span>
+                        <span class="  md-margin">{{category.name}}</span>
                     </md-card-content>
                 </md-card>
-                <md-card md-whiteframe="6" data-aos="zoom-in-up"
-                         class="md-margin " flex-gt-md="22" flex-md="22" flex-gt-xs="46" flex-xs="80"
-                         ng-click="::$ctrl.showFavors('НІГТЬОВА ЕСТЕТИКА')">
-                    <card-image-container>
-                        <img ng-src="/content/images/services/product-2.jpg" class="md-card-image">
-                    </card-image-container>
-                    <md-card-content layout="column" flex="100" layout-align="center center">
-                        <span class="  md-margin">НІГТЬОВА ЕСТЕТИКА</span>
-                    </md-card-content>
-                </md-card>
-                <md-card md-whiteframe="6" data-aos="zoom-in-up"
-                         class="md-margin " flex-gt-md="22" flex-md="22" flex-gt-xs="46" flex-xs="80"
-                        ng-click="::$ctrl.showFavors('МАКІЯЖ')">
-                    <card-image-container>
-                        <img ng-src="/content/images/services/product-5.jpg" class="md-card-image">
-                    </card-image-container>
-                    <md-card-content layout="column" flex="100" layout-align="center center">
-                        <span class="  md-margin">МАКІЯЖ</span>
-                    </md-card-content>
-                </md-card>
-
+                
             </div>
         </div>
     </div>
@@ -160,7 +141,7 @@ const template = `<div class="courses-details description-container" layout="col
 
 export class SalonHomeComponentController {
 
-    static $inject = [FavorResourceName, MasterResourceName, 'smoothScroll', "$location"];
+    static $inject = [FavorResourceName, MasterResourceName, 'smoothScroll', "$location", 'constants'];
 
     favors:IFavor[];
     masters:IMaster[];
@@ -187,14 +168,15 @@ export class SalonHomeComponentController {
         }, {
             name: "НЕДІЛЯ",
             program: 'закрито',
-        }]
+        }];
+    categories:any;
 
     constructor(private favorResource:IFavorResource,
                 private masterResource:IMasterResource,
-                private smoothScroll, private $location:ng.ILocationService) {
+                private smoothScroll, private $location:ng.ILocationService, private constants:IConstants) {
 
         this.masters = this.masterResource.query();
-
+        this.categories = this.constants.favorCategories;
     }
 
     scrollToMain() {
