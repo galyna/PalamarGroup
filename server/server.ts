@@ -12,9 +12,10 @@ import api from './routes/api';
 
 let app = express();
 let port = process.env.PORT || 8080;
+let env = process.env.TYPE;
 
 //TODO: remove on production
-if (process.env.TYPE !== 'prod') {
+if (env !== 'prod') {
     mongoose.set('debug', true);
     app.use('/setup', setupRouter);
 }
@@ -31,7 +32,7 @@ app.use('/api', api);
 
 //static content
 let pathes;
-if(process.env.TYPE === 'prod'){
+if(env === 'prod'){
     pathes = {
         admin: '../front-end/dist/admin.html',
         all: '../front-end/dist'
@@ -68,7 +69,7 @@ app.use((err: any, req, res, next) => {
 
 // development error handler
 // will print stacktrace
-if (process.env.TYPE !== 'prod') {
+if (env !== 'prod') {
     app.use((err:any, req, res, next) => {
         res.status(err.status || 500);
         res.json({
@@ -89,6 +90,8 @@ app.use((err:any, req, res, next) => {
 });
 
 app.listen(port);
-console.log('api is running at localhost:' + port);
+console.log(`origin: ${config.origin}`);
+console.log(`port: ${port}`);
+console.log(`environment: ${env}`);
 
 export default app;

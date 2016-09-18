@@ -1,5 +1,6 @@
 /front-end/content/css/app.css
 /front-end/app/templates.js
-/front-end/app.js
+/front-end/dist
+/server/config.ts
 .idea
 node_modules
