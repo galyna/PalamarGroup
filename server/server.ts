@@ -89,7 +89,7 @@ app.use((err:any, req, res, next) => {
     });
 });
 
-app.listen(port);
+app.listen(port, 'localhost');
 console.log(`origin: ${config.origin}`);
 console.log(`port: ${port}`);
 console.log(`environment: ${env}`);
