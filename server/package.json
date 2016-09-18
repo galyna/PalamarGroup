@@ -28,7 +28,7 @@
   },
   "scripts": {
     "postinstall": "npm run typings:install && npm run tsc",
-    "start:prod": "forever stopall && TYPE=prod forever start server.js",
+    "start:prod": "forever stopall && TYPE=prod PORT=80 forever start server.js",
     "stop:prod": "forever stopall",
     "tsc": "tsc",
     "typings:install": "cd ../ && typings install"
