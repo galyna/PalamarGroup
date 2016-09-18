@@ -1,5 +1,6 @@
 import {CourseCalendarComponentUrl} from "../courses/components/course.calendar.component";
 import {SalonHomeComponentUrl} from "../salon/components/salon.home.component";
+import {IConstants} from "../core/core.config";
 
 const template = `<div id="nav-icon4" ng-click="$ctrl.toggleMenu($event)">
   <span></span>
@@ -13,40 +14,40 @@ const menuBtnSelector = "#nav-icon4";
 const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout="column" layout-align="center stretch"
 
 >
-  <div class="pg-menu-section">
+  <div class="pg-menu-section" ng-if="vm.showSalon">
         <div class="pg-menu-section-title" ng-click="vm.courses()">САЛОН</div>
         <div layout="column" layout-gt-sm="row">
-            <div flex ng-click="vm.goToURL(SalonHomeComponentUrl)" class=" pg-menu-item ">ГОЛОВНА
+            <div flex ng-click="vm.goToURL(vm.SalonHomeComponentUrl)" class=" pg-menu-item ">ГОЛОВНА
 
             </div>
-            <div flex ng-click="vm.courses()" class=" pg-menu-item ">ПОСЛУГИ
+            <div flex ng-click="vm.goToURL(SalonHomeComponentUrl)" class=" pg-menu-item ">ПОСЛУГИ
 
             </div>
 
-            <div flex ng-click="vm.calendar()" class=" pg-menu-item ">КОМАНДА
+            <div flex ng-click="vm.goToURL(SalonHomeComponentUrl)" class=" pg-menu-item ">КОМАНДА
             </div>
-            <div flex ng-click="vm.calendar()" class=" pg-menu-item ">ПРАЙС
+            <div flex ng-click="vm.goToURL(SalonHomeComponentUrl)" class=" pg-menu-item ">ПРАЙС
 
             </div>
-            <div flex ng-click="vm.calendar()" class=" pg-menu-item ">ПЕРЕВТІЛЕННЯ
+            <div flex ng-click="vm.goToURL(SalonHomeComponentUrl)" class=" pg-menu-item ">ПЕРЕВТІЛЕННЯ
 
             </div>
    
-            <div flex ng-click="vm.calendar()" class=" pg-menu-item ">КОНТАКТИ
+            <div flex ng-click="vm.goToURL(SalonHomeComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
 
             </div>
         </div>
     </div>
     <div class=" pg-menu-section">
-        <div class="pg-menu-section-title" ng-click="vm.courses()"></div>
+        <div class="pg-menu-section-title" ng-click="vm.courses()">АКАДЕМІЯ</div>
         <div layout="column" layout-gt-sm="row">
-            <div flex ng-click="vm.courses()" class=" pg-menu-item ">НАВЧАЛЬННЯ
+            <div flex ng-click="vm.goToURL('/courses')" class=" pg-menu-item ">НАВЧАЛЬННЯ
 
             </div>
 
-            <div flex ng-click="vm.calendar()" class=" pg-menu-item ">КАЛАЕНДАР
+            <div flex ng-click="vm.goToURL(vm.CourseCalendarComponentUrl)" class=" pg-menu-item ">КАЛАЕНДАР
             </div>
-            <!-- <div flex ng-click="vm.calendar()" class=" pg-menu-item ">КОНТАКТИ
+            <!-- <div flex ng-click="vm.goToURL(SalonHomeComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
 
             </div>-->
      
@@ -58,30 +59,39 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
 
 export class MenuComponentController {
 
-    static $inject = ['$mdDialog', '$location'];
+    static $inject = ['$mdDialog', '$location', 'constants', 'smoothScroll'];
     static componentName = 'MenuComponentController';
 
+    showSalon:boolean
+    SalonHomeComponentUrl = SalonHomeComponentUrl;
+    CourseCalendarComponentUrl = CourseCalendarComponentUrl;
 
-    constructor(private mdDialog:ng.material.IDialogService, private $location) {
+    constructor(private mdDialog:ng.material.IDialogService, private $location,
+                private constants:IConstants, private smoothScroll) {
+        this.showSalon = constants.showSalon;
+    }
 
+    scrollToMain() {
+        var options = {
+            duration: 400,
+            easing: 'easeInQuad',
+            offset: 0,
+
+        }
+        var element = document.getElementById( 'mainContent' );
+        this.smoothScroll( element, options );
     }
 
     goToURL(url):void {
-        this.$location.url( SalonHomeComponentUrl );
-        this.mdDialog.hide();
+        this.$location.url( url );
+        this.mdDialog.hide().then( ()=> {
+            this.scrollToMain();
+        } );
+        ;
         angular.element( document.querySelector( menuBtnSelector ) ).toggleClass( 'open' );
-    }
-    courses():void {
-        this.$location.url( '/course' );
-        this.mdDialog.hide();
-        angular.element( document.querySelector( menuBtnSelector ) ).toggleClass( 'open' );
+
     }
 
-    calendar():void {
-        this.$location.url( CourseCalendarComponentUrl );
-        this.mdDialog.hide();
-        angular.element( document.querySelector( menuBtnSelector ) ).toggleClass( 'open' );
-    }
 
     toggleMenu($event):void {
         var menuBtn = angular.element( $event.currentTarget );

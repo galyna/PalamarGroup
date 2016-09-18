@@ -4,7 +4,8 @@ export interface IConstants {
     apiUrl:string,
     uploadDir:string,
     photoUrl:string,
-    favorCategories:any[]
+    favorCategories:any[],
+    showSalon:boolean
 }
 
 export let constants:IConstants = {
@@ -16,7 +17,8 @@ export let constants:IConstants = {
     favorCategories: [
         {_id: "hear", name: "ПЕРУКАРСЬКІ ПОСЛУГИ"},
         {_id: "neils", name: "НІГТЬОВА ЕСТЕТИКА"},
-        {_id: "makeup", name: "ВІЗАЖ"}]
+        {_id: "makeup", name: "ВІЗАЖ"}],
+    showSalon:false
 };
 
 debugConfig.$inject = ['$compileProvider'];

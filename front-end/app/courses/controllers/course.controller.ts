@@ -44,7 +44,7 @@ export class CourseController {
             this.setSocialParams( course );
             course.hearFormsPhotos = this.orderByFilter( course.hearFormsPhotos, "order" );
             course.historyPhotos = this.orderByFilter( course.historyPhotos, "order" );
-            this.scrollToMain();
+         //   this.scrollToMain();
         } );
 
         this.order = new OrderResource();
