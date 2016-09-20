@@ -119,7 +119,9 @@ export class ContactComponentController {
         this.photoService.save( this.photoService.dataUrltoFile( dataUrl, name ) )
             .then( (url)=> {
                 this.contact.photo = {
-                    url: url
+                    name: "",
+                    url: url,
+                    order: 0
                 }
             } ).catch( (err) => {
             this.$log.debug( "fail upload file..." + err );

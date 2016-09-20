@@ -42,7 +42,9 @@ System.register(["../../../resources/contact.resource", "../../../resources/phot
                     this.photoService.save(this.photoService.dataUrltoFile(dataUrl, name))
                         .then(function (url) {
                         _this.contact.photo = {
-                            url: url
+                            name: "",
+                            url: url,
+                            order: 0
                         };
                     }).catch(function (err) {
                         _this.$log.debug("fail upload file..." + err);

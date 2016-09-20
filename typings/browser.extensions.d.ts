@@ -7,7 +7,7 @@ declare namespace angular.angularFileUpload {
 declare module "aos" {
     interface AOSConstructor {
         new (): any,
-        init():any,
+        init(options: any):any,
         refresh():any
     }
     let AOS: AOSConstructor;
