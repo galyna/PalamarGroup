@@ -1,8 +1,8 @@
 import {IRootScope} from "../typings";
 import AOS from "aos";
 
-appRun.$inject = ['$rootScope','$timeout'];
-export function appRun($rootScope:IRootScope,$timeout) {
+appRun.$inject = ['$rootScope', '$timeout','$mdMedia'];
+export function appRun($rootScope:IRootScope, $timeout,$mdMedia) {
     $rootScope.socialParams = {
         host: "",
         target: "",
@@ -11,10 +11,12 @@ export function appRun($rootScope:IRootScope,$timeout) {
         description: ""
     };
 
+    $rootScope.isBigSize= $mdMedia( 'gt-md' );
+
     //create a new instance
-    AOS.init({
+    AOS.init( {
         disable: 'mobile'
-    });
+    } );
     //
     // $window.onload = function(e) {
     //
@@ -22,9 +24,9 @@ export function appRun($rootScope:IRootScope,$timeout) {
     // }
 
     $rootScope.$on( '$routeChangeSuccess', function () {
-       $timeout( ()=> {
+        $timeout( ()=> {
             AOS.refresh();
-        }, 10);
+        }, 10 );
 
     } );
 }

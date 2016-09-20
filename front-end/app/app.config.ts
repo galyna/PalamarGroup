@@ -1,10 +1,11 @@
+import {IRootScope} from "../typings";
 /**
  * Created by Galyna on 16.03.2016.
  */
 
 materialConfig.$inject = ['$mdThemingProvider'];
 export function materialConfig($mdThemingProvider:ng.material.IThemingProvider) {
-    
+
     // var customBackground = {
     //     '50': '#737373',
     //     '100': '#666666',

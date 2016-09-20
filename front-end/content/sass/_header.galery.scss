@@ -17,7 +17,7 @@
     height: 100%;
     opacity: 0;
     /*animation*/
-    @media (min-width: $layout-breakpoint-sm) {
+    @media (min-width: $layout-breakpoint-md) {
       animation: slideShow 46s linear infinite 0s;
       -o-animation: slideShow 46s linear infinite 0s;
       -moz-animation: slideShow 46s linear infinite 0s;

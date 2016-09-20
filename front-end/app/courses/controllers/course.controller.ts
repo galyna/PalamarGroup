@@ -18,7 +18,7 @@ export class CourseController {
     static $inject = ['$log', '$routeParams', '$location', CourseResourceName,
         OrderResourceName, MediaObserverFactoryName, '$mdDialog', 'Upload',
         '$timeout', ModelResourceName, 'constants', "$filter",
-        '$rootScope', '$templateCache', '$mdMedia', 'orderByFilter','smoothScroll'];
+        '$rootScope', '$templateCache', '$mdMedia', 'orderByFilter', 'smoothScroll'];
     static componentName = 'CourseController';
 
     course:ICourse;
@@ -38,14 +38,15 @@ export class CourseController {
                 private $filter, private $rootScope:IRootScope, private $templateCache:ng.ITemplateCacheService,
                 private $mdMedia:ng.material.IMedia, private orderByFilter:ng.IFilterOrderBy,
                 private smoothScroll) {
-        this.showAnimation=$mdMedia('gt-md');
+        this.showAnimation = $rootScope.isBigSize;
+       
         this.course = CourseResource.get( {id: $routeParams.id} );
         this.course.$promise.then( (course)=> {
 
             this.setSocialParams( course );
             course.hearFormsPhotos = this.orderByFilter( course.hearFormsPhotos, "order" );
             course.historyPhotos = this.orderByFilter( course.historyPhotos, "order" );
-         //   this.scrollToMain();
+            //   this.scrollToMain();
         } );
 
         this.order = new OrderResource();
@@ -63,10 +64,10 @@ export class CourseController {
             offset: 0,
 
         }
-        var element = document.getElementById('mainContent');
-        this.smoothScroll(element,options);
+        var element = document.getElementById( 'mainContent' );
+        this.smoothScroll( element, options );
     }
-    
+
     setSocialParams(course:ICourse) {
         this.$rootScope.socialParams.host = this.constants.host;
         this.$rootScope.socialParams.target = this.constants.host + "/#/course/" + course._id;
@@ -192,23 +193,23 @@ export class CourseController {
 
     submitOrder(form):void {
 
-            this.order.event_id = this.course._id;
-            this.order.event_name = this.course.name;
-            //TODO: change order.event_dates to Date[] like in CourseResourse
-            this.order.event_dates = this.course.courseModulesDates.map( (date) => date.toJSON() );
-            this.order.date = new Date().toJSON();
-            this.order.$save()
-                .then( () => {
-                    this.mdDialog.hide();
-                    this.showOrderConfirm();
-                } )
-                .catch( (err) => {
-                    this.$log.error( err );
-                } )
-                .finally( () => {
-                    this.order = new this.OrderResource();
-                } );
-       
+        this.order.event_id = this.course._id;
+        this.order.event_name = this.course.name;
+        //TODO: change order.event_dates to Date[] like in CourseResourse
+        this.order.event_dates = this.course.courseModulesDates.map( (date) => date.toJSON() );
+        this.order.date = new Date().toJSON();
+        this.order.$save()
+            .then( () => {
+                this.mdDialog.hide();
+                this.showOrderConfirm();
+            } )
+            .catch( (err) => {
+                this.$log.error( err );
+            } )
+            .finally( () => {
+                this.order = new this.OrderResource();
+            } );
+
     }
 
     cancel():void {

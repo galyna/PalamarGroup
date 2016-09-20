@@ -1,5 +1,6 @@
 import {CourseResourceName, ICourseResource, ICourse} from "../../resources/course.resource";
 import {IPgCalendarDataService} from "../../calendar/calendar.data.service";
+import {IRootScope} from "../../../typings";
 /**
  * Created by Galyna on 13.04.2016.
  */
@@ -11,7 +12,8 @@ export interface ICourseDates {
 
 export class CoursesController {
 
-    static $inject = ['$scope', '$sce', '$location', 'pgCalendarData', CourseResourceName, '$mdMedia', 'orderByFilter'];
+    static $inject = ['$scope', '$sce', '$location', '$rootScope',
+        'pgCalendarData', CourseResourceName, '$mdMedia', 'orderByFilter'];
     static componentName = 'CoursesController';
     courses:ICourse[];
     calendarDirection = 'horizontal';
@@ -19,9 +21,10 @@ export class CoursesController {
     showAnimation:boolean;
 
 
-    constructor($scope, private $sce, private $location, private pgCalendarData:IPgCalendarDataService,
+    constructor($scope, private $sce, private $location,private $rootScope:IRootScope, private pgCalendarData:IPgCalendarDataService,
                 private CourseResource:ICourseResource, private $mdMedia, private orderByFilter:ng.IFilterOrderBy) {
-        this.showAnimation = $mdMedia( 'gt-md' );
+        this.showAnimation = $rootScope.isBigSize;
+       
         $scope.$on( "$destroy", () => {
             this.courses = null;
             this.showDetails = null;

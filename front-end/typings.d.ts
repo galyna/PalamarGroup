@@ -4,6 +4,7 @@
 
 export interface IRootScope extends ng.IRootScopeService {
     loading:boolean;
+    isBigSize:boolean;
     isAdminZone:() => boolean;
     socialParams:{
         host:string,
