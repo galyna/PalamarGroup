@@ -16,11 +16,12 @@ export class CoursesController {
     courses:ICourse[];
     calendarDirection = 'horizontal';
     coursesDateMap:ICourseDates[];
+    showAnimation:boolean;
 
 
     constructor($scope, private $sce, private $location, private pgCalendarData:IPgCalendarDataService,
                 private CourseResource:ICourseResource, private $mdMedia, private orderByFilter:ng.IFilterOrderBy) {
-
+        this.showAnimation = $mdMedia( 'gt-md' );
         $scope.$on( "$destroy", () => {
             this.courses = null;
             this.showDetails = null;

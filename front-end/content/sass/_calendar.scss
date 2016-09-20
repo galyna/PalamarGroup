@@ -30,6 +30,8 @@ pg-calendar {
 
     md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
       background-color: rgba($primary, 0.8);
+
+      .next-prev{height: 100px;width: 100px}
     }
     > md-content {
       overflow: visible;

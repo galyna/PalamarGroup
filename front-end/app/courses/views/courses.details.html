@@ -14,7 +14,7 @@
                         </md-card-title-text>
                     </md-card-title>
                 </div>
-                <div class=" card-media" layout="column" data-aos="fade-right"  data-aos-easing="ease-out-cubic"
+                <div class=" card-media" layout="column" data-aos="{{{true:'fade-left', false:''}[vm.showAnimation]}}"   data-aos-easing="ease-out-cubic"
                      flex-gt-sm="50" layout-align="center center">
                     <img src="{{vm.course.author.photoUrl}}"/>
                     <div class="md-padding author-name" layout="column" layout-align="space-around center">
@@ -22,7 +22,7 @@
                         <div class="md-headline">{{ ::vm.course.author.name}}</div>
                     </div>
                 </div>
-                <div  class="card-desc " data-aos="fade-left" data-aos-easing="ease-out-cubic" flex-gt-sm="50"
+                <div  class="card-desc "  data-aos="{{{true:'fade-right', false:''}[vm.showAnimation]}}"  data-aos-easing="ease-out-cubic" flex-gt-sm="50"
                      layout="column" layout-align=" space-between center">
                     <md-card-title layout="column" layout-align="space-around center">
                         <md-card-title-text hide show-gt-sm="true" flex layout="column"
@@ -109,7 +109,7 @@
             <div class="fit-screen-wrap header-long " layout="column">
                 <div flex="none" layout="row" class="md-padding program-block  " layout-align=" center center">
                     <div ng-repeat="day in ::vm.course.days track by $index">
-                        <div class="date-block md-margin " data-aos="fade-up" layout="column"
+                        <div class="date-block md-margin " data-aos="{{{true:'fade-up', false:''}[vm.showAnimation]}}"  layout="column"
                              layout-align=" center center">
                             <div class=" md-display-2">{{ day.date| date:'dd.MM'}}</div>
                             <div class="md-subhead  ">{{day.program}}</div>
@@ -145,7 +145,7 @@
 
         <div  flex flex-gt-md="60" flex-md="80">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="course in vm.course.hearFormsPhotos"
+                <md-card md-whiteframe="6" data-aos="{{{true:'zoom-in-up', false:''}[vm.showAnimation]}}" ng-repeat="course in vm.course.hearFormsPhotos"
                          class="md-margin " flex-gt-md="22" flex-md="22" flex-gt-xs="46" flex-xs="80"
                          ng-click="::vm.showMediaObserver(vm.course.hearFormsPhotos, $index)">
                     <card-image-container>
@@ -163,7 +163,7 @@
     <div layout="row" layout-align="center center" ng-if="vm.course.videos.length>0">
         <div flex flex-gt-md="60" flex-md="80" >
             <div layout="column" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" class="  courses-videos" data-aos="zoom-in-up"
+                <md-card md-whiteframe="6" class="  courses-videos" data-aos="{{{true:'zoom-in-up', false:''}[vm.showAnimation]}}"
                          ng-repeat="video in vm.course.videos track by $index"
                          flex>
                     <div flex class="embed-responsive embed-responsive-16by9">
@@ -184,11 +184,11 @@
             <div  class="fit-screen-wrap header-long " layout="column">
 
                 <div layout="row" layout-align="center center">
-                    <div data-aos="flip-right"   hide-xs="true" flex="60" flex-gt-sm="50"
+                    <div data-aos="{{{true:'flip-left', false:''}[vm.showAnimation]}}"  hide-xs="true" flex="60" flex-gt-sm="50"
                          class="md-display-1 md-margin md-padding">
                         {{vm.course.description}}
                     </div>
-                    <div data-aos="flip-right"  hide-gt-xs="true"  flex="70"
+                    <div  data-aos="{{{true:'flip-left', false:''}[vm.showAnimation]}}"   hide-gt-xs="true"  flex="70"
                          class="md-headline ">{{vm.course.description}}
                     </div>
 
@@ -211,7 +211,7 @@
         <div  flex-gt-md="60" flex-md="90">
 
             <div class="courses-history" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="course in vm.course.historyPhotos"
+                <md-card md-whiteframe="6" data-aos="{{{true:'zoom-in-up', false:''}[vm.showAnimation]}}" ng-repeat="course in vm.course.historyPhotos"
                          class="md-margin " flex-gt-xs="46" flex-xs="80"
                          ng-click="::vm.showMediaObserver(vm.course.historyPhotos, $index)">
                     <card-image-container>
@@ -231,7 +231,7 @@
     <div layout="row" flex ng-if="vm.showComments()">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap header-super">
-                <div data-aos="zoom-out"  class="md-display-3">Відгуки</div>
+                <div data-aos="{{{true:'zoom-out', false:''}[vm.showAnimation]}}"   class="md-display-3">Відгуки</div>
             </div>
             <div class="overlay-comments"></div>
             <!-- ng-style="{'background-image':'url({{vm.course.historyPhotos[0].url}})'}"></div>-->
@@ -240,7 +240,7 @@
     <div id="comments" ng-class="{'content-block':vm.showComments()}" layout="row" layout-align="center center">
         <div flex="60" flex-xs="100" flex-sm="90">
 
-            <div data-aos="fade-up"  ng-if="vm.showComments()">
+            <div data-aos="{{{true:'fade-up', false:''}[vm.showAnimation]}}"   ng-if="vm.showComments()">
                 <md-list class="md-dense" flex>
                     <md-list-item class="md-2-line" ng-if="comment.isVisible"
                                   ng-repeat="comment in vm.course.comments track by $index">

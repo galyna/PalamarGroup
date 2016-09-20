@@ -26,6 +26,7 @@ export class CourseController {
     newModel:IModel;
     newComment:any;
     socialParams:any;
+    showAnimation:boolean;
 
 
     constructor(private $log:ng.ILogService, $routeParams:IRouteParams,
@@ -35,9 +36,9 @@ export class CourseController {
                 private $timeout:ng.ITimeoutService, private ModelResource:IModelResource,
                 private constants:IConstants,
                 private $filter, private $rootScope:IRootScope, private $templateCache:ng.ITemplateCacheService,
-                private $mdMedia:ng.material.IMenuService, private orderByFilter:ng.IFilterOrderBy,
+                private $mdMedia:ng.material.IMedia, private orderByFilter:ng.IFilterOrderBy,
                 private smoothScroll) {
-
+        this.showAnimation=$mdMedia('gt-md');
         this.course = CourseResource.get( {id: $routeParams.id} );
         this.course.$promise.then( (course)=> {
 

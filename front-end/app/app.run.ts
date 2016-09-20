@@ -12,7 +12,9 @@ export function appRun($rootScope:IRootScope,$timeout) {
     };
 
     //create a new instance
-    AOS.init();
+    AOS.init({
+        disable: 'mobile'
+    });
     //
     // $window.onload = function(e) {
     //

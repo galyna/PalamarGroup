@@ -17,11 +17,14 @@
     height: 100%;
     opacity: 0;
     /*animation*/
+    @media (min-width: $layout-breakpoint-sm) {
+      animation: slideShow 46s linear infinite 0s;
+      -o-animation: slideShow 46s linear infinite 0s;
+      -moz-animation: slideShow 46s linear infinite 0s;
+      -webkit-animation: slideShow 46s linear infinite 0s;
+    }
 
-    animation: slideShow 46s linear infinite 0s;
-    -o-animation: slideShow 46s linear infinite 0s;
-    -moz-animation: slideShow 46s linear infinite 0s;
-    -webkit-animation: slideShow 46s linear infinite 0s;
+
   }
 
   figurecaption {
@@ -33,7 +36,7 @@
 
   .pic-1 {
     opacity: 1;
-    background: url("../images/bg/slider/IMG_6883.jpg") no-repeat center center fixed;
+    background: url("../images/bg/slider/IMG_6917.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -76,18 +79,7 @@
     background-size: cover;
   }
 
-  .pic-5 {
-    animation-delay: 24s;
-    -o-animation-delay: 24s;
-    -moz--animation-delay: 24s;
-    -webkit-animation-delay: 24s;
-    background: url("../images/bg/slider/IMG_6917.jpg") no-repeat center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
-
+  .pic-5
   .pic-6 {
     animation-delay: 30s;
     -o-animation-delay: 30s;
