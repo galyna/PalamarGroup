@@ -34,7 +34,7 @@ pg-calendar {
       .next-prev{height: 100px;width: 100px}
     }
     > md-content {
-      overflow: visible;
+      overflow: hidden;
       // Week row, agenda view.
       border: $calendar-md-border;
 
@@ -152,6 +152,7 @@ pg-calendar {
           position: absolute;
           width: 100%;
           z-index: 1;
+          overflow: visible;
         }
 
         .calendar-day {
