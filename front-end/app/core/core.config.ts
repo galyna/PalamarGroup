@@ -9,7 +9,7 @@ export interface IConstants {
 }
 
 export let constants:IConstants = {
-    host: 'http://staging.palamar.com.ua',
+    host: 'http://palamar.com.ua',
     baseUrl: '/',
     apiUrl: '/api',
     uploadDir: '/content/uploads',
