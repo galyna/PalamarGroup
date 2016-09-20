@@ -64,6 +64,7 @@ System.register(["../../../resources/contact.resource", "../../../resources/phot
                     var _this = this;
                     if (form.$invalid)
                         return;
+                    this.contact.isAcademy = true;
                     this.contact.$save()
                         .then(function (favor) {
                         _this.$mdToast.showSimple("\u0414\u0430\u043D\u0456 \u043A\u043E\u043D\u0442\u0430\u043A\u0442\u0443 \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043D\u043E");

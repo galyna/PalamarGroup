@@ -24,7 +24,8 @@ System.config({
         'angular-socialshare': 'node_modules/angular-socialshare/dist/angular-socialshare.js',
         'angular-youtube-embed': 'node_modules/angular-youtube-embed/src/angular-youtube-embed.js',
         'ngSmoothScroll': 'node_modules/ngSmoothScroll/lib/angular-smooth-scroll.js',
-        'aos':'node_modules/aos/dist/aos.js'
+        'aos':'node_modules/aos/dist/aos.js',
+        // 'uiGmapgoogle-maps':'/node_modules/angular-google-maps/dist/angular-google-maps.js'
       
     },
     

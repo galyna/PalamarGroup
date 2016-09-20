@@ -140,6 +140,7 @@ export class ContactComponentController {
 
     save(form:ng.IFormController) {
         if (form.$invalid) return;
+        this.contact.isAcademy=true;
         this.contact.$save()
             .then( (favor) => {
                 this.$mdToast.showSimple( `Дані контакту збережено` );

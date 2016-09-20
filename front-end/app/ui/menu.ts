@@ -1,5 +1,6 @@
 import {CourseCalendarComponentUrl} from "../courses/components/course.calendar.component";
 import {SalonHomeComponentUrl} from "../salon/components/salon.home.component";
+import {AcademyContactComponentUrl} from "../courses/components/academy.contacts.component";
 import {IConstants} from "../core/core.config";
 
 const template = `<div id="nav-icon4" ng-click="$ctrl.toggleMenu($event)">
@@ -47,9 +48,9 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
 
             <div flex ng-click="vm.goToURL(vm.CourseCalendarComponentUrl)" class=" pg-menu-item ">КАЛАЕНДАР
             </div>
-            <!-- <div flex ng-click="vm.goToURL(SalonHomeComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
+        <div flex ng-click="vm.goToURL(vm.AcademyContactComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
 
-            </div>-->
+            </div>
      
         </div>
     </div>
@@ -65,6 +66,7 @@ export class MenuComponentController {
     showSalon:boolean
     SalonHomeComponentUrl = SalonHomeComponentUrl;
     CourseCalendarComponentUrl = CourseCalendarComponentUrl;
+    AcademyContactComponentUrl = AcademyContactComponentUrl;
 
     constructor(private mdDialog:ng.material.IDialogService, private $location,
                 private constants:IConstants, private smoothScroll) {
