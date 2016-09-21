@@ -58,7 +58,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
             </div>
             
         </md-toolbar>
-        <md-dialog-content>
+       <!-- <md-dialog-content>
             <div class="md-dialog-content" layout="row">
                 <md-subheader flex="1">
                     <p ng-if="$ctrl.order.date">{{$ctrl.order.date|date}}</p>
@@ -84,7 +84,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                     </md-input-container>
                 </div>
             </div>
-        </md-dialog-content>
+        </md-dialog-content>-->
         <md-dialog-actions layout="row">
             <span flex></span>
             <md-button ng-click="$ctrl.cancel()" aria-label="cancel">
