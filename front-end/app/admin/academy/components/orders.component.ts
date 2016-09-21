@@ -11,22 +11,27 @@ let template = `
     </div>
   </md-toolbar>
 
-<md-list flex>
+<md-list flex class="orders-list">
     <md-subheader class="md-no-sticky">Записи на курс</md-subheader>
-    <md-list-item class="md-2-line" ng-repeat="order in $ctrl.orders" ng-click="$ctrl.showEditOrderDialog($event, order)">
+    <md-list-item class="md-2-line" ng-repeat="order in $ctrl.orders" ng-class="{new:order.answered,approved:order.booked}" ng-click="$ctrl.showEditOrderDialog($event, order)">
         <div class="md-list-item-text" layout="column">
-            <h3>{{::order.name||'Анонім'}} {{::order.phone||order.email||''}}</h3>
+
+          <h2 ng-if="order.booked"> ЗАМОВЛЕННЯ ПІДТВЕРДЖЕНО</h2>
+            <p ng-if="order.answered">Замовнику передзвонили </p>
+            <h3>{{::order.name||'Анонім'}} {{::order.phone||order.email||''}} </h3>
             <p>{{::$ctrl.getOrderTitle(order)}}</p>
+             <p>Запис створено {{order.date|date:'dd.MM.yyyy'}}</p>
+              <p ng-if="order.answered">Замовнику передзвонили </p>
         </div>
         <div class="md-secondary md-margin">
-        <md-checkbox  ng-model="order.answered" ng-click="$ctrl.saveOrder(order)"></md-checkbox>
+        <md-checkbox  ng-model="order.answered" ng-click="$ctrl.saveAnsewerOrder(order)"></md-checkbox>
         <md-tooltip >
          Замовнику передзвонили
         </md-tooltip>
          </div>
   
         <div class="md-secondary md-margin">
-         <md-checkbox ng-model="order.booked" ng-click="$ctrl.saveOrder(order)"></md-checkbox>  
+         <md-checkbox ng-model="order.booked" ng-click="$ctrl.saveBookedOrder(order)"></md-checkbox>  
           <md-tooltip md-direction="top">
         Участь у заході підтверджено
         </md-tooltip>
@@ -58,22 +63,30 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
             </div>
             
         </md-toolbar>
-       <!-- <md-dialog-content>
+        <md-dialog-content>
             <div class="md-dialog-content" layout="row">
                 <md-subheader flex="1">
-                    <p ng-if="$ctrl.order.date">{{$ctrl.order.date|date}}</p>
-                    <p ng-if="$ctrl.order.name">
-                        {{$ctrl.order.name}}
-                    </p>
-                    <p ng-if="$ctrl.order.phone">
-                        {{$ctrl.order.phone}}
-                    </p>
-                    <p ng-if="$ctrl.order.email">
-                        {{$ctrl.order.email}}
-                    </p>
-                    <p ng-if="$ctrl.order.comment">
-                        {{$ctrl.order.comment}}
-                    </p>
+                    <p ng-if="$ctrl.order.date">Запис створено {{$ctrl.order.date|date:'dd.MM.yyyy'}}</p>
+                     <md-input-container class="md-block">
+                    <label>Замовник</label>
+                    <input type="text" ng-model="$ctrl.order.name" >
+                </md-input-container>
+                    <md-input-container class="md-block">
+                    <label>Телфон</label>
+                    <input type="text" ng-model="$ctrl.order.phone" >
+                </md-input-container>
+                   
+                </md-input-container>
+                    <md-input-container class="md-block">
+                    <label>Email</label>
+                    <input type="text" ng-model="$ctrl.order.email" >
+                </md-input-container>
+                </md-input-container>
+                    <md-input-container class="md-block">
+                    <label>Коментар замовника</label>
+                    <input type="text" ng-model="$ctrl.order.comment" >
+                </md-input-container>
+                  
                 </md-subheader>
                 <div flex="2" layout="column" class="md-margin">
                     <md-checkbox ng-model="$ctrl.order.answered">Замовнику передзвонили</md-checkbox>                     
@@ -84,7 +97,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                     </md-input-container>
                 </div>
             </div>
-        </md-dialog-content>-->
+        </md-dialog-content>
         <md-dialog-actions layout="row">
             <span flex></span>
             <md-button ng-click="$ctrl.cancel()" aria-label="cancel">
@@ -97,23 +110,22 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
     </form>
 </md-dialog>
 `;
+class EditDialogController {
 
-class EditOrderDialogController {
+    static $inject = ['$mdDialog', 'order'];
 
     private order:IOrder;
     private originalOrder:IOrder;
 
-    static $inject = ['$mdDialog'];
-
     constructor(private $mdDialog:ng.material.IDialogService, order:IOrder) {
-        this.order = angular.copy( order );
+        this.order = angular.copy(order);
         this.originalOrder = order;
     }
 
     save($form:ng.IFormController) {
         if ($form.$valid) {
-            angular.extend( this.originalOrder, this.order );
-            this.$mdDialog.hide( this.originalOrder );
+            angular.extend(this.originalOrder, this.order);
+            this.$mdDialog.hide(this.originalOrder);
         }
     }
 
@@ -121,13 +133,14 @@ class EditOrderDialogController {
         this.$mdDialog.cancel();
     }
 }
-
 export class AdminOrdersController {
 
     static $inject = ["$filter", "$mdDialog", "$mdToast", "$mdMedia", OrderResourceName, PagingServiceName];
 
     orders:IOrder[];
     paging:any;
+    private order:IOrder;
+    private originalOrder:IOrder;
 
     constructor(private $filter:ng.IFilterService, private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService,
                 private $mdMedia:ng.material.IMedia, private orderResource:IOrderResource,
@@ -140,9 +153,10 @@ export class AdminOrdersController {
     }
 
     showEditOrderDialog(ev:MouseEvent, order:IOrder) {
+
         this.$mdDialog.show( {
             template: editOrderDialogTemplate,
-            controller: EditOrderDialogController,
+            controller: EditDialogController,
             controllerAs: '$ctrl',
             bindToController: true,
             locals: {
@@ -153,13 +167,28 @@ export class AdminOrdersController {
         } ).then( (order) => this.saveOrder( order ) );
     }
 
+
+
     saveOrder(order:IOrder) {
 
         order.$save().then( () => {
             this.$mdToast.showSimple( `Запис збережено` );
         } ).catch( (err) => {
             this.$mdToast.showSimple( err.message );
+        } ).finally( ()=> {
+            this.showPage( this.pagingService.currentPage() );
         } );
+        ;
+    }
+
+    saveAnsewerOrder(order:IOrder) {
+        order.answered = !order.answered;
+        this.saveOrder( order );
+    }
+
+    saveBookedOrder(order:IOrder) {
+        order.booked = !order.booked;
+        this.saveOrder( order );
     }
 
     showDeleteDialog(ev, order:IOrder) {
@@ -209,7 +238,7 @@ export class AdminOrdersController {
     }
 
     private showPage(page = 1) {
-        this.orders = this.orderResource.query( {page: page, sort: {"answered": 1, "date": -1}},
+        this.orders = this.orderResource.query( {page: page, sort: { "answered": 1}},
             (res, headers) => {
                 let {total, page, perPage} = this.pagingService.parseHeaders( headers );
                 this.pagingService.update( {page: page, perPage: perPage, total: total} );

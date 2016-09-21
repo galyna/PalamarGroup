@@ -18,10 +18,8 @@ import '../templates';
 
 //components
 import {adminRoutes} from './admin.routes';
-import {AcademyOrdersController} from './academy/controllers/orders.controller';
 import {AcademyModelController} from './academy/controllers/models.controller';
 import {AcademyDeliveryController} from './academy/controllers/delivery.controller';
-import {AcademyContactsController} from './academy/controllers/contacts.controller';
 import {AdminController} from './controllers/admin.controller';
 import {DeliveryService} from "./academy/services/delivery.service";
 import {EmailAdvComponentName, EmailAdvComponentOptions} from "./academy/components/email.adv.component";
@@ -62,10 +60,8 @@ let app = angular.module('admin', [
     .config(adminRoutes)
     .run(adminRun)
     .controller(AdminController.componentName, AdminController)
-    .controller(AcademyOrdersController.componentName, AcademyOrdersController)
     .controller(AcademyModelController.componentName, AcademyModelController)
     .controller(AcademyDeliveryController.componentName, AcademyDeliveryController)
-    .controller(AcademyContactsController.componentName, AcademyContactsController)
     .service(DeliveryService.componentName, DeliveryService)
     .component(HeaderComponentName, HeaderComponentOptions)
     .component(LeftSidenavComponentName, LeftSidenavComponentOptions)

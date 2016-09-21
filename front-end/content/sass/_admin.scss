@@ -23,3 +23,20 @@
     }
   }
 }
+.orders-list{
+  md-list-item{
+    margin: 0 !important;
+    &.new{
+      background: #6b6b6b;
+      h3, p{
+        font-weight: bold !important;
+      }
+    }
+    &.approved{
+      background: #398075;
+      h3, p{
+        font-weight: bold !important;
+      }
+    }
+  }
+}

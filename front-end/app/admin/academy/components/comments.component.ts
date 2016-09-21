@@ -16,25 +16,26 @@ const editDialogTemplate = `<md-dialog aria-label="Comment edit" flex="80">
         </md-toolbar>
         <md-dialog-content>
             <div class="md-dialog-content">
-            <h3>{{$ctrl.comment.courseName}} <span>{{$ctrl.comment.courseDates|courseDates}} </span></h3>
+                <h3>{{$ctrl.comment.courseName}} <span>{{$ctrl.comment.courseDates|courseDates}} </span></h3>
                 <md-input-container class="md-block">
                     <label>Автор</label>
                     <input type="text" ng-model="$ctrl.comment.name" required>
                 </md-input-container>
-                
+
                 <md-input-container class="md-block">
                     <label>Відгук</label>
-                    <textarea ng-model="$ctrl.comment.text" required></textarea>
+                    <textarea ng-model="$ctrl.comment.text"></textarea>
                 </md-input-container>
                 <div layout="row">
-                <md-datepicker ng-model="$ctrl.comment.date" md-placeholder="Дата" required></md-datepicker>
-                <md-checkbox class="md-block" ng-model="$ctrl.comment.isVisible">
-                    Видимий
-                </md-checkbox>
-</div>
-                <!--<md-select ng-model="$ctrl.comment.courseId">-->
-                    <!--<md-option ng-repeat="course in $ctrl.courses" ng-value="course.id">{{course.name}}</md-option>-->
-                <!--</md-select>-->
+                    <md-datepicker ng-model="$ctrl.comment.date" md-placeholder="Дата"></md-datepicker>
+                    <md-checkbox class="md-block" ng-model="$ctrl.comment.isVisible">
+                        Видимий
+                    </md-checkbox>
+                    <md-checkbox class="md-block" ng-model="$ctrl.comment.isModerated">
+                        Відгук перевірено
+                    </md-checkbox>
+                </div>
+       
             </div>
         </md-dialog-content>
         <md-dialog-actions layout="row">
@@ -91,6 +92,7 @@ const template = `<md-toolbar>
         <div class="md-list-item-text">
             <h3>{{::comment.name||'Анонім'}} {{::comment.date| date:'dd.MM.yyyy'}}</h3>
             <p>{{comment.text}}</p>
+             <p ng-if="!comment.isModerated">Відгук перевірено </p>
         </div>
 
         <md-checkbox ng-model="comment.isVisible"
@@ -166,7 +168,10 @@ export class CommentsComponentController {
             })
             .catch((err) => {
                 this.$mdToast.showSimple(err.message);
-            });
+            }).finally( ()=> {
+            this.showPage( this.pagingService.currentPage() );
+        } );
+        ;
     }
 
     showDeleteDialog(ev, comment:pg.models.IAdminComment) {
