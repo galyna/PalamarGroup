@@ -46,7 +46,7 @@ export class CourseController {
             this.setSocialParams( course );
             course.hearFormsPhotos = this.orderByFilter( course.hearFormsPhotos, "order" );
             course.historyPhotos = this.orderByFilter( course.historyPhotos, "order" );
-            //   this.scrollToMain();
+       
         } );
 
         this.order = new OrderResource();
@@ -57,44 +57,15 @@ export class CourseController {
 
     }
 
-    scrollToMain() {
-        var options = {
-            duration: 400,
-            easing: 'easeInQuad',
-            offset: 0,
-
-        }
-        var element = document.getElementById( 'mainContent' );
-        this.smoothScroll( element, options );
-    }
 
     setSocialParams(course:ICourse) {
         this.$rootScope.socialParams.host = this.constants.host;
         this.$rootScope.socialParams.target = this.constants.host + "/#/course/" + course._id;
         this.$rootScope.socialParams.image = this.constants.host + course.avatar;
         this.$rootScope.socialParams.title = course.name;
-        this.$rootScope.socialParams.description = this.getFBDescription( course );
+        this.$rootScope.socialParams.description = course.description.slice( 0, 920 );;
         this.socialParams = angular.copy( this.$rootScope.socialParams, this.socialParams );
     }
-
-    getDatesPeriod(course:ICourse) {
-        if (this.course.courseModulesDates) {
-            let format = "dd.MM.yyyy";
-            let firstDate = this.$filter( 'date' )( course.courseModulesDates[0], format );
-            let lastDate = this.$filter( 'date' )( course.courseModulesDates[course.courseModulesDates.length - 1], format );
-            return firstDate + " - " + lastDate;
-        } else {
-            return "";
-        }
-    }
-
-    getFBDescription(course:ICourse):string {
-        let desc = "Запрошуємо на курс, який проволиться у Львові. Дати проведення: ";
-        desc += this.getDatesPeriod( course );
-        desc += ". " + this.course.description;
-        return desc.slice( 0, 920 );
-    }
-
 
     showComments():Boolean {
         if (this.course.comments) {
@@ -158,7 +129,7 @@ export class CourseController {
             this.mdDialog.alert()
                 .clickOutsideToClose( true )
                 .title( 'Вашу заявку стати моделлю прийнято. ' )
-                .textContent( 'На протязі дня з вами зв`яжеться координатор курсів. Дякуємо.' )
+                .textContent( 'На протязі дня з вами зв`яжеться координатор акодемії. Дякуємо.' )
                 .ariaLabel( 'Вашу заявку прийнято.j ' )
                 .ok( 'Закрити' )
         );
@@ -184,7 +155,7 @@ export class CourseController {
             this.mdDialog.alert()
                 .clickOutsideToClose( true )
                 .title( 'Вашу заявку прийнято. ' )
-                .textContent( 'На протязі дня з вами зв`яжеться координатор курсів. Дякуємо.' )
+                .textContent( 'На протязі дня з вами зв`яжеться координатор акодемії. Дякуємо.' )
                 .ariaLabel( 'Вашу заявку прийнято. ' )
                 .ok( 'Закрити' )
         );
