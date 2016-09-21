@@ -8,7 +8,7 @@ import {SalonClient} from "../models/salon.client";
 import {config} from '../config';
 export let emailEndpoint = Router();
 let emailService = new EmailService( {
-    user: 'Gerasima2015@gmail.com',
+    user: 'ostapnagovitsyn@gmail.com',
     clientId: '3589981967-i1a3i6vtrfjjk9uq4j2uhochovp5dlhc.apps.googleusercontent.com',
     clientSecret: 'nml42vl2FC7RWapNg-M1iunT',
     refreshToken: '1/FkpSMSJuZnlcwSWulSuMqhFXU5zrrzwqWJBWv_2lEw8'
