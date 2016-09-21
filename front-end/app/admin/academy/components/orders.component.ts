@@ -194,7 +194,7 @@ export class AdminOrdersController {
     showDeleteDialog(ev, order:IOrder) {
         let confirm = this.$mdDialog.confirm()
             .title( "Підтвердження дії" )
-            .textContent( `Ви дійсно бажаєте видалити Запис ${order.name}?` )
+            .textContent( `Ви дійсно бажаєте видалити Запис ${order.name|| ''}?` )
             .ariaLabel( "Підтвердження дії" )
             .targetEvent( ev )
             .ok( 'Так' )

@@ -1,6 +1,5 @@
 import {AcademyModelController} from './academy/controllers/models.controller';
 import {AcademyDeliveryController} from './academy/controllers/delivery.controller';
-import {AcademyContactsController} from './academy/controllers/contacts.controller';
 import {AdminCourseComponentUrl} from "./academy/components/course.component";
 import {AdminCoursesComponentUrl} from "./academy/components/courses.component";
 import {AdminOrdersComponentUrl} from "./academy/components/orders.component";
