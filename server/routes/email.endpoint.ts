@@ -8,7 +8,7 @@ import {SalonClient} from "../models/salon.client";
 import {config} from '../config';
 export let emailEndpoint = Router();
 let emailService = new EmailService( {
-    user: 'ostapnagovitsyn@gmail.com',
+    user: 'Gerasima2015@gmail.com',
     clientId: '3589981967-i1a3i6vtrfjjk9uq4j2uhochovp5dlhc.apps.googleusercontent.com',
     clientSecret: 'nml42vl2FC7RWapNg-M1iunT',
     refreshToken: '1/FkpSMSJuZnlcwSWulSuMqhFXU5zrrzwqWJBWv_2lEw8'
@@ -72,7 +72,7 @@ emailEndpoint.route( '/adv/:courseId' )
             width: 70px;
             min-height: 70px;
             height: 70px;
-            padding: 10px;" src="${'http://staging.palamar.com.ua' + '/content/images/logo/palamar_logo_70.png'}"/>
+            padding: 10px;" src="${'http://palamar.com.ua' + '/content/images/logo/palamar_logo_70.png'}"/>
             <div class="md-padding">
                 <h1 class="featured-area-title" style=" text-align: center;
 
@@ -99,7 +99,7 @@ emailEndpoint.route( '/adv/:courseId' )
         <img style="z-index: -100;
             width: 500px;
             height: 500px;
-            display: inline-block;" src="${config.origin +  req.course.hearFormsPhotos[0].url}"
+            display: inline-block;" src="${config.origin +  req.course.avatar}"
         >
         <div style=" background: white;
             width: 500px;
@@ -112,7 +112,7 @@ emailEndpoint.route( '/adv/:courseId' )
             padding-bottom: 15px;
             font-size: 26px;
             width: 100%;
-            height: 20px;color: #2b2b2b;" > Запрошуємо на блок </div>
+            height: 20px;color: #2b2b2b;" > Запрошуємо на </div>
 
             <div style=" padding-top: 5px;
             padding-bottom: 15px;

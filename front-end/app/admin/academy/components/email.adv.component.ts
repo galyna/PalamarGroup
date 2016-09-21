@@ -26,7 +26,7 @@ let template = `<md-card>
 </md-card>`;
 
 class EmailAdvDirectiveController {
-    static $inject = [EmailService.componentName];
+    static $inject = [EmailService.componentName,"$mdDialog"];
     static as = "vm";
     static DEFAULT_GROUP = "global";
     
@@ -35,14 +35,21 @@ class EmailAdvDirectiveController {
     courses:ICourse[];
     groups: string[];
     
-    constructor(private emailService:EmailService) {
+    constructor(private emailService:EmailService,private $mdDialog:ng.material.IDialogService) {
         this.group = EmailAdvDirectiveController.DEFAULT_GROUP;
     }
 
     send($form:ng.IFormController, courseId:string, group = EmailAdvDirectiveController.DEFAULT_GROUP) {
         if ($form.$valid) {
             this.emailService.sendAdv(courseId).then(() => {
-                alert('success');
+                this.$mdDialog.show(
+                    this.$mdDialog.alert()
+                        .clickOutsideToClose( true )
+                        .title( 'Листи успішно розіслано. ' )
+                        .textContent( 'Ви розіслали листи для групи: '+group )
+                        .ariaLabel( 'Листи успішно розіслано. ' )
+                        .ok( 'Закрити' )
+                );
             })
         }
     }

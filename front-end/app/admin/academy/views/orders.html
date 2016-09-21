@@ -1,9 +1,0 @@
-<div flex class="md-padding" ng-repeat="order in vm.orders" ng-class="{'not-answered':!order.answered}">
-    <span ng-if="order.name"><b>name:</b> {{order.name}}</span>
-    <span ng-if="order.phone"><b>phone: </b>{{order.phone}}</span>
-    <span ng-if="order.email"><b>email</b>: <a href="mailto:{{order.email}}">{{order.email}}</a></span>
-    <span ng-if="order.comment"><b>comment: </b>{{order.comment}}</span>
-    <md-button class="  md-raised" ng-click="vm.deleteOrder(order)">Видалити</md-button>
-    <md-button ng-show="!order.answered" class="  md-raised" ng-click="vm.answerOrder(order)">Відповіли
-    </md-button>
-</div>
