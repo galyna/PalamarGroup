@@ -103,6 +103,8 @@ class EditOrderDialogController {
     private order:IOrder;
     private originalOrder:IOrder;
 
+    static $inject = ['$mdDialog'];
+
     constructor(private $mdDialog:ng.material.IDialogService, order:IOrder) {
         this.order = angular.copy( order );
         this.originalOrder = order;
