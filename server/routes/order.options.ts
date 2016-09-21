@@ -7,7 +7,7 @@ export let orderOptions: IOptions = {
         if (process.env.TYPE !== 'prod') return console.trace('Not prod env, skipping sms sending');
         const result = <IOrderModel>req.erm.result;
         //we're not waiting for result here, user don't need it
-        sms.sendAdminNotification(`${result.event_name}. ${result.phone}`).catch(() => {});
+        sms.sendAdminNotification(` ${result.phone}`).catch(() => {});
         next();
     }
 };
