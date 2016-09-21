@@ -72,7 +72,7 @@ emailEndpoint.route( '/adv/:courseId' )
             width: 70px;
             min-height: 70px;
             height: 70px;
-            padding: 10px;" src="${'http://palamar.com.ua' + '/content/images/logo/palamar_logo_70.png'}"/>
+            padding: 10px;" src="${config.origin + '/content/images/logo/palamar_logo_70.png'}"/>
             <div class="md-padding">
                 <h1 class="featured-area-title" style=" text-align: center;
 
