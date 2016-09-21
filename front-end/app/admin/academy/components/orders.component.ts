@@ -13,7 +13,7 @@ let template = `
 
 <md-list flex class="orders-list">
     <md-subheader class="md-no-sticky">Записи на курс</md-subheader>
-    <md-list-item class="md-2-line" ng-repeat="order in $ctrl.orders" ng-class="{new:order.answered,approved:order.booked}" ng-click="$ctrl.showEditOrderDialog($event, order)">
+    <md-list-item class="md-2-line" ng-repeat="order in $ctrl.orders" ng-class="{answered:order.answered, approved:order.booked}" ng-click="$ctrl.showEditOrderDialog($event, order)">
         <div class="md-list-item-text" layout="column">
 
           <h2 ng-if="order.booked"> ЗАМОВЛЕННЯ ПІДТВЕРДЖЕНО</h2>
@@ -238,7 +238,7 @@ export class AdminOrdersController {
     }
 
     private showPage(page = 1) {
-        this.orders = this.orderResource.query( {page: page, sort: { "answered": 1}},
+        this.orders = this.orderResource.query( {page: page, sort: { "answered": 1,"booked":-1,"date":-1}},
             (res, headers) => {
                 let {total, page, perPage} = this.pagingService.parseHeaders( headers );
                 this.pagingService.update( {page: page, perPage: perPage, total: total} );

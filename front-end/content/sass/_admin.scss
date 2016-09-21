@@ -15,8 +15,14 @@
 .comments-list{
   md-list-item{
     margin: 0 !important;
-    &.new{
-      background: lightgray;
+    &.answered{
+      background: #6b6b6b;
+      h3, p{
+        font-weight: bold !important;
+      }
+    }
+    &.approved{
+      background: #3c804d;
       h3, p{
         font-weight: bold !important;
       }
@@ -26,14 +32,14 @@
 .orders-list{
   md-list-item{
     margin: 0 !important;
-    &.new{
+    &.answered{
       background: #6b6b6b;
       h3, p{
         font-weight: bold !important;
       }
     }
     &.approved{
-      background: #398075;
+      background: #3c804d;
       h3, p{
         font-weight: bold !important;
       }

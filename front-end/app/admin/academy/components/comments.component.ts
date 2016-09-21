@@ -27,7 +27,8 @@ const editDialogTemplate = `<md-dialog aria-label="Comment edit" flex="80">
                     <textarea ng-model="$ctrl.comment.text"></textarea>
                 </md-input-container>
                 <div layout="row">
-                    <md-datepicker ng-model="$ctrl.comment.date" md-placeholder="Дата"></md-datepicker>
+                   <p>Відгук створено {{$ctrl.comment.date|date:'dd.MM.yyyy'}}</p>
+                 
                     <md-checkbox class="md-block" ng-model="$ctrl.comment.isVisible">
                         Видимий
                     </md-checkbox>
@@ -87,12 +88,13 @@ const template = `<md-toolbar>
 </md-toolbar>
 <md-list flex class="comments-list">
     
-    <md-list-item class="md-3-line md-long-text" ng-class="{new:!comment.isModerated}"
+    <md-list-item class="md-3-line md-long-text" ng-class="{answered:comment.isModerated, approved:comment.isVisible}"
                   ng-repeat="comment in $ctrl.comments" ng-click="$ctrl.showEditDialog($event, comment)">
         <div class="md-list-item-text">
+         <h2 ng-if="comment.isVisible">Відгук видимий </h2>
             <h3>{{::comment.name||'Анонім'}} {{::comment.date| date:'dd.MM.yyyy'}}</h3>
             <p>{{comment.text}}</p>
-             <p ng-if="!comment.isModerated">Відгук перевірено </p>
+             <p ng-if="comment.isModerated">Відгук перевірено </p>
         </div>
 
         <md-checkbox ng-model="comment.isVisible"
@@ -147,7 +149,7 @@ export class CommentsComponentController {
     }
 
     showEditDialog(ev:MouseEvent, comment:pg.models.IAdminComment) {
-        this.moderateComment( comment );
+
         this.$mdDialog.show( {
             template: editDialogTemplate,
             controller: EditDialogController,
@@ -247,7 +249,7 @@ export class CommentsComponentController {
     }
 
     private showPage(page = 1) {
-        this.comments = this.CourseResource.getComments( {page: page, sort: {"date": 1}},
+        this.comments = this.CourseResource.getComments( {page: page, sort: {"isModerated": 1,"isVisible":-1,"date":-1}},
             (res, headers) => {
                 let {total, page, perPage} = this.pagingService.parseHeaders( headers );
                 this.pagingService.update( {page: page, perPage: perPage, total: total} );
