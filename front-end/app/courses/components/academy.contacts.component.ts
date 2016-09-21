@@ -11,7 +11,7 @@ import {IRootScope} from "../../../typings";
 const template = `<div class="courses-details description-container" layout="column">
 
     <!--author-->
-    <div layout="row" class="top-info" flex layout-align="center center">
+    <div layout="column" class="top-info" flex layout-align="center center">
         <md-card ng-repeat="contact in $ctrl.contacts" flex-md="90" flex-gt-md="60" flex-xs="none" flex
                  md-whiteframe="5">
             <md-card-content layuot="column" layout-gt-sm="row">

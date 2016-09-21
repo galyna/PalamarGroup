@@ -58,14 +58,14 @@ class EditDialogController {
     private originalComment:IAdminComment;
 
     constructor(private $mdDialog:ng.material.IDialogService, comment:IAdminComment) {
-        this.comment = angular.copy(comment);
+        this.comment = angular.copy( comment );
         this.originalComment = comment;
     }
 
     save($form:ng.IFormController) {
         if ($form.$valid) {
-            angular.extend(this.originalComment, this.comment);
-            this.$mdDialog.hide(this.originalComment);
+            angular.extend( this.originalComment, this.comment );
+            this.$mdDialog.hide( this.originalComment );
         }
     }
 
@@ -122,7 +122,7 @@ interface IConfirmMsg {
     isAnswered:string;
     isNotAnswered:string;
     isDeleted:string,
-    isSaved: string
+    isSaved:string
 }
 
 export class CommentsComponentController {
@@ -143,12 +143,12 @@ export class CommentsComponentController {
     }
 
     showCourse(id:string):void {
-        this.$location.url('/academy/course/' + id);
+        this.$location.url( '/academy/course/' + id );
     }
 
     showEditDialog(ev:MouseEvent, comment:pg.models.IAdminComment) {
-        this.moderateComment(comment);
-        this.$mdDialog.show({
+        this.moderateComment( comment );
+        this.$mdDialog.show( {
             template: editDialogTemplate,
             controller: EditDialogController,
             controllerAs: '$ctrl',
@@ -157,18 +157,18 @@ export class CommentsComponentController {
                 comment: comment
             },
             targetEvent: ev,
-            parent: angular.element(document.body),
-        }).then((comment) => this.saveComment(comment));
+            parent: angular.element( document.body ),
+        } ).then( (comment) => this.saveComment( comment ) );
     }
 
     saveComment(comment:pg.models.IAdminComment) {
-        this.CourseResource.editComment({id: comment.courseId}, this.convertToDbComment(comment)).$promise
-            .then(()=>{
-                this.$mdToast.showSimple(this.confirmMsg.isSaved);
-            })
-            .catch((err) => {
-                this.$mdToast.showSimple(err.message);
-            }).finally( ()=> {
+        this.CourseResource.editComment( {id: comment.courseId}, this.convertToDbComment( comment ) ).$promise
+            .then( ()=> {
+                this.$mdToast.showSimple( this.confirmMsg.isSaved );
+            } )
+            .catch( (err) => {
+                this.$mdToast.showSimple( err.message );
+            } ).finally( ()=> {
             this.showPage( this.pagingService.currentPage() );
         } );
         ;
@@ -176,29 +176,31 @@ export class CommentsComponentController {
 
     showDeleteDialog(ev, comment:pg.models.IAdminComment) {
         let confirm = this.$mdDialog.confirm()
-            .title("Підтвердження дії")
-            .textContent(`Ви дійсно бажаєте видалити dsluer ${comment.text ? comment.text : ""}?`)
-            .ariaLabel("Підтвердження дії")
-            .targetEvent(ev)
-            .ok('Так')
-            .cancel('Ні');
+            .title( "Підтвердження дії" )
+            .textContent( `Ви дійсно бажаєте видалити dsluer ${comment.text ? comment.text : ""}?` )
+            .ariaLabel( "Підтвердження дії" )
+            .targetEvent( ev )
+            .ok( 'Так' )
+            .cancel( 'Ні' );
 
-        return this.$mdDialog.show(confirm)
-            .then(() => {
-                return this.deleteComment(comment);
-            });
+        return this.$mdDialog.show( confirm )
+            .then( () => {
+                return this.deleteComment( comment );
+            } );
     }
 
     deleteComment(comment:pg.models.IAdminComment) {
 
-        this.CourseResource.deleteComment({id: comment.courseId, commentId: comment._id}).$promise.then(() => {
-            this.comments.splice(this.comments.indexOf(comment), 1);
-            this.$mdToast.showSimple(this.confirmMsg.isDeleted);
-        })
-            .catch((err) => {
-                    this.$log.error(err);
+        this.CourseResource.deleteComment( {id: comment.courseId, commentId: comment._id} ).$promise.then( () => {
+            this.comments.splice( this.comments.indexOf( comment ), 1 );
+            this.$mdToast.showSimple( this.confirmMsg.isDeleted );
+        } )
+            .catch( (err) => {
+                    this.$log.error( err );
                 }
-            )
+            ).finally( ()=> {
+            this.showPage( this.pagingService.currentPage() );
+        } );
 
 
     }
@@ -213,15 +215,15 @@ export class CommentsComponentController {
             isVisible: !comment.isVisible,
             isModerated: comment.isModerated,
         }
-        this.CourseResource.editComment({id: comment.courseId}, newComment).$promise.then(() => {
+        this.CourseResource.editComment( {id: comment.courseId}, newComment ).$promise.then( () => {
             if (comment.isVisible) {
-                this.$mdToast.showSimple(this.confirmMsg.isVisible);
+                this.$mdToast.showSimple( this.confirmMsg.isVisible );
             } else {
-                this.$mdToast.showSimple(this.confirmMsg.isNotVisible);
+                this.$mdToast.showSimple( this.confirmMsg.isNotVisible );
             }
-        })
-            .catch((err) => {
-                    this.$mdToast.showSimple(err.message);
+        } )
+            .catch( (err) => {
+                    this.$mdToast.showSimple( err.message );
                 }
             )
     }
@@ -230,37 +232,37 @@ export class CommentsComponentController {
     moderateComment(comment:pg.models.IAdminComment) {
         if (comment.isModerated) return;
         comment.isModerated = true;
-        this.CourseResource.editComment({id: comment.courseId}, {isModerated: true}).$promise
-            .catch((err) => {
-                this.$mdToast.showSimple(err.message);
-            });
+        this.CourseResource.editComment( {id: comment.courseId}, {isModerated: true} ).$promise
+            .catch( (err) => {
+                this.$mdToast.showSimple( err.message );
+            } );
     }
 
     prev() {
-        this.showPage(this.pagingService.prevPage());
+        this.showPage( this.pagingService.prevPage() );
     }
 
     next() {
-        this.showPage(this.pagingService.nextPage());
+        this.showPage( this.pagingService.nextPage() );
     }
 
     private showPage(page = 1) {
-        this.comments = this.CourseResource.getComments({page: page, sort: {"date": 1}},
+        this.comments = this.CourseResource.getComments( {page: page, sort: {"date": 1}},
             (res, headers) => {
-                let {total, page, perPage} = this.pagingService.parseHeaders(headers);
-                this.pagingService.update({page: page, perPage: perPage, total: total});
-                this.paging = angular.copy(this.pagingService.params());
-            });
+                let {total, page, perPage} = this.pagingService.parseHeaders( headers );
+                this.pagingService.update( {page: page, perPage: perPage, total: total} );
+                this.paging = angular.copy( this.pagingService.params() );
+            } );
     }
 
-    private convertToDbComment(comment:pg.models.IAdminComment){
+    private convertToDbComment(comment:pg.models.IAdminComment) {
         return <pg.models.IComment>{
-            _id:comment._id,
-            name:comment.name,
-            text:comment.text,
-            date:comment.date,
-            isVisible:comment.isVisible,
-            isModerated:comment.isModerated
+            _id: comment._id,
+            name: comment.name,
+            text: comment.text,
+            date: comment.date,
+            isVisible: comment.isVisible,
+            isModerated: comment.isModerated
         }
     }
 
