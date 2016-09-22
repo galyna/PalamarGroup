@@ -9,61 +9,61 @@ enum Tabs {
 
 export class AcademyDeliveryController {
 
-    static $inject = ['$q', '$log', SalonClientResourceName, CourseResourceName];
+    static $inject = ['$q', '$log', SalonClientResourceName, CourseResourceName, '$mdDialog'];
     static componentName = 'AcademyDeliveryController';
-    
+
     salons:ISalonClient[];
     editSalonModel:ISalonClient;
     showSalonEditForm:boolean;
-    selectedTab: Tabs;
-    courses: ICourse[];
-    salonGroups: string[];
-    
-    constructor(private $q: ng.IQService, private $log: ng.ILogService, private SalonClientResource: ISalonClientResource,
-    private CourseResource: ICourseResource) {
+    selectedTab:Tabs;
+    courses:ICourse[];
+    salonGroups:string[];
+
+    constructor(private $q:ng.IQService, private $log:ng.ILogService, private SalonClientResource:ISalonClientResource,
+                private CourseResource:ICourseResource, private $mdDialog:ng.material.IDialogService) {
         this.selectedTab = Tabs.List; //contacts tab
         this.showSalonEditForm = false;
         this.courses = CourseResource.query();
         this.initSalons();
     }
 
-    initSalons(){
+    initSalons() {
         this.salons = this.SalonClientResource.query();
         this.salonGroups = this.SalonClientResource.getGroups();
-        return this.$q.all([this.salons.$promise, this.salonGroups.$promise]);
+        return this.$q.all( [this.salons.$promise, this.salonGroups.$promise] );
     }
 
-    showListTab(){
+    showListTab() {
         this.editSalonModel = undefined;
         this.showSalonEditForm = false;
         this.selectedTab = Tabs.List;
     }
-    
-    createSalon(newSalonModel: ISalonClient) {
-        this.$log.debug("createSalon ...");
-            newSalonModel.$save()
-                .then(()=> {
-                    this.$log.debug("success createSalon...");
-                    return this.initSalons();
-                })
-                .catch((err)=> {
-                    this.$log.debug("fail createSalon..." + err);
-                }).finally(()=> {
-                    this.showListTab();
-                });
+
+    createSalon(newSalonModel:ISalonClient) {
+        this.$log.debug( "createSalon ..." );
+        newSalonModel.$save()
+            .then( ()=> {
+                this.$log.debug( "success createSalon..." );
+                return this.initSalons();
+            } )
+            .catch( (err)=> {
+                this.$log.debug( "fail createSalon..." + err );
+            } ).finally( ()=> {
+            this.showListTab();
+        } );
     }
 
-    editSalon(editSalonModel: ISalonClient):void {
-        this.$log.debug("editSalonModel ...vm.editSalonModel._id===" + editSalonModel._id);
-            editSalonModel.$save()
-                .then(()=> {
-                    return this.initSalons();
-                })
-                .catch((err)=> {
-                    this.$log.debug("fail editCourse..." + err);
-                }).finally(()=> {
-                    this.showListTab();
-                });
+    editSalon(editSalonModel:ISalonClient):void {
+        this.$log.debug( "editSalonModel ...vm.editSalonModel._id===" + editSalonModel._id );
+        editSalonModel.$save()
+            .then( ()=> {
+                return this.initSalons();
+            } )
+            .catch( (err)=> {
+                this.$log.debug( "fail editCourse..." + err );
+            } ).finally( ()=> {
+            this.showListTab();
+        } );
     }
 
     showEditForm(model:ISalonClient) {
@@ -73,12 +73,26 @@ export class AcademyDeliveryController {
 
     deleteSalon(salonClient:ISalonClient):void {
         salonClient.$delete()
-            .then(() => this.initSalons());
+            .then( () => this.initSalons() );
+    }
+
+    showDeleteDialog( salonClient:ISalonClient) {
+        let confirm = this.$mdDialog.confirm()
+            .title( "Підтвердження дії" )
+            .textContent( `Ви дійсно бажаєте видалити Салон ${salonClient.name || ''}?` )
+            .ariaLabel( "Підтвердження дії" )
+            .ok( 'Так' )
+            .cancel( 'Ні' );
+
+        return this.$mdDialog.show( confirm )
+            .then( () => {
+                return this.deleteSalon( salonClient );
+            } );
     }
 
     //noinspection JSMethodCanBeStatic
     deleteFromList(list:any[], item:any) {
-        list.splice(list.indexOf(item), 1);
+        list.splice( list.indexOf( item ), 1 );
     }
-    
+
 }

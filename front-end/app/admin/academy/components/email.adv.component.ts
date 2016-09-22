@@ -4,7 +4,7 @@ import {ICourse} from "../../../resources/course.resource";
 let template = `<md-card>
     <md-card-content>
         <form name="emailAdvForm" class="md-padding" novalidate>
-            <md-input-container>
+            <md-input-container flex="30">
                 <label>Курс</label>
                 <md-select aria-label="courses select" ng-model="$ctrl.courseId" required>
                     <md-option ng-repeat="course in $ctrl.courses" value="{{course._id}}">
@@ -12,15 +12,15 @@ let template = `<md-card>
                     </md-option>
                 </md-select>
             </md-input-container>
-            <md-input-container>
-                <label>Группа розсилки</label>
-                <md-select aria-label="salonclient group select" ng-model="$ctrl.group" required>
-                    <md-option ng-repeat="group in $ctrl.groups" value="{{group}}">
-                        <span ng-bind="group"></span>
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <md-button ng-click="$ctrl.send(emailAdvForm, $ctrl.courseId, $ctrl.group);">Розіслати</md-button>
+            <!--<md-input-container>-->
+                <!--<label>Группа розсилки</label>-->
+                <!--<md-select aria-label="salonclient group select" ng-model="$ctrl.group" required>-->
+                    <!--<md-option ng-repeat="group in $ctrl.groups" value="{{group}}">-->
+                        <!--<span ng-bind="group"></span>-->
+                    <!--</md-option>-->
+                <!--</md-select>-->
+            <!--</md-input-container>-->
+            <md-button class="md-raised md-primary" ng-click="$ctrl.send(emailAdvForm, $ctrl.courseId);">Розіслати</md-button>
         </form>
     </md-card-content>
 </md-card>`;
@@ -46,7 +46,7 @@ class EmailAdvDirectiveController {
                     this.$mdDialog.alert()
                         .clickOutsideToClose( true )
                         .title( 'Листи успішно розіслано. ' )
-                        .textContent( 'Ви розіслали листи для групи: '+group )
+                        //.textContent( 'Ви розіслали листи для групи: '+group )
                         .ariaLabel( 'Листи успішно розіслано. ' )
                         .ok( 'Закрити' )
                 );

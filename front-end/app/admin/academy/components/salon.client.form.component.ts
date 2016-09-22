@@ -54,14 +54,14 @@ let template = `
             <label for="address">Адреса</label>
             <input id="address" ng-model="$ctrl.salonClient.address" type="text" name="address">
         </md-input-container>
-        <md-input-container class="md-block">
-            <label for="address">Гуппа</label>
-            <input id="group" ng-model="$ctrl.salonClient.group" type="text" name="group">
-        </md-input-container>
+        <!--<md-input-container class="md-block">-->
+            <!--<label for="address">Гуппа</label>-->
+            <!--<input id="group" ng-model="$ctrl.salonClient.group" type="text" name="group">-->
+        <!--</md-input-container>-->
     </md-content>
     <div layout="row" md-whiteframe="4">
-        <md-button ng-click="$ctrl.cancel()" class="md-raised md-primary">Скасувати</md-button>
-        <md-button type="submit" class="md-raised md-accent">Зберегти</md-button>
+        <md-button ng-click="$ctrl.cancel()" class=" ">Скасувати</md-button>
+        <md-button type="submit" class="md-raised md-primary">Зберегти</md-button>
     </div>
 </form>
 `;

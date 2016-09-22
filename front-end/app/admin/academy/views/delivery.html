@@ -2,15 +2,16 @@
 
 <md-tabs md-selected="vm.selectedTab" md-stretch-tabs="always" md-dynamic-height md-border-bottom>
     <md-tab label="Контакти">
-        <div ng-if="!vm.showSalonEditForm" ng-repeat="item in vm.salons" ng-click="null" layout="row" class=" md-margin">
+        <div ng-if="!vm.showSalonEditForm" ng-repeat="item in vm.salons" ng-click="null" layout="row"
+             class=" md-margin">
             <div layout="column">
                 <span ng-if="item.name"><b>ім`я:</b> {{item.name}}</span>
                 <span ng-if="item.phone"><b>телефон: </b>{{item.phone}}</span>
                 <span ng-if="item.email"><b>email</b>: <a href="mailto:{{item.email}}">{{item.email}}</a></span>
-                <span ng-if="item.group"><b>група</b>: <span ng-bind="item.group"></span></span>
+
 
                 <div layout="row" layout-align="center end">
-                    <md-button class="  md-raised" ng-click="vm.deleteSalon(item)">Видалити</md-button>
+                    <md-button class="  md-raised" ng-click="vm.showDeleteDialog(item)">Видалити</md-button>
                     <md-button class=" md-primary md-raised" ng-click="vm.showEditForm(item)">Редагувати
                     </md-button>
                 </div>
@@ -24,8 +25,7 @@
                 on-cancel="vm.showListTab()"
         >
         </pg-salon-client-form>
-        <!--<div flex ng-if="vm.showSalonEditForm"-->
-             <!--ng-include="'app/admin/academy/views/salon.client.edit.form.html'"></div>-->
+
     </md-tab>
     <md-tab label="Додати контакт">
         <pg-salon-client-form
@@ -33,7 +33,6 @@
                 on-save="vm.createSalon(salonClient)"
                 on-cancel="vm.showListTab()"
         ></pg-salon-client-form>
-        <!--<div ng-include="'app/admin/academy/views/salon.client.create.form.html'"></div>-->
     </md-tab>
     <md-tab label="Email розсилка">
         <pg-email-adv courses="vm.courses" groups="vm.salonGroups"></pg-email-adv>
