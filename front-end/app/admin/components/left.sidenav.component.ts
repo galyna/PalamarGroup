@@ -1,5 +1,6 @@
 import {ItServiceName, ItService} from "../../users/services/it.service";
 import {usersComponentUrl} from "./users.component";
+import {IConstants} from "../../core/core.config";
 let template = `<md-sidenav
         md-component-id="pgLeftSidenav"
         md-is-locked-open="$mdMedia('gt-sm')"
@@ -26,13 +27,17 @@ let template = `<md-sidenav
 
 export class LeftSidenavComponentController {
 
-    static $inject = ['$location','$route',ItServiceName];
+    static $inject = ['$location','$route',ItServiceName,'constants'];
 
     componentId: string;
     items: any[];
+    showSalon:boolean;
 
-    constructor(private $location:ng.ILocationService,private $route, public it: ItService) {
+    constructor(private $location:ng.ILocationService,private $route,
+                public it: ItService,private constants:IConstants) {
         this.componentId = LeftSidenavComponentName;
+        this.showSalon = constants.showSalon;
+
         this.items = [
             {
                 text: 'Академія',
@@ -89,7 +94,7 @@ export class LeftSidenavComponentController {
                 text: 'Салон',
                 opened: false,
                 visible: ()=> {
-                    return this.it.is('salonUser')
+                    return this.it.is('salonUser')&& this.showSalon
                 },
                 items: [
                     {
@@ -108,7 +113,7 @@ export class LeftSidenavComponentController {
                 text: 'Користувачі',
                 url: usersComponentUrl,
                 visible: ()=>{
-                    return this.it.is('admin');
+                    return this.it.is('admin')&& this.showSalon;
                 }
             }
 
