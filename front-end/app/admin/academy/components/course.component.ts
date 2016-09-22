@@ -429,14 +429,12 @@ class AdminCourseController {
 
     //noinspection JSMethodCanBeStatic
     addDate() {
-        this.course.courseModulesDates.push( this.newDate );
         this.course.days.push( {date: this.newDate, program: this.newProgram} );
         this.newDate = null;
         this.newProgram = null;
     }
 
     deleteDate(day:any) {
-        this.course.courseModulesDates.splice( this.course.courseModulesDates.indexOf( day.date ), 1 );
         this.course.days.splice( this.course.days.indexOf( day ), 1 );
     }
 

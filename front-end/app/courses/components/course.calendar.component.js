@@ -55,22 +55,22 @@ System.register(["../../resources/course.resource"], function(exports_1, context
                 };
                 CalendarComponentController.prototype.setCalendarContent = function (course) {
                     var _this = this;
-                    angular.forEach(course.courseModulesDates, function (courseDate) {
+                    angular.forEach(course.days, function (courseDate) {
                         var content = _this.setCoursesCalendarTemplate(course.avatar, course.name);
-                        _this.pgCalendarData.setDayContent(courseDate, _this.$sce.trustAsHtml(content));
+                        _this.pgCalendarData.setDayContent(new Date(courseDate.date), _this.$sce.trustAsHtml(content));
                     });
                 };
                 CalendarComponentController.prototype.createDatesMap = function (course) {
                     //TODO: change coursesDateMap.date to Date[] like in CourseResourse
-                    var coursesDateChunk = course.courseModulesDates.map(function (date) {
-                        return { coursesId: course._id, date: date.toJSON() };
+                    var coursesDateChunk = course.days.map(function (courseDate) {
+                        return { coursesId: course._id, date: new Date(courseDate.date) };
                     });
                     this.coursesDateMap = this.coursesDateMap.concat(coursesDateChunk);
                 };
                 CalendarComponentController.prototype.dayClick = function (date) {
                     var _this = this;
                     angular.forEach(this.coursesDateMap, function (course) {
-                        var cDate = new Date(course.date);
+                        var cDate = course.date;
                         if (cDate.getDate() == date.getDate() && cDate.getFullYear() == date.getFullYear() && cDate.getMonth() == date.getMonth()) {
                             _this.$location.url('/course/' + course.coursesId);
                             return;

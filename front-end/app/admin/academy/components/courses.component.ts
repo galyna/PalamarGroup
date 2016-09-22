@@ -87,7 +87,7 @@ export class AdminCoursesController {
     cloneCourse(course:ICourse) {
         var newCourse = new this.CourseResource(course);
         delete newCourse._id;
-        newCourse.courseModulesDates = [];
+        newCourse.days = [];
         newCourse.isVisible = false;
         newCourse.$save()
             .then(this.showEditForm.bind(this))

@@ -21,10 +21,10 @@ export class CoursesController {
     showAnimation:boolean;
 
 
-    constructor($scope, private $sce, private $location,private $rootScope:IRootScope, private pgCalendarData:IPgCalendarDataService,
+    constructor($scope, private $sce, private $location, private $rootScope:IRootScope, private pgCalendarData:IPgCalendarDataService,
                 private CourseResource:ICourseResource, private $mdMedia, private orderByFilter:ng.IFilterOrderBy) {
         this.showAnimation = $rootScope.isBigSize;
-       
+
         $scope.$on( "$destroy", () => {
             this.courses = null;
             this.showDetails = null;
@@ -74,33 +74,32 @@ export class CoursesController {
     }
 
 
-    setCalendarContent(course:ICourse) {
-        angular.forEach( course.courseModulesDates, (courseDate) => {
-            let content = this.setCoursesCalendarTemplate( course.avatar, course.name );
-            this.pgCalendarData.setDayContent( courseDate, this.$sce.trustAsHtml( content ) );
-        } );
-    }
-
-
-    createDatesMap(course:ICourse) {
-        //TODO: change coursesDateMap.date to Date[] like in CourseResourse
-        let coursesDateChunk = course.courseModulesDates.map( (date) => {
-            return {coursesId: course._id, date: date.toJSON()}
-        } );
-        this.coursesDateMap = this.coursesDateMap.concat( coursesDateChunk );
-    }
-
-    dayClick(date:Date) {
-        angular.forEach( this.coursesDateMap, (course) => {
-            var cDate = new Date( course.date );
-            if (cDate.getDate() == date.getDate() && cDate.getFullYear() == date.getFullYear() && cDate.getMonth() == date.getMonth()) {
-                this.$location.url( '/course/' + course.coursesId );
-                return;
-            }
-
-        } );
-
-    }
+    // setCalendarContent(course:ICourse) {
+    //     angular.forEach( course.days, (courseDate) => {
+    //         let content = this.setCoursesCalendarTemplate( course.avatar, course.name );
+    //         this.pgCalendarData.setDayContent( courseDate.date, this.$sce.trustAsHtml( content ) );
+    //     } );
+    // }
+    //
+    //
+    // createDatesMap(course:ICourse) {
+    //     let coursesDateChunk = course.days.map( (day) => {
+    //         return {coursesId: course._id, date: day.date.toJSON()}
+    //     } );
+    //     this.coursesDateMap = this.coursesDateMap.concat( coursesDateChunk );
+    // }
+    //
+    // dayClick(date:Date) {
+    //     angular.forEach( this.coursesDateMap, (course) => {
+    //         var cDate = new Date( course.date );
+    //         if (cDate.getDate() == date.getDate() && cDate.getFullYear() == date.getFullYear() && cDate.getMonth() == date.getMonth()) {
+    //             this.$location.url( '/course/' + course.coursesId );
+    //             return;
+    //         }
+    //
+    //     } );
+    //
+    // }
 
     showDetails(id:string) {
         this.$location.url( '/course/' + id );

@@ -79,7 +79,6 @@ declare module pg {
                 photoUrl:string
             },
             days:IDay[],
-            courseModulesDates:any[],
             isVisible:boolean,
             comments:IComment[]
         }

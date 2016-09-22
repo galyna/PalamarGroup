@@ -20,7 +20,7 @@ const template = `<div layout="row" flex layout-align="center stretch"> <pg-cale
 
 
 export interface ICourseDates {
-    date:string;
+    date:Date;
     coursesId:any;
 }
 
@@ -94,24 +94,24 @@ export class CalendarComponentController {
     }
 
     setCalendarContent(course:ICourse) {
-        angular.forEach( course.courseModulesDates, (courseDate) => {
+        angular.forEach( course.days, (courseDate) => {
             let content = this.setCoursesCalendarTemplate( course.avatar, course.name );
-            this.pgCalendarData.setDayContent( courseDate, this.$sce.trustAsHtml( content ) );
+            this.pgCalendarData.setDayContent(   new Date(courseDate.date), this.$sce.trustAsHtml( content ) );
         } );
     }
 
 
     createDatesMap(course:ICourse) {
         //TODO: change coursesDateMap.date to Date[] like in CourseResourse
-        let coursesDateChunk = course.courseModulesDates.map( (date) => {
-            return {coursesId: course._id, date: date.toJSON()}
+        let coursesDateChunk = course.days.map( (courseDate) => {
+            return {coursesId: course._id, date:  new Date(courseDate.date)}
         } );
         this.coursesDateMap = this.coursesDateMap.concat( coursesDateChunk );
     }
 
     dayClick(date:Date) {
         angular.forEach( this.coursesDateMap, (course) => {
-            var cDate = new Date( course.date );
+            var cDate =  course.date ;
             if (cDate.getDate() == date.getDate() && cDate.getFullYear() == date.getFullYear() && cDate.getMonth() == date.getMonth()) {
                 this.$location.url( '/course/' + course.coursesId );
                 return;

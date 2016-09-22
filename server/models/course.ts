@@ -5,7 +5,6 @@ import {IPhotoModel, PhotoSchema} from "./photo.schema";
 export interface ICourseModel extends pg.models.ICourse, Document{
     hearFormsPhotos: IPhotoModel[],
     historyPhotos: IPhotoModel[],
-    courseModulesDates: string[],
     _id: any
 }
 
@@ -43,7 +42,6 @@ let CourseSchema = new Schema({
         photoUrl: String
     },
     days: [DaySchema],
-    courseModulesDates:[Date],
     isVisible: Boolean,
     comments: [CommentSchema]
 });

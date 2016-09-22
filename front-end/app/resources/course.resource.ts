@@ -4,7 +4,7 @@ import IComment = pg.models.IComment;
 
 
 export interface ICourse extends ng.resource.IResource<ICourse>, pg.models.ICourse {
-    courseModulesDates: Date[]
+
 }
 
 export interface IAdminComment extends pg.models.IAdminComment {
@@ -29,9 +29,7 @@ export function CourseResource($resource:ng.resource.IResourceService, constants
         transformResponse: (data) => {
             let courses = <pg.models.ICourse[]>JSON.parse(data);
             courses.map((course) => {
-                course.courseModulesDates = course.courseModulesDates.map((dateStr) => {
-                    return new Date(dateStr);
-                });
+
                 return <ICourse>course;
             });
             return courses;
@@ -41,9 +39,7 @@ export function CourseResource($resource:ng.resource.IResourceService, constants
         method: "GET",
         transformResponse: (data) => {
             let course = <pg.models.ICourse>JSON.parse(data);
-            course.courseModulesDates = course.courseModulesDates.map((dateStr) => {
-                return new Date(dateStr);
-            });
+
             return <ICourse>course;
         }
     };
@@ -51,9 +47,7 @@ export function CourseResource($resource:ng.resource.IResourceService, constants
         method: "POST",
         transformResponse: (data) => {
             let course = <pg.models.ICourse>JSON.parse(data);
-            course.courseModulesDates = course.courseModulesDates.map((dateStr) => {
-                return new Date(dateStr);
-            });
+
             return <ICourse>course;
         }
     };
