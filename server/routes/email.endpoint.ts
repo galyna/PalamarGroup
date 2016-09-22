@@ -73,15 +73,15 @@ emailEndpoint.route( '/adv/:courseId' )
             min-height: 70px;
             height: 70px;
             padding: 10px;" src="${config.origin + '/content/images/logo/palamar_logo_70.png'}"/>
-            <div class="md-padding">
+            <div >
                 <h1 class="featured-area-title" style=" text-align: center;
-
-            font-size: 6.1428em;
+            font-size: 4.9428em;
             font-weight: 900;
             line-height: 1em;
             text-transform: uppercase;
+             width: 800px;
             margin: 0;"> PALAMAR GROUP</h1>
-                <div style=" font-size: 3.5em;
+                <div style=" font-size: 2.1em;
             line-height: 1em;" class="featured-area-subtitle">
                     beauty parlour & academy
                 </div>
