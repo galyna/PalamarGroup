@@ -67,7 +67,7 @@ export class ContactsComponentController {
     showDeleteDialog(ev, contact:IContact) {
         let confirm = this.$mdDialog.confirm()
             .title( "Підтвердження дії" )
-            .textContent( `Ви дійсно бажаєте видалити послугу ${contact.name}?` )
+            .textContent( `Ви дійсно бажаєте видалити Адміністратора ${contact.name||''}?` )
             .ariaLabel( "Підтвердження дії" )
             .targetEvent( ev )
             .ok( 'Так' )
