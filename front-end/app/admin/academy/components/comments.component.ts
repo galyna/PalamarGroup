@@ -30,7 +30,7 @@ const editDialogTemplate = `<md-dialog aria-label="Comment edit" flex="80">
                    <p>Відгук створено {{$ctrl.comment.date|date:'dd.MM.yyyy'}}</p>
                  
                     <md-checkbox class="md-block " ng-model="$ctrl.comment.isVisible">
-                        Видимий
+                        Показати на сайті
                     </md-checkbox>
                     <md-checkbox class="md-block " ng-model="$ctrl.comment.isModerated">
                         Відгук перевірено
@@ -91,7 +91,7 @@ const template = `<md-toolbar>
     <md-list-item class="md-3-line md-long-text" ng-class="{answered:comment.isModerated, approved:comment.isVisible}"
                   ng-repeat="comment in $ctrl.comments" ng-click="$ctrl.showEditDialog($event, comment)">
         <div class="md-list-item-text">
-         <h2 ng-if="comment.isVisible">Відгук видимий </h2>
+         <h2 ng-if="comment.isVisible">Відгук  видимий на сайті </h2>
             <h3>{{::comment.name||'Анонім'}} {{::comment.date| date:'dd.MM.yyyy'}}</h3>
             <p>{{comment.text}}</p>
              <p ng-if="comment.isModerated">Відгук перевірено </p>
@@ -99,9 +99,7 @@ const template = `<md-toolbar>
 
         <md-checkbox ng-model="comment.isVisible"
                      ng-click="$ctrl.showComment(comment)">
-            <md-tooltip>
-                Показати відгук на сайті
-            </md-tooltip>
+            Показати на сайті
         </md-checkbox>
         <md-icon ng-click="$ctrl.showEditDialog($event, comment)"
                  class="md-secondary" aria-label="edit"
