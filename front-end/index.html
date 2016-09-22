@@ -42,7 +42,7 @@
                 </div>
                 <img class="logo-img md-padding" src="../content/images/logo/palamar_logo.png"/>
             </div>
-            <video ng-if="$root.isBigSize" class="screen" muted autoplay loop="true">
+            <video ng-if="$root.isBigSize" class="screen" muted autoplay loop="true" onloadedmetadata="this.muted = true" >
                 <source type="video/mp4" src="../content/images/bg/bd.mp4"/>
             </video>
         </div>

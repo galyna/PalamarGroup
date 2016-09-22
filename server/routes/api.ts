@@ -76,7 +76,7 @@ restify.serve(api, Model);
 restify.serve(api, Order, orderOptions);
 restify.serve(api, Master, readOnlyOptions);
 api.use('/salonclient', salonClientApi);
-restify.serve(api, SalonClient, Object.assign({}, readOnlyOptions));
+restify.serve(api, SalonClient);
 restify.serve(api, Favor);
 restify.serve(api, Transform);
 

@@ -8,10 +8,10 @@ import {SalonClient} from "../models/salon.client";
 import {config} from '../config';
 export let emailEndpoint = Router();
 let emailService = new EmailService( {
-    user: 'ostapnagovitsyn@gmail.com',
-    clientId: '3589981967-i1a3i6vtrfjjk9uq4j2uhochovp5dlhc.apps.googleusercontent.com',
-    clientSecret: 'nml42vl2FC7RWapNg-M1iunT',
-    refreshToken: '1/FkpSMSJuZnlcwSWulSuMqhFXU5zrrzwqWJBWv_2lEw8'
+    user: 'palamargroupacademyinvites@gmail.com',
+    clientId: '573730920940-206mtakrqbg71umpmmvneusmtj3o1b95.apps.googleusercontent.com',
+    clientSecret: 'y1WuRtN6xhrp2vyYpA3mlddm',
+    refreshToken: '1/qMOzZWnPvT-ANHBQ_5osnElmHQbZOV0Hgjy_6Mc7khU'
 } );
 
 interface EmailRequest extends Request {
