@@ -15,7 +15,10 @@ button.md-button.md-fab.down-btn {
     left: calc(50% - 17px);
 
   }
+
 }
+.md-fab.down-btn.md-button.md-ink-ripple.md-focused{ background: white !important;}
+.md-fab.up-btn.md-button.md-ink-ripple.md-focused{ background: white !important;}
 
 button.md-button.md-fab.up-btn {
   position: absolute;
@@ -175,6 +178,9 @@ button.md-button.md-fab.side-up-btn {
 
 
 /* Icon 1 */
+.md-button.md-default-theme.md-fab, .md-button.md-fab, .md-button.md-fab, .md-focused {
+  background: white;
+}
 
 .page-header, .page-footer, .courses-details, .courses, .pop-form, .menu-dialog {
 
