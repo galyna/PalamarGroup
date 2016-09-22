@@ -26,13 +26,13 @@ const editDialogTemplate = `<md-dialog aria-label="Comment edit" flex="80">
                     <label>Відгук</label>
                     <textarea ng-model="$ctrl.comment.text"></textarea>
                 </md-input-container>
-                <div layout="row">
+                <div layout="column" >
                    <p>Відгук створено {{$ctrl.comment.date|date:'dd.MM.yyyy'}}</p>
                  
-                    <md-checkbox class="md-block" ng-model="$ctrl.comment.isVisible">
+                    <md-checkbox class="md-block " ng-model="$ctrl.comment.isVisible">
                         Видимий
                     </md-checkbox>
-                    <md-checkbox class="md-block" ng-model="$ctrl.comment.isModerated">
+                    <md-checkbox class="md-block " ng-model="$ctrl.comment.isModerated">
                         Відгук перевірено
                     </md-checkbox>
                 </div>
