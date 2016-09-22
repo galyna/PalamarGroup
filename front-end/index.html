@@ -31,7 +31,7 @@
 
 <div class="container-wrapper description-container ">
     <div class="page-header">
-        <div class="fit-screen-wrap">
+        <div id="video-container" class="fit-screen-wrap">
             <div class="page-header-wrap "  layout="row" layout-align="center center">
                 <img class="logo-img md-padding"  src="../content/images/logo/palamar_logo.png"/>
                 <div class="md-padding" >
@@ -42,20 +42,15 @@
                 </div>
                 <img class="logo-img md-padding" src="../content/images/logo/palamar_logo.png"/>
             </div>
-            <video ng-if="$root.isBigSize" class="screen" muted autoplay loop="true" onloadedmetadata="this.muted = true" >
-                <source type="video/mp4" src="../content/images/bg/bd.mp4"/>
-            </video>
         </div>
 
         <div class="pic-wrapper" >
             <figure class="pic-1"></figure>
-            <figure class="pic-2"></figure>
-            <figure class="pic-3"></figure>
-            <figure class="pic-4"></figure>
-            <figure class="pic-5"></figure>
-            <figure class="pic-6"></figure>
-            <figure class="pic-7"></figure>
-            <figure class="pic-8"></figure>
+            <figure hide-gt-md="true" class="pic-2"></figure>
+            <figure hide-gt-md="true" class="pic-3"></figure>
+            <figure hide-gt-md="true" class="pic-4"></figure>
+            <figure hide-gt-md="true" class="pic-5"></figure>
+
 
         </div>
         <md-button scroll-to="mainContent" easing="easeInOutCubic"
