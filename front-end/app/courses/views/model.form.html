@@ -47,7 +47,7 @@
                                 <md-button aria-label="Upload a file" class="detail-btn  ">
                                     Виберіть файл
                                 </md-button>
-                                <input type="file" ngf-select="vm.saveModelPhoto(fasPhotoUrlFile,'fasPhotoUrl')"
+                                <input type="file"  ngf-resize="{width: 400, quality: .9}"  ngf-select="vm.saveModelPhoto(fasPhotoUrlFile,'fasPhotoUrl')"
                                        ng-model="fasPhotoUrlFile" name="fasPhotoUrlFile"
                                        accept="image/*" required/>
                             </choose-file-button>
@@ -65,7 +65,7 @@
                                 <md-button aria-label="Upload a file" class="detail-btn  ">
                                     Виберіть файл
                                 </md-button>
-                                <input type="file" ngf-select="vm.saveModelPhoto(profilePhotoFile,'profilePhotoUrl')"
+                                <input type="file" ngf-resize="{width: 400, quality: .9}" ngf-select="vm.saveModelPhoto(profilePhotoFile,'profilePhotoUrl')"
                                        ng-model="profilePhotoFile" name="profilePhotoFile"
                                        accept="image/*" required/>
                             </choose-file-button>
@@ -82,7 +82,7 @@
                                 <md-button aria-label="Upload a file" class="detail-btn  ">
                                     Виберіть файл
                                 </md-button>
-                                <input type="file" ngf-select="vm.saveModelPhoto(backPhotoFile,'backPhotoUrl')"
+                                <input type="file" ngf-resize="{width: 400, quality: .9}" ngf-select="vm.saveModelPhoto(backPhotoFile,'backPhotoUrl')"
                                        ng-model="backPhotoFile"
                                        name="backPhotoFile"
                                        accept="image/*" required/>
@@ -101,7 +101,7 @@
                                 <md-button aria-label="Upload a file" class="detail-btn  ">
                                     Виберіть файл
                                 </md-button>
-                                <input type="file" ngf-select="vm.saveModelPhoto(fullSizeFile,'fullSizePhotoUrl')"
+                                <input type="file" ngf-resize="{width: 400, quality: .9}" ngf-select="vm.saveModelPhoto(fullSizeFile,'fullSizePhotoUrl')"
                                        ng-model="fullSizeFile" name="fullSizeFile"
                                        accept="image/*" required/>
                             </choose-file-button>

@@ -33,7 +33,7 @@
                         <md-button aria-label="Upload a file" class="detail-btn  ">
                             Виберіть файл
                         </md-button>
-                        <input type="file" ngf-select="vm.saveNewModelPhoto(fasPhotoUrlFile,'fasPhotoUrl')"
+                        <input type="file"   ngf-resize="{width: 400, quality: .9}"  ngf-select="vm.saveNewModelPhoto(fasPhotoUrlFile,'fasPhotoUrl')"
                                ng-model="fasPhotoUrlFile" name="fasPhotoUrlFile"
                                accept="image/*" />
                     </choose-file-button>
@@ -51,7 +51,7 @@
                         <md-button aria-label="Upload a file" class="detail-btn  ">
                             Виберіть файл
                         </md-button>
-                        <input type="file" ngf-select="vm.saveNewModelPhoto(profilePhotoFile,'profilePhotoUrl')"
+                        <input type="file" ngf-resize="{width: 400, quality: .9}" ngf-select="vm.saveNewModelPhoto(profilePhotoFile,'profilePhotoUrl')"
                                ng-model="profilePhotoFile" name="profilePhotoFile"
                                accept="image/*" />
                     </choose-file-button>
@@ -68,7 +68,7 @@
                         <md-button aria-label="Upload a file" class="detail-btn  ">
                             Виберіть файл
                         </md-button>
-                        <input type="file" ngf-select="vm.saveNewModelPhoto(backPhotoFile,'backPhotoUrl')"
+                        <input type="file" ngf-resize="{width: 400, quality: .9}" ngf-select="vm.saveNewModelPhoto(backPhotoFile,'backPhotoUrl')"
                                ng-model="backPhotoFile"
                                name="backPhotoFile"
                                accept="image/*" />
@@ -87,7 +87,7 @@
                         <md-button aria-label="Upload a file" class="detail-btn  ">
                             Виберіть файл
                         </md-button>
-                        <input type="file" ngf-select="vm.saveNewModelPhoto(fullSizeFile,'fullSizePhotoUrl')"
+                        <input type="file" ngf-resize="{width: 400, quality: .9}" ngf-select="vm.saveNewModelPhoto(fullSizeFile,'fullSizePhotoUrl')"
                                ng-model="fullSizeFile" name="fullSizeFile"
                                accept="image/*" />
                         </choose-file-button>
