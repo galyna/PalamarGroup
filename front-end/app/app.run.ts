@@ -21,9 +21,7 @@ export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
         videoContainer.append( videoTag );
     }
     //create a new instance
-    AOS.init( {
-        disable: 'mobile'
-    } );
+    AOS.init();
 
     $rootScope.$on( '$routeChangeSuccess', function () {
         $timeout( ()=> {
