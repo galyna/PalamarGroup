@@ -166,8 +166,8 @@ export class CourseController {
 
         this.order.event_id = this.course._id;
         this.order.event_name = this.course.name;
-        //TODO: change order.event_dates to Date[] like in CourseResourse
-        this.order.event_dates = this.course.days.map( (day) => day.date.toJSON() );
+
+        this.order.event_dates = this.course.days.map( (day) => day.date );
         this.order.date = new Date().toJSON();
         this.order.$save()
             .then( () => {
