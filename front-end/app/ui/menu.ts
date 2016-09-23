@@ -86,7 +86,6 @@ export class MenuComponentController {
     }
 
     goToURL(url):void {
-        this.$rootScope.loading=true;
         this.$location.url( url );
         this.mdDialog.hide().then( ()=> {
             this.scrollToMain();

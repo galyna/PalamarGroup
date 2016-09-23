@@ -34,8 +34,9 @@ export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
     $rootScope.$on('$routeChangeSuccess', function() {
         //hide loading gif
         $timeout( ()=> {
-            AOS.refresh();
             $rootScope.loading = false;
+            AOS.refresh();
+
         }, 5 );
 
 
