@@ -184,11 +184,11 @@
             <div  class="fit-screen-wrap header-long " layout="column">
 
                 <div layout="row" layout-align="center center">
-                    <div data-aos="{{{true:'flip-left', false:''}[vm.showAnimation]}}"  hide-xs="true" flex="60" flex-gt-sm="50"
+                    <div data-aos="{{{true:'zoom-in-down', false:''}[vm.showAnimation]}}"  hide-xs="true" flex="60" flex-gt-sm="50"
                          class="md-display-1 md-margin md-padding">
                         {{vm.course.description}}
                     </div>
-                    <div  data-aos="{{{true:'flip-left', false:''}[vm.showAnimation]}}"   hide-gt-xs="true"  flex="70"
+                    <div    hide-gt-xs="true"  flex="70"
                          class="md-headline ">{{vm.course.description}}
                     </div>
 
@@ -231,7 +231,7 @@
     <div layout="row" flex ng-if="vm.showComments()">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap header-super">
-                <div data-aos="{{{true:'zoom-out', false:''}[vm.showAnimation]}}"   class="md-display-3">Відгуки</div>
+                <div data-aos="{{{true:'fade-down', false:''}[vm.showAnimation]}}"   class="md-display-3">Відгуки</div>
             </div>
             <div class="overlay-comments"></div>
             <!-- ng-style="{'background-image':'url({{vm.course.historyPhotos[0].url}})'}"></div>-->
