@@ -2,6 +2,7 @@ import {CourseCalendarComponentUrl} from "../courses/components/course.calendar.
 import {SalonHomeComponentUrl} from "../salon/components/salon.home.component";
 import {AcademyContactComponentUrl} from "../courses/components/academy.contacts.component";
 import {IConstants} from "../core/core.config";
+import {IRootScope} from "../../typings";
 
 const template = `<div id="nav-icon4" ng-click="$ctrl.toggleMenu($event)">
   <span></span>
