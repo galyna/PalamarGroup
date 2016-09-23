@@ -25,7 +25,7 @@
             <md-card class="md-margin" flex-gt-md="22" flex-md="46"
                      flex-gt-sm="46" flex-xs="80">
                 <card-image-container>
-                    <img ng-src="{{vm.editModelModel.fasPhotoUrl}}" >
+                    <img class="not-resize" ng-src="{{vm.editModelModel.fasPhotoUrl}}" >
                 </card-image-container>
                 <md-card-content layout="column" layout-align="center center">
                     <span>Фото ан фас</span>
@@ -33,7 +33,7 @@
                         <md-button aria-label="Upload a file" class="detail-btn  ">
                             Виберіть файл
                         </md-button>
-                        <input type="file" ngf-resize="{width: 400, quality: .9}" ngf-select="vm.saveEditModelPhoto(fasPhotoUrlFile,'fasPhotoUrl')"
+                        <input type="file" ngf-resize="{width: 400,height:800, quality: .9}" ngf-select="vm.saveEditModelPhoto(fasPhotoUrlFile,'fasPhotoUrl')"
                                ng-model="fasPhotoUrlFile" name="fasPhotoUrlFile"
                                accept="image/*" />
                     </choose-file-button>
@@ -42,7 +42,7 @@
             <md-card class="md-margin" flex-gt-md="22" flex-md="46"
                      flex-gt-sm="46" flex-xs="80">
                 <card-image-container>
-                    <img ng-src="{{vm.editModelModel.profilePhotoUrl}}"
+                    <img class="not-resize" ng-src="{{vm.editModelModel.profilePhotoUrl}}"
                          >
                 </card-image-container>
                 <md-card-content layout="column" layout-align="center center">
@@ -60,7 +60,7 @@
             <md-card class="md-margin" flex-gt-md="22" flex-md="46"
                      flex-gt-sm="46" flex-xs="80">
                 <card-image-container>
-                    <img ng-src="{{vm.editModelModel.backPhotoUrl}}" >
+                    <img class="not-resize" ng-src="{{vm.editModelModel.backPhotoUrl}}" >
                 </card-image-container>
                 <md-card-content layout="column" layout-align="center center">
                     <span>Фото вид ззаду</span>
@@ -78,7 +78,7 @@
             <md-card class="md-margin" flex-gt-md="22" flex-md="46"
                      flex-gt-sm="46" flex-xs="80">
                 <card-image-container>
-                    <img ng-src="{{vm.editModelModel.fullSizePhotoUrl}}" >
+                    <img class="not-resize" ng-src="{{vm.editModelModel.fullSizePhotoUrl}}" >
                 </card-image-container>
 
                 <md-card-content class="model-card-content" layout="column" layout-align="center center">

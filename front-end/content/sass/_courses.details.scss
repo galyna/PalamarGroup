@@ -171,15 +171,15 @@
       -ms-filter: blur(1px);
       filter: blur(1px);
 
-      @media  (min-height: 1286px) and (min-width: 1923px) {
+      @media (min-height: 1286px) and (min-width: 1923px) {
         background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_full.jpg") no-repeat center center fixed;
       }
 
-      @media  (max-height: 1286px) and (max-width: 1923px) {
+      @media (max-height: 1286px) and (max-width: 1923px) {
         background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1923_1282.jpg") no-repeat center center fixed;
       }
 
-      @media  (max-height: 1026px) and (max-width: 1539px) {
+      @media (max-height: 1026px) and (max-width: 1539px) {
         background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1539_1026.jpg") no-repeat center center fixed;
       }
       @media (max-height: 802px) and (max-width: 1203px) {
@@ -193,7 +193,6 @@
         background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_723_482.jpg") no-repeat center center fixed;
       }
 
-
     }
     .overlay-comments {
       @extend .overlay;
@@ -202,23 +201,23 @@
       -o-filter: blur(1px);
       -ms-filter: blur(1px);
       filter: blur(1px);
-      @media  (min-height: 1286px) and (min-width: 1923px) {
-       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_full.jpg") no-repeat center center fixed;
+      @media (min-height: 1286px) and (min-width: 1923px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_full.jpg") no-repeat center center fixed;
       }
 
-        @media  (max-height: 1286px) and (max-width: 1923px) {
+      @media (max-height: 1286px) and (max-width: 1923px) {
         background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1923_1282.jpg") no-repeat center center fixed;
       }
 
-      @media  (max-height: 1024px) and (max-width: 1536px) {
+      @media (max-height: 1024px) and (max-width: 1536px) {
         background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1536_1024.jpg") no-repeat center center fixed;
       }
 
-      @media  (max-height: 800px) and (max-width: 1200px) {
+      @media (max-height: 800px) and (max-width: 1200px) {
         background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1200_800.jpg") no-repeat center center fixed;
       }
 
-      @media  (max-height: 640px) and (max-width: 960px) {
+      @media (max-height: 640px) and (max-width: 960px) {
         background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_960_640.jpg") no-repeat center center fixed;
       }
       @media (max-height: 400px) and (max-width: 720px) {
@@ -234,13 +233,13 @@
       -o-filter: blur(1px);
       -ms-filter: blur(1px);
       filter: blur(1px);
-      @media  (min-height: 1286px) and (min-width: 1923px) {
+      @media (min-height: 1286px) and (min-width: 1923px) {
         background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_full.jpg") no-repeat center center fixed;
       }
       @media (max-height: 1286px) and (max-width: 1923px) {
         background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1923_1282.jpg") no-repeat center center fixed;
       }
-      @media  (max-height: 1026px) and (max-width: 1539px) {
+      @media (max-height: 1026px) and (max-width: 1539px) {
         background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1539_1026.jpg") no-repeat center center fixed;
       }
 
@@ -440,7 +439,9 @@
 
 .model-card {
   box-sizing: border-box;
-
+  .not-resize {
+    height: auto !important;
+  }
   card-image-container {
     overflow: hidden;
     cursor: pointer;
@@ -450,6 +451,9 @@
 
     position: relative;
     display: block;
+
+    md-card > img, md-card > :not(md-card-content) img {
+    }
     md-card-content {
       position: absolute;
       bottom: 0;

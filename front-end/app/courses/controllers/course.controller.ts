@@ -96,6 +96,7 @@ export class CourseController {
 
     saveModelPhoto(file, photoName):void {
         if (!file) return;
+        
         this.$rootScope.loading = true;
         this.fileUpload( file ).then( (response)=> {
             this.newModel[photoName] = response.data.url;
