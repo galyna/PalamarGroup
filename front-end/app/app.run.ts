@@ -11,8 +11,8 @@ export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
         description: ""
     };
 
-    $rootScope.isBigSize = $mdMedia( 'gt-md' );
-    if ($rootScope.isBigSize) {
+    $rootScope.isBigSize = $mdMedia( 'gt-lg' );
+    if ($mdMedia( 'gt-md' )) {
         var videoTag = angular.element( ` <video  hide show-gt-md="true" class="screen" muted autoplay
                                               loop="true" onloadedmetadata="this.muted = true" >
                                            <source type="video/mp4" src="../content/images/bg/bd.mp4"/>
