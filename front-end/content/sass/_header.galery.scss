@@ -57,9 +57,6 @@
       background: url("../images/bg/slider/IMG_6917_723.jpg") no-repeat 25% 15% fixed;
     }
 
-    @media (min-width: 1280px) {
-      display: none;
-    }
   }
 
   .pic-2 {
@@ -85,9 +82,7 @@
     }
 
 
-
-
-    @media (min-width: 1280px) {
+    @media (min-width: $layout-breakpoint-lg) {
       display: none;
     }
   }
@@ -115,7 +110,7 @@
       background: url("../images/bg/slider/IMG_6618_963.jpg") no-repeat 25% 15% fixed;
     }
 
-    @media (min-width: 1280px) {
+    @media (min-width: $layout-breakpoint-lg) {
       display: none;
     }
   }
@@ -144,7 +139,7 @@
       background: url("../images/bg/slider/IMG_6962_963.jpg") no-repeat 25% 15% fixed;
     }
 
-    @media (min-width: 1280px) {
+    @media (min-width: $layout-breakpoint-lg) {
       display: none;
     }
   }
@@ -172,7 +167,8 @@
       background: url("../images/bg/slider/IMG_6947_963.jpg") no-repeat 25% 15% fixed;
     }
 
-    @media (min-width: 1280px) {
+
+    @media (min-width: $layout-breakpoint-lg) {
       display: none;
     }
   }
