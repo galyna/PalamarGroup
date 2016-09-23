@@ -87,20 +87,22 @@ const template = `<md-toolbar>
     </div>
 </md-toolbar>
 <md-list flex class="comments-list">
-    
+
     <md-list-item class="md-3-line md-long-text" ng-class="{answered:comment.isModerated, approved:comment.isVisible}"
                   ng-repeat="comment in $ctrl.comments" ng-click="$ctrl.showEditDialog($event, comment)">
         <div class="md-list-item-text">
-         <h2 ng-if="comment.isVisible">Відгук  видимий на сайті </h2>
+            <h2 ng-if="comment.isVisible">Відгук видимий на сайті </h2>
             <h3>{{::comment.name||'Анонім'}} {{::comment.date| date:'dd.MM.yyyy'}}</h3>
             <p>{{comment.text}}</p>
-             <p ng-if="comment.isModerated">Відгук перевірено </p>
+            <p ng-if="comment.isModerated">Відгук перевірено </p>
         </div>
-
-        <md-checkbox ng-model="comment.isVisible"
-                     ng-click="$ctrl.showComment(comment)">
-            Показати на сайті
-        </md-checkbox>
+        <div class="md-secondary md-margin">
+            <md-checkbox ng-model="comment.isVisible"
+                         ng-click="$ctrl.showComment(comment)"></md-checkbox>
+            <md-tooltip>
+                Показати на сайті
+            </md-tooltip>
+        </div>
         <md-icon ng-click="$ctrl.showEditDialog($event, comment)"
                  class="md-secondary" aria-label="edit"
                  md-svg-icon="content:ic_create_24px">
