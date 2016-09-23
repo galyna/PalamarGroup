@@ -1,4 +1,80 @@
 
+
+#loading {
+  z-index: 700;
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background-color: rgba(white, 0.95);
+
+  @-webkit-keyframes rotating /* Safari and Chrome */ {
+    from {
+      -ms-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -ms-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes rotating {
+    from {
+      -ms-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -ms-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  .rotating {
+    -webkit-animation: rotating 2s linear infinite;
+    -moz-animation: rotating 2s linear infinite;
+    -ms-animation: rotating 2s linear infinite;
+    -o-animation: rotating 2s linear infinite;
+    animation: rotating 2s linear infinite;
+  }
+  .logo-img {
+    animation: rotating 2s linear infinite 0s;
+    -o-animation: rotating 2s linear infinite 0s;
+    -moz-animation: rotating 2s linear infinite 0s;
+    -webkit-animation: rotating 2s linear infinite 0s;
+
+    @media (min-width: $layout-breakpoint-lg) {
+      width: 160px;
+      height: 150px;
+    }
+    @media (min-width: $layout-breakpoint-md) {
+      width: 140px;
+      height: 135px;
+    }
+    @media (min-width: $layout-breakpoint-sm) and (max-width: $layout-breakpoint-md) {
+      width: 110px;
+      height: 105px;
+
+    }
+    @media (max-width: $layout-breakpoint-xs) {
+      width: 70px;;
+      height: 65px;
+    }
+  }
+}
+
 md-dialog.md-dialog-fullscreen.menu-dialog {
   max-height: 100%;
   background-color: rgba(white, 0.92);
@@ -158,7 +234,7 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
       width: 70px;;
       height: 65px;
     }
-    @media (min-width: $layout-breakpoint-sm) and (max-width: $layout-breakpoint-md){
+    @media (min-width: $layout-breakpoint-sm) and (max-width: $layout-breakpoint-md) {
       width: 110px;
       height: 105px;
       margin: 20px;
@@ -252,7 +328,7 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     -o-filter: blur(1px);
     -ms-filter: blur(1px);
     filter: blur(1px);
-    @media  (min-height: 1286px) and (min-width: 1923px) {
+    @media (min-height: 1286px) and (min-width: 1923px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_full.jpg") no-repeat center center fixed;
     }
 
@@ -260,15 +336,15 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_1923_1282.jpg") no-repeat center center fixed;
     }
 
-    @media  (max-height: 1026px) and (max-width: 1539px) {
+    @media (max-height: 1026px) and (max-width: 1539px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_1539_1026.jpg") no-repeat center center fixed;
     }
 
-    @media   (max-height: 802px) and (max-width: 1203px) {
+    @media (max-height: 802px) and (max-width: 1203px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_1203_800.jpg") no-repeat center center fixed;
     }
 
-    @media  (max-height: 642px) and (max-width: 963px) {
+    @media (max-height: 642px) and (max-width: 963px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_963_642.jpg") no-repeat center center fixed;
     }
 

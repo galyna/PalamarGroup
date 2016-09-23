@@ -1,6 +1,7 @@
 import {CourseResourceName, ICourseResource} from "../../resources/course.resource";
 import {IPgCalendarDataService} from "../../calendar/calendar.data.service";
 import ICourse = pg.models.ICourse;
+import {IRootScope} from "../../../typings";
 
 
 const template = `<div layout="row" flex layout-align="center stretch"> <pg-calendar 
@@ -27,13 +28,13 @@ export interface ICourseDates {
 
 export class CalendarComponentController {
 
-    static $inject = ['pgCalendarData', CourseResourceName, '$sce', '$location', 'orderByFilter', 'smoothScroll'];
+    static $inject = ['pgCalendarData','$rootScope', CourseResourceName, '$sce', '$location', 'orderByFilter', 'smoothScroll'];
 
     courses:ICourse[];
     calendarDirection = 'horizontal';
     coursesDateMap:ICourseDates[];
 
-    constructor(private pgCalendarData:IPgCalendarDataService,
+    constructor(private pgCalendarData:IPgCalendarDataService,private $rootScope:IRootScope,
                 private CourseResource:ICourseResource, private $sce,
                 private $location, private orderByFilter:ng.IFilterOrderBy, private smoothScroll) {
 

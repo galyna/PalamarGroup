@@ -60,7 +60,7 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
 
 export class MenuComponentController {
 
-    static $inject = ['$mdDialog', '$location', 'constants', 'smoothScroll'];
+    static $inject = ['$mdDialog', '$location', 'constants', 'smoothScroll','$rootScope'];
     static componentName = 'MenuComponentController';
 
     showSalon:boolean
@@ -69,7 +69,7 @@ export class MenuComponentController {
     AcademyContactComponentUrl = AcademyContactComponentUrl;
 
     constructor(private mdDialog:ng.material.IDialogService, private $location,
-                private constants:IConstants, private smoothScroll) {
+                private constants:IConstants, private smoothScroll,private $rootScope:IRootScope) {
         this.showSalon = constants.showSalon;
     }
 
@@ -85,6 +85,7 @@ export class MenuComponentController {
     }
 
     goToURL(url):void {
+        this.$rootScope.loading=true;
         this.$location.url( url );
         this.mdDialog.hide().then( ()=> {
             this.scrollToMain();

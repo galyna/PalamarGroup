@@ -39,14 +39,14 @@ export class CourseController {
                 private $mdMedia:ng.material.IMedia, private orderByFilter:ng.IFilterOrderBy,
                 private smoothScroll) {
         this.showAnimation = $rootScope.isBigSize;
-       
+
         this.course = CourseResource.get( {id: $routeParams.id} );
         this.course.$promise.then( (course)=> {
 
             this.setSocialParams( course );
             course.hearFormsPhotos = this.orderByFilter( course.hearFormsPhotos, "order" );
             course.historyPhotos = this.orderByFilter( course.historyPhotos, "order" );
-       
+
         } );
 
         this.order = new OrderResource();
@@ -63,7 +63,8 @@ export class CourseController {
         this.$rootScope.socialParams.target = this.constants.host + "/#/course/" + course._id;
         this.$rootScope.socialParams.image = this.constants.host + course.avatar;
         this.$rootScope.socialParams.title = course.name;
-        this.$rootScope.socialParams.description = course.description.slice( 0, 920 );;
+        this.$rootScope.socialParams.description = course.description.slice( 0, 920 );
+        ;
         this.socialParams = angular.copy( this.$rootScope.socialParams, this.socialParams );
     }
 
@@ -95,11 +96,14 @@ export class CourseController {
 
     saveModelPhoto(file, photoName):void {
         if (!file) return;
+        this.$rootScope.loading = true;
         this.fileUpload( file ).then( (response)=> {
             this.newModel[photoName] = response.data.url;
         } ).catch( (err)=> {
             this.$log.debug( "fail upload file..." + err );
-        } )
+        } ) .finally( ()=> {
+            this.$rootScope.loading = false;
+        } );
     }
 
     fileUpload(file) {
@@ -112,6 +116,7 @@ export class CourseController {
 
 
     submitModel():void {
+        this.$rootScope.loading = true;
         this.newModel.$save()
             .then( () => {
                 this.mdDialog.hide();
@@ -120,7 +125,9 @@ export class CourseController {
             .catch( (err) => {
                     this.$log.error( err );
                 }
-            );
+            ).finally( ()=> {
+            this.$rootScope.loading = false;
+        } );
     }
 
     showModelConfirm():void {
@@ -163,7 +170,7 @@ export class CourseController {
     }
 
     submitOrder(form):void {
-
+        this.$rootScope.loading = true;
         this.order.event_id = this.course._id;
         this.order.event_name = this.course.name;
 
@@ -179,6 +186,7 @@ export class CourseController {
             } )
             .finally( () => {
                 this.order = new this.OrderResource();
+                this.$rootScope.loading = false;
             } );
 
     }
@@ -201,6 +209,7 @@ export class CourseController {
     }
 
     submitComment():void {
+        this.$rootScope.loading = true;
         this.newComment.date = new Date();
         this.CourseResource.addComment( {id: this.course._id}, this.newComment ).$promise.then( () => {
             this.mdDialog.hide();
@@ -211,6 +220,7 @@ export class CourseController {
                 }
             ).finally( ()=> {
             this.$timeout( ()=> {
+                this.$rootScope.loading = false;
                 this.newComment = this.getBlankComment();
             } );
         } );

@@ -10,7 +10,7 @@ export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
         image: "",
         description: ""
     };
-
+    $rootScope.loading = false;
     $rootScope.isBigSize = $mdMedia( 'gt-lg' );
     if ($mdMedia( 'gt-md' )) {
         var videoTag = angular.element( ` <video  hide show-gt-md="true" class="screen" muted autoplay
@@ -29,4 +29,31 @@ export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
         }, 10 );
 
     } );
+
+
+
+    $rootScope.$on('$routeChangeStart', function() {
+        //show loading gif
+        $timeout( ()=> {
+        $rootScope.loading = true;
+        }, 1 );
+    });
+
+    $rootScope.$on('$routeChangeSuccess', function() {
+        //hide loading gif
+        $timeout( ()=> {
+            AOS.refresh();
+            $rootScope.loading = false;
+        }, 5 );
+
+
+    });
+
+    $rootScope.$on('$routeChangeError', function() {
+        //hide loading gif
+        $timeout( ()=> {
+            $rootScope.loading = false;
+        }, 1 );
+
+    });
 }

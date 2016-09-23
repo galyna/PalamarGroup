@@ -24,7 +24,9 @@
 </head>
 
 <body ng-cloak layout="column">
-
+<div id="loading" ng-if="$root.loading" layout="row" layout-align="center center">
+    <img class="logo-img md-padding" src="../content/images/logo/palamar_logo.png"/>
+</div>
 <pg-menu></pg-menu>
 
 <!--header-->
