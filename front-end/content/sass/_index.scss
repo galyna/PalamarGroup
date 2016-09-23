@@ -246,27 +246,30 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     -o-filter: blur(1px);
     -ms-filter: blur(1px);
     filter: blur(1px);
-  //  background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_full.jpg") no-repeat center center fixed;
-
-    @media (max-height: 400px) and (max-width: 723px) {
-      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_723_482.jpg") no-repeat center center fixed;
+    @media  (min-height: 1286px) and (min-width: 1923px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_full.jpg") no-repeat center center fixed;
     }
 
-    @media  (max-height: 642px) and (max-width: 963px) {
-      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_963_642.jpg") no-repeat center center fixed;
-    }
-
-    @media   (max-height: 802px) and (max-width: 1203px) {
-      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_1203_800.jpg") no-repeat center center fixed;
+    @media (min-height: 900px) and (max-height: 1286px) and (max-width: 1923px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_1923_1282.jpg") no-repeat center center fixed;
     }
 
     @media  (max-height: 1026px) and (max-width: 1539px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_1539_1026.jpg") no-repeat center center fixed;
     }
 
-    @media (min-height: 900px) and (max-height: 1286px) and (max-width: 1923px) {
-      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_1923_1282.jpg") no-repeat center center fixed;
+    @media   (max-height: 802px) and (max-width: 1203px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_1203_800.jpg") no-repeat center center fixed;
     }
+
+    @media  (max-height: 642px) and (max-width: 963px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_963_642.jpg") no-repeat center center fixed;
+    }
+
+    @media (max-height: 400px) and (max-width: 723px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_723_482.jpg") no-repeat center center fixed;
+    }
+
   }
 
 }

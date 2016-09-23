@@ -17,7 +17,7 @@
     height: 100%;
     opacity: 0;
     /*animation*/
-    @media (min-width: $layout-breakpoint-sm) {
+    @media (min-width: 963px) {
       animation: slideShow 30s linear infinite 0s;
       -o-animation: slideShow 30s linear infinite 0s;
       -moz-animation: slideShow 30s linear infinite 0s;
@@ -40,24 +40,24 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-       background: url("../images/bg/slider/IMG_6917_723.jpg") no-repeat center center fixed;
 
     @media (min-height: 1000px) {
       background: url("../images/bg/slider/IMG_6917_h.jpg") no-repeat center center fixed;
     }
     @media (max-height: 1000px)and (max-width:1500px) {
-      background: url("../images/bg/slider/IMG_6917.jpg") no-repeat 25% 15% fixed;
+      background: url("../images/bg/slider/IMG_6917.jpg") no-repeat center center fixed;
     }
-    @media (max-height: 642px)and (max-width:963px) {
-      background: url("../images/bg/slider/IMG_6917_963.jpg") no-repeat 25% 15% fixed;
-    }
-    @media (max-height: 480px) and (max-width:723px) {
-      background: url("../images/bg/slider/IMG_6917_723.jpg") no-repeat 25% 15% fixed;
-    }
-    @media (max-width: 1200px)  and (min-width:963px) and (max-height: 800px) {
+    @media (max-width: 1200px) and (max-height: 800px) {
       background: url("../images/bg/slider/IMG_6917_1200.jpg") no-repeat 25% 15% fixed;
     }
-    @media (min-width: $layout-breakpoint-lg) {
+    @media (max-height: 642px)and (min-width:963px) {
+      background: url("../images/bg/slider/IMG_6917_963.jpg") no-repeat 25% 15% fixed;
+    }
+    @media (max-height: 480px) and (max-width:723px)  {
+      background: url("../images/bg/slider/IMG_6917_723.jpg") no-repeat 25% 15% fixed;
+    }
+
+    @media (min-width: 1280px) {
       display: none;
     }
   }
@@ -71,15 +71,24 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-
-    @media (min-width: $layout-breakpoint-sm) {
-      background: url("../images/bg/slider/IMG_6924.jpg") no-repeat center center fixed;
-    }
-    @media (min-height: 1000px) {
+    @media (min-height: 1000px) and (min-width:963px) {
       background: url("../images/bg/slider/IMG_6924_h.jpg") no-repeat center center fixed;
     }
-    @media (min-width: $layout-breakpoint-lg) {
-     display: none;
+    @media (max-height: 1000px)and (max-width:1500px) and (min-width:963px) {
+      background: url("../images/bg/slider/IMG_6924.jpg") no-repeat center center fixed;
+    }
+    @media (max-width: 1200px) and (max-height: 800px) and (min-width:963px){
+      background: url("../images/bg/slider/IMG_6924_1200.jpg") no-repeat 25% 15% fixed;
+    }
+    @media (max-height: 642px)and (min-width:963px) {
+      background: url("../images/bg/slider/IMG_6924_963.jpg") no-repeat 25% 15% fixed;
+    }
+
+
+
+
+    @media (min-width: 1280px) {
+      display: none;
     }
   }
 
@@ -93,14 +102,20 @@
     -o-background-size: cover;
     background-size: cover;
 
-
-    @media (min-width: $layout-breakpoint-sm) {
-      background: url("../images/bg/slider/IMG_6618.jpg") no-repeat center center fixed;
-    }
-    @media (min-height: 1000px) {
+    @media (min-height: 1000px) and (min-width:963px){
       background: url("../images/bg/slider/IMG_6618_h.jpg") no-repeat center center fixed;
     }
-    @media (min-width: $layout-breakpoint-lg) {
+    @media (max-height: 1000px)and (max-width:1500px) and (min-width:963px){
+      background: url("../images/bg/slider/IMG_6618.jpg") no-repeat center center fixed;
+    }
+    @media (max-width: 1200px) and (max-height: 800px) and (min-width:963px){
+      background: url("../images/bg/slider/IMG_6618_1200.jpg") no-repeat 25% 15% fixed;
+    }
+    @media (max-height: 642px)and (min-width:963px) and (min-width:963px){
+      background: url("../images/bg/slider/IMG_6618_963.jpg") no-repeat 25% 15% fixed;
+    }
+
+    @media (min-width: 1280px) {
       display: none;
     }
   }
@@ -115,13 +130,21 @@
     -o-background-size: cover;
     background-size: cover;
 
-    @media (min-width: $layout-breakpoint-sm) {
-      background: url("../images/bg/slider/IMG_6962.jpg") no-repeat center center fixed;
-    }
-    @media (min-height: 1000px) {
+    @media (min-height: 1000px) and (min-width:963px){
       background: url("../images/bg/slider/IMG_6962_h.jpg") no-repeat center center fixed;
     }
-    @media (min-width: $layout-breakpoint-lg) {
+    @media (max-height: 1000px)and (max-width:1500px) and (min-width:963px){
+      background: url("../images/bg/slider/IMG_6962.jpg") no-repeat center center fixed;
+    }
+    @media (max-width: 1200px) and (max-height: 800px) and (min-width:963px){
+      background: url("../images/bg/slider/IMG_6962_1200.jpg") no-repeat 25% 15% fixed;
+    }
+
+    @media (max-height: 642px)and (min-width:963px) and (min-width:963px){
+      background: url("../images/bg/slider/IMG_6962_963.jpg") no-repeat 25% 15% fixed;
+    }
+
+    @media (min-width: 1280px) {
       display: none;
     }
   }
@@ -135,14 +158,20 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-
-    @media (min-width: $layout-breakpoint-sm) {
-      background: url("../images/bg/slider/IMG_6947.jpg") no-repeat center center fixed;
-    }
-    @media (min-height: 1000px) {
+    @media (min-height: 1000px) and (min-width:963px){
       background: url("../images/bg/slider/IMG_6947_h.jpg") no-repeat center center fixed;
     }
-    @media (min-width: $layout-breakpoint-lg) {
+    @media (max-height: 1000px)and (max-width:1500px) and (min-width:963px){
+      background: url("../images/bg/slider/IMG_6947.jpg") no-repeat center center fixed;
+    }
+    @media (max-width: 1200px) and (max-height: 800px) and (min-width:963px){
+      background: url("../images/bg/slider/IMG_6947_1200.jpg") no-repeat 25% 15% fixed;
+    }
+    @media (max-height: 642px)and  (min-width:963px){
+      background: url("../images/bg/slider/IMG_6947_963.jpg") no-repeat 25% 15% fixed;
+    }
+
+    @media (min-width: 1280px) {
       display: none;
     }
   }
