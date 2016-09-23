@@ -14,8 +14,14 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     transition: background-color 0.3s;
     font-size: 30px;
     color: white;
-    min-height: 20%;
+    height: 20%;
     background-color: $primary;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 60px;
 
     &:hover {
       color: black;
