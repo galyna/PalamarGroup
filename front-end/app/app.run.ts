@@ -22,15 +22,7 @@ export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
     }
     //create a new instance
     AOS.init({});
-
-    $rootScope.$on( '$routeChangeSuccess', function () {
-        $timeout( ()=> {
-            AOS.refresh();
-        }, 10 );
-
-    } );
-
-
+    
 
     $rootScope.$on('$routeChangeStart', function() {
         //show loading gif
