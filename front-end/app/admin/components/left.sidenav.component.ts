@@ -94,7 +94,7 @@ export class LeftSidenavComponentController {
                 text: 'Салон',
                 opened: this.it.is( 'salonUser' ),
                 visible: ()=> {
-                    return this.it.is( 'salonUser' ) && this.showSalon
+                    return this.it.is( 'salonUser' ) 
                 },
                 items: [
                     {
