@@ -70,6 +70,10 @@ const template = `<form name="saveUserForm" novalidate ng-submit="$ctrl.save(sav
                 <label>Ім’я</label>
                 <input type="text" required ng-model="$ctrl.user.name"/>
             </md-input-container>
+             <md-input-container ng-if="!$ctrl.user._id" class="md-block">
+                <label>Пароль</label>
+                <input type="text" required ng-model="$ctrl.user.password"/>
+            </md-input-container>
             <md-input-container class="md-block">
                 <label>Ролі</label>
                 <md-select ng-model="$ctrl.user.roles" multiple>
@@ -123,9 +127,10 @@ export class UsersComponentController {
 
     save(form:ng.IFormController) {
         if (form.$invalid) return;
+
         this.user.$save()
             .then((user) => {
-                this.$mdToast.showSimple(`курс ${user.name} збережено`);
+                this.$mdToast.showSimple(`Користівача ${user.name} збережено`);
             })
             .catch((err)=> {
                 this.$log.error(err);

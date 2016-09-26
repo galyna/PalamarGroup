@@ -20,7 +20,7 @@ import '../templates';
 import {adminRoutes} from './admin.routes';
 import {AcademyModelController} from './academy/controllers/models.controller';
 import {AcademyDeliveryController} from './academy/controllers/delivery.controller';
-import {AdminController} from './controllers/admin.controller';
+
 import {DeliveryService} from "./academy/services/delivery.service";
 import {EmailAdvComponentName, EmailAdvComponentOptions} from "./academy/components/email.adv.component";
 import {
@@ -33,7 +33,7 @@ import {AdminCoursesComponentName, AdminCoursesComponentOptions} from "./academy
 import {AdminCourseComponentName, AdminCourseComponentOptions} from "./academy/components/course.component";
 import {HeaderComponentName, HeaderComponentOptions} from "./components/header.component";
 import {LeftSidenavComponentName, LeftSidenavComponentOptions} from "./components/left.sidenav.component";
-import {testComponentName, testComponentOptions} from "./components/test.component";
+//import {testComponentName, testComponentOptions} from "./components/test.component";
 import {adminRun} from "./admin.run";
 import {usersModule} from "../users/users.module";
 import {usersComponentName, usersComponentOptions} from "./components/users.component";
@@ -59,7 +59,7 @@ let app = angular.module('admin', [
 ])
     .config(adminRoutes)
     .run(adminRun)
-    .controller(AdminController.componentName, AdminController)
+
     .controller(AcademyModelController.componentName, AcademyModelController)
     .controller(AcademyDeliveryController.componentName, AcademyDeliveryController)
     .service(DeliveryService.componentName, DeliveryService)
@@ -73,7 +73,6 @@ let app = angular.module('admin', [
     .component(usersComponentName, usersComponentOptions)
     .component(userComponentName, userComponentOptions)
     .component(CommentsComponentName, CommentsComponentOptions)
-    .component(userComponentName, userComponentOptions)
     .component(ContactsComponentName, ContactsComponentOptions)
     .component(ContactComponentName, ContactComponentOptions);
 

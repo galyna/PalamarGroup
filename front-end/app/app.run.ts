@@ -11,6 +11,7 @@ export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
         description: ""
     };
     $rootScope.loading = false;
+    
     $rootScope.isBigSize = $mdMedia( 'gt-lg' );
     if ($mdMedia( 'gt-md' )) {
         var videoTag = angular.element( ` <video  hide show-gt-md="true" class="screen" muted autoplay
@@ -21,17 +22,17 @@ export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
         videoContainer.append( videoTag );
     }
     //create a new instance
-    AOS.init({});
-    
+    AOS.init( {} );
 
-    $rootScope.$on('$routeChangeStart', function() {
+
+    $rootScope.$on( '$routeChangeStart', function () {
         //show loading gif
         $timeout( ()=> {
-        $rootScope.loading = true;
+            $rootScope.loading = true;
         }, 1 );
-    });
+    } );
 
-    $rootScope.$on('$routeChangeSuccess', function() {
+    $rootScope.$on( '$routeChangeSuccess', function () {
         //hide loading gif
         $timeout( ()=> {
             $rootScope.loading = false;
@@ -40,13 +41,13 @@ export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
         }, 5 );
 
 
-    });
+    } );
 
-    $rootScope.$on('$routeChangeError', function() {
+    $rootScope.$on( '$routeChangeError', function () {
         //hide loading gif
         $timeout( ()=> {
             $rootScope.loading = false;
         }, 1 );
 
-    });
+    } );
 }

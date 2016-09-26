@@ -64,7 +64,6 @@ export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
                 auth: [ItServiceName, (it: ItService) => it.canAsync('readAcademy')]
             }
         })
- 
         .when(CommentsComponentUrl, {
             template: '<pg-comments></pg-comments>',
             resolve: {
