@@ -13,7 +13,7 @@ export let userOptions: IOptions = {
         if (req.method.toUpperCase() === "GET") {
             return 'public';
         } else {
-            return 'private'
+            return 'public'
         }
     }
 };

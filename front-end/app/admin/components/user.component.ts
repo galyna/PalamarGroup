@@ -131,7 +131,7 @@ export class UsersComponentController {
 
         this.user.$save()
             .then((user) => {
-                this.$mdToast.showSimple(`Користівача ${user.name} збережено`);
+                this.$mdToast.showSimple(`Користувача ${user.name} збережено`);
             })
             .catch((err)=> {
                 this.$log.error(err);
