@@ -2,7 +2,13 @@ import IPhoto = pg.models.IPhoto;
 import {ICourseResource, ICourse, CourseResourceName} from "../../../resources/course.resource";
 import {AdminCourseComponentUrl} from "./course.component";
 
-const template = `
+const template = `<md-toolbar>
+<div class="md-toolbar-tools">
+    <md-subheader>Курси</md-subheader>
+    <span flex></span>
+    
+    </div>
+    </md-toolbar>
 <md-button ng-click="$ctrl.showEditForm()" ng-disabled="!$root.it.can('modifyAcademy');"
            class="md-fab md-fab-fixed md-primary md-fab-bottom-right" aria-label="new">
     <md-icon md-svg-icon="content:ic_add_24px"></md-icon>
@@ -10,7 +16,7 @@ const template = `
 </md-button>
 <div>
     <md-list>
-        <md-list-item class="md-2-line" ng-repeat="course in $ctrl.courses" ng-click="$root.it.can('modifyAcademy') && $ctrl.showEditForm(course)">
+        <md-list-item class="md-2-line" ng-repeat="course in $ctrl.courses" ng-click=" $ctrl.showEditForm(course)">
             <img ng-src="{{::course.avatar}}" class="md-avatar" alt="No photo"/>
             <div class="md-list-item-text" layout="column">
                 <h3>{{::course.name}}</h3>

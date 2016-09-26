@@ -11,6 +11,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
                 <md-tooltip>Послуги</md-tooltip>
             </md-button>
+              <md-subheader>Послуги</md-subheader>           
             <span flex></span>
             <md-button ng-click="$ctrl.cancel()" ng-disabled="saveForm.$pristine">
                 <span>Скасувати</span>
@@ -47,7 +48,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                 </md-card-content>
             </md-card>
         </md-tab>
-        <md-tab label="Ісонка" flex>
+        <md-tab label="Іконка" flex>
             <md-card>
                 <md-card-content layout-sm="row" layout-gt-sm>
                     <div layout="column">

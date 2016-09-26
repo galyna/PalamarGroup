@@ -59,7 +59,7 @@ let template = `
             <!--<input id="group" ng-model="$ctrl.salonClient.group" type="text" name="group">-->
         <!--</md-input-container>-->
     </md-content>
-    <div layout="row" md-whiteframe="4">
+    <div layout="row" md-whiteframe="4" ng-if="::$root.it.can('modifyAcademy')">
         <md-button ng-click="$ctrl.cancel()" class=" ">Скасувати</md-button>
         <md-button type="submit" class="md-raised md-primary">Зберегти</md-button>
     </div>

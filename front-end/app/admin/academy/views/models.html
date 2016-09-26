@@ -33,7 +33,7 @@
         <div flex ng-if="vm.showModelEditForm"
              ng-include="'app/admin/academy/views/model.edit.form.html'"></div>
     </md-tab>
-    <md-tab label="Додати модель">
+    <md-tab label="Додати модель" ng-if="::$root.it.can('modifyAcademy')">
         <div ng-include="'app/admin/academy/views/model.create.form.html'"></div>
     </md-tab>
 </md-tabs>

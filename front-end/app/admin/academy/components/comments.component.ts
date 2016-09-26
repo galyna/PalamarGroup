@@ -89,26 +89,27 @@ const template = `<md-toolbar>
 <md-list flex class="comments-list">
 
     <md-list-item class="md-3-line md-long-text" ng-class="{answered:comment.isModerated, approved:comment.isVisible}"
-                  ng-repeat="comment in $ctrl.comments" ng-click="$ctrl.showEditDialog($event, comment)">
+                  ng-repeat="comment in $ctrl.comments" ng-click="::$root.it.can('modifyAcademy') && $ctrl.showEditDialog($event, comment)">
         <div class="md-list-item-text">
             <h2 ng-if="comment.isVisible">Відгук видимий на сайті </h2>
             <h3>{{::comment.name||'Анонім'}} {{::comment.date| date:'dd.MM.yyyy'}}</h3>
             <p>{{comment.text}}</p>
+            <h3>{{comment.courseName}} <span>{{comment.courseDates|courseDates}} </span></h3>
             <p ng-if="comment.isModerated">Відгук перевірено </p>
         </div>
         <div class="md-secondary md-margin">
-            <md-checkbox ng-model="comment.isVisible"
-                         ng-click="$ctrl.showComment(comment)"></md-checkbox>
+            <md-checkbox ng-model="comment.isVisible" ng-disabled="::!$root.it.can('modifyAcademy')"
+                         ng-click="::$root.it.can('modifyAcademy') && $ctrl.showComment(comment)"></md-checkbox>
             <md-tooltip>
                 Показати на сайті
             </md-tooltip>
         </div>
-        <md-icon ng-click="$ctrl.showEditDialog($event, comment)"
+        <md-icon ng-click="$ctrl.showEditDialog($event, comment)" ng-disabled="::!$root.it.can('modifyAcademy')"
                  class="md-secondary" aria-label="edit"
                  md-svg-icon="content:ic_create_24px">
             <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Редагувати</md-tooltip>
         </md-icon>
-        <md-icon ng-click="$ctrl.showDeleteDialog($event, comment)"
+        <md-icon ng-click="$ctrl.showDeleteDialog($event, comment)" ng-disabled="::!$root.it.can('modifyAcademy')"
                  class="md-secondary" aria-label="delete"
                  md-svg-icon="action:ic_delete_24px">
             <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Видалити</md-tooltip>

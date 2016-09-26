@@ -27,64 +27,64 @@ let template = `<md-sidenav
 
 export class LeftSidenavComponentController {
 
-    static $inject = ['$location','$route',ItServiceName,'constants'];
+    static $inject = ['$location', '$route', ItServiceName, 'constants'];
 
-    componentId: string;
-    items: any[];
+    componentId:string;
+    items:any[];
     showSalon:boolean;
 
-    constructor(private $location:ng.ILocationService,private $route,
-                public it: ItService,private constants:IConstants) {
+    constructor(private $location:ng.ILocationService, private $route,
+                public it:ItService, private constants:IConstants) {
         this.componentId = LeftSidenavComponentName;
         this.showSalon = constants.showSalon;
 
         this.items = [
             {
                 text: 'Академія',
-                opened: false,
-                visible: ()=>{
-                    return this.it.is('academyUser')
+                opened: this.it.is( 'academyUser' ),
+                visible: ()=> {
+                    return this.it.is( 'academyUser' )
                 },
                 items: [
                     {
                         text: 'Курси',
                         url: '/academy/courses',
-                        visible: ()=>{
+                        visible: ()=> {
                             return true;
                         }
                     },
                     {
                         text: 'Записи',
                         url: '/academy/orders',
-                        visible: ()=>{
+                        visible: ()=> {
                             return true;
                         }
                     },
                     {
                         text: 'Моделі',
                         url: '/academy/models',
-                        visible: ()=>{
+                        visible: ()=> {
                             return true;
                         }
                     },
                     {
                         text: 'Розсилка',
                         url: '/academy/delivery',
-                        visible: ()=>{
+                        visible: ()=> {
                             return true;
                         }
                     },
                     {
                         text: 'Контакти',
                         url: '/academy/contacts',
-                        visible: ()=>{
+                        visible: ()=> {
                             return true;
                         }
                     },
                     {
                         text: 'Відгуки',
                         url: '/academy/comments',
-                        visible: ()=>{
+                        visible: ()=> {
                             return true;
                         }
                     }
@@ -92,9 +92,9 @@ export class LeftSidenavComponentController {
             },
             {
                 text: 'Салон',
-                opened: true,
+                opened: this.it.is( 'salonUser' ),
                 visible: ()=> {
-                    return this.it.is('salonUser')&& this.showSalon
+                    return this.it.is( 'salonUser' ) && this.showSalon
                 },
                 items: [
                     {
@@ -112,50 +112,20 @@ export class LeftSidenavComponentController {
             {
                 text: 'Користувачі',
                 url: usersComponentUrl,
-                visible: ()=>{
-                    return this.it.is('admin')&& this.showSalon;
+                visible: ()=> {
+                    return this.it.is( 'admin' ) ;
                 }
             }
 
         ]
     }
 
-    goTo(item){
-        if(!item.url) return;
-        this.$location.url(item.url);
+    goTo(item) {
+        if (!item.url) return;
+        this.$location.url( item.url );
         this.$route.reload();
     }
 
-    navToCources():void {
-        this.$location.url('/academy/courses');
-        this.$route.reload();
-    }
-
-    navToOrders():void {
-        this.$location.url('/academy/orders');
-        this.$route.reload();
-    }
-
-    navToModels():void {
-        this.$location.url('/academy/models');
-        this.$route.reload();
-    }
-
-    navToDelivery():void {
-        this.$location.url('/academy/delivery');
-        this.$route.reload();
-    }
-
-    navToContacts():void {
-        this.$location.url('/academy/contacts');
-        this.$route.reload();
-    }
-
-
-    navToComments():void {
-        this.$location.url('/academy/comments');
-        this.$route.reload();
-    }
 }
 
 export let LeftSidenavComponentName = 'pgLeftSidenav';

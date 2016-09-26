@@ -8,6 +8,8 @@ const template = `<md-button ng-click="$ctrl.edit()"
 </md-button>
 <md-toolbar md-scroll-shrink ng-if="true">
     <div class="md-toolbar-tools">
+        <md-subheader>Користувачі</md-subheader>
+            <span flex></span>
       <pg-admin-paging
     params="$ctrl.paging"
     on-prev="$ctrl.prev()"

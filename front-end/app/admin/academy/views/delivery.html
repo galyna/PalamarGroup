@@ -10,7 +10,7 @@
                 <span ng-if="item.email"><b>email</b>: <a href="mailto:{{item.email}}">{{item.email}}</a></span>
 
 
-                <div layout="row" layout-align="center end">
+                <div ng-if="::$root.it.can('modifyAcademy')" layout="row" layout-align="center end">
                     <md-button class="  md-raised" ng-click="vm.showDeleteDialog(item)">Видалити</md-button>
                     <md-button class=" md-primary md-raised" ng-click="vm.showEditForm(item)">Редагувати
                     </md-button>
@@ -27,14 +27,14 @@
         </pg-salon-client-form>
 
     </md-tab>
-    <md-tab label="Додати контакт">
+    <md-tab label="Додати контакт" ng-if="::$root.it.can('modifyAcademy')">
         <pg-salon-client-form
                 model="null"
-                on-save="vm.createSalon(salonClient)"
+                on-save="::$root.it.can('modifyAcademy') && vm.createSalon(salonClient)"
                 on-cancel="vm.showListTab()"
         ></pg-salon-client-form>
     </md-tab>
-    <md-tab label="Email розсилка">
+    <md-tab label="Email розсилка" ng-if="::$root.it.can('modifyAcademy')">
         <pg-email-adv courses="vm.courses" groups="vm.salonGroups"></pg-email-adv>
     </md-tab>
 </md-tabs>

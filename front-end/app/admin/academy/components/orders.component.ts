@@ -1,19 +1,19 @@
 import {IOrderResource, IOrder, OrderResourceName} from "../../../resources/order.resource";
 import {PagingServiceName, PagingService} from "../../../ui/admin.paging";
-let template = `
-<md-toolbar  ng-if="true">
-    <div class="md-toolbar-tools">
-      <pg-admin-paging
-    params="$ctrl.paging"
-    on-prev="$ctrl.prev()"
-    on-next="$ctrl.next()"
+let template = `<md-toolbar>
+<div class="md-toolbar-tools">
+    <md-subheader>Записи на навчальний курс</md-subheader>
+    <span flex></span>
+    <pg-admin-paging
+params="$ctrl.paging"
+on-prev="$ctrl.prev()"
+on-next="$ctrl.next()"
     ></pg-admin-paging>
     </div>
-  </md-toolbar>
-
+    </md-toolbar>
 <md-list flex class="orders-list">
-    <md-subheader class="md-no-sticky">Записи на курс</md-subheader>
-    <md-list-item class="md-2-line" ng-repeat="order in $ctrl.orders" ng-class="{answered:order.answered, approved:order.booked}" ng-click="$ctrl.showEditOrderDialog($event, order)">
+  
+    <md-list-item  class="md-2-line" ng-repeat="order in $ctrl.orders" ng-class="{answered:order.answered, approved:order.booked}" ng-click=" $ctrl.showEditOrderDialog($event, order)">
         <div class="md-list-item-text" layout="column">
 
           <h2 ng-if="order.booked"> ЗАМОВЛЕННЯ ПІДТВЕРДЖЕНО</h2>
@@ -24,14 +24,14 @@ let template = `
               <p ng-if="order.answered">Замовнику передзвонили </p>
         </div>
         <div class="md-secondary md-margin">
-        <md-checkbox  ng-model="order.answered" ng-click="$ctrl.saveAnsewerOrder(order)"></md-checkbox>
+        <md-checkbox  ng-model="order.answered" ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="::$root.it.can('modifyAcademy') && $ctrl.saveAnsewerOrder(order)"></md-checkbox>
         <md-tooltip >
          Замовнику передзвонили
         </md-tooltip>
          </div>
   
         <div class="md-secondary md-margin">
-         <md-checkbox ng-model="order.booked" ng-click="$ctrl.saveBookedOrder(order)"></md-checkbox>  
+         <md-checkbox ng-model="order.booked" ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="::$root.it.can('modifyAcademy') && $ctrl.saveBookedOrder(order)"></md-checkbox>  
           <md-tooltip md-direction="top">
         Участь у заході підтверджено
         </md-tooltip>
@@ -40,7 +40,7 @@ let template = `
         <md-icon class="md-secondary "  ng-click="$ctrl.showEditOrderDialog($event, order)" md-svg-icon="communication:ic_message_24px"> 
          <md-tooltip > Деталі</md-tooltip></md-icon>
           
-         <md-icon class="md-secondary " ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="$ctrl.showDeleteDialog($event, order)" 
+         <md-icon class="md-secondary " ng-disabled="::!$root.it.can('modifyAcademy')" ng-click=" ::$root.it.can('modifyAcademy') && $ctrl.showDeleteDialog($event, order)" 
                      md-svg-icon="action:ic_delete_24px">
                 <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Видалити</md-tooltip>  
             </md-icon>
@@ -69,36 +69,36 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                     <p ng-if="$ctrl.order.date">Запис створено {{$ctrl.order.date|date:'dd.MM.yyyy'}}</p>
                      <md-input-container class="md-block">
                     <label>Замовник</label>
-                    <input type="text" ng-model="$ctrl.order.name" >
+                    <input ng-disabled="::!$root.it.can('modifyAcademy')" type="text" ng-model="$ctrl.order.name" >
                 </md-input-container>
                     <md-input-container class="md-block">
                     <label>Телфон</label>
-                    <input type="text" ng-model="$ctrl.order.phone" >
+                    <input ng-disabled="::!$root.it.can('modifyAcademy')" type="text" ng-model="$ctrl.order.phone" >
                 </md-input-container>
                    
                 </md-input-container>
                     <md-input-container class="md-block">
                     <label>Email</label>
-                    <input type="text" ng-model="$ctrl.order.email" >
+                    <input ng-disabled="::!$root.it.can('modifyAcademy')" type="text" ng-model="$ctrl.order.email" >
                 </md-input-container>
                 </md-input-container>
                     <md-input-container class="md-block">
                     <label>Коментар замовника</label>
-                    <input type="text" ng-model="$ctrl.order.comment" >
+                    <input ng-disabled="::!$root.it.can('modifyAcademy')" type="text" ng-model="$ctrl.order.comment" >
                 </md-input-container>
                   
                 </md-subheader>
                 <div flex="2" layout="column" class="md-margin">
-                    <md-checkbox ng-model="$ctrl.order.answered">Замовнику передзвонили</md-checkbox>                     
-                    <md-checkbox ng-model="$ctrl.order.booked">Участь у заході підтверджено</md-checkbox>                    
+                    <md-checkbox ng-disabled="::!$root.it.can('modifyAcademy')" ng-model="$ctrl.order.answered">Замовнику передзвонили</md-checkbox>                     
+                    <md-checkbox ng-disabled="::!$root.it.can('modifyAcademy')" ng-model="$ctrl.order.booked">Участь у заході підтверджено</md-checkbox>                    
                     <md-input-container>
                         <label>Коментар адміністратора</label>
-                        <textarea ng-model="$ctrl.order.admin_comment"></textarea>
+                        <textarea ng-disabled="::!$root.it.can('modifyAcademy')" ng-model="$ctrl.order.admin_comment"></textarea>
                     </md-input-container>
                 </div>
             </div>
         </md-dialog-content>
-        <md-dialog-actions layout="row">
+        <md-dialog-actions layout="row" ng-if="::$root.it.can('modifyAcademy')">
             <span flex></span>
             <md-button ng-click="$ctrl.cancel()" aria-label="cancel">
                 Відмінити

@@ -29,7 +29,7 @@ export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
         .when(AdminCourseComponentUrl, {
             template: "<pg-admin-course layout flex></pg-admin-course>",
             resolve: {
-                auth: [ItServiceName, (it: ItService) => it.canAsync('modifyAcademy')]
+                auth: [ItServiceName, (it: ItService) => it.canAsync('readAcademy')]
             }
         })
         

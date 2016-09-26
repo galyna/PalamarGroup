@@ -7,17 +7,18 @@ import IPhoto = pg.models.IPhoto;
 
 const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
     <md-toolbar>
-        <div class="md-toolbar-tools">
+        <div  class="md-toolbar-tools">
             <md-button class="md-icon-button" ng-href="#/academy/contacts">
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
                 <md-tooltip>Контакти академії</md-tooltip>
-            </md-button>
+            </md-button>          
+    <md-subheader>Контакти академії</md-subheader>
             <span flex></span>
-            <md-button ng-click="$ctrl.cancel()" ng-disabled="saveForm.$pristine">
+            <md-button ng-if="::$root.it.can('modifyAcademy')" ng-click="$ctrl.cancel()" ng-disabled="saveForm.$pristine">
                 <span>Скасувати</span>
                 <md-tooltip>Скасувати зміни</md-tooltip>
             </md-button>
-            <md-button type="submit" class="md-raised">Зберегти</md-button>
+            <md-button ng-if="::$root.it.can('modifyAcademy')"  type="submit" class="md-raised">Зберегти</md-button>
         </div>
     </md-toolbar>
     <md-tabs md-stretch-tabs="always" md-dynamic-height>
@@ -26,19 +27,19 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                 <md-card-content>
                     <md-input-container class="md-block ">
                         <label for="name">Назва</label>
-                        <input id="name" ng-model="$ctrl.contact.name" name="name"/>
+                        <input ng-disabled="::!$root.it.can('modifyAcademy')" id="name" ng-model="$ctrl.contact.name" name="name"/>
                     </md-input-container>
                      <md-input-container>
                         <label>Телефон</label>
-                        <input id="name" ng-model="$ctrl.contact.phone" name="name"/>
+                        <input ng-disabled="::!$root.it.can('modifyAcademy')" id="name" ng-model="$ctrl.contact.phone" name="name"/>
                     </md-input-container>
                     <md-input-container>
                         <label>Email</label>
-                        <input id="name" ng-model="$ctrl.contact.email" name="name"/>
+                        <input ng-disabled="::!$root.it.can('modifyAcademy')" id="name" ng-model="$ctrl.contact.email" name="name"/>
                     </md-input-container>
                      <md-input-container>
                         <label>Адреса</label>
-                        <input id="name" ng-model="$ctrl.contact.address" name="name"/>
+                        <input ng-disabled="::!$root.it.can('modifyAcademy')" id="name" ng-model="$ctrl.contact.address" name="name"/>
                     </md-input-container>
                                  
                 </md-card-content>
@@ -50,7 +51,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                     <div layout="column">
                         <img ng-src="{{$ctrl.contact.photo.url}}" class="module-history-img"/>
 
-                        <div>
+                        <div ng-if="::$root.it.can('modifyAcademy')">
                             <md-button ng-if="!$ctrl.showAuthorPhotoUpload" class="md-raised"
                                        ng-click="$ctrl.showAuthorPhotoUpload=true">
                                 Змінити фото
