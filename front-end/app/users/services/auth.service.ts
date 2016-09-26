@@ -41,7 +41,7 @@ export class AuthService{
     parseToken(token: string){
         if(!token) return null;
         let payload = token.split('.')[1];
-        payload = this.$window.atob(payload);
+        payload = this.$window.atob(payload.replace(/\s/g, ''));
         return JSON.parse(payload);
     }
 
