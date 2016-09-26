@@ -14,3 +14,10 @@ declare module "aos" {
     export = AOS;
 }
 
+declare module "jwt-decode" {
+    interface IJwtDecode{
+        (token:string): string;
+    }
+    let jwtDecode: IJwtDecode;
+    export = jwtDecode;
+}

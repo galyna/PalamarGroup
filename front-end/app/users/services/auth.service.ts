@@ -1,3 +1,5 @@
+import jwtDecode from 'jwt-decode';
+
 export class AuthService{
 
     static $inject = ['$http', '$window', '$rootScope'];
@@ -40,9 +42,7 @@ export class AuthService{
 
     parseToken(token: string){
         if(!token) return null;
-        let payload = token.split('.')[1];
-        payload = this.$window.atob(payload.replace(/\s/g, ''));
-        return JSON.parse(payload);
+        return jwtDecode(token);
     }
 
     register(user) {
@@ -57,7 +57,13 @@ export class AuthService{
         
         this.setTokenHeader(token);
         this.saveToken(token);
-        this.$rootScope.user = this.parseToken(token);
+        try {
+            this.$rootScope.user = this.parseToken( token );
+        }catch(err){
+            //last chance fix
+            console.dir(err);
+            this.logout();
+        }
     }
     
     getUserInfo(){
