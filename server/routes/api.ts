@@ -3,7 +3,7 @@ import * as restify from 'express-restify-mongoose';
 import {currentUser} from '../auth/current_user';
 import photoEndpoint from './photo.endpoint';
 import {auth} from "../auth/auth";
-import passport = require("passport");
+let passport = require("passport");
 import {config} from "../config";
 import {paging} from "../services/paging.service";
 

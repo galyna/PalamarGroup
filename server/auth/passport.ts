@@ -1,12 +1,14 @@
-import passport = require("passport");
-import {Strategy as LocalStrategy} from "passport-local";
+let passport = require("passport");
+let passportLocal = require("passport-local");
+
+
 import {User} from "../models/user";
 
-passport.use(new LocalStrategy({
+passport.use(new passportLocal({
         usernameField: 'email'
     }, async(username, password, done) => {
         try {
-            let user = await User.findOne({email: username}).exec();
+            let user = await User.findOne({email: username}).exec()
             // Return if user not found in database
             if (!user) {
                 return done(null, false, {

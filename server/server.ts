@@ -1,5 +1,5 @@
 import * as express from 'express';
-import passport = require('passport');
+let passport = require("passport");
 import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
 import * as slash from 'express-slash';

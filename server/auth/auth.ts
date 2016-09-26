@@ -1,4 +1,4 @@
-import jwt = require("express-jwt");
+let jwt = require("express-jwt");
 import {config} from "../config";
 
 export let auth = jwt({
