@@ -12,6 +12,7 @@ import 'angular-animate';
 import 'ng-file-upload';
 import 'ng-img-crop-full-extended';
 import 'angular-youtube-embed';
+import 'daypilot';
 import {coreModule} from "../core/core.module";
 import {resourcesModule} from "../resources/resources.module";
 import '../templates';
@@ -51,6 +52,8 @@ let app = angular.module('admin', [
     'ngImgCrop',
     'youtube-embed',
     'templates',
+    'daypilot',
+    
     coreModule.name,
     resourcesModule.name,
     uiModule.name,

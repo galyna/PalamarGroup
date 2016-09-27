@@ -39,6 +39,7 @@ pg-calendar {
       border: $calendar-md-border;
 
       &.agenda {
+        overflow: auto;
         position: relative;
         .courses-calendar {
           display: flex;
@@ -132,7 +133,7 @@ pg-calendar {
             }
             // Day content container
             :not(:first-child) {
-              overflow: hidden;
+              //overflow: hidden;
               text-overflow: ellipsis;
             }
           }

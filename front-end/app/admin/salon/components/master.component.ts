@@ -22,20 +22,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
     </md-toolbar>
     <md-tabs md-stretch-tabs="always" md-dynamic-height>
     <md-tab label="Графік">
-            <div layout="row" flex layout-align="center stretch"> <pg-calendar 
-                             calendar-direction="$ctrl.calendarDirection"
-                             on-prev-month="prevMonth"
-                             on-next-month="nextMonth"
-                             on-day-click="$ctrl.dayClick(date)"
-                             title-format="'MMMM y'"
-                             ng-model='selectedDate'
-                             day-format="'d'"
-                             day-label-format="'EEE'"
-                             day-label-tooltip-format="'EEEE'"
-                             day-tooltip-format="'fullDate'"
-                             week-starts-on="firstDayOfWeek"
-                             day-content="setDayContent"
-                             template-url="'app/calendar/calendar.html'"></pg-calendar> </div>
+<pg-master-sceduler></pg-master-sceduler>
         </md-tab>
         <md-tab label="Інфо">
             <md-card>
@@ -187,16 +174,15 @@ export class MasterComponentController {
     showWorkUpload:boolean;
     favors:IFavor[];
     newService:IMasterFavor;
-
-
+    
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
-                private photoService:PhotoService,
-                private MasterResource:IMasterResource,
+                private photoService:PhotoService, private MasterResource:IMasterResource,
                 private Upload:ng.angularFileUpload.IUploadService, private favorResource:IFavorResource) {
     }
 
     $onInit() {
+       
         this.favors = this.favorResource.query();
 
         if (this.$routeParams["id"]) {
@@ -210,6 +196,7 @@ export class MasterComponentController {
             this.master = angular.copy( this.originalMaster );
         }
     }
+
 
     cancel() {
         this.master = angular.copy( this.originalMaster );
@@ -290,6 +277,11 @@ export class MasterComponentController {
     deleteFromList(list:any[], item:any) {
         list.splice( list.indexOf( item ), 1 );
     }
+
+
+;
+
+
 }
 
 export let MasterComponentUrl = "/salon/master/:id?";

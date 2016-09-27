@@ -21,3 +21,5 @@ declare module "jwt-decode" {
     let jwtDecode: IJwtDecode;
     export = jwtDecode;
 }
+
+declare var DayPilot: any;

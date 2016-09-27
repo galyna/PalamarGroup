@@ -1,0 +1,28 @@
+<md-content   flex layout='column' layout-fill md-swipe-left='next()' md-swipe-right='prev()'>
+    <md-toolbar>
+        <div class='md-toolbar-tools' layout='row'>
+            <md-button class="md-icon-button next-prev" ng-click='prev()' aria-label="Previous month">
+                <md-tooltip ng-if="::tooltips()">Previous month</md-tooltip>
+                &laquo;
+            </md-button>
+            <div flex></div>
+            <h2 class='calendar-md-title'><span>{{ calendar.start | date:titleFormat:timezone }}</span></h2>
+            <div flex></div>
+            <md-button class="md-icon-button next-prev" ng-click='next()' aria-label="Next month">
+                <md-tooltip ng-if="::tooltips()">Next month</md-tooltip>
+                &raquo;
+            </md-button>
+        </div>
+    </md-toolbar>
+    <!-- agenda view -->
+    <md-content ng-if='weekLayout === columnWeekLayout' class='agenda'>
+        <div ng-repeat='week in calendar.weeks track by $index'>
+            <div class="courses-calendar " ng-if="sameMonth(day)" ng-class='{"disabled" : isDisabled(day), active: active === day }' ng-click='handleDayClick(day)' ng-repeat='day in week' layout>
+                <md-tooltip ng-if="::tooltips()">{{ day | date:dayTooltipFormat:timezone }}</md-tooltip>
+                <div class="calendar-day md-padding" >{{ day | date:dayFormat:timezone }}</div>
+                <div class="courses-calendar " flex ng-bind-html='dataService.data[dayKey(day)]'></div>
+            </div>
+        </div>
+    </md-content>
+
+</md-content>
