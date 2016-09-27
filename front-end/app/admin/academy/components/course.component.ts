@@ -8,7 +8,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
                 <md-tooltip>Курси</md-tooltip>
             </md-button>
-    <md-subheader>Курси</md-subheader>
+            <md-subheader>Курси</md-subheader>
             <span flex></span>
             <md-button ng-if="::$root.it.can('modifyAcademy')" ng-click="$ctrl.cancel()"
                        ng-disabled="saveCourseForm.$pristine">
@@ -57,7 +57,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                             <div ng-repeat="day in $ctrl.course.days">
                                 <md-divider></md-divider>
                                 <div layout="row">
-                                    <div class="md-margin md-padding " id="program" name="program">{{day.date|
+                                    <div class="md-margin md-padding " id="prokgram" name="program">{{day.date|
                                         date:"dd.MM.yyyy"}}
                                     </div>
                                     <div class="md-margin md-padding " id="program" name="program">{{day.program}}</div>
@@ -84,6 +84,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                                 Додати
                             </md-button>
                         </md-input-container>
+                    </div>
                 </md-card-content>
             </md-card>
         </md-tab>
@@ -239,7 +240,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                                             <label for="ord">Порядок відображення</label>
                                             <input id="ord" ng-model="item.order" type="number"/>
                                         </md-input-container>
-                                        <md-button class="  md-raised" 
+                                        <md-button class="  md-raised"
                                                    ng-click="$ctrl.deleteFromList($ctrl.course.videos,item)">
                                             Видалити
                                         </md-button>
