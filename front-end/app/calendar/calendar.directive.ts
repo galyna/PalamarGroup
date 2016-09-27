@@ -82,7 +82,7 @@ export function pgCalendarDirective($compile:ng.ICompileService, $parse:ng.IPars
                 return !$scope.sameMonth(date);
             };
 
-            $scope.calendarDirection = $scope.calendarDirection || "horizontal";
+            $scope.calendarDirection = $scope.calendarDirection || "column";
 
             $scope.$watch("calendarDirection", function (val) {
                 $scope.weekLayout = val === "horizontal" ? "row" : "column";

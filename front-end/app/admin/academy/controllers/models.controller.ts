@@ -55,6 +55,7 @@ export class AcademyModelController {
                 })
                 .finally(()=> {
                     this.showModelCreateForm = false;
+                    this.showModelEditForm = false;
                 });
 
         }
@@ -78,6 +79,7 @@ export class AcademyModelController {
                     this.$mdToast.showSimple( `помилка при збереженні моделі` );
                 })
                 .finally(()=> {
+                    this.showModelCreateForm = false;
                     this.showModelEditForm = false;
                 });
         }

@@ -19,8 +19,8 @@ export function PgCalendarFactory() {
         };
 
         this.options = angular.isObject(options) ? options : {};
-        this.year = now.getFullYear();
-        this.month = now.getMonth();
+        this.year = now.getFullYear()
+        this.month = now.getMonth()
         this.weeks = [];
         this.weekStartsOn = this.setWeekStartsOn(this.options.weekStartsOn);
 

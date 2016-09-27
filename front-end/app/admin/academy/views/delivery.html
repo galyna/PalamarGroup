@@ -1,6 +1,15 @@
-<md-subheader class="md-no-sticky">Розсилка</md-subheader>
 
-<md-tabs md-selected="vm.selectedTab" md-stretch-tabs="always" md-dynamic-height md-border-bottom>
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+
+            <md-subheader class="md-no-sticky">Розсилка</md-subheader>
+
+            <span flex></span>
+
+        </div>
+    </md-toolbar>
+<md-tabs md-selected="vm.selectedTab" flex="grow" md-border-bottom>
     <md-tab label="Контакти">
         <div ng-if="!vm.showSalonEditForm" ng-repeat="item in vm.salons" ng-click="null" layout="row"
              class=" md-margin">

@@ -21,6 +21,22 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
         </div>
     </md-toolbar>
     <md-tabs md-stretch-tabs="always" md-dynamic-height>
+    <md-tab label="Графік">
+            <div layout="row" flex layout-align="center stretch"> <pg-calendar 
+                             calendar-direction="$ctrl.calendarDirection"
+                             on-prev-month="prevMonth"
+                             on-next-month="nextMonth"
+                             on-day-click="$ctrl.dayClick(date)"
+                             title-format="'MMMM y'"
+                             ng-model='selectedDate'
+                             day-format="'d'"
+                             day-label-format="'EEE'"
+                             day-label-tooltip-format="'EEEE'"
+                             day-tooltip-format="'fullDate'"
+                             week-starts-on="firstDayOfWeek"
+                             day-content="setDayContent"
+                             template-url="'app/calendar/calendar.html'"></pg-calendar> </div>
+        </md-tab>
         <md-tab label="Інфо">
             <md-card>
                 <md-card-content>
