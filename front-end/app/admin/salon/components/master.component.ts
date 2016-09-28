@@ -17,12 +17,14 @@ const template:string = `<div flex layout="column">
                 <span>Скасувати</span>
                 <md-tooltip>Скасувати зміни</md-tooltip>
             </md-button>
-            <md-button ng-if="::$root.it.can('modifySalon')" type="submit" ng-click="$ctrl.save(saveForm)" class="md-raised">Зберегти</md-button>
+            <md-button ng-if="::$root.it.can('modifySalon')" type="submit" ng-click="$ctrl.save(saveForm)"
+                       class="md-raised">Зберегти
+            </md-button>
         </div>
     </md-toolbar>
     <md-tabs md-stretch-tabs="always" md-dynamic-height>
-    <md-tab label="Графік">
-<pg-master-sceduler></pg-master-sceduler>
+        <md-tab label="Графік">
+            <pg-master-sceduler master="$ctrl.master"></pg-master-sceduler>
         </md-tab>
         <md-tab label="Інфо">
             <md-card>
@@ -53,7 +55,7 @@ const template:string = `<div flex layout="column">
                         <div ng-if="::$root.it.can('modifySalon')" class="md-block">
                             <md-subheader class="md-no-sticky">Додати послугу
                             </md-subheader>
-                           
+
                             <md-select ng-model="$ctrl.newService.favor" ng-model-options="{trackBy: '$value._id'}">
                                 <md-option ng-repeat="favor in $ctrl.favors" ng-value="favor">
                                     {{ favor.name }}
@@ -61,7 +63,7 @@ const template:string = `<div flex layout="column">
                             </md-select>
                             <md-input-container layout="row" class="md-block">
                                 <label for="newProgram">ЦІНА</label>
-                                <input type="number" ng-model="$ctrl.newService.price" />
+                                <input type="number" ng-model="$ctrl.newService.price"/>
                             </md-input-container>
                             <md-input-container class="md-block">
                                 <md-button ng-disabled="!$ctrl.newService" class=" " ng-click="$ctrl.addService()">

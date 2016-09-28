@@ -8,7 +8,7 @@ import {FavorsComponentName, FavorsComponentOptions} from "./components/favors.c
 import {FavorComponentName, FavorComponentOptions} from "./components/favor.component";
 import {TransformComponentName, TransformComponentOptions} from "./components/transform.component";
 import {TransformsComponentName, TransformsComponentOptions} from "./components/transforms.component";
-import {MasterScedulerComponentName, MasterScedulerComponentOptions} from "./components/master.sceduler";
+import {MasterSchedulerComponentName, MasterSchedulerComponentOptions} from "./components/master.scheduler";
 
 export let salonModule = angular.module( 'salon', [
     'ngRoute'
@@ -20,4 +20,4 @@ export let salonModule = angular.module( 'salon', [
     .component( FavorsComponentName, FavorsComponentOptions )
     .component( TransformComponentName, TransformComponentOptions )
     .component( TransformsComponentName, TransformsComponentOptions )
-    .component( MasterScedulerComponentName, MasterScedulerComponentOptions );
+    .component( MasterSchedulerComponentName, MasterSchedulerComponentOptions );

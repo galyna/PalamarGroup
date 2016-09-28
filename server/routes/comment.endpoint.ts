@@ -65,7 +65,6 @@ getCommentsApi.route('/')
                         date: "$comments.date",
                         isCourseVisible: "$isVisible",
                         courseId: '$_id',
-                        courseDates: "$courseModulesDates",
                         courseName: '$name'
                     }}
                 ]);
