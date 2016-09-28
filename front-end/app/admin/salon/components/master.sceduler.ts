@@ -1,10 +1,15 @@
+import {IOrderResource, IOrder, OrderResourceName} from "../../../resources/order.resource";
+
 const template = `<div style="float:left; width: 170px">
-        <daypilot-navigator id="navi" daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>
+        <daypilot-navigator style="float:left; width: 170px" id="navi" daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>
     </div>
     <div style="margin-left: 170px">
-
+   <div class="space">
+            <button ng-click="$ctrl.showDay()">Day</button>
+            <button ng-click="$ctrl.showWeek()">Week</button>
+        </div>
         <daypilot-calendar id="day" daypilot-config="$ctrl.dayConfig" daypilot-events="$ctrl.events"></daypilot-calendar>
-
+ <daypilot-calendar id="week" daypilot-config="$ctrl.weekConfig" daypilot-events="$ctrl.events"></daypilot-calendar>
     </div>
       
       New event:
@@ -24,15 +29,58 @@ const template = `<div style="float:left; width: 170px">
 
   </div>`;
 
+let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
+  
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 >Редагувата замовлення</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="$ctrl.cancel()">
+                    <md-icon md-svg-src="navigation:ic_close_24px" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+            
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content" layout="row">
+               
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row" ng-if="::$root.it.can('modifySalon')">
+            <span flex></span>
+            <md-button ng-click="$ctrl.cancel()" aria-label="cancel">
+                Відмінити
+            </md-button>
+           
+        </md-dialog-actions>
+
+</md-dialog>
+`;
+class EditDialogController {
+
+    static $inject = ['$mdDialog'];
+
+
+    constructor(private $mdDialog:ng.material.IDialogService) {
+
+    }
+
+    cancel() {
+        this.$mdDialog.cancel();
+    }
+}
 export class MasterScedulerComponentController {
 
-    static $inject = ['$timeout'];
+    static $inject = ['$timeout',"$mdDialog"];
 
 
-    events :any[];
-    
-    constructor(private $timeout:ng.ITimeoutService) {
-        this.events=[];
+    events:any[];
+    weekConfig:any;
+    dayConfig:any;
+    navigatorConfig:any;
+
+    constructor(private $timeout:ng.ITimeoutService, private $mdDialog:ng.material.IDialogService) {
+        this.events = [];
         this.events.push(
             {
                 start: new DayPilot.Date( "2016-09-27T10:00:00" ),
@@ -41,71 +89,159 @@ export class MasterScedulerComponentController {
                 text: "Simple Event"
             }
         );
-    }
-    
-    navigatorConfig = {
-        selectMode: "day",
-        showMonths: 3,
-        skipMonths: 3,
-        onTimeRangeSelected: function (args) {
 
-            this.dayConfig.startDate = new DayPilot.Date( "2016-09-01T10:00:00" );
-            this.loadEvents();
-        }
-    };
+        this.weekConfig = {
+            visible: false,
+            viewType: "Week",
+            angularAutoApply:true,
 
+            onTimeRangeSelected:(args)=>  {
+                var params = {
+                    start: args.start.toString(),
+                    end: args.end.toString(),
+                    text: "New event"
+                };
 
-    dayConfig = {
-        viewType: "Day",
-        onTimeRangeSelected: function (args) {
-            var params = {
-                start: args.start.toString(),
-                end: args.end.toString(),
-                text: "New event"
-            };
+                //$http.post('@Url.Action("Create", "Backend")', params).success(function (data) {
+                this.events.push( {
+                    start: args.start,
+                    end: args.end,
+                    text: "New Week",
+                    id: DayPilot.guid(),
+                } );
+                //});
+            },
+            onEventMove: (args) => {
+                var params = {
+                    id: args.e.id(),
+                    newStart: args.newStart.toString(),
+                    newEnd: args.newEnd.toString()
+                };
 
-            // $http.post('@Url.Action("Create", "Backend")', params).success(function (data) {
-            this.events.push( {
-                start: args.start,
-                end: args.end,
-                text: "New event",
-                id: 1//data.id
-            } );
-            // });
-        },
-        onEventMove: function (args) {
-            var params = {
-                id: args.e.id(),
-                newStart: args.newStart.toString(),
-                newEnd: args.newEnd.toString()
-            };
+                this.$mdDialog.show( {
+                    template: editOrderDialogTemplate,
+                    controller: MasterScedulerComponentController,
+                    controllerAs: '$ctrl',
+                    bindToController: true,
+                    parent: angular.element( document.body ),
 
-            // $http.post('@Url.Action("Move", "Backend")', params);
-        },
-        onEventResize: function (args) {
-            var params = {
-                id: args.e.id(),
-                newStart: args.newStart.toString(),
-                newEnd: args.newEnd.toString()
-            };
+                } ).then( () =>{});
+                //$http.post('@Url.Action("Move", "Backend")', params);
+            },
+            onEventClick: (args) => {
+                var params = {
+                    id: args.e.id(),
+                    newStart: args.newStart.toString(),
+                    newEnd: args.newEnd.toString()
+                };
 
-            //  $http.post('@Url.Action("Move", "Backend")', params);
-        },
+                //$http.post('@Url.Action("Move", "Backend")', params);
+            },
+            onEventResize: (args) => {
+                var params = {
+                    id: args.e.id(),
+                    newStart: args.newStart.toString(),
+                    newEnd: args.newEnd.toString()
+                };
 
-        onEventClick: function (args) {
-            var modal = new DayPilot.Modal( {
-                onClosed: function (args) {
-                    if (args.result) {  // args.result is empty when modal is closed without submitting
-                        this.loadEvents();
+                // $http.post('@Url.Action("Move", "Backend")', params);
+            },
+            onEventClicked: (args)=> {
+                this.$mdDialog.show( {
+                    template: editOrderDialogTemplate,
+                    controller: EditDialogController,
+                    controllerAs: '$ctrl',
+                    bindToController: true,
+                    locals: {
+
+                    },
+                    parent: angular.element( document.body ),
+
+                } ).then( () => this.saveOrder( ) );
+            }
+        };
+
+        this.dayConfig = {
+            viewType: "Day",
+            startDate: new DayPilot.Date( "2016-09-27T10:00:00" ),
+            onTimeRangeSelected: (args)=>  {
+                var params = {
+                    start: args.start.toString(),
+                    end: args.end.toString(),
+                    text: "New event"
+                };
+
+                // $http.post('@Url.Action("Create", "Backend")', params).success(function (data) {
+                this.events.push( {
+                    start: args.start,
+                    end: args.end,
+                    text: "New event",
+                    id: DayPilot.guid(),
+                } );
+
+            },
+            onEventMove:(args) => {
+                var params = {
+                    id: args.e.id(),
+                    newStart: args.newStart.toString(),
+                    newEnd: args.newEnd.toString()
+                };
+
+                // $http.post('@Url.Action("Move", "Backend")', params);
+            },
+            onEventResize: (args)=>  {
+                var params = {
+                    id: args.e.id(),
+                    newStart: args.newStart.toString(),
+                    newEnd: args.newEnd.toString()
+                };
+
+                //  $http.post('@Url.Action("Move", "Backend")', params);
+            },
+            onEventClicked: (args)=>  {
+                var modal = new DayPilot.Modal( {
+                    onClosed: (args) =>{
+                        if (args.result) {  // args.result is empty when modal is closed without submitting
+                            this.loadEvents();
+                        }
                     }
-                }
-            } );
+                } );
 
-            modal.showUrl( '@Url.Action("Edit", "Event")/' + args.e.id() );
-        }
+                modal.showUrl( '@Url.Action("Edit", "Event")/' + args.e.id() );
+            }
+        };
+
+        this.navigatorConfig = {
+            selectMode: "day",
+            showMonths: 3,
+            skipMonths: 3,
+            onTimeRangeSelected: (args)=> {
+                this.weekConfig.startDate = args.day;
+                this.dayConfig.startDate = args.day;
+                this.loadEvents();
+            }
+        };
+    }
+
+    saveOrder() {
+
+
+    }
+    showDay() {
+        this.dayConfig.visible = true;
+        this.weekConfig.visible = false;
+        this.navigatorConfig.selectMode = "day";
     };
 
+    showWeek() {
+        this.dayConfig.visible = false;
+        this.weekConfig.visible = true;
+        this.navigatorConfig.selectMode = "week";
+    };
 
+    cancel() {
+        this.$mdDialog.cancel();
+    }
     loadEvents() {
         // using $timeout to make sure all changes are applied before reading visibleStart() and visibleEnd()
         this.$timeout( function () {
@@ -117,22 +253,15 @@ export class MasterScedulerComponentController {
             //     $scope.events = data;
             // });
 
-            this.events.push(
-                {
-                    start: new DayPilot.Date( "2016-09-27T12:00:00" ),
-                    end: new DayPilot.Date( "2016-09-27T16:00:00" ),
-                    id: DayPilot.guid(),
-                    text: "Simple Event"
-                }
-            );
+
         } );
     }
 
     addEvent() {
         this.events.push(
             {
-                start: new DayPilot.Date( "2014-09-01T10:00:00" ),
-                end: new DayPilot.Date( "2014-09-01T12:00:00" ),
+                start: new DayPilot.Date( "2016-09-01T10:00:00" ),
+                end: new DayPilot.Date( "2016-09-01T12:00:00" ),
                 id: DayPilot.guid(),
                 text: "Simple Event"
             }

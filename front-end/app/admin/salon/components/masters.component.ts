@@ -46,7 +46,8 @@ export class MastersComponentController {
     masters:IMaster[];
     paging:any;
 
-    constructor(private $filter:ng.IFilterService, private $location:ng.ILocationService, private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService,
+    constructor(private $filter:ng.IFilterService, private $location:ng.ILocationService, 
+                private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService,
                 private $mdMedia:ng.material.IMedia, private masterResource:IMasterResource,
                 private pagingService: PagingService) {
 

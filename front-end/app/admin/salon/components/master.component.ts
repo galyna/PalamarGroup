@@ -4,7 +4,7 @@ import IPhoto = pg.models.IPhoto;
 import {FavorResourceName, IFavorResource, IFavor} from "../../../resources/favor.resource";
 import IMasterFavor = pg.models.IMasterFavor;
 
-const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
+const template:string = `<div flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button" ng-href="#/salon/masters">
@@ -17,7 +17,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                 <span>Скасувати</span>
                 <md-tooltip>Скасувати зміни</md-tooltip>
             </md-button>
-            <md-button ng-if="::$root.it.can('modifySalon')" type="submit" class="md-raised">Зберегти</md-button>
+            <md-button ng-if="::$root.it.can('modifySalon')" type="submit" ng-click="$ctrl.save(saveForm)" class="md-raised">Зберегти</md-button>
         </div>
     </md-toolbar>
     <md-tabs md-stretch-tabs="always" md-dynamic-height>
@@ -161,7 +161,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
             </md-card>
         </md-tab>
     </md-tabs>
-</form>`;
+</div>`;
 
 export class MasterComponentController {
     static $inject = ["$log", "$routeParams", "$mdToast",
