@@ -1,10 +1,10 @@
 import {IOrderResource, IOrder, OrderResourceName} from "../../../resources/order.resource";
 
-const template = `<div style="float:left; width: 170px">
-        <daypilot-navigator style="float:left; width: 170px" id="navi" daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>
+const template = `<div class="md-padding " style="float:left; width: 160px">
+        <daypilot-navigator style="float:left; width: 160px" id="navi" daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>
     </div>
     <div style="margin-left: 170px">
-   <div class="space">
+   <div class="md-padding ">
             <button ng-click="$ctrl.showDay()">Day</button>
             <button ng-click="$ctrl.showWeek()">Week</button>
         </div>
@@ -12,20 +12,7 @@ const template = `<div style="float:left; width: 170px">
  <daypilot-calendar id="week" daypilot-config="$ctrl.weekConfig" daypilot-events="$ctrl.events"></daypilot-calendar>
     </div>
       
-      New event:
-      <button ng-click="$ctrl.addEvent()">Add</button>
-  </div>
-  <div>
-      First event:
-      <button ng-click="$ctrl.moveEvent()">Move</button>
-      <button ng-click="$ctrl.renameEvent()">Rename</button>
-  </div>
- 
-  <div>
-      Events array (debug):
-      <div ng-repeat="item in $ctrl.events">
-          {{item}}
-      </div>
+    
 
   </div>`;
 
@@ -81,14 +68,7 @@ export class MasterScedulerComponentController {
 
     constructor(private $timeout:ng.ITimeoutService, private $mdDialog:ng.material.IDialogService) {
         this.events = [];
-        this.events.push(
-            {
-                start: new DayPilot.Date( "2016-09-27T10:00:00" ),
-                end: new DayPilot.Date( "2016-09-27T12:00:00" ),
-                id: DayPilot.guid(),
-                text: "Simple Event"
-            }
-        );
+
 
         this.weekConfig = {
             visible: false,
@@ -118,22 +98,6 @@ export class MasterScedulerComponentController {
                     newEnd: args.newEnd.toString()
                 };
 
-                this.$mdDialog.show( {
-                    template: editOrderDialogTemplate,
-                    controller: MasterScedulerComponentController,
-                    controllerAs: '$ctrl',
-                    bindToController: true,
-                    parent: angular.element( document.body ),
-
-                } ).then( () =>{});
-                //$http.post('@Url.Action("Move", "Backend")', params);
-            },
-            onEventClick: (args) => {
-                var params = {
-                    id: args.e.id(),
-                    newStart: args.newStart.toString(),
-                    newEnd: args.newEnd.toString()
-                };
 
                 //$http.post('@Url.Action("Move", "Backend")', params);
             },
@@ -146,7 +110,7 @@ export class MasterScedulerComponentController {
 
                 // $http.post('@Url.Action("Move", "Backend")', params);
             },
-            onEventClicked: (args)=> {
+            onEventClick: (args)=> {
                 this.$mdDialog.show( {
                     template: editOrderDialogTemplate,
                     controller: EditDialogController,
@@ -198,16 +162,15 @@ export class MasterScedulerComponentController {
 
                 //  $http.post('@Url.Action("Move", "Backend")', params);
             },
-            onEventClicked: (args)=>  {
-                var modal = new DayPilot.Modal( {
-                    onClosed: (args) =>{
-                        if (args.result) {  // args.result is empty when modal is closed without submitting
-                            this.loadEvents();
-                        }
-                    }
-                } );
+            onEventClick: (args)=>  {
+                this.$mdDialog.show( {
+                    template: editOrderDialogTemplate,
+                    controller: MasterScedulerComponentController,
+                    controllerAs: '$ctrl',
+                    bindToController: true,
+                    parent: angular.element( document.body ),
 
-                modal.showUrl( '@Url.Action("Edit", "Event")/' + args.e.id() );
+                } ).then( () =>{});
             }
         };
 

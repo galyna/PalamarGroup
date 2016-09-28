@@ -12,11 +12,17 @@ import 'angular-animate';
 import 'ng-file-upload';
 import 'ng-img-crop-full-extended';
 import 'angular-youtube-embed';
-import 'daypilot';
+import 'daypilot'
 import {coreModule} from "../core/core.module";
 import {resourcesModule} from "../resources/resources.module";
 import '../templates';
 
+// import '../../lib/dayPilot/src/daypilot-common.src.js'
+// import '../../lib/dayPilot/src/daypilot-calendar.src.js'
+// import '../../lib/dayPilot/src/daypilot-datepicker.src.js'
+// import '../../lib/dayPilot/src/daypilot-month.src.js'
+// import '../../lib/dayPilot/src/daypilot-modal.src.js'
+// import '../../lib/dayPilot/src/daypilot-navigator.src.js'
 //components
 import {adminRoutes} from './admin.routes';
 import {AcademyModelController} from './academy/controllers/models.controller';
@@ -78,5 +84,6 @@ let app = angular.module('admin', [
     .component(CommentsComponentName, CommentsComponentOptions)
     .component(ContactsComponentName, ContactsComponentOptions)
     .component(ContactComponentName, ContactComponentOptions);
+
 
 export let adminModule = app;

@@ -7,6 +7,7 @@ System.config({
             format: 'register',
             defaultExtension: 'js'
         }
+
     },
     paths: {
         "systemjs": "node_modules/systemjs/dist/system.js",
@@ -26,7 +27,7 @@ System.config({
         'ngSmoothScroll': 'node_modules/ngSmoothScroll/lib/angular-smooth-scroll.js',
         'aos':'node_modules/aos/dist/aos.js',
         'jwt-decode': 'node_modules/jwt-decode/build/jwt-decode.min.js',
-        'daypilot':'lib/dayPilot/daypilot-all.min.js',
+        'daypilot':'lib/dayPilot/src/daypilot-all.min.js',
         
       
     },
