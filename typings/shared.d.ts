@@ -12,13 +12,13 @@ declare module pg {
         export interface IFavor {
             _id:any,
             name:string,
-            category: { _id: string, name: string},
+            category:{ _id:string, name:string},
             defPrice:number,
             photo:IPhoto
         }
 
         export interface IMasterFavor {
-            favor:any,
+            favor:IFavor,
             price:number
         }
 
@@ -31,7 +31,22 @@ declare module pg {
             contacts:{
                 phone:string,
                 facebook:string,
-            }
+            },
+            tasks:ITask[],
+        }
+        
+        export interface ITask {
+            _id?:any,
+            order?:IOrder ,
+            scheduler:IScheduler,
+            favors?:IMasterFavor[]
+        }
+
+        export interface IScheduler {
+            start:any,
+            end:any,
+            text:string,
+            id:string
         }
 
         export interface IContact {

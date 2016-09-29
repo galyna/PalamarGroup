@@ -26,7 +26,7 @@ import {courseGetCommentsApi} from "./comment.endpoint";
 import {userOptions, userApi} from "./user.endpoint";
 import IOrder = pg.models.IOrder;
 import {salonClientApi} from "./salon.client.endpoint";
-
+import {tasksOptions, tasksApi} from './tasks.endpoint';
 
 
 let api = express.Router();
@@ -63,6 +63,11 @@ api.use(paging.preRead);
 restify.serve(api, Contact);
 
 api.use('/course/comments', courseGetCommentsApi);
+api.use('/master/:id', (req: any, res, next) => {
+    req.masterId = req.params.id;
+    next();
+}, tasksApi);
+
 api.use('/course/:id', (req: any, res, next) => {
     req.courseId = req.params.id;
     next();
@@ -75,11 +80,11 @@ restify.serve(api, User, userOptions);
 restify.serve(api, Model);
 restify.serve(api, Order, orderOptions);
 restify.serve(api, Master, readOnlyOptions);
+restify.serve(tasksApi, Master, tasksOptions);
 api.use('/salonclient', salonClientApi);
 restify.serve(api, SalonClient);
 restify.serve(api, Favor);
 restify.serve(api, Transform);
-
 api.use('/photo', photoEndpoint);
 api.use('/email', emailEndpoint);
 

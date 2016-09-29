@@ -1,5 +1,5 @@
 import {IOrderResource, IOrder, OrderResourceName} from "../../../resources/order.resource";
-import {IMaster, MasterResourceName, IMasterResource} from "../../../resources/master.resource";
+import {IMaster, MasterResourceName, IMasterResource, ITask, IScheduler} from "../../../resources/master.resource";
 
 const template = `<div  layout="row" layout-xs="column">
 <div class="md-padding " >
@@ -31,6 +31,16 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                     <label>Техт</label>
                     <input ng-disabled="::!$root.it.can('modifySalon')" type="text" ng-model="$ctrl.tempEvent.text" >
                 </md-input-container>
+                 </md-input-container>
+                    <md-input-container class="md-block">
+                    <label>Техт</label>
+                    <input ng-disabled="::!$root.it.can('modifySalon')" type="text" ng-model="$ctrl.tempEvent.start.value" >
+                </md-input-container>
+                 </md-input-container>
+                    <md-input-container class="md-block">
+                    <label>Техт</label>
+                    <input ng-disabled="::!$root.it.can('modifySalon')" type="text" ng-model="$ctrl.tempEvent.end.value" >
+                </md-input-container>
             </div>
         </md-dialog-content>
         <md-dialog-actions layout="row" ng-if="::$root.it.can('modifySalon')">
@@ -52,68 +62,120 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 </md-dialog>
 `;
 
+class EditDialogController {
+
+    static $inject = ['$mdDialog', 'tempEvent'];
+
+    private tempEvent:IScheduler;
+    private originaltempEvent:IScheduler;
+
+    constructor(private $mdDialog:ng.material.IDialogService, tempEvent:IScheduler) {
+        this.tempEvent = angular.copy( tempEvent );
+        this.originaltempEvent = tempEvent;
+    }
+
+    save($form:ng.IFormController) {
+
+            angular.extend( this.originaltempEvent, this.tempEvent );
+            this.$mdDialog.hide( {action: "save", event: this.originaltempEvent} );
+            }
+
+    deleteEvent() {
+        this.$mdDialog.hide( {action: "delete", event: this.originaltempEvent} );
+    }
+
+    cancel() {
+        this.$mdDialog.cancel();
+    }
+}
 export class MasterSchedulerComponentController {
 
     static $inject = ['$timeout', "$mdDialog", "$scope", MasterResourceName, "$routeParams"];
 
 
     master:IMaster;
-    model:IMaster;
-    events:any[];
+    events:IScheduler[];
     weekConfig:any;
-    currentEvent:any;
     weekControl:any;
     navigatorConfig:any;
-    tempEvents:{id:string}[];
-    tempEvent:{id:string,text:string,start:any,end:any};
+    tempEvent:IScheduler;
 
     constructor(private $timeout:ng.ITimeoutService, private $mdDialog:ng.material.IDialogService,
                 private $scope:ng.IScope, private MasterResource:IMasterResource, private $routeParams:ng.route.IRouteParamsService) {
         this.events = [];
-
-        if (this.$routeParams["id"]) {
-            this.MasterResource.get( {id: this.$routeParams["id"], populate: 'services.favor'} ).$promise
-                .then( (master) => {
-
-                    this.master = master;
-                    this.init()
-                } );
-        }
-
+        this.init();
     }
 
+    init() {
+        this.initEvents()
+        this.initWeekConfig();
+        this.initNavigatorConfig();
+    }
 
+    initEvents() {
+        if (this.$routeParams["id"]) {
+            this.MasterResource.get( {id: this.$routeParams["id"], populate: 'tasks'} ).$promise
+                .then( (master) => {
+                    this.master = master;
+                    this.events = this.master.tasks? this.master.tasks.filter( (task)=> {return task != null;}).map( (task)=> {return task.scheduler;} ):[];
+
+                } );
+        }
+    }
+    
     initWeekConfig() {
         this.weekConfig = {
             visible: true,
             viewType: "Week",
+            api: 2,
             angularAutoApply: true,
-            onTimeRangeSelect: (args)=> {
-                this.currentEvent = {
-                    start: args.start.toString(),
-                    end: args.end.toString(),
-                    text: "New event",
-                    id: DayPilot.guid()
-                };
-
-                this.events.push( this.currentEvent );
-                this.weekControl = this.$scope.week;
-                this.weekControl.update();
-            },
-
             locale: "ru-ru",
             cellHeight: "36",
             businessEndsHour: "19",
             hideUntilInit: true,
+            eventMoveHandling: 'Disabled',
             heightSpec: 'BusinessHours',
+            onTimeRangeSelect: (args)=> {
+                var params = {
+                    scheduler: {
+                        start: args.start.toString(),
+                        end: args.end.toString(),
+                        text: "New event",
+                        id: DayPilot.guid()
+                    }
+                };
+                this.weekControl = this.$scope.week;
+                this.MasterResource.addTask( {id: this.master._id}, params ).$promise.then( (master) => {
+                    this.master = master;
+                    this.events = this.master.tasks.filter( (task)=> {return task != null;}).map( (task)=> {return task.scheduler;} )
+                    this.weekControl.update();
+                } );
+
+
+            },
+            onEventResize: (args)=> {
+                var params = {
+                    id: args.e.id(),
+                    newStart: args.newStart.toString(),
+                    newEnd: args.newEnd.toString()
+                };
+                var event = this.events.filter( (e)=> {
+                    return e.id == args.e.id()
+                } )
+                if (event.length > 0) {
+                    // event.start=args.newStart;
+                    //  event.start=args.newStart;
+                    //  this.tempEvents.splice( this.tempEvents.indexOf( event[0] ), 1, this.tempEvent );
+                }
+
+            },
             onEventClick: (args)=> {
                 this.$mdDialog.show( {
                     template: editOrderDialogTemplate,
-                    controller: MasterSchedulerComponentController,
+                    controller: EditDialogController,
                     controllerAs: '$ctrl',
                     bindToController: true,
                     locals: {
-                        tempEvents: this.events,
                         tempEvent: {
                             id: args.e.id(),
                             text: args.e.text(),
@@ -123,14 +185,13 @@ export class MasterSchedulerComponentController {
                     },
                     parent: angular.element( document.body ),
 
-                } ).then( (events) => {
-                    this.events = events;
-                    this.weekControl.update()
+                } ).then( (result) => {
+
+                    this.handleDialogResult( result );
                 } );
             }
         };
     };
-
 
     initNavigatorConfig() {
         this.navigatorConfig = {
@@ -147,51 +208,61 @@ export class MasterSchedulerComponentController {
         };
     }
 
-    addEvet(e) {
+    updateMaster(result) {
+        this.MasterResource.updateTask( {id: this.master._id}, result.event ).$promise.then( (task) => {
 
+            var event = this.events.filter( (e)=> {
+                return e.id == result.event.id;
+            } )
+            if (event.length > 0 && result.event) {
+                //this.tempEvents.splice( this.tempEvents.indexOf( event[0] ), 1, result.event.scheduler );
+            }
+        } );
+    }
+
+    deleteMasterTask(result) {
+
+        var tasks = this.master.tasks.filter( (t)=> {
+            return t.scheduler.id == result.event.id;
+        } );
+        if (tasks.length > 0) {
+            var deleteTask = tasks[0];
+            this.MasterResource.deleteTask( {id: this.master._id, taskId: deleteTask._id} ).$promise.then( (task) => {
+                this.master.tasks.splice( this.master.tasks.indexOf( deleteTask ), 1 );
+                var events = this.events.filter( (e)=> {
+                    return e.id == result.event.id;
+                } )
+                if (events.length > 0 && result.event) {
+                    this.events.splice( this.events.indexOf( events[0] ), 1 );
+                }
+            } );
+        }
+    }
+
+
+    handleDialogResult(result) {
+        switch (result.action) {
+            case "delete":
+                this.deleteMasterTask( result );
+                break;
+            case "save":
+                this.updateMaster( result );
+
+                break;
+            default:
+                throw "unnovn action";
+        }
         //  this.events = [];
     }
 
-    init() {
-        this.initWeekConfig();
-
-        this.initNavigatorConfig();
-
-
-    }
-
-    saveEvent() {
-        var event = this.tempEvents.filter( (e)=> {
-            return e.id == this.tempEvent.id
-        } )
-        if (event.length > 0) {
-            this.tempEvents.splice( this.tempEvents.indexOf( event[0] ), 1, this.tempEvent );
-        }
-        this.$mdDialog.hide( this.tempEvents );
-
-        this.$mdDialog.cancel();
-    }
-
-    deleteEvent() {
-
-        this.tempEvents.splice( this.tempEvents.indexOf( this.currentEvent ), 1 );
-        this.$mdDialog.hide( this.tempEvents );
-
-        this.$mdDialog.cancel();
-    }
-
-
-    cancel() {
-        this.$mdDialog.cancel();
-    }
 
     loadEvents() {
         // using $timeout to make sure all changes are applied before reading visibleStart() and visibleEnd()
         this.$timeout( function () {
             //   var params = {
-            //    start: this.week.visibleStart().toString(),
-            //    end: this.week.visibleEnd().toString()
-            // }
+            //     start: this.week.visibleStart().toString(),
+            //     end: this.week.visibleEnd().toString()
+            // }toString
             //  $http.post('@Url.Action("Events", "Backend")', params).success(function (data) {
             //     $scope.events = data;
             // });
