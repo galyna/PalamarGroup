@@ -6,7 +6,7 @@ import {Request} from "express-serve-static-core";
 import {currentUser} from "../auth/current_user";
 import {auth} from "../auth/auth";
 import {Router} from "express";
-import {IMasterModel, Master} from "../models/master";
+import {IMasterModel, Master, ITaskModel} from "../models/master";
 import {userApi} from "./user.endpoint";
 import ITask = pg.models.ITask;
 
@@ -43,24 +43,23 @@ tasksApi.route( '/task' )
     } )
     .put( auth, currentUser.is( 'salonModerator' ), async(req:any, res, next) => {
         let master:IMasterModel;
-        let newTask = req.query.task;
-        let task:ITask;
+
+        let task:ITaskModel;
         try {
             master = await Master.findOne( {_id: req.masterId} ).exec();
         } catch (err) {
-            return next( err );
+            next( err );
         }
 
         try {
-          //  task = master.tasks.id( req.body._id );
-            // Object.assign(task, req.body);
-            // course.comments.splice(course.comments.indexOf(comment),1,req.body);
+           task = master.tasks.id( req.body._id );
+             Object.assign(task, req.body);
             await master.save();
-
-            res.end( task );
+            res.json( task );
         } catch (err) {
             next( err );
         }
+        res.end();
     } )
 
 
@@ -69,12 +68,9 @@ tasksApi.route('/task/:taskId')
         let master:IMasterModel;
         try {
             master = await Master.findOne( {_id: req.masterId} ).exec();
-
         } catch (err) {
             return next( err );
         }
-
-
         try {
 
             master.tasks.remove(req.params.taskId);

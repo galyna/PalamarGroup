@@ -49,7 +49,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                         <md-button ng-click="$ctrl.deleteEvent()" aria-label="cancel">
                 Видалити
             </md-button>
-                        <md-button ng-click="$ctrl.saveEvent()" aria-label="cancel">
+                        <md-button ng-click="$ctrl.save()" aria-label="save">
                 Зберегти
             </md-button>
            
@@ -74,11 +74,11 @@ class EditDialogController {
         this.originaltempEvent = tempEvent;
     }
 
-    save($form:ng.IFormController) {
+    save() {
 
-            angular.extend( this.originaltempEvent, this.tempEvent );
-            this.$mdDialog.hide( {action: "save", event: this.originaltempEvent} );
-            }
+        angular.extend( this.originaltempEvent, this.tempEvent );
+        this.$mdDialog.hide( {action: "save", event: this.originaltempEvent} );
+    }
 
     deleteEvent() {
         this.$mdDialog.hide( {action: "delete", event: this.originaltempEvent} );
@@ -117,12 +117,16 @@ export class MasterSchedulerComponentController {
             this.MasterResource.get( {id: this.$routeParams["id"], populate: 'tasks'} ).$promise
                 .then( (master) => {
                     this.master = master;
-                    this.events = this.master.tasks? this.master.tasks.filter( (task)=> {return task != null;}).map( (task)=> {return task.scheduler;} ):[];
+                    this.events = this.master.tasks ? this.master.tasks.filter( (task)=> {
+                        return task != null;
+                    } ).map( (task)=> {
+                        return angular.copy( task.scheduler );
+                    } ) : [];
 
                 } );
         }
     }
-    
+
     initWeekConfig() {
         this.weekConfig = {
             visible: true,
@@ -147,27 +151,33 @@ export class MasterSchedulerComponentController {
                 this.weekControl = this.$scope.week;
                 this.MasterResource.addTask( {id: this.master._id}, params ).$promise.then( (master) => {
                     this.master = master;
-                    this.events = this.master.tasks.filter( (task)=> {return task != null;}).map( (task)=> {return task.scheduler;} )
+                    this.events = this.master.tasks.filter( (task)=> {
+                        return task != null;
+                    } ).map( (task)=> {
+                        return task.scheduler;
+                    } )
                     this.weekControl.update();
                 } );
 
 
             },
             onEventResize: (args)=> {
-                var params = {
+                var event = {
                     id: args.e.id(),
-                    newStart: args.newStart.toString(),
-                    newEnd: args.newEnd.toString()
+                    start: args.newStart.toString(),
+                    end: args.newEnd.toString(),
+                    text: args.e.text()
                 };
-                var event = this.events.filter( (e)=> {
-                    return e.id == args.e.id()
-                } )
-                if (event.length > 0) {
-                    // event.start=args.newStart;
-                    //  event.start=args.newStart;
-                    //  this.tempEvents.splice( this.tempEvents.indexOf( event[0] ), 1, this.tempEvent );
+                var tasks = this.master.tasks.filter( (task)=> {
+                    return task != null && task.scheduler.id === event.id;
+                } );
+                if (tasks.length > 0 && event) {
+                    var task = tasks[0];
+                    task.scheduler = event;
+                    this.MasterResource.updateTask( {id: this.master._id}, task ).$promise.then( (newTask) => {
+                        this.master.tasks.splice( this.master.tasks.indexOf( task ), 1, newTask );
+                    } );
                 }
-
             },
             onEventClick: (args)=> {
                 this.$mdDialog.show( {
@@ -208,31 +218,43 @@ export class MasterSchedulerComponentController {
         };
     }
 
-    updateMaster(result) {
-        this.MasterResource.updateTask( {id: this.master._id}, result.event ).$promise.then( (task) => {
-
-            var event = this.events.filter( (e)=> {
-                return e.id == result.event.id;
-            } )
-            if (event.length > 0 && result.event) {
-                //this.tempEvents.splice( this.tempEvents.indexOf( event[0] ), 1, result.event.scheduler );
-            }
+    updateMaster(event) {
+        var tasks = this.master.tasks.filter( (task)=> {
+            return task != null && task.scheduler.id === event.id;
         } );
+        if (tasks.length > 0 && event) {
+            var task = tasks[0];
+            task.scheduler.text = event.text;
+            task.scheduler.start = event.start.value;
+            task.scheduler.end = event.end.value;
+            ;
+            this.MasterResource.updateTask( {id: this.master._id}, task ).$promise.then( (newTask) => {
+                this.master.tasks.splice( this.master.tasks.indexOf( task ), 1, newTask );
+                var tempEvents = this.events.filter( (e)=> {
+                    return e.id == event.id;
+                } )
+
+                if (tempEvents.length > 0 && event) {
+                    this.events.splice( this.events.indexOf( tempEvents[0] ), 1, newTask.scheduler );
+                }
+            } );
+        }
+
     }
 
-    deleteMasterTask(result) {
+    deleteMasterTask(event) {
 
         var tasks = this.master.tasks.filter( (t)=> {
-            return t.scheduler.id == result.event.id;
+            return t.scheduler.id == event.id;
         } );
         if (tasks.length > 0) {
             var deleteTask = tasks[0];
             this.MasterResource.deleteTask( {id: this.master._id, taskId: deleteTask._id} ).$promise.then( (task) => {
                 this.master.tasks.splice( this.master.tasks.indexOf( deleteTask ), 1 );
                 var events = this.events.filter( (e)=> {
-                    return e.id == result.event.id;
+                    return e.id == event.id;
                 } )
-                if (events.length > 0 && result.event) {
+                if (events.length > 0 && event) {
                     this.events.splice( this.events.indexOf( events[0] ), 1 );
                 }
             } );
@@ -243,10 +265,10 @@ export class MasterSchedulerComponentController {
     handleDialogResult(result) {
         switch (result.action) {
             case "delete":
-                this.deleteMasterTask( result );
+                this.deleteMasterTask( result.event );
                 break;
             case "save":
-                this.updateMaster( result );
+                this.updateMaster( result.event );
 
                 break;
             default:

@@ -43,24 +43,23 @@ exports.tasksApi.route('/task')
 }))
     .put(auth_1.auth, current_user_1.currentUser.is('salonModerator'), (req, res, next) => __awaiter(this, void 0, void 0, function* () {
     let master;
-    let newTask = req.query.task;
     let task;
     try {
         master = yield master_1.Master.findOne({ _id: req.masterId }).exec();
     }
     catch (err) {
-        return next(err);
+        next(err);
     }
     try {
-        //  task = master.tasks.id( req.body._id );
-        // Object.assign(task, req.body);
-        // course.comments.splice(course.comments.indexOf(comment),1,req.body);
+        task = master.tasks.id(req.body._id);
+        Object.assign(task, req.body);
         yield master.save();
-        res.end(task);
+        res.json(task);
     }
     catch (err) {
         next(err);
     }
+    res.end();
 }));
 exports.tasksApi.route('/task/:taskId')
     .delete(auth_1.auth, current_user_1.currentUser.is('salonModerator'), (req, res, next) => __awaiter(this, void 0, void 0, function* () {
