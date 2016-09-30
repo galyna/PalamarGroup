@@ -13,7 +13,7 @@ export interface IScheduler  extends pg.models.IScheduler {
 }
 
 export interface IMasterResource extends ng.resource.IResourceClass<IMaster> {
-    addTask(params:{id:string}, task:any):IMaster;
+    addTask(params:{id:string}, task:any):ITask;
     updateTask(params:{id:string}, task:any):ITask;
     deleteTask(params:{id:string,taskId:string}):IMaster;
     getTasks(params:{id:string ,start:any,end:any}):ITask[];
@@ -40,8 +40,8 @@ export function MasterResource($resource:ng.resource.IResourceService, constants
     };
     let getTasksDescriptor:IActionDescriptor = {
         method: "GET",
-        params: {id: '@id', start: '@start', end: '@end'},
-        url: `${constants.apiUrl}/master/:id/task`,
+        params: {id: '@id', start: '@start',end: '@end',},
+        url: `${constants.apiUrl}/master/:id/tasks/:start/:end`,
         isArray: true,
     };
     return <IMasterResource>$resource( `${constants.apiUrl}/master/:id`, {id: '@_id'},

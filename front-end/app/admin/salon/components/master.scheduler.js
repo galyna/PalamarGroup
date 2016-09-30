@@ -9,7 +9,7 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                 master_resource_1 = master_resource_1_1;
             }],
         execute: function() {
-            template = "<div  layout=\"row\" layout-xs=\"column\">\n<div class=\"md-padding \" >\n    <daypilot-navigator style=\" width: 280px\" id=\"navi\"\n                        daypilot-config=\"$ctrl.navigatorConfig\"></daypilot-navigator>\n</div>\n<div flex class=\"md-padding \">\n    <daypilot-calendar id=\"week\" daypilot-config=\"$ctrl.weekConfig\" daypilot-events=\"$ctrl.events\"></daypilot-calendar>\n</div>\n\n</div>";
+            template = "<md-list flex ng-if=\"$ctrl.photo\">\n    <md-list-item class=\"md-1-line\">\n        <img ng-src=\"{{$ctrl.photo}}\" class=\"md-avatar\" alt=\"{{$ctrl.photo}}\"/>\n        <div class=\"md-list-item-text\" layout=\"column\">\n            <h3>{{::$ctrl.mname}}</h3>\n        </div>\n    </md-list-item>\n</md-list>\n<div layout=\"row\" layout-xs=\"column\">\n    <div class=\"md-padding \">\n        <daypilot-navigator style=\" width: 280px\" id=\"navi\"\n                            daypilot-config=\"$ctrl.navigatorConfig\"></daypilot-navigator>\n    </div>\n    <div flex class=\"md-padding \">\n        <daypilot-calendar id=\"week\" daypilot-config=\"$ctrl.weekConfig\"\n                           daypilot-events=\"$ctrl.events\"></daypilot-calendar>\n    </div>\n\n</div>";
             editOrderDialogTemplate = "<md-dialog aria-label=\"Order edit\" ng-cloak>\n  \n        <md-toolbar>\n            <div class=\"md-toolbar-tools\">\n                <h2 >\u0420\u0435\u0434\u0430\u0433\u0443\u0432\u0430\u0442\u0430 \u0437\u0430\u043C\u043E\u0432\u043B\u0435\u043D\u043D\u044F</h2>\n                <span flex></span>\n                <md-button class=\"md-icon-button\" ng-click=\"$ctrl.cancel()\">\n                    <md-icon md-svg-src=\"navigation:ic_close_24px\" aria-label=\"Close dialog\"></md-icon>\n                </md-button>\n            </div>\n            \n        </md-toolbar>\n        <md-dialog-content>\n            <div class=\"md-dialog-content\" layout=\"row\">\n                </md-input-container>\n                    <md-input-container class=\"md-block\">\n                    <label>\u0422\u0435\u0445\u0442</label>\n                    <input ng-disabled=\"::!$root.it.can('modifySalon')\" type=\"text\" ng-model=\"$ctrl.tempEvent.text\" >\n                </md-input-container>\n                 </md-input-container>\n                    <md-input-container class=\"md-block\">\n                    <label>\u0422\u0435\u0445\u0442</label>\n                    <input ng-disabled=\"::!$root.it.can('modifySalon')\" type=\"text\" ng-model=\"$ctrl.tempEvent.start.value\" >\n                </md-input-container>\n                 </md-input-container>\n                    <md-input-container class=\"md-block\">\n                    <label>\u0422\u0435\u0445\u0442</label>\n                    <input ng-disabled=\"::!$root.it.can('modifySalon')\" type=\"text\" ng-model=\"$ctrl.tempEvent.end.value\" >\n                </md-input-container>\n            </div>\n        </md-dialog-content>\n        <md-dialog-actions layout=\"row\" ng-if=\"::$root.it.can('modifySalon')\">\n         <span flex></span>\n         \n                        <md-button ng-click=\"$ctrl.deleteEvent()\" aria-label=\"cancel\">\n                \u0412\u0438\u0434\u0430\u043B\u0438\u0442\u0438\n            </md-button>\n                        <md-button ng-click=\"$ctrl.save()\" aria-label=\"save\">\n                \u0417\u0431\u0435\u0440\u0435\u0433\u0442\u0438\n            </md-button>\n           \n            <md-button ng-click=\"$ctrl.cancel()\" aria-label=\"cancel\">\n                \u0412\u0456\u0434\u043C\u0456\u043D\u0438\u0442\u0438\n            </md-button>\n\n        </md-dialog-actions>\n\n</md-dialog>\n";
             EditDialogController = (function () {
                 function EditDialogController($mdDialog, tempEvent) {
@@ -38,24 +38,39 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                     this.MasterResource = MasterResource;
                     this.$routeParams = $routeParams;
                     this.events = [];
+                    if (this.$routeParams["id"]) {
+                        this.masterId = this.$routeParams["id"];
+                    }
                     this.init();
                 }
                 MasterSchedulerComponentController.prototype.init = function () {
-                    this.initEvents();
                     this.initWeekConfig();
                     this.initNavigatorConfig();
+                    this.loadEvents(new Date());
                 };
-                MasterSchedulerComponentController.prototype.initEvents = function () {
+                MasterSchedulerComponentController.prototype.startAndEndOfWeek = function (date) {
+                    var now = date ? new Date(date) : new Date();
+                    now.setHours(0, 0, 0, 0);
+                    var monday = new Date(now);
+                    monday.setDate(monday.getDate() - monday.getDay() + 1);
+                    var sunday = new Date(now);
+                    sunday.setDate(sunday.getDate() - sunday.getDay() + 7);
+                    return [monday, sunday];
+                };
+                MasterSchedulerComponentController.prototype.loadEvents = function (start) {
                     var _this = this;
-                    if (this.$routeParams["id"]) {
-                        this.MasterResource.get({ id: this.$routeParams["id"], populate: 'tasks' }).$promise
-                            .then(function (master) {
-                            _this.master = master;
-                            _this.events = _this.master.tasks ? _this.master.tasks.filter(function (task) {
-                                return task != null;
-                            }).map(function (task) {
+                    if (this.masterId) {
+                        var days = this.startAndEndOfWeek(start);
+                        var params = {
+                            id: this.masterId,
+                            start: days[0].toISOString(),
+                            end: days[1].toISOString(),
+                        };
+                        this.MasterResource.getTasks(params).$promise.then(function (tasks) {
+                            _this.tasks = tasks;
+                            _this.events = _this.tasks.map(function (task) {
                                 return angular.copy(task.scheduler);
-                            }) : [];
+                            });
                         });
                     }
                 };
@@ -82,13 +97,9 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                                 }
                             };
                             _this.weekControl = _this.$scope.week;
-                            _this.MasterResource.addTask({ id: _this.master._id }, params).$promise.then(function (master) {
-                                _this.master = master;
-                                _this.events = _this.master.tasks.filter(function (task) {
-                                    return task != null;
-                                }).map(function (task) {
-                                    return task.scheduler;
-                                });
+                            _this.MasterResource.addTask({ id: _this.masterId }, params).$promise.then(function (task) {
+                                _this.tasks.push(task);
+                                _this.events.push(task.scheduler);
                                 _this.weekControl.update();
                             });
                         },
@@ -99,16 +110,7 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                                 end: args.newEnd.toString(),
                                 text: args.e.text()
                             };
-                            var tasks = _this.master.tasks.filter(function (task) {
-                                return task != null && task.scheduler.id === event.id;
-                            });
-                            if (tasks.length > 0 && event) {
-                                var task = tasks[0];
-                                task.scheduler = event;
-                                _this.MasterResource.updateTask({ id: _this.master._id }, task).$promise.then(function (newTask) {
-                                    _this.master.tasks.splice(_this.master.tasks.indexOf(task), 1, newTask);
-                                });
-                            }
+                            _this.updateMasteronResize(event);
                         },
                         onEventClick: function (args) {
                             _this.$mdDialog.show({
@@ -131,7 +133,6 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                         }
                     };
                 };
-                ;
                 MasterSchedulerComponentController.prototype.initNavigatorConfig = function () {
                     var _this = this;
                     this.navigatorConfig = {
@@ -143,49 +144,9 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                         cellWidth: "30",
                         onTimeRangeSelected: function (args) {
                             _this.weekConfig.startDate = args.day;
-                            _this.loadEvents();
+                            _this.loadEvents(args.day);
                         }
                     };
-                };
-                MasterSchedulerComponentController.prototype.updateMaster = function (event) {
-                    var _this = this;
-                    var tasks = this.master.tasks.filter(function (task) {
-                        return task != null && task.scheduler.id === event.id;
-                    });
-                    if (tasks.length > 0 && event) {
-                        var task = tasks[0];
-                        task.scheduler.text = event.text;
-                        task.scheduler.start = event.start.value;
-                        task.scheduler.end = event.end.value;
-                        ;
-                        this.MasterResource.updateTask({ id: this.master._id }, task).$promise.then(function (newTask) {
-                            _this.master.tasks.splice(_this.master.tasks.indexOf(task), 1, newTask);
-                            var tempEvents = _this.events.filter(function (e) {
-                                return e.id == event.id;
-                            });
-                            if (tempEvents.length > 0 && event) {
-                                _this.events.splice(_this.events.indexOf(tempEvents[0]), 1, newTask.scheduler);
-                            }
-                        });
-                    }
-                };
-                MasterSchedulerComponentController.prototype.deleteMasterTask = function (event) {
-                    var _this = this;
-                    var tasks = this.master.tasks.filter(function (t) {
-                        return t.scheduler.id == event.id;
-                    });
-                    if (tasks.length > 0) {
-                        var deleteTask = tasks[0];
-                        this.MasterResource.deleteTask({ id: this.master._id, taskId: deleteTask._id }).$promise.then(function (task) {
-                            _this.master.tasks.splice(_this.master.tasks.indexOf(deleteTask), 1);
-                            var events = _this.events.filter(function (e) {
-                                return e.id == event.id;
-                            });
-                            if (events.length > 0 && event) {
-                                _this.events.splice(_this.events.indexOf(events[0]), 1);
-                            }
-                        });
-                    }
                 };
                 MasterSchedulerComponentController.prototype.handleDialogResult = function (result) {
                     switch (result.action) {
@@ -196,30 +157,74 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                             this.updateMaster(result.event);
                             break;
                         default:
-                            throw "unnovn action";
+                            throw "unknown action";
                     }
-                    //  this.events = [];
                 };
-                MasterSchedulerComponentController.prototype.loadEvents = function () {
-                    // using $timeout to make sure all changes are applied before reading visibleStart() and visibleEnd()
-                    this.$timeout(function () {
-                        //   var params = {
-                        //     start: this.week.visibleStart().toString(),
-                        //     end: this.week.visibleEnd().toString()
-                        // }toString
-                        //  $http.post('@Url.Action("Events", "Backend")', params).success(function (data) {
-                        //     $scope.events = data;
-                        // });
+                MasterSchedulerComponentController.prototype.updateMaster = function (event) {
+                    var _this = this;
+                    var tasks = this.tasks.filter(function (task) {
+                        return task != null && task.scheduler.id === event.id;
                     });
+                    if (tasks.length > 0 && event) {
+                        var task = tasks[0];
+                        task.scheduler.text = event.text;
+                        task.scheduler.start = event.start.value;
+                        task.scheduler.end = event.end.value;
+                        ;
+                        this.MasterResource.updateTask({ id: this.masterId }, task).$promise.then(function (newTask) {
+                            _this.tasks.splice(_this.tasks.indexOf(task), 1, newTask);
+                            var tempEvents = _this.events.filter(function (e) {
+                                return e.id == event.id;
+                            });
+                            if (tempEvents.length > 0 && event) {
+                                _this.events.splice(_this.events.indexOf(tempEvents[0]), 1, newTask.scheduler);
+                            }
+                        });
+                    }
+                };
+                MasterSchedulerComponentController.prototype.updateMasteronResize = function (event) {
+                    var _this = this;
+                    var tasks = this.tasks.filter(function (task) {
+                        return task != null && task.scheduler.id === event.id;
+                    });
+                    if (tasks.length > 0 && event) {
+                        var task = tasks[0];
+                        task.scheduler = event;
+                        this.MasterResource.updateTask({ id: this.masterId }, task).$promise.then(function (newTask) {
+                            _this.tasks.splice(_this.tasks.indexOf(task), 1, newTask);
+                        });
+                    }
+                };
+                MasterSchedulerComponentController.prototype.deleteMasterTask = function (event) {
+                    var _this = this;
+                    var tasks = this.tasks.filter(function (t) {
+                        return t.scheduler.id == event.id;
+                    });
+                    if (tasks.length > 0) {
+                        var deleteTask = tasks[0];
+                        this.MasterResource.deleteTask({ id: this.masterId, taskId: deleteTask._id }).$promise.then(function (task) {
+                            _this.tasks.splice(_this.tasks.indexOf(deleteTask), 1);
+                            var events = _this.events.filter(function (e) {
+                                return e.id == event.id;
+                            });
+                            if (events.length > 0 && event) {
+                                _this.events.splice(_this.events.indexOf(events[0]), 1);
+                            }
+                        });
+                    }
                 };
                 MasterSchedulerComponentController.$inject = ['$timeout', "$mdDialog", "$scope", master_resource_1.MasterResourceName, "$routeParams"];
                 return MasterSchedulerComponentController;
             }());
             exports_1("MasterSchedulerComponentController", MasterSchedulerComponentController);
-            exports_1("MasterSchedulerComponentName", MasterSchedulerComponentName = 'pgMasterSceduler');
+            exports_1("MasterSchedulerComponentName", MasterSchedulerComponentName = 'pgMasterScheduler');
             exports_1("MasterSchedulerComponentOptions", MasterSchedulerComponentOptions = {
                 controller: MasterSchedulerComponentController,
-                template: template
+                template: template,
+                bindings: {
+                    mname: "=",
+                    photo: '='
+                }
             });
         }
     }

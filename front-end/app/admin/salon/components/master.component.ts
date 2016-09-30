@@ -24,7 +24,7 @@ const template:string = `<div flex layout="column">
     </md-toolbar>
     <md-tabs md-stretch-tabs="always" md-dynamic-height>
         <md-tab label="Графік">
-            <pg-master-sceduler master="$ctrl.master"></pg-master-sceduler>
+            <pg-master-scheduler mname="$ctrl.master.name" photo="$ctrl.master.photo.url"></pg-master-scheduler>
         </md-tab>
         <md-tab label="Інфо">
             <md-card>

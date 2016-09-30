@@ -24,7 +24,7 @@ export let tasksOptions:IOptions = {
 tasksApi.route( '/task' )
     .post( auth, currentUser.is( 'salonModerator' ), async(req:any, res, next) => {
         let master:IMasterModel;
-        let newTask = req.query.task;
+        let event = req.query.task;
         try {
             master = await Master.findOne( {_id: req.masterId} ).exec();
         } catch (err) {
@@ -33,8 +33,13 @@ tasksApi.route( '/task' )
         try {
             master.tasks.push( req.body );
             await master.save();
-           // newTask = master.tasks.find((t)=>{return t.scheduler.id==newTask.scheduler.id });
-            res.json( master );
+            var tasks = master.tasks.filter( (task)=> {
+                return task && task.scheduler.id == req.body.scheduler.id;
+            } );
+            if (tasks.length > 0) {
+                res.json( tasks[0] );
+            }
+
         } catch (err) {
             return next( err );
         }
@@ -52,10 +57,16 @@ tasksApi.route( '/task' )
         }
 
         try {
-           task = master.tasks.id( req.body._id );
-             Object.assign(task, req.body);
-            await master.save();
-            res.json( task );
+
+            var tasks = master.tasks.filter( (task)=> {
+                return task && task._id == req.body._id;
+            } );
+            if (tasks.length > 0) {
+                Object.assign( tasks[0], req.body );
+                await master.save();
+                res.json( tasks[0] );
+            }else { res.status(500)}
+
         } catch (err) {
             next( err );
         }
@@ -63,8 +74,8 @@ tasksApi.route( '/task' )
     } )
 
 
-tasksApi.route('/task/:taskId')
-    .delete( auth, currentUser.is( 'salonModerator' ),async(req:any, res,next) => {
+tasksApi.route( '/task/:taskId' )
+    .delete( auth, currentUser.is( 'salonModerator' ), async(req:any, res, next) => {
         let master:IMasterModel;
         try {
             master = await Master.findOne( {_id: req.masterId} ).exec();
@@ -73,9 +84,30 @@ tasksApi.route('/task/:taskId')
         }
         try {
 
-            master.tasks.remove(req.params.taskId);
+            master.tasks.remove( req.params.taskId );
             await master.save();
-            res.json({course: master});
+            res.json( {course: master} );
+        } catch (err) {
+            return next( err );
+        }
+        res.end();
+    } );
+
+tasksApi.route( '/tasks/:start/:end' )
+    .get( async(req:any, res, next) => {
+        let master:IMasterModel;
+        try {
+            master = await Master.findOne( {_id: req.masterId} ).exec();
+        } catch (err) {
+            return next( err );
+        }
+        try {
+
+            var tasks = master.tasks.filter( (task)=> {
+                return task && task.scheduler.start > new Date( req.params.start ) && task.scheduler.start < new Date( req.params.end );
+            } );
+
+            res.json( tasks );
         } catch (err) {
             return next( err );
         }

@@ -23,7 +23,7 @@ exports.tasksOptions = {
 exports.tasksApi.route('/task')
     .post(auth_1.auth, current_user_1.currentUser.is('salonModerator'), (req, res, next) => __awaiter(this, void 0, void 0, function* () {
     let master;
-    let newTask = req.query.task;
+    let event = req.query.task;
     try {
         master = yield master_1.Master.findOne({ _id: req.masterId }).exec();
     }
@@ -33,8 +33,12 @@ exports.tasksApi.route('/task')
     try {
         master.tasks.push(req.body);
         yield master.save();
-        // newTask = master.tasks.find((t)=>{return t.scheduler.id==newTask.scheduler.id });
-        res.json(master);
+        var tasks = master.tasks.filter((task) => {
+            return task && task.scheduler.id == req.body.scheduler.id;
+        });
+        if (tasks.length > 0) {
+            res.json(tasks[0]);
+        }
     }
     catch (err) {
         return next(err);
@@ -51,10 +55,17 @@ exports.tasksApi.route('/task')
         next(err);
     }
     try {
-        task = master.tasks.id(req.body._id);
-        Object.assign(task, req.body);
-        yield master.save();
-        res.json(task);
+        var tasks = master.tasks.filter((task) => {
+            return task && task._id == req.body._id;
+        });
+        if (tasks.length > 0) {
+            Object.assign(tasks[0], req.body);
+            yield master.save();
+            res.json(tasks[0]);
+        }
+        else {
+            res.status(500);
+        }
     }
     catch (err) {
         next(err);
@@ -74,6 +85,26 @@ exports.tasksApi.route('/task/:taskId')
         master.tasks.remove(req.params.taskId);
         yield master.save();
         res.json({ course: master });
+    }
+    catch (err) {
+        return next(err);
+    }
+    res.end();
+}));
+exports.tasksApi.route('/tasks/:start/:end')
+    .get((req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    let master;
+    try {
+        master = yield master_1.Master.findOne({ _id: req.masterId }).exec();
+    }
+    catch (err) {
+        return next(err);
+    }
+    try {
+        var tasks = master.tasks.filter((task) => {
+            return task && task.scheduler.start > new Date(req.params.start) && task.scheduler.start < new Date(req.params.end);
+        });
+        res.json(tasks);
     }
     catch (err) {
         return next(err);
