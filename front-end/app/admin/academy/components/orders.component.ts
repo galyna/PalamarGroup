@@ -205,6 +205,8 @@ export class AdminOrdersController {
                 return this.deleteOrder( order );
             } );
     }
+    
+    
 
     deleteOrder(order:IOrder) {
 

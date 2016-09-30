@@ -56,7 +56,7 @@ exports.tasksApi.route('/task')
     }
     try {
         var tasks = master.tasks.filter((task) => {
-            return task && task._id == req.body._id;
+            return task && task._id == req.body._idll;
         });
         if (tasks.length > 0) {
             Object.assign(tasks[0], req.body);
@@ -64,7 +64,7 @@ exports.tasksApi.route('/task')
             res.json(tasks[0]);
         }
         else {
-            res.status(500);
+            res.status(500).send(" task not found");
         }
     }
     catch (err) {

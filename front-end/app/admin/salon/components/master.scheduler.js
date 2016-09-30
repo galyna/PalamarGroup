@@ -31,7 +31,8 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                 return EditDialogController;
             }());
             MasterSchedulerComponentController = (function () {
-                function MasterSchedulerComponentController($timeout, $mdDialog, $scope, MasterResource, $routeParams) {
+                function MasterSchedulerComponentController($log, $timeout, $mdDialog, $scope, MasterResource, $routeParams) {
+                    this.$log = $log;
                     this.$timeout = $timeout;
                     this.$mdDialog = $mdDialog;
                     this.$scope = $scope;
@@ -71,6 +72,9 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                             _this.events = _this.tasks.map(function (task) {
                                 return angular.copy(task.scheduler);
                             });
+                        }).catch(function (err) {
+                            _this.$log.error(err);
+                            _this.showErrorDialog();
                         });
                     }
                 };
@@ -96,11 +100,10 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                                     id: DayPilot.guid()
                                 }
                             };
-                            _this.weekControl = _this.$scope.week;
                             _this.MasterResource.addTask({ id: _this.masterId }, params).$promise.then(function (task) {
                                 _this.tasks.push(task);
                                 _this.events.push(task.scheduler);
-                                _this.weekControl.update();
+                                _this.$scope.week.update();
                             });
                         },
                         onEventResize: function (args) {
@@ -110,7 +113,23 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                                 end: args.newEnd.toString(),
                                 text: args.e.text()
                             };
-                            _this.updateMasteronResize(event);
+                            var originalTask;
+                            var tasks = _this.tasks.filter(function (task) {
+                                return task != null && task.scheduler.id === event.id;
+                            });
+                            if (tasks.length > 0 && event) {
+                                var task = tasks[0];
+                                originalTask = angular.copy(task);
+                                task.scheduler = event;
+                                _this.MasterResource.updateTask({ id: _this.masterId }, task).$promise.then(function (newTask) {
+                                    _this.tasks.splice(_this.tasks.indexOf(task), 1, newTask);
+                                }).catch(function (err) {
+                                    _this.revertResize(originalTask);
+                                    _this.$scope.week.update();
+                                    _this.$log.error(err);
+                                    _this.showErrorDialog();
+                                });
+                            }
                         },
                         onEventClick: function (args) {
                             _this.$mdDialog.show({
@@ -179,20 +198,37 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                             if (tempEvents.length > 0 && event) {
                                 _this.events.splice(_this.events.indexOf(tempEvents[0]), 1, newTask.scheduler);
                             }
+                        }).catch(function (err) {
+                            _this.$log.error(err);
+                            _this.showErrorDialog();
                         });
                     }
                 };
-                MasterSchedulerComponentController.prototype.updateMasteronResize = function (event) {
+                MasterSchedulerComponentController.prototype.updateMasterOnResize = function (event) {
                     var _this = this;
+                    var originalTask;
                     var tasks = this.tasks.filter(function (task) {
                         return task != null && task.scheduler.id === event.id;
                     });
                     if (tasks.length > 0 && event) {
                         var task = tasks[0];
+                        originalTask = task;
                         task.scheduler = event;
                         this.MasterResource.updateTask({ id: this.masterId }, task).$promise.then(function (newTask) {
                             _this.tasks.splice(_this.tasks.indexOf(task), 1, newTask);
+                        }).catch(function (err) {
+                            _this.revertResize(originalTask);
+                            _this.$log.error(err);
+                            _this.showErrorDialog();
                         });
+                    }
+                };
+                MasterSchedulerComponentController.prototype.revertResize = function (originalTask) {
+                    var events = this.events.filter(function (e) {
+                        return e.id == originalTask.scheduler.id;
+                    });
+                    if (events.length > 0) {
+                        this.events.splice(this.events.indexOf(events[0]), 1, originalTask.scheduler);
                     }
                 };
                 MasterSchedulerComponentController.prototype.deleteMasterTask = function (event) {
@@ -210,10 +246,21 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                             if (events.length > 0 && event) {
                                 _this.events.splice(_this.events.indexOf(events[0]), 1);
                             }
+                        }).catch(function (err) {
+                            _this.$log.error(err);
+                            _this.showErrorDialog();
                         });
                     }
                 };
-                MasterSchedulerComponentController.$inject = ['$timeout', "$mdDialog", "$scope", master_resource_1.MasterResourceName, "$routeParams"];
+                MasterSchedulerComponentController.prototype.showErrorDialog = function () {
+                    var confirm = this.$mdDialog.alert()
+                        .title("Помилка")
+                        .textContent("\u0421\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 \u0431\u0443\u0434\u044C \u043B\u0430\u0441\u043A\u0430 \u043F\u0456\u0437\u043D\u0456\u0448\u0435")
+                        .ariaLabel("Помилка")
+                        .ok('OK');
+                    return this.$mdDialog.show(confirm);
+                };
+                MasterSchedulerComponentController.$inject = ["$log", '$timeout', "$mdDialog", "$scope", master_resource_1.MasterResourceName, "$routeParams"];
                 return MasterSchedulerComponentController;
             }());
             exports_1("MasterSchedulerComponentController", MasterSchedulerComponentController);
