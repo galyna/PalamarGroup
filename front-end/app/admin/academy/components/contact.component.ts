@@ -1,8 +1,7 @@
-import {ContactResourceName,IContactResource,IContact} from "../../../resources/contact.resource";
+import {ContactResourceName, IContactResource, IContact} from "../../../resources/contact.resource";
 import {IConstants} from "../../../core/core.config";
 import {PhotoServiceName, PhotoService} from "../../../resources/photo.service";
 import IPhoto = pg.models.IPhoto;
-
 
 
 const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
@@ -87,18 +86,18 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
 export class ContactComponentController {
 
     static $inject = ["$log", "$routeParams", "$mdToast", "$timeout",
-        ContactResourceName, 'constants', PhotoServiceName];
+        ContactResourceName, 'constants', PhotoServiceName, "$mdDialog"];
 
     originalContact:IContact;
     contact:IContact;
     showPhotoUpload:boolean;
 
 
-
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
                 private contactResource:IContactResource,
-                private constants:IConstants, private photoService:PhotoService) {
+                private constants:IConstants, private photoService:PhotoService,
+                private $mdDialog:ng.material.IDialogService) {
     }
 
 
@@ -108,7 +107,10 @@ export class ContactComponentController {
                 .then( (favor) => {
                     this.originalContact = favor;
                     this.contact = angular.copy( this.originalContact );
-                } );
+                } ).catch( (err)=> {
+                this.$log.error( err );
+                this.showErrorDialog();
+            } );
         } else {
             this.originalContact = new this.contactResource();
             this.contact = angular.copy( this.originalContact );
@@ -125,6 +127,7 @@ export class ContactComponentController {
                     order: 0
                 }
             } ).catch( (err) => {
+                this.showErrorDialog();
             this.$log.debug( "fail upload file..." + err );
         } ).finally( () => {
             this.$timeout( () => {
@@ -133,9 +136,6 @@ export class ContactComponentController {
         } );
     };
 
-    showErrorToast(text = 'Помилка, спробуйте пізніше') {
-        this.$mdToast.showSimple( text );
-    }
 
     cancel() {
         this.contact = angular.copy( this.originalContact );
@@ -143,17 +143,26 @@ export class ContactComponentController {
 
     save(form:ng.IFormController) {
         if (form.$invalid) return;
-        this.contact.isAcademy=true;
+        this.contact.isAcademy = true;
         this.contact.$save()
             .then( (favor) => {
                 this.$mdToast.showSimple( `Дані контакту збережено` );
             } )
             .catch( (err)=> {
                 this.$log.error( err );
-                this.showErrorToast();
+                this.showErrorDialog();
             } );
     }
 
+    showErrorDialog() {
+        let confirm = this.$mdDialog.alert()
+            .title( "Помилка" )
+            .textContent( `Спробуйте будь ласка пізніше` )
+            .ariaLabel( "Помилка" )
+            .ok( 'OK' )
+        return this.$mdDialog.show( confirm );
+
+    }
 
 }
 

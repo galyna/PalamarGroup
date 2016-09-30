@@ -93,8 +93,8 @@ export class FavorsComponentController {
     deleteFavor(favor:IFavor) {
         favor.$delete().then( () => {
             this.$mdToast.showSimple( `Замовлення видалено` );
-        } ).catch( (err) => {
-            this.$mdToast.showSimple( err.message );
+        } ).catch( (err)=> {
+            this.showErrorDialog();
         } ).finally( ()=> {
             this.showPage( this.pagingService.currentPage() );
         } );
@@ -107,6 +107,15 @@ export class FavorsComponentController {
                 this.pagingService.update( {page: page, perPage: perPage, total: total} );
                 this.paging = angular.copy( this.pagingService.params() );
             } );
+    }
+    showErrorDialog() {
+        let confirm = this.$mdDialog.alert()
+            .title( "Помилка" )
+            .textContent( `Спробуйте будь ласка пізніше` )
+            .ariaLabel( "Помилка" )
+            .ok( 'OK' )
+        return this.$mdDialog.show( confirm );
+
     }
 }
 

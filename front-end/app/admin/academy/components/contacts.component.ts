@@ -82,8 +82,8 @@ export class ContactsComponentController {
     deleteFavor(contact:IContact) {
         contact.$delete().then( () => {
             this.$mdToast.showSimple( `Адміністратора видалено` );
-        } ).catch( (err) => {
-            this.$mdToast.showSimple( err.message );
+        } ).catch( (err)=> {
+            this.showErrorDialog();
         } ).finally( ()=> {
             this.showPage( this.pagingService.currentPage() );
         } );
@@ -96,6 +96,15 @@ export class ContactsComponentController {
                 this.pagingService.update( {page: page, perPage: perPage, total: total} );
                 this.paging = angular.copy( this.pagingService.params() );
             } );
+    }
+    showErrorDialog() {
+        let confirm = this.$mdDialog.alert()
+            .title( "Помилка" )
+            .textContent( `Спробуйте будь ласка пізніше` )
+            .ariaLabel( "Помилка" )
+            .ok( 'OK' )
+        return this.$mdDialog.show( confirm );
+
     }
 }
 

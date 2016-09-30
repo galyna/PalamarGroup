@@ -89,7 +89,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
 
 export class FavorComponentController {
 
-    static $inject = ["$log", "$routeParams", "$mdToast", "$timeout",
+    static $inject = ["$log", "$routeParams", "$mdToast", "$timeout", '$mdDialog',
         FavorResourceName, 'constants', PhotoServiceName];
 
     originalFavor:IFavor;
@@ -100,7 +100,7 @@ export class FavorComponentController {
 
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
-                private favorResource:IFavorResource,
+                private favorResource:IFavorResource, private $mdDialog:ng.material.IDialogService,
                 private constants:IConstants, private photoService:PhotoService) {
     }
 
@@ -125,8 +125,9 @@ export class FavorComponentController {
                 model.photo = {
                     url: url
                 }
-            } ).catch( (err) => {
-            this.$log.debug( "fail upload file..." + err );
+            } ).catch( (err)=> {
+            this.$log.error( err );
+            this.showErrorDialog();
         } ).finally( () => {
             this.$timeout( () => {
                 this.showPhotoUpload = false;
@@ -134,9 +135,6 @@ export class FavorComponentController {
         } );
     };
 
-    showErrorToast(text = 'Помилка, спробуйте пізніше') {
-        this.$mdToast.showSimple( text );
-    }
 
     cancel() {
         this.favor = angular.copy( this.originalFavor );
@@ -150,10 +148,19 @@ export class FavorComponentController {
             } )
             .catch( (err)=> {
                 this.$log.error( err );
-                this.showErrorToast();
+                this.showErrorDialog();
             } );
     }
 
+    showErrorDialog() {
+        let confirm = this.$mdDialog.alert()
+            .title( "Помилка" )
+            .textContent( `Спробуйте будь ласка пізніше` )
+            .ariaLabel( "Помилка" )
+            .ok( 'OK' )
+        return this.$mdDialog.show( confirm );
+
+    }
 
 }
 

@@ -168,7 +168,7 @@ const template:string = `<div flex layout="column">
 export class MasterComponentController {
     static $inject = ["$log", "$routeParams", "$mdToast",
         "$timeout", PhotoServiceName, MasterResourceName,
-        "Upload", FavorResourceName];
+        "Upload", FavorResourceName, '$mdDialog'];
 
     originalMaster:IMaster;
     master:IMaster;
@@ -176,15 +176,16 @@ export class MasterComponentController {
     showWorkUpload:boolean;
     favors:IFavor[];
     newService:IMasterFavor;
-    
+
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
                 private photoService:PhotoService, private MasterResource:IMasterResource,
-                private Upload:ng.angularFileUpload.IUploadService, private favorResource:IFavorResource) {
+                private Upload:ng.angularFileUpload.IUploadService, private favorResource:IFavorResource,
+                private $mdDialog:ng.material.IDialogService) {
     }
 
     $onInit() {
-       
+
         this.favors = this.favorResource.query();
 
         if (this.$routeParams["id"]) {
@@ -192,7 +193,10 @@ export class MasterComponentController {
                 .then( (master) => {
                     this.originalMaster = master;
                     this.master = angular.copy( this.originalMaster );
-                } );
+                } ).catch( (err)=> {
+                this.$log.error( err );
+                this.showErrorDialog();
+            } );
         } else {
             this.originalMaster = new this.MasterResource();
             this.master = angular.copy( this.originalMaster );
@@ -204,15 +208,15 @@ export class MasterComponentController {
         this.master = angular.copy( this.originalMaster );
     }
 
-    save(form:ng.IFormController) {
-        if (form.$invalid) return;
+    save() {
+
         this.master.$save( {populate: 'services.favor'} )
             .then( (master) => {
                 this.$mdToast.showSimple( `Дані майстра збережено` );
             } )
             .catch( (err)=> {
                 this.$log.error( err );
-                this.showErrorToast();
+                this.showErrorDialog();
             } );
     }
 
@@ -247,8 +251,9 @@ export class MasterComponentController {
                 model.photo = {
                     url: url
                 }
-            } ).catch( (err) => {
-            this.$log.debug( "fail upload file..." + err );
+            } ).catch( (err)=> {
+            this.$log.error( err );
+            this.showErrorDialog();
         } ).finally( () => {
             this.$timeout( () => {
                 this.showPhotoUpload = false;
@@ -265,23 +270,28 @@ export class MasterComponentController {
                 order: 0
             } );
         } ).catch( (err)=> {
-            this.$log.debug( "fail upload file..." + err );
+            this.$log.error( err );
+            this.showErrorDialog();
         } ).finally( ()=> {
             this.showWorkUpload = false;
         } );
     }
 
-    showErrorToast(text = 'Помилка, спробуйте пізніше') {
-        this.$mdToast.showSimple( text );
-    }
 
-    //noinspection JSMethodCanBeStatic
     deleteFromList(list:any[], item:any) {
         list.splice( list.indexOf( item ), 1 );
     }
 
 
-;
+    showErrorDialog() {
+        let confirm = this.$mdDialog.alert()
+            .title( "Помилка" )
+            .textContent( `Спробуйте будь ласка пізніше` )
+            .ariaLabel( "Помилка" )
+            .ok( 'OK' )
+        return this.$mdDialog.show( confirm );
+
+    }
 
 
 }

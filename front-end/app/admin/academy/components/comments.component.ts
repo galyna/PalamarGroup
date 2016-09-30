@@ -169,8 +169,9 @@ export class CommentsComponentController {
             .then( ()=> {
                 this.$mdToast.showSimple( this.confirmMsg.isSaved );
             } )
-            .catch( (err) => {
-                this.$mdToast.showSimple( err.message );
+            .catch( (err)=> {
+                this.$log.error( err );
+                this.showErrorDialog();
             } ).finally( ()=> {
             this.showPage( this.pagingService.currentPage() );
         } );
@@ -198,10 +199,10 @@ export class CommentsComponentController {
             this.comments.splice( this.comments.indexOf( comment ), 1 );
             this.$mdToast.showSimple( this.confirmMsg.isDeleted );
         } )
-            .catch( (err) => {
-                    this.$log.error( err );
-                }
-            ).finally( ()=> {
+            .catch( (err)=> {
+                this.$log.error( err );
+                this.showErrorDialog();
+            } ).finally( ()=> {
             this.showPage( this.pagingService.currentPage() );
         } );
 
@@ -225,10 +226,10 @@ export class CommentsComponentController {
                 this.$mdToast.showSimple( this.confirmMsg.isNotVisible );
             }
         } )
-            .catch( (err) => {
-                    this.$mdToast.showSimple( err.message );
-                }
-            )
+            .catch( (err)=> {
+                this.$log.error( err );
+                this.showErrorDialog();
+            } );
     }
 
     //noinspection JSMethodCanBeStatic
@@ -236,9 +237,10 @@ export class CommentsComponentController {
         if (comment.isModerated) return;
         comment.isModerated = true;
         this.CourseResource.editComment( {id: comment.courseId}, {isModerated: true} ).$promise
-            .catch( (err) => {
-                this.$mdToast.showSimple( err.message );
-            } );
+            .catch( (err)=> {
+                this.$log.error( err );
+                this.showErrorDialog();
+            } );;
     }
 
     prev() {
@@ -278,6 +280,15 @@ export class CommentsComponentController {
             isNotAnswered: 'Відгук не перевірено',
             isSaved: 'Відгук збережено'
         };
+    }
+    showErrorDialog() {
+        let confirm = this.$mdDialog.alert()
+            .title( "Помилка" )
+            .textContent( `Спробуйте будь ласка пізніше` )
+            .ariaLabel( "Помилка" )
+            .ok( 'OK' )
+        return this.$mdDialog.show( confirm );
+
     }
 }
 

@@ -105,7 +105,6 @@ export class MasterSchedulerComponentController {
     masterId:string;
     events:IScheduler[];
     weekConfig:any;
-    weekControl:any;
     navigatorConfig:any;
     tempEvent:IScheduler;
     tasks:ITask[];

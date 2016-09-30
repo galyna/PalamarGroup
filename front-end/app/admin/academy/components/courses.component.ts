@@ -81,10 +81,10 @@ export class AdminCoursesController {
             .then((course) => {
                 this.$mdToast.showSimple(`курс ${course.name} видалено`);
             })
-            .catch((err) => {
-                this.$log.error(err);
-                this.showErrorToast()
-            })
+            .catch( (err)=> {
+                this.$log.error( err );
+                this.showErrorDialog();
+            } )
             .finally(()=> {
                 this.courses = this.getCourses();
             });
@@ -97,7 +97,10 @@ export class AdminCoursesController {
         newCourse.isVisible = false;
         newCourse.$save()
             .then(this.showEditForm.bind(this))
-            .catch(this.showErrorToast.bind(this));
+            .catch( (err)=> {
+                this.$log.error( err );
+                this.showErrorDialog();
+            } );
     }
 
     //noinspection JSMethodCanBeStatic
@@ -105,8 +108,15 @@ export class AdminCoursesController {
         list.splice(list.indexOf(item), 1);
     }
 
-    showErrorToast(text = 'Помилка, спробуйте пізніше') {
-        this.$mdToast.showSimple(text);
+
+    showErrorDialog() {
+        let confirm = this.$mdDialog.alert()
+            .title( "Помилка" )
+            .textContent( `Спробуйте будь ласка пізніше` )
+            .ariaLabel( "Помилка" )
+            .ok( 'OK' )
+        return this.$mdDialog.show( confirm );
+
     }
 }
 

@@ -59,7 +59,7 @@ tasksApi.route( '/task' )
         try {
 
             var tasks = master.tasks.filter( (task)=> {
-                return task && task._id == req.body._idll;
+                return task && task._id == req.body._id;
             } );
             if (tasks.length > 0) {
                 Object.assign( tasks[0], req.body );

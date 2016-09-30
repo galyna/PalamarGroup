@@ -142,7 +142,8 @@ export class AdminOrdersController {
     private order:IOrder;
     private originalOrder:IOrder;
 
-    constructor(private $filter:ng.IFilterService, private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService,
+    constructor(private $filter:ng.IFilterService, private $mdDialog:ng.material.IDialogService,
+                private $mdToast:ng.material.IToastService,
                 private $mdMedia:ng.material.IMedia, private orderResource:IOrderResource,
                 private pagingService:PagingService) {
 
@@ -173,8 +174,8 @@ export class AdminOrdersController {
 
         order.$save().then( () => {
             this.$mdToast.showSimple( `Запис збережено` );
-        } ).catch( (err) => {
-            this.$mdToast.showSimple( err.message );
+        } ).catch( (err)=> {
+            this.showErrorDialog();
         } ).finally( ()=> {
             this.showPage( this.pagingService.currentPage() );
         } );
@@ -205,8 +206,16 @@ export class AdminOrdersController {
                 return this.deleteOrder( order );
             } );
     }
-    
-    
+
+    showErrorDialog() {
+        let confirm = this.$mdDialog.alert()
+            .title( "Помилка" )
+            .textContent( `Спробуйте будь ласка пізніше` )
+            .ariaLabel( "Помилка" )
+            .ok( 'OK' )
+        return this.$mdDialog.show( confirm );
+
+    }
 
     deleteOrder(order:IOrder) {
 

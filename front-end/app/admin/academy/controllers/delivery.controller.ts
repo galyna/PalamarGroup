@@ -47,7 +47,8 @@ export class AcademyDeliveryController {
                 return this.initSalons();
             } )
             .catch( (err)=> {
-                this.$log.debug( "fail createSalon..." + err );
+                this.$log.error( err );
+                this.showErrorDialog();
             } ).finally( ()=> {
             this.showListTab();
         } );
@@ -60,7 +61,8 @@ export class AcademyDeliveryController {
                 return this.initSalons();
             } )
             .catch( (err)=> {
-                this.$log.debug( "fail editCourse..." + err );
+                this.$log.error( err );
+                this.showErrorDialog();
             } ).finally( ()=> {
             this.showListTab();
         } );
@@ -76,7 +78,7 @@ export class AcademyDeliveryController {
             .then( () => this.initSalons() );
     }
 
-    showDeleteDialog( salonClient:ISalonClient) {
+    showDeleteDialog(salonClient:ISalonClient) {
         let confirm = this.$mdDialog.confirm()
             .title( "Підтвердження дії" )
             .textContent( `Ви дійсно бажаєте видалити Салон ${salonClient.name || ''}?` )
@@ -88,6 +90,16 @@ export class AcademyDeliveryController {
             .then( () => {
                 return this.deleteSalon( salonClient );
             } );
+    }
+
+    showErrorDialog() {
+        let confirm = this.$mdDialog.alert()
+            .title( "Помилка" )
+            .textContent( `Спробуйте будь ласка пізніше` )
+            .ariaLabel( "Помилка" )
+            .ok( 'OK' )
+        return this.$mdDialog.show( confirm );
+
     }
 
     //noinspection JSMethodCanBeStatic

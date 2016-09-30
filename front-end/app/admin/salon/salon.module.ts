@@ -10,6 +10,7 @@ import {TransformComponentName, TransformComponentOptions} from "./components/tr
 import {TransformsComponentName, TransformsComponentOptions} from "./components/transforms.component";
 import {MasterSchedulerComponentName, MasterSchedulerComponentOptions} from "./components/master.scheduler";
 
+
 export let salonModule = angular.module( 'salon', [
     'ngRoute'
 ] )

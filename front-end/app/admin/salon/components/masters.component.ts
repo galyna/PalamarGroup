@@ -46,10 +46,10 @@ export class MastersComponentController {
     masters:IMaster[];
     paging:any;
 
-    constructor(private $filter:ng.IFilterService, private $location:ng.ILocationService, 
+    constructor(private $filter:ng.IFilterService, private $location:ng.ILocationService,
                 private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService,
                 private $mdMedia:ng.material.IMedia, private masterResource:IMasterResource,
-                private pagingService: PagingService) {
+                private pagingService:PagingService) {
 
     }
 
@@ -57,54 +57,65 @@ export class MastersComponentController {
         this.showPage();
     }
 
-    addMaster(){
-        this.$location.path("/salon/master");
+    addMaster() {
+        this.$location.path( "/salon/master" );
     }
-    
-    editMaster(master: IMaster){
-        this.$location.path(`/salon/master/${master._id}`);
+
+    editMaster(master:IMaster) {
+        this.$location.path( `/salon/master/${master._id}` );
     }
-    
+
     showDeleteDialog(ev, master:IMaster) {
         let confirm = this.$mdDialog.confirm()
-            .title("Підтвердження дії")
-            .textContent(`Ви дійсно бажаєте видалити Запис ${master.name}?`)
-            .ariaLabel("Підтвердження дії")
-            .targetEvent(ev)
-            .ok('Так')
-            .cancel('Ні');
+            .title( "Підтвердження дії" )
+            .textContent( `Ви дійсно бажаєте видалити Запис ${master.name}?` )
+            .ariaLabel( "Підтвердження дії" )
+            .targetEvent( ev )
+            .ok( 'Так' )
+            .cancel( 'Ні' );
 
-        return this.$mdDialog.show(confirm)
-            .then(() => {
-                return this.deleteMaster(master);
-            });
+        return this.$mdDialog.show( confirm )
+            .then( () => {
+                return this.deleteMaster( master );
+            } );
     }
 
     deleteMaster(master:IMaster) {
-        master.$delete().then(() => {
-            this.$mdToast.showSimple(`Замовлення видалено`);
-        }).catch((err) => {
-            this.$mdToast.showSimple(err.message);
-        }).finally(()=> {
-            this.showPage(this.pagingService.currentPage());
-        });
+        master.$delete().then( () => {
+            this.$mdToast.showSimple( `Замовлення видалено` );
+        } ).catch( (err)=> {
+
+            this.showErrorDialog();
+        } ).finally( ()=> {
+            this.showPage( this.pagingService.currentPage() );
+        } );
     }
 
     prev() {
-        this.showPage(this.pagingService.prevPage());
+        this.showPage( this.pagingService.prevPage() );
     }
 
     next() {
-        this.showPage(this.pagingService.nextPage());
+        this.showPage( this.pagingService.nextPage() );
     }
 
     private showPage(page = 1) {
-        this.masters = this.masterResource.query({page: page},
+        this.masters = this.masterResource.query( {page: page},
             (res, headers) => {
-                let {total, page, perPage} = this.pagingService.parseHeaders(headers);
-                this.pagingService.update({page: page, perPage: perPage, total: total});
-                this.paging = angular.copy(this.pagingService.params());
-            });
+                let {total, page, perPage} = this.pagingService.parseHeaders( headers );
+                this.pagingService.update( {page: page, perPage: perPage, total: total} );
+                this.paging = angular.copy( this.pagingService.params() );
+            } );
+    }
+
+    showErrorDialog() {
+        let confirm = this.$mdDialog.alert()
+            .title( "Помилка" )
+            .textContent( `Спробуйте будь ласка пізніше` )
+            .ariaLabel( "Помилка" )
+            .ok( 'OK' )
+        return this.$mdDialog.show( confirm );
+
     }
 }
 

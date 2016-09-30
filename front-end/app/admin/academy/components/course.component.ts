@@ -321,7 +321,8 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
 
 class AdminCourseController {
 
-    static $inject = ["$log", "$routeParams", "$mdToast", "$timeout", PhotoServiceName, "CourseResource", "Upload"];
+    static $inject = ["$log", "$routeParams", "$mdToast", "$timeout",
+        PhotoServiceName, "CourseResource", "Upload", "$mdDialog"];
 
     originalCourse:ICourse;
     course:ICourse;
@@ -333,8 +334,8 @@ class AdminCourseController {
 
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
-                private photoService:PhotoService,
-                private CourseResource:ICourseResource, private Upload:ng.angularFileUpload.IUploadService) {
+                private photoService:PhotoService, private CourseResource:ICourseResource,
+                private Upload:ng.angularFileUpload.IUploadService,private $mdDialog:ng.material.IDialogService) {
     }
 
     $onInit() {
@@ -343,7 +344,10 @@ class AdminCourseController {
                 .then( (course) => {
                     this.originalCourse = course;
                     this.course = angular.copy( this.originalCourse );
-                } );
+                } ).catch( (err)=> {
+                this.$log.error( err );
+                this.showErrorDialog();
+            } );
         } else {
             this.originalCourse = new this.CourseResource();
             this.course = angular.copy( this.originalCourse );
@@ -362,7 +366,7 @@ class AdminCourseController {
             } )
             .catch( (err)=> {
                 this.$log.error( err );
-                this.showErrorToast();
+                this.showErrorDialog();
             } );
     }
 
@@ -382,7 +386,7 @@ class AdminCourseController {
             } )
             .catch( (err)=> {
                 this.$log.error( err );
-                this.showErrorToast();
+                this.showErrorDialog();
             } );
     }
 
@@ -398,6 +402,7 @@ class AdminCourseController {
                 model.avatar = response.data.url;
             } );
         } ).catch( function (err) {
+                this.showErrorDialog();
             this.$log.debug( "fail upload file..." + err );
         } ).finally( function () {
             this.$timeout( function () {
@@ -419,6 +424,7 @@ class AdminCourseController {
                 model.author.photoUrl = response.data.url;
             } );
         } ).catch( function (err) {
+                this.showErrorDialog();
             this.$log.debug( "fail upload file..." + err );
         } ).finally( function () {
             this.$timeout( function () {
@@ -445,6 +451,7 @@ class AdminCourseController {
                 } );
             } );
         } ).catch( (err)=> {
+                this.showErrorDialog();
             this.$log.debug( "fail upload file..." + err );
         } ).finally( ()=> {
             this.$timeout( ()=> {
@@ -472,6 +479,15 @@ class AdminCourseController {
     //noinspection JSMethodCanBeStatic
     deleteFromList(list:any[], item:any) {
         list.splice( list.indexOf( item ), 1 );
+    }
+    showErrorDialog() {
+        let confirm = this.$mdDialog.alert()
+            .title( "Помилка" )
+            .textContent( `Спробуйте будь ласка пізніше` )
+            .ariaLabel( "Помилка" )
+            .ok( 'OK' )
+        return this.$mdDialog.show( confirm );
+
     }
 }
 
