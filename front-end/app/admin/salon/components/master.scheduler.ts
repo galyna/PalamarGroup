@@ -1,5 +1,6 @@
-import {IOrderResource, IOrder, OrderResourceName} from "../../../resources/order.resource";
+
 import {IMaster, MasterResourceName, IMasterResource, ITask, IScheduler} from "../../../resources/master.resource";
+
 
 const template = `<md-list flex ng-if="$ctrl.photo">
     <md-list-item class="md-1-line">
@@ -71,6 +72,9 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 </md-dialog>
 `;
 
+export interface ISchedulerScope extends ng.IScope{
+    week: any;
+}
 class EditDialogController {
 
     static $inject = ['$mdDialog', 'tempEvent'];
@@ -112,7 +116,7 @@ export class MasterSchedulerComponentController {
     mname:string;
 
     constructor(private $log:ng.ILogService, private $timeout:ng.ITimeoutService, private $mdDialog:ng.material.IDialogService,
-                private $scope:ng.IScope, private MasterResource:IMasterResource, private $routeParams:ng.route.IRouteParamsService
+                private $scope:ISchedulerScope, private MasterResource:IMasterResource, private $routeParams:ng.route.IRouteParamsService
                 ) {
         this.events = [];
         if (this.$routeParams["id"]) {
@@ -362,11 +366,11 @@ export class MasterSchedulerComponentController {
 }
 
 export let MasterSchedulerComponentName = 'pgMasterScheduler';
-export let MasterSchedulerComponentOptions = {
+export let MasterSchedulerComponentOptions: ng.IComponentOptions = {
     controller: MasterSchedulerComponentController,
     template: template,
     bindings: {
-        mname: "=",
-        photo: '='
+        'mname': "=",
+        'photo': '='
     }
 };

@@ -267,8 +267,8 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                 controller: MasterSchedulerComponentController,
                 template: template,
                 bindings: {
-                    mname: "=",
-                    photo: '='
+                    'mname': "=",
+                    'photo': '='
                 }
             });
         }
