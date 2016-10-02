@@ -12,7 +12,8 @@ import 'angular-animate';
 import 'ng-file-upload';
 import 'ng-img-crop-full-extended';
 import 'angular-youtube-embed';
-import 'daypilot'
+import 'daypilot';
+
 import {coreModule} from "../core/core.module";
 import {resourcesModule} from "../resources/resources.module";
 import '../templates';

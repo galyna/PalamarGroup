@@ -112,7 +112,8 @@ export class MasterSchedulerComponentController {
     mname:string;
 
     constructor(private $log:ng.ILogService, private $timeout:ng.ITimeoutService, private $mdDialog:ng.material.IDialogService,
-                private $scope:ng.IScope, private MasterResource:IMasterResource, private $routeParams:ng.route.IRouteParamsService) {
+                private $scope:ng.IScope, private MasterResource:IMasterResource, private $routeParams:ng.route.IRouteParamsService
+                ) {
         this.events = [];
         if (this.$routeParams["id"]) {
             this.masterId = this.$routeParams["id"]
@@ -127,19 +128,19 @@ export class MasterSchedulerComponentController {
         this.loadEvents( new Date() );
     }
 
-    startAndEndOfWeek(date):Date[] {
-        var now = date ? new Date( date ) : new Date();
-        now.setHours( 0, 0, 0, 0 );
-        var monday = new Date( now );
-        monday.setDate( monday.getDate() - monday.getDay() + 1 );
-        var sunday = new Date( now );
-        sunday.setDate( sunday.getDate() - sunday.getDay() + 7 );
-        return [monday, sunday];
+
+    getStartAndEndOfWeek(date):Date[] {
+        date = new Date(date);
+        var day = date.getDay(),
+            diff = date.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+        var start= new Date(date.setDate(diff));
+        var end = new Date(date.setDate(start.getDate()+7));
+        return [start, end];
     }
 
     loadEvents(start) {
         if (this.masterId) {
-            var days = this.startAndEndOfWeek( start );
+            var days = this.getStartAndEndOfWeek( start );
             var params = {
                 id: this.masterId,
                 start: days[0].toISOString(),

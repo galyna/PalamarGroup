@@ -6,8 +6,7 @@ import {Request} from "express-serve-static-core";
 import {currentUser} from "../auth/current_user";
 import {auth} from "../auth/auth";
 import {Router} from "express";
-import {IMasterModel, Master, ITaskModel} from "../models/master";
-import {userApi} from "./user.endpoint";
+import {IMasterModel, Master} from "../models/master";
 import ITask = pg.models.ITask;
 
 export let tasksApi = Router();
@@ -47,15 +46,12 @@ tasksApi.route( '/task' )
         res.end();
     } )
     .put( auth, currentUser.is( 'salonModerator' ), async(req:any, res, next) => {
-        let master:IMasterModel;
-
-        let task:ITaskModel;
+        let master;
         try {
             master = await Master.findOne( {_id: req.masterId} ).exec();
         } catch (err) {
             next( err );
         }
-
         try {
 
             var tasks = master.tasks.filter( (task)=> {
@@ -78,7 +74,7 @@ tasksApi.route( '/task' )
 
 tasksApi.route( '/task/:taskId' )
     .delete( auth, currentUser.is( 'salonModerator' ), async(req:any, res, next) => {
-        let master:IMasterModel;
+        let master;
         try {
             master = await Master.findOne( {_id: req.masterId} ).exec();
         } catch (err) {
@@ -98,14 +94,24 @@ tasksApi.route( '/task/:taskId' )
 tasksApi.route( '/tasks/:start/:end' )
     .get( async(req:any, res, next) => {
         let master:IMasterModel;
+        let tasks;
         try {
-            master = await Master.findOne( {_id: req.masterId} ).exec();
+            master = await Master.findOne( {
+                _id: req.masterId,
+            } ).exec();
+            // tasks = await Master.aggregate([
+            //     {$match:{_id: req.masterId}},
+            //     {$unwind:"$tasks"},
+            //     {$match:{"tasks.scheduler.start": {$gt: new Date(req.params.start), $lt: new Date(req.params.end)}}},
+            //     {$project:{_id:"$tasks._id", favors: "$tasks.favors", scheduler: "$tasks.scheduler"}}
+            // ]);
+            // res.json( tasks );
         } catch (err) {
             return next( err );
         }
         try {
 
-            var tasks = master.tasks.filter( (task)=> {
+             tasks = master.tasks.filter( (task)=> {
                 return task && task.scheduler.start > new Date( req.params.start ) && task.scheduler.start < new Date( req.params.end );
             } );
 

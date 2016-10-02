@@ -49,19 +49,17 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                     this.initNavigatorConfig();
                     this.loadEvents(new Date());
                 };
-                MasterSchedulerComponentController.prototype.startAndEndOfWeek = function (date) {
-                    var now = date ? new Date(date) : new Date();
-                    now.setHours(0, 0, 0, 0);
-                    var monday = new Date(now);
-                    monday.setDate(monday.getDate() - monday.getDay() + 1);
-                    var sunday = new Date(now);
-                    sunday.setDate(sunday.getDate() - sunday.getDay() + 7);
-                    return [monday, sunday];
+                MasterSchedulerComponentController.prototype.getStartAndEndOfWeek = function (date) {
+                    date = new Date(date);
+                    var day = date.getDay(), diff = date.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
+                    var start = new Date(date.setDate(diff));
+                    var end = new Date(date.setDate(start.getDate() + 7));
+                    return [start, end];
                 };
                 MasterSchedulerComponentController.prototype.loadEvents = function (start) {
                     var _this = this;
                     if (this.masterId) {
-                        var days = this.startAndEndOfWeek(start);
+                        var days = this.getStartAndEndOfWeek(start);
                         var params = {
                             id: this.masterId,
                             start: days[0].toISOString(),

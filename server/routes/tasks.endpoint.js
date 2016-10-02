@@ -47,7 +47,6 @@ exports.tasksApi.route('/task')
 }))
     .put(auth_1.auth, current_user_1.currentUser.is('salonModerator'), (req, res, next) => __awaiter(this, void 0, void 0, function* () {
     let master;
-    let task;
     try {
         master = yield master_1.Master.findOne({ _id: req.masterId }).exec();
     }
@@ -94,14 +93,17 @@ exports.tasksApi.route('/task/:taskId')
 exports.tasksApi.route('/tasks/:start/:end')
     .get((req, res, next) => __awaiter(this, void 0, void 0, function* () {
     let master;
+    let tasks;
     try {
-        master = yield master_1.Master.findOne({ _id: req.masterId }).exec();
+        master = yield master_1.Master.findOne({
+            _id: req.masterId,
+        }).exec();
     }
     catch (err) {
         return next(err);
     }
     try {
-        var tasks = master.tasks.filter((task) => {
+        tasks = master.tasks.filter((task) => {
             return task && task.scheduler.start > new Date(req.params.start) && task.scheduler.start < new Date(req.params.end);
         });
         res.json(tasks);
