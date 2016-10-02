@@ -34,7 +34,21 @@ declare module pg {
             },
             tasks:ITask[],
         }
-        
+
+        export interface IAppointment {
+            _id?:any;
+            name:string,
+            phone:string,
+            email:string,
+            date:string,
+            comment:string,
+            admin_comment:string,
+            master:IMaster,
+            favors?:IMasterFavor[],
+            answered:boolean,
+            booked:boolean
+        }
+
         export interface ITask {
             _id?:any,
             order?:IOrder ,

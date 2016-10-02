@@ -17,6 +17,7 @@ import {User} from "../models/user";
 import {Master} from "../models/master";
 import {Favor} from "../models/favor";
 import {Transform} from "../models/transform";
+import {Appointment} from "../models/appointment";
 
 //endpoints
 import {emailEndpoint} from "./email.endpoint";
@@ -80,7 +81,7 @@ restify.serve(api, User, userOptions);
 restify.serve(api, Model);
 restify.serve(api, Order, orderOptions);
 restify.serve(api, Master, readOnlyOptions);
-restify.serve(tasksApi, Master, tasksOptions);
+restify.serve(api, Appointment);
 api.use('/salonclient', salonClientApi);
 restify.serve(api, SalonClient);
 restify.serve(api, Favor);

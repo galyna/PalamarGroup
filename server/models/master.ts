@@ -1,33 +1,23 @@
 import {Document, Schema, model} from "mongoose";
 import {PhotoSchema, IPhotoModel} from "./photo.schema";
-import {FavorSchema} from "./favor";
-import ITask = pg.models.ITask;
-
-export interface ITaskModel extends pg.models.ITask, Document{
-    _id: any;
-}
 
 
 export interface IMasterModel extends pg.models.IMaster, Document {
     photo:IPhotoModel,
     works:IPhotoModel[],
-    tasks: ITaskModel[],
-   
-}
-let TaskSchema = new Schema({
+    tasks:ITaskModel[],
 
-    order:{type: Schema.Types.ObjectId, ref: 'Order'},
+}
+let TaskSchema = new Schema( {
+    appointment: {type: Schema.Types.ObjectId, ref: 'Appointment'},
     scheduler: {
         start: Date,
         end: Date,
         text: String,
         id: String
     },
-    favors: [{
-        favor: {type: Schema.Types.ObjectId, ref: 'Favor'},
-        price: Number
-    }]
-});
+
+} );
 
 let MasterSchema = new Schema( {
     name: String,

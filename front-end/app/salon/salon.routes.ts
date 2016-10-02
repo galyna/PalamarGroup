@@ -3,8 +3,9 @@
  */
 
 import {SalonHomeComponentUrl} from "./components/salon.home.component";
-import {FavorsComponentUrl} from "../admin/salon/components/favors.component";
+import {FavorsComponentUrl} from "./components/favors.component";
 import {IConstants} from "../core/core.config";
+import {MasterComponentUrl} from "./components/master.compenent";
 
 salonRoutes.$inject = ['$routeProvider', 'constants'];
 export function salonRoutes($routeProvider:ng.route.IRouteProvider, constants:IConstants) {
@@ -15,6 +16,9 @@ export function salonRoutes($routeProvider:ng.route.IRouteProvider, constants:IC
             } )
             .when( FavorsComponentUrl, {
                 template: '<pg-favors></pg-favors>',
+            } )
+            .when( MasterComponentUrl, {
+                template: '<pg-master></pg-master>',
             } )
         ;
     }

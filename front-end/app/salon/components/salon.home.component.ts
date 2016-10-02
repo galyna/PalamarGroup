@@ -73,7 +73,7 @@ const template = `<div class="courses-details description-container" layout="col
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="master in $ctrl.masters"
                          class="md-margin " flex-gt-md="22" flex-md="22" flex-gt-xs="46" flex-xs="80"
-                         ng-click="::vm.showMediaObserver(vm.course.hearFormsPhotos, $index)">
+                         ng-click="$ctrl.showMaster(master._id)">
                     <card-image-container>
                         <img ng-src="{{::master.photo.url}}" class="md-card-image">
                     </card-image-container>
@@ -192,6 +192,9 @@ export class SalonHomeComponentController {
 
     showFavors(category:String) {
         this.$location.path( `/favor/${category}` );
+    }
+    showMaster(masterId:String) {
+        this.$location.path( `/master/${masterId}` );
     }
 }
 
