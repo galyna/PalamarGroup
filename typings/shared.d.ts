@@ -51,9 +51,8 @@ declare module pg {
 
         export interface ITask {
             _id?:any,
-            order?:IOrder ,
+            appointment?:IAppointment ,
             scheduler:IScheduler,
-            favors?:IMasterFavor[]
         }
 
         export interface IScheduler {

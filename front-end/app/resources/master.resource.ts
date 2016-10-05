@@ -31,6 +31,7 @@ export function MasterResource($resource:ng.resource.IResourceService, constants
     };
     let updateTaskDescriptor:IActionDescriptor = {
         method: "PUT",
+        params: {id: '@id'},
         url: `${constants.apiUrl}/master/:id/task`,
 
     };

@@ -3,6 +3,7 @@ import {PhotoServiceName, PhotoService} from "../../../resources/photo.service";
 import IPhoto = pg.models.IPhoto;
 import {FavorResourceName, IFavorResource, IFavor} from "../../../resources/favor.resource";
 import IMasterFavor = pg.models.IMasterFavor;
+import {IAppointment, AppointmentResourceName, IAppointmentResource} from "../../../resources/appointment.resource";
 
 const template:string = `<div flex layout="column">
     <md-toolbar>
@@ -24,7 +25,7 @@ const template:string = `<div flex layout="column">
     </md-toolbar>
     <md-tabs md-stretch-tabs="always" md-dynamic-height>
         <md-tab label="Графік">
-            <pg-master-scheduler mname="$ctrl.master.name" photo="$ctrl.master.photo.url"></pg-master-scheduler>
+            <pg-master-scheduler mode='master' appointment="$ctrl.appointment" masterid="$ctrl.master._id" mname="$ctrl.master.name" photo="$ctrl.master.photo.url"></pg-master-scheduler>
         </md-tab>
         <md-tab label="Інфо">
             <md-card>
@@ -168,7 +169,7 @@ const template:string = `<div flex layout="column">
 export class MasterComponentController {
     static $inject = ["$log", "$routeParams", "$mdToast",
         "$timeout", PhotoServiceName, MasterResourceName,
-        "Upload", FavorResourceName, '$mdDialog'];
+        "Upload", FavorResourceName, '$mdDialog',AppointmentResourceName];
 
     originalMaster:IMaster;
     master:IMaster;
@@ -176,18 +177,18 @@ export class MasterComponentController {
     showWorkUpload:boolean;
     favors:IFavor[];
     newService:IMasterFavor;
-
+    appointment:IAppointment;
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
                 private photoService:PhotoService, private MasterResource:IMasterResource,
                 private Upload:ng.angularFileUpload.IUploadService, private favorResource:IFavorResource,
-                private $mdDialog:ng.material.IDialogService) {
+                private $mdDialog:ng.material.IDialogService,private AppointmentResource:IAppointmentResource) {
     }
 
     $onInit() {
 
         this.favors = this.favorResource.query();
-
+        this.appointment=new this.AppointmentResource();
         if (this.$routeParams["id"]) {
             this.MasterResource.get( {id: this.$routeParams["id"], populate: 'services.favor'} ).$promise
                 .then( (master) => {
