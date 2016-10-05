@@ -9,6 +9,7 @@ import {FavorComponentName, FavorComponentOptions} from "./components/favor.comp
 import {TransformComponentName, TransformComponentOptions} from "./components/transform.component";
 import {TransformsComponentName, TransformsComponentOptions} from "./components/transforms.component";
 import {MasterSchedulerComponentName, MasterSchedulerComponentOptions} from "./components/master.scheduler";
+import {AppointmentsComponentName, AppointmentsComponentOptions} from "./components/appointments.component";
 
 
 export let salonModule = angular.module( 'salon', [
@@ -21,4 +22,5 @@ export let salonModule = angular.module( 'salon', [
     .component( FavorsComponentName, FavorsComponentOptions )
     .component( TransformComponentName, TransformComponentOptions )
     .component( TransformsComponentName, TransformsComponentOptions )
-    .component( MasterSchedulerComponentName, MasterSchedulerComponentOptions );
+    .component( MasterSchedulerComponentName, MasterSchedulerComponentOptions )
+    .component( AppointmentsComponentName, AppointmentsComponentOptions );

@@ -25,6 +25,7 @@ MasterResource.$inject = ['$resource', 'constants'];
 export function MasterResource($resource:ng.resource.IResourceService, constants:IConstants) {
     let addTaskDescriptor:IActionDescriptor = {
         method: "POST",
+        params: {id: '@id'},
         url: `${constants.apiUrl}/master/:id/task`,
 
     };

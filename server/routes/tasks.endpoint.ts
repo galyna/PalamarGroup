@@ -8,6 +8,7 @@ import {auth} from "../auth/auth";
 import {Router} from "express";
 import {IMasterModel, Master} from "../models/master";
 import ITask = pg.models.ITask;
+import {Task} from "../models/task";
 
 export let tasksApi = Router();
 
@@ -24,20 +25,19 @@ tasksApi.route( '/task' )
     .post( auth, currentUser.is( 'salonModerator' ), async(req:any, res, next) => {
         let master:IMasterModel;
         let event = req.query.task;
+        console.dir( event );
+
         try {
             master = await Master.findOne( {_id: req.masterId} ).exec();
         } catch (err) {
             return next( err );
         }
         try {
-            master.tasks.push( req.body );
+            var task = await Task.create( req.body );
+            master.tasks.push( task );
             await master.save();
-            var tasks = master.tasks.filter( (task)=> {
-                return task && task.scheduler.id == req.body.scheduler.id;
-            } );
-            if (tasks.length > 0) {
-                res.json( tasks[0] );
-            }
+            res.json( task );
+
 
         } catch (err) {
             return next( err );
@@ -48,19 +48,19 @@ tasksApi.route( '/task' )
     .put( auth, currentUser.is( 'salonModerator' ), async(req:any, res, next) => {
         let master;
         try {
-            master = await Master.findOne( {_id: req.masterId} ).exec();
+            master = await Master.findOne( {_id: req.masterId} ).populate( {
+                path: 'tasks',
+                match: {'_id': req.body._id }
+            } ).exec();
         } catch (err) {
             next( err );
         }
         try {
 
-            var tasks = master.tasks.filter( (task)=> {
-                return task && task._id == req.body._id;
-            } );
-            if (tasks.length > 0) {
-                Object.assign( tasks[0], req.body );
+            if (master.tasks > 0) {
+                Object.assign( master.tasks[0], req.body );
                 await master.save();
-                res.json( tasks[0] );
+                res.json( master.tasks[0] );
             } else {
                 res.status( 500 ).send( " task not found" )
             }
@@ -93,29 +93,15 @@ tasksApi.route( '/task/:taskId' )
 
 tasksApi.route( '/tasks/:start/:end' )
     .get( async(req:any, res, next) => {
-        let master:IMasterModel;
+        let master;
         let tasks;
         try {
-            master = await Master.findOne( {
-                _id: req.masterId,
+            master = await Master.findOne( {_id: req.masterId} ).populate( {
+                path: 'tasks',
+                match: {'scheduler.start': {$gte: new Date( req.params.start ), $lte: new Date( req.params.end )}}
             } ).exec();
-            // tasks = await Master.aggregate([
-            //     {$match:{_id: req.masterId}},
-            //     {$unwind:"$tasks"},
-            //     {$match:{"tasks.scheduler.start": {$gt: new Date(req.params.start), $lt: new Date(req.params.end)}}},
-            //     {$project:{_id:"$tasks._id", favors: "$tasks.favors", scheduler: "$tasks.scheduler"}}
-            // ]);
-            // res.json( tasks );
-        } catch (err) {
-            return next( err );
-        }
-        try {
 
-             tasks = master.tasks.filter( (task)=> {
-                return task && task.scheduler.start > new Date( req.params.start ) && task.scheduler.start < new Date( req.params.end );
-            } );
-
-            res.json( tasks );
+            res.json( master.tasks );
         } catch (err) {
             return next( err );
         }

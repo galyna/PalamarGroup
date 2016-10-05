@@ -39,6 +39,7 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                     this.MasterResource = MasterResource;
                     this.$routeParams = $routeParams;
                     this.events = [];
+                    this.tasks = [];
                     if (this.$routeParams["id"]) {
                         this.masterId = this.$routeParams["id"];
                     }

@@ -5,19 +5,9 @@ import {PhotoSchema, IPhotoModel} from "./photo.schema";
 export interface IMasterModel extends pg.models.IMaster, Document {
     photo:IPhotoModel,
     works:IPhotoModel[],
-    tasks:ITaskModel[],
+    _id: any;
 
 }
-let TaskSchema = new Schema( {
-    appointment: {type: Schema.Types.ObjectId, ref: 'Appointment'},
-    scheduler: {
-        start: Date,
-        end: Date,
-        text: String,
-        id: String
-    },
-
-} );
 
 let MasterSchema = new Schema( {
     name: String,
@@ -26,7 +16,7 @@ let MasterSchema = new Schema( {
         favor: {type: Schema.Types.ObjectId, ref: 'Favor'},
         price: Number
     }],
-    tasks: [TaskSchema],
+    tasks: [{type: Schema.Types.ObjectId, ref: 'Task'}],
     works: [PhotoSchema],
     contacts: {
         phone: String,

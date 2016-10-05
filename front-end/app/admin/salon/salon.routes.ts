@@ -5,6 +5,7 @@ import {FavorsComponentUrl} from "./components/favors.component";
 import {FavorComponentUrl} from "./components/favor.component";
 import {TransformComponentUrl} from "./components/transform.component";
 import {TransformsComponentUrl} from "./components/transforms.component";
+import {AppointmentsComponentUrl} from "./components/appointments.component";
 
 salonRoutes.$inject = ['$routeProvider'];
 export function salonRoutes($routeProvider:ng.route.IRouteProvider) {
@@ -41,6 +42,12 @@ export function salonRoutes($routeProvider:ng.route.IRouteProvider) {
         } )
         .when( TransformsComponentUrl, {
             template: '<pg-transforms></pg-transforms>',
+            resolve: {
+                auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
+            }
+        } )
+        .when( AppointmentsComponentUrl, {
+            template: '<pg-appointments></pg-appointments>',
             resolve: {
                 auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
             }

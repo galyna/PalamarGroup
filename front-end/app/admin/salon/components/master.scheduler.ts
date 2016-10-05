@@ -119,6 +119,7 @@ export class MasterSchedulerComponentController {
                 private $scope:ISchedulerScope, private MasterResource:IMasterResource, private $routeParams:ng.route.IRouteParamsService
                 ) {
         this.events = [];
+        this.tasks=[];
         if (this.$routeParams["id"]) {
             this.masterId = this.$routeParams["id"]
         }

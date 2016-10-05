@@ -11,6 +11,7 @@ const current_user_1 = require("../auth/current_user");
 const auth_1 = require("../auth/auth");
 const express_1 = require("express");
 const master_1 = require("../models/master");
+const task_1 = require("../models/task");
 exports.tasksApi = express_1.Router();
 exports.tasksOptions = {
     preCreate: [auth_1.auth, current_user_1.currentUser.is('salonModerator')],
@@ -24,6 +25,7 @@ exports.tasksApi.route('/task')
     .post(auth_1.auth, current_user_1.currentUser.is('salonModerator'), (req, res, next) => __awaiter(this, void 0, void 0, function* () {
     let master;
     let event = req.query.task;
+    console.dir(event);
     try {
         master = yield master_1.Master.findOne({ _id: req.masterId }).exec();
     }
@@ -31,14 +33,10 @@ exports.tasksApi.route('/task')
         return next(err);
     }
     try {
-        master.tasks.push(req.body);
+        var task = yield task_1.Task.create(req.body);
+        master.tasks.push(task);
         yield master.save();
-        var tasks = master.tasks.filter((task) => {
-            return task && task.scheduler.id == req.body.scheduler.id;
-        });
-        if (tasks.length > 0) {
-            res.json(tasks[0]);
-        }
+        res.json(task);
     }
     catch (err) {
         return next(err);
@@ -48,19 +46,19 @@ exports.tasksApi.route('/task')
     .put(auth_1.auth, current_user_1.currentUser.is('salonModerator'), (req, res, next) => __awaiter(this, void 0, void 0, function* () {
     let master;
     try {
-        master = yield master_1.Master.findOne({ _id: req.masterId }).exec();
+        master = yield master_1.Master.findOne({ _id: req.masterId }).populate({
+            path: 'tasks',
+            match: { '_id': req.body._id }
+        }).exec();
     }
     catch (err) {
         next(err);
     }
     try {
-        var tasks = master.tasks.filter((task) => {
-            return task && task._id == req.body._id;
-        });
-        if (tasks.length > 0) {
-            Object.assign(tasks[0], req.body);
+        if (master.tasks > 0) {
+            Object.assign(master.tasks[0], req.body);
             yield master.save();
-            res.json(tasks[0]);
+            res.json(master.tasks[0]);
         }
         else {
             res.status(500).send(" task not found");
@@ -95,18 +93,11 @@ exports.tasksApi.route('/tasks/:start/:end')
     let master;
     let tasks;
     try {
-        master = yield master_1.Master.findOne({
-            _id: req.masterId,
+        master = yield master_1.Master.findOne({ _id: req.masterId }).populate({
+            path: 'tasks',
+            match: { 'scheduler.start': { $gte: new Date(req.params.start), $lte: new Date(req.params.end) } }
         }).exec();
-    }
-    catch (err) {
-        return next(err);
-    }
-    try {
-        tasks = master.tasks.filter((task) => {
-            return task && task.scheduler.start > new Date(req.params.start) && task.scheduler.start < new Date(req.params.end);
-        });
-        res.json(tasks);
+        res.json(master.tasks);
     }
     catch (err) {
         return next(err);
