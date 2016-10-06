@@ -9,6 +9,7 @@ import {Router} from "express";
 import {IMasterModel, Master} from "../models/master";
 import ITask = pg.models.ITask;
 import {Task} from "../models/task";
+import {Appointment} from "../models/appointment";
 
 export let tasksApi = Router();
 
@@ -59,6 +60,7 @@ tasksApi.route( '/task' )
 
             if (master.tasks.length>0) {
                 Object.assign( master.tasks[0], req.body );
+                await master.tasks[0].save();
                 await master.save();
                 res.json( master.tasks[0] );
             } else {

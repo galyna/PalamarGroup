@@ -57,6 +57,7 @@ exports.tasksApi.route('/task')
     try {
         if (master.tasks.length > 0) {
             Object.assign(master.tasks[0], req.body);
+            yield master.tasks[0].save();
             yield master.save();
             res.json(master.tasks[0]);
         }

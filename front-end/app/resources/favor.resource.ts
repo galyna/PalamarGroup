@@ -15,3 +15,4 @@ FavorResource.$inject = ['$resource', 'constants'];
 export function FavorResource($resource:ng.resource.IResourceService, constants:IConstants) {
     return <IFavorResource>$resource(`${constants.apiUrl}/favor/:id`, {id: '@_id'});
 }
+

@@ -100,14 +100,14 @@ export class FavorComponentController {
 
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
-                private favorResource:IFavorResource, private $mdDialog:ng.material.IDialogService,
+                private $mdDialog:ng.material.IDialogService, private favorResource:IFavorResource,
                 private constants:IConstants, private photoService:PhotoService) {
     }
 
 
     $onInit() {
         if (this.$routeParams["id"]) {
-            this.favorResource.get( {id: this.$routeParams["id"]} ).$promise
+            this.favorResource.get( {id: this.$routeParams["id"]}).$promise
                 .then( (favor) => {
                     this.originalFavor = favor;
                     this.favor = angular.copy( this.originalFavor );

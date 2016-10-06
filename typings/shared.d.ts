@@ -18,6 +18,7 @@ declare module pg {
         }
 
         export interface IMasterFavor {
+            _id?:any,
             favor:IFavor,
             price:number
         }
@@ -43,7 +44,7 @@ declare module pg {
             date:string,
             comment:string,
             admin_comment:string,
-            master:IMaster,
+            master?:IMaster,
             favors?:IMasterFavor[],
             answered:boolean,
             booked:boolean
@@ -51,7 +52,21 @@ declare module pg {
 
         export interface ITask {
             _id?:any,
-            appointment?:IAppointment ,
+            appointment:{
+                name:string,
+                phone:string,
+                email:string,
+                date:string,
+                comment:string,
+                admin_comment:string,
+                master?:IMaster,
+                favors?:[{
+                    id: string,
+                    name: string,
+                    price: number,
+                    photo:IPhoto
+                }]
+            } ,
             scheduler:IScheduler,
         }
 
@@ -59,7 +74,9 @@ declare module pg {
             start:any,
             end:any,
             text:string,
-            id:string
+            id:string,
+            borderColor:string,
+            barColor:string
         }
 
         export interface IContact {
@@ -78,6 +95,7 @@ declare module pg {
             program:string,
 
         }
+        
         export interface IVideo {
             _id?:any;
             name:string,
