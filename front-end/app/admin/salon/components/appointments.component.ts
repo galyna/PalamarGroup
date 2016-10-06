@@ -106,7 +106,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 
                         <md-input-container class="md-block">
                             <label>Майстер</label>
-                            <md-select ng-model="$ctrl.appointment.master" ng-change="$ctrl.changeMaster(id)">
+                            <md-select ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.appointment.master" ng-change="$ctrl.changeMaster(id)">
                                 <md-option ng-repeat="master in $ctrl.masters" ng-value="master._id">
                                     {{ master.name }}
                                 </md-option>
@@ -118,12 +118,12 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                             <div ng-repeat="service in $ctrl.appointment.favors">
 
                                 <div layout="row">
-                                    <div class="md-margin md-padding " id="prokgram" name="program">
-                                        {{service.favor.name}}
+                                    <div class=" md-padding " id="prokgram" name="program">
+                                        {{service.favor.name}} грн.
                                     </div>
-                                    <div class="md-margin md-padding " id="program" name="program">{{service.price}}
+                                    <div class="m md-padding " id="program" name="program">{{service.price}}
                                     </div>
-                                    <md-button ng-if="::$root.it.can('modifySalon')" class="md-icon-button"
+                                    <md-button class=" md-padding" ng-if="::$root.it.can('modifySalon')" class="md-icon-button"
                                                ng-click="$ctrl.deleteService(service)">
                                         <md-icon md-svg-src="action:ic_delete_24px"></md-icon>
                                     </md-button>
@@ -132,20 +132,20 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                         </md-input-container>
 
 
-                        <md-subheader class="md-no-sticky">Додати послугу
+                        <md-subheader class="md-no-sticky" ng-if=" ::$root.it.can('modifySalon')" >Додати послугу
                         </md-subheader>
 
-                        <md-select ng-model="$ctrl.newService" ng-model-options="{trackBy: '$value.favor._id'}">
+                        <md-select ng-if=" ::$root.it.can('modifySalon')" ng-model="$ctrl.newService" ng-model-options="{trackBy: '$value.favor._id'}">
                             <md-option ng-repeat="favor in $ctrl.favors" ng-value="favor">
                                 {{ favor.favor.name }}
                             </md-option>
                         </md-select>
-                        <md-input-container layout="row" class="md-block">
+                        <md-input-container  ng-if=" ::$root.it.can('modifySalon')" layout="row" class="md-block">
                             <label for="newProgram">ЦІНА</label>
                             <input type="number" ng-model="$ctrl.newService.price"/>
 
                         </md-input-container>
-                        <md-button ng-disabled="!$ctrl.newService.favor" class=" " ng-click="$ctrl.addService()">
+                        <md-button ng-if=" ::$root.it.can('modifySalon')"  ng-disabled="!$ctrl.newService.favor" class=" " ng-click="$ctrl.addService()">
                             Додати
                         </md-button>
 
@@ -171,14 +171,10 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                                       ng-model="$ctrl.appointment.admin_comment"></textarea>
                         </md-input-container>
 
-                        <md-button type="submit" ng-click="$ctrl.AddToCalendar()" aria-label="save">
-                            Додати у графік майстра
-                        </md-button>
-
                     </div>
                 </div>
-                <div flex  layout="row" >
-                    <pg-master-scheduler mode='appointment' masterid="$ctrl.appointment.master"></pg-master-scheduler>
+                <div flex  layout="row" id="pgCalendarContainer" >
+                    <pg-appointment-scheduler appointment="$ctrl.appointment" master="$ctrl.appointment.master"  ></pg-appointment-scheduler>
                 </div>
 
             </div>
@@ -199,7 +195,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 `;
 class EditDialogController {
 
-    static $inject = ['$mdDialog', 'appointment'];
+    static $inject = ['$mdDialog',"$mdToast", 'appointment'];
     private masters:IMaster[];
     private favors:any[];
     private newService:IMasterFavor;
@@ -207,7 +203,7 @@ class EditDialogController {
     private originalAppointment:IAppointment;
 
 
-    constructor(private $mdDialog:ng.material.IDialogService, appointment:IAppointment) {
+    constructor(private $mdDialog:ng.material.IDialogService,private $mdToast:ng.material.IToastService, appointment:IAppointment) {
         this.appointment = angular.copy( appointment );
         this.originalAppointment = appointment;
         this.masters.forEach( (m)=> {
@@ -215,15 +211,31 @@ class EditDialogController {
                 this.favors = m.services;
             }
         } )
+       // this.appendCalendar();
 
     }
-    AddToCalendar(){}
+
+
+    appendCalendar() {
+        if (this.appointment.master) {
+            var myEl = angular.element( document.querySelector( '#pgCalendarContainer' ) );
+            var calendar=`<pg-appointment-scheduler appointment="${this.appointment}"  ></pg-appointment-scheduler>`;
+            myEl.html(calendar);
+        }
+    }
     deleteService(favor) {
         this.appointment.favors.splice( this.appointment.favors.indexOf( favor ), 1 )
     }
 
     addService(favor:IMasterFavor) {
-        this.appointment.favors.push( this.newService )
+
+        if (!this.appointment.favors.some( (f)=> {
+                return this.newService._id === f._id;
+            } )) {
+            this.appointment.favors.push( this.newService );
+        } else {
+            this.$mdToast.showSimple( `Така послуга вже існує` );
+        }
     }
 
 
@@ -253,24 +265,24 @@ class EditDialogController {
 
 export class AppointmentsComponentController {
 
-    static $inject = [AppointmentResourceName, PagingServiceName, "$filter", "$mdDialog", "$mdToast", MasterResourceName];
+    static $inject = [AppointmentResourceName, PagingServiceName, "$filter", "$mdDialog",
+        "$mdToast", MasterResourceName, "$location"];
     masters:IMaster[];
     appointments:IAppointment[];
     paging:any;
 
     constructor(private AppointmentResource:IAppointmentResource, private pagingService:PagingService,
                 private $filter:ng.IFilterService, private $mdDialog:ng.material.IDialogService,
-                private $mdToast:ng.material.IToastService, private MasterResource:IMasterResource) {
+                private $mdToast:ng.material.IToastService, private MasterResource:IMasterResource,
+       private $location:ng.ILocationService) {
 
+    }
+    openTask(masterId: string) {
+        this.$location.url( '/salon/master/' + masterId);
     }
 
     $onInit() {
         this.masters = this.MasterResource.query( {populate: 'services.favor'} );
-        this.masters.$promise.then( (courses) => {
-                // this.courses = this.orderByFilter( courses, "order" )
-            }
-        );
-
         this.showPage();
     }
 
@@ -370,12 +382,7 @@ export class AppointmentsComponentController {
         ;
     }
 
-    getOrderTitle(appointment:IAppointment) {
-        let format = "dd.MM.yyyy";
 
-        return "";
-
-    }
 
 }
 

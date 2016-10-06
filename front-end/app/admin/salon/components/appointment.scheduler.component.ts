@@ -1,19 +1,12 @@
 /**
  * Created by Galyna on 06.10.2016.
  */
-import {IMaster, MasterResourceName, IMasterResource, ITask, IScheduler} from "../../../resources/master.resource";
+import {MasterResourceName, IMasterResource, ITask, IScheduler} from "../../../resources/master.resource";
 import {IAppointment, AppointmentResourceName, IAppointmentResource} from "../../../resources/appointment.resource";
 import IMasterFavor = pg.models.IMasterFavor;
 import {ISchedulerScope} from "./master.scheduler";
 
-const template = `<md-list flex ng-if="$ctrl.photo">
-    <md-list-item class="md-1-line">
-        <img ng-src="{{$ctrl.photo}}" class="md-avatar" alt="{{$ctrl.photo}}"/>
-        <div class="md-list-item-text" layout="column">
-            <h3>{{::$ctrl.mname}}</h3>
-        </div>
-    </md-list-item>
-</md-list>
+const template = `
 <div layout="row" layout-xs="column">
     <div class="md-padding ">
         <daypilot-navigator style=" width: 280px" id="navi"
@@ -28,33 +21,37 @@ const template = `<md-list flex ng-if="$ctrl.photo">
 
 export class AppointmentSchedulerComponentController {
 
-    static $inject = ["$log", '$timeout', "$mdDialog", "$scope", MasterResourceName, "$routeParams",AppointmentResourceName];
+    static $inject = ["$log", '$timeout', "$mdDialog", MasterResourceName, "$routeParams", '$scope'];
 
-    master:IMaster;
-    masterId:string;
+    masterId:any;
+    master:string;
     events:IScheduler[];
     weekConfig:any;
     navigatorConfig:any;
     tasks:ITask[];
-    photo:string;
-    masterid:string;
-    mode:string;
-    appointment:IAppointment;
+    appointment:any;
+
 
     constructor(private $log:ng.ILogService, private $timeout:ng.ITimeoutService, private $mdDialog:ng.material.IDialogService,
-                private $scope:ISchedulerScope, private MasterResource:IMasterResource, private $routeParams:ng.route.IRouteParamsService,
-                private AppointmentResource:IAppointmentResource) {
+                private MasterResource:IMasterResource,
+                private $routeParams:ng.route.IRouteParamsService, private $scope:ISchedulerScope) {
         this.events = [];
         this.tasks = [];
-        this.mode='master';
-        if (this.$routeParams["id"]) {
-            this.masterId = this.$routeParams["id"]
-        } else {
-            this.masterId = this.masterid;
-            this.mode='appointment';
+
+        if (this.appointment.master) {
+            this.masterId = this.appointment.master;
+            this.init();
         }
-        this.init();
+
     }
+
+    $onChanges(changesObj) {
+        console.log(changesObj);
+        if (changesObj.master.currentValue && changesObj.master.previousValue!=changesObj.master.currentValue) {
+            this.masterId = changesObj.master.currentValue;
+            this.init();
+        }
+    };
 
     init() {
 
@@ -108,19 +105,20 @@ export class AppointmentSchedulerComponentController {
             heightSpec: 'BusinessHours',
             onTimeRangeSelect: (args)=> {
                 var params = {
+                    appointment: this.appointment,
                     scheduler: {
                         start: args.start.toString(),
                         end: args.end.toString(),
-                        text: "New event",
                         id: DayPilot.guid()
                     }
                 };
+                params.appointment.favors = this.getFavors();
+                this.updateTaskText( params );
                 this.MasterResource.addTask( {id: this.masterId}, params ).$promise.then( (task) => {
                     this.tasks.push( task );
                     this.events.push( task.scheduler );
                     this.$scope.week.update();
                 } );
-
 
             },
             onEventResize: (args)=> {
@@ -128,7 +126,9 @@ export class AppointmentSchedulerComponentController {
                     id: args.e.id(),
                     start: args.newStart.toString(),
                     end: args.newEnd.toString(),
-                    text: args.e.text()
+                    text: args.e.text(),
+                    borderColor: args.e.borderColor,
+                    barColor: args.e.barColor,
                 };
                 var originalTask;
 
@@ -150,10 +150,11 @@ export class AppointmentSchedulerComponentController {
                 }
             },
             onEventClick: (args)=> {
-            }    
+
+            }
         };
     }
-    
+
     initNavigatorConfig() {
         this.navigatorConfig = {
             selectMode: "week",
@@ -169,45 +170,67 @@ export class AppointmentSchedulerComponentController {
         };
     }
 
-    handleDialogResult(result) {
-        switch (result.action) {
-            case "delete":
-                this.deleteMasterTask( result.event );
-                break;
-            case "save":
-                this.updateMaster( result.event );
+    getFavors() {
+        return this.appointment.favors.map( (favor)=> {
+            return {
+                name: favor.name,
+                id: favor._id,
+                price: favor.price,
+            }
+        } );
 
-                break;
-            default:
-                throw "unknown action";
+    }
+
+    updateTaskText(task) {
+        task.scheduler.text = ``;
+        if (!task.appointment.name) {
+            task.scheduler.text = task.scheduler.text + `<div>Замовника не вказано</div>`;
+        } else {
+            task.scheduler.borderColor = "blue";
+            task.scheduler.barColor = "blue";
+            task.scheduler.text = `<div><span>Замовник:</span><span> ${task.appointment.name}</span></div>`;
+        }
+
+        if (task.appointment.favors.length == 0) {
+            task.scheduler.text = task.scheduler.text + `<div>Послуги не вказані</div>`;
+
+        } else {
+            var favors = task.appointment.favors.map( (f)=> {
+                return f.name;
+            } ).join( ' ' );
+            task.scheduler.text = task.scheduler.text + `<div><span>Послуги:</span><span> ${favors}</span></div>`;
+        }
+        if (task.appointment.favors.length == 0 || !task.appointment.name) {
+            task.scheduler.borderColor = "red";
+            task.scheduler.barColor = "red";
+        }
+
+        if (task.appointment.isDayOff) {
+            task.scheduler.text = `<div>Час без замовлень</div>`;
+            task.scheduler.borderColor = "grey";
+            task.scheduler.barColor = "grey";
         }
 
     }
 
-    updateMaster(event) {
-        var tasks = this.tasks.filter( (task)=> {
-            return task != null && task.scheduler.id === event.id;
-        } );
-        if (tasks.length > 0 && event) {
-            var task = tasks[0];
-            task.scheduler.text = event.text;
-            task.scheduler.start = event.start.value;
-            task.scheduler.end = event.end.value;
-            ;
-            this.MasterResource.updateTask( {id: this.masterId}, task ).$promise.then( (newTask) => {
-                this.tasks.splice( this.tasks.indexOf( task ), 1, newTask );
-                var tempEvents = this.events.filter( (e)=> {
-                    return e.id == event.id;
-                } )
+    updateMaster(task:ITask) {
+        this.updateTaskText( task );
 
-                if (tempEvents.length > 0 && event) {
-                    this.events.splice( this.events.indexOf( tempEvents[0] ), 1, newTask.scheduler );
-                }
-            } ).catch( (err)=> {
-                this.$log.error( err );
-                this.showErrorDialog();
-            } );
-        }
+        this.MasterResource.updateTask( {id: this.masterId}, task ).$promise.then( (newTask) => {
+            this.tasks.splice( this.tasks.indexOf( task ), 1, newTask );
+            var tempEvents = this.events.filter( (e)=> {
+                return e.id == newTask.scheduler.id;
+            } )
+
+            if (tempEvents.length > 0 && event) {
+
+                this.events.splice( this.events.indexOf( tempEvents[0] ), 1, newTask.scheduler );
+            }
+        } ).catch( (err)=> {
+            this.$log.error( err );
+            this.showErrorDialog();
+        } );
+
 
     }
 
@@ -242,28 +265,6 @@ export class AppointmentSchedulerComponentController {
 
     }
 
-    deleteMasterTask(event) {
-
-        var tasks = this.tasks.filter( (t)=> {
-            return t.scheduler.id == event.id;
-        } );
-        if (tasks.length > 0) {
-            var deleteTask = tasks[0];
-            this.MasterResource.deleteTask( {id: this.masterId, taskId: deleteTask._id} ).$promise.then( (task) => {
-                this.tasks.splice( this.tasks.indexOf( deleteTask ), 1 );
-                var events = this.events.filter( (e)=> {
-                    return e.id == event.id;
-                } )
-                if (events.length > 0 && event) {
-                    this.events.splice( this.events.indexOf( events[0] ), 1 );
-                }
-            } ).catch( (err)=> {
-                this.$log.error( err );
-                this.showErrorDialog();
-
-            } );
-        }
-    }
 
     showErrorDialog() {
         let confirm = this.$mdDialog.alert()
@@ -282,7 +283,7 @@ export let AppointmentSchedulerComponentOptions:ng.IComponentOptions = {
     controller: AppointmentSchedulerComponentController,
     template: template,
     bindings: {
-        'masterid': "=",
-        "appointment":'='
+        "appointment": '<',
+        'master':'<'
     }
 };

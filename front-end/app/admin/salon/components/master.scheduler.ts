@@ -80,19 +80,19 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                             </div>
                         </div>
                     </md-input-container>
-                    <md-subheader ng-if="$ctrl.showAddFavors ||::!$root.it.can('modifySalon')" class="md-no-sticky">Додати послугу
+                    <md-subheader ng-if="$ctrl.showAddFavors " class="md-no-sticky">Додати послугу
                     </md-subheader>
-                    <md-select ng-if="$ctrl.showAddFavors ||::!$root.it.can('modifySalon')"  ng-model="$ctrl.newService" ng-model-options="{trackBy: '$value._id'}">
+                    <md-select ng-if="$ctrl.showAddFavors  "  ng-model="$ctrl.newService" ng-model-options="{trackBy: '$value._id'}">
                         <md-option ng-repeat="services in $ctrl.services" ng-value="services">
                             {{ services.favor.name }}
                         </md-option>
                     </md-select>
-                    <md-input-container ng-if="$ctrl.showAddFavors ||::!$root.it.can('modifySalon')" layout="row" class="md-block">
+                    <md-input-container ng-if="$ctrl.showAddFavors " layout="row" class="md-block">
                         <label for="newProgram">ЦІНА</label>
                         <input type="number" ng-model="$ctrl.newService.price"/>
 
                     </md-input-container>
-                    <md-button ng-if="$ctrl.showAddFavors ||::!$root.it.can('modifySalon')" ng-disabled="!$ctrl.newService " class="md-raised " ng-click="$ctrl.addService()">
+                    <md-button ng-if="$ctrl.showAddFavors " ng-disabled="!$ctrl.newService " class="md-raised " ng-click="$ctrl.addService()">
                         Додати послугу
                     </md-button>
 

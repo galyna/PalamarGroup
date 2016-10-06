@@ -10,6 +10,7 @@ import {TransformComponentName, TransformComponentOptions} from "./components/tr
 import {TransformsComponentName, TransformsComponentOptions} from "./components/transforms.component";
 import {MasterSchedulerComponentName, MasterSchedulerComponentOptions} from "./components/master.scheduler";
 import {AppointmentsComponentName, AppointmentsComponentOptions} from "./components/appointments.component";
+import {AppointmentSchedulerComponentName, AppointmentSchedulerComponentOptions} from "./components/appointment.scheduler.component";
 
 
 export let salonModule = angular.module( 'salon', [
@@ -23,4 +24,5 @@ export let salonModule = angular.module( 'salon', [
     .component( TransformComponentName, TransformComponentOptions )
     .component( TransformsComponentName, TransformsComponentOptions )
     .component( MasterSchedulerComponentName, MasterSchedulerComponentOptions )
+    .component( AppointmentSchedulerComponentName, AppointmentSchedulerComponentOptions )
     .component( AppointmentsComponentName, AppointmentsComponentOptions );
