@@ -53,6 +53,7 @@ declare module pg {
         export interface ITask {
             _id?:any,
             appointment:{
+                isDayOff:boolean,
                 name:string,
                 phone:string,
                 email:string,
@@ -63,8 +64,7 @@ declare module pg {
                 favors?:[{
                     id: string,
                     name: string,
-                    price: number,
-                    photo:IPhoto
+                    price: number
                 }]
             } ,
             scheduler:IScheduler,

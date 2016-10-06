@@ -2,13 +2,14 @@
  * Created by Galyna on 05.10.2016.
  */
 import {Document, Schema, model} from "mongoose";
-import {PhotoSchema} from "./photo.schema";
+
 
 export interface ITaskModel extends pg.models.ITask, Document {
     _id:any;
 }
 let TaskSchema = new Schema( {
     appointment: {
+        isDayOff:{type: Boolean, default: false },
         name: String,
         phone: String,
         email: String,
@@ -18,10 +19,8 @@ let TaskSchema = new Schema( {
         master: {type: Schema.Types.ObjectId, ref: 'Master'},
         favors: [{
             name: String,
-            photo: PhotoSchema,
             id: String,
-            price: Number,
-
+            price: Number
         }],
     },
     scheduler: {

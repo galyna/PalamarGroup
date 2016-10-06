@@ -26,7 +26,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <h2>Редагувата замовлення</h2>
+            <h2>Деталі замовлення</h2>
             <span flex></span>
             <md-button class="md-icon-button" ng-click="$ctrl.cancel()">
                 <md-icon md-svg-src="navigation:ic_close_24px" aria-label="Close dialog"></md-icon>
@@ -37,7 +37,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
     <md-dialog-content>
         <div class="md-dialog-content" layout="column">
             <div layout-gt-sm="row" layout="column">
-                <div flex="100" flex-gt-sm="30" layout="column" class="md-margin">
+                <div flex="100" flex-gt-sm="30" layout="column" class="md-margin" ng-if="!$ctrl.appointment.isDayOff">
                     <md-subheader class="md-no-sticky">Інформація від замовника
                     </md-subheader>
                     <md-input-container class="md-block">
@@ -61,7 +61,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                                ng-model="$ctrl.appointment.comment"/>
                     </md-input-container>
                 </div>
-                <div flex="100" flex-gt-sm="30" layout="column" class="md-margin md-whiteframe-z8">
+                <div flex="100" flex-gt-sm="30" layout="column" ng-if="!$ctrl.appointment.isDayOff" class="md-margin md-whiteframe-z8">
                   <md-subheader ng-if="$ctrl.appointment.favors.length>0"  class="md-no-sticky">Послуги</md-subheader>
                     <md-input-container ng-if="$ctrl.appointment.favors.length>0"  class="md-block">
                       
@@ -80,19 +80,19 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                             </div>
                         </div>
                     </md-input-container>
-                    <md-subheader ng-if="$ctrl.showAddFavors" class="md-no-sticky">Додати послугу
+                    <md-subheader ng-if="$ctrl.showAddFavors ||::!$root.it.can('modifySalon')" class="md-no-sticky">Додати послугу
                     </md-subheader>
-                    <md-select  ng-model="$ctrl.newService" ng-model-options="{trackBy: '$value._id'}">
+                    <md-select ng-if="$ctrl.showAddFavors ||::!$root.it.can('modifySalon')"  ng-model="$ctrl.newService" ng-model-options="{trackBy: '$value._id'}">
                         <md-option ng-repeat="services in $ctrl.services" ng-value="services">
                             {{ services.favor.name }}
                         </md-option>
                     </md-select>
-                    <md-input-container ng-if="$ctrl.showAddFavors" layout="row" class="md-block">
+                    <md-input-container ng-if="$ctrl.showAddFavors ||::!$root.it.can('modifySalon')" layout="row" class="md-block">
                         <label for="newProgram">ЦІНА</label>
                         <input type="number" ng-model="$ctrl.newService.price"/>
 
                     </md-input-container>
-                    <md-button ng-if="$ctrl.showAddFavors" ng-disabled="!$ctrl.newService" class="md-raised " ng-click="$ctrl.addService()">
+                    <md-button ng-if="$ctrl.showAddFavors ||::!$root.it.can('modifySalon')" ng-disabled="!$ctrl.newService " class="md-raised " ng-click="$ctrl.addService()">
                         Додати послугу
                     </md-button>
 
@@ -105,6 +105,9 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                             <textarea class=" md-padding  " ng-disabled="::!$root.it.can('modifySalon')"
                                       ng-model="$ctrl.appointment.admin_comment"></textarea>
                     </md-input-container>
+                    <md-input-container class="md-block">
+                      <md-checkbox ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.appointment.isDayOff">Час без замовлень</md-checkbox> 
+                        </md-input-container>
                 </div>
             </div>
              <div class=" md-padding " ng-if="::$root.it.can('modifySalon')" layout-gt-sm="row" layout="column">
@@ -391,6 +394,7 @@ export class MasterSchedulerComponentController {
     }
 
     updateTaskText(task:ITask) {
+        task.scheduler.text =``;
         if (!task.appointment.name) {
             task.scheduler.text = task.scheduler.text + `<div>Замовника не вказано</div>`;
         } else {
@@ -412,6 +416,13 @@ export class MasterSchedulerComponentController {
             task.scheduler.borderColor = "red";
             task.scheduler.barColor = "red";
         }
+
+        if (task.appointment.isDayOff) {
+            task.scheduler.text = `<div>Час без замовлень</div>`;
+            task.scheduler.borderColor = "grey";
+            task.scheduler.barColor = "grey";
+        }
+
     }
 
     updateMaster(task:ITask) {
