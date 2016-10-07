@@ -6,7 +6,7 @@ currentUser.use( 'admin', (req) => {
 } );
 
 currentUser.use( 'academyModerator', (req) => {
-    return req.user && (currentUser.is( 'admin' ) || req.user.roles.indexOf( 'academyModerator' ) > -1);
+    return req.user && (req.user.roles.indexOf( 'admin' ) > -1 || req.user.roles.indexOf( 'academyModerator' ) > -1);
 } );
 
 currentUser.use( 'salonModerator', (req) => {
@@ -14,9 +14,9 @@ currentUser.use( 'salonModerator', (req) => {
 } );
 
 currentUser.use( 'user', (req) => {
-    return req.user && (currentUser.is( 'admin' )||
-            req.user.roles.indexOf( 'academyModerator' ) || req.user.roles.indexOf( 'salonModerator' )
-    || req.user.roles.indexOf( 'academyUser' ) || req.user.roles.indexOf( 'salonUser' ) > -1
+    return req.user && (req.user.roles.indexOf( 'admin' ) > -1 ||
+            req.user.roles.indexOf( 'academyModerator' ) > -1|| req.user.roles.indexOf( 'salonModerator' )> -1
+    || req.user.roles.indexOf( 'academyUser' )> -1 || req.user.roles.indexOf( 'salonUser' ) > -1
     )
     ;
 } );

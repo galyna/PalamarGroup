@@ -40,7 +40,7 @@ on-next="$ctrl.next()"
         <md-icon class="md-secondary "  ng-click="$ctrl.showEditOrderDialog($event, order)" md-svg-icon="communication:ic_message_24px"> 
          <md-tooltip > Деталі</md-tooltip></md-icon>
           
-         <md-icon class="md-secondary " ng-disabled="::!$root.it.can('modifyAcademy')" ng-click=" ::$root.it.can('modifyAcademy') && $ctrl.showDeleteDialog($event, order)" 
+         <md-icon class="md-secondary " ng-if="::$root.it.can('modifyAcademy')" ng-click=" ::$root.it.can('modifyAcademy') && $ctrl.showDeleteDialog($event, order)" 
                      md-svg-icon="action:ic_delete_24px">
                 <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Видалити</md-tooltip>  
             </md-icon>

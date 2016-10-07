@@ -22,12 +22,12 @@
                 <span ng-if="item.email"><b>Email</b>: <a href="mailto:{{item.email}}">{{item.email}}</a></span>
 
                 <div class="md-margin" layout="row" layout-align="space-around end">
-                    <md-icon ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="vm.showEditForm(item)" class="md-secondary" md-svg-icon="content:ic_create_24px">
-                        <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Редагувати</md-tooltip>
+                    <md-icon ng-if="::$root.it.can('modifyAcademy')" ng-click="vm.showEditForm(item)" class="md-secondary" md-svg-icon="content:ic_create_24px">
+                        <md-tooltip>Редагувати</md-tooltip>
                     </md-icon>
-                    <md-icon ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="vm.showDeleteDialog($event, item)" class="md-secondary"
+                    <md-icon ng-if="::$root.it.can('modifyAcademy')" ng-click="vm.showDeleteDialog($event, item)" class="md-secondary"
                              md-svg-icon="action:ic_delete_24px">
-                        <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Видалити</md-tooltip>
+                        <md-tooltip >Видалити</md-tooltip>
                     </md-icon>
                 </div>
             </div>

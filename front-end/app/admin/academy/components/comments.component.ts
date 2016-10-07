@@ -16,7 +16,7 @@ const editDialogTemplate = `<md-dialog aria-label="Comment edit" flex="80">
         </md-toolbar>
         <md-dialog-content>
             <div class="md-dialog-content">
-                <h3>{{$ctrl.comment.courseName}} <span>{{$ctrl.comment.courseDates|courseDates}} </span></h3>
+                <h3>{{$ctrl.comment.courseName}} </h3>
                 <md-input-container class="md-block">
                     <label>Автор</label>
                     <input type="text" ng-model="$ctrl.comment.name" required>
@@ -91,10 +91,10 @@ const template = `<md-toolbar>
     <md-list-item class="md-3-line md-long-text" ng-class="{answered:comment.isModerated, approved:comment.isVisible}"
                   ng-repeat="comment in $ctrl.comments" ng-click="::$root.it.can('modifyAcademy') && $ctrl.showEditDialog($event, comment)">
         <div class="md-list-item-text">
-            <h2 ng-if="comment.isVisible">Відгук видимий на сайті </h2>
-            <h3>{{::comment.name||'Анонім'}} {{::comment.date| date:'dd.MM.yyyy'}}</h3>
+            <h2 ng-if="comment.isVisible" class="approved-titlt">Відгук видимий на сайті </h2>
+            <h3>{{::comment.name||'Анонім'}} </h3>
             <p>{{comment.text}}</p>
-            <h3>{{comment.courseName}} <span>{{comment.courseDates|courseDates}} </span></h3>
+            <h3>{{comment.courseName}} </h3>
             <p ng-if="comment.isModerated">Відгук перевірено </p>
         </div>
         <div class="md-secondary md-margin">
@@ -104,12 +104,12 @@ const template = `<md-toolbar>
                 Показати на сайті
             </md-tooltip>
         </div>
-        <md-icon ng-click="$ctrl.showEditDialog($event, comment)" ng-disabled="::!$root.it.can('modifyAcademy')"
+        <md-icon ng-click="$ctrl.showEditDialog($event, comment)" ng-if="::$root.it.can('modifyAcademy')"
                  class="md-secondary" aria-label="edit"
                  md-svg-icon="content:ic_create_24px">
-            <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Редагувати</md-tooltip>
+            <md-tooltip >Редагувати</md-tooltip>
         </md-icon>
-        <md-icon ng-click="$ctrl.showDeleteDialog($event, comment)" ng-disabled="::!$root.it.can('modifyAcademy')"
+        <md-icon ng-click="$ctrl.showDeleteDialog($event, comment)" ng-if="::$root.it.can('modifyAcademy')"
                  class="md-secondary" aria-label="delete"
                  md-svg-icon="action:ic_delete_24px">
             <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Видалити</md-tooltip>

@@ -21,13 +21,14 @@ import {Appointment} from "../models/appointment";
 
 //endpoints
 import {emailEndpoint} from "./email.endpoint";
-import {orderOptions} from "./order.options";
-import {courseApi} from "./course.endpoint";
+import {orderOptions,modelOptions} from "./order.options";
+import {courseApi,coursesOptions} from "./course.endpoint";
 import {courseGetCommentsApi} from "./comment.endpoint";
 import {userOptions, userApi} from "./user.endpoint";
 import IOrder = pg.models.IOrder;
-import {salonClientApi} from "./salon.client.endpoint";
+import {salonClientApi, salonClientOptions} from "./salon.client.endpoint";
 import {tasksOptions, tasksApi} from './tasks.endpoint';
+import {appointmentOptions} from './appointment.options';
 
 
 let api = express.Router();
@@ -61,7 +62,7 @@ let readOnlyOptions = {
 
 api.use(paging.preRead);
 
-restify.serve(api, Contact);
+restify.serve(api, Contact,coursesOptions);
 
 api.use('/course/comments', courseGetCommentsApi);
 api.use('/master/:id', (req: any, res, next) => {
@@ -73,19 +74,19 @@ api.use('/course/:id', (req: any, res, next) => {
     req.courseId = req.params.id;
     next();
 }, courseApi);
-restify.serve(api, Course);
+restify.serve(api, Course,coursesOptions);
 
 api.use('/user', userApi);
 restify.serve(api, User, userOptions);
 
-restify.serve(api, Model);
+restify.serve(api, Model,modelOptions);
 restify.serve(api, Order, orderOptions);
-restify.serve(api, Master, readOnlyOptions);
-restify.serve(api, Appointment);
+restify.serve(api, Master, tasksOptions);
+restify.serve(api, Appointment,appointmentOptions);
 api.use('/salonclient', salonClientApi);
-restify.serve(api, SalonClient);
-restify.serve(api, Favor);
-restify.serve(api, Transform);
+restify.serve(api, SalonClient,salonClientOptions);
+restify.serve(api, Favor,tasksOptions);
+restify.serve(api, Transform,tasksOptions);
 api.use('/photo', photoEndpoint);
 api.use('/email', emailEndpoint);
 

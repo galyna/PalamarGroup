@@ -31,7 +31,7 @@ const template:string = `<div flex layout="column">
             <md-card>
                 <md-card-content>
                     <md-input-container class="md-block ">
-                        <label for="name">Назва</label>
+                        <label for="name">Ім’я </label>
                         <input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.master.name"
                                name="name"/>
                     </md-input-container>
@@ -83,7 +83,7 @@ const template:string = `<div flex layout="column">
                     <div layout="column">
                         <img ng-src="{{$ctrl.master.photo.url}}" class="module-history-img"/>
 
-                        <div>
+                        <div ng-if="::$root.it.can('modifySalon')">
                             <md-button ng-if="!$ctrl.showAuthorPhotoUpload" class="md-raised"
                                        ng-click="$ctrl.showAuthorPhotoUpload=true">
                                 Змінити фото
@@ -115,12 +115,11 @@ const template:string = `<div flex layout="column">
             <md-card>
                 <md-card-content>
                     <div flex>
-                        <md-subheader class="md-no-sticky">Форми блоків</md-subheader>
                         <div class="md-padding md-margin" layout="row"
                              ng-repeat="item in $ctrl.master.works track by $index"
                              ng-click="null">
                             <img ng-src="{{item.url}}" class="module-history-img"/>
-                            <div layout="column">
+                            <div layout="column" ng-if="::$root.it.can('modifySalon')">
                                 <md-input-container class="md-block  ">
                                     <label for="historyNme">Назва роботи</label>
                                     <input id="historyNme" ng-model="item.name" name="historyNme"/>
@@ -136,7 +135,7 @@ const template:string = `<div flex layout="column">
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div ng-if="::$root.it.can('modifySalon')">
                         <md-button ng-if="!$ctrl.showFormPhotoUpload" class="md-raised"
                                    ng-click="$ctrl.showFormPhotoUpload=true">
                             Додати фото

@@ -49,10 +49,10 @@ const template = `<md-toolbar>
             <md-tooltip> Деталі</md-tooltip>
         </md-icon>
 
-        <md-icon class="md-secondary " ng-disabled="::!$root.it.can('modifySalon')"
+        <md-icon class="md-secondary " ng-if="::$root.it.can('modifySalon')"
                  ng-click=" ::$root.it.can('modifySalon') && $ctrl.showDeleteDialog($event, appointment)"
                  md-svg-icon="action:ic_delete_24px">
-            <md-tooltip ng-if="::$root.it.can('modifySalon')">Видалити</md-tooltip>
+            <md-tooltip >Видалити</md-tooltip>
         </md-icon>
 
         <md-divider></md-divider>
@@ -179,7 +179,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 
                     </div>
                 </div>
-                <div flex  layout="row" id="pgCalendarContainer" >
+                <div flex  layout="row" ng-if="::$root.it.can('modifySalon') && $ctrl.appointment.master">
                     <pg-appointment-scheduler appointment="$ctrl.appointment" master="$ctrl.appointment.master"  ></pg-appointment-scheduler>
                 </div>
 

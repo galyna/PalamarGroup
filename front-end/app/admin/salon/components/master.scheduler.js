@@ -1,19 +1,19 @@
-System.register(["../../../resources/master.resource", "../../../resources/appointment.resource"], function(exports_1, context_1) {
+System.register(["../../../resources/master.resource", "../../../users/services/it.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var master_resource_1, appointment_resource_1;
+    var master_resource_1, it_service_1;
     var template, editOrderDialogTemplate, EditDialogController, MasterSchedulerComponentController, MasterSchedulerComponentName, MasterSchedulerComponentOptions;
     return {
         setters:[
             function (master_resource_1_1) {
                 master_resource_1 = master_resource_1_1;
             },
-            function (appointment_resource_1_1) {
-                appointment_resource_1 = appointment_resource_1_1;
+            function (it_service_1_1) {
+                it_service_1 = it_service_1_1;
             }],
         execute: function() {
             template = "\n <div layout=\"row\" ng-if=\"$ctrl.photo\" layout-align=\"  center  \"> <img  ng-src=\"{{$ctrl.photo}}\" class=\"avatar \" alt=\"{{master.name}}\" />\n                                   <h3>{{::$ctrl.mname}}</h3> </div>\n<div layout=\"row\" layout-xs=\"column\">\n    <div class=\"md-padding \">\n        <daypilot-navigator style=\" width: 280px\" id=\"navi\"\n                            daypilot-config=\"$ctrl.navigatorConfig\"></daypilot-navigator>\n    </div>\n    <div flex class=\"md-padding \">\n        <daypilot-calendar id=\"week\" daypilot-config=\"$ctrl.weekConfig\"\n                           daypilot-events=\"$ctrl.events\"></daypilot-calendar>\n    </div>\n\n</div>";
-            editOrderDialogTemplate = "<md-dialog aria-label=\"Order edit\" ng-cloak>\n\n    <md-toolbar>\n        <div class=\"md-toolbar-tools\">\n          <img  ng-src=\"{{$ctrl.masterPhoto}}\" class=\"avatar\" alt=\"{{$ctrl.masterPhoto}}\" />\n            <h2>\u0414\u0435\u0442\u0430\u043B\u0456 \u0437\u0430\u043C\u043E\u0432\u043B\u0435\u043D\u043D\u044F</h2>\n            <span flex></span>\n            <md-button class=\"md-icon-button\" ng-click=\"$ctrl.cancel()\">\n                <md-icon md-svg-src=\"navigation:ic_close_24px\" aria-label=\"Close dialog\"></md-icon>\n            </md-button>\n        </div>\n\n    </md-toolbar>\n    <md-dialog-content>\n        <div class=\"md-dialog-content\" layout=\"column\">\n            <div layout-gt-sm=\"row\" layout=\"column\">\n                <div flex=\"100\" flex-gt-sm=\"30\" layout=\"column\" class=\"md-margin\" ng-if=\"!$ctrl.appointment.isDayOff\">\n                    <md-subheader class=\"md-no-sticky\">\u0406\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0432\u0456\u0434 \u0437\u0430\u043C\u043E\u0432\u043D\u0438\u043A\u0430\n                    </md-subheader>\n                    <md-input-container class=\"md-block\">\n                        <label>\u0417\u0430\u043C\u043E\u0432\u043D\u0438\u043A</label>\n                        <input ng-disabled=\"::!$root.it.can('modifySalon')\" type=\"text\"\n                               ng-model=\"$ctrl.appointment.name\">\n                    </md-input-container>\n                    <md-input-container class=\"md-block\">\n                        <label>\u0422\u0435\u043B\u0444\u043E\u043D</label>\n                        <input ng-disabled=\"::!$root.it.can('modifySalon')\" type=\"text\"\n                               ng-model=\"$ctrl.appointment.phone\">\n                    </md-input-container>\n                    <md-input-container class=\"md-block\">\n                        <label>Email</label>\n                        <input ng-disabled=\"::!$root.it.can('modifySalon')\" type=\"text\"\n                               ng-model=\"$ctrl.appointment.email\">\n                    </md-input-container>\n                    <md-input-container class=\"md-block\">\n                        <label>\u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440 \u0437\u0430\u043C\u043E\u0432\u043D\u0438\u043A\u0430</label>\n                        <input ng-disabled=\"::!$root.it.can('modifySalon')\" type=\"text\"\n                               ng-model=\"$ctrl.appointment.comment\"/>\n                    </md-input-container>\n                </div>\n                <div flex=\"100\" flex-gt-sm=\"30\" layout=\"column\" ng-if=\"!$ctrl.appointment.isDayOff\" class=\"md-margin md-whiteframe-z8\">\n                  <md-subheader ng-if=\"$ctrl.appointment.favors.length>0\"  class=\"md-no-sticky\">\u041F\u043E\u0441\u043B\u0443\u0433\u0438</md-subheader>\n                    <md-input-container ng-if=\"$ctrl.appointment.favors.length>0\"  class=\"md-block\">\n                      \n                        <div ng-repeat=\"favor in $ctrl.appointment.favors\">\n                            <div layout=\"row\">\n                              <img  ng-src=\"{{favor.photo}}\" class=\"avatar\" alt=\"{{favor.photo}}\" />\n                                <div class=\" md-padding\" id=\"prokgram\" name=\"program\">\n                                {{favor.name}}\n                                </div>\n                                <div class=\" md-padding\" id=\"program\" name=\"program\">\n                                {{favor.price}} \u0433\u0440\u043D.\n                                </div>\n                                <md-button class=\" md-padding \" ng-if=\"::$root.it.can('modifySalon')\" class=\"md-icon-button\"\n                                           ng-click=\"$ctrl.deleteService(favor)\">\n                                    <md-icon md-svg-src=\"action:ic_delete_24px\"></md-icon>\n                                </md-button>\n                            </div>\n                        </div>\n                    </md-input-container>\n                    <md-subheader ng-if=\"$ctrl.showAddFavors \" class=\"md-no-sticky\">\u0414\u043E\u0434\u0430\u0442\u0438 \u043F\u043E\u0441\u043B\u0443\u0433\u0443\n                    </md-subheader>\n                    <md-select ng-if=\"$ctrl.showAddFavors  \"  ng-model=\"$ctrl.newService\" ng-model-options=\"{trackBy: '$value._id'}\">\n                        <md-option ng-repeat=\"services in $ctrl.services\" ng-value=\"services\">\n                            <div layout=\"row\" layout-align=\" start center  \">\n                                 <img  ng-src=\"{{services.favor.photo.url}}\" class=\"avatar\" alt=\"{{services.favor.name}}\" />\n                                   <span>  {{ services.favor.name }}  </span>  </div>\n                        </md-option>\n                    </md-select>\n                    <md-input-container ng-if=\"$ctrl.showAddFavors \" layout=\"row\" class=\"md-block\">\n                        <label for=\"newProgram\">\u0426\u0406\u041D\u0410</label>\n                        <input type=\"number\" ng-model=\"$ctrl.newService.price\"/>\n\n                    </md-input-container>\n                    <md-button ng-if=\"$ctrl.showAddFavors \" ng-disabled=\"!$ctrl.newService \" class=\"md-raised \" ng-click=\"$ctrl.addService()\">\n                        \u0414\u043E\u0434\u0430\u0442\u0438 \u043F\u043E\u0441\u043B\u0443\u0433\u0443\n                    </md-button>\n\n                </div>\n                <div flex=\"100\" flex-gt-sm=\"30\" layout=\"column\" class=\"md-margin\">\n                    <md-subheader class=\" md-margin  md-no-sticky\">\u0410\u0434\u043C\u0456\u043D\u0456\u0441\u0442\u0440\u0430\u0442\u0438\u0432\u043D\u0430 \u0447\u0430\u0441\u0442\u0438\u043D\u0430\n                    </md-subheader>\n                   <md-input-container class=\"md-block\">\n                        <label>\u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440 \u0430\u0434\u043C\u0456\u043D\u0456\u0441\u0442\u0440\u0430\u0442\u043E\u0440\u0430</label>\n                            <textarea class=\" md-padding  \" ng-disabled=\"::!$root.it.can('modifySalon')\"\n                                      ng-model=\"$ctrl.appointment.admin_comment\"></textarea>\n                    </md-input-container>\n                    <md-input-container class=\"md-block\">\n                      <md-checkbox ng-disabled=\"::!$root.it.can('modifySalon')\" ng-model=\"$ctrl.appointment.isDayOff\">\u0427\u0430\u0441 \u0431\u0435\u0437 \u0437\u0430\u043C\u043E\u0432\u043B\u0435\u043D\u044C</md-checkbox> \n                        </md-input-container>\n                </div>\n            </div>\n             <div class=\" md-padding \" ng-if=\"::$root.it.can('modifySalon')\" layout-gt-sm=\"row\" layout=\"column\">\n\n        <span flex></span>\n\n        <md-button class=\" md-primary md-accent\"  ng-click=\"$ctrl.delete()\" aria-label=\"cancel\">\n            \u0412\u0438\u0434\u0430\u043B\u0438\u0442\u0438\n        </md-button>\n        <md-button class=\" md-raised md-primary md-accent\" ng-click=\"$ctrl.save()\" aria-label=\"save\">\n            \u0417\u0431\u0435\u0440\u0435\u0433\u0442\u0438\n        </md-button>\n\n        <md-button class=\"md-raised  md-primary\" ng-click=\"$ctrl.cancel()\" aria-label=\"cancel\">\n            \u0412\u0456\u0434\u043C\u0456\u043D\u0438\u0442\u0438\n        </md-button>\n                </div>\n        </div>\n    </md-dialog-content>\n\n\n\n</md-dialog>\n";
+            editOrderDialogTemplate = "<md-dialog aria-label=\"Order edit\" ng-cloak>\n\n    <md-toolbar>\n        <div class=\"md-toolbar-tools\">\n          <img  ng-src=\"{{$ctrl.masterPhoto}}\" class=\"avatar\" alt=\"{{$ctrl.masterPhoto}}\" />\n            <h2>\u0414\u0435\u0442\u0430\u043B\u0456 \u0437\u0430\u043C\u043E\u0432\u043B\u0435\u043D\u043D\u044F</h2>\n            <span flex></span>\n            <md-button class=\"md-icon-button\" ng-click=\"$ctrl.cancel()\">\n                <md-icon md-svg-src=\"navigation:ic_close_24px\" aria-label=\"Close dialog\"></md-icon>\n            </md-button>\n        </div>\n\n    </md-toolbar>\n    <md-dialog-content>\n        <div class=\"md-dialog-content\" layout=\"column\">\n            <div layout-gt-sm=\"row\" layout=\"column\">\n                <div flex=\"100\" flex-gt-sm=\"30\" layout=\"column\" class=\"md-margin\" ng-if=\"!$ctrl.appointment.isDayOff\">\n                    <md-subheader class=\"md-no-sticky\">\u0406\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0456\u044F \u0432\u0456\u0434 \u0437\u0430\u043C\u043E\u0432\u043D\u0438\u043A\u0430\n                    </md-subheader>\n                    <md-input-container class=\"md-block\">\n                        <label>\u0417\u0430\u043C\u043E\u0432\u043D\u0438\u043A</label>\n                        <input ng-disabled=\"::!$root.it.can('modifySalon')\" type=\"text\"\n                               ng-model=\"$ctrl.appointment.name\">\n                    </md-input-container>\n                    <md-input-container class=\"md-block\">\n                        <label>\u0422\u0435\u043B\u0444\u043E\u043D</label>\n                        <input ng-disabled=\"::!$root.it.can('modifySalon')\" type=\"text\"\n                               ng-model=\"$ctrl.appointment.phone\">\n                    </md-input-container>\n                    <md-input-container class=\"md-block\">\n                        <label>Email</label>\n                        <input ng-disabled=\"::!$root.it.can('modifySalon')\" type=\"text\"\n                               ng-model=\"$ctrl.appointment.email\">\n                    </md-input-container>\n                    <md-input-container class=\"md-block\">\n                        <label>\u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440 \u0437\u0430\u043C\u043E\u0432\u043D\u0438\u043A\u0430</label>\n                        <input ng-disabled=\"::!$root.it.can('modifySalon')\" type=\"text\"\n                               ng-model=\"$ctrl.appointment.comment\"/>\n                    </md-input-container>\n                </div>\n                <div flex=\"100\" flex-gt-sm=\"30\" layout=\"column\" ng-if=\"!$ctrl.appointment.isDayOff \" \n                 class=\"md-margin md-whiteframe-z8\">\n                  <md-subheader ng-if=\"$ctrl.appointment.favors.length>0\"  class=\"md-no-sticky\">\u041F\u043E\u0441\u043B\u0443\u0433\u0438</md-subheader>\n                    <md-input-container ng-if=\"$ctrl.appointment.favors.length>0\"  class=\"md-block\">\n                      \n                        <div ng-repeat=\"favor in $ctrl.appointment.favors\">\n                            <div layout=\"row\">\n                              <img  ng-src=\"{{favor.photo}}\" class=\"avatar\" alt=\"{{favor.photo}}\" />\n                                <div class=\" md-padding\" id=\"prokgram\" name=\"program\">\n                                {{favor.name}}\n                                </div>\n                                <div class=\" md-padding\" id=\"program\" name=\"program\">\n                                {{favor.price}} \u0433\u0440\u043D.\n                                </div>\n                                <md-button class=\" md-padding \" ng-if=\"::$root.it.can('modifySalon')\" class=\"md-icon-button\"\n                                           ng-click=\"$ctrl.deleteService(favor)\">\n                                    <md-icon md-svg-src=\"action:ic_delete_24px\"></md-icon>\n                                </md-button>\n                            </div>\n                        </div>\n                    </md-input-container>\n                    <md-subheader ng-if=\"$ctrl.showAddFavors && $root.it.can('modifySalon')\" class=\"md-no-sticky\">\u0414\u043E\u0434\u0430\u0442\u0438 \u043F\u043E\u0441\u043B\u0443\u0433\u0443\n                    </md-subheader>\n                    <md-select ng-if=\"$ctrl.showAddFavors && $root.it.can('modifySalon') \"  ng-model=\"$ctrl.newService\" ng-model-options=\"{trackBy: '$value._id'}\">\n                        <md-option ng-repeat=\"services in $ctrl.services\" ng-value=\"services\">\n                            <div layout=\"row\" layout-align=\" start center  \">\n                                 <img  ng-src=\"{{services.favor.photo.url}}\" class=\"avatar\" alt=\"{{services.favor.name}}\" />\n                                   <span>  {{ services.favor.name }}  </span>  </div>\n                        </md-option>\n                    </md-select>\n                    <md-input-container ng-if=\"$ctrl.showAddFavors && $root.it.can('modifySalon')\" layout=\"row\" class=\"md-block\">\n                        <label for=\"newProgram\">\u0426\u0406\u041D\u0410</label>\n                        <input type=\"number\" ng-model=\"$ctrl.newService.price\"/>\n\n                    </md-input-container>\n                    <md-button ng-if=\"$ctrl.showAddFavors && $root.it.can('modifySalon')\" ng-disabled=\"!$ctrl.newService \" class=\"md-raised \" ng-click=\"$ctrl.addService()\">\n                        \u0414\u043E\u0434\u0430\u0442\u0438 \u043F\u043E\u0441\u043B\u0443\u0433\u0443\n                    </md-button>\n\n                </div>\n                <div flex=\"100\" flex-gt-sm=\"30\" layout=\"column\" class=\"md-margin\">\n                    <md-subheader class=\" md-margin  md-no-sticky\">\u0410\u0434\u043C\u0456\u043D\u0456\u0441\u0442\u0440\u0430\u0442\u0438\u0432\u043D\u0430 \u0447\u0430\u0441\u0442\u0438\u043D\u0430\n                    </md-subheader>\n                   <md-input-container class=\"md-block\">\n                        <label>\u041A\u043E\u043C\u0435\u043D\u0442\u0430\u0440 \u0430\u0434\u043C\u0456\u043D\u0456\u0441\u0442\u0440\u0430\u0442\u043E\u0440\u0430</label>\n                            <textarea class=\" md-padding  \" ng-disabled=\"::!$root.it.can('modifySalon')\"\n                                      ng-model=\"$ctrl.appointment.admin_comment\"></textarea>\n                    </md-input-container>\n                    <md-input-container class=\"md-block\">\n                      <md-checkbox ng-disabled=\"::!$root.it.can('modifySalon')\" ng-model=\"$ctrl.appointment.isDayOff\">\u0427\u0430\u0441 \u0431\u0435\u0437 \u0437\u0430\u043C\u043E\u0432\u043B\u0435\u043D\u044C</md-checkbox> \n                        </md-input-container>\n                </div>\n            </div>\n             <div class=\" md-padding \" ng-if=\"::$root.it.can('modifySalon')\" layout-gt-sm=\"row\" layout=\"column\">\n\n        <span flex></span>\n\n        <md-button class=\" md-primary md-accent\"  ng-click=\"$ctrl.delete()\" aria-label=\"cancel\">\n            \u0412\u0438\u0434\u0430\u043B\u0438\u0442\u0438\n        </md-button>\n        <md-button class=\" md-raised md-primary md-accent\" ng-click=\"$ctrl.save()\" aria-label=\"save\">\n            \u0417\u0431\u0435\u0440\u0435\u0433\u0442\u0438\n        </md-button>\n\n        <md-button class=\"md-raised  md-primary\" ng-click=\"$ctrl.cancel()\" aria-label=\"cancel\">\n            \u0412\u0456\u0434\u043C\u0456\u043D\u0438\u0442\u0438\n        </md-button>\n                </div>\n        </div>\n    </md-dialog-content>\n\n\n\n</md-dialog>\n";
             EditDialogController = (function () {
                 function EditDialogController($mdDialog, $mdToast, task) {
                     this.$mdDialog = $mdDialog;
@@ -70,13 +70,14 @@ System.register(["../../../resources/master.resource", "../../../resources/appoi
                 return EditDialogController;
             }());
             MasterSchedulerComponentController = (function () {
-                function MasterSchedulerComponentController($log, $timeout, $mdDialog, $scope, MasterResource, $routeParams) {
+                function MasterSchedulerComponentController($log, $timeout, $mdDialog, $scope, MasterResource, $routeParams, ItService) {
                     this.$log = $log;
                     this.$timeout = $timeout;
                     this.$mdDialog = $mdDialog;
                     this.$scope = $scope;
                     this.MasterResource = MasterResource;
                     this.$routeParams = $routeParams;
+                    this.ItService = ItService;
                     this.events = [];
                     this.tasks = [];
                     this.masters = this.MasterResource.query({ populate: 'services.favor' });
@@ -129,55 +130,8 @@ System.register(["../../../resources/master.resource", "../../../resources/appoi
                         businessEndsHour: "19",
                         hideUntilInit: true,
                         eventMoveHandling: 'Disabled',
+                        eventResizeHandling: 'Disabled',
                         heightSpec: 'BusinessHours',
-                        onTimeRangeSelect: function (args) {
-                            var params = {
-                                appointment: {
-                                    date: new Date(),
-                                    master: _this.masterId
-                                },
-                                scheduler: {
-                                    start: args.start.toString(),
-                                    end: args.end.toString(),
-                                    text: "Новий запис, Заповніть форму",
-                                    borderColor: "red",
-                                    barColor: "red",
-                                    id: DayPilot.guid()
-                                }
-                            };
-                            _this.MasterResource.addTask({ id: _this.masterId }, params).$promise.then(function (task) {
-                                _this.tasks.push(task);
-                                _this.events.push(task.scheduler);
-                                _this.$scope.week.update();
-                            });
-                        },
-                        onEventResize: function (args) {
-                            var event = {
-                                id: args.e.id(),
-                                start: args.newStart.toString(),
-                                end: args.newEnd.toString(),
-                                text: args.e.text(),
-                                borderColor: args.e.borderColor,
-                                barColor: args.e.barColor,
-                            };
-                            var originalTask;
-                            var tasks = _this.tasks.filter(function (task) {
-                                return task != null && task.scheduler.id === event.id;
-                            });
-                            if (tasks.length > 0 && event) {
-                                var task = tasks[0];
-                                originalTask = angular.copy(task);
-                                task.scheduler = event;
-                                _this.MasterResource.updateTask({ id: _this.masterId }, task).$promise.then(function (newTask) {
-                                    _this.tasks.splice(_this.tasks.indexOf(task), 1, newTask);
-                                }).catch(function (err) {
-                                    _this.revertResize(originalTask);
-                                    _this.$scope.week.update();
-                                    _this.$log.error(err);
-                                    _this.showErrorDialog();
-                                });
-                            }
-                        },
                         onEventClick: function (args) {
                             var tasks = _this.tasks.filter(function (task) {
                                 return task != null && task.scheduler.id === args.e.id();
@@ -187,6 +141,11 @@ System.register(["../../../resources/master.resource", "../../../resources/appoi
                             }
                         }
                     };
+                    if (this.ItService.can('modifySalon')) {
+                        this.weekConfig.eventResizeHandling = 'Update';
+                        this.iniOnTimeRangeSelect();
+                        this.iniOnEventResize();
+                    }
                 };
                 MasterSchedulerComponentController.prototype.initNavigatorConfig = function () {
                     var _this = this;
@@ -201,6 +160,60 @@ System.register(["../../../resources/master.resource", "../../../resources/appoi
                             _this.weekConfig.startDate = args.day;
                             _this.loadEvents(args.day);
                         }
+                    };
+                };
+                MasterSchedulerComponentController.prototype.iniOnEventResize = function () {
+                    var _this = this;
+                    this.weekConfig.onEventResize = function (args) {
+                        var event = {
+                            id: args.e.id(),
+                            start: args.newStart.toString(),
+                            end: args.newEnd.toString(),
+                            text: args.e.text(),
+                            borderColor: args.e.borderColor,
+                            barColor: args.e.barColor,
+                        };
+                        var originalTask;
+                        var tasks = _this.tasks.filter(function (task) {
+                            return task != null && task.scheduler.id === event.id;
+                        });
+                        if (tasks.length > 0 && event) {
+                            var task = tasks[0];
+                            originalTask = angular.copy(task);
+                            task.scheduler = event;
+                            _this.MasterResource.updateTask({ id: _this.masterId }, task).$promise.then(function (newTask) {
+                                _this.tasks.splice(_this.tasks.indexOf(task), 1, newTask);
+                            }).catch(function (err) {
+                                _this.revertResize(originalTask);
+                                _this.$scope.week.update();
+                                _this.$log.error(err);
+                                _this.showErrorDialog();
+                            });
+                        }
+                    };
+                };
+                MasterSchedulerComponentController.prototype.iniOnTimeRangeSelect = function () {
+                    var _this = this;
+                    this.weekConfig.onTimeRangeSelect = function (args) {
+                        var params = {
+                            appointment: {
+                                date: new Date(),
+                                master: _this.masterId
+                            },
+                            scheduler: {
+                                start: args.start.toString(),
+                                end: args.end.toString(),
+                                text: "Новий запис, Заповніть форму",
+                                borderColor: "red",
+                                barColor: "red",
+                                id: DayPilot.guid()
+                            }
+                        };
+                        _this.MasterResource.addTask({ id: _this.masterId }, params).$promise.then(function (task) {
+                            _this.tasks.push(task);
+                            _this.events.push(task.scheduler);
+                            _this.$scope.week.update();
+                        });
                     };
                 };
                 MasterSchedulerComponentController.prototype.createEditDialod = function (task) {
@@ -327,7 +340,7 @@ System.register(["../../../resources/master.resource", "../../../resources/appoi
                         .ok('OK');
                     return this.$mdDialog.show(confirm);
                 };
-                MasterSchedulerComponentController.$inject = ["$log", '$timeout', "$mdDialog", "$scope", master_resource_1.MasterResourceName, "$routeParams", appointment_resource_1.AppointmentResourceName];
+                MasterSchedulerComponentController.$inject = ["$log", '$timeout', "$mdDialog", "$scope", master_resource_1.MasterResourceName, "$routeParams", it_service_1.ItServiceName];
                 return MasterSchedulerComponentController;
             }());
             exports_1("MasterSchedulerComponentController", MasterSchedulerComponentController);

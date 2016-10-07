@@ -13,7 +13,7 @@ const template = `<md-toolbar>
     </div>
 </md-toolbar>
 
-<md-button ng-click="$ctrl.addMaster()" ng-disabled="!$root.it.can('modifyAcademy');"
+<md-button ng-click="$ctrl.addMaster()" ng-if="::$root.it.can('modifyAcademy')"
            class="md-fab md-fab-fixed md-primary md-fab-bottom-right" aria-label="new">
     <md-icon md-svg-icon="content:ic_add_24px"></md-icon>
     <md-tooltip>Додати майстра</md-tooltip>
@@ -26,14 +26,14 @@ const template = `<md-toolbar>
         <div class="md-list-item-text" layout="column">
             <h3>{{::master.name}}</h3>
         </div>
-        <md-icon class="md-secondary " ng-disabled="::!$root.it.can('modifyAcademy')"
+        <md-icon class="md-secondary " 
                  ng-click="$ctrl.editMaster(master)" md-svg-icon="communication:ic_message_24px">
             <md-tooltip>Деталі</md-tooltip>
         </md-icon>
-        <md-icon class="md-secondary " ng-disabled="::!$root.it.can('modifyAcademy')"
+        <md-icon ng-if="::$root.it.can('modifySalon')" class="md-secondary " 
                  ng-click="$ctrl.showDeleteDialog($event, master)"
                  md-svg-icon="action:ic_delete_24px">
-            <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Видалити</md-tooltip>
+            <md-tooltip >Видалити</md-tooltip>
         </md-icon>
         <md-divider></md-divider>
     </md-list-item>

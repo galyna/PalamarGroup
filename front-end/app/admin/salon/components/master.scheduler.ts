@@ -1,6 +1,7 @@
 import {IMaster, MasterResourceName, IMasterResource, ITask, IScheduler} from "../../../resources/master.resource";
-import {IAppointment, AppointmentResourceName, IAppointmentResource} from "../../../resources/appointment.resource";
+import {ItServiceName, ItService} from "../../../users/services/it.service";
 import IMasterFavor = pg.models.IMasterFavor;
+
 
 const template = `
  <div layout="row" ng-if="$ctrl.photo" layout-align="  center  "> <img  ng-src="{{$ctrl.photo}}" class="avatar " alt="{{master.name}}" />
@@ -57,7 +58,8 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                                ng-model="$ctrl.appointment.comment"/>
                     </md-input-container>
                 </div>
-                <div flex="100" flex-gt-sm="30" layout="column" ng-if="!$ctrl.appointment.isDayOff" class="md-margin md-whiteframe-z8">
+                <div flex="100" flex-gt-sm="30" layout="column" ng-if="!$ctrl.appointment.isDayOff " 
+                 class="md-margin md-whiteframe-z8">
                   <md-subheader ng-if="$ctrl.appointment.favors.length>0"  class="md-no-sticky">Послуги</md-subheader>
                     <md-input-container ng-if="$ctrl.appointment.favors.length>0"  class="md-block">
                       
@@ -77,21 +79,21 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                             </div>
                         </div>
                     </md-input-container>
-                    <md-subheader ng-if="$ctrl.showAddFavors " class="md-no-sticky">Додати послугу
+                    <md-subheader ng-if="$ctrl.showAddFavors && $root.it.can('modifySalon')" class="md-no-sticky">Додати послугу
                     </md-subheader>
-                    <md-select ng-if="$ctrl.showAddFavors  "  ng-model="$ctrl.newService" ng-model-options="{trackBy: '$value._id'}">
+                    <md-select ng-if="$ctrl.showAddFavors && $root.it.can('modifySalon') "  ng-model="$ctrl.newService" ng-model-options="{trackBy: '$value._id'}">
                         <md-option ng-repeat="services in $ctrl.services" ng-value="services">
                             <div layout="row" layout-align=" start center  ">
                                  <img  ng-src="{{services.favor.photo.url}}" class="avatar" alt="{{services.favor.name}}" />
                                    <span>  {{ services.favor.name }}  </span>  </div>
                         </md-option>
                     </md-select>
-                    <md-input-container ng-if="$ctrl.showAddFavors " layout="row" class="md-block">
+                    <md-input-container ng-if="$ctrl.showAddFavors && $root.it.can('modifySalon')" layout="row" class="md-block">
                         <label for="newProgram">ЦІНА</label>
                         <input type="number" ng-model="$ctrl.newService.price"/>
 
                     </md-input-container>
-                    <md-button ng-if="$ctrl.showAddFavors " ng-disabled="!$ctrl.newService " class="md-raised " ng-click="$ctrl.addService()">
+                    <md-button ng-if="$ctrl.showAddFavors && $root.it.can('modifySalon')" ng-disabled="!$ctrl.newService " class="md-raised " ng-click="$ctrl.addService()">
                         Додати послугу
                     </md-button>
 
@@ -207,7 +209,7 @@ class EditDialogController {
 }
 export class MasterSchedulerComponentController {
 
-    static $inject = ["$log", '$timeout', "$mdDialog", "$scope", MasterResourceName, "$routeParams", AppointmentResourceName];
+    static $inject = ["$log", '$timeout', "$mdDialog", "$scope", MasterResourceName, "$routeParams", ItServiceName];
 
     masterId:string;
     masters:IMaster[];
@@ -221,9 +223,11 @@ export class MasterSchedulerComponentController {
 
 
     constructor(private $log:ng.ILogService, private $timeout:ng.ITimeoutService, private $mdDialog:ng.material.IDialogService,
-                private $scope:ISchedulerScope, private MasterResource:IMasterResource, private $routeParams:ng.route.IRouteParamsService) {
+                private $scope:ISchedulerScope, private MasterResource:IMasterResource, private $routeParams:ng.route.IRouteParamsService,
+                private ItService:ItService) {
         this.events = [];
         this.tasks = [];
+
         this.masters = this.MasterResource.query( {populate: 'services.favor'} );
         if (this.$routeParams["id"]) {
             this.masterId = this.$routeParams["id"]
@@ -279,58 +283,8 @@ export class MasterSchedulerComponentController {
             businessEndsHour: "19",
             hideUntilInit: true,
             eventMoveHandling: 'Disabled',
+            eventResizeHandling: 'Disabled',
             heightSpec: 'BusinessHours',
-            onTimeRangeSelect: (args)=> {
-                var params = {
-                    appointment: {
-                        date: new Date(),
-                        master: this.masterId
-                    },
-                    scheduler: {
-                        start: args.start.toString(),
-                        end: args.end.toString(),
-                        text: "Новий запис, Заповніть форму",
-                        borderColor: "red",
-                        barColor: "red",
-                        id: DayPilot.guid()
-                    }
-                };
-                this.MasterResource.addTask( {id: this.masterId}, params ).$promise.then( (task) => {
-                    this.tasks.push( task );
-                    this.events.push( task.scheduler );
-                    this.$scope.week.update();
-                } );
-
-
-            },
-            onEventResize: (args)=> {
-                var event = {
-                    id: args.e.id(),
-                    start: args.newStart.toString(),
-                    end: args.newEnd.toString(),
-                    text: args.e.text(),
-                    borderColor: args.e.borderColor,
-                    barColor: args.e.barColor,
-                };
-                var originalTask;
-
-                var tasks = this.tasks.filter( (task)=> {
-                    return task != null && task.scheduler.id === event.id;
-                } );
-                if (tasks.length > 0 && event) {
-                    var task = tasks[0];
-                    originalTask = angular.copy( task );
-                    task.scheduler = event;
-                    this.MasterResource.updateTask( {id: this.masterId}, task ).$promise.then( (newTask) => {
-                        this.tasks.splice( this.tasks.indexOf( task ), 1, newTask );
-                    } ) .catch( (err)=> {
-                        this.revertResize( originalTask );
-                        this.$scope.week.update();
-                        this.$log.error( err );
-                        this.showErrorDialog();
-                    } );
-                }
-            },
             onEventClick: (args)=> {
                 var tasks = this.tasks.filter( (task)=> {
                     return task != null && task.scheduler.id === args.e.id();
@@ -340,6 +294,12 @@ export class MasterSchedulerComponentController {
                 }
             }
         };
+
+        if (this.ItService.can( 'modifySalon' )) {
+            this.weekConfig.eventResizeHandling= 'Update';
+            this.iniOnTimeRangeSelect();
+            this.iniOnEventResize();
+        }
     }
 
     initNavigatorConfig() {
@@ -357,6 +317,62 @@ export class MasterSchedulerComponentController {
         };
     }
 
+    iniOnEventResize() {
+        this.weekConfig.onEventResize = (args)=> {
+            var event = {
+                id: args.e.id(),
+                start: args.newStart.toString(),
+                end: args.newEnd.toString(),
+                text: args.e.text(),
+                borderColor: args.e.borderColor,
+                barColor: args.e.barColor,
+            };
+            var originalTask;
+
+            var tasks = this.tasks.filter( (task)=> {
+                return task != null && task.scheduler.id === event.id;
+            } );
+            if (tasks.length > 0 && event) {
+                var task = tasks[0];
+                originalTask = angular.copy( task );
+                task.scheduler = event;
+                this.MasterResource.updateTask( {id: this.masterId}, task ).$promise.then( (newTask) => {
+                    this.tasks.splice( this.tasks.indexOf( task ), 1, newTask );
+                } ) .catch( (err)=> {
+                    this.revertResize( originalTask );
+                    this.$scope.week.update();
+                    this.$log.error( err );
+                    this.showErrorDialog();
+                } );
+            }
+        }
+    }
+
+    iniOnTimeRangeSelect() {
+        this.weekConfig.onTimeRangeSelect = (args)=> {
+            var params = {
+                appointment: {
+                    date: new Date(),
+                    master: this.masterId
+                },
+                scheduler: {
+                    start: args.start.toString(),
+                    end: args.end.toString(),
+                    text: "Новий запис, Заповніть форму",
+                    borderColor: "red",
+                    barColor: "red",
+                    id: DayPilot.guid()
+                }
+            };
+            this.MasterResource.addTask( {id: this.masterId}, params ).$promise.then( (task) => {
+                this.tasks.push( task );
+                this.events.push( task.scheduler );
+                this.$scope.week.update();
+            } );
+
+
+        };
+    }
 
     createEditDialod(task) {
         this.$mdDialog.show( {

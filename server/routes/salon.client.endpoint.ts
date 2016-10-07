@@ -1,5 +1,16 @@
 import {Router} from "express";
 import {SalonClient} from "../models/salon.client";
+import {IOptions} from "express-restify-mongoose";
+import {currentUser} from "../auth/current_user";
+import {auth} from "../auth/auth";
+
+
+export let salonClientOptions: IOptions = {
+    preCreate: [auth, currentUser.is( 'academyModerator' )],
+    preUpdate: [auth, currentUser.is( 'academyModerator' )],
+    preDelete: [auth, currentUser.is( 'academyModerator' )],
+ 
+};
 
 export let salonClientApi = Router();
 

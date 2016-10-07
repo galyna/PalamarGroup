@@ -12,7 +12,7 @@ const template = `<md-toolbar>
     </div>
 </md-toolbar>
 
-<md-button ng-click="$ctrl.addContact()" ng-disabled="!$root.it.can('modifyAcademy');"
+<md-button ng-click="$ctrl.addContact()" ng-if="::$root.it.can('modifyAcademy')"
            class="md-fab md-fab-fixed md-primary md-fab-bottom-right" aria-label="new">
     <md-icon md-svg-icon="content:ic_add_24px"></md-icon>
     <md-tooltip>Додати адміністратора</md-tooltip>
@@ -29,7 +29,7 @@ const template = `<md-toolbar>
         </div>
 
   
-        <md-icon class="md-secondary " ng-disabled="::!$root.it.can('modifyAcademy')"
+        <md-icon ng-if="::$root.it.can('modifyAcademy')" class="md-secondary " 
                  ng-click="$ctrl.showDeleteDialog($event, contact)"
                  md-svg-icon="action:ic_delete_24px">
             <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Видалити</md-tooltip>

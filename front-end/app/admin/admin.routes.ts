@@ -83,6 +83,6 @@ export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
             }
         })
         .otherwise({
-            redirectTo: '/academy/courses'
+            redirectTo: '/admin'
         });
 }

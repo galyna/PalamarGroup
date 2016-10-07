@@ -72,9 +72,7 @@ export function CourseResource($resource:ng.resource.IResourceService, constants
             let comments = <pg.models.IAdminComment[]>JSON.parse(data);
             comments.forEach((comment)=>{
                 comment.date = new Date(comment.date);
-                comment.courseDates = comment.courseDates.map((dateStr) => {
-                    return new Date(dateStr);
-                });
+                
             });
             return <IAdminComment[]>comments;
         }

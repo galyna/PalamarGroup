@@ -15,14 +15,14 @@ const template = `<md-toolbar>
     </div>
 </md-toolbar>
 
-<md-button ng-click="$ctrl.addFavor()" ng-disabled="!$root.it.can('modifyAcademy');"
+<md-button ng-click="$ctrl.addFavor()" ng-if="::$root.it.can('modifySalon')" 
            class="md-fab md-fab-fixed md-primary md-fab-bottom-right" aria-label="new">
     <md-icon md-svg-icon="content:ic_add_24px"></md-icon>
     <md-tooltip>Додати послугу</md-tooltip>
 </md-button>
 
 <md-list flex>
-    <md-list-item class="md-2-line" ng-repeat="favor in $ctrl.favors"  ng-click="$ctrl.editFavor( favor)"
+    <md-list-item class="md-2-line" ng-repeat="favor in $ctrl.favors" ng-disabled="!$root.it.can('modifySalon')"  ng-click="$ctrl.editFavor( favor) "
     >
      <img ng-src="{{favor.photo.url}}" class="md-avatar" alt="{{favor.name}}" />
         <div class="md-list-item-text" layout="column">
@@ -38,10 +38,10 @@ const template = `<md-toolbar>
             <p>{{::favor.defPrice}} грн.</p>
         </div>
   
-        <md-icon class="md-secondary " ng-disabled="::!$root.it.can('modifyAcademy')"
+        <md-icon ng-if="::$root.it.can('modifySalon')" class="md-secondary " 
                  ng-click="$ctrl.showDeleteDialog($event, favor)"
                  md-svg-icon="action:ic_delete_24px">
-            <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Видалити</md-tooltip>
+            <md-tooltip ">Видалити</md-tooltip>
         </md-icon>
         <md-divider></md-divider>
     </md-list-item>

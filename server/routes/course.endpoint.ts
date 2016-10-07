@@ -1,7 +1,15 @@
 import {Router} from "express";
 import {Course} from "../models/course";
+import {IOptions} from "express-restify-mongoose";
+import {auth} from "../auth/auth";
+import {currentUser} from "../auth/current_user";
 
+export let coursesOptions: IOptions = {
+    preUpdate: [auth, currentUser.is( 'academyModerator' )],
+    preCreate: [auth, currentUser.is( 'academyModerator' )],
+    preDelete: [auth, currentUser.is( 'academyModerator' )],
 
+};
 let api = Router();
 
 api.route('/comment')
@@ -22,7 +30,7 @@ api.route('/comment')
         }
 
     })
-    .put(async(req: any, res, next) => {
+    .put(auth, currentUser.is( 'academyModerator' ),async(req: any, res, next) => {
         let course, comment;
         try {
             course = await Course.findOne({"_id": req.courseId});
@@ -42,7 +50,7 @@ api.route('/comment')
     });
 
 api.route('/comment/:commentId')
-    .delete(async(req: any, res) => {
+    .delete(auth, currentUser.is( 'academyModerator' ),async(req: any, res) => {
         let course, comment;
         try {
             course = await Course.findOne({"_id": req.courseId});
