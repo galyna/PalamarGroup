@@ -16,12 +16,12 @@ on-next="$ctrl.next()"
     <md-list-item  class="md-2-line" ng-repeat="order in $ctrl.orders" ng-class="{answered:order.answered, approved:order.booked}" ng-click=" $ctrl.showEditOrderDialog($event, order)">
         <div class="md-list-item-text" layout="column">
 
-          <h2 ng-if="order.booked"> ЗАМОВЛЕННЯ ПІДТВЕРДЖЕНО</h2>
+          <h2 ng-if="order.booked" class="approved-titlt"> ЗАМОВЛЕННЯ ПІДТВЕРДЖЕНО</h2>
             <p ng-if="order.answered">Замовнику передзвонили </p>
             <h3>{{::order.name||'Анонім'}} {{::order.phone||order.email||''}} </h3>
             <p>{{::$ctrl.getOrderTitle(order)}}</p>
              <p>Запис створено {{order.date|date:'dd.MM.yyyy'}}</p>
-              <p ng-if="order.answered">Замовнику передзвонили </p>
+         
         </div>
         <div class="md-secondary md-margin">
         <md-checkbox  ng-model="order.answered" ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="::$root.it.can('modifyAcademy') && $ctrl.saveAnsewerOrder(order)"></md-checkbox>

@@ -21,12 +21,12 @@ const template = `<md-toolbar>
                   ng-click=" $ctrl.showEditOrderDialog($event, appointment)">
         <div class="md-list-item-text" layout="column">
 
-            <h2 ng-if="appointment.booked"> ЗАПИС ПІДТВЕРДЖЕНО</h2>
+            <h2 ng-if="appointment.booked" class="approved-titlt"> ЗАПИС ПІДТВЕРДЖЕНО</h2>
             <p ng-if="appointment.answered">Замовнику передзвонили </p>
             <h3>{{::appointment.name||'Анонім'}} {{::appointment.phone||appointment.email||''}} </h3>
             <p>{{::$ctrl.getOrderTitle(appointment)}}</p>
             <p>Запис створено {{appointment.date|date:'dd.MM.yyyy'}}</p>
-            <p ng-if="appointment.answered">Замовнику передзвонили </p>
+
         </div>
         <div class="md-secondary md-margin">
             <md-checkbox ng-model="appointment.answered" ng-disabled="::!$root.it.can('modifySalon')"
@@ -107,8 +107,10 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                         <md-input-container class="md-block">
                             <label>Майстер</label>
                             <md-select ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.appointment.master" ng-change="$ctrl.changeMaster(id)">
-                                <md-option ng-repeat="master in $ctrl.masters" ng-value="master._id">
-                                    {{ master.name }}
+                                <md-option  ng-repeat="master in $ctrl.masters" ng-value="master._id">
+                                <div layout="row" layout-align=" start center  ">
+                                 <img  ng-src="{{master.photo.url}}" class="avatar" alt="{{master.name}}" />
+                                   <span> {{ master.name }}   </span>  </div>
                                 </md-option>
                             </md-select>
                         </md-input-container>
@@ -117,11 +119,12 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                             <md-subheader class="md-no-sticky">Послуги</md-subheader>
                             <div ng-repeat="service in $ctrl.appointment.favors">
 
-                                <div layout="row">
+                                <div layout="row" layout-align="start center  ">
+                                  <img  ng-src="{{service.favor.photo.url}}" class="avatar" alt="{{service.favor.name}}" />
                                     <div class=" md-padding " id="prokgram" name="program">
-                                        {{service.favor.name}} грн.
+                                        {{service.favor.name}} 
                                     </div>
-                                    <div class="m md-padding " id="program" name="program">{{service.price}}
+                                    <div class="m md-padding " id="program" name="program">{{service.price}} грн.
                                     </div>
                                     <md-button class=" md-padding" ng-if="::$root.it.can('modifySalon')" class="md-icon-button"
                                                ng-click="$ctrl.deleteService(service)">
@@ -137,7 +140,10 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 
                         <md-select ng-if=" ::$root.it.can('modifySalon')" ng-model="$ctrl.newService" ng-model-options="{trackBy: '$value.favor._id'}">
                             <md-option ng-repeat="favor in $ctrl.favors" ng-value="favor">
-                                {{ favor.favor.name }}
+                             <div layout="row" layout-align=" start center  ">
+                                 <img  ng-src="{{favor.favor.photo.url}}" class="avatar" alt="{{favor.favor.name}}" />
+                                   <span>  {{ favor.favor.name }}  </span>  </div>
+                               
                             </md-option>
                         </md-select>
                         <md-input-container  ng-if=" ::$root.it.can('modifySalon')" layout="row" class="md-block">
@@ -211,18 +217,9 @@ class EditDialogController {
                 this.favors = m.services;
             }
         } )
-       // this.appendCalendar();
-
     }
 
 
-    appendCalendar() {
-        if (this.appointment.master) {
-            var myEl = angular.element( document.querySelector( '#pgCalendarContainer' ) );
-            var calendar=`<pg-appointment-scheduler appointment="${this.appointment}"  ></pg-appointment-scheduler>`;
-            myEl.html(calendar);
-        }
-    }
     deleteService(favor) {
         this.appointment.favors.splice( this.appointment.favors.indexOf( favor ), 1 )
     }
@@ -233,6 +230,7 @@ class EditDialogController {
                 return this.newService._id === f._id;
             } )) {
             this.appointment.favors.push( this.newService );
+            this.newService=null;
         } else {
             this.$mdToast.showSimple( `Така послуга вже існує` );
         }

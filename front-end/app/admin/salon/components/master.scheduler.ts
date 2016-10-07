@@ -2,14 +2,9 @@ import {IMaster, MasterResourceName, IMasterResource, ITask, IScheduler} from ".
 import {IAppointment, AppointmentResourceName, IAppointmentResource} from "../../../resources/appointment.resource";
 import IMasterFavor = pg.models.IMasterFavor;
 
-const template = `<md-list flex ng-if="$ctrl.photo">
-    <md-list-item class="md-1-line">
-        <img ng-src="{{$ctrl.photo}}" class="md-avatar" alt="{{$ctrl.photo}}"/>
-        <div class="md-list-item-text" layout="column">
-            <h3>{{::$ctrl.mname}}</h3>
-        </div>
-    </md-list-item>
-</md-list>
+const template = `
+ <div layout="row" ng-if="$ctrl.photo" layout-align="  center  "> <img  ng-src="{{$ctrl.photo}}" class="avatar " alt="{{master.name}}" />
+                                   <h3>{{::$ctrl.mname}}</h3> </div>
 <div layout="row" layout-xs="column">
     <div class="md-padding ">
         <daypilot-navigator style=" width: 280px" id="navi"
@@ -26,6 +21,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 
     <md-toolbar>
         <div class="md-toolbar-tools">
+          <img  ng-src="{{$ctrl.masterPhoto}}" class="avatar" alt="{{$ctrl.masterPhoto}}" />
             <h2>Деталі замовлення</h2>
             <span flex></span>
             <md-button class="md-icon-button" ng-click="$ctrl.cancel()">
@@ -67,6 +63,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                       
                         <div ng-repeat="favor in $ctrl.appointment.favors">
                             <div layout="row">
+                              <img  ng-src="{{favor.photo}}" class="avatar" alt="{{favor.photo}}" />
                                 <div class=" md-padding" id="prokgram" name="program">
                                 {{favor.name}}
                                 </div>
@@ -84,7 +81,9 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                     </md-subheader>
                     <md-select ng-if="$ctrl.showAddFavors  "  ng-model="$ctrl.newService" ng-model-options="{trackBy: '$value._id'}">
                         <md-option ng-repeat="services in $ctrl.services" ng-value="services">
-                            {{ services.favor.name }}
+                            <div layout="row" layout-align=" start center  ">
+                                 <img  ng-src="{{services.favor.photo.url}}" class="avatar" alt="{{services.favor.name}}" />
+                                   <span>  {{ services.favor.name }}  </span>  </div>
                         </md-option>
                     </md-select>
                     <md-input-container ng-if="$ctrl.showAddFavors " layout="row" class="md-block">
@@ -142,7 +141,8 @@ class EditDialogController {
     static $inject = ['$mdDialog', "$mdToast", 'task'];
     private services:any[];
     private masters:IMaster[];
-    private newService:any;
+    private masterPhoto:string;
+    private newService:IMasterFavor;
     private appointment:any;
     private originalAppointment:any;
     private showAddFavors;
@@ -164,11 +164,12 @@ class EditDialogController {
             } )) {
             this.appointment.favors.push( {
                 name: this.newService.favor.name,
-                photo: this.newService.favor.photo,
+                photo: this.newService.favor.photo.url,
                 id: this.newService._id,
                 price: this.newService.price,
 
-            } )
+            } );
+            this.newService = null;
         } else {
             this.$mdToast.showSimple( `Така послуга вже існує` );
         }
@@ -180,9 +181,7 @@ class EditDialogController {
         this.masters.forEach( (m)=> {
             if (m._id === this.appointment.master) {
                 this.services = m.services;
-                if (this.services.length > 0) {
-                    this.newService = m.services[0];
-                }
+                this.masterPhoto = m.photo.url;
                 this.showAddFavors = true;
                 return;
             }
@@ -394,7 +393,7 @@ export class MasterSchedulerComponentController {
     }
 
     updateTaskText(task:ITask) {
-        task.scheduler.text =``;
+        task.scheduler.text = ``;
         if (!task.appointment.name) {
             task.scheduler.text = task.scheduler.text + `<div>Замовника не вказано</div>`;
         } else {

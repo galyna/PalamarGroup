@@ -20,10 +20,6 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                     this.$scope = $scope;
                     this.events = [];
                     this.tasks = [];
-                    if (this.appointment.master) {
-                        this.masterId = this.appointment.master;
-                        this.init();
-                    }
                 }
                 AppointmentSchedulerComponentController.prototype.$onChanges = function (changesObj) {
                     console.log(changesObj);
@@ -80,7 +76,7 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                         heightSpec: 'BusinessHours',
                         onTimeRangeSelect: function (args) {
                             var params = {
-                                appointment: _this.appointment,
+                                appointment: angular.copy(_this.appointment),
                                 scheduler: {
                                     start: args.start.toString(),
                                     end: args.end.toString(),
@@ -142,11 +138,12 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                     };
                 };
                 AppointmentSchedulerComponentController.prototype.getFavors = function () {
-                    return this.appointment.favors.map(function (favor) {
+                    return this.appointment.favors.map(function (mf) {
                         return {
-                            name: favor.name,
-                            id: favor._id,
-                            price: favor.price,
+                            name: mf.favor.name,
+                            id: mf._id,
+                            price: mf.price,
+                            photo: mf.favor.photo.url
                         };
                     });
                 };

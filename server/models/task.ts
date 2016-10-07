@@ -20,7 +20,8 @@ let TaskSchema = new Schema( {
         favors: [{
             name: String,
             id: String,
-            price: Number
+            price: Number,
+            photo:String
         }],
     },
     scheduler: {

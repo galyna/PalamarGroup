@@ -38,10 +38,6 @@ export class AppointmentSchedulerComponentController {
         this.events = [];
         this.tasks = [];
 
-        if (this.appointment.master) {
-            this.masterId = this.appointment.master;
-            this.init();
-        }
 
     }
 
@@ -105,7 +101,7 @@ export class AppointmentSchedulerComponentController {
             heightSpec: 'BusinessHours',
             onTimeRangeSelect: (args)=> {
                 var params = {
-                    appointment: this.appointment,
+                    appointment: angular.copy(this.appointment),
                     scheduler: {
                         start: args.start.toString(),
                         end: args.end.toString(),
@@ -171,11 +167,12 @@ export class AppointmentSchedulerComponentController {
     }
 
     getFavors() {
-        return this.appointment.favors.map( (favor)=> {
+        return this.appointment.favors.map( (mf)=> {
             return {
-                name: favor.name,
-                id: favor._id,
-                price: favor.price,
+                name: mf.favor.name,
+                id: mf._id,
+                price: mf.price,
+                photo:mf.favor.photo.url
             }
         } );
 

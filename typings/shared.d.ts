@@ -64,7 +64,8 @@ declare module pg {
                 favors?:[{
                     id: string,
                     name: string,
-                    price: number
+                    price: number,
+                    photo:string
                 }]
             } ,
             scheduler:IScheduler,

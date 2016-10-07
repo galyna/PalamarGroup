@@ -41,6 +41,7 @@ const template:string = `<div flex layout="column">
                             <div ng-repeat="service in $ctrl.master.services">
                                 <md-divider></md-divider>
                                 <div layout="row">
+                                  <img  ng-src="{{service.favor.photo.url}}" class="avatar" alt="{{service.favor.name}}" />
                                     <div class="md-margin md-padding " id="prokgram" name="program">
                                         {{service.favor.name}}
                                     </div>
