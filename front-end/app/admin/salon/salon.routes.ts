@@ -6,6 +6,10 @@ import {FavorComponentUrl} from "./components/favor.component";
 import {TransformComponentUrl} from "./components/transform.component";
 import {TransformsComponentUrl} from "./components/transforms.component";
 import {AppointmentsComponentUrl} from "./components/appointments.component";
+import {BrendsComponentUrl} from "./components/brends.component";
+import {BrendComponentUrl} from "./components/brend.component";
+import {ProductComponentUrl} from "./components/product.component";
+import {ProductsComponentUrl} from "./components/products.component";
 
 salonRoutes.$inject = ['$routeProvider'];
 export function salonRoutes($routeProvider:ng.route.IRouteProvider) {
@@ -42,6 +46,30 @@ export function salonRoutes($routeProvider:ng.route.IRouteProvider) {
         } )
         .when( TransformsComponentUrl, {
             template: '<pg-transforms></pg-transforms>',
+            resolve: {
+                auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
+            }
+        } )
+        .when( BrendsComponentUrl, {
+            template: '<pg-brends></pg-brends>',
+            resolve: {
+                auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
+            }
+        } )
+        .when( BrendComponentUrl, {
+            template: '<pg-brend></pg-brend>',
+            resolve: {
+                auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
+            }
+        } )
+        .when( ProductsComponentUrl, {
+            template: '<pg-products></pg-products>',
+            resolve: {
+                auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
+            }
+        } )
+        .when( ProductComponentUrl, {
+            template: '<pg-product></pg-product>',
             resolve: {
                 auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
             }

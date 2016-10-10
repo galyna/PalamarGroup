@@ -12,6 +12,7 @@ declare module pg {
         export interface IFavor {
             _id:any,
             name:string,
+            description:string,
             category:{ _id:string, name:string},
             defPrice:number,
             photo:IPhoto
@@ -188,6 +189,21 @@ declare module pg {
             courseId:string,
             courseDates:any[],
             courseName:string
+        }
+        
+        export interface IProduct {
+            _id:any,
+            name:string,
+            description:string,
+            price:number,
+            photo:IPhoto
+        }
+
+        export interface IBrend {
+            _id:any,
+            name:string,
+            url:string,
+            photo:IPhoto
         }
     }
 

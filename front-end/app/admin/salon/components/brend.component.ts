@@ -1,4 +1,4 @@
-import {FavorResourceName, IFavorResource, IFavor} from "../../../resources/favor.resource";
+import {IBrend,BrendResourceName,IBrendResource} from "../../../resources/brend.resource";
 import {IConstants} from "../../../core/core.config";
 import {PhotoServiceName, PhotoService} from "../../../resources/photo.service";
 import IPhoto = pg.models.IPhoto;
@@ -7,11 +7,11 @@ import IPhoto = pg.models.IPhoto;
 const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" ng-href="#/salon/favors">
+            <md-button class="md-icon-button" ng-href="#/salon/brends">
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
-                <md-tooltip>Послуги</md-tooltip>
+                <md-tooltip>Бренди</md-tooltip>
             </md-button>
-              <md-subheader>Послуги</md-subheader>           
+              <md-subheader>Бренди</md-subheader>           
             <span flex></span>
             <md-button ng-click="$ctrl.cancel()" ng-disabled="saveForm.$pristine">
                 <span>Скасувати</span>
@@ -29,26 +29,9 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                         <input id="name" ng-model="$ctrl.favor.name" name="name"/>
                     </md-input-container>
                     
-                    <md-input-container class="md-block">
-                        <label for="description">Опис</label>
-                        <textarea ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.favor.description"
-                                  id="description" name="description" required></textarea>
-                    </md-input-container>
-                      
-                    <md-input-container>
-                        <label>Категорія</label>
-                        <md-select ng-model="$ctrl.favor.category" ng-model-options="{trackBy: '$value._id'}">
-                            <md-option ng-repeat="n in $ctrl.categories" ng-value="n">
-                                {{ n.name }}
-                            </md-option>
-                        </md-select>
-                     
-                    </md-input-container>
-                  
-                  
-                    <md-input-container class="md-block">
-                        <label for="defPrice">Ціна</label>
-                        <input type="number" ng-model="$ctrl.favor.defPrice" id="defPrice" name="defPrice"/>
+                    <md-input-container class="md-block ">
+                        <label for="name">URL головного сайту бренду</label>
+                        <input id="name" ng-model="$ctrl.favor.url" name="name"/>
                     </md-input-container>
 
                 </md-card-content>
@@ -93,20 +76,22 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
 </form>`;
 
 
-export class FavorComponentController {
+
+export class BrendComponentController {
+
 
     static $inject = ["$log", "$routeParams", "$mdToast", "$timeout", '$mdDialog',
-        FavorResourceName, 'constants', PhotoServiceName];
+        BrendResourceName, 'constants', PhotoServiceName];
 
-    originalFavor:IFavor;
-    favor:IFavor;
+    originalFavor:IBrend;
+    favor:IBrend;
     showPhotoUpload:boolean;
     categories:any;
 
 
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
-                private $mdDialog:ng.material.IDialogService, private favorResource:IFavorResource,
+                private $mdDialog:ng.material.IDialogService, private favorResource:IBrendResource,
                 private constants:IConstants, private photoService:PhotoService) {
     }
 
@@ -167,12 +152,11 @@ export class FavorComponentController {
         return this.$mdDialog.show( confirm );
 
     }
-
 }
 
-export let FavorComponentUrl = "/salon/favor/:id?";
-export let FavorComponentName = 'pgFavor';
-export let FavorComponentOptions = {
+export let BrendComponentUrl = "/salon/brend/:id?";
+export let BrendComponentName = 'pgBrend';
+export let BrendComponentOptions = {
     template: template,
-    controller: FavorComponentController
+    controller: BrendComponentController
 };

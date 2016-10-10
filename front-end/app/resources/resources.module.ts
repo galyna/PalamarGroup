@@ -16,6 +16,8 @@ import {MasterResourceName, MasterResource} from "./master.resource";
 import {FavorResourceName, FavorResource} from "./favor.resource";
 import {TransformResourceName, TransformResource} from "./transform.resource";
 import {AppointmentResourceName, AppointmentResource} from "./appointment.resource";
+import {BrendResourceName, BrendResource} from "./brend.resource";
+import {ProductResourceName, ProductResource} from "./product.resource";
 
 export let resourcesModule = angular.module('resources', ['ngResource', coreModule.name])
     .factory(CourseResourceName, CourseResource)
@@ -28,5 +30,7 @@ export let resourcesModule = angular.module('resources', ['ngResource', coreModu
     .service(FavorResourceName, FavorResource)
     .service(TransformResourceName, TransformResource)
     .service(AppointmentResourceName, AppointmentResource)
+    .service(BrendResourceName, BrendResource)
+    .service(ProductResourceName, ProductResource)
     .service(EmailService.componentName, EmailService)
     .service(PhotoServiceName, PhotoService);

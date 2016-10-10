@@ -94,17 +94,22 @@ export class LeftSidenavComponentController {
                 text: 'Салон',
                 opened: this.it.is( 'salonUser' ),
                 visible: ()=> {
-                    return this.it.is( 'salonUser' ) 
+                    return this.it.is( 'salonUser' )
                 },
                 items: [
                     {
                         text: 'Записи',
                         visible: () => true,
                         url: '/salon/appointments',
-                    },{
+                    }, {
                         text: 'Майстри',
                         visible: () => true,
                         url: '/salon/masters',
+                    },
+                    {
+                        text: 'Послуги',
+                        visible: () => true,
+                        url: '/salon/favors',
                     }
                     , {
                         text: 'Перевтілення',
@@ -112,17 +117,22 @@ export class LeftSidenavComponentController {
                         url: '/salon/transforms',
                     },
                     {
-                        text: 'Послуги',
+                        text: 'Продукція',
                         visible: () => true,
-                        url: '/salon/favors',
+                        url: '/salon/products',
                     }
+                    , {
+                        text: 'Бренди',
+                        visible: () => true,
+                        url: '/salon/brends',
+                    },
                 ]
             },
             {
                 text: 'Користувачі',
                 url: usersComponentUrl,
                 visible: ()=> {
-                    return this.it.is( 'admin' ) ;
+                    return this.it.is( 'admin' );
                 }
             }
 

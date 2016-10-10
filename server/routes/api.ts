@@ -18,6 +18,8 @@ import {Master} from "../models/master";
 import {Favor} from "../models/favor";
 import {Transform} from "../models/transform";
 import {Appointment} from "../models/appointment";
+import {Product} from "../models/product";
+import {Brend} from "../models/brend";
 
 //endpoints
 import {emailEndpoint} from "./email.endpoint";
@@ -87,6 +89,8 @@ api.use('/salonclient', salonClientApi);
 restify.serve(api, SalonClient,salonClientOptions);
 restify.serve(api, Favor,tasksOptions);
 restify.serve(api, Transform,tasksOptions);
+restify.serve(api, Product,tasksOptions);
+restify.serve(api, Brend,tasksOptions);
 api.use('/photo', photoEndpoint);
 api.use('/email', emailEndpoint);
 

@@ -1,4 +1,4 @@
-import {FavorResourceName, IFavorResource, IFavor} from "../../../resources/favor.resource";
+import {IProduct,ProductResourceName,IProductResource} from "../../../resources/product.resource";
 import {IConstants} from "../../../core/core.config";
 import {PhotoServiceName, PhotoService} from "../../../resources/photo.service";
 import IPhoto = pg.models.IPhoto;
@@ -7,11 +7,11 @@ import IPhoto = pg.models.IPhoto;
 const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" ng-href="#/salon/favors">
+            <md-button class="md-icon-button" ng-href="#/salon/products">
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
-                <md-tooltip>Послуги</md-tooltip>
+                <md-tooltip>Продукція</md-tooltip>
             </md-button>
-              <md-subheader>Послуги</md-subheader>           
+              <md-subheader>Продукція</md-subheader>           
             <span flex></span>
             <md-button ng-click="$ctrl.cancel()" ng-disabled="saveForm.$pristine">
                 <span>Скасувати</span>
@@ -26,7 +26,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                 <md-card-content>
                     <md-input-container class="md-block ">
                         <label for="name">Назва</label>
-                        <input id="name" ng-model="$ctrl.favor.name" name="name"/>
+                        <input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.favor.name" name="name"/>
                     </md-input-container>
                     
                     <md-input-container class="md-block">
@@ -34,23 +34,11 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                         <textarea ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.favor.description"
                                   id="description" name="description" required></textarea>
                     </md-input-container>
-                      
-                    <md-input-container>
-                        <label>Категорія</label>
-                        <md-select ng-model="$ctrl.favor.category" ng-model-options="{trackBy: '$value._id'}">
-                            <md-option ng-repeat="n in $ctrl.categories" ng-value="n">
-                                {{ n.name }}
-                            </md-option>
-                        </md-select>
-                     
-                    </md-input-container>
-                  
-                  
-                    <md-input-container class="md-block">
-                        <label for="defPrice">Ціна</label>
-                        <input type="number" ng-model="$ctrl.favor.defPrice" id="defPrice" name="defPrice"/>
-                    </md-input-container>
 
+                      <md-input-container class="md-block">
+                        <label for="defPrice">Ціна</label>
+                        <input ng-disabled="::!$root.it.can('modifySalon')" type="number" ng-model="$ctrl.favor.price" id="defPrice" name="defPrice"/>
+                    </md-input-container>
                 </md-card-content>
             </md-card>
         </md-tab>
@@ -92,21 +80,22 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
     </md-tabs>
 </form>`;
 
+export class ProductComponentController {
 
-export class FavorComponentController {
+
 
     static $inject = ["$log", "$routeParams", "$mdToast", "$timeout", '$mdDialog',
-        FavorResourceName, 'constants', PhotoServiceName];
+        ProductResourceName, 'constants', PhotoServiceName];
 
-    originalFavor:IFavor;
-    favor:IFavor;
+    originalFavor:IProduct;
+    favor:IProduct;
     showPhotoUpload:boolean;
     categories:any;
 
 
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
-                private $mdDialog:ng.material.IDialogService, private favorResource:IFavorResource,
+                private $mdDialog:ng.material.IDialogService, private favorResource:IProductResource,
                 private constants:IConstants, private photoService:PhotoService) {
     }
 
@@ -170,9 +159,9 @@ export class FavorComponentController {
 
 }
 
-export let FavorComponentUrl = "/salon/favor/:id?";
-export let FavorComponentName = 'pgFavor';
-export let FavorComponentOptions = {
+export let ProductComponentUrl =   "/salon/product/:id?";
+export let ProductComponentName = 'pgProduct';
+export let ProductComponentOptions = {
     template: template,
-    controller: FavorComponentController
+    controller: ProductComponentController
 };
