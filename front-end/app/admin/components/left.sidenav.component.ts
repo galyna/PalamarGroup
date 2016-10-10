@@ -105,6 +105,11 @@ export class LeftSidenavComponentController {
                         text: 'Майстри',
                         visible: () => true,
                         url: '/salon/masters',
+                    }
+                    , {
+                        text: 'Перевтілення',
+                        visible: () => true,
+                        url: '/salon/transforms',
                     },
                     {
                         text: 'Послуги',

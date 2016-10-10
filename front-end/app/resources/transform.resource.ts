@@ -11,5 +11,5 @@ export let TransformResourceName = 'TransformResource';
 
 TransformResource.$inject = ['$resource', 'constants'];
 export function TransformResource($resource: ng.resource.IResourceService, constants: IConstants){
-    return <ITransformResource>$resource(`${constants.apiUrl}/model/:id`, {id: '@_id'});
+    return <ITransformResource>$resource(`${constants.apiUrl}/transform/:id`, {id: '@_id'});
 }

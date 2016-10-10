@@ -233,7 +233,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                                     </div>
                                     <div layout="column" ng-if="::$root.it.can('modifyAcademy')">
                                         <md-input-container class="md-block  ">
-                                            <label for="historyNme">Назва форми</label>
+                                            <label for="historyNme">Назва відео</label>
                                             <input id="historyNme" ng-model="item.name" name="historyNme"/>
                                         </md-input-container>
                                         <md-input-container class="md-block  ">

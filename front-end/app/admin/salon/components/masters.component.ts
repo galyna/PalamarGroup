@@ -13,7 +13,7 @@ const template = `<md-toolbar>
     </div>
 </md-toolbar>
 
-<md-button ng-click="$ctrl.addMaster()" ng-if="::$root.it.can('modifyAcademy')"
+<md-button ng-click="$ctrl.addMaster()" ng-if="::$root.it.can('modifySalon')"
            class="md-fab md-fab-fixed md-primary md-fab-bottom-right" aria-label="new">
     <md-icon md-svg-icon="content:ic_add_24px"></md-icon>
     <md-tooltip>Додати майстра</md-tooltip>
@@ -41,14 +41,14 @@ const template = `<md-toolbar>
 `;
 
 export class MastersComponentController {
-    static $inject = ["$filter", "$location", "$mdDialog", "$mdToast", "$mdMedia", MasterResourceName, PagingServiceName];
+    static $inject = [ "$location", "$mdDialog", "$mdToast",  MasterResourceName, PagingServiceName];
 
     masters:IMaster[];
     paging:any;
 
-    constructor(private $filter:ng.IFilterService, private $location:ng.ILocationService,
+    constructor(private $location:ng.ILocationService,
                 private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService,
-                private $mdMedia:ng.material.IMedia, private masterResource:IMasterResource,
+                private masterResource:IMasterResource,
                 private pagingService:PagingService) {
 
     }
