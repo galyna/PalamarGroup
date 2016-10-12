@@ -5,7 +5,7 @@ import {SalonResourceName, ISalonResource, ISalon} from "../../../resources/salo
 
 const template = `<md-toolbar>
     <div class="md-toolbar-tools">
-        <h3>Послуги</h3>
+        <h3>Салони</h3>
         <span flex></span>
         <pg-admin-paging
                 params="$ctrl.paging"
@@ -18,7 +18,7 @@ const template = `<md-toolbar>
 <md-button ng-click="$ctrl.addFavor()" ng-if="::$root.it.can('modifySalon')" 
            class="md-fab md-fab-fixed md-primary md-fab-bottom-right" aria-label="new">
     <md-icon md-svg-icon="content:ic_add_24px"></md-icon>
-    <md-tooltip>Додати послугу</md-tooltip>
+    <md-tooltip>Додати салон</md-tooltip>
 </md-button>
 
 <md-list flex>

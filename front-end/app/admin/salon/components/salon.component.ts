@@ -7,11 +7,11 @@ import IPhoto = pg.models.IPhoto;
 const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" ng-href="#/salon/favors">
+            <md-button class="md-icon-button" ng-href="#/salon/salons">
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
-                <md-tooltip>Перревтілення</md-tooltip>
+                <md-tooltip>Салони</md-tooltip>
             </md-button>
-            <md-subheader>Перревтілення</md-subheader>
+            <md-subheader>Салони</md-subheader>
             <span flex></span>
             <md-button ng-if="::$root.it.can('modifySalon')" ng-click="$ctrl.cancel()" ng-disabled="saveForm.$pristine">
                 <span>Скасувати</span>
