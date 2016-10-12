@@ -19,14 +19,21 @@ const template = `<md-toolbar>
     <md-list-item class="md-2-line" ng-repeat="appointment in $ctrl.appointments"
                   ng-class="{answered:appointment.answered, approved:appointment.booked}"
                   ng-click=" $ctrl.showEditOrderDialog($event, appointment)">
+        
+            
+         <div ng-if="appointment.booked || appointment.answered" class="md-list-item-text" layout="column">
+         <h2 ng-if="appointment.booked" class="approved-titlt"> ЗАМОВЛЕННЯ ПІДТВЕРДЖЕНО</h2>     
+            <p ng-if="appointment.answered">Замовнику передзвонили </p>  
+        </div>
+     
         <div class="md-list-item-text" layout="column">
+            <h3>Запис створено</h3>
+            <p>{{appointment.date|date:'dd.MM.yyyy'}}</p>
+        </div>
 
-            <h2 ng-if="appointment.booked" class="approved-titlt"> ЗАПИС ПІДТВЕРДЖЕНО</h2>
-            <p ng-if="appointment.answered">Замовнику передзвонили </p>
-            <h3>{{::appointment.name||'Анонім'}} {{::appointment.phone||appointment.email||''}} </h3>
-            <p>{{::$ctrl.getOrderTitle(appointment)}}</p>
-            <p>Запис створено {{appointment.date|date:'dd.MM.yyyy'}}</p>
-
+        <div class="md-list-item-text" layout="column">
+            <h3>Замовник</h3>
+            <p>{{::appointment.name||'Анонім'}} {{::appointment.phone||appointment.email||''}}</p>
         </div>
         <div class="md-secondary md-margin">
             <md-checkbox ng-model="appointment.answered" ng-disabled="::!$root.it.can('modifySalon')"
@@ -167,7 +174,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                         </md-input-container>
                         <md-input-container layout="row" class="md-block">
                             <md-checkbox ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.appointment.booked">
-                                Участь у заході підтверджено
+                                ЗАМОВЛЕННЯ ПІДТВЕРДЖЕНО
                             </md-checkbox>
                         </md-input-container>
 

@@ -88,7 +88,8 @@ declare module pg {
             phone:string,
             photo:IPhoto,
             address:string,
-            isAcademy:boolean
+            isAcademy:boolean,
+            salon:string
         }
 
         export interface IDay {
@@ -167,21 +168,21 @@ declare module pg {
         }
 
         export interface ISalonClient {
-            _id?:any;
-            name:string;
-            phone:string;
-            email:string;
-            address:string;
-            group:string;
+            _id?:any,
+            name:string,
+            phone:string,
+            email:string,
+            address:string,
+            group:string
         }
 
         export interface IComment {
-            _id?:any;
-            name:string;
-            text:string;
-            date:any;
-            isVisible:boolean;
-            isModerated:boolean;
+            _id?:any,
+            name:string,
+            text:string,
+            date:any,
+            isVisible:boolean,
+            isModerated:boolean
         }
 
         export interface IAdminComment extends IComment {
@@ -204,6 +205,28 @@ declare module pg {
             name:string,
             url:string,
             photo:IPhoto
+        }
+
+        export interface IProductOrder {
+            _id?:any;
+            name:string,
+            phone:string,
+            email:string,
+            date:string,
+            comment:string,
+            admin_comment:string,
+            product:string,
+            answered:boolean,
+            booked:boolean
+        }
+
+        export interface ISalon {
+            _id?:any,
+            name:string,
+            phone:string,
+            photos:IPhoto[],
+            address:string,
+            map:string
         }
     }
 

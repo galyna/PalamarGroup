@@ -10,6 +10,11 @@ import {BrendsComponentUrl} from "./components/brends.component";
 import {BrendComponentUrl} from "./components/brend.component";
 import {ProductComponentUrl} from "./components/product.component";
 import {ProductsComponentUrl} from "./components/products.component";
+import {ProductOrdersComponentUrl} from "./components/product.orders.component";
+import {SalonContactComponentUrl} from "./components/contact.component";
+import {SalonContactsComponentUrl} from "./components/contacts.component";
+import {SalonsComponentUrl} from "./components/salons.component";
+import {SalonComponentUrl} from "./components/salon.component";
 
 salonRoutes.$inject = ['$routeProvider'];
 export function salonRoutes($routeProvider:ng.route.IRouteProvider) {
@@ -74,8 +79,38 @@ export function salonRoutes($routeProvider:ng.route.IRouteProvider) {
                 auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
             }
         } )
+        .when( ProductOrdersComponentUrl, {
+            template: '<pg-product-orders></pg-product-orders>',
+            resolve: {
+                auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
+            }
+        } )
         .when( AppointmentsComponentUrl, {
             template: '<pg-appointments></pg-appointments>',
+            resolve: {
+                auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
+            }
+        } )
+        .when( SalonContactComponentUrl, {
+        template: '<pg-salon-contact></pg-salon-contact>',
+        resolve: {
+            auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
+        }
+    } )
+        .when( SalonContactsComponentUrl, {
+            template: '<pg-salon-contacts></pg-salon-contacts>',
+            resolve: {
+                auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
+            }
+        } )
+        .when( SalonComponentUrl, {
+            template: '<pg-salon></pg-salon>',
+            resolve: {
+                auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
+            }
+        } )
+        .when( SalonsComponentUrl, {
+            template: '<pg-salons></pg-salons>',
             resolve: {
                 auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
             }

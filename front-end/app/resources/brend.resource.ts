@@ -1,9 +1,7 @@
 /**
  * Created by Galyna on 10.10.2016.
  */
-/**
- * Created by Galyna on 02.10.2016.
- */
+
 import {IConstants} from "../core/core.config";
 
 export interface IBrend extends ng.resource.IResource<IBrend>, pg.models.IBrend{}

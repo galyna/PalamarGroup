@@ -12,7 +12,8 @@ let ContactSchema = new Schema({
     phone: String,
     photo: PhotoSchema,
     address: String,
-    isAcademy: Boolean
+    isAcademy: Boolean,
+    salon: { type: Schema.Types.ObjectId, ref: 'Salon'  },
 });
 
 export var Contact = model<IContactModel>('Contact', ContactSchema);

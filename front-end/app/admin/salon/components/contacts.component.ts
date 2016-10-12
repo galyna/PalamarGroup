@@ -2,7 +2,7 @@ import {ContactResourceName,IContactResource,IContact} from "../../../resources/
 import {PagingServiceName,PagingService} from "../../../ui/admin.paging";
 const template = `<md-toolbar>
     <div class="md-toolbar-tools">
-        <h3>Контакти академії</h3>
+        <h3>Контакти  салону</h3>
         <span flex></span>
         <pg-admin-paging
                 params="$ctrl.paging"
@@ -12,7 +12,7 @@ const template = `<md-toolbar>
     </div>
 </md-toolbar>
 
-<md-button ng-click="$ctrl.addContact()" ng-if="::$root.it.can('modifyAcademy')"
+<md-button ng-click="$ctrl.addContact()" ng-if="::$root.it.can('modifySalon')"
            class="md-fab md-fab-fixed md-primary md-fab-bottom-right" aria-label="new">
     <md-icon md-svg-icon="content:ic_add_24px"></md-icon>
     <md-tooltip>Додати адміністратора</md-tooltip>
@@ -29,10 +29,10 @@ const template = `<md-toolbar>
         </div>
 
   
-        <md-icon ng-if="::$root.it.can('modifyAcademy')" class="md-secondary " 
+        <md-icon ng-if="::$root.it.can('modifySalon')" class="md-secondary " 
                  ng-click="$ctrl.showDeleteDialog($event, contact)"
                  md-svg-icon="action:ic_delete_24px">
-            <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Видалити</md-tooltip>
+            <md-tooltip ng-if="::$root.it.can('modifySalon')">Видалити</md-tooltip>
         </md-icon>
         <md-divider></md-divider>
     </md-list-item>
@@ -57,11 +57,11 @@ export class ContactsComponentController {
     }
 
     addContact(){
-        this.$location.path("/academy/contact");
+        this.$location.path("/salon/contact");
     }
 
     editContact(contact: IContact){
-        this.$location.path(`/academy/contact/${contact._id}`);
+        this.$location.path(`/salon/contact/${contact._id}`);
     }
 
     showDeleteDialog(ev, contact:IContact) {
@@ -90,7 +90,7 @@ export class ContactsComponentController {
     }
 
     private showPage(page = 1) {
-        this.contacts = this.contactResource.query( {page: page,  query:{'isAcademy': 'true'}},
+        this.contacts = this.contactResource.query( {page: page,query:{'isAcademy': 'false'}},
             (res, headers) => {
                 let {total, page, perPage} = this.pagingService.parseHeaders( headers );
                 this.pagingService.update( {page: page, perPage: perPage, total: total} );
@@ -108,9 +108,9 @@ export class ContactsComponentController {
     }
 }
 
-export let ContactsComponentUrl = "/academy/contacts";
-export let ContactsComponentName = 'pgContacts';
-export let ContactsComponentOptions = {
+export let SalonContactsComponentUrl = "/salon/contacts";
+export let SalonContactsComponentName = 'pgSalonContacts';
+export let SalonContactsComponentOptions = {
     template: template,
     controller: ContactsComponentController
 };

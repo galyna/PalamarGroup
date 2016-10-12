@@ -6,6 +6,7 @@ import {SalonHomeComponentUrl} from "./components/salon.home.component";
 import {FavorsComponentUrl} from "./components/favors.component";
 import {IConstants} from "../core/core.config";
 import {MasterComponentUrl} from "./components/master.compenent";
+import {ProductsComponentUrl} from "./components/products.component";
 
 salonRoutes.$inject = ['$routeProvider', 'constants'];
 export function salonRoutes($routeProvider:ng.route.IRouteProvider, constants:IConstants) {
@@ -19,6 +20,9 @@ export function salonRoutes($routeProvider:ng.route.IRouteProvider, constants:IC
             } )
             .when( MasterComponentUrl, {
                 template: '<pg-master></pg-master>',
+            } )
+            .when( ProductsComponentUrl, {
+                template: '<pg-products></pg-products>',
             } )
         ;
     }

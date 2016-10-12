@@ -31,6 +31,8 @@ import IOrder = pg.models.IOrder;
 import {salonClientApi, salonClientOptions} from "./salon.client.endpoint";
 import {tasksOptions, tasksApi} from './tasks.endpoint';
 import {appointmentOptions} from './appointment.options';
+import {ProductOrder} from "../models/product.order";
+import {Salon} from "../models/salon";
 
 
 let api = express.Router();
@@ -84,6 +86,7 @@ restify.serve(api, User, userOptions);
 restify.serve(api, Model,modelOptions);
 restify.serve(api, Order, orderOptions);
 restify.serve(api, Master, tasksOptions);
+restify.serve(api, ProductOrder,appointmentOptions);
 restify.serve(api, Appointment,appointmentOptions);
 api.use('/salonclient', salonClientApi);
 restify.serve(api, SalonClient,salonClientOptions);
@@ -91,6 +94,7 @@ restify.serve(api, Favor,tasksOptions);
 restify.serve(api, Transform,tasksOptions);
 restify.serve(api, Product,tasksOptions);
 restify.serve(api, Brend,tasksOptions);
+restify.serve(api, Salon,tasksOptions);
 api.use('/photo', photoEndpoint);
 api.use('/email', emailEndpoint);
 

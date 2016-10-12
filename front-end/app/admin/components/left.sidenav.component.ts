@@ -1,6 +1,23 @@
 import {ItServiceName, ItService} from "../../users/services/it.service";
 import {usersComponentUrl} from "./users.component";
 import {IConstants} from "../../core/core.config";
+
+import {MastersComponentUrl} from "../../admin/salon/components/masters.component";
+import {FavorsComponentUrl} from "../../admin/salon/components/favors.component";
+import {TransformsComponentUrl} from "../../admin/salon/components/transforms.component";
+import {AppointmentsComponentUrl} from "../../admin/salon/components/appointments.component";
+import {BrendsComponentUrl} from "../../admin/salon/components/brends.component";
+import {ProductsComponentUrl} from "../../admin/salon/components/products.component";
+import {ProductOrdersComponentUrl} from "../../admin/salon/components/product.orders.component";
+import {SalonsComponentUrl} from "../../admin/salon/components/salons.component";
+import {SalonContactsComponentUrl} from "../../admin/salon/components/contacts.component";
+
+import {AdminCoursesComponentUrl} from "../../admin/academy/components/courses.component";
+import {AdminOrdersComponentUrl} from "../../admin/academy/components/orders.component";
+import {CommentsComponentUrl} from "../../admin/academy/components/comments.component";
+import {ContactsComponentUrl} from "../../admin/academy/components/contacts.component";
+
+
 let template = `<md-sidenav
         md-component-id="pgLeftSidenav"
         md-is-locked-open="$mdMedia('gt-sm')"
@@ -48,14 +65,14 @@ export class LeftSidenavComponentController {
                 items: [
                     {
                         text: 'Курси',
-                        url: '/academy/courses',
+                        url: AdminCoursesComponentUrl,
                         visible: ()=> {
                             return true;
                         }
                     },
                     {
                         text: 'Записи',
-                        url: '/academy/orders',
+                        url: AdminOrdersComponentUrl,
                         visible: ()=> {
                             return true;
                         }
@@ -76,14 +93,14 @@ export class LeftSidenavComponentController {
                     },
                     {
                         text: 'Контакти',
-                        url: '/academy/contacts',
+                        url: ContactsComponentUrl,
                         visible: ()=> {
                             return true;
                         }
                     },
                     {
-                        text: 'Відгуки',
-                        url: '/academy/comments',
+                        text:'Відгуки',
+                        url: CommentsComponentUrl,
                         visible: ()=> {
                             return true;
                         }
@@ -98,33 +115,54 @@ export class LeftSidenavComponentController {
                 },
                 items: [
                     {
-                        text: 'Записи',
+                        text: 'Записи на прийом',
                         visible: () => true,
-                        url: '/salon/appointments',
+                        url: AppointmentsComponentUrl,
                     }, {
                         text: 'Майстри',
                         visible: () => true,
-                        url: '/salon/masters',
+                        url: MastersComponentUrl,
                     },
                     {
                         text: 'Послуги',
                         visible: () => true,
-                        url: '/salon/favors',
+                        url: FavorsComponentUrl,
                     }
                     , {
                         text: 'Перевтілення',
                         visible: () => true,
-                        url: '/salon/transforms',
+                        url: TransformsComponentUrl,
                     },
                     {
                         text: 'Продукція',
                         visible: () => true,
-                        url: '/salon/products',
+                        url: ProductsComponentUrl,
                     }
-                    , {
+                    ,
+                    {
+                        text: 'Замовлення Продукції',
+                        visible: () => true,
+                        url: ProductOrdersComponentUrl,
+                    }
+                    ,
+                    {
                         text: 'Бренди',
                         visible: () => true,
-                        url: '/salon/brends',
+                        url: BrendsComponentUrl,
+                    },
+                    {
+                        text: 'Контакти',
+                        url: SalonContactsComponentUrl,
+                        visible: ()=> {
+                            return true;
+                        }
+                    },
+                    {
+                        text: 'Салони',
+                        url: SalonsComponentUrl,
+                        visible: ()=> {
+                            return true;
+                        }
                     },
                 ]
             },
