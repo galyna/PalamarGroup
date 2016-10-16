@@ -227,7 +227,8 @@ declare module pg {
             photos:IPhoto[],
             contacts:IContact[],
             address:string,
-            map:string
+            latitude: string,
+            longitude:string
         }
     }
 

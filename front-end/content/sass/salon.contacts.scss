@@ -4,7 +4,6 @@
 
 .salon-contacts {
 
-
   .page-delimiter {
     position: relative;
     display: table;
@@ -148,15 +147,12 @@
       transform: translate(0%, -1%);
     }
 
-
-    @media (min-width: $layout-breakpoint-xs)  {
+    @media (min-width: $layout-breakpoint-xs) {
       min-height: 300px;
       min-width: 600px;
       margin-left: 0px;
       margin-right: 0px;
     }
-
-
 
     .card-desc {
       background: white;
@@ -164,7 +160,6 @@
       z-index: 2;
       vertical-align: middle;
       text-align: center;
-
 
     }
 
@@ -181,22 +176,33 @@
         width: 300px
       }
 
-
     }
 
     .descr-container {
       max-height: 116px;
-      width:100%;
+      width: 100%;
       text-align: center;
       overflow: hidden;
       text-overflow: ellipsis;
 
     }
 
-
   }
 
 }
 
+.angular-google-map-container {
+  height: 400px;
+  width: 300px;
+  @media (min-width: $layout-breakpoint-xs) {
+    min-height: 400px;
+    min-width: 600px;
 
+  }
+}
+
+.angular-google-map-container-academy {
+  height: 450px;
+
+}
 

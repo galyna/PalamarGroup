@@ -41,9 +41,14 @@ const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveFor
                         <label>Адреса</label>
                         <input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.salon.address" name="name"/>
                     </md-input-container>
+                     <label class="md-block ">Координати карти</label>
                      <md-input-container class="md-block ">
-                        <label>Координати карти</label>
-                        <input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.salon.map" name="name"/>
+                        <label>Довгота</label>
+                        <input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.salon.longitude" name="name"/>
+                    </md-input-container>
+                     <md-input-container class="md-block ">
+                        <label>Широта</label>
+                        <input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.salon.latitude" name="name"/>
                     </md-input-container>
                 </md-card-content>
                 </md-card-content>

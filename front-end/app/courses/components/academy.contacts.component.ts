@@ -69,31 +69,41 @@ const template = `<div class="courses-details description-container" layout="col
             </md-card-content>
         </md-card>
     </div>
+    
+     <ui-gmap-google-map id="m4ap" layout="row" class="top-info angular-google-map-container-academy" 
+      layout-align="center center" center='$ctrl.map.center' zoom='$ctrl.map.zoom' >
+            <ui-gmap-marker coords='$ctrl.marker' idkey="8552452588">
+              
+            </ui-gmap-marker>
+            </ui-gmap-markers>
+        </ui-gmap-google-map>
 </div>`;
 
 export class AcademyContactComponentController {
 
-    static $inject = [ ContactResourceName,OrderResourceName,'$log', '$mdDialog', 'Upload',
-         ModelResourceName, 'constants','$rootScope','$templateCache'];
-
+    static $inject = [ContactResourceName, OrderResourceName, '$log', '$mdDialog', 'Upload',
+        ModelResourceName, 'constants', '$rootScope', '$templateCache'];
 
 
     order:IOrder;
     newModel:IModel;
     showAnimation:boolean;
     contacts:IContact[];
+    map:any;
+    marker:any;
 
     constructor(private contactResource:IContactResource,
-                private OrderResource:IOrderResource,private $log:ng.ILogService,
-                private mdDialog:ng.material.IDialogService,  private Upload:ng.angularFileUpload.IUploadService,
+                private OrderResource:IOrderResource, private $log:ng.ILogService,
+                private mdDialog:ng.material.IDialogService, private Upload:ng.angularFileUpload.IUploadService,
                 private ModelResource:IModelResource,
-                private constants:IConstants,private $rootScope:IRootScope,
+                private constants:IConstants, private $rootScope:IRootScope,
                 private $templateCache:ng.ITemplateCacheService) {
-
+        this.map = {center: {latitude: 49.811077, longitude: 23.973777}, zoom: 18};
+        this.marker = {latitude: 49.811077, longitude: 23.973777};
         this.order = new OrderResource();
         this.showAnimation = $rootScope.isBigSize;
         this.newModel = this.getBlankModel();
-        this.contacts = this.contactResource.query( {query:{'isAcademy': 'true'}});
+        this.contacts = this.contactResource.query( {query: {'isAcademy': 'true'}} );
 
     }
 
@@ -194,7 +204,7 @@ export class AcademyContactComponentController {
                 this.order = new this.OrderResource();
             } );
 
-    
+
     }
 
     cancel():void {

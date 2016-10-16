@@ -7,6 +7,7 @@ import {ICourseResource, CourseResourceName, ICourse} from "../../resources/cour
 import {IModelResource, IModel, ModelResourceName} from "../../resources/model.resource";
 import {IOrder, IOrderResource, OrderResourceName} from "../../resources/order.resource";
 import {IRootScope} from "../../../typings";
+import {ISchedulerScope} from "../../admin/salon/components/master.scheduler";
 
 
 const template = `<div class="salon-contacts description-container" layout="column">
@@ -16,11 +17,19 @@ const template = `<div class="salon-contacts description-container" layout="colu
         <div layout="row" flex ng-if="salon.contacts.length>0">
             <div class="page-delimiter" flex>
                 <div class="fit-screen-wrap invers header">
-                    <div class="md-display-1"> Салон на {{salon.address}}</div>
+                    <div class="md-display-1"> Салон {{salon.name}}</div>
+                    <div class="md-display-1"> знаходиться на {{salon.address}}</div>
                 </div>
 
             </div>
         </div>
+        <ui-gmap-google-map ng-if="$ctrl.showMap && salon.map" id="map"
+                            center='{ latitude: salon.latitude, longitude: salon.longitude}' zoom='$ctrl.map.zoom'>
+            <ui-gmap-marker coords="{ latitude: salon.latitude, longitude: salon.longitude}" idkey="$index">
+              
+            </ui-gmap-marker>
+            </ui-gmap-markers>
+        </ui-gmap-google-map>
         <div class="course-bg " layout-align="center center" flex
              ng-repeat="contact in salon.contacts track by $index">
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
@@ -37,6 +46,7 @@ const template = `<div class="salon-contacts description-container" layout="colu
                              flex layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text layout-align="space-around center">
+                                    <div class="md-title">Адміністратор</div>
                                     <div class="md-display-1">{{::contact.name}}</div>
                                     <div class="descr-container">
                                         <div class="md-display-1">{{::contact.phone}}</div>
@@ -49,11 +59,12 @@ const template = `<div class="salon-contacts description-container" layout="colu
                 </md-card>
                 <md-card id="trigger-right" ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                     <md-card-content layout="row" layout-align="start none">
-                       <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
+                        <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
                              data-aos-easing="ease-out-cubic"
                              flex layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text layout-align="space-around center">
+                                    <div class="md-title">Адміністратор</div>
                                     <div class="md-display-1">{{::contact.name}}</div>
                                     <div class="descr-container">
                                         <div class="md-display-1">{{::contact.phone}}</div>
@@ -73,11 +84,12 @@ const template = `<div class="salon-contacts description-container" layout="colu
                              data-aos-easing="ease-out-cubic"
                              flex="50"><img src="{{::contact.photo.url}}" class="md-card-image "/>
                         </div>
-                       <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
+                        <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
                              data-aos-easing="ease-out-cubic"
                              flex layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text layout-align="space-around center">
+                                    <div class="md-title">Адміністратор</div>
                                     <div class="md-display-1">{{::contact.name}}</div>
                                     <div class="descr-container">
                                         <div class="md-display-1">{{::contact.phone}}</div>
@@ -114,27 +126,31 @@ const template = `<div class="salon-contacts description-container" layout="colu
 
 export class SalonContactsComponentController {
 
-    static $inject = [ContactResourceName, 'constants', '$rootScope', SalonResourceName];
+    static $inject = [ContactResourceName, 'constants', '$rootScope', SalonResourceName,"$scope"];
 
     showAnimation:boolean;
+    showMap:boolean;
     contacts:IContact[];
     salons:ISalon[];
+    map:any;
 
     constructor(private contactResource:IContactResource,
                 private constants:IConstants, private $rootScope:IRootScope,
-                private salonResource:ISalonResource) {
+                private salonResource:ISalonResource,private $scope:ISchedulerScope) {
 
         this.showAnimation = $rootScope.isBigSize;
-
+        this.map = { center: { latitude: 49.811210, longitude: 23.974013}, zoom: 18};
         this.contacts = this.contactResource.query( {query: {'isAcademy': 'false'}, group: 'salon'} );
         this.contacts.$promise.then( (contacts) => {
                 this.salons = this.salonResource.query();
-                this.salons.$promise.then( (salons) => {
 
+                this.salons.$promise.then( (salons) => {
+                    this.showMap=true;
                     salons.forEach( (salon)=> {
                         if (!salon.contacts) {
                             salon.contacts=[];
                         }
+                        
                         contacts.forEach( (contact)=> {
                             if (contact.salon === salon._id) {
                                 salon.contacts.push( contact );

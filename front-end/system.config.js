@@ -25,18 +25,28 @@ System.config({
         'angular-socialshare': 'node_modules/angular-socialshare/dist/angular-socialshare.js',
         'angular-youtube-embed': 'node_modules/angular-youtube-embed/src/angular-youtube-embed.js',
         'ngSmoothScroll': 'node_modules/ngSmoothScroll/lib/angular-smooth-scroll.js',
-        'aos':'node_modules/aos/dist/aos.js',
+        'aos': 'node_modules/aos/dist/aos.js',
         'jwt-decode': 'node_modules/jwt-decode/build/jwt-decode.min.js',
-        'daypilot':'lib/dayPilot/daypilot-all.min.js'
-        
-      
+        'daypilot': 'lib/dayPilot/daypilot-all.min.js',
+        'lodash': 'node_modules/lodash/dist/lodash.js',
+        'angular-simple-logger': 'node_modules/angular-simple-logger/dist/angular-simple-logger.min.js',
+        'uiGmapgoogle-maps': 'node_modules/angular-google-maps/dist/angular-google-maps.js'
+
+
     },
-    
+
     map: {
         'youtube-iframe-api': 'https://www.youtube.com/iframe_api'
     },
     meta: {
         'aos': {
+            format: "global"
+        },
+        'uiGmapgoogle-maps': {
+            deps: ['angular',
+                "angular-simple-logger",
+                "lodash"
+            ],
             format: "global"
         },
         'ng-img-crop-full-extended': {
