@@ -1,126 +1,15 @@
-@import "theme";
-@import "core";
-@import "buttons";
-.products {
-  .overlay-bg {
-    @extend .overlay;
-    // background: linear-gradient(rgba(white, 0.8), rgba(white, 0.7)), url("../images/bg/courses/cards_bg.png") no-repeat center center fixed;
+.card-media-product {
+  width: 300px;
+
+  min-height: 300px;
+  .card-desc {
+
+    width: 100%;
   }
 
-  md-card.md-default-theme, md-card {
-    transition: transform 0.4s;
-   // min-width: 1000px;
-    &:hover {
-      @extend .md-whiteframe-16dp;
-      transform: translate(0%, -1%);
-    }
+  img {
+    width: 300px;
+    height: 300px;
 
-    @media (min-width: $layout-breakpoint-xs) {
-      margin-left: 0px;
-      margin-right: 0px;
-      height: 300px;
-      max-width: 300px;
-
-    }
-
-    @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm) {
-      min-height: 300px;
-      min-width: 600px;
-      margin-left: 0px;
-      margin-right: 0px;
-    }
-
-
-
-    @media(min-width: $layout-breakpoint-sm){
-      width: 1000px;
-      min-width: 1000px;
-      min-height: 500px;
-    }
-
-    .card-desc {
-      background: white;
-
-
-      z-index: 2;
-      vertical-align: middle;
-      text-align: center;
-
-      @media (min-width: $layout-breakpoint-lg) {
-        height: 500px;
-        min-width: 500px;
-      }
-
-      @media  (max-width: $layout-breakpoint-sm) {
-        max-width: 300px;
-      }
-    }
-
-    .card-media {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-     // height: 500px;
-      overflow: hidden;
-      padding: 0;
-
-      @media (max-width: $layout-breakpoint-xs) {
-        height: 300px;
-        max-width: 300px;
-        img {
-          height: 300px;
-          width: 300px
-        }
-
-      }
-
-      @media (min-width: $layout-breakpoint-md) {
-        height: 500px;
-        min-width: 500px;
-        img {
-          height: 500px;
-          width: 500px
-        }
-
-      }
-
-
-      @media (max-width: $layout-breakpoint-sm) {
-        height: 300px;
-        max-width: 300px;
-        img {
-          height: 300px;
-          width: 300px
-        }
-      }
-    }
-
-    .descr-container {
-      max-height: 116px;
-      max-width: 90%;
-      width: 500px;
-      text-align: center;
-      overflow: hidden;
-      text-overflow: ellipsis;
-
-    }
-
-    .md-raised {
-
-      min-width: 200px;
-
-      @media (max-width: $layout-breakpoint-xs) {
-        margin-bottom: 22px;
-        width: 90%;
-
-      }
-      @media (max-width: $layout-breakpoint-sm) {
-        margin-bottom: 22px;
-      }
-    }
   }
-
 }
-
-
-
