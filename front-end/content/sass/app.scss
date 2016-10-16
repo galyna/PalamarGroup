@@ -2,6 +2,7 @@
 @import "../../node_modules/ng-img-crop-full-extended/source/scss/ng-img-crop";
 @import "../../node_modules/aos/dist/aos";
 @import "theme";
+@import "material.overides";
 @import "core";
 @import "buttons";
 @import "index";
@@ -9,9 +10,10 @@
 @import "courses.details";
 @import "image.input";
 @import "media.observer";
+@import "salon.contacts";
+@import "products";
 @import "admin";
 @import "calendar";
 @import "header.galery";
-@import "material.overides";
-@import "salon.contacts";
+
 @import "home";

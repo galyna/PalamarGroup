@@ -7,24 +7,50 @@ const template = `<div class="courses description-container" layout="row" layout
     <div layout="column" layout-align="center center">
 
         <div class="course-bg " layout-align="center center" flex
-             ng-repeat="product in $ctrl.products track by $index" >
+             ng-repeat="product in $ctrl.products track by $index">
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
-                <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"cd
+                <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
                 >
-                <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[$ctrl.showAnimation]}}"   data-aos-easing="ease-out-cubic"
+                    <md-card-content layout="row" layout-align="start none">
+                        <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
+                             data-aos-easing="ease-out-cubic"
                              flex="50"><img src="{{::product.photo.url}}" class="md-card-image "/>
                         </div>
-                        <div  class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[$ctrl.showAnimation]}}"   data-aos-easing="ease-out-cubic"
-                              flex="50" layout="column" layout-align="center center">
+                        <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
+                             data-aos-easing="ease-out-cubic"
+                             flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
-                                    <div hide show-md="true"  class="md-display-2">{{::product.name}}</div>
-                                    <div hide-md="true" class="md-display-1" >{{::product.name}}</div>
-                                    <div hide-sm="true" class="descr-container">
-                                        <div class="md-title">{{::course.description}}</div>
+                                    <div hide show-md="true" class="md-display-2">{{::product.name}}</div>
+                                    <div hide-md="true" class="md-display-1">{{::product.name}}</div>
+                                    <div class="descr-container">
+                                        <div class="md-title">{{::product.description}}</div>
 
+                                    </div>
+                                </md-card-title-text>
+                            </md-card-title>
+                            <md-card-actions flex="25">
+                                <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
+                                           ng-click="$ctrl.showAppointmentDialog(product)">
+                                    Замовити
+                                </md-button>
+                            </md-card-actions>
+                        </div>
+                    </md-card-content>
+                </md-card>
+                <md-card id="trigger-right" ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
+                    <md-card-content layout="row" layout-align="start none">
+                        <div class="card-desc  " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
+                             data-aos-easing="ease-out-cubic"
+                              flex layout="column" layout-align="center center">
+                            <md-card-title flex>
+                                  <md-card-title-text flex layout-align="space-around center">
+                                    <div hide show-gt-sm="true" class="md-display-2">{{::product.name}}</div>
+                                    <div  hide-gt-sm="true" class="md-display-1">{{::product.name}}</div>
+                                    <div  class="descr-container">
+                                        <div hide show-gt-sm="true" class="md-title">{{::product.description}}</div>
+                                        <div  hide-gt-sm="true" class="md-subhead">{{::product.description}}</div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
@@ -35,46 +61,27 @@ const template = `<div class="courses description-container" layout="row" layout
                                 </md-button>
                             </md-card-actions>
                         </div>
-                    </md-card-content>
-                </md-card>
-                <md-card id="trigger-right" ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
-                    <md-card-content layout="row" layout-align="start none">
-                        <div class="card-desc  " data-aos="{{{true:'fade-right', false:'false'}[$ctrl.showAnimation]}}"  data-aos-easing="ease-out-cubic"
-                              flex="50" flex layout="column" layout-align="center center">
-                            <md-card-title flex>
-                                <md-card-title-text flex layout-align="space-around center">
-                                    <div hide show-md="true"  class="md-display-2">{{::product.name}}</div>
-                                    <div hide-md="true" class="md-display-1" >{{::product.name}}</div>
-                                    <div hide-sm="true" class="descr-container">
-                                        <div class="md-title">{{::product.description}}</div>
-
-                                    </div>
-                                </md-card-title-text>
-                            </md-card-title>
-                            <md-card-actions flex="25">
-                                <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
-                                           ng-click="$ctrl.showAppointmentDialog(course)">
-                                    product
-                                </md-button>
-                            </md-card-actions>
-                        </div>
-                        <div class="card-media " data-aos="{{{true:'fade-left', false:'false'}[$ctrl.showAnimation]}}" data-aos-easing="ease-out-cubic"
-                              flex="50"><img src="{{::product.photo.url}}" class="md-card-image"/></div>
+                        <div class="card-media " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
+                             data-aos-easing="ease-out-cubic"
+                             flex="50"><img src="{{::product.photo.url}}" class="md-card-image"/></div>
                     </md-card-content>
                 </md-card>
                 <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[$ctrl.showAnimation]}}"  data-aos-easing="ease-out-cubic"
-                              flex="50"><img src="{{::product.photo.url}}" class="md-card-image "/>
+                        <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
+                             data-aos-easing="ease-out-cubic"
+                             flex="50"><img src="{{::product.photo.url}}" class="md-card-image "/>
                         </div>
-                        <div class="card-desc " flex="50" data-aos="{{{true:'fade-left', false:'false'}[$ctrl.showAnimation]}}"
+                        <div class="card-desc " flex="50"
+                             data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
                              data-aos-easing="ease-out-cubic" layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
-                                    <div hide show-md="true"  class="md-display-2">{{::product.name}}</div>
-                                    <div hide-md="true" class="md-display-1" >{{::product.name}}</div>
-                                    <div hide-sm="true" class="descr-container">
-                                        <div class="md-title">{{::product.description}}</div>
+                                    <div hide show-gt-sm="true" class="md-display-2">{{::product.name}}</div>
+                                    <div  hide-gt-sm="true" class="md-display-1">{{::product.name}}</div>
+                                    <div  class="descr-container">
+                                        <div hide show-gt-sm="true" class="md-title">{{::product.description}}</div>
+                                        <div  hide-gt-sm="true" class="md-subhead">{{::product.description}}</div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
@@ -89,12 +96,20 @@ const template = `<div class="courses description-container" layout="row" layout
                     </md-card-content>
                 </md-card>
                 <div class="overlay-bg"></div>
+                <!--<md-button hide show-gt-xs="true" class=" md-fab  side-up-btn"-->
 
+                <!--data-aos-anchor="#trigger-right"-->
+                <!--data-aos-anchor-placement="top-center" data-aos-delay="100" scroll-to="mainContent"-->
+                <!--easing="easeInOutCubic"-->
+                <!--duration="1800" aria-label="up">-->
+                <!--<md-icon class=""-->
+                <!--md-svg-src="navigation:ic_arrow_downward_24px"></md-icon>-->
+                <!--</md-button>-->
             </div>
 
             <div hide-gt-xs="true" layout="row" layout-align="center center">
                 <div class="overlay-bg trigger-right"></div>
-                <md-card md-whiteframe="8" ng-click="$ctrl.showAppointmentDialog(product)">
+                <md-card md-whiteframe="8" ng-click="vm.showDetails(course._id)">
                     <md-card-content layout="column">
                         <div class="card-media "><img src="{{::product.photo.url}}" class="md-card-image"/></div>
                         <div class="card-desc "
@@ -102,20 +117,23 @@ const template = `<div class="courses description-container" layout="row" layout
                             <md-card-title>
                                 <md-card-title-text>
                                     <div class="md-headline">{{::product.name}}</div>
+                                    <div class="md-title">{{::product.description}}</div>
                                 </md-card-title-text>
                             </md-card-title>
                             <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
-                            >Замовити
+                                       ng-click="$ctrl.showAppointmentDialog(product)">
+                                Замовити
                             </md-button>
                         </div>
                     </md-card-content>
 
                 </md-card>
-           
+
             </div>
         </div>
     </div>
 </div>
+
 
 `;
 
@@ -132,66 +150,16 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
     </md-toolbar>
     <form name="orderForm" class="md-padding pop-form" novalidate flex>
         <md-dialog-content>
-            <md-dialog-content-body>
-                <div class="courses description-container" layout="row" layout-align="center center">
-                    <div layout="column" layout-align="center center">
-
-                        <div class="course-bg " layout-align="center center" flex
-                             >
-                            <div hide show-gt-xs="true" layout="row" layout-align="center center">
-
-                                <md-card   flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
-                                       
-                                >
-                                    <md-card-content layout="row" layout-align="start none">
-                                        <div class="card-media "
-                                             
-                                             flex="50"><img src="{{::vm.product.photo.url}}" class="md-card-image "/>
+            <md-dialog-content-body >
+               <div class=" md-block" layout="row" layout-align="center">
+                                    <div class="card-media-product  layout="column" >
+                                        <img src="{{::vm.product.photo.url}}" />
+                                        <div class="card-desc " flex="100" layout="column" layout-align="center center">                                          
+                                                    <div flex class="md-title">{{::vm.product.name}}</div>
+                                                      <div flex class="md-headline">{{::vm.product.description}}</div>                                                                                    
                                         </div>
-                                        <div class="card-desc "
-                                             
-                                             flex="50" layout="column" layout-align="center center">
-                                            <md-card-title flex>
-                                                <md-card-title-text flex layout-align="space-around center">
-                                                    <div hide show-md="true" class="md-display-2">{{::vm.product.name}}
-                                                    </div>
-                                                    <div hide-md="true" class="md-display-1">{{::vm.product.name}}</div>
- <div hide-sm="true" class="descr-container">
-                                        <div class="md-title">{{::vm.product.description}}</div>
-
                                     </div>
-                                                </md-card-title-text>
-                                            </md-card-title>
-
-                                        </div>
-                                    </md-card-content>
-                                </md-card>
-                                
-
-                            </div>
-
-                            <div hide-gt-xs="true" layout="row" layout-align="center center">
-                                <md-card>
-                                    <md-card-content layout="column">
-                                        <div class="card-media "><img src="{{::vm.product.photo.url}}"
-                                                                      class="md-card-image"/></div>
-                                        <div class="card-desc "
-                                             layout="column" layout-align="space-around center">
-                                            <md-card-title>
-                                                <md-card-title-text>
-                                                    <div class="md-headline">{{::vm.product.name}}</div>
-                                                </md-card-title-text>
-                                            </md-card-title>
-                                          
-                                        </div>
-                                    </md-card-content>
-
-                                </md-card>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        </div>
                 <md-input-container class="md-block">
                     <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
                     <label for="name">Як до вас звертатися</label>
