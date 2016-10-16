@@ -13,6 +13,7 @@ import {SalonHomeComponentName, SalonHomeComponentOptions} from "./components/sa
 import {FavorsComponentName, FavorsComponentOptions} from "./components/favors.component";
 import {MasterComponentName,MasterComponentOptions} from "./components/master.compenent";
 import {ProductsComponentOptions, ProductsComponentName} from "./components/products.component";
+import {SalonContactsComponentOptions, SalonContactsComponentName} from "./components/salon.contacts.component";
 
 
 let app = angular.module( 'salon', ['ngMaterial', resourcesModule.name] )
@@ -20,6 +21,7 @@ let app = angular.module( 'salon', ['ngMaterial', resourcesModule.name] )
     .component( SalonHomeComponentName, SalonHomeComponentOptions )
     .component( FavorsComponentName, FavorsComponentOptions )
     .component( MasterComponentName, MasterComponentOptions )
+    .component( SalonContactsComponentName, SalonContactsComponentOptions )
     .component( ProductsComponentName, ProductsComponentOptions );
 export let salonModule = app;
 

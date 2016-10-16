@@ -1,0 +1,202 @@
+@import "theme";
+@import "../../node_modules/angular-material/modules/scss/angular-material";
+@import "theme";
+
+.salon-contacts {
+
+
+  .page-delimiter {
+    position: relative;
+    display: table;
+    width: 100%;
+    color: white;
+    overflow: hidden;
+    overflow-y: auto;
+    text-align: center;
+
+    .fit-screen-wrap {
+      position: relative;
+      display: table-cell;
+      vertical-align: middle;
+      z-index: 2;
+    }
+    .header {
+      height: 150px;
+
+    }
+    .header-super {
+      height: 350px;
+
+    }
+    .header-long {
+      height: 500px;
+
+    }
+    .invers {
+      background-color: white;
+      color: black;
+    }
+
+    .overlay {
+      z-index: 1;
+
+    }
+
+    .overlay-days {
+      @extend .overlay;
+      -webkit-filter: blur(1px);
+      -moz-filter: blur(1px);
+      -o-filter: blur(1px);
+      -ms-filter: blur(1px);
+      filter: blur(1px);
+
+      @media (min-height: 1286px) and (min-width: 1923px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_full.jpg") no-repeat center center fixed;
+      }
+
+      @media (max-height: 1286px) and (max-width: 1923px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1923_1282.jpg") no-repeat center center fixed;
+      }
+
+      @media (max-height: 1026px) and (max-width: 1539px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1539_1026.jpg") no-repeat center center fixed;
+      }
+      @media (max-height: 802px) and (max-width: 1203px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1203_802.jpg") no-repeat center center fixed;
+      }
+      @media (max-height: 642px) and (max-width: 963px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_963_642.jpg") no-repeat center center fixed;
+      }
+
+      @media (max-height: 400px) and (max-width: 723px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_723_482.jpg") no-repeat center center fixed;
+      }
+
+    }
+    .overlay-comments {
+      @extend .overlay;
+      -webkit-filter: blur(1px);
+      -moz-filter: blur(1px);
+      -o-filter: blur(1px);
+      -ms-filter: blur(1px);
+      filter: blur(1px);
+      @media (min-height: 1286px) and (min-width: 1923px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_full.jpg") no-repeat center center fixed;
+      }
+
+      @media (max-height: 1286px) and (max-width: 1923px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1923_1282.jpg") no-repeat center center fixed;
+      }
+
+      @media (max-height: 1024px) and (max-width: 1536px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1536_1024.jpg") no-repeat center center fixed;
+      }
+
+      @media (max-height: 800px) and (max-width: 1200px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1200_800.jpg") no-repeat center center fixed;
+      }
+
+      @media (max-height: 640px) and (max-width: 960px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_960_640.jpg") no-repeat center center fixed;
+      }
+      @media (max-height: 400px) and (max-width: 720px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_720_480.jpg") no-repeat center center fixed;
+      }
+
+    }
+
+    .overlay-description {
+      @extend .overlay;
+      -webkit-filter: blur(1px);
+      -moz-filter: blur(1px);
+      -o-filter: blur(1px);
+      -ms-filter: blur(1px);
+      filter: blur(1px);
+      @media (min-height: 1286px) and (min-width: 1923px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_full.jpg") no-repeat center center fixed;
+      }
+      @media (max-height: 1286px) and (max-width: 1923px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1923_1282.jpg") no-repeat center center fixed;
+      }
+      @media (max-height: 1026px) and (max-width: 1539px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1539_1026.jpg") no-repeat center center fixed;
+      }
+
+      @media (max-height: 802px) and (max-width: 1203px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1203_802.jpg") no-repeat center center fixed;
+      }
+
+      @media (max-height: 642px) and (max-width: 963px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_963_642.jpg") no-repeat center center fixed;
+      }
+
+      @media (max-height: 400px) and (max-width: 723px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_723_482.jpg") no-repeat center center fixed;
+      }
+
+    }
+
+  }
+  md-card.md-default-theme, md-card {
+    margin-left: 0px;
+    margin-right: 0px;
+    max-width: 300px;
+    transition: transform 0.4s;
+
+    &:hover {
+      @extend .md-whiteframe-16dp;
+      transform: translate(0%, -1%);
+    }
+
+
+    @media (min-width: $layout-breakpoint-xs)  {
+      min-height: 300px;
+      min-width: 600px;
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+
+
+
+    .card-desc {
+      background: white;
+      min-width: 300px;
+      z-index: 2;
+      vertical-align: middle;
+      text-align: center;
+
+
+    }
+
+    .card-media {
+      position: relative;
+      z-index: 1;
+
+      overflow: hidden;
+      padding: 0;
+      height: 300px;
+      max-width: 300px;
+      img {
+        height: 300px;
+        width: 300px
+      }
+
+
+    }
+
+    .descr-container {
+      max-height: 116px;
+      width:100%;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+    }
+
+
+  }
+
+}
+
+
+

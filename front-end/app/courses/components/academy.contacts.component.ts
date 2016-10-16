@@ -94,12 +94,7 @@ export class AcademyContactComponentController {
         this.showAnimation = $rootScope.isBigSize;
         this.newModel = this.getBlankModel();
         this.contacts = this.contactResource.query( {query:{'isAcademy': 'true'}});
-        // contacts.$promise.then( (contacts) => {
-        //         this.contacts = contacts.filter( (contact)=> {
-        //             return contact.isAcademy;
-        //         } )
-        //     }
-        // );
+
     }
 
 

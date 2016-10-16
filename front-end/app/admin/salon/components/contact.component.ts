@@ -38,7 +38,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                     <md-select  ng-if="$root.it.can('modifySalon') "  ng-model="$ctrl.newSalon" ng-model-options="{trackBy: '$value._id'}">
                         <md-option ng-repeat="salon in $ctrl.salons" ng-value="salon">
                             <div layout="row" layout-align=" start center  ">
-                              <span>  {{ salon.name }}  </span>
+                           
                                    <span>  {{ salon.address }}  </span>  </div>
                         </md-option>
                     </md-select>
@@ -118,6 +118,7 @@ export class SalonContactComponentController {
         } else {
             this.originalContact = new this.contactResource();
             this.contact = angular.copy( this.originalContact );
+            this.setSalon()
         }
 
     }
