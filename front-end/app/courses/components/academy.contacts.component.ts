@@ -8,76 +8,112 @@ import {IOrder, IOrderResource, OrderResourceName} from "../../resources/order.r
 import {IRootScope} from "../../../typings";
 
 
-const template = `<div class="courses-details description-container" layout="column">
+const template = `<div class="salon-contacts description-container" layout="column">
 
     <!--author-->
-    <div ng-repeat="contact in $ctrl.contacts" layout="row" class="top-info" flex layout-align="center center">
-        <md-card  flex-md="90" flex-gt-md="60" flex-xs="none" flex
-                 md-whiteframe="5">
-            <md-card-content layuot="column" layout-gt-sm="row">
-                <div class="card-desc-top " flex hide-gt-sm="true" layout="column" layout-align=" space-around center">
-                    <md-card-title>
-                        <md-card-title-text flex layout="column" layout-align=" space-around center">
-                            <div class="md-display-1">ТЕЛЕФОН</div>
-                            <div class="md-display-1">{{contact.phone}}</div>
-                        </md-card-title-text>
-                    </md-card-title>
-                </div>
-                <div class=" card-media" layout="column" data-aos="{{{true:'fade-left', false:''}[vm.showAnimation]}}"
-                     data-aos-easing="ease-out-cubic"
-                     flex-gt-sm="50" layout-align="center center">
-                    <img src="{{contact.photo.url}}"/>
-                    <div class="md-padding author-name" layout="column" layout-align="space-around center">
-                        <div class="md-headline">КООРДИНАТОР</div>
-                        <div class="md-headline">{{ contact.name}}</div>
+    <div layout="column" layout-align="center center" >
+    <div class="course-bg " layout-align="center center" flex
+         ng-repeat="contact in $ctrl.contacts track by $index">
+        <div hide show-gt-xs="true" layout="row" layout-align="center center">
+
+            <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
+            >
+                <md-card-content layout="row" layout-align="start none">
+                    <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
+                         data-aos-easing="ease-out-cubic"
+                         flex="50"><img src="{{::contact.photo.url}}" class="md-card-image "/>
                     </div>
-                </div>
-                <div class="card-desc " data-aos="{{{true:'fade-right', false:''}[vm.showAnimation]}}"
-                     data-aos-easing="ease-out-cubic" flex-gt-sm="50"
-                     layout="column" layout-align=" space-between center">
-                    
-                    <md-card-title layout="column" layout-align="space-around center">
-                        <md-card-title-text hide show-gt-sm="true" flex layout="column"
-                                            layout-align=" space-around center">
-                           <div class="md-display-1">ТЕЛЕФОН</div>
-                            <div class="md-display-1">{{contact.phone}}</div>
-                        </md-card-title-text>
-                       
-                    </md-card-title>
+                    <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
+                         data-aos-easing="ease-out-cubic"
+                         flex layout="column" layout-align="center center">
+                        <md-card-title flex>
+                            <md-card-title-text layout-align="space-around center">
+                                <div class="md-title">Координатор</div>
+                                <div class="md-display-1">{{::contact.name}}</div>
+                                <div class="descr-container">
+                                    <div class="md-display-1">{{::contact.phone}}</div>
+                                </div>
+                            </md-card-title-text>
+                        </md-card-title>
 
-                    <div flex layuot="column" layout-align="space-between stretch">
-
-                        <md-button class="md-raised " flex aria-label="Play" ng-click="$ctrl.showModelDialog($event)">
-                            Стати моделлю
-                        </md-button>
-                        <md-button class=" md-raised xs-selected " aria-label="Play"
-                                   ng-click="$ctrl.showOrderDialog($event)">
-                            Записатись
-                        </md-button>
-                        
-                       <div class="md-padding md-margin" layout="column" layout-gt-sm="row"
-                             layout-align="center center">
-                
-                            <div class=" md-title social-image-container" layout="row"
-                                 layout-align="center center">
-
-                                <div flex>{{contact.email}} .</div>
-                            </div>
-                        </div>
                     </div>
-                </div>
-            </md-card-content>
-        </md-card>
+                </md-card-content>
+            </md-card>
+            <md-card id="trigger-right" ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
+                <md-card-content layout="row" layout-align="start none">
+                    <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
+                         data-aos-easing="ease-out-cubic"
+                         flex layout="column" layout-align="center center">
+                        <md-card-title flex>
+                            <md-card-title-text layout-align="space-around center">
+                                <div class="md-title">Координатор</div>
+                                <div class="md-display-1">{{::contact.name}}</div>
+                                <div class="descr-container">
+                                    <div class="md-display-1">{{::contact.phone}}</div>
+                                </div>
+                            </md-card-title-text>
+                        </md-card-title>
+
+                    </div>
+                    <div class="card-media " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
+                         data-aos-easing="ease-out-cubic"
+                         flex="50"><img src="{{::contact.photo.url}}" class="md-card-image"/></div>
+                </md-card-content>
+            </md-card>
+            <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
+                <md-card-content layout="row" layout-align="start none">
+                    <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
+                         data-aos-easing="ease-out-cubic"
+                         flex="50"><img src="{{::contact.photo.url}}" class="md-card-image "/>
+                    </div>
+                    <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
+                         data-aos-easing="ease-out-cubic"
+                         flex layout="column" layout-align="center center">
+                        <md-card-title flex>
+                            <md-card-title-text layout-align="space-around center">
+                                <div class="md-title">Координатор</div>
+                                <div class="md-display-1">{{::contact.name}}</div>
+                                <div class="descr-container">
+                                    <div class="md-display-1">{{::contact.phone}}</div>
+                                </div>
+                            </md-card-title-text>
+                        </md-card-title>
+
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+
+        <div hide-gt-xs="true" layout="row" layout-align="center center">
+            <div class="overlay-bg trigger-right"></div>
+            <md-card md-whiteframe="8">
+                <md-card-content layout="column">
+                    <div class="card-media "><img src="{{::contact.photo.url}}" class="md-card-image"/></div>
+                    <div class="card-desc "
+                         layout="column" layout-align="space-around center">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <div class="md-headline">{{::contact.name}}</div>
+                                <div class="md-headline">{{::contact.phone}}</div>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </div>
+                </md-card-content>
+
+            </md-card>
+        </div>
     </div>
-    
-     <ui-gmap-google-map id="m4ap" layout="row" class="top-info angular-google-map-container-academy" 
-      layout-align="center center" center='$ctrl.map.center' zoom='$ctrl.map.zoom' >
-            <ui-gmap-marker coords='$ctrl.marker' idkey="8552452588">
-              
-            </ui-gmap-marker>
-            </ui-gmap-markers>
-        </ui-gmap-google-map>
-</div>`;
+
+    <ui-gmap-google-map id="m4ap" layout="row" class="top-info angular-google-map-container-academy"
+                        layout-align="center center" center='$ctrl.map.center' zoom='$ctrl.map.zoom'>
+        <ui-gmap-marker coords='$ctrl.marker' idkey="8552452588">
+
+        </ui-gmap-marker>
+        </ui-gmap-markers>
+    </ui-gmap-google-map>
+    </div>
+</div>
+`;
 
 export class AcademyContactComponentController {
 
