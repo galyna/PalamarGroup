@@ -15,7 +15,9 @@ let SalonSchema = new Schema({
     photos: [PhotoSchema],
     address: String,
     latitude: String,
-    longitude:String
+    longitude:String,
+    isMain:Boolean,
+    isAcademy:Boolean,
 });
 
 export var Salon = model<ISalonModel>('Salon', SalonSchema);

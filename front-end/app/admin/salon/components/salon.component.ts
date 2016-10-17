@@ -24,6 +24,16 @@ const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveFor
         <md-tab label="Інфо">
             <md-card>
                 <md-card-content>
+                <md-input-container>
+                        <md-checkbox ng-model="$ctrl.salon.isMain" aria-label="Finished?"
+                                     ng-disabled="::!$root.it.can('modifySalon')">
+                            Це головний салон
+                        </md-checkbox>
+                        <md-checkbox ng-model="$ctrl.salon.isAcademy" aria-label="Finished?"
+                                     ng-disabled="::!$root.it.can('modifySalon')">
+                            Тут знаходиться академія
+                        </md-checkbox>
+                    </md-input-container>
                     <md-input-container class="md-block ">
                         <label for="name">Назва</label>
                         <input id="name" ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.salon.name"

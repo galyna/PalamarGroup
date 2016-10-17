@@ -228,7 +228,9 @@ declare module pg {
             contacts:IContact[],
             address:string,
             latitude: string,
-            longitude:string
+            longitude:string,
+            isMain:boolean,
+            isAcademy:boolean,
         }
     }
 

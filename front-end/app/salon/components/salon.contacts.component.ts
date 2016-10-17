@@ -17,8 +17,8 @@ const template = `<div class="salon-contacts description-container" layout="colu
         <div layout="row" flex ng-if="salon.contacts.length>0">
             <div class="page-delimiter" flex>
                 <div class="fit-screen-wrap invers header">
-                    <div class="md-display-1"> Салон {{salon.name}}</div>
-                    <div class="md-display-1"> знаходиться на {{salon.address}}</div>
+                  
+                    <div class="md-display-1"> Салон на {{salon.address}}</div>
                 </div>
 
             </div>
@@ -147,7 +147,7 @@ export class SalonContactsComponentController {
         this.map = { center: { latitude: 49.811210, longitude: 23.974013}, zoom: 18};
         this.contacts = this.contactResource.query( {query: {'isAcademy': 'false'}} );
         this.contacts.$promise.then( (contacts) => {
-            this.salons = this.salonResource.query();
+            this.salons = this.salonResource.query({sort:'-isMain'});
 
             this.salons.$promise.then( (salons) => {
                 this.showMap=true;
@@ -155,7 +155,10 @@ export class SalonContactsComponentController {
                     if (!salon.contacts) {
                         salon.contacts=[];
                     }
-
+                    if (salon.isMain) {
+                        this.map.center.latitude= salon.latitude;
+                        this.map.center.longitude= salon.longitude;
+                    }
                     contacts.forEach( (contact)=> {
                         if (contact.salon === salon._id) {
                             salon.contacts.push( contact );

@@ -110,14 +110,11 @@ export class FooterComponentController {
     $onInit() {
         this.showAnimation = this.$rootScope.isBigSize;
         this.map = {
-            center: {latitude: 49.811210, longitude: 23.974013}, zoom: 12, options: {
-                fullscreenControl: true,
-
-            }
+            center: {latitude: 49.811210, longitude: 23.974013}, zoom: 14
         };
         this.contacts = this.contactResource.query(  );
         this.contacts.$promise.then( (contacts) => {
-            this.salons = this.salonResource.query();
+            this.salons = this.salonResource.query({sort:'-isMain'});
 
             this.salons.$promise.then( (salons) => {
                 this.showMap = true;
@@ -129,7 +126,10 @@ export class FooterComponentController {
                     if (!salon.contacts) {
                         salon.contacts = [];
                     }
-
+                    if (salon.isMain) {
+                        this.map.center.latitude= salon.latitude;
+                        this.map.center.longitude= salon.longitude;
+                    }
                     contacts.forEach( (contact)=> {
                         if (!contact.isAcademy && contact.salon === salon._id) {
                             salon.contacts.push( contact );

@@ -6,6 +6,7 @@ import {ICourseResource, CourseResourceName, ICourse} from "../../resources/cour
 import {IModelResource, IModel, ModelResourceName} from "../../resources/model.resource";
 import {IOrder, IOrderResource, OrderResourceName} from "../../resources/order.resource";
 import {IRootScope} from "../../../typings";
+import {SalonResourceName, ISalonResource} from "../../resources/salon.resource";
 
 
 const template = `<div class="salon-contacts description-container" layout="column">
@@ -117,144 +118,37 @@ const template = `<div class="salon-contacts description-container" layout="colu
 
 export class AcademyContactComponentController {
 
-    static $inject = [ContactResourceName, OrderResourceName, '$log', '$mdDialog', 'Upload',
-        ModelResourceName, 'constants', '$rootScope', '$templateCache'];
+    static $inject = [ContactResourceName, '$rootScope', SalonResourceName];
 
 
     order:IOrder;
-    newModel:IModel;
     showAnimation:boolean;
     contacts:IContact[];
     map:any;
     marker:any;
 
-    constructor(private contactResource:IContactResource,
-                private OrderResource:IOrderResource, private $log:ng.ILogService,
-                private mdDialog:ng.material.IDialogService, private Upload:ng.angularFileUpload.IUploadService,
-                private ModelResource:IModelResource,
-                private constants:IConstants, private $rootScope:IRootScope,
-                private $templateCache:ng.ITemplateCacheService) {
+    constructor(private contactResource:IContactResource, private $rootScope:IRootScope, private salonResource:ISalonResource) {
+        
+    }
+
+    $onInit() {
         this.map = {center: {latitude: 49.811077, longitude: 23.973777}, zoom: 18};
         this.marker = {latitude: 49.811077, longitude: 23.973777};
-        this.order = new OrderResource();
-        this.showAnimation = $rootScope.isBigSize;
-        this.newModel = this.getBlankModel();
+        this.showAnimation = this.$rootScope.isBigSize;
+        var mainSalons = this.salonResource.query( {query: {'isAcademy': 'true'}} );
+        mainSalons.$promise.then( (salons) => {
+            if (salons.length>0) {
+             var academySalon= salons[0];
+                this.map.center.latitude=academySalon.latitude;
+                this.map.center.longitude=academySalon.longitude;
+                this.marker.latitude=academySalon.latitude;
+                this.marker.longitude=academySalon.longitude;
+            }
+        } );
         this.contacts = this.contactResource.query( {query: {'isAcademy': 'true'}} );
-
+       
     }
 
-
-    showModelDialog($event):void {
-        this.newModel = this.getBlankModel();
-
-        this.mdDialog.show( {
-            template: this.$templateCache.get( "app/courses/views/model.form.html" ).toString(),
-            clickOutsideToClose: true,
-            bindToController: true,
-            controller: AcademyContactComponentController,
-            controllerAs: 'vm',
-            parent: angular.element( document.body ),
-            targetEvent: $event
-        } );
-    }
-
-
-    saveModelPhoto(file, photoName):void {
-        if (!file) return;
-        this.fileUpload( file ).then( (response)=> {
-            this.newModel[photoName] = response.data.url;
-        } ).catch( (err)=> {
-            this.$log.debug( "fail upload file..." + err );
-        } )
-    }
-
-    fileUpload(file) {
-        return this.Upload.upload<{url:string}>( {
-            method: 'POST',
-            url: this.constants.photoUrl,
-            data: {file: file}
-        } );
-    }
-
-
-    submitModel():void {
-        this.newModel.$save()
-            .then( () => {
-                this.mdDialog.hide();
-                this.showModelConfirm();
-            } )
-            .catch( (err) => {
-                    this.$log.error( err );
-                }
-            );
-    }
-
-    showModelConfirm():void {
-
-        this.mdDialog.show(
-            this.mdDialog.alert()
-                .clickOutsideToClose( true )
-                .title( 'Вашу заявку стати моделлю прийнято. ' )
-                .textContent( 'На протязі дня з вами зв`яжеться координатор акодемії. Дякуємо.' )
-                .ariaLabel( 'Вашу заявку прийнято.j ' )
-                .ok( 'Закрити' )
-        );
-
-    }
-
-    showOrderDialog($event):void {
-
-        this.mdDialog.show( {
-            template: this.$templateCache.get( "app/courses/views/order.html" ).toString(),
-            clickOutsideToClose: true,
-            bindToController: true,
-            controller: AcademyContactComponentController,
-            controllerAs: 'vm',
-            parent: angular.element( document.body ),
-            targetEvent: $event,
-        } );
-
-    }
-
-    showOrderConfirm():void {
-        this.mdDialog.show(
-            this.mdDialog.alert()
-                .clickOutsideToClose( true )
-                .title( 'Вашу заявку прийнято. ' )
-                .textContent( 'На протязі дня з вами зв`яжеться координатор акодемії. Дякуємо.' )
-                .ariaLabel( 'Вашу заявку прийнято. ' )
-                .ok( 'Закрити' )
-        );
-
-    }
-
-    submitOrder(form):void {
-        this.order.$save().then( () => {
-            this.mdDialog.hide();
-            this.showOrderConfirm();
-        } )
-            .catch( (err) => {
-                this.$log.error( err );
-            } )
-            .finally( () => {
-                this.order = new this.OrderResource();
-            } );
-
-
-    }
-
-    cancel():void {
-        this.mdDialog.hide();
-    }
-
-    private getBlankModel() {
-        return new this.ModelResource( {
-            fasPhotoUrl: '../content/images/models/fas.jpg',
-            profilePhotoUrl: '../content/images/models/prifile.jpg',
-            backPhotoUrl: '../content/images/models/back.jpg',
-            fullSizePhotoUrl: '../content/images/models/fullsize.jpg'
-        } );
-    }
 }
 export let AcademyContactComponentUrl = "/academycontact";
 export let AcademyContactComponentName = 'pgAcademyContact';
