@@ -24,7 +24,7 @@ const template = `<md-toolbar>
      <img ng-src="{{contact.photo.url}}" class="md-avatar" alt="{{contact.name}}" />
 
         <div class="md-list-item-text" layout="column">
-            <h3>Назва</h3>
+            <h3>Ім'я</h3>
             <p>{{::contact.name}}</p>
         </div>
 

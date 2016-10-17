@@ -227,21 +227,10 @@ export class ProductsComponentController {
 
         this.showAnimation = $rootScope.isBigSize;
         this.productsOrder=new this.ProductOrderResource();
-
-        this.init();
     }
     
-   init() {
-
-       this.products = this.ProductResource.query();
-       this.products.$promise.then( (products) => {
-               this.products= products;
-           }
-       );
-   }
-
-
-
+  
+    
 
     $onInit() {
         this.products = this.ProductResource.query();

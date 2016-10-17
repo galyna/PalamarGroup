@@ -157,3 +157,65 @@ md-card.md-default-theme, md-card {
 }
 
 
+.social-header{
+  height: 50px;
+  width: 600px;
+  background:rgba( $primary,0.8) ;
+  color: white;
+
+  @media (max-width: $layout-breakpoint-xs) {
+    width: 300px;
+  }
+}
+
+.social-container{
+  width: 600px;
+  padding-left: 1px ;
+  background:rgba( white,0.5);
+
+  @media (max-width: $layout-breakpoint-xs) {
+    width: 300px;
+  }
+}
+
+
+.avatar {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-right: 16px;
+  margin-left: 16px;
+  border-radius: 50%;
+  box-sizing: content-box;
+  flex: none;
+  width: 80px;
+  height: 80px;
+  @media (max-width: $layout-breakpoint-xs) {
+    width: 50px;
+    height: 50px;
+    margin-right: 6px;
+    margin-left: 6px;
+  }
+}
+
+.header-contacts{
+  margin-bottom: 16px;
+
+}
+
+.footer-contacts{
+  font-weight: 900;
+  width: 600px;
+  background:rgba( white,0.5);
+
+  @media (max-width: $layout-breakpoint-xs) {
+    width: 300px;
+  }
+}
+
+.footer-man{
+  //width: 100%; height: 100%;
+
+  @media (max-width: $layout-breakpoint-xs) {
+    //
+  }
+}

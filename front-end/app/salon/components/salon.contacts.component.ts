@@ -138,33 +138,35 @@ export class SalonContactsComponentController {
                 private constants:IConstants, private $rootScope:IRootScope,
                 private salonResource:ISalonResource,private $scope:ISchedulerScope) {
 
-        this.showAnimation = $rootScope.isBigSize;
-        this.map = { center: { latitude: 49.811210, longitude: 23.974013}, zoom: 18};
-        this.contacts = this.contactResource.query( {query: {'isAcademy': 'false'}, group: 'salon'} );
-        this.contacts.$promise.then( (contacts) => {
-                this.salons = this.salonResource.query();
-
-                this.salons.$promise.then( (salons) => {
-                    this.showMap=true;
-                    salons.forEach( (salon)=> {
-                        if (!salon.contacts) {
-                            salon.contacts=[];
-                        }
-                        
-                        contacts.forEach( (contact)=> {
-                            if (contact.salon === salon._id) {
-                                salon.contacts.push( contact );
-                            }
-                        } )
-                    } )
-
-                } )
-            }
-
-        );
 
 
     }
+
+    $onInit() {
+        this.showAnimation = this.$rootScope.isBigSize;
+        this.map = { center: { latitude: 49.811210, longitude: 23.974013}, zoom: 18};
+        this.contacts = this.contactResource.query( {query: {'isAcademy': 'false'}} );
+        this.contacts.$promise.then( (contacts) => {
+            this.salons = this.salonResource.query();
+
+            this.salons.$promise.then( (salons) => {
+                this.showMap=true;
+                salons.forEach( (salon)=> {
+                    if (!salon.contacts) {
+                        salon.contacts=[];
+                    }
+
+                    contacts.forEach( (contact)=> {
+                        if (contact.salon === salon._id) {
+                            salon.contacts.push( contact );
+                        }
+                    } )
+                } )
+
+            } )
+        } );
+    }
+
 
 }
 

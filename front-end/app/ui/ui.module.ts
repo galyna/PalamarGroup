@@ -14,6 +14,7 @@ import {
     ImageInputDirectiveName, imageInputDirectiveFactory} from "./image.input.directive";
 import {courseDatesFilterName, courseDatesFilter} from "./course.dates.filter";
 import {MenuComponentName, MenuComponentOptions} from "./menu";
+import {FooterComponentName, FooterComponentOptions} from "./footer.component";
 
 export let uiModule = angular.module('ui', [
     'youtube-embed',
@@ -25,5 +26,5 @@ export let uiModule = angular.module('ui', [
     .filter(courseDatesFilterName, courseDatesFilter)
     .directive(chooseFileButtonDirectiveName, chooseFileButtonDirectiveFactory)
     .component(MenuComponentName, MenuComponentOptions)
-
+    .component(FooterComponentName, FooterComponentOptions)
     .directive(ImageInputDirectiveName, imageInputDirectiveFactory);

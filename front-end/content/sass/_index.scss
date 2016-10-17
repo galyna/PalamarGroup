@@ -307,10 +307,12 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
   .page-header-wrap {
     min-height: 100vh;
     z-index: 108;
-    color: white;
+    color: black;
     font-family: 'microsquare', sans-serif;
-    padding: 20px;
+    padding:  100px 0px 20px 0px;
+
     @media (max-width: $layout-breakpoint-xs) {
+      padding:  80px 0px 20px 0px;
       .md-display-1 {
         font-size: 28px;
       }
