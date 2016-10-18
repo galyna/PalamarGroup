@@ -3,6 +3,8 @@ import {SalonHomeComponentUrl} from "../salon/components/salon.home.component";
 import {ProductsComponentUrl} from "../salon/components/products.component";
 import {AcademyContactComponentUrl} from "../courses/components/academy.contacts.component";
 import {SalonContactsComponentUrl} from "../salon/components/salon.contacts.component";
+import {SalonTransformsComponentUrl} from "../salon/components/salon.transforms.component";
+
 import {IConstants} from "../core/core.config";
 import {IRootScope} from "../../typings";
 
@@ -35,7 +37,7 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
             </div>
             
      
-            <div flex ng-click="vm.goToURL(vm.SalonHomeComponentUrl)" class=" pg-menu-item ">ПЕРЕВТІЛЕННЯ
+            <div flex ng-click="vm.goToURL(vm.SalonTransformsComponentUrl)" class=" pg-menu-item ">ПЕРЕВТІЛЕННЯ
 
             </div>
    
@@ -65,7 +67,7 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
 
 export class MenuComponentController {
 
-    static $inject = ['$mdDialog', '$location', 'constants', 'smoothScroll','$rootScope'];
+    static $inject = ['$mdDialog', '$location', 'constants', 'smoothScroll', '$rootScope'];
     static componentName = 'MenuComponentController';
 
     showSalon:boolean
@@ -74,9 +76,10 @@ export class MenuComponentController {
     AcademyContactComponentUrl = AcademyContactComponentUrl;
     ProductsComponentUrl = ProductsComponentUrl;
     SalonContactsComponentUrl = SalonContactsComponentUrl;
+    SalonTransformsComponentUrl = SalonTransformsComponentUrl;
 
     constructor(private mdDialog:ng.material.IDialogService, private $location,
-                private constants:IConstants, private smoothScroll,private $rootScope:IRootScope) {
+                private constants:IConstants, private smoothScroll, private $rootScope:IRootScope) {
         this.showSalon = constants.showSalon;
     }
 

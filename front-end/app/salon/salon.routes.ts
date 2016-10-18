@@ -8,6 +8,7 @@ import {IConstants} from "../core/core.config";
 import {MasterComponentUrl} from "./components/master.compenent";
 import {ProductsComponentUrl} from "./components/products.component";
 import {SalonContactsComponentUrl} from "./components/salon.contacts.component";
+import {SalonTransformsComponentUrl} from "./components/salon.transforms.component";
 
 salonRoutes.$inject = ['$routeProvider', 'constants'];
 export function salonRoutes($routeProvider:ng.route.IRouteProvider, constants:IConstants) {
@@ -26,7 +27,10 @@ export function salonRoutes($routeProvider:ng.route.IRouteProvider, constants:IC
                 template: '<pg-products></pg-products>',
             } )
             .when( SalonContactsComponentUrl, {
-                template: '<pg-salon-contacts></pg-salon-contacts>',
+            template: '<pg-salon-contacts></pg-salon-contacts>',
+        } )
+            .when( SalonTransformsComponentUrl, {
+                template: '<pg-salon-transforms></pg-salon-transforms>',
             } )
         ;
     }

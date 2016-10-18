@@ -387,7 +387,10 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     -o-filter: blur(1px);
     -ms-filter: blur(1px);
     filter: blur(1px);
-    @media (min-height: 1286px) and (min-width: 1923px) {
+    @media (min-height: 1286px){
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_full.jpg") no-repeat center center fixed;
+    }
+    @media  (min-width: 1923px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_full.jpg") no-repeat center center fixed;
     }
 

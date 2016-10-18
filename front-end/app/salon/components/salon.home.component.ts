@@ -14,10 +14,10 @@ const template = `<div class="courses-details description-container" layout="col
         </div>
     </div>
     <div layout="row" layout-align="center center">
-        <div flex flex-gt-md="60" flex-md="80">
+        <div flex flex-gt-md="60" flex-md="80"  flex-gt-xs="60">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="category in $ctrl.categories"
-                         class="md-margin " flex-gt-md="22" flex-md="22" flex-gt-xs="46" flex-xs="80"
+                         class="md-margin " flex-gt-sm="22"  flex-gt-xs="46" flex-xs="80"
                          ng-click="::$ctrl.showFavors(category._id)">
                     <card-image-container>
                         <img ng-src="{{'/content/images/services/'+category._id+'.jpg'}}" class="md-card-image">
@@ -69,10 +69,10 @@ const template = `<div class="courses-details description-container" layout="col
     </div>
     <div layout="row" layout-align="center center">
 
-        <div flex flex-gt-md="60" flex-md="80">
+        <div flex flex-gt-md="60" flex-md="80"  flex-gt-xs="60">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="master in $ctrl.masters"
-                         class="md-margin " flex-gt-md="22" flex-md="22" flex-gt-xs="46" flex-xs="80"
+                         class="md-margin " flex-gt-sm="22"  flex-gt-xs="46" flex-xs="80"
                          ng-click="$ctrl.showMaster(master._id)">
                     <card-image-container>
                         <img ng-src="{{::master.photo.url}}" class="md-card-image">
@@ -117,10 +117,10 @@ const template = `<div class="courses-details description-container" layout="col
     </div>
  <div layout="row" layout-align="center center">
 
-        <div flex flex-gt-md="60" flex-md="80">
+        <div flex flex-gt-md="60" flex-md="80"  flex-gt-xs="60">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="master in $ctrl.masters"
-                         class="md-margin " flex-gt-md="22" flex-md="22" flex-gt-xs="46" flex-xs="80"
+                         class="md-margin " flex-gt-sm="22"  flex-gt-xs="46" flex-xs="80"
                          ng-click="::vm.showMediaObserver(vm.course.hearFormsPhotos, $index)">
                     <card-image-container>
                         <img ng-src="{{::master.photo.url}}" class="md-card-image">

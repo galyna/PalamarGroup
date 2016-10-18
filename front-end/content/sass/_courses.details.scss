@@ -171,7 +171,10 @@
       -ms-filter: blur(1px);
       filter: blur(1px);
 
-      @media (min-height: 1286px) and (min-width: 1923px) {
+      @media (min-height: 1286px)  {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_full.jpg") no-repeat center center fixed;
+      }
+      @media  (min-width: 1923px) {
         background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_full.jpg") no-repeat center center fixed;
       }
 
@@ -201,7 +204,11 @@
       -o-filter: blur(1px);
       -ms-filter: blur(1px);
       filter: blur(1px);
-      @media (min-height: 1286px) and (min-width: 1923px) {
+      @media (min-width: 1923px) {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_full.jpg") no-repeat center center fixed;
+      }
+
+      @media (min-height: 1286px)  {
         background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_full.jpg") no-repeat center center fixed;
       }
 
@@ -233,7 +240,10 @@
       -o-filter: blur(1px);
       -ms-filter: blur(1px);
       filter: blur(1px);
-      @media (min-height: 1286px) and (min-width: 1923px) {
+      @media (min-height: 1286px)  {
+        background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_full.jpg") no-repeat center center fixed;
+      }
+      @media  (min-width: 1923px) {
         background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_full.jpg") no-repeat center center fixed;
       }
       @media (max-height: 1286px) and (max-width: 1923px) {
@@ -358,7 +368,18 @@
 
     }
 
-    @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-md) {
+    @media (min-width: $layout-breakpoint-sm) {
+
+      &.flex-gt-sm-22 {
+
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 1 25%;
+      }
+
+    }
+
+    @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm) {
 
       &.flex-gt-xs-46 {
         max-height: 100%;
