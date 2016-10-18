@@ -1,4 +1,4 @@
-import {ITransform,ITransformResource,TransformResourceName} from "../../resources/transform.resource";
+import {ITransform, ITransformResource, TransformResourceName} from "../../resources/transform.resource";
 import {IRootScope} from "../../../typings";
 
 
@@ -34,9 +34,9 @@ const template = `<div class="courses-details description-container" layout="col
 
      <div layout="row" layout-align="center center" ng-if="transform.photos.length>0">
         <div  flex flex-gt-md="60" flex-md="80"  flex-gt-xs="60">
-            <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+         <div  class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="photo in transform.photos"
-                         class="md-margin " flex-gt-sm="22"  flex-gt-xs="46" flex-xs="80"
+                         class="md-margin " ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,transform.photos.length)}}"  flex-gt-xs="46" flex-xs="80"
                          ng-click="$ctrl.showMaster(master._id)">
                     <card-image-container>
                         <img ng-src="{{::photo.url}}" class="md-card-image">
@@ -46,6 +46,7 @@ const template = `<div class="courses-details description-container" layout="col
                     </md-card-content>
 
             </div>
+            
         </div>
          
     </div>
@@ -59,8 +60,8 @@ const template = `<div class="courses-details description-container" layout="col
 export class SalonTransformsComponentController {
 
 
-    static $inject = [TransformResourceName,"$routeParams"];
-    
+    static $inject = [TransformResourceName, "$routeParams"];
+
     showAnimation:boolean;
     transforms:ITransform[];
 
@@ -69,10 +70,17 @@ export class SalonTransformsComponentController {
     }
 
     $onInit() {
-            this.transforms=  this.TransformResource.query({sort:"order"});
-            this.transforms.$promise.then( (transforms) => {
-            } );
+        this.transforms = this.TransformResource.query( {sort: "order"} );
+        this.transforms.$promise.then( (transforms) => {
+        } );
 
+    }
+    getPictureFlex(index, length) {
+        if (length > 3  && ( length % 3 == 1 && index >= length - 4 ) ||( length % 3 == 2 && index >= length - 5 )) {
+            return 46;
+        } else {
+            return 22;
+        }
     }
 
 }

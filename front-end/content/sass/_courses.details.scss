@@ -379,6 +379,14 @@
         flex: 1 25%;
       }
 
+      &.flex-gt-sm-46 {
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 1 43%;
+      }
+
+
+
     }
 
     @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm) {

@@ -218,6 +218,7 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     margin: 0;
     padding: 0;
   }
+
   .page-header-wrap {
 
     min-height: 100vh;
@@ -305,7 +306,13 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
 
 .page-footer {
 
+  @media (max-width: $layout-breakpoint-xs) {
+    .md-margin {
+      margin-left: 0;
+      margin-right: 0;
 
+    }
+  }
   .social-header{
     height: 50px;
     width: 600px;
@@ -388,6 +395,7 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     -o-filter: blur(1px);
     -ms-filter: blur(1px);
     filter: blur(1px);
+
     @media (min-height: 1286px){
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_full.jpg") no-repeat center center fixed;
     }
@@ -395,7 +403,7 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_full.jpg") no-repeat center center fixed;
     }
 
-    @media (min-height: 900px) and (max-height: 1286px) and (max-width: 1923px) {
+    @media (max-height: 1286px) and (max-width: 1923px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_1923_1282.jpg") no-repeat center center fixed;
     }
 

@@ -57,6 +57,13 @@ export class CourseController {
 
     }
 
+    getPictureFlex(index, length) {
+        if (length > 3  && ( length % 3 == 1 && index >= length - 4 ) ||( length % 3 == 2 && index >= length - 5 )) {
+            return 46;
+        } else {
+            return 22;
+        }
+    }
 
     setSocialParams(course:ICourse) {
         this.$rootScope.socialParams.host = this.constants.host;

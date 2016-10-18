@@ -146,7 +146,7 @@
         <div  flex flex-gt-md="60" flex-md="80"  flex-gt-xs="60">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" data-aos="{{{true:'zoom-in-up', false:''}[vm.showAnimation]}}" ng-repeat="course in vm.course.hearFormsPhotos"
-                         class="md-margin " flex-gt-sm="22"  flex-gt-xs="46" flex-xs="80"
+                         class="md-margin " ng-attr-flex-gt-sm="{{vm.getPictureFlex($index,vm.course.hearFormsPhotos.length)}}"   flex-gt-xs="46" flex-xs="80"
                          ng-click="::vm.showMediaObserver(vm.course.hearFormsPhotos, $index)">
                     <card-image-container>
                         <img ng-src="{{::course.url}}" class="md-card-image">

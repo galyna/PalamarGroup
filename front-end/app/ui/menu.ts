@@ -20,45 +20,32 @@ const menuBtnSelector = "#nav-icon4";
 const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout="column" layout-align="center stretch"
 
 >
-  <div class="pg-menu-section" ng-if="vm.showSalon">
+    <div class="pg-menu-section" ng-if="vm.showSalon">
         <div class="pg-menu-section-title" ng-click="vm.courses()">САЛОН</div>
         <div layout="column" layout-gt-sm="row">
             <div flex ng-click="vm.goToURL(vm.SalonHomeComponentUrl)" class=" pg-menu-item ">ГОЛОВНА
-
             </div>
             <div flex ng-click="vm.goToURL(vm.SalonHomeComponentUrl)" class=" pg-menu-item ">ПОСЛУГИ
-
             </div>
-            
-              <div flex ng-click="vm.goToURL(vm.ProductsComponentUrl)" class=" pg-menu-item ">ПРОДУКЦІЯ
-            </div>
-            
             <div flex ng-click="vm.goToURL(vm.SalonHomeComponentUrl)" class=" pg-menu-item ">КОМАНДА
             </div>
-            
-     
             <div flex ng-click="vm.goToURL(vm.SalonTransformsComponentUrl)" class=" pg-menu-item ">ПЕРЕВТІЛЕННЯ
-
             </div>
-   
+            <div flex ng-click="vm.goToURL(vm.ProductsComponentUrl)" class=" pg-menu-item ">ПРОДУКЦІЯ
+            </div>
             <div flex ng-click="vm.goToURL(vm.SalonContactsComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
-
             </div>
-        </div>
+        </div>import {SalonTransformsComponentUrl} from "./components/salon.transforms.component";
     </div>
     <div class=" pg-menu-section">
         <div class="pg-menu-section-title" ng-click="vm.courses()">АКАДЕМІЯ</div>
         <div layout="column" layout-gt-sm="row">
             <div flex ng-click="vm.goToURL('/courses')" class=" pg-menu-item ">НАВЧАЛЬННЯ
-
             </div>
-
             <div flex ng-click="vm.goToURL(vm.CourseCalendarComponentUrl)" class=" pg-menu-item ">КАЛАЕНДАР
             </div>
-        <div flex ng-click="vm.goToURL(vm.AcademyContactComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
-
+            <div flex ng-click="vm.goToURL(vm.AcademyContactComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
             </div>
-     
         </div>
     </div>
 
