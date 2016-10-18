@@ -1,13 +1,15 @@
 /*dialog*/
 
-@media (max-width: $layout-breakpoint-md) {
+
+@media (min-width: $layout-breakpoint-sm) {
   md-dialog.md-dialog-fullscreen {
     min-height: 100%;
     min-width: 100%;
     border-radius: 0;
   }
 }
-@media (min-width: $layout-breakpoint-lg) {
+
+@media (min-width: $layout-breakpoint-md) {
   md-dialog.md-dialog-fullscreen {
     min-height: 100%;
     min-width: 100%;
@@ -69,10 +71,6 @@ md-tabs md-ink-bar {
 }
 
 
-:hov
-
-
-.cls
 
 element.style {
 }
@@ -97,11 +95,6 @@ md-toolbar + md-tabs {
 md-toolbar + md-tabs {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-}
-md-tabs {
-
- // overflow: scroll !important;
-
 }
 
 

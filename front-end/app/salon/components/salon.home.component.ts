@@ -35,7 +35,7 @@ const template = `<div class="courses-details description-container" layout="col
             <div class="fit-screen-wrap header-long " layout="column">
                 <div flex="none" layout="row" class="md-padding program-block  " layout-align=" center center">
                     <div ng-repeat="day in :: $ctrl.days track by $index">
-                        <div class="date-block md-margin " data-aos="fade-up" layout="column"
+                        <div class="date-block md-margin " ng-class="{'date-block-disabled':day.program=='закрито'}" data-aos="fade-up" layout="column"
                              layout-align=" center center">
                             <div class=" md-headline">{{ day.name}}</div>
                             <div class="md-subhead  ">{{day.program}}</div>
@@ -148,23 +148,23 @@ export class SalonHomeComponentController {
     days = [
         {
             name: "ПОНЕДІЛОК",
-            program: '09:00- 19:00',
+            program: '10:00- 19:00',
         },
         {
             name: "ВІВТОРОК",
-            program: '09:00- 19:00',
+            program: '10:00- 19:00',
         }, {
             name: "СЕРЕДА",
             program: '09:00- 19:00',
         }, {
             name: "ЧЕТВЕР",
-            program: '09:00- 19:00',
+            program: '10:00- 19:00',
         }, {
             name: "П`ЯТНИЦЯ",
-            program: '09:00- 19:00',
+            program: '10:00- 19:00',
         }, {
             name: "СУБОТА",
-            program: '09:00- 17:00',
+            program: 'закрито',
         }, {
             name: "НЕДІЛЯ",
             program: 'закрито',
