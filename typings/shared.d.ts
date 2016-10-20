@@ -27,13 +27,12 @@ declare module pg {
         export interface IMaster {
             _id:any,
             name:string,
+            description:string,
             photo:IPhoto,
+            order:number,
+            videos:IVideo[],
             services:IMasterFavor[],
             works:IPhoto[],
-            contacts:{
-                phone:string,
-                facebook:string,
-            },
             tasks:ITask[],
         }
 

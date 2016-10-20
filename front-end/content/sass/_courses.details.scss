@@ -50,12 +50,14 @@
       }
 
       .card-media {
+
         .author-name {
           position: absolute;
           bottom: 0px;
           left: 0;
           width: 100%;
           color: white;
+          max-width: 500px;
           background-color: rgba(0, 0, 0, 0.6);
         }
         @media (min-width: $layout-breakpoint-sm) {
@@ -64,6 +66,7 @@
 
         @media (min-width: $layout-breakpoint-xs) {
           height: 500px;
+          max-width: 500px;
         }
 
         @media (max-width: $layout-breakpoint-xs) {

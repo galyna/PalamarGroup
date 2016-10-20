@@ -35,6 +35,16 @@ const template:string = `<div flex layout="column">
                         <input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.master.name"
                                name="name"/>
                     </md-input-container>
+                      <md-input-container class="md-block">
+                        <label for="description">Про майстра</label>
+                        <textarea ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.master.description"
+                                  id="description" name="description" required></textarea>
+                    </md-input-container>
+                      <md-input-container>
+                            <label for="order">Порядок відображення</label>
+                            <input id="order" ng-disabled="::!$root.it.can('modifySalon')"
+                                   ng-model="$ctrl.master.order" name="order" type="number"/>
+                        </md-input-container>
                     <div>
                         <div class="md-block">
                             <md-subheader class="md-no-sticky">Послуги</md-subheader>
@@ -163,6 +173,48 @@ const template:string = `<div flex layout="column">
                 </md-card-content>
             </md-card>
         </md-tab>
+         <md-tab label="Відео" flex>
+            <md-card>
+                <md-card-content layout="row">
+                    <div flex="60">
+                        <md-subheader class="md-no-sticky">Відео</md-subheader>
+                        <div class="md-padding md-margin"
+                             ng-repeat="item in $ctrl.master.videos track by $index"
+                             ng-click="null">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
+                                               video-id="item.url"></youtube-video>
+                            </div>
+                            <div layout="column" ng-if="::$root.it.can('modifySalon')">
+                                <md-input-container class="md-block  ">
+                                    <label for="historyNme">Назва відео</label>
+                                    <input id="historyNme" ng-model="item.name" name="historyNme"/>
+                                </md-input-container>
+                                <md-input-container class="md-block  ">
+                                    <label for="ord">Порядок відображення</label>
+                                    <input id="ord" ng-model="item.order" type="number"/>
+                                </md-input-container>
+                                <md-button class="  md-raised"
+                                           ng-click="$ctrl.deleteFromList($ctrl.master.videos,item)">
+                                    Видалити
+                                </md-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div flex ng-if="::$root.it.can('modifySalon')">
+                        <md-input-container class="md-block  ">
+                            <label for="videoId">ID</label>
+                            <input id="videoId" ng-model="videoId" name="videoId"/>
+                        </md-input-container>
+                        <md-button class="md-raised" ng-if="::$root.it.can('modifySalon')"
+                                   ng-click="$ctrl.addVideo(videoId)">
+                            Додати відео
+                        </md-button>
+
+                    </div>
+                </md-card-content>
+            </md-card>
+        </md-tab>
     </md-tabs>
 </div>`;
 
@@ -244,6 +296,22 @@ export class MasterComponentController {
             this.master.services.push( this.newService );
             this.newService = null;
         }
+    }
+    
+    addVideo(id) {
+        this.master.videos.push( {
+            name: "",
+            url: id,
+            order: 0
+        } );
+        this.master.$save()
+            .then( (course) => {
+                this.$mdToast.showSimple( `майстра ${course.name} збережено` );
+            } )
+            .catch( (err)=> {
+                this.$log.error( err );
+                this.showErrorDialog();
+            } );
     }
 
     uploadPhoto(dataUrl, name, model) {

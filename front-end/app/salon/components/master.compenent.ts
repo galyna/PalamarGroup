@@ -2,46 +2,102 @@ import {MasterResourceName, IMasterResource, IMaster} from "../../resources/mast
 import {IRootScope} from "../../../typings";
 import {IAppointmentResource, AppointmentResourceName, IAppointment} from "../../resources/appointment.resource";
 
-const template = `
-
-<div class="courses-details description-container" layout="column">
+const template = `<div class=" description-container" layout="column">
 
     <!--author-->
-    <div layout="row" class="top-info" flex layout-align="center center">
-        <md-card flex-md="90"  flex-gt-md="60"  flex-xs="none" flex md-whiteframe="5">
-            <md-card-content layuot="column" layout-gt-sm="row">
-               
-                <div class=" card-media" layout="column" data-aos="{{{true:'fade-right', false:''}[$ctrl.showAnimation]}}"   data-aos-easing="ease-out-cubic"
-                     flex-gt-sm="50" layout-align="center center">
-                    <img src="{{$ctrl.master.photo.url}}"/>
-                    <div class="md-padding author-name" layout="column" layout-align="space-around center">
-                        <div class="md-headline">Майстер</div>
-                        <div class="md-headline">{{ ::$ctrl.master.name}}</div>
-                    </div>
-                </div>
-                <div  class="card-desc "  data-aos="{{{true:'fade-left', false:''}[$ctrl.showAnimation]}}"  data-aos-easing="ease-out-cubic" flex-gt-sm="50"
-                     layout="column" layout-align=" space-between center">
-                    <md-card-title layout="column" layout-align="space-around center">
-                        <md-card-title-text hide show-gt-sm="true" flex layout="column"
-                                            layout-align=" space-around center">                       
-                        </md-card-title-text>
-                    </md-card-title>
-                    <div flex layuot="column" layout-align="space-between stretch">
-                        <md-button class=" md-raised xs-selected " aria-label="Play"
-                                   ng-click="$ctrl.showAppointmentDialog($event)">
+    <div layout="row" class=" courses" flex layout-align="center center">
+         <md-card hide show-gt-xs="true" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
+                >
+                    <md-card-content layout="row" layout-align="start none">
+                        <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[$ctrl.showAnimation]}}"
+                             data-aos-easing="ease-out-cubic"
+                             flex="50"><img src="{{::$ctrl.master.photo.url}}" class="md-card-image "/>
+                        </div>
+                        <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[$ctrl.showAnimation]}}"
+                             data-aos-easing="ease-out-cubic"
+                             flex="50" layout="column" layout-align="center center">
+                            <md-card-title flex>
+                                <md-card-title-text flex layout-align="space-around center">
+                                    <div hide show-md="true" class="md-display-2">{{::$ctrl.master.name}}</div>
+                                    <div hide-md="true" class="md-display-1">{{::$ctrl.master.name}}</div>
+                                    <div class="descr-container">
+                                        <div class="md-title">{{::$ctrl.master.description}}</div>
+
+                                    </div>
+                                </md-card-title-text>
+                            </md-card-title>
+                            <md-card-actions flex="25">
+                                <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
+                                           ng-click="$ctrl.showAppointmentDialog()">
+                                    Записатись
+                                </md-button>
+                            </md-card-actions>
+                        </div>
+                    </md-card-content>
+                </md-card>
+        <div hide-gt-xs="true" layout="row" layout-align="center center">
+            <div class="overlay-bg trigger-right"></div>
+            <md-card md-whiteframe="8">
+                <md-card-content layout="column">
+                    <div class="card-media " ng-click="$ctrl.showMaster($ctrl.master._id)"><img src="{{::$ctrl.master.photo.url}}"
+                                                                                          class="md-card-image"/></div>
+                    <div class="card-desc "
+                         layout="column" layout-align="center center">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <div class="md-headline">{{::$ctrl.master.name}}</div>
+                                <div class="md-title">{{::$ctrl.master.description}}</div>
+                            </md-card-title-text>
+                        </md-card-title>
+                      
+                        <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
+                                   ng-click="$ctrl.showAppointmentDialog(product)">
                             Записатись
-                        </md-button>                    
+                        </md-button>
                     </div>
-                </div>
-            </md-card-content>
-        </md-card>
+                </md-card-content>
+
+            </md-card>
+
+        </div>
+    </div>
+    
+  <div class="courses-details" layout="row" layout-align="center center" ng-if="$ctrl.master.videos.length>0">
+        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
+            <div layout="column" layout-margin layout layout-wrap layout-align="center center">
+                <md-card md-whiteframe="6" class="  courses-videos" data-aos="{{{true:'zoom-in-up', false:''}[$ctrl.showAnimation]}}"
+                         ng-repeat="video in $ctrl.master.videos track by $index"
+                         flex>
+                    <div flex class="embed-responsive embed-responsive-16by9">
+                        <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
+                                       video-id="video.url"></youtube-video>
+                    </div>
+                    <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
+                        <span class="  md-margin">{{::video.name}}</span>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
 
     </div>
+    <div flex="100" class="courses-details" layout="row" layout-align="center center" ng-if="$ctrl.master.works.length>0 ">
+        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85">
+            <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+                <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="photo in $ctrl.master.works"
+                         class="md-margin "
+                         ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
+                         flex-gt-xs="46" flex-xs="80"
+                         ng-click="$ctrl.showMaster(master._id)">
+                    <card-image-container>
+                        <img ng-src="{{::photo.url}}" class="md-card-image">
+                    </card-image-container>
+                    <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
+                        <span class="  md-margin">{{::photo.name}}</span>
+                    </md-card-content>
+            </div>
+        </div>
+    </div>
 
-
-
-
-    
 
 </div>
 
@@ -51,7 +107,7 @@ const appointmentTemplate = `
 <md-dialog class="pop-form-dialog"  aria-label="ЗАПИСАТИСЬ НА БЛОК" flex-sm="85" flex-xs="95" flex-gt-sm="65"  layout="column" >
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools md-padding ">
-            <h2 class=" md-padding ">ЗАПИСАТИСЬ НА БЛОК</h2>
+            <h2 class=" md-padding ">ЗАПИСАТИСЬ НА ПРИЙОМ</h2>
             <span flex></span>
             <md-button class="md-icon-button" ng-click="vm.cancel()">
                 <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>
@@ -65,11 +121,6 @@ const appointmentTemplate = `
                     <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
                     <label for="name">Як до вас звертатися</label>
                     <input id="name" ng-model="vm.appointment.name" type="text" name="name">
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <md-icon md-svg-icon="communication:ic_email_24px"></md-icon>
-                    <label for="email">email</label>
-                    <input id="email" ng-model="vm.appointment.email" type="text" name="email">
                 </md-input-container>
                 <md-input-container class="md-block">
                     <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
@@ -133,7 +184,16 @@ export class MasterComponentController {
         }
     }
 
+    getPictureFlex(index, length) {
+        if (length > 3 && ( length % 3 == 1 && index >= length - 4 ) || ( length % 3 == 2 && index >= length - 5 )) {
+            return 46;
+        } else {
+            return 22;
+        }
+    }
+
     showAppointmentDialog(event) {
+        this.appointment.master=this.master;
         this.mdDialog.show( {
             template: appointmentTemplate,
             clickOutsideToClose: true,

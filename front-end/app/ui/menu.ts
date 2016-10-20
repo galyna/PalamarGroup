@@ -4,6 +4,9 @@ import {ProductsComponentUrl} from "../salon/components/products.component";
 import {AcademyContactComponentUrl} from "../courses/components/academy.contacts.component";
 import {SalonContactsComponentUrl} from "../salon/components/salon.contacts.component";
 import {SalonTransformsComponentUrl} from "../salon/components/salon.transforms.component";
+import {FavorsComponentUrl} from "../salon/components/favors.component";
+import {MastersComponentUrl} from "../salon/components/masters.component";
+
 
 import {IConstants} from "../core/core.config";
 import {IRootScope} from "../../typings";
@@ -25,9 +28,9 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
         <div layout="column" layout-gt-sm="row">
             <div flex ng-click="vm.goToURL(vm.SalonHomeComponentUrl)" class=" pg-menu-item ">ГОЛОВНА
             </div>
-            <div flex ng-click="vm.goToURL(vm.SalonHomeComponentUrl)" class=" pg-menu-item ">ПОСЛУГИ
+            <div flex ng-click="vm.goToURL(vm.FavorsComponentUrl)" class=" pg-menu-item ">ПОСЛУГИ
             </div>
-            <div flex ng-click="vm.goToURL(vm.SalonHomeComponentUrl)" class=" pg-menu-item ">КОМАНДА
+            <div flex ng-click="vm.goToURL(vm.MastersComponentUrl)" class=" pg-menu-item ">МАЙСТРИ
             </div>
             <div flex ng-click="vm.goToURL(vm.SalonTransformsComponentUrl)" class=" pg-menu-item ">ПЕРЕВТІЛЕННЯ
             </div>
@@ -35,7 +38,7 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
             </div>
             <div flex ng-click="vm.goToURL(vm.SalonContactsComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
             </div>
-        </div>import {SalonTransformsComponentUrl} from "./components/salon.transforms.component";
+        </div>
     </div>
     <div class=" pg-menu-section">
         <div class="pg-menu-section-title" ng-click="vm.courses()">АКАДЕМІЯ</div>
@@ -64,6 +67,9 @@ export class MenuComponentController {
     ProductsComponentUrl = ProductsComponentUrl;
     SalonContactsComponentUrl = SalonContactsComponentUrl;
     SalonTransformsComponentUrl = SalonTransformsComponentUrl;
+    FavorsComponentUrl = FavorsComponentUrl;
+    MastersComponentUrl=MastersComponentUrl;
+    
 
     constructor(private mdDialog:ng.material.IDialogService, private $location,
                 private constants:IConstants, private smoothScroll, private $rootScope:IRootScope) {

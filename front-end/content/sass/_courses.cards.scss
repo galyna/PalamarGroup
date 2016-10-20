@@ -16,12 +16,18 @@
       @extend .md-whiteframe-16dp;
       transform: translate(0%, -1%);
     }
-
-    @media (min-width: $layout-breakpoint-sm) {
+    @media (min-width: 1000px) {
       height: 500px;
       min-height: 500px;
-      min-width: 960px;
+      min-width: 1000px;
     }
+
+
+    @media (min-width: $layout-breakpoint-sm) {
+    height: 500px;
+    min-height: 500px;
+    min-width: 960px;
+  }
 
     @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm) {
       min-height: 300px;
@@ -40,7 +46,7 @@
 
     .card-desc {
       background: white;
-      // min-width: 300px;
+      max-width: 500px;
 
       z-index: 2;
       vertical-align: middle;
@@ -67,7 +73,7 @@
     .card-media {
       position: relative;
       z-index: 1;
-      //height: 500px;
+      max-width: 500px;
       overflow: hidden;
       padding: 0;
 
@@ -85,6 +91,7 @@
       @media (min-width: $layout-breakpoint-sm) {
         height: 500px;
         min-width: 500px;
+        max-width: 500px;
         img {
           height: 500px;
           width: 500px;
@@ -108,12 +115,22 @@
 
     .descr-container {
       max-height: 116px;
-      //width: 70%;
+
       text-align: center;
       overflow: hidden;
       text-overflow: ellipsis;
 
     }
+
+    .favor-container {
+      max-height: 216px;
+
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+    }
+
 
     .md-raised {
 

@@ -5,8 +5,6 @@ import {IConstants} from "../../core/core.config";
 import {TransformResourceName, ITransformResource, ITransform} from "../../resources/transform.resource";
 
 
-
-
 const template = `<div class="courses-details description-container" layout="column">
     <div layout="row" flex>
         <div class="page-delimiter" flex>
@@ -173,7 +171,7 @@ const template = `<div class="courses-details description-container" layout="col
 
 export class SalonHomeComponentController {
 
-    static $inject = [ MasterResourceName, 'smoothScroll', "$location", 'constants',TransformResourceName];
+    static $inject = [MasterResourceName, 'smoothScroll', "$location", 'constants', TransformResourceName];
 
     favors:IFavor[];
     masters:IMaster[];
@@ -208,13 +206,13 @@ export class SalonHomeComponentController {
 
     constructor(private masterResource:IMasterResource,
                 private smoothScroll, private $location:ng.ILocationService,
-                private constants:IConstants,private TransformResource:ITransformResource) {
+                private constants:IConstants, private TransformResource:ITransformResource) {
 
         this.masters = this.masterResource.query();
-        this.transforms = this.TransformResource.query({sort: "order", pageSize :2});
+        this.transforms = this.TransformResource.query( {sort: "order", pageSize: 2} );
         this.transforms.$promise.then( (transforms) => {
-            this.showMoreTransforms=transforms.length>2;
-            transforms.splice(1,transforms.length-2);
+            this.showMoreTransforms = transforms.length > 2;
+            transforms.splice( 1, transforms.length - 2 );
         } );
         this.categories = this.constants.favorCategories;
     }
@@ -231,17 +229,19 @@ export class SalonHomeComponentController {
     }
 
     showTransforms() {
-        this.$location.path(  `/transforms`);
+        this.$location.path( `/transforms` );
     }
-    showFavors(category:String) {
-        this.$location.path( `/favor/${category}` );
+
+    showFavors(id:String) {
+        this.$location.path( `/favors/${id}` );
     }
+
     showMaster(masterId:String) {
         this.$location.path( `/master/${masterId}` );
     }
 
     getPictureFlex(index, length) {
-        if (length > 3  && ( length % 3 == 1 && index >= length - 4 ) ||( length % 3 == 2 && index >= length - 5 )) {
+        if (length > 3 && ( length % 3 == 1 && index >= length - 4 ) || ( length % 3 == 2 && index >= length - 5 )) {
             return 46;
         } else {
             return 22;

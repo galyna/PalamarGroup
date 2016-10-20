@@ -5,12 +5,20 @@ import {PhotoSchema, IPhotoModel} from "./photo.schema";
 export interface IMasterModel extends pg.models.IMaster, Document {
     photo:IPhotoModel,
     works:IPhotoModel[],
-    _id: any;
+    _id:any;
 
 }
 
+let VideoSchema = new Schema( {
+    name: String,
+    url: String,
+    order: Number
+} );
+
 let MasterSchema = new Schema( {
     name: String,
+    description: String,
+    order: Number,
     photo: PhotoSchema,
     services: [{
         favor: {type: Schema.Types.ObjectId, ref: 'Favor'},
@@ -18,10 +26,7 @@ let MasterSchema = new Schema( {
     }],
     tasks: [{type: Schema.Types.ObjectId, ref: 'Task'}],
     works: [PhotoSchema],
-    contacts: {
-        phone: String,
-        facebook: String,
-    }
+    videos: [VideoSchema]
 } );
 
 MasterSchema.post( 'remove', (master:IMasterModel) => {

@@ -7,7 +7,7 @@ import IPhoto = pg.models.IPhoto;
 const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" ng-href="#/salon/transforms">
+            <md-button class="md-icon-button" ng-href="#/salon/transformsmongod">
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
                 <md-tooltip>Перревтілення</md-tooltip>
             </md-button>
@@ -189,7 +189,7 @@ export class TransformComponentController {
         } );
         this.transform.$save()
             .then( (course) => {
-                this.$mdToast.showSimple( `курс ${course.name} збережено` );
+                this.$mdToast.showSimple( `Перевтілення ${course.name} збережено` );
             } )
             .catch( (err)=> {
                 this.$log.error( err );
