@@ -31,7 +31,10 @@ pg-calendar {
     md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
       background-color: rgba($primary, 0.8);
 
-      .next-prev{height: 100px;width: 100px}
+      .next-prev {
+        height: 100px;
+        width: 100px
+      }
     }
     > md-content {
       overflow: hidden;
@@ -341,3 +344,85 @@ pg-calendar {
   }
 
 }
+
+
+
+.calendar_black_cell_business {
+  background: black;
+  color: white;
+
+  text-align: center;
+  vertical-align: middle;
+
+  &:hover {
+    color: black;
+    background: white;
+  }
+  .calendar_black_cell_inner {
+
+    font-size: 20px;
+    padding-top: 5px;
+    //@media (max-width: $layout-breakpoint-xs) {
+    //  font-size: 10px;
+    //}
+  }
+  .calendar_black_cell_inner:after {
+
+    content: 'Записатись'; /* Добавляем перед текстом открывающую кавычку */
+  }
+
+}
+
+.calendar_black_event {
+  background: gainsboro;
+  color: black;
+  border: none;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 14px;
+  padding-top: 5px;
+  .calendar_black_cell_inner {
+
+
+    color: black;
+    text-align: center;
+    vertical-align: middle;
+
+  }
+  .calendar_black_cell_inner:after {
+
+    content: 'Зарезервовано'; /* Добавляем перед текстом открывающую кавычку */
+  }
+}
+
+.calendar_black_colheader {
+  // border: 1px solid black;
+  .calendar_black_colheader_inner {
+    padding-top: 10px;
+    font-size: 14px;
+    color: black;
+    text-align: center;
+    vertical-align: middle;
+
+  }
+}
+
+.calendar_black_rowheader_inner {
+  padding: 5px;
+  width: 60px;
+  border: 1px solid black;
+}
+
+.calendar_black_rowheader_minutes:before {
+
+  content: ':'; /* Добавляем перед текстом открывающую кавычку */
+}
+
+.calendar_default_cornerright {
+  .calendar_default_cornerright_inner {
+    display: none;
+  }
+  display: none;
+}
+
+

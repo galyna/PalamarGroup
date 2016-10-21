@@ -16,6 +16,7 @@ import 'ngSmoothScroll';
 import 'aos';
 import 'angular-youtube-embed';
 import 'uiGmapgoogle-maps';
+import 'daypilot';
 import {uiModule} from './ui/ui.module';
 import {coursesModule} from './courses/courses.module';
 import {salonModule} from './salon/salon.module';
@@ -40,6 +41,7 @@ let app = angular.module('yuliaPalamarApp', [
     'templates',
     'youtube-embed',
     'uiGmapgoogle-maps',
+    'daypilot',
     coreModule.name,
     resourcesModule.name,
     uiModule.name,
