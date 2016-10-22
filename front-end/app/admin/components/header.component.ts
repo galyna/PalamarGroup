@@ -4,7 +4,7 @@ let template = `<md-toolbar class="md-hue-2">
         <md-button hide-gt-sm="true" ng-click="$ctrl.toggleLeftSidenav()" class="md-icon-button" aria-label="Settings">
             <md-icon md-svg-src="navigation:ic_menu_24px"></md-icon>
         </md-button>
-        <h2 >Palamar Group</h2>
+        <h2><a ng-href="/">Palamar Group</a></h2>
         <!--<input type="text" placeholder="search">-->
         <span flex></span>
         <span ng-if="$root.user">{{$root.user.email}} <md-button ng-click="$root.logout()">Logout</md-button></span>
