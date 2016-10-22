@@ -24,7 +24,7 @@ export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
             template: "<pg-admin-courses layout='column' ng-cloak></pg-admin-courses>",
             resolve: {
                 auth: [ItServiceName, (it: ItService) => it.canAsync('readAcademy')]
-            }
+            },
         })
         .when(AdminCourseComponentUrl, {
             template: "<pg-admin-course layout flex></pg-admin-course>",

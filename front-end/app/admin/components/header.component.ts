@@ -23,10 +23,7 @@ export class HeaderComponentController {
     
     toggleLeftSidenav(){
         this.$mdSidenav(LeftSidenavComponentName)
-            .toggle()
-            .then(function () {
-                // $log.debug("close LEFT is done");
-            });
+            .toggle();
     }
 }
 

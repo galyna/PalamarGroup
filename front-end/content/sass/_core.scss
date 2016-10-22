@@ -3,13 +3,13 @@
 $shadow-social: 0 1px 3px 0 rgba(white, .2), 0 1px 1px 0 rgba(white, .14), 0 2px 1px -1px rgba(white, .12) !default;
 $shadow-social-active: 0 3px 5px 0 rgba(white, .2), 0 3px 3px 0 rgba(white, .14), 0 4px 3px -3px rgba(white, .12) !default;
 @font-face {
-  font-family: 'microsquare'; /* Гарнитура шрифта */
-  src: url('../fonts/ufonts.com_microsquare-ex-regular.ttf'); /* Путь к файлу со шрифтом */
+  font-family: 'microsquare';
+  src: url('../fonts/ufonts.com_microsquare-ex-regular.ttf');
 }
 
 @font-face {
-  font-family: OpenSands; /* Гарнитура шрифта */
-  src: url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600&subset=cyrillic-ext,latin-ext'); /* Путь к файлу со шрифтом */
+  font-family: OpenSands;
+  src: url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600&subset=cyrillic-ext,latin-ext');
 }
 
 body {
@@ -23,7 +23,12 @@ body {
 
   }
 }
+
 html{ background-color: white;}
+
+:focus {
+  outline: 0;
+}
 
 *:before, *:after {
   -webkit-box-sizing: border-box;
@@ -33,9 +38,6 @@ html{ background-color: white;}
 * {
   box-sizing: border-box;
 }
-
-
-
 
 .overlay {
   position: absolute;
@@ -64,14 +66,11 @@ card-image-container {
 }
 
 .fit-screen-wrap {
-
   position: relative;
   display: table-cell;
   vertical-align: middle;
   z-index: 2;
 }
-
-
 
 ///common card
 md-card.md-default-theme, md-card {
@@ -125,16 +124,12 @@ md-card.md-default-theme, md-card {
 .description-container {
   background-color: white;
 }
-/**
- * Hide when Angular is not yet loaded and initialized
- */
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
 
-
 .embed-responsive {
-
   position: relative;
   display: block;
   height: 0;

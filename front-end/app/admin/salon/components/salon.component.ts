@@ -3,7 +3,6 @@ import {IConstants} from "../../../core/core.config";
 import {PhotoServiceName, PhotoService} from "../../../resources/photo.service";
 import IPhoto = pg.models.IPhoto;
 
-
 const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
@@ -11,7 +10,6 @@ const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveFor
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
                 <md-tooltip>Салони</md-tooltip>
             </md-button>
-            <md-subheader>Салони</md-subheader>
             <span flex></span>
             <md-button ng-if="::$root.it.can('modifySalon')" ng-click="$ctrl.cancel()" ng-disabled="saveForm.$pristine">
                 <span>Скасувати</span>
@@ -147,6 +145,7 @@ export class SalonComponentController {
         } else {
             this.originalSalon = new this.SalonResource();
             this.salon = angular.copy( this.originalSalon );
+            this.salon.photos = [];
         }
 
     }

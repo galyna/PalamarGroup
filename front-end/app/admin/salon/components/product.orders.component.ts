@@ -7,7 +7,7 @@ import {
 
 let template = `<md-toolbar>
 <div class="md-toolbar-tools">
-    <md-subheader>Замовлення продукції</md-subheader>
+    <h1>Замовлення продукції</h1>
     <span flex></span>
     <pg-admin-paging
 params="$ctrl.paging"

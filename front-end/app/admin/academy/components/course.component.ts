@@ -8,7 +8,6 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
                 <md-tooltip>Курси</md-tooltip>
             </md-button>
-            <md-subheader>Курси</md-subheader>
             <span flex></span>
             <md-button ng-if="::$root.it.can('modifyAcademy')" ng-click="$ctrl.cancel()"
                        ng-disabled="saveCourseForm.$pristine">

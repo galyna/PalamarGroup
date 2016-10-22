@@ -1,0 +1,9 @@
+- lodash, angular-simple-logger added to package.json
+- lodash path change in system-config
+- outline removed globally
+- "закрито" changed to "зачинено"
+- card text in one line
+- admin menu close after click
+- admin md-subheader changed to h1 in top toolbar
+- admin md-subheader removed on item-edit pages
+- salon creation photo upload bug

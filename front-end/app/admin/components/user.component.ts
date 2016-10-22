@@ -52,7 +52,6 @@ const template = `<form name="saveUserForm" novalidate ng-submit="$ctrl.save(sav
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
                 <md-tooltip>Користувачі</md-tooltip>
             </md-button>
-              <md-subheader>Користувачі</md-subheader>         
             <span flex></span>
             <md-button ng-click="$ctrl.cancel()" ng-disabled="saveUserForm.$pristine">
                 <span>Скасувати</span>

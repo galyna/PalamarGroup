@@ -5,7 +5,7 @@ import {IFavor} from "../../../resources/favor.resource";
 import IMasterFavor = pg.models.IMasterFavor;
 const template = `<md-toolbar>
     <div class="md-toolbar-tools">
-        <md-subheader>Записи на прийом</md-subheader>
+        <h1>Записи на прийом</h1>
         <span flex></span>
         <pg-admin-paging
                 params="$ctrl.paging"

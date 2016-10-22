@@ -44,13 +44,14 @@ let template = `<md-sidenav
 
 export class LeftSidenavComponentController {
 
-    static $inject = ['$location', '$route', ItServiceName, 'constants'];
+    static $inject = ['$mdSidenav', '$location', '$route', ItServiceName, 'constants'];
 
     componentId:string;
     items:any[];
     showSalon:boolean;
 
-    constructor(private $location:ng.ILocationService, private $route,
+    constructor(private $mdSidenav: ng.material.ISidenavService,
+                private $location:ng.ILocationService, private $route,
                 public it:ItService, private constants:IConstants) {
         this.componentId = LeftSidenavComponentName;
         this.showSalon = constants.showSalon;
@@ -181,6 +182,7 @@ export class LeftSidenavComponentController {
         if (!item.url) return;
         this.$location.url( item.url );
         this.$route.reload();
+        this.$mdSidenav(LeftSidenavComponentName).close();
     }
 
 }

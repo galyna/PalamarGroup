@@ -77,7 +77,7 @@ class EditDialogController {
 
 const template = `<md-toolbar>
     <div class="md-toolbar-tools">
-        <md-subheader>Відгуки</md-subheader>
+        <h1>Відгуки</h1>
         <span flex></span>
         <pg-admin-paging
                 params="$ctrl.paging"
