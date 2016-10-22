@@ -360,6 +360,8 @@
       color: white;
       background-color: rgba($primary, 0.7);
       overflow: hidden;
+      white-space: nowrap;
+
     }
 
     @media (min-width: $layout-breakpoint-md) {

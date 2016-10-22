@@ -2,7 +2,7 @@ import {IOrderResource, IOrder, OrderResourceName} from "../../../resources/orde
 import {PagingServiceName, PagingService} from "../../../ui/admin.paging";
 let template = `<md-toolbar>
 <div class="md-toolbar-tools">
-    <md-subheader>Записи на навчальний курс</md-subheader>
+    <h1>Записи на навчальний курс</h1>
     <span flex></span>
     <pg-admin-paging
 params="$ctrl.paging"

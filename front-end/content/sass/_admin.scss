@@ -83,3 +83,34 @@ color: #961648;
 .navigator_default_select {
   background: rgba(9, 12, 255, 0.56);
 }
+
+.pg-left-sidenav{
+  padding: 0;
+  margin: 0;
+
+  ul{
+    padding: 0;
+    margin: 0;
+  }
+
+  button{
+    width: 100%;
+    text-align: left;
+    margin: 0;
+    padding: 8px 0 8px 20px;
+  }
+
+  .pg-subitem{
+    padding-left: 40px;
+  }
+
+  .active{
+    background-color: rgba(158,158,158,0.2);
+  }
+}
+
+pg-admin-paging{
+  button.md-button{
+    background-color: rgba(0,0,0,0.1) !important;
+  }
+}

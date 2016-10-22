@@ -31,7 +31,7 @@ const template = `<md-toolbar>
             <p>{{::salon.name}}</p>
         </div>
         <div class="md-list-item-text" layout="column">
-            <h3>Алресса</h3>
+            <h3>Адреса</h3>
             <p>{{::salon.address}} </p>
         </div>
   

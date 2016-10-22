@@ -78,11 +78,11 @@ button.md-button.md-fab.side-up-btn {
 }
 
 /* Icon 4 */
-
 #nav-icon4 {
   z-index: 81;
   position: fixed;
   top: 0;
+  //outline: none;
 }
 /* Icon 1 */
 
@@ -90,7 +90,7 @@ button.md-button.md-fab.side-up-btn {
   width: 60px;
   height: 45px;
 
-  margin: 5px 0px 0px 8px;
+  margin: 5px 0 0 8px;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
@@ -297,6 +297,10 @@ button.md-button.md-fab.side-up-btn {
   &:focus {
     background-color: white;
   }
+}
+
+.md-button.md-fab, .md-button.md-fab.md-default-theme{
+  border: none;
 }
 
 .comment-btn {

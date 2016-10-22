@@ -12,7 +12,6 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
                 <md-tooltip>Контакти академії</md-tooltip>
             </md-button>          
-    <md-subheader>Контакти салону</md-subheader>
             <span flex></span>
             <md-button ng-if="::$root.it.can('modifySalon')" ng-click="$ctrl.cancel()" ng-disabled="saveForm.$pristine">
                 <span>Скасувати</span>

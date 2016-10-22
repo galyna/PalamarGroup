@@ -4,7 +4,7 @@ import {AdminCourseComponentUrl} from "./course.component";
 
 const template = `<md-toolbar>
 <div class="md-toolbar-tools">
-    <md-subheader>Курси</md-subheader>
+    <h1>Курси</h1>
     <span flex></span>
     
     </div>

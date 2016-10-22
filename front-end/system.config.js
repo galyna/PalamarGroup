@@ -28,7 +28,7 @@ System.config({
         'aos': 'node_modules/aos/dist/aos.js',
         'jwt-decode': 'node_modules/jwt-decode/build/jwt-decode.min.js',
         'daypilot': 'lib/dayPilot/daypilot-all.min.js',
-        'lodash': 'node_modules/lodash/dist/lodash.js',
+        'lodash': 'node_modules/lodash/lodash.js',
         'angular-simple-logger': 'node_modules/angular-simple-logger/dist/angular-simple-logger.min.js',
         'uiGmapgoogle-maps': 'node_modules/angular-google-maps/dist/angular-google-maps.js'
 

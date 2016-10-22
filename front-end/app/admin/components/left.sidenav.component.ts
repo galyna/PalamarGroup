@@ -23,19 +23,19 @@ let template = `<md-sidenav
         md-is-locked-open="$mdMedia('gt-sm')"
         hide-print
         class="md-sidenav-left">
-    <ul>
+    <ul class="pg-left-sidenav">
         <li ng-repeat="item in ::$ctrl.items" ng-if="item.visible()">
             <span ng-if="item.items">
                 <button class="md-button md-ink-ripple" ng-bind="item.text" ng-click="item.opened = !item.opened">
                     <md-icon md-svg-src="navigation:ic_expand_more_24px"></md-icon>          
                 </button>
             </span>
-            <span ng-if="!item.items" ng-click="$ctrl.goTo(item)">
+            <span ng-if="!item.items" ng-click="$ctrl.goTo(item)" ng-class="{active:$ctrl.active(item)}">
                 <button class="md-button md-ink-ripple" ng-bind="item.text"></button>
             </span>
             <ul ng-if="item.items && item.opened && item.visible()">
-                <li ng-repeat="item in ::item.items" ng-click="$ctrl.goTo(item)">
-                    <button class="md-button md-ink-ripple" ng-bind="item.text"></button>
+                <li ng-repeat="item in ::item.items" ng-click="$ctrl.goTo(item)"  ng-class="{active:$ctrl.active(item)}">
+                    <button class="md-button md-ink-ripple pg-subitem" ng-bind="item.text"></button>
                 </li>
             </ul>
         </li>
@@ -44,13 +44,14 @@ let template = `<md-sidenav
 
 export class LeftSidenavComponentController {
 
-    static $inject = ['$location', '$route', ItServiceName, 'constants'];
+    static $inject = ['$mdSidenav', '$location', '$route', ItServiceName, 'constants'];
 
     componentId:string;
     items:any[];
     showSalon:boolean;
 
-    constructor(private $location:ng.ILocationService, private $route,
+    constructor(private $mdSidenav: ng.material.ISidenavService,
+                private $location:ng.ILocationService, private $route: ng.route.IRouteService,
                 public it:ItService, private constants:IConstants) {
         this.componentId = LeftSidenavComponentName;
         this.showSalon = constants.showSalon;
@@ -181,6 +182,11 @@ export class LeftSidenavComponentController {
         if (!item.url) return;
         this.$location.url( item.url );
         this.$route.reload();
+        this.$mdSidenav(LeftSidenavComponentName).close();
+    }
+    
+    active(item){
+        return item.url === this.$location.path();
     }
 
 }
