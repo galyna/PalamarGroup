@@ -1,6 +1,5 @@
 /*dialog*/
 
-
 @media (min-width: $layout-breakpoint-sm) {
   md-dialog.md-dialog-fullscreen {
     min-height: 100%;
@@ -16,6 +15,7 @@
     border-radius: 0;
   }
 }
+
 @media (max-width: $layout-breakpoint-lg) {
   md-dialog.md-dialog-fullscreen {
     min-height: 100%;
@@ -29,6 +29,7 @@ md-dialog .md-actions, md-dialog md-dialog-actions {
     padding-left: 8px;
   }
 }
+
 md-dialog.md-default-theme, md-dialog {
   border-radius: 0px;
   .md-title {
@@ -57,6 +58,33 @@ md-input-container:not(.md-input-invalid).md-input-focused > md-icon {
   color: $primary;
 }
 
+md-select.md-default-theme:focus:not([disabled]) ._md-select-value._md-select-placeholder, md-select:focus:not([disabled])
+._md-select-value._md-select-placeholder {
+  border-bottom-color: $primary !important;
+}
+
+md-select.md-default-theme:focus:not([disabled]) ._md-select-value, md-select:focus:not([disabled]) ._md-select-value{
+  border-bottom-color: $primary !important;
+}
+.md-datepicker md-icon.md-default-theme, md-icon{ fill: $primary !important;}
+
+.md-default-theme .md-datepicker-open .md-datepicker-calendar-icon, .md-datepicker-open .md-datepicker-calendar-icon {
+  fill: $primary;
+}
+
+.md-default-theme .md-calendar-date.md-calendar-selected-date
+.md-calendar-date-selection-indicator, .md-calendar-date.md-calendar-selected-date
+.md-calendar-date-selection-indicator, .md-default-theme .md-calendar-date.md-focus.md-calendar-selected-date
+.md-calendar-date-selection-indicator, .md-calendar-date.md-focus.md-calendar-selected-date
+.md-calendar-date-selection-indicator {
+  background: rgba($primary, 0.8);
+}
+
+.md-default-theme .md-calendar-date.md-calendar-date-today
+.md-calendar-date-selection-indicator, .md-calendar-date.md-calendar-date-today .md-calendar-date-selection-indicator {
+  border-color: rgba($primary, 0.8);;
+}
+
 md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar), md-toolbar.md-hue-2:not(.md-menu-toolbar) {
   background-color: rgba($primary, 0.8);
 }
@@ -70,28 +98,32 @@ md-tabs md-ink-bar {
   background-color: $primary
 }
 
-
-
 element.style {
 }
+
 md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
   min-height: 248px;
 }
+
 md-tabs:not(.md-no-tab-content):not(.md-dynamic-height) {
   min-height: 248px;
 }
+
 .flex-grow {
   flex: 1 1 100%;
   box-sizing: border-box;
 }
+
 .flex-grow {
   flex: 1 1 100%;
   box-sizing: border-box;
 }
+
 md-toolbar + md-tabs {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
 md-toolbar + md-tabs {
   border-top-left-radius: 0;
   border-top-right-radius: 0;

@@ -15,8 +15,8 @@ let OrderSchema = new Schema({
     event_id: { type: Schema.Types.ObjectId, ref: 'Course'  },
     event_name: { type: String},
     event_dates: [Date],
-    answered: { type: Boolean, default: false, index: true },
-    booked: { type: Boolean, default: false },
+    status: { type: Number, default: 0}
+
 });
 
 export var Order = model<IOrderModel>('Order', OrderSchema);

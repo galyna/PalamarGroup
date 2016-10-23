@@ -16,6 +16,7 @@ let ProductOrderSchema = new Schema({
     comment: String,
     admin_comment: String,
     product: { type: Schema.Types.ObjectId, ref: 'Product'  },
+    status: { type: Number, default: 0},
     answered: { type: Boolean, default: false, index: true },
     booked: { type: Boolean, default: false },
 });

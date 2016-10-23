@@ -9,7 +9,7 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                 master_resource_1 = master_resource_1_1;
             }],
         execute: function() {
-            template = "\n<div layout=\"row\" layout-xs=\"column\">\n    <div class=\"md-padding \">\n        <daypilot-navigator style=\" width: 280px\" id=\"navi\"\n                            daypilot-config=\"$ctrl.navigatorConfig\"></daypilot-navigator>\n    </div>\n    <div flex class=\"md-padding \">\n        <daypilot-calendar id=\"week\" daypilot-config=\"$ctrl.weekConfig\"\n                           daypilot-events=\"$ctrl.events\"></daypilot-calendar>\n    </div>\n\n</div>";
+            template = "\n <div layout=\"row\" class=\"master-scheduler\" layout-xs=\"column\">\n                <div hide show-gt-xs=\"true\"  layout=\"row\" layout-align=\"center center\">\n                    <daypilot-navigator  style=\" width: 280px\" id=\"navi\"\n                                        daypilot-config=\"$ctrl.navigatorConfig\"></daypilot-navigator>\n                   \n                </div>\n                <div hide-gt-xs=\"true\" class=\"md-padding \" layout=\"row\" layout-align=\"center center\">\n                   \n                    <daypilot-navigator  style=\" width: 280px\" id=\"navis\"\n                                        daypilot-config=\"$ctrl.navigatorSmallConfig\"></daypilot-navigator>\n                </div>\n                <div flex class=\"md-padding \">\n                    <daypilot-calendar id=\"week\" daypilot-config=\"$ctrl.weekConfig\"\n                                       daypilot-events=\"$ctrl.events\"></daypilot-calendar>\n                </div>\n\n            </div>";
             AppointmentSchedulerComponentController = (function () {
                 function AppointmentSchedulerComponentController($log, $timeout, $mdDialog, MasterResource, $routeParams, $scope) {
                     this.$log = $log;
@@ -32,10 +32,12 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                 AppointmentSchedulerComponentController.prototype.init = function () {
                     this.initWeekConfig();
                     this.initNavigatorConfig();
+                    this.initNavigatorSmallConfig();
                     this.loadEvents(new Date());
                 };
                 AppointmentSchedulerComponentController.prototype.getStartAndEndOfWeek = function (date) {
                     date = new Date(date);
+                    date.setUTCHours(0);
                     var day = date.getDay(), diff = date.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
                     var start = new Date(date.setDate(diff));
                     var end = new Date(date.setDate(start.getDate() + 7));
@@ -69,9 +71,11 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                         api: 2,
                         angularAutoApply: true,
                         locale: "ru-ru",
-                        cellHeight: "36",
+                        cellHeight: "30",
+                        businessBeginsHour: "10",
                         businessEndsHour: "19",
                         hideUntilInit: true,
+                        headerDateFormat: 'dd.MM',
                         eventMoveHandling: 'Disabled',
                         heightSpec: 'BusinessHours',
                         onTimeRangeSelect: function (args) {
@@ -122,14 +126,29 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                         }
                     };
                 };
+                AppointmentSchedulerComponentController.prototype.initNavigatorSmallConfig = function () {
+                    var _this = this;
+                    this.navigatorSmallConfig = {
+                        selectMode: "week",
+                        showMonths: 1,
+                        skipMonths: 1,
+                        locale: "ru-ru",
+                        cellHeight: "40",
+                        cellWidth: "40",
+                        onTimeRangeSelected: function (args) {
+                            _this.weekConfig.startDate = args.day;
+                            _this.loadEvents(args.day);
+                        }
+                    };
+                };
                 AppointmentSchedulerComponentController.prototype.initNavigatorConfig = function () {
                     var _this = this;
                     this.navigatorConfig = {
                         selectMode: "week",
-                        showMonths: 3,
-                        skipMonths: 3,
+                        showMonths: 2,
+                        skipMonths: 2,
                         locale: "ru-ru",
-                        cellHeight: "34",
+                        cellHeight: "40.2",
                         cellWidth: "30",
                         onTimeRangeSelected: function (args) {
                             _this.weekConfig.startDate = args.day;

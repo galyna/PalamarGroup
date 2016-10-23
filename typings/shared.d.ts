@@ -41,10 +41,13 @@ declare module pg {
             name:string,
             phone:string,
             email:string,
-            date:string,
+            date:any,
+            status:number,
+            creationDate:any,
             comment:string,
             admin_comment:string,
             master?:IMaster,
+            service:IMasterFavor,
             favors?:IMasterFavor[],
             answered:boolean,
             booked:boolean
@@ -136,15 +139,14 @@ declare module pg {
             name:string,
             phone:string,
             email:string,
-            date:string,
+            date:any,
             comment:string,
             admin_comment:string,
             event_id:string,
             event_name:string,
             event_dates:string[],
-            answered:boolean,
-            booked:boolean
-        }
+            status:number
+           }
 
         export interface IUser {
             _id?:any;
@@ -213,6 +215,7 @@ declare module pg {
             email:string,
             date:string,
             comment:string,
+            status?:number,
             admin_comment:string,
             product:string,
             answered:boolean,

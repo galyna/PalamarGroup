@@ -12,10 +12,16 @@ let AppointmentSchema = new Schema( {
     name: String,
     phone: String,
     email: String,
-    date: {type: Date, default: Date.now},
+    status: { type: Number, default: 0},
+    date: {type: Date, default: null},
+    creationDate:{type: Date, default: Date.now},
     comment: String,
     admin_comment: String,
     master: {type: Schema.Types.ObjectId, ref: 'Master'},
+    service: {
+        favor: {type: Schema.Types.ObjectId, ref: 'Favor'},
+        price: Number
+    },
     favors: [{
         favor: {type: Schema.Types.ObjectId, ref: 'Favor'},
         price: Number

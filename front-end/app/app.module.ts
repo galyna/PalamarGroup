@@ -17,6 +17,7 @@ import 'aos';
 import 'angular-youtube-embed';
 import 'uiGmapgoogle-maps';
 import 'daypilot';
+
 import {uiModule} from './ui/ui.module';
 import {coursesModule} from './courses/courses.module';
 import {salonModule} from './salon/salon.module';

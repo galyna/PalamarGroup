@@ -7,17 +7,23 @@ import IMasterFavor = pg.models.IMasterFavor;
 import {ISchedulerScope} from "./master.scheduler";
 
 const template = `
-<div layout="row" layout-xs="column">
-    <div class="md-padding ">
-        <daypilot-navigator style=" width: 280px" id="navi"
-                            daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>
-    </div>
-    <div flex class="md-padding ">
-        <daypilot-calendar id="week" daypilot-config="$ctrl.weekConfig"
-                           daypilot-events="$ctrl.events"></daypilot-calendar>
-    </div>
+ <div layout="row" class="master-scheduler" layout-xs="column">
+                <div hide show-gt-xs="true"  layout="row" layout-align="center center">
+                    <daypilot-navigator  style=" width: 280px" id="navi"
+                                        daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>
+                   
+                </div>
+                <div hide-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
+                   
+                    <daypilot-navigator  style=" width: 280px" id="navis"
+                                        daypilot-config="$ctrl.navigatorSmallConfig"></daypilot-navigator>
+                </div>
+                <div flex class="md-padding ">
+                    <daypilot-calendar id="week" daypilot-config="$ctrl.weekConfig"
+                                       daypilot-events="$ctrl.events"></daypilot-calendar>
+                </div>
 
-</div>`;
+            </div>`;
 
 export class AppointmentSchedulerComponentController {
 
@@ -28,6 +34,7 @@ export class AppointmentSchedulerComponentController {
     events:IScheduler[];
     weekConfig:any;
     navigatorConfig:any;
+    navigatorSmallConfig:any;
     tasks:ITask[];
     appointment:any;
 
@@ -53,12 +60,14 @@ export class AppointmentSchedulerComponentController {
 
         this.initWeekConfig();
         this.initNavigatorConfig();
+        this.initNavigatorSmallConfig();
         this.loadEvents( new Date() );
     }
 
 
     getStartAndEndOfWeek(date):Date[] {
         date = new Date( date );
+        date.setUTCHours(0);
         var day = date.getDay(),
             diff = date.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
         var start = new Date( date.setDate( diff ) );
@@ -94,9 +103,11 @@ export class AppointmentSchedulerComponentController {
             api: 2,
             angularAutoApply: true,
             locale: "ru-ru",
-            cellHeight: "36",
+            cellHeight: "30",
+            businessBeginsHour: "10",
             businessEndsHour: "19",
             hideUntilInit: true,
+            headerDateFormat: 'dd.MM',
             eventMoveHandling: 'Disabled',
             heightSpec: 'BusinessHours',
             onTimeRangeSelect: (args)=> {
@@ -151,13 +162,28 @@ export class AppointmentSchedulerComponentController {
         };
     }
 
+    initNavigatorSmallConfig() {
+        this.navigatorSmallConfig = {
+            selectMode: "week",
+            showMonths: 1,
+            skipMonths: 1,
+            locale: "ru-ru",
+            cellHeight: "40",
+            cellWidth: "40",
+            onTimeRangeSelected: (args)=> {
+                this.weekConfig.startDate = args.day;
+                this.loadEvents( args.day );
+            }
+        };
+    }
+
     initNavigatorConfig() {
         this.navigatorConfig = {
             selectMode: "week",
-            showMonths: 3,
-            skipMonths: 3,
+            showMonths: 2,
+            skipMonths: 2,
             locale: "ru-ru",
-            cellHeight: "34",
+            cellHeight: "40.2",
             cellWidth: "30",
             onTimeRangeSelected: (args)=> {
                 this.weekConfig.startDate = args.day;

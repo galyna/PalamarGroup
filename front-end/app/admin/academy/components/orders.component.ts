@@ -1,5 +1,6 @@
 import {IOrderResource, IOrder, OrderResourceName} from "../../../resources/order.resource";
 import {PagingServiceName, PagingService} from "../../../ui/admin.paging";
+import {IConstants} from "../../../core/core.config";
 let template = `<md-toolbar>
 <div class="md-toolbar-tools">
     <h1>Записи на навчальний курс</h1>
@@ -13,12 +14,16 @@ on-next="$ctrl.next()"
     </md-toolbar>
 <md-list flex class="orders-list">
   
-    <md-list-item  class="md-2-line" ng-repeat="order in $ctrl.orders" ng-class="{answered:order.answered, approved:order.booked}" ng-click=" $ctrl.showEditOrderDialog($event, order)">
+    <md-list-item  class="md-2-line" ng-repeat="order in $ctrl.orders" ng-class="{answered:order.status==3, approved:order.status==1, bay:order.status==2}" ng-click=" $ctrl.showEditOrderDialog($event, order)">
              
-         <div ng-if="order.booked || order.answered" class="md-list-item-text" layout="column">
-         <h2 ng-if="order.booked" class="approved-titlt"> ЗАМОВЛЕННЯ ПІДТВЕРДЖЕНО</h2>     
-            <p ng-if="order.answered">Замовнику передзвонили </p>  
+          <div class="md-list-item-text" layout="column">
+            <h3>Статус</h3>
+            <p ng-if="order.status==0" >Новий</p>
+            <p class="approved-titlt" ng-if="order.status==1" >Підтвірджено</p>
+            <p  ng-if="order.status==2" >Оплачено</p>
+            <p  ng-if="order.status==3" >Відмова</p>
         </div>
+      
      
         <div class="md-list-item-text" layout="column">
             <h3>Запис створено</h3>
@@ -31,19 +36,6 @@ on-next="$ctrl.next()"
         <div class="md-list-item-text" layout="column">
             <h3>Замовник</h3>
             <p>{{::order.name||'Анонім'}} {{::order.phone||order.email||''}}</p>
-        </div>
-        <div class="md-secondary md-margin">
-        <md-checkbox  ng-model="order.answered" ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="::$root.it.can('modifyAcademy') && $ctrl.saveAnsewerOrder(order)"></md-checkbox>
-        <md-tooltip >
-         Замовнику передзвонили
-        </md-tooltip>
-         </div>
-  
-        <div class="md-secondary md-margin">
-         <md-checkbox ng-model="order.booked" ng-disabled="::!$root.it.can('modifyAcademy')" ng-click="::$root.it.can('modifyAcademy') && $ctrl.saveBookedOrder(order)"></md-checkbox>  
-          <md-tooltip md-direction="top">
-        Участь у заході підтверджено
-        </md-tooltip>
         </div>
                 
         <md-icon class="md-secondary "  ng-click="$ctrl.showEditOrderDialog($event, order)" md-svg-icon="communication:ic_message_24px"> 
@@ -98,8 +90,16 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                   
                 </md-subheader>
                 <div flex="2" layout="column" class="md-margin">
-                    <md-checkbox ng-disabled="::!$root.it.can('modifyAcademy')" ng-model="$ctrl.order.answered">Замовнику передзвонили</md-checkbox>                     
-                    <md-checkbox ng-disabled="::!$root.it.can('modifyAcademy')" ng-model="$ctrl.order.booked">Участь у заході підтверджено</md-checkbox>                    
+                  <md-input-container>
+                        <label>Статас</label>
+                        <md-select ng-if=" ::$root.it.can('modifyAcademy')" ng-model="$ctrl.order.status"
+                                   >
+                            <md-option ng-repeat="status in $ctrl.orderStatuses" ng-value="status._id">                          
+                                    <span>  {{ status.name }}  </span>
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                
                     <md-input-container>
                         <label>Коментар адміністратора</label>
                         <textarea ng-disabled="::!$root.it.can('modifyAcademy')" ng-model="$ctrl.order.admin_comment"></textarea>
@@ -121,20 +121,22 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 `;
 class EditDialogController {
 
-    static $inject = ['$mdDialog', 'order'];
+    static $inject = ['$mdDialog', 'constants', 'order'];
 
     private order:IOrder;
     private originalOrder:IOrder;
+    private orderStatuses:any;
 
-    constructor(private $mdDialog:ng.material.IDialogService, order:IOrder) {
-        this.order = angular.copy(order);
+    constructor(private $mdDialog:ng.material.IDialogService, private constants:IConstants, order:IOrder) {
+        this.order = angular.copy( order );
         this.originalOrder = order;
+        this.orderStatuses = constants.orderStatuses;
     }
 
     save($form:ng.IFormController) {
         if ($form.$valid) {
-            angular.extend(this.originalOrder, this.order);
-            this.$mdDialog.hide(this.originalOrder);
+            angular.extend( this.originalOrder, this.order );
+            this.$mdDialog.hide( this.originalOrder );
         }
     }
 
@@ -144,12 +146,12 @@ class EditDialogController {
 }
 export class AdminOrdersController {
 
-    static $inject = ["$filter", "$mdDialog", "$mdToast", "$mdMedia", OrderResourceName, PagingServiceName];
+    static $inject = ["$filter", "$mdDialog", "$mdToast", "$mdMedia", OrderResourceName, PagingServiceName,];
 
     orders:IOrder[];
     paging:any;
     private order:IOrder;
-    private originalOrder:IOrder;
+
 
     constructor(private $filter:ng.IFilterService, private $mdDialog:ng.material.IDialogService,
                 private $mdToast:ng.material.IToastService,
@@ -178,7 +180,6 @@ export class AdminOrdersController {
     }
 
 
-
     saveOrder(order:IOrder) {
 
         order.$save().then( () => {
@@ -191,20 +192,11 @@ export class AdminOrdersController {
         ;
     }
 
-    saveAnsewerOrder(order:IOrder) {
-        order.answered = !order.answered;
-        this.saveOrder( order );
-    }
-
-    saveBookedOrder(order:IOrder) {
-        order.booked = !order.booked;
-        this.saveOrder( order );
-    }
-
+   
     showDeleteDialog(ev, order:IOrder) {
         let confirm = this.$mdDialog.confirm()
             .title( "Підтвердження дії" )
-            .textContent( `Ви дійсно бажаєте видалити Запис ${order.name|| ''}?` )
+            .textContent( `Ви дійсно бажаєте видалити Запис ${order.name || ''}?` )
             .ariaLabel( "Підтвердження дії" )
             .targetEvent( ev )
             .ok( 'Так' )
@@ -258,7 +250,7 @@ export class AdminOrdersController {
     }
 
     private showPage(page = 1) {
-        this.orders = this.orderResource.query( {page: page, sort: { "answered": 1,"booked":-1,"date":-1}},
+        this.orders = this.orderResource.query( {page: page, sort: {"status": 1,  "date": -1}},
             (res, headers) => {
                 let {total, page, perPage} = this.pagingService.parseHeaders( headers );
                 this.pagingService.update( {page: page, perPage: perPage, total: total} );

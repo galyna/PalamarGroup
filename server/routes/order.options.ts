@@ -8,7 +8,9 @@ export let orderOptions: IOptions = {
     preUpdate: [auth, currentUser.is( 'academyModerator' )],
     preDelete: [auth, currentUser.is( 'academyModerator' )],
     postCreate(req:any, res, next) {
-        if (process.env.TYPE !== 'prod') return console.trace('Not prod env, skipping sms sending');
+        if (process.env.TYPE !== 'prod'){
+            next();
+            return console.log('Not prod env, skipping sms sending');}
         const result = <IOrderModel>req.erm.result;
         //we're not waiting for result here, user don't need it
         sms.sendAdminNotification(` ${result.phone}`).catch(() => {});

@@ -5,6 +5,7 @@ export interface IConstants {
     uploadDir:string,
     photoUrl:string,
     favorCategories:any[],
+    orderStatuses:any[],
     showSalon:boolean
 }
 
@@ -14,6 +15,11 @@ export let constants:IConstants = {
     apiUrl: '/api',
     uploadDir: '/content/uploads',
     photoUrl: '/api/photo',
+    orderStatuses: [
+        {_id: 0, name: "Новий"},
+        {_id: 1, name: "Підтвірджено"},
+        {_id: 2, name: "Оплачено"},
+        {_id: 3, name: "Відмова"}],
     favorCategories: [
         {_id: "hear", name: "ПЕРУКАРСЬКІ ПОСЛУГИ"},
         {_id: "neils", name: "НІГТЬОВА ЕСТЕТИКА"},

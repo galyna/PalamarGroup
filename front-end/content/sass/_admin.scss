@@ -15,7 +15,7 @@
 }
 
 .approved-titlt {
-color: #961648;
+  color: #961648;
 }
 
 .cropArea {
@@ -58,6 +58,15 @@ color: #961648;
         font-weight: bold !important;
       }
     }
+    &.bay {
+      color: white !important;;
+      background: rgba(8, 8, 131, 0.94);
+      h3, p {
+        font-weight: bold !important;
+        color: white !important;;
+      }
+    }
+
   }
 }
 
@@ -84,33 +93,33 @@ color: #961648;
   background: rgba(9, 12, 255, 0.56);
 }
 
-.pg-left-sidenav{
+.pg-left-sidenav {
   padding: 0;
   margin: 0;
 
-  ul{
+  ul {
     padding: 0;
     margin: 0;
   }
 
-  button{
+  button {
     width: 100%;
     text-align: left;
     margin: 0;
     padding: 8px 0 8px 20px;
   }
 
-  .pg-subitem{
+  .pg-subitem {
     padding-left: 40px;
   }
 
-  .active{
-    background-color: rgba(158,158,158,0.2);
+  .active {
+    background-color: rgba(158, 158, 158, 0.2);
   }
 }
 
-pg-admin-paging{
-  button.md-button{
-    background-color: rgba(0,0,0,0.1) !important;
+pg-admin-paging {
+  button.md-button {
+    background-color: rgba(0, 0, 0, 0.1) !important;
   }
 }
