@@ -245,8 +245,8 @@ class AppointmentDialogController {
 }
 export class FavorsComponentController {
 
-    static $inject = [FavorResourceName, 'constants', "$routeParams", "$location", MasterResourceName, '$mdDialog', '$rootScope', "$log",
-        AppointmentResourceName];
+    static $inject = [FavorResourceName, 'constants', "$routeParams", "$location", MasterResourceName,
+        '$mdDialog', '$rootScope', "$log", AppointmentResourceName];
 
     favors:any;
     masters:IMaster[];
@@ -275,7 +275,7 @@ export class FavorsComponentController {
 
                 } )
             } );
-            this.MasterResource.query( {populate: 'services.favor'} ).$promise
+            this.MasterResource.query( {populate: 'services.favor',sort:"order"} ).$promise
                 .then( (masters) => {
                     this.masters = masters.filter( (master)=> {
 
