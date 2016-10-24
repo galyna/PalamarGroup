@@ -274,16 +274,14 @@ class AppointmentDialogController {
 }
 export class MasterComponentController {
 
-    static $inject = ["$log", "$routeParams", MasterResourceName, '$mdDialog', '$routeParams', AppointmentResourceName];
+    static $inject = ["$log", "$routeParams", MasterResourceName, '$mdDialog', '$rootScope', AppointmentResourceName];
     master:IMaster;
     private appointment:IAppointment;
     events:IScheduler[];
     weekConfig:any;
     navigatorConfig:any;
     navigatorSmallConfig:any;
-    dayHour:any;
-    dayHours:['10:00','10:30','11:00','11:30','12:00','12:30','13:00' ,'13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00' ,'13:30','18:00']
-
+  
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private MasterResource:IMasterResource, private mdDialog:ng.material.IDialogService,
                 private $rootScope:IRootScope, private AppointmentResource:IAppointmentResource) {

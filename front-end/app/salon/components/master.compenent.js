@@ -227,7 +227,7 @@ System.register(["../../resources/master.resource", "../../resources/appointment
                         .ariaLabel('Вашу заявку прийнято. ')
                         .ok('Закрити'));
                 };
-                MasterComponentController.$inject = ["$log", "$routeParams", master_resource_1.MasterResourceName, '$mdDialog', '$routeParams', appointment_resource_1.AppointmentResourceName];
+                MasterComponentController.$inject = ["$log", "$routeParams", master_resource_1.MasterResourceName, '$mdDialog', '$rootScope', appointment_resource_1.AppointmentResourceName];
                 return MasterComponentController;
             }());
             exports_1("MasterComponentController", MasterComponentController);

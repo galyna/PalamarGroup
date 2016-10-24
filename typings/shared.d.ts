@@ -49,8 +49,7 @@ declare module pg {
             master?:IMaster,
             service:IMasterFavor,
             favors?:IMasterFavor[],
-            answered:boolean,
-            booked:boolean
+            
         }
 
         export interface ITask {
@@ -218,8 +217,7 @@ declare module pg {
             status:number,
             admin_comment:string,
             product:string,
-            answered:boolean,
-            booked:boolean
+           
         }
 
         export interface ISalon {
