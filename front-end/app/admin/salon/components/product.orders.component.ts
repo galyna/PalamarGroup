@@ -4,6 +4,7 @@ import {
     IProductOrder,
     IProductOrderResource
 } from "../../../resources/product.order.resource";
+import {IConstants} from "../../../core/core.config";
 
 let template = `<md-toolbar>
 <div class="md-toolbar-tools">
@@ -16,17 +17,37 @@ on-next="$ctrl.next()"
     ></pg-admin-paging>
     </div>
     </md-toolbar>
+<div flex="100" layout="row" layout-xs="column" class="md-padding">
+    <div  class=" md-margin"  layout="row">
+        <label>Від</label>
+        <md-datepicker  placeholder="Дата" flex ng-model="$ctrl.start"></md-datepicker>
+    </div>
+    <div class=" md-margin"  layout="row">
+        <label>До</label>
+        <md-datepicker  placeholder="Дата" flex ng-model="$ctrl.end"></md-datepicker>
+    </div>   
+        <md-button class="md-raised md-margin" ng-click="$ctrl.Search()">Пошук</md-button>
+    
+</div>
 <md-list flex class="orders-list">
   
-    <md-list-item  class="md-2-line" ng-repeat="order in $ctrl.orders" ng-class="{answered:order.answered, approved:order.booked}" ng-click=" $ctrl.showEditOrderDialog($event, order)">
-        <div ng-if="order.booked || order.answered" class="md-list-item-text" layout="column">
-         <h2 ng-if="order.booked" class="approved-titlt"> ЗАМОВЛЕННЯ ПІДТВЕРДЖЕНО</h2>     
-            <p ng-if="order.answered">Замовнику передзвонили </p>  
+    <md-list-item  class="md-2-line" ng-repeat="order in $ctrl.orders"   ng-class="{answered:order.status==3, approved:order.status==1, bay:order.status==2}" ng-click=" $ctrl.showEditOrderDialog($event, order)">
+            <div class="md-list-item-text" style='min-width: 130px;' layout="column">
+            <h3>Статус</h3>
+            <p ng-if="order.status==0">Новий</p>
+            <p class="approved-titlt" ng-if="order.status==1">Підтвірджено</p>
+            <p ng-if="order.status==2">Оплачено</p>
+            <p ng-if="order.status==3">Відмова</p>
         </div>
+
         <img ng-src="{{order.product.photo.url}}" class="md-avatar" alt="{{master.order}}" />
         <div class="md-list-item-text" layout="column">
-            <h3>Замовлення на продукт</h3>
+          
             <p>{{::$ctrl.getOrderTitle(order)}}</p>
+        </div>
+         <div class="md-list-item-text" layout="column">
+            <h3>Створено</h3>
+             <p>{{order.date|date:'dd.MM.yyyy'}}</p>
         </div>
          <div class="md-list-item-text" layout="column">
             <h3>Ціна</h3>
@@ -37,20 +58,7 @@ on-next="$ctrl.next()"
             <p>{{::order.name||'Анонім'}} {{::order.phone||order.email||''}}</p>
         </div>
 
-        <div class="md-secondary md-margin">
-        <md-checkbox  ng-model="order.answered" ng-disabled="::!$root.it.can('modifySalon')" ng-click="::$root.it.can('modifySalon') && $ctrl.saveAnsewerOrder(order)"></md-checkbox>
-        <md-tooltip >
-         Замовнику передзвонили
-        </md-tooltip>
-         </div>
-  
-        <div class="md-secondary md-margin">
-         <md-checkbox ng-model="order.booked" ng-disabled="::!$root.it.can('modifySalon')" ng-click="::$root.it.can('modifySalon') && $ctrl.saveBookedOrder(order)"></md-checkbox>  
-          <md-tooltip md-direction="top">
-       Покупку підтверджено
-        </md-tooltip>
-        </div>
-                
+       
         <md-icon class="md-secondary "  ng-click="$ctrl.showEditOrderDialog($event, order)" md-svg-icon="communication:ic_message_24px"> 
          <md-tooltip > Деталі</md-tooltip></md-icon>
           
@@ -106,8 +114,15 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                   
                 </md-subheader>
                 <div flex="2" layout="column" class="md-margin">
-                    <md-checkbox ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.order.answered">Замовнику передзвонили</md-checkbox>                     
-                    <md-checkbox ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.order.booked">Покупку підтверджено</md-checkbox>                    
+                    <md-input-container>
+                        <label>Статас</label>
+                        <md-select ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.order.status"
+                                   >
+                            <md-option ng-repeat="status in $ctrl.orderStatuses" ng-value="status._id">                          
+                                    <span>  {{ status.name }}  </span>
+                            </md-option>
+                        </md-select>
+                    </md-input-container>                   
                     <md-input-container>
                         <label>Коментар адміністратора</label>
                         <textarea ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.order.admin_comment"></textarea>
@@ -130,14 +145,16 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 
 class EditDialogController {
 
-    static $inject = ['$mdDialog', 'order'];
+    static $inject = ['$mdDialog', 'constants', 'order'];
 
     private order:IProductOrder;
     private originalOrder:IProductOrder;
+    private orderStatuses:any;
 
-    constructor(private $mdDialog:ng.material.IDialogService, order:IProductOrder) {
+    constructor(private $mdDialog:ng.material.IDialogService, private constants:IConstants, order:IProductOrder) {
         this.order = angular.copy( order );
         this.originalOrder = order;
+        this.orderStatuses = constants.orderStatuses;
     }
 
     save($form:ng.IFormController) {
@@ -160,11 +177,23 @@ export class ProductOrdersComponentController {
     orders:IProductOrder[];
     paging:any;
     private order:IProductOrder;
-
+    private start:Date;
+    private end:Date;
 
     constructor(private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService,
                 private orderResource:IProductOrderResource, private pagingService:PagingService) {
+        this.setDefaultDates();
+    }
 
+    setDefaultDates() {
+        this.end= new Date();
+        this.start= new Date();
+        this.start.setMonth(this.start.getMonth() - 1);
+        this.start.setHours(0,0,0)
+    }
+
+    Search() {
+        this.showPage();
     }
 
     $onInit() {
@@ -200,15 +229,7 @@ export class ProductOrdersComponentController {
         ;
     }
 
-    saveAnsewerOrder(order:IProductOrder) {
-        order.answered = !order.answered;
-        this.saveOrder( order );
-    }
-
-    saveBookedOrder(order:IProductOrder) {
-        order.booked = !order.booked;
-        this.saveOrder( order );
-    }
+    
 
     showDeleteDialog(ev, order:IProductOrder) {
         let confirm = this.$mdDialog.confirm()
@@ -268,7 +289,8 @@ export class ProductOrdersComponentController {
         this.orders = this.orderResource.query(
             {
                 page: page,
-                sort: {"answered": 1, "booked": -1, "date": -1},
+                sort: {"status": 1, "date": -1},
+                query:{'date': {"$lte":this.end.toJSON(),"$gte":this.start.toJSON()}},
                 populate: 'product'
             },
             (res, headers) => {

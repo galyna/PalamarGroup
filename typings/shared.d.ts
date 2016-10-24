@@ -215,7 +215,7 @@ declare module pg {
             email:string,
             date:string,
             comment:string,
-            status?:number,
+            status:number,
             admin_comment:string,
             product:string,
             answered:boolean,

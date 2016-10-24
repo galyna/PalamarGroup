@@ -164,12 +164,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                     <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
                     <label for="name">Як до вас звертатися</label>
                     <input id="name" ng-model="vm.productsOrder.name" type="text" name="name">
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <md-icon md-svg-icon="communication:ic_email_24px"></md-icon>
-                    <label for="email">email</label>
-                    <input id="email" ng-model="vm.productsOrder.email" type="text" name="email">
-                </md-input-container>
+                </md-input-container>                
                 <md-input-container class="md-block">
                     <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
                     <label for="phone">Телефон</label>

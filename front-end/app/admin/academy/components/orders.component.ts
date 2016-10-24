@@ -12,20 +12,17 @@ let template = `<md-toolbar>
         ></pg-admin-paging>
     </div>
 </md-toolbar>
-<div flex="100" layout="row" layout-xs="columm" class="md-padding">
-    <div flex="30" flex-xs="100" class="order-picker-conteiner " layout="row">
+<div flex="100" layout="row" layout-xs="column" class="md-padding">
+    <div  class=" md-margin"  layout="row">
         <label>Від</label>
-        <md-datepicker class="order-dete-pcker" placeholder="Дата" flex ng-model="$ctrl.start"></md-datepicker>
-
-
+        <md-datepicker  placeholder="Дата" flex ng-model="$ctrl.start"></md-datepicker>
     </div>
-    <div flex="30" flex-xs="100" class="order-picker-conteiner " layout="row">
+    <div class=" md-margin"  layout="row">
         <label>До</label>
-        <md-datepicker class="order-dete-pcker" placeholder="Дата" flex ng-model="$ctrl.end"></md-datepicker>
-    </div>
-    <div flex="30" flex-xs="100" class="order-picker-conteiner " layout="row">
-        <md-button class="md-raised" ng-click="$ctrl.Search()">Пошук</md-button>
-    </div>
+        <md-datepicker  placeholder="Дата" flex ng-model="$ctrl.end"></md-datepicker>
+    </div>   
+        <md-button class="md-raised md-margin" ng-click="$ctrl.Search()">Пошук</md-button>
+    
 </div>
 <md-list flex class="orders-list">
 
@@ -33,7 +30,7 @@ let template = `<md-toolbar>
                   ng-class="{answered:order.status==3, approved:order.status==1, bay:order.status==2}"
                   ng-click=" $ctrl.showEditOrderDialog($event, order)">
 
-        <div class="md-list-item-text" layout="column">
+        <div class="md-list-item-text" style='min-width: 130px;' layout="column">
             <h3>Статус</h3>
             <p ng-if="order.status==0">Новий</p>
             <p class="approved-titlt" ng-if="order.status==1">Підтвірджено</p>
@@ -112,7 +109,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                 <div flex="2" layout="column" class="md-margin">
                   <md-input-container>
                         <label>Статас</label>
-                        <md-select ng-if=" ::$root.it.can('modifyAcademy')" ng-model="$ctrl.order.status"
+                        <md-select ng-disabled="::!$root.it.can('modifyAcademy')" ng-model="$ctrl.order.status"
                                    >
                             <md-option ng-repeat="status in $ctrl.orderStatuses" ng-value="status._id">                          
                                     <span>  {{ status.name }}  </span>
@@ -183,11 +180,15 @@ export class AdminOrdersController {
                 private $mdMedia:ng.material.IMedia, private orderResource:IOrderResource,
                 private pagingService:PagingService) {
        
+        this.setDefaultDates();
+       
+
+    }
+    setDefaultDates() {
         this.end= new Date();
         this.start= new Date();
         this.start.setMonth(this.start.getMonth() - 1);
         this.start.setHours(0,0,0)
-
     }
 
     private showPage(page = 1) {

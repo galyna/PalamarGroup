@@ -3,6 +3,7 @@ import {IMaster, MasterResourceName, IMasterResource, ITask, IScheduler} from ".
 import {PagingServiceName, PagingService} from "../../../ui/admin.paging";
 import {IFavor} from "../../../resources/favor.resource";
 import IMasterFavor = pg.models.IMasterFavor;
+import {IConstants} from "../../../core/core.config";
 const template = `<md-toolbar>
     <div class="md-toolbar-tools">
         <h1>Записи на прийом</h1>
@@ -14,17 +15,32 @@ const template = `<md-toolbar>
         ></pg-admin-paging>
     </div>
 </md-toolbar>
+<div flex="100" layout="row" layout-xs="column" class="md-padding">
+    <div  class=" md-margin"  layout="row">
+        <label>Від</label>
+        <md-datepicker  placeholder="Дата" flex ng-model="$ctrl.start"></md-datepicker>
+    </div>
+    <div class=" md-margin"  layout="row">
+        <label>До</label>
+        <md-datepicker  placeholder="Дата" flex ng-model="$ctrl.end"></md-datepicker>
+    </div>   
+        <md-button class="md-raised md-margin" ng-click="$ctrl.Search()">Пошук</md-button>
+    
+</div>
 <md-list flex class="orders-list">
 
     <md-list-item class="md-2-line" ng-repeat="appointment in $ctrl.appointments"
-                  ng-class="{answered:appointment.answered, approved:appointment.booked}"
+                  ng-class="{answered:appointment.appointment==3, approved:appointment.status==1, bay:appointment.status==2}"
                   ng-click=" $ctrl.showEditOrderDialog($event, appointment)">
         
-            
-         <div ng-if="appointment.booked || appointment.answered" class="md-list-item-text" layout="column">
-         <h2 ng-if="appointment.booked" class="approved-titlt"> ЗАМОВЛЕННЯ ПІДТВЕРДЖЕНО</h2>     
-            <p ng-if="appointment.answered">Замовнику передзвонили </p>  
+            <div class="md-list-item-text" style='min-width: 130px;'layout="column">
+            <h3>Статус</h3>
+            <p ng-if="appointment.status==0">Новий</p>
+            <p class="approved-titlt" ng-if="appointment.status==1">Підтвірджено</p>
+            <p ng-if="appointment.status==2">Оплачено</p>
+            <p ng-if="appointment.status==3">Відмова</p>
         </div>
+
      
         <div class="md-list-item-text" layout="column">
             <h3>Запис створено</h3>
@@ -35,22 +51,7 @@ const template = `<md-toolbar>
             <h3>Замовник</h3>
             <p>{{::appointment.name||'Анонім'}} {{::appointment.phone||appointment.email||''}}</p>
         </div>
-        <div class="md-secondary md-margin">
-            <md-checkbox ng-model="appointment.answered" ng-disabled="::!$root.it.can('modifySalon')"
-                         ng-click="::$root.it.can('modifySalon') && $ctrl.saveAnsewerOrder(appointment)"></md-checkbox>
-            <md-tooltip>
-                Замовнику передзвонили
-            </md-tooltip>
-        </div>
-
-        <div class="md-secondary md-margin">
-            <md-checkbox ng-model="appointment.booked" ng-disabled="::!$root.it.can('modifySalon')"
-                         ng-click="::$root.it.can('modifySalon') && $ctrl.saveBookedOrder(appointment)"></md-checkbox>
-            <md-tooltip md-direction="top">
-                ЗАПИС ПІДТВЕРДЖЕНО
-            </md-tooltip>
-        </div>
-
+       
         <md-icon class="md-secondary " ng-click="$ctrl.showEditOrderDialog($event, appointment)"
                  md-svg-icon="communication:ic_message_24px">
             <md-tooltip> Деталі</md-tooltip>
@@ -183,18 +184,15 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 
                         <md-subheader class="md-no-sticky">Адміністративна частина
                         </md-subheader>
-                        <md-input-container layout="row" class="md-block">
-                            <md-checkbox ng-disabled="::!$root.it.can('modifySalon')"
-                                         ng-model="$ctrl.appointment.answered">
-                                Замовнику передзвонили
-                            </md-checkbox>
-                        </md-input-container>
-                        <md-input-container layout="row" class="md-block">
-                            <md-checkbox ng-disabled="::!$root.it.can('modifySalon')"
-                                         ng-model="$ctrl.appointment.booked">
-                                ЗАМОВЛЕННЯ ПІДТВЕРДЖЕНО
-                            </md-checkbox>
-                        </md-input-container>
+                        <md-input-container>
+                        <label>Статас</label>
+                        <md-select ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.appointment.status"
+                                   >
+                            <md-option ng-repeat="status in $ctrl.orderStatuses" ng-value="status._id">                          
+                                    <span>  {{ status.name }}  </span>
+                            </md-option>
+                        </md-select>
+                    </md-input-container>    
 
                         <md-input-container>
                             <label>Коментар адміністратора</label>
@@ -227,15 +225,17 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 `;
 class EditDialogController {
 
-    static $inject = ['$mdDialog', "$mdToast", 'appointment'];
+    static $inject = ['$mdDialog', "$mdToast", 'constants','appointment'];
     private masters:IMaster[];
     private favors:any[];
     private newService:IMasterFavor;
     private appointment:IAppointment;
     private originalAppointment:IAppointment;
     dayHour:any;
+    private orderStatuses:any;
 
-    constructor(private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService, appointment:IAppointment) {
+    constructor(private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService,
+                private constants:IConstants, appointment:IAppointment) {
         this.appointment = angular.copy( appointment );
         this.originalAppointment = appointment;
         this.masters.forEach( (m)=> {
@@ -244,6 +244,7 @@ class EditDialogController {
             }
         } )
         this.setTime();
+        this.orderStatuses = constants.orderStatuses;
     }
 
     setTime() {
@@ -303,12 +304,25 @@ export class AppointmentsComponentController {
     masters:IMaster[];
     appointments:IAppointment[];
     paging:any;
+    private start:Date;
+    private end:Date;
 
     constructor(private AppointmentResource:IAppointmentResource, private pagingService:PagingService,
                 private $filter:ng.IFilterService, private $mdDialog:ng.material.IDialogService,
                 private $mdToast:ng.material.IToastService, private MasterResource:IMasterResource,
                 private $location:ng.ILocationService) {
+        this.setDefaultDates();
+    }
 
+    setDefaultDates() {
+        this.end= new Date();
+        this.start= new Date();
+        this.start.setMonth(this.start.getMonth() - 1);
+        this.start.setHours(0,0,0)
+    }
+
+    Search() {
+        this.showPage();
     }
 
     openTask(masterId:string) {
@@ -331,7 +345,8 @@ export class AppointmentsComponentController {
     private showPage(page = 1) {
         this.appointments = this.AppointmentResource.query( {
                 page: page,
-                sort: {"answered": 1, "booked": -1, "creationDate": -1},
+                sort: {"status": 1, "creationDate": -1},
+                query:{'creationDate': {"$lte":this.end.toJSON(),"$gte":this.start.toJSON()}},
                 populate: 'favors.favor'
             },
             (res, headers) => {
@@ -358,15 +373,7 @@ export class AppointmentsComponentController {
         } ).then( (appointment) => this.saveAppointment( appointment ) );
     }
 
-    saveAnsewerOrder(appointment:IAppointment) {
-        appointment.answered = !appointment.answered;
-        this.saveAppointment( appointment );
-    }
-
-    saveBookedOrder(appointment:IAppointment) {
-        appointment.booked = !appointment.booked;
-        this.saveAppointment( appointment );
-    }
+   
 
     saveAppointment(appointment:IAppointment) {
 
