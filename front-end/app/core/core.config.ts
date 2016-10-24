@@ -32,8 +32,8 @@ export function debugConfig($compileProvider) {
     $compileProvider.debugInfoEnabled( false );
 }
 
-materialConfig.$inject = ['$mdIconProvider'];
-export function materialConfig($mdIconProvider:ng.material.IIconProvider) {
+materialConfig.$inject = ['$mdIconProvider','$mdDateLocaleProvider'];
+export function materialConfig($mdIconProvider:ng.material.IIconProvider,$mdDateLocaleProvider) {
     $mdIconProvider
         .iconSet( "action", "/content/images/icons/svg-sprite-action.svg" )
         .iconSet( "social", "/content/images/icons/svg-sprite-social.svg" )
@@ -41,4 +41,24 @@ export function materialConfig($mdIconProvider:ng.material.IIconProvider) {
         .iconSet( "content", "/content/images/icons/svg-sprite-content.svg" )
         .iconSet( "navigation", "/content/images/icons/svg-sprite-navigation.svg" )
         .iconSet( "av", "/content/images/icons/svg-sprite-av.svg" )
+
+    // Example of a French localization.
+    $mdDateLocaleProvider.months = ['Січень', 'Лютий', 'Березень',"Квітель",'Травень','Липень', 'Червень', 'Серпень',"Вересень" ,'Жовтень', 'Листопад', 'Грудень'];
+    $mdDateLocaleProvider.shortMonths = ['Січ', 'Лют', 'Бер',"Кві",'Тра','Лип', 'Чер', 'Сер',"Вер" ,'Жов', 'Лис', 'Гру'];
+    $mdDateLocaleProvider.days = ['Понеділок', 'Вівторок', 'Середа',"Четвер","П'ятниця", 'Субота', 'Неділя' ];
+    $mdDateLocaleProvider.shortDays = ['Пон', 'Вів', 'Сер',"Чет","П'ят", 'Суб', 'Нед'];
+
+    // Can change week display to start on Monday.
+    $mdDateLocaleProvider.firstDayOfWeek = 1;
+
+
+    $mdDateLocaleProvider.formatDate = function(date) {
+        return date.toLocaleDateString();
+    };
+    $mdDateLocaleProvider.msgCalendar = 'Календар';
+    $mdDateLocaleProvider.msgOpenCalendar = 'Відкрийте календар';
+
+    // You can also set when your calendar begins and ends.
+    $mdDateLocaleProvider.firstRenderableDate = new Date(1776, 6, 4);
+  
 }

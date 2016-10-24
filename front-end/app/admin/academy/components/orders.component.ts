@@ -2,34 +2,51 @@ import {IOrderResource, IOrder, OrderResourceName} from "../../../resources/orde
 import {PagingServiceName, PagingService} from "../../../ui/admin.paging";
 import {IConstants} from "../../../core/core.config";
 let template = `<md-toolbar>
-<div class="md-toolbar-tools">
-    <h1>Записи на навчальний курс</h1>
-    <span flex></span>
-    <pg-admin-paging
-params="$ctrl.paging"
-on-prev="$ctrl.prev()"
-on-next="$ctrl.next()"
-    ></pg-admin-paging>
+    <div class="md-toolbar-tools">
+        <h1>Записи на навчальний курс</h1>
+        <span flex></span>
+        <pg-admin-paging
+                params="$ctrl.paging"
+                on-prev="$ctrl.prev()"
+                on-next="$ctrl.next()"
+        ></pg-admin-paging>
     </div>
-    </md-toolbar>
+</md-toolbar>
+<div flex="100" layout="row" layout-xs="columm" class="md-padding">
+    <div flex="30" flex-xs="100" class="order-picker-conteiner " layout="row">
+        <label>Від</label>
+        <md-datepicker class="order-dete-pcker" placeholder="Дата" flex ng-model="$ctrl.start"></md-datepicker>
+
+
+    </div>
+    <div flex="30" flex-xs="100" class="order-picker-conteiner " layout="row">
+        <label>До</label>
+        <md-datepicker class="order-dete-pcker" placeholder="Дата" flex ng-model="$ctrl.end"></md-datepicker>
+    </div>
+    <div flex="30" flex-xs="100" class="order-picker-conteiner " layout="row">
+        <md-button class="md-raised" ng-click="$ctrl.Search()">Пошук</md-button>
+    </div>
+</div>
 <md-list flex class="orders-list">
-  
-    <md-list-item  class="md-2-line" ng-repeat="order in $ctrl.orders" ng-class="{answered:order.status==3, approved:order.status==1, bay:order.status==2}" ng-click=" $ctrl.showEditOrderDialog($event, order)">
-             
-          <div class="md-list-item-text" layout="column">
+
+    <md-list-item class="md-2-line" ng-repeat="order in $ctrl.orders"
+                  ng-class="{answered:order.status==3, approved:order.status==1, bay:order.status==2}"
+                  ng-click=" $ctrl.showEditOrderDialog($event, order)">
+
+        <div class="md-list-item-text" layout="column">
             <h3>Статус</h3>
-            <p ng-if="order.status==0" >Новий</p>
-            <p class="approved-titlt" ng-if="order.status==1" >Підтвірджено</p>
-            <p  ng-if="order.status==2" >Оплачено</p>
-            <p  ng-if="order.status==3" >Відмова</p>
+            <p ng-if="order.status==0">Новий</p>
+            <p class="approved-titlt" ng-if="order.status==1">Підтвірджено</p>
+            <p ng-if="order.status==2">Оплачено</p>
+            <p ng-if="order.status==3">Відмова</p>
         </div>
-      
-     
+
+
         <div class="md-list-item-text" layout="column">
             <h3>Запис створено</h3>
             <p>{{order.date|date:'dd.MM.yyyy'}}</p>
         </div>
-         <div class="md-list-item-text" layout="column">
+        <div class="md-list-item-text" layout="column">
             <h3>Курс</h3>
             <p>{{::$ctrl.getOrderTitle(order)}}</p>
         </div>
@@ -37,14 +54,17 @@ on-next="$ctrl.next()"
             <h3>Замовник</h3>
             <p>{{::order.name||'Анонім'}} {{::order.phone||order.email||''}}</p>
         </div>
-                
-        <md-icon class="md-secondary "  ng-click="$ctrl.showEditOrderDialog($event, order)" md-svg-icon="communication:ic_message_24px"> 
-         <md-tooltip > Деталі</md-tooltip></md-icon>
-          
-         <md-icon class="md-secondary " ng-if="::$root.it.can('modifyAcademy')" ng-click=" ::$root.it.can('modifyAcademy') && $ctrl.showDeleteDialog($event, order)" 
-                     md-svg-icon="action:ic_delete_24px">
-                <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Видалити</md-tooltip>  
-            </md-icon>
+
+        <md-icon class="md-secondary " ng-click="$ctrl.showEditOrderDialog($event, order)"
+                 md-svg-icon="communication:ic_message_24px">
+            <md-tooltip> Деталі</md-tooltip>
+        </md-icon>
+
+        <md-icon class="md-secondary " ng-if="::$root.it.can('modifyAcademy')"
+                 ng-click=" ::$root.it.can('modifyAcademy') && $ctrl.showDeleteDialog($event, order)"
+                 md-svg-icon="action:ic_delete_24px">
+            <md-tooltip ng-if="::$root.it.can('modifyAcademy')">Видалити</md-tooltip>
+        </md-icon>
 
         <md-divider></md-divider>
     </md-list-item>
@@ -126,11 +146,13 @@ class EditDialogController {
     private order:IOrder;
     private originalOrder:IOrder;
     private orderStatuses:any;
-
+   
     constructor(private $mdDialog:ng.material.IDialogService, private constants:IConstants, order:IOrder) {
         this.order = angular.copy( order );
         this.originalOrder = order;
         this.orderStatuses = constants.orderStatuses;
+
+       
     }
 
     save($form:ng.IFormController) {
@@ -151,15 +173,35 @@ export class AdminOrdersController {
     orders:IOrder[];
     paging:any;
     private order:IOrder;
+    private start:Date;
+    private end:Date;
+
 
 
     constructor(private $filter:ng.IFilterService, private $mdDialog:ng.material.IDialogService,
                 private $mdToast:ng.material.IToastService,
                 private $mdMedia:ng.material.IMedia, private orderResource:IOrderResource,
                 private pagingService:PagingService) {
+       
+        this.end= new Date();
+        this.start= new Date();
+        this.start.setMonth(this.start.getMonth() - 1);
+        this.start.setHours(0,0,0)
 
     }
 
+    private showPage(page = 1) {
+        this.orders = this.orderResource.query( {page: page, sort: {"status": 1,  "date": -1}, query:{'date': {"$lte":this.end.toJSON(),"$gte":this.start.toJSON()}}},
+            (res, headers) => {
+                let {total, page, perPage} = this.pagingService.parseHeaders( headers );
+                this.pagingService.update( {page: page, perPage: perPage, total: total} );
+                this.paging = angular.copy( this.pagingService.params() );
+            } );
+    } 
+    
+    Search() {
+        this.showPage();
+    }
     $onInit() {
         this.showPage();
     }
@@ -249,14 +291,7 @@ export class AdminOrdersController {
         this.showPage( this.pagingService.nextPage() );
     }
 
-    private showPage(page = 1) {
-        this.orders = this.orderResource.query( {page: page, sort: {"status": 1,  "date": -1}},
-            (res, headers) => {
-                let {total, page, perPage} = this.pagingService.parseHeaders( headers );
-                this.pagingService.update( {page: page, perPage: perPage, total: total} );
-                this.paging = angular.copy( this.pagingService.params() );
-            } );
-    }
+  
 }
 
 export let AdminOrdersComponentUrl = '/academy/orders';

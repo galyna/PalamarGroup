@@ -31,8 +31,6 @@ System.config({
         'lodash': 'node_modules/lodash/lodash.js',
         'angular-simple-logger': 'node_modules/angular-simple-logger/dist/angular-simple-logger.min.js',
         'uiGmapgoogle-maps': 'node_modules/angular-google-maps/dist/angular-google-maps.js'
-
-
     },
 
     map: {

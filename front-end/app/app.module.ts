@@ -43,6 +43,7 @@ let app = angular.module('yuliaPalamarApp', [
     'youtube-embed',
     'uiGmapgoogle-maps',
     'daypilot',
+   
     coreModule.name,
     resourcesModule.name,
     uiModule.name,

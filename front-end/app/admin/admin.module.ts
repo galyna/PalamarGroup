@@ -58,7 +58,7 @@ let app = angular.module('admin', [
     'youtube-embed',
     'templates',
     'daypilot',
-    
+
     coreModule.name,
     resourcesModule.name,
     uiModule.name,
