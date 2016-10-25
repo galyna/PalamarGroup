@@ -293,6 +293,8 @@
     transition: top 0.3s linear;
     top: 0px;
 
+
+
     &:hover {
       @extend .md-whiteframe-12dp;
       transition: top 0.3s linear;
@@ -348,6 +350,18 @@
     position: relative;
     display: block;
 
+    .hide_file {
+      position: absolute;
+      z-index: 1000;
+      opacity: 0;
+      cursor: pointer;
+      right: 0;
+      top: 0;
+      height: 100%;
+      font-size: 24px;
+      width: 100%;
+
+    }
     md-card > img, md-card > :not(md-card-content) img {
     }
     md-card-content {
