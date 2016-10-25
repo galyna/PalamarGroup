@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="beauty parlour & academy">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
-    <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+
     <!--build:prod-->
     <script src="node_modules/systemjs/dist/system.js"></script>
     <script src="system.config.js"></script>
@@ -16,7 +16,7 @@
     <!--endbuild-->
 
     <script>
-
+        System.import('googleapis');
         System.import('youtube-iframe-api');
         System.import('app');
     </script>
