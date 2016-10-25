@@ -60,8 +60,7 @@ System.config({
         },
         "googleapis": {
             "scriptLoad": true,
-            "format": "global",
-            "exports": "GOOGLE"
+            "format": "global"
         }
     }
 });
