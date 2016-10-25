@@ -32,7 +32,7 @@ System.config({
         'angular-simple-logger': 'node_modules/angular-simple-logger/dist/angular-simple-logger.min.js',
         'uiGmapgoogle-maps': 'node_modules/angular-google-maps/dist/angular-google-maps.js',
         'googleapis': '//maps.googleapis.com/maps/api/js?sensor=false'
-        
+
     },
 
     map: {
@@ -57,6 +57,11 @@ System.config({
             "scriptLoad": true,
             "format": "global",
             "exports": "YT"
+        },
+        "googleapis": {
+            "scriptLoad": true,
+            "format": "global",
+            "exports": "GOOGLE"
         }
     }
 });
