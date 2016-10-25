@@ -30,7 +30,7 @@ const template = `<md-toolbar>
 <md-list flex class="orders-list">
 
     <md-list-item class="md-2-line" ng-repeat="appointment in $ctrl.appointments"
-                  ng-class="{answered:appointment.appointment==3, approved:appointment.status==1, bay:appointment.status==2}"
+                  ng-class="{answered:appointment.status==3, approved:appointment.status==1, bay:appointment.status==2}"
                   ng-click=" $ctrl.showEditOrderDialog($event, appointment)">
         
             <div class="md-list-item-text" style='min-width: 130px;'layout="column">
