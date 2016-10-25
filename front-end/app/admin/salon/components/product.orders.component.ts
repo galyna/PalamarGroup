@@ -101,11 +101,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                     <input ng-disabled="::!$root.it.can('modifySalon')" type="text" ng-model="$ctrl.order.phone" >
                 </md-input-container>
                    
-                </md-input-container>
-                    <md-input-container class="md-block">
-                    <label>Email</label>
-                    <input ng-disabled="::!$root.it.can('modifySalon')" type="text" ng-model="$ctrl.order.email" >
-                </md-input-container>
+            
                 </md-input-container>
                     <md-input-container class="md-block">
                     <label>Коментар замовника</label>

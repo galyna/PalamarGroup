@@ -32,8 +32,8 @@ export function debugConfig($compileProvider) {
     $compileProvider.debugInfoEnabled( false );
 }
 
-materialConfig.$inject = ['$mdIconProvider', '$mdDateLocaleProvider','uiGmapGoogleMapApiProvider'];
-export function materialConfig($mdIconProvider:ng.material.IIconProvider, $mdDateLocaleProvider,uiGmapGoogleMapApiProvider) {
+materialConfig.$inject = ['$mdIconProvider', '$mdDateLocaleProvider'];
+export function materialConfig($mdIconProvider:ng.material.IIconProvider, $mdDateLocaleProvider) {
     $mdIconProvider
         .iconSet( "action", "/content/images/icons/svg-sprite-action.svg" )
         .iconSet( "social", "/content/images/icons/svg-sprite-social.svg" )
@@ -66,11 +66,5 @@ export function materialConfig($mdIconProvider:ng.material.IIconProvider, $mdDat
 
     // You can also set when your calendar begins and ends.
     $mdDateLocaleProvider.firstRenderableDate = new Date( 1776, 6, 4 );
-
-    uiGmapGoogleMapApiProvider.configure( {
-        key: 'AIzaSyCIta-syyAj-btYL9IMx5262_LCEC_U0No',
-        v: '3.20', //defaults to latest 3.X anyhow
-        libraries: 'weather,geometry,visualization'
-    } );
 
 }
