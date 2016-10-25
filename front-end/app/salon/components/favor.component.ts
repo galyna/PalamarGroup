@@ -189,7 +189,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                         </md-option>
                     </md-select>
                 </md-input-container>
-                <md-input-container ng-if="!vm.appointment.master" class="md-block md-padding">
+                <md-input-container ng-if="!vm.appointment.master" class="md-block ">
                     <label for="service">Послуга</label>
                     <div layout="row" layout-align=" start center  ">
                                 <img ng-src="{{vm.appointment.favor.photo.url}}" class="avatar" alt="{{vm.appointment.favor.name}}"/>

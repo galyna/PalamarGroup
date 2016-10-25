@@ -159,7 +159,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                         </md-select>
                     </md-input-container>
                 </div>
-                <md-input-container ng-if="vm.appointment.master" class="md-block md-padding">
+                <md-input-container ng-if="vm.appointment.master" class="md-block ">
                     <label for="service">Послуга</label>
                     <md-select ng-model="vm.appointment.service"
                                ng-model-options="{trackBy: '$value._id'}">

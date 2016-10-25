@@ -68,7 +68,7 @@ const template = `<div class="courses description-container" layout="row" layout
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-actions flex="25">
-                                <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
+                                <md-button class=" near-master  xs-selected md-display-1 md-raised " aria-label="Details"
                                            ng-click="$ctrl.showAppointmentDialog(master)">
                                     Записатись
                                 </md-button>
@@ -93,7 +93,7 @@ const template = `<div class="courses description-container" layout="row" layout
                                     <div hide show-gt-sm="true" class="md-display-2">{{::master.name}}</div>
                                     <div hide-gt-sm="true" class="md-display-1">{{::master.name}}</div>
                                     <div>
-                                        <md-button class="  md-display-1 md-raised  " aria-label="Details"
+                                        <md-button class=" near-master   md-display-1 md-raised  " aria-label="Details"
                                                    ng-click="$ctrl.showMaster(master._id)">
                                             Про майстра
                                         </md-button>
@@ -101,7 +101,7 @@ const template = `<div class="courses description-container" layout="row" layout
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-actions flex="25">
-                                <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
+                                <md-button class=" near-master  xs-selected md-display-1 md-raised " aria-label="Details"
                                            ng-click="$ctrl.showAppointmentDialog(master)">
                                     Записатись
                                 </md-button>
