@@ -25,13 +25,18 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
 >
     <div class="pg-menu-section" ng-if="vm.showSalon">
         <div class="pg-menu-section-title" ng-click="vm.courses()">САЛОН</div>
-        <div layout="column" layout-gt-sm="row">
+         <div layout="column" >
+            <div layout="row" layout-xs="column">
             <div flex ng-click="vm.goToURL(vm.SalonHomeComponentUrl)" class=" pg-menu-item ">ГОЛОВНА
             </div>
             <div flex ng-click="vm.goToURL(vm.FavorsComponentUrl)" class=" pg-menu-item ">ПОСЛУГИ
             </div>
             <div flex ng-click="vm.goToURL(vm.MastersComponentUrl)" class=" pg-menu-item ">МАЙСТРИ
             </div>
+           
+        </div>
+            <div layout="row" layout-xs="column">
+           
             <div flex ng-click="vm.goToURL(vm.SalonTransformsComponentUrl)" class=" pg-menu-item ">ПЕРЕВТІЛЕННЯ
             </div>
             <div flex ng-click="vm.goToURL(vm.ProductsComponentUrl)" class=" pg-menu-item ">ПРОДУКЦІЯ
@@ -39,6 +44,8 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
             <div flex ng-click="vm.goToURL(vm.SalonContactsComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
             </div>
         </div>
+        </div>
+       
     </div>
     <div class=" pg-menu-section">
         <div class="pg-menu-section-title" ng-click="vm.courses()">АКАДЕМІЯ</div>

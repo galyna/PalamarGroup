@@ -83,14 +83,14 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
   .pg-menu-item {
     @extend .md-whiteframe-8dp;
     cursor: pointer;
-    padding: 5% 0 5% 0;
+    padding: 2% 0 2% 0;
     margin: 3px;
     border-radius: 0px;
     vertical-align: middle;
     transition: background-color 0.3s;
     font-size: 30px;
     color: white;
-    height: 20%;
+    height: 12%;
     background-color: $primary;
     display: flex;
     align-items: center;
