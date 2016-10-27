@@ -95,7 +95,7 @@ const template = `<div class="courses-details description-container" layout="col
             <div class="fit-screen-wrap header-long " layout="column">
 
                 <div layout="row" layout-align="center center">
-                    <div data-aos="flip-right" hide-xs="true" flex="60" flex-gt-sm="50"
+                    <div flex="60" flex-gt-sm="50"
                          class="md-display-1 md-margin md-padding">
                         <video class="screen" controls>
                             <source type="video/mp4" src="../content/images/bg/bd.mp4"/>
