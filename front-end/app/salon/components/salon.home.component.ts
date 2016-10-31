@@ -22,10 +22,10 @@ const template = `<div class="courses-details description-container" layout="col
                          ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.categories.length)}}" flex-gt-xs="46"
                          flex-xs="80"
                          ng-click="::$ctrl.showFavors(category._id)">
-                    <card-image-container>
+                    
                         <img ng-src="{{'/content/images/services/'+category._id+'.jpg'}}" class="md-card-image">
-                    </card-image-container>
-                    <md-card-content layout="column" flex="100" layout-align="center center">
+                 
+                    <md-card-content layout="column"  layout-align="center center">
                         <span class="  md-margin">{{category.name}}</span>
                     </md-card-content>
                 </md-card>
@@ -78,11 +78,9 @@ const template = `<div class="courses-details description-container" layout="col
                 <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="master in $ctrl.masters"
                          class="md-margin " ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.masters.length)}}"
                          flex-gt-xs="46" flex-xs="80"
-                         ng-click="$ctrl.showMaster(master._id)">
-                    <card-image-container>
-                        <img ng-src="{{::master.photo.url}}" class="md-card-image">
-                    </card-image-container>
-                    <md-card-content layout="column" flex="100" layout-align="center center">
+                         ng-click="$ctrl.showMaster(master._id)">                 
+                        <img ng-src="{{::master.photo.url}}" class="md-card-image">                
+                    <md-card-content layout="column"  layout-align="center center">
                         <span class="  md-margin">{{::master.name}}</span>
                     </md-card-content>
 
@@ -149,12 +147,11 @@ const template = `<div class="courses-details description-container" layout="col
                              ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,transform.photos.length)}}"
                              flex-gt-xs="46" flex-xs="80"
                              ng-click="$ctrl.showMaster(master._id)">
-                        <card-image-container>
                             <img ng-src="{{::photo.url}}" class="md-card-image">
-                        </card-image-container>
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                             <span class="  md-margin">{{::photo.name}}</span>
                         </md-card-content>
+                        </md-card>
                 </div>
             </div>
         </div>

@@ -19,25 +19,25 @@ const template = `
         </div>
     </div>
 
-     <div layout="row" layout-align="center center" >
-        <div  flex flex-gt-md="60" flex-md="80"  flex-gt-xs="60">
-         <div  class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="favor in category.favors"
-                         class="md-margin " flex-gt-sm="46"  flex-gt-xs="46" flex-xs="80"
-                         ng-click="$ctrl.showFavor(favor._id)">
-                    <card-image-container>
-                        <img ng-src="{{::favor.photo.url}}" class="md-card-image">
-                    </card-image-container>
-                    <md-card-content ng-if="favor.name" layout="column" flex="100" layout-align="center center">
-                        <span class="  md-margin">{{::favor.name}}</span>
-                    </md-card-content>
-
+    <div layout="row" layout-align="center center" ng-if="category.favors.length>0 ">
+            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
+                <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+                    <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="favor in category.favors"
+                             class="md-margin "
+                             ng-attr-flex-gt-sm="46"
+                             flex-gt-xs="46" flex-xs="80"
+                             ng-click="$ctrl.showFavor(favor._id)">
+                     
+                            <img ng-src="{{::favor.photo.url}}" class="md-card-image">
+                       
+                        <md-card-content ng-if="favor.name" layout="column" flex="100" layout-align="center center">
+                            <span class="  md-margin">{{::favor.name}}</span>
+                        </md-card-content>
+                        </md-card>
+                </div>
             </div>
-            
         </div>
-         
     </div>
- </div>  
  </div> 
 <div class="courses description-container" layout="row" layout-align="center center">
     <div layout="column" layout-align="center center">       
@@ -210,7 +210,7 @@ class AppointmentDialogController {
         {id: 15, value: '17:00'}, {id: 16, value: '17:30'}, {id: 17, value: '18:00'}, {id: 18, value: '18:30'}];
 
     constructor(private $mdDialog:ng.material.IDialogService, appointment:IAppointment) {
-        this.appointment = angular.copy( appointment );
+        this.appointment = angular.copy(appointment);
         this.originalAppointment = appointment;
         this.setTime();
     }
@@ -219,24 +219,24 @@ class AppointmentDialogController {
         if (this.appointment.date) {
             var minutes = this.appointment.date.getUTCMinutes();
             var hourValue = this.appointment.date.getUTCHours() + ':' + (  (minutes < 10) ? minutes + '0' : minutes);
-            this.dayHours.forEach( (hour)=> {
+            this.dayHours.forEach((hour)=> {
                 if (hour.value === hourValue) {
                     this.dayHour = hour
                 }
-            } )
+            })
         }
     }
 
     save(orderForm) {
         if (this.dayHour && this.appointment.date) {
-            var time = this.dayHour.value.split( ':' );
-            this.appointment.date.setHours( time[0] );
-            this.appointment.date.setMinutes( time[1] );
+            var time = this.dayHour.value.split(':');
+            this.appointment.date.setHours(time[0]);
+            this.appointment.date.setMinutes(time[1]);
             this.dayHour = null;
         }
 
-        angular.extend( this.originalAppointment, this.appointment );
-        this.$mdDialog.hide( this.originalAppointment );
+        angular.extend(this.originalAppointment, this.appointment);
+        this.$mdDialog.hide(this.originalAppointment);
     }
 
     cancel() {
@@ -263,65 +263,65 @@ export class FavorsComponentController {
     }
 
     $onInit() {
-        this.favors=[];
+        this.favors = [];
         if (this.$routeParams["category"] && this.$routeParams["category"] != ":category") {
             this.appointment = new this.AppointmentResource();
             this.favors = this.favorResource.query();
-            this.favors.$promise.then( (favors) => {
-                this.categories.forEach( (category)=> {
-                    category.favors = favors.filter( (favor)=> {
+            this.favors.$promise.then((favors) => {
+                this.categories.forEach((category)=> {
+                    category.favors = favors.filter((favor)=> {
                         return category.name == favor.category.name && category._id == this.$routeParams["category"];
-                    } );
+                    });
 
-                } )
-            } );
-            this.MasterResource.query( {populate: 'services.favor',sort:"order"} ).$promise
-                .then( (masters) => {
-                    this.masters = masters.filter( (master)=> {
+                })
+            });
+            this.MasterResource.query({populate: 'services.favor', sort: "order"}).$promise
+                .then((masters) => {
+                    this.masters = masters.filter((master)=> {
 
-                        return master.services.some( (s)=> {
+                        return master.services.some((s)=> {
                             return s.favor.category._id == this.$routeParams["category"];
-                        } );
-                    } )
-                } );
+                        });
+                    })
+                });
         } else {
             this.favors = this.favorResource.query();
-            this.favors.$promise.then( (favors) => {
-                this.categories.forEach( (category)=> {
-                    category.favors = favors.filter( (favor)=> {
+            this.favors.$promise.then((favors) => {
+                this.categories.forEach((category)=> {
+                    category.favors = favors.filter((favor)=> {
                         return category.name == favor.category.name;
-                    } );
+                    });
 
-                } )
-            } );
+                })
+            });
         }
     }
 
     showFavor(id) {
-        this.$location.path( `/favor/${id}` );
+        this.$location.path(`/favor/${id}`);
     }
 
     showMaster(id) {
-        this.$location.path( `/master/${id}` );
+        this.$location.path(`/master/${id}`);
     }
 
     showAppointmentDialog(master) {
         this.appointment.master = master;
 
-        this.mdDialog.show( {
+        this.mdDialog.show({
             template: appointmentTemplate,
             clickOutsideToClose: true,
             bindToController: true,
             controller: AppointmentDialogController,
             controllerAs: 'vm',
-            parent: angular.element( document.body ),
+            parent: angular.element(document.body),
 
             locals: {
                 appointment: this.appointment,
             },
-        } ).then( (result) => {
-            this.handleDialogResult( result );
-        } );
+        }).then((result) => {
+            this.handleDialogResult(result);
+        });
         ;
     }
 
@@ -330,34 +330,44 @@ export class FavorsComponentController {
 
         if (this.appointment.service) {
             this.appointment.favors = [];
-            this.appointment.favors.push( this.appointment.service );
+            this.appointment.favors.push(this.appointment.service);
         }
         this.appointment.creationDate = new Date().toJSON();
-        this.appointment.date = new Date( this.appointment.date ).toJSON();
+        this.appointment.date = new Date(this.appointment.date).toJSON();
         this.appointment.$save()
-            .then( () => {
+            .then(() => {
                 this.mdDialog.hide();
                 this.showOrderConfirm();
-            } )
-            .catch( (err) => {
-                this.$log.error( err );
-            } )
-            .finally( () => {
+            })
+            .catch((err) => {
+                this.$log.error(err);
+            })
+            .finally(() => {
                 this.appointment = new this.AppointmentResource();
                 this.$rootScope.loading = false;
-            } );
+            });
 
     }
 
     showOrderConfirm():void {
         this.mdDialog.show(
             this.mdDialog.alert()
-                .clickOutsideToClose( true )
-                .title( 'Вашу запис прийнято. ' )
-                .textContent( 'З вами зв`яжеться адміністратор для підтвердження. Дякуємо.' )
-                .ariaLabel( 'Вашу заявку прийнято. ' )
-                .ok( 'Закрити' )
+                .clickOutsideToClose(true)
+                .title('Вашу запис прийнято. ')
+                .textContent('З вами зв`яжеться адміністратор для підтвердження. Дякуємо.')
+                .ariaLabel('Вашу заявку прийнято. ')
+                .ok('Закрити')
         );
+
+    }
+
+    getPictureFlex(index, length) {
+        if (length < 3 || (length > 3 && ( length % 3 == 1 && index >= length - 4 ) || ( length % 3 == 2 && index >= length - 5 ))) {
+            return 46;
+        } else {
+            return 22;
+        }
+
 
     }
 }

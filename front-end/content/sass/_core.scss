@@ -64,10 +64,6 @@ html {
   min-height: 100vh;
 }
 
-card-image-container {
-  overflow: hidden;
-  cursor: pointer;
-}
 
 .fit-screen-wrap {
   position: relative;
@@ -81,6 +77,7 @@ md-card.md-default-theme, md-card {
   z-index: 3;
   padding: 0;
   margin: 20px;
+
   @media (max-width: $layout-breakpoint-xs) {
     margin-left: 0px;
     margin-right: 0px;
@@ -117,13 +114,7 @@ md-card.md-default-theme, md-card {
   }
 }
 
-.md-card-image {
-  transition: transform 0.5s;
-  &:hover {
-    transform: scale(1.1, 1.1);
-    transition: transform 0.5s;
-  }
-}
+
 
 .description-container {
   background-color: white;
@@ -343,4 +334,17 @@ md-card.md-default-theme, md-card {
 }
 
 .navigator_default_todaybox {border: none !important;}
+
+
+@media (min-width: $layout-breakpoint-md) {
+
+  .md-card-image {
+    transition: transform 0.3s;
+    &:hover {
+      transform: scale(1.1, 1.1);
+      transition: transform 0.3s;
+    }
+  }
+
+}
 

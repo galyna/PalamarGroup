@@ -1,6 +1,5 @@
 @import "theme";
 
-
 .courses-details {
 
   .top-info {
@@ -125,15 +124,15 @@
       }
     }
 
-    .date-block-disabled { background-color:  rgba(grey, 0.8);}
+    .date-block-disabled {
+      background-color: rgba(grey, 0.8);
+    }
   }
 
   .content-block {
     min-height: 500px;
 
   }
-
-
 
 }
 
@@ -186,25 +185,16 @@
 }
 
 .courses-hear-forms {
-  box-sizing: border-box;
+
   padding: 0;
   margin: 0 0 20px 0;
-
-  img {
-    max-width: 100%;
-    overflow: hidden;
-  }
-
-  card-image-container {
-    display: block;
-    overflow: hidden;
-  }
 
   md-card.md-default-theme, md-card {
     position: relative;
     display: block;
     transition: top 0.3s linear;
     top: 0px;
+    overflow: hidden;
 
     &:hover {
       @extend .md-whiteframe-12dp;
@@ -212,9 +202,15 @@
       top: -3px;
     }
 
+    img {
+
+      max-width: 100%;
+      overflow: hidden;
+    }
+
     md-card-content {
       position: absolute;
-      bottom: 0;
+      bottom: 0px;
       right: 0;
       left: 0;
       height: 12%;
@@ -251,8 +247,6 @@
         flex: 1 43%;
       }
 
-
-
     }
 
     @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm) {
@@ -283,18 +277,11 @@
   box-sizing: border-box;
   padding: 0 0 20px 0;
 
-  card-image-container {
-    display: block;
-    overflow: hidden;
-  }
-
   md-card {
     position: relative;
     display: block;
     transition: top 0.3s linear;
     top: 0px;
-
-
 
     &:hover {
       @extend .md-whiteframe-12dp;
@@ -340,10 +327,6 @@
   box-sizing: border-box;
   .not-resize {
     height: auto !important;
-  }
-  card-image-container {
-    overflow: hidden;
-    cursor: pointer;
   }
 
   md-card.md-default-theme, md-card {

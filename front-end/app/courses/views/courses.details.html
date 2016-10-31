@@ -147,9 +147,9 @@
                 <md-card md-whiteframe="6" data-aos="{{{true:'zoom-in-up', false:''}[vm.showAnimation]}}" ng-repeat="course in vm.course.hearFormsPhotos"
                          class="md-margin " ng-attr-flex-gt-sm="{{vm.getPictureFlex($index,vm.course.hearFormsPhotos.length)}}"   flex-gt-xs="46" flex-xs="80"
                          ng-click="::vm.showMediaObserver(vm.course.hearFormsPhotos, $index)">
-                    <card-image-container>
+
                         <img ng-src="{{::course.url}}" class="md-card-image">
-                    </card-image-container>
+
                     <md-card-content ng-if="course.name" layout="column" flex="100" layout-align="center center">
                         <span class="  md-margin">{{::course.name}}</span>
                     </md-card-content>
@@ -213,10 +213,10 @@
                 <md-card md-whiteframe="6" data-aos="{{{true:'zoom-in-up', false:''}[vm.showAnimation]}}" ng-repeat="course in vm.course.historyPhotos"
                          class="md-margin " flex-gt-xs="46" flex-xs="80"
                          ng-click="::vm.showMediaObserver(vm.course.historyPhotos, $index)">
-                    <card-image-container>
+
                         <img ng-src="{{::course.url}}" class="md-card-image">
-                    </card-image-container>
-                    <md-card-content ng-if="course.name" layout="column" flex="100" layout-align="center center">
+
+                    <md-card-content ng-if="course.name" layout="column"  layout-align="center center">
                         <span class="  md-margin">{{::course.name}}</span>
                     </md-card-content>
                 </md-card>

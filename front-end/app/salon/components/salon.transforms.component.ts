@@ -1,5 +1,7 @@
 import {ITransform, ITransformResource, TransformResourceName} from "../../resources/transform.resource";
 import {IRootScope} from "../../../typings";
+import {IMediaObserverFactory, MediaObserverFactoryName} from "../../ui/mediaObserver.service";
+import {IConstants} from "../../core/core.config";
 
 
 const template = `<div class="courses-details description-container" layout="column">
@@ -37,10 +39,8 @@ const template = `<div class="courses-details description-container" layout="col
          <div  class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="photo in transform.photos"
                          class="md-margin " ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,transform.photos.length)}}"  flex-gt-xs="46" flex-xs="80"
-                         ng-click="$ctrl.showMaster(master._id)">
-                    <card-image-container>
+                         ng-click="::$ctrl.showMediaObserver(transform.photos, $index)">                  
                         <img ng-src="{{::photo.url}}" class="md-card-image">
-                    </card-image-container>
                     <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                         <span class="  md-margin">{{::photo.name}}</span>
                     </md-card-content>
@@ -60,27 +60,44 @@ const template = `<div class="courses-details description-container" layout="col
 export class SalonTransformsComponentController {
 
 
-    static $inject = [TransformResourceName, "$routeParams"];
+    static $inject = [TransformResourceName, "$rootScope", MediaObserverFactoryName,'constants'
+    ];
 
     showAnimation:boolean;
     transforms:ITransform[];
+    socialParams:any;
 
-    constructor(private TransformResource:ITransformResource, private $rootScope:IRootScope) {
+    constructor(private TransformResource:ITransformResource, private $rootScope:IRootScope,
+                private mediaObserver:IMediaObserverFactory,
+                private constants:IConstants) {
         this.showAnimation = $rootScope.isBigSize;
     }
 
     $onInit() {
-        this.transforms = this.TransformResource.query( {sort: "order"} );
-        this.transforms.$promise.then( (transforms) => {
-        } );
+        this.transforms = this.TransformResource.query({sort: "order"});
+
 
     }
+
+    setSocialParams(photo) {
+        this.$rootScope.socialParams.host = this.constants.host;
+        this.$rootScope.socialParams.target = this.constants.host + "/#"+SalonTransformsComponentUrl;
+        this.$rootScope.socialParams.image = this.constants.host + photo.url;
+        this.$rootScope.socialParams.title = photo.name;
+        this.socialParams = angular.copy( this.$rootScope.socialParams, this.socialParams );
+    }
+
     getPictureFlex(index, length) {
-        if (length > 3  && ( length % 3 == 1 && index >= length - 4 ) ||( length % 3 == 2 && index >= length - 5 )) {
+        if (length > 3 && ( length % 3 == 1 && index >= length - 4 ) || ( length % 3 == 2 && index >= length - 5 )) {
             return 46;
         } else {
             return 22;
         }
+    }
+
+    showMediaObserver(items, index):void {
+        this.setSocialParams(items[index]);
+        this.mediaObserver.observe(items, index, this.socialParams);
     }
 
 }
