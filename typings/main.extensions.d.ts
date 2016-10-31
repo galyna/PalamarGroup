@@ -5,8 +5,8 @@ declare module "express-serve-static-core" {
 }
 
 declare module "express-slash" {
-    import {RequestHandler} from "express-serve-static-core";
-    function slash(statusCode?: number): RequestHandler;
+    import {PathArgument} from "~express/lib/router/index";
+    function slash(statusCode?: number): PathArgument;
     namespace slash {}
     export = slash;
 }
@@ -78,11 +78,11 @@ declare module "xoauth2" {
         refreshToken: string;
         accessToken?: string;
     }
-    
+
     export interface Generator {
         //TODO: implement
     }
-    
+
     export function createXOAuth2Generator(XOAuth2GeneratorOptions): Generator;
 }
 

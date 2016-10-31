@@ -11,8 +11,8 @@ import {setupRouter} from './routes/setup.endpoint';
 import api from './routes/api';
 
 let app = express();
-let port = process.env.PORT || 8080;
-let env = process.env.TYPE;
+let port = parseInt(process.env['PORT']) || 8080;
+let env = process.env['TYPE'];
 
 //TODO: remove on production
 if (env !== 'prod') {
@@ -89,9 +89,10 @@ app.use((err:any, req, res, next) => {
     });
 });
 
-app.listen(port, 'localhost');
-console.log(`origin: ${config.origin}`);
-console.log(`port: ${port}`);
-console.log(`environment: ${env}`);
+app.listen(port, 'localhost', ()=>{
+    console.log(`origin: ${config.origin}`);
+    console.log(`port: ${port}`);
+    console.log(`environment: ${env}`);
+});
 
 export default app;

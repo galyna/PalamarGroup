@@ -4,11 +4,12 @@ import {IOrderModel} from "../models/order";
 import {currentUser} from "../auth/current_user";
 import {auth} from "../auth/auth";
 
+//noinspection JSUnusedLocalSymbols
 export let orderOptions: IOptions = {
     preUpdate: [auth, currentUser.is( 'academyModerator' )],
     preDelete: [auth, currentUser.is( 'academyModerator' )],
     postCreate(req:any, res, next) {
-        if (process.env.TYPE !== 'prod'){
+        if (process.env['TYPE'] !== 'prod'){
             next();
             return console.log('Not prod env, skipping sms sending');}
         const result = <IOrderModel>req.erm.result;

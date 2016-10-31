@@ -1,33 +1,33 @@
 {
   "globalDependencies": {
-    "angular": "registry:dt/angular#1.5.0+20160412133217",
-    "angular-material": "registry:dt/angular-material#1.0.0-rc5.0+20160412154003",
-    "angular-resource": "registry:dt/angular-resource#1.5.0+20160412142209",
+    "angular": "registry:dt/angular#1.5.0+20161016133926",
+    "angular-material": "registry:dt/angular-material#1.1.0-rc5.0+20161019085523",
+    "angular-mocks": "registry:dt/angular-mocks#1.5.0+20160608104721",
+    "angular-resource": "registry:dt/angular-resource#1.5.0+20160914132003",
     "angular-route": "registry:dt/angular-route#1.3.0+20160317120654",
     "bcrypt-nodejs": "registry:dt/bcrypt-nodejs#0.0.0+20160316155526",
     "body-parser": "registry:dt/body-parser#0.0.0+20160317120654",
-    "express": "registry:dt/express#4.0.0+20160317120654",
     "express-jwt": "registry:dt/express-jwt#0.0.0+20160319033732",
-    "express-serve-static-core": "registry:dt/express-serve-static-core#0.0.0+20160322035842",
+    "express-serve-static-core": "registry:dt/express-serve-static-core#4.0.0+20161012061536",
     "express-unless": "registry:dt/express-unless#0.0.0+20160317120654",
     "jasmine": "registry:dt/jasmine#2.2.0+20160505161446",
-    "jquery": "registry:dt/jquery#1.10.0+20160417213236",
+    "jquery": "registry:dt/jquery#1.10.0+20160929162922",
+    "jsonwebtoken": "registry:dt/jsonwebtoken#0.0.0+20160720062725",
     "mime": "registry:dt/mime#0.0.0+20160316155526",
     "mongoose": "registry:dt/mongoose#3.8.5+20160629014609",
     "ng-file-upload": "registry:dt/ng-file-upload#0.0.0+20160317120654",
-    "node": "registry:dt/node#4.0.0+20160423143914",
+    "node": "registry:env/node#6.0.0+20161019193037",
     "nodemailer": "registry:dt/nodemailer#1.3.2+20160316155526",
     "nodemailer-direct-transport": "registry:dt/nodemailer-direct-transport#0.0.0+20160317120654",
     "nodemailer-smtp-transport": "registry:dt/nodemailer-smtp-transport#0.0.0+20160317120654",
-    "nodemailer-types": "registry:dt/nodemailer-types#0.0.0+20160317120654",
-    "passport": "registry:dt/passport#0.2.0+20160317120654",
-    "passport-local": "registry:dt/passport-local#0.0.0+20160316155526",
-    "serve-static": "registry:dt/serve-static#0.0.0+20160317120654"
+    "nodemailer-types": "registry:dt/nodemailer-types#0.0.0+20160317120654"
   },
   "globalDevDependencies": {
     "angular-mocks": "registry:dt/angular-mocks#1.3.0+20160425155016"
   },
   "dependencies": {
-    "jsonwebtoken": "registry:npm/jsonwebtoken#5.5.4+20160208220328"
+    "express": "registry:npm/express#4.14.0+20160925001530",
+    "passport": "registry:npm/passport#0.3.0+20161028163825",
+    "serve-static": "registry:npm/serve-static#1.11.1+20160810053450"
   }
 }

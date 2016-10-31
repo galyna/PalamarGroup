@@ -1,5 +1,5 @@
 
-import {IRootScope} from "../typings";
+import {IRootScope} from "../../typings";
 
 httpInterceptorConfig.$inject = ['$httpProvider'];
 export function httpInterceptorConfig($httpProvider: ng.IHttpProvider) {
