@@ -282,6 +282,7 @@
     display: block;
     transition: top 0.3s linear;
     top: 0px;
+    overflow: hidden;
 
     &:hover {
       @extend .md-whiteframe-12dp;
@@ -289,14 +290,23 @@
       top: -3px;
     }
 
+    img {
+
+      max-width: 100%;
+      overflow: hidden;
+    }
+
     md-card-content {
       position: absolute;
-      bottom: 0;
+      bottom: 0px;
       right: 0;
       left: 0;
       height: 12%;
       color: white;
       background-color: rgba($primary, 0.7);
+      overflow: hidden;
+      white-space: nowrap;
+
     }
 
     @media (min-width: $layout-breakpoint-xs) {

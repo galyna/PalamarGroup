@@ -34,6 +34,7 @@ declare module pg {
             services:IMasterFavor[],
             works:IPhoto[],
             tasks:ITask[],
+            isTop:boolean
         }
 
         export interface IAppointment {

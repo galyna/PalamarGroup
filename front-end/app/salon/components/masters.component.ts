@@ -1,7 +1,7 @@
 import {MasterResourceName, IMasterResource, IMaster} from "../../resources/master.resource";
 import {IRootScope} from "../../../typings";
 import {IAppointmentResource, AppointmentResourceName, IAppointment} from "../../resources/appointment.resource";
-import {FavorResourceName} from "../../resources/favor.resource";
+
 const template = `<div class="courses description-container" layout="row" layout-align="center center">
     <div layout="column" layout-align="center center">
 
@@ -25,9 +25,10 @@ const template = `<div class="courses description-container" layout="row" layout
                              data-aos-easing="ease-out-cubic"   ng-click="$ctrl.showMaster(master._id)"
                              flex="50"><img src="{{::master.photo.url}}" class="md-card-image "/>
                         </div>
-                        <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
+                        <div class="card-desc box" data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
                              data-aos-easing="ease-out-cubic"
                              flex="50" layout="column" layout-align="center center">
+                              <div ng-if="master.isTop" class="corner-ribbon top-right black">Top Stylist</div>
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
                                     <div hide show-md="true" class="md-display-2">{{::master.name}}</div>
@@ -52,9 +53,10 @@ const template = `<div class="courses description-container" layout="row" layout
                 </md-card>
                 <md-card id="trigger-right" ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-desc  " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
+                        <div class="card-desc  box" data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
                              data-aos-easing="ease-out-cubic"
                              flex layout="column" layout-align="center center">
+                              <div ng-if="master.isTop" class="corner-ribbon top-left black">Top Stylist</div>
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
                                     <div hide show-gt-sm="true" class="md-display-2">{{::master.name}}</div>
@@ -85,9 +87,10 @@ const template = `<div class="courses description-container" layout="row" layout
                              data-aos-easing="ease-out-cubic"   ng-click="$ctrl.showMaster(master._id)"
                              flex="50"><img src="{{::master.photo.url}}" class="md-card-image "/>
                         </div>
-                        <div class="card-desc " flex="50"
+                        <div class="card-desc box" flex="50"
                              data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
                              data-aos-easing="ease-out-cubic" layout="column" layout-align="center center">
+                              <div ng-if="master.isTop" class="corner-ribbon top-right black">Top Stylist</div>
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
                                     <div hide show-gt-sm="true" class="md-display-2">{{::master.name}}</div>
@@ -117,6 +120,14 @@ const template = `<div class="courses description-container" layout="row" layout
                 <div class="overlay-bg trigger-right"></div>
                 <md-card md-whiteframe="8" >
                     <md-card-content layout="column">
+                     <div ng-if="master.isTop" class="card-desc-top-master" flex layout="column"
+                         layout-align=" space-around center">
+                        <md-card-title>
+                            <md-card-title-text flex layout="column" layout-align=" space-around center">
+                                <div class="md-headline">Top Stylist</div>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </div>
                         <div class="card-media "   ng-click="$ctrl.showMaster(master._id)" ><img src="{{::master.photo.url}}" class="md-card-image"/></div>
                         <div class="card-desc "
                              layout="column" layout-align="center center">
@@ -173,8 +184,8 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                     <input id="phone" ng-model="vm.appointment.phone" type="text" name="phone">
                 </md-input-container>
                 <div flex="100" layout="row" layout-xs="columm">
-                    <div flex="50" flex-xs="100" class="order-picker-conteiner " layout="row">
-                        <md-datepicker class="order-dete-pcker" placeholder="Дата" flex ng-model="vm.appointment.date"
+                    <div flex="50" flex-xs="100" class="order-picker-container" layout="row">
+                        <md-datepicker class="order-date-picker" placeholder="Дата" flex ng-model="vm.appointment.date"
                                        name="dateField"></md-datepicker>
                     </div>
                     <md-input-container flex="50" flex-xs="100">
@@ -189,7 +200,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                 </div>
                 <md-input-container ng-if="vm.appointment.master" class="md-block md-padding">
                     <label for="service">Послуга</label>
-                    <md-select ng-model="vm.appointment.service"
+                    <md-select  ng-model="vm.appointment.service"
                                ng-model-options="{trackBy: '$value._id'}">
                         <md-option ng-repeat="service in vm.appointment.master.services" ng-value="service">
                             <div layout="row" layout-align=" start center  ">

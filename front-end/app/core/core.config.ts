@@ -34,6 +34,8 @@ export function debugConfig($compileProvider) {
 
 materialConfig.$inject = ['$mdIconProvider', '$mdDateLocaleProvider'];
 export function materialConfig($mdIconProvider:ng.material.IIconProvider, $mdDateLocaleProvider) {
+
+
     $mdIconProvider
         .iconSet( "action", "/content/images/icons/svg-sprite-action.svg" )
         .iconSet( "social", "/content/images/icons/svg-sprite-social.svg" )

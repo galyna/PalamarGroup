@@ -78,7 +78,8 @@ const template = `<div class="courses-details description-container" layout="col
                 <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="master in $ctrl.masters"
                          class="md-margin " ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.masters.length)}}"
                          flex-gt-xs="46" flex-xs="80"
-                         ng-click="$ctrl.showMaster(master._id)">                 
+                         ng-click="$ctrl.showMaster(master._id)">      
+                        <div ng-if="master.isTop" class="corner-ribbon-min top-right white">Top Stylist</div>
                         <img ng-src="{{::master.photo.url}}" class="md-card-image">                
                     <md-card-content layout="column"  layout-align="center center">
                         <span class="  md-margin">{{::master.name}}</span>

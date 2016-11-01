@@ -18,11 +18,14 @@ const template = `<div class=" description-container">
                          data-aos-easing="ease-out-cubic"
                          flex="50"><img src="{{::$ctrl.master.photo.url}}" class="md-card-image "/>
                     </div>
-                    <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[$ctrl.showAnimation]}}"
+                    <div class="card-desc box " data-aos="{{{true:'fade-left', false:'false'}[$ctrl.showAnimation]}}"
                          data-aos-easing="ease-out-cubic"
                          flex="50" layout="column" layout-align="center center">
+                        <div ng-if="$ctrl.master.isTop" class="corner-ribbon top-right black">Top Stylist</div>
                         <md-card-title flex>
                             <md-card-title-text flex layout-align="space-around center">
+
+
                                 <div hide show-md="true" class="md-display-2">{{::$ctrl.master.name}}</div>
                                 <div hide-md="true" class="md-display-1">{{::$ctrl.master.name}}</div>
                                 <div class="descr-container">
@@ -45,9 +48,18 @@ const template = `<div class=" description-container">
 
             <md-card md-whiteframe="8">
                 <md-card-content layout="column">
-                    <div class="card-media " ng-click="$ctrl.showMaster($ctrl.master._id)"><img
-                            src="{{::$ctrl.master.photo.url}}"
-                            class="md-card-image"/></div>
+                    <div ng-if="$ctrl.master.isTop" class="card-desc-top-master" flex layout="column"
+                         layout-align=" space-around center">
+                        <md-card-title>
+                            <md-card-title-text flex layout="column" layout-align=" space-around center">
+                                <div class="md-headline">Top Stylist</div>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </div>
+                    <div class="card-media " ng-click="$ctrl.showMaster($ctrl.master._id)">
+                        <img
+                                src="{{::$ctrl.master.photo.url}}"
+                                class="md-card-image"/></div>
                     <div class="card-desc "
                          layout="column" layout-align="center center">
                         <md-card-title>
@@ -83,13 +95,13 @@ const template = `<div class=" description-container">
         <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
             <div layout="row" layout-xs="column">
                 <div hide show-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
-                    <daypilot-navigator  style=" width: 280px" id="navi"
+                    <daypilot-navigator style=" width: 280px" id="navi"
                                         daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>
-                   
+
                 </div>
                 <div hide-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
-                   
-                    <daypilot-navigator  style=" width: 280px" id="navis"
+
+                    <daypilot-navigator style=" width: 280px" id="navis"
                                         daypilot-config="$ctrl.navigatorSmallConfig"></daypilot-navigator>
                 </div>
                 <div flex class="md-padding ">
@@ -182,8 +194,8 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                     <input id="phone" ng-model="vm.appointment.phone" type="text" name="phone">
                 </md-input-container>
                 <div flex="100" layout="row" layout-xs="columm">
-                    <div flex="50" flex-xs="100" class="order-picker-conteiner " layout="row">
-                        <md-datepicker class="order-dete-pcker" placeholder="Дата" flex ng-model="vm.appointment.date"
+                    <div flex="50" flex-xs="100" class="order-picker-container " layout="row">
+                        <md-datepicker class="order-date-picker" placeholder="Дата" flex ng-model="vm.appointment.date"
                                        name="dateField"></md-datepicker>
                     </div>
                     <md-input-container flex="50" flex-xs="100">

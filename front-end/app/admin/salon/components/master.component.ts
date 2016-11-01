@@ -29,6 +29,13 @@ const template:string = `<div flex layout="column">
         <md-tab label="Інфо">
             <md-card>
                 <md-card-content>
+                      <md-input-container>
+                       
+                        <md-checkbox ng-model="$ctrl.master.isTop" aria-label="Finished?"
+                                     ng-disabled="::!$root.it.can('modifySalon')">
+                           Топ стиліст
+                        </md-checkbox>
+                    </md-input-container>
                     <md-input-container class="md-block ">
                         <label for="name">Ім’я </label>
                         <input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.master.name"

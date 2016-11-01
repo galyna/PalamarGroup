@@ -77,9 +77,10 @@ const template = `<div class="courses description-container" layout="row" layout
                              data-aos-easing="ease-out-cubic"
                              flex="50"><img src="{{::master.photo.url}}" class="md-card-image "/>
                         </div>
-                          <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
+                          <div class="card-desc box" data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
                              data-aos-easing="ease-out-cubic"
                              flex="50" layout="column" layout-align="center center">
+                              <div ng-if="master.isTop" class="corner-ribbon top-right black">Top Stylist</div>
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
                                     <div hide show-md="true" class="md-display-2">{{::master.name}}</div>
@@ -109,6 +110,14 @@ const template = `<div class="courses description-container" layout="row" layout
                 <div class="overlay-bg trigger-right"></div>
                 <md-card md-whiteframe="8" ng-click="vm.showDetails(course._id)">
                     <md-card-content layout="column">
+                     <div ng-if="master.isTop" class="card-desc-top-master" flex layout="column"
+                         layout-align=" space-around center">
+                        <md-card-title>
+                            <md-card-title-text flex layout="column" layout-align=" space-around center">
+                                <div class="md-headline">Top Stylist</div>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </div>
                         <div class="card-media "><img src="{{::master.photo.url}}" class="md-card-image"/></div>
                         <div class="card-desc "
                              layout="column" layout-align="center center">
@@ -163,8 +172,8 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                     <input id="phone" ng-model="vm.appointment.phone" type="text" name="phone">
                 </md-input-container>
                 <div flex="100" layout="row" layout-xs="columm">
-                    <div flex="50" flex-xs="100" class="order-picker-conteiner " layout="row">
-                        <md-datepicker class="order-dete-pcker" placeholder="Дата" flex ng-model="vm.appointment.date"
+                    <div flex="50" flex-xs="100" class="order-picker-container " layout="row">
+                        <md-datepicker class="order-date-picker" placeholder="Дата" flex ng-model="vm.appointment.date"
                                        name="dateField"></md-datepicker>
                     </div>
                     <md-input-container flex="50" flex-xs="100">
