@@ -69,7 +69,9 @@ const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveFor
                         <div class="md-padding md-margin" layout="row"
                              ng-repeat="item in $ctrl.salon.photos track by $index"
                              ng-click="null">
+                              <div>
                             <img ng-src="{{item.url}}" class="module-history-img"/>
+                            </div>
                             <div layout="column" ng-if="::$root.it.can('modifySalon')">
                                 <md-input-container class="md-block  ">
                                     <label for="historyNme">Назва </label>

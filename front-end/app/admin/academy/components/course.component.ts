@@ -89,10 +89,11 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
         </md-tab>
         <md-tab label="Аватар">
             <md-card>
-                <md-card-content layout-sm="row" layout-gt-sm>
-                    <div layout="column">
-                        <img ng-src="{{$ctrl.course.avatar}}" class="module-history-img"/>
-
+                <md-card-content >
+                    <div layout="column" layout-gt-xs="row">
+                      <div layout="column">
+                        <img ng-src="{{$ctrl.course.avatar}}" />
+  </div>
                         <div ng-if="::$root.it.can('modifyAcademy')">
                             <md-button ng-if="!$ctrl.showAuthorPhotoUpload" class="md-raised"
                                        ng-click="$ctrl.showAuthorPhotoUpload=true">

@@ -40,7 +40,10 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
             <md-card>
                 <md-card-content layout-sm="row" layout-gt-sm>
                     <div layout="column">
-                        <img ng-src="{{$ctrl.favor.photo.url}}" class="module-history-img"/>
+                              <div  >
+                            <img ng-src="{{$ctrl.favor.photo.url}}" />
+                            </div>
+                       
 
                         <div ng-if="::$root.it.can('modifySalon')" >
                             <md-button ng-if="!$ctrl.showAuthorPhotoUpload" class="md-raised"

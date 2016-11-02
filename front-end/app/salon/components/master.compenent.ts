@@ -3,6 +3,8 @@ import {IRootScope} from "../../../typings";
 import {IAppointmentResource, AppointmentResourceName, IAppointment} from "../../resources/appointment.resource";
 import ITask = pg.models.ITask;
 import IMasterFavor = pg.models.IMasterFavor;
+import {MediaObserverFactoryName, IMediaObserverFactory} from "../../ui/mediaObserver.service";
+import {IConstants} from "../../core/core.config";
 
 const template = `<div class=" description-container">
 
@@ -168,7 +170,7 @@ const template = `<div class=" description-container">
                          class="md-margin "
                          ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
                          flex-gt-xs="46" flex-xs="80"
-                         ng-click="$ctrl.showMaster(master._id)">                   
+                         ng-click="::$ctrl.showMediaObserver($ctrl.master.works, $index)">                   
                         <img ng-src="{{::photo.url}}" class="md-card-image">                 
                     <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                         <span class="  md-margin">{{::photo.name}}</span>
@@ -298,17 +300,21 @@ class AppointmentDialogController {
 }
 export class MasterComponentController {
 
-    static $inject = ["$log", "$routeParams", MasterResourceName, '$mdDialog', '$rootScope', AppointmentResourceName];
+    static $inject = ["$log", "$routeParams", MasterResourceName, '$mdDialog', '$rootScope', AppointmentResourceName,
+      MediaObserverFactoryName,'constants'];
     master:IMaster;
     private appointment:IAppointment;
     events:IScheduler[];
     weekConfig:any;
     navigatorConfig:any;
     navigatorSmallConfig:any;
+    socialParams:any;
   
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private MasterResource:IMasterResource, private mdDialog:ng.material.IDialogService,
-                private $rootScope:IRootScope, private AppointmentResource:IAppointmentResource) {
+                private $rootScope:IRootScope, private AppointmentResource:IAppointmentResource,
+                private mediaObserver:IMediaObserverFactory,
+                private constants:IConstants) {
         this.events = [];
         this.appointment = new this.AppointmentResource();
         if (this.$routeParams["id"]) {
@@ -428,12 +434,25 @@ export class MasterComponentController {
         };
     }
 
+    setSocialParams(photo) {
+        this.$rootScope.socialParams.host = this.constants.host;
+        this.$rootScope.socialParams.target = this.constants.host+ "/#master"+this.master._id;
+        this.$rootScope.socialParams.image = this.constants.host + photo.url;
+        this.$rootScope.socialParams.title ="Робота майстра " +this.master.name;
+        this.socialParams = angular.copy( this.$rootScope.socialParams, this.socialParams );
+    }
+
     getPictureFlex(index, length) {
         if (length > 3 && ( length % 3 == 1 && index >= length - 4 ) || ( length % 3 == 2 && index >= length - 5 )) {
             return 46;
         } else {
             return 22;
         }
+    }
+
+    showMediaObserver(items, index):void {
+        this.setSocialParams(items[index]);
+        this.mediaObserver.observe(items, index, this.socialParams);
     }
 
     showAppointmentDialog() {

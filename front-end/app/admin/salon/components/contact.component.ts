@@ -46,10 +46,12 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
         </md-tab>
         <md-tab label="Аватарка" flex>
             <md-card>
-                <md-card-content layout-sm="row" layout-gt-sm>
-                    <div layout="column">
-                        <img ng-src="{{$ctrl.contact.photo.url}}" class="module-history-img"/>
-
+                <md-card-content >
+                     <div layout="column" layout-gt-xs="row">
+                      
+ <div  >
+                            <img ng-src="{{$ctrl.contact.photo.url}}" />
+                            </div>
                         <div ng-if="::$root.it.can('modifySalon')">
                             <md-button ng-if="!$ctrl.showAuthorPhotoUpload" class="md-raised"
                                        ng-click="$ctrl.showAuthorPhotoUpload=true">

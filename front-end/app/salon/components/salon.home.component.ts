@@ -4,6 +4,8 @@ import {FavorResourceName, IFavorResource, IFavor} from "../../resources/favor.r
 import {IConstants} from "../../core/core.config";
 import {TransformResourceName, ITransformResource, ITransform} from "../../resources/transform.resource";
 import {IBrendResource, IBrend, BrendResourceName} from "../../resources/brend.resource";
+import {MediaObserverFactoryName, IMediaObserverFactory} from "../../ui/mediaObserver.service";
+import {IRootScope} from "../../../typings";
 
 
 const template = `<div class="courses-details description-container" layout="column">
@@ -147,7 +149,7 @@ const template = `<div class="courses-details description-container" layout="col
                              class="md-margin "
                              ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,transform.photos.length)}}"
                              flex-gt-xs="46" flex-xs="80"
-                             ng-click="$ctrl.showMaster(master._id)">
+                              ng-click="::$ctrl.showMediaObserver(transform.photos, $index)">
                         <img ng-src="{{::photo.url}}" class="md-card-image">
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                             <span class="  md-margin">{{::photo.name}}</span>
@@ -172,10 +174,10 @@ const template = `<div class="courses-details description-container" layout="col
     
      <div layout="row" layout-align="center center">
 
-        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
-            <div class="brends-container" layout-margin layout layout-wrap layout-align="center center">
-             <a href="{{::bren.url}}"  class="md-margin brend " 
-               ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
+        <div flex  flex-gt-md="60" flex-gt-lg="40" flex-md="80" flex-gt-xs="60">
+            <div flex class="brends-container" layout-margin layout layout-wrap layout-align="center center">
+             <a href="{{::bren.url}}"  class="md-margin brend " layout="row"  layout-align="center center"
+              flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
                              flex-gt-xs="46" flex-xs="80" ng-repeat="bren in $ctrl.brends">
                                               
                     <img ng-src="{{::bren.photo.url}}"  
@@ -192,7 +194,8 @@ const template = `<div class="courses-details description-container" layout="col
 
 export class SalonHomeComponentController {
 
-    static $inject = [MasterResourceName, 'smoothScroll', "$location", 'constants', TransformResourceName, BrendResourceName];
+    static $inject = [MasterResourceName, 'smoothScroll', "$location", 'constants',
+        TransformResourceName, BrendResourceName, "$rootScope", MediaObserverFactoryName];
 
     favors: IFavor[];
     masters: IMaster[];
@@ -224,12 +227,13 @@ export class SalonHomeComponentController {
         }];
     categories: any;
     showMoreTransforms: boolean;
-
+    socialParams:any;
 
     constructor(private masterResource: IMasterResource,
                 private smoothScroll, private $location: ng.ILocationService,
                 private constants: IConstants, private TransformResource: ITransformResource,
-                private BrendResource: IBrendResource) {
+                private BrendResource: IBrendResource, private $rootScope:IRootScope,
+                private mediaObserver:IMediaObserverFactory) {
 
         this.masters = this.masterResource.query({sort: "order"});
         this.brends = this.BrendResource.query({sort: "order"});
@@ -266,12 +270,25 @@ export class SalonHomeComponentController {
         this.$location.path(`/master/${masterId}`);
     }
 
+    setSocialParams(photo) {
+        this.$rootScope.socialParams.host = this.constants.host;
+        this.$rootScope.socialParams.target = this.constants.host ;
+        this.$rootScope.socialParams.image = this.constants.host + photo.url;
+        this.$rootScope.socialParams.title = photo.name;
+        this.socialParams = angular.copy( this.$rootScope.socialParams, this.socialParams );
+    }
+
     getPictureFlex(index, length) {
         if (length > 3 && ( length % 3 == 1 && index >= length - 4 ) || ( length % 3 == 2 && index >= length - 5 )) {
             return 46;
         } else {
             return 22;
         }
+    }
+
+    showMediaObserver(items, index):void {
+        this.setSocialParams(items[index]);
+        this.mediaObserver.observe(items, index, this.socialParams);
     }
 }
 

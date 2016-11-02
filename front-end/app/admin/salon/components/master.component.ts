@@ -123,10 +123,11 @@ const template:string = `<div flex layout="column">
         </md-tab>
         <md-tab label="Аватар" flex>
             <md-card>
-                <md-card-content layout-sm="row" layout-gt-sm>
-                    <div layout="column">
-                        <img ng-src="{{$ctrl.master.photo.url}}" class="module-history-img"/>
-
+                <md-card-content  >
+                    <div layout="column" layout-gt-xs="row">
+                     <div >
+                        <img ng-src="{{$ctrl.master.photo.url}}" />
+                         </div>
                         <div ng-if="::$root.it.can('modifySalon')">
                             <md-button ng-if="!$ctrl.showAuthorPhotoUpload" class="md-raised"
                                        ng-click="$ctrl.showAuthorPhotoUpload=true">
@@ -142,7 +143,7 @@ const template:string = `<div flex layout="column">
                                 </md-button>
                                 <div ngf-drop ng-model="hearFormsPhotoFile" ngf-pattern="image/*"
                                      class="cropArea">
-                                    <img-crop area-type="rectangle" result-image-size="{w:1000,h:1000}" aspect-ratio="1"
+                                    <img-crop area-type="rectangle" result-image-size="{w:500,h:500}" aspect-ratio="1"
                                               init-max-area="true"
                                               image="hearFormsPhotoFile  | ngfDataUrl"
                                               result-image="croppedhearFormsPhotoFile"
