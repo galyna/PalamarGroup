@@ -391,10 +391,10 @@ export class MasterComponentController {
     initNavigatorConfig() {
         this.navigatorConfig = {
             selectMode: "week",
-            showMonths: 2,
-            skipMonths: 2,
+            showMonths: 3,
+            skipMonths: 3,
             locale: "ru-ru",
-            cellHeight: "40.2",
+            cellHeight: "34.5",
             cellWidth: "30",
             onTimeRangeSelected: (args)=> {
                 this.weekConfig.startDate = args.day;
@@ -412,13 +412,13 @@ export class MasterComponentController {
             businessBeginsHour: "10",
             businessEndsHour: "19",
             headerDateFormat: 'dd.MM',
-            cellHeight: "30",
+            cellHeight: "40",
             durationBarVisible: "false",
             columnMarginRight: "0",
             hideUntilInit: true,
             eventMoveHandling: 'Disabled',
             eventResizeHandling: 'Disabled',
-            heightSpec: 'BusinessHours'
+           // heightSpec: 'BusinessHours'
         };
 
 

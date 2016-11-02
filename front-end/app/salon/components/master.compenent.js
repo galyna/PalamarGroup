@@ -138,10 +138,10 @@ System.register(["../../resources/master.resource", "../../resources/appointment
                     var _this = this;
                     this.navigatorConfig = {
                         selectMode: "week",
-                        showMonths: 2,
-                        skipMonths: 2,
+                        showMonths: 3,
+                        skipMonths: 3,
                         locale: "ru-ru",
-                        cellHeight: "40.2",
+                        cellHeight: "34.5",
                         cellWidth: "30",
                         onTimeRangeSelected: function (args) {
                             _this.weekConfig.startDate = args.day;
@@ -158,13 +158,12 @@ System.register(["../../resources/master.resource", "../../resources/appointment
                         businessBeginsHour: "10",
                         businessEndsHour: "19",
                         headerDateFormat: 'dd.MM',
-                        cellHeight: "30",
+                        cellHeight: "40",
                         durationBarVisible: "false",
                         columnMarginRight: "0",
                         hideUntilInit: true,
                         eventMoveHandling: 'Disabled',
                         eventResizeHandling: 'Disabled',
-                        heightSpec: 'BusinessHours'
                     };
                 };
                 MasterComponentController.prototype.iniOnTimeRangeSelect = function () {

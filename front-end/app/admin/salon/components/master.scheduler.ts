@@ -281,9 +281,10 @@ export class MasterSchedulerComponentController {
         this.weekConfig = {
             visible: true,
             viewType: "Week",
-            angularAutoApply: true,
+           // angularAutoApply: true,
             locale: "ru-ru",
-            cellHeight: "30",
+            cellHeight: "40",
+            //headerHeight:'40',
             businessBeginsHour: "10",
             businessEndsHour: "19",
             hideUntilInit: true,
@@ -326,10 +327,10 @@ export class MasterSchedulerComponentController {
     initNavigatorConfig() {
         this.navigatorConfig = {
             selectMode: "week",
-            showMonths: 2,
-            skipMonths: 2,
+            showMonths: 3,
+            skipMonths: 3,
             locale: "ru-ru",
-            cellHeight: "40.2",
+            cellHeight: "34.5",
             cellWidth: "30",
             onTimeRangeSelected: (args)=> {
                 this.weekConfig.startDate = args.day;

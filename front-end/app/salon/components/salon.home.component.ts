@@ -204,20 +204,20 @@ export class SalonHomeComponentController {
     days = [
         {
             name: "ПОНЕДІЛОК",
-            program: '10:00- 19:00',
+            program: '10:00 - 19:00',
         },
         {
             name: "ВІВТОРОК",
-            program: '10:00- 19:00',
+            program: '10:00 - 19:00',
         }, {
             name: "СЕРЕДА",
-            program: '09:00- 19:00',
+            program: '10:00 - 19:00',
         }, {
             name: "ЧЕТВЕР",
-            program: '10:00- 19:00',
+            program: '10:00 - 19:00',
         }, {
             name: "П`ЯТНИЦЯ",
-            program: '10:00- 19:00',
+            program: '10:00 - 19:00',
         }, {
             name: "СУБОТА",
             program: 'зачинено',
