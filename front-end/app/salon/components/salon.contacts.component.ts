@@ -8,6 +8,7 @@ import {IModelResource, IModel, ModelResourceName} from "../../resources/model.r
 import {IOrder, IOrderResource, OrderResourceName} from "../../resources/order.resource";
 import {IRootScope} from "../../../typings";
 import {ISchedulerScope} from "../../admin/salon/components/master.scheduler";
+import {IMediaObserverFactory, MediaObserverFactoryName} from "../../ui/mediaObserver.service";
 
 
 const template = `<div class="salon-contacts description-container" layout="column">
@@ -120,54 +121,97 @@ const template = `<div class="salon-contacts description-container" layout="colu
 
                 </md-card>
             </div>
+            
+            
         </div>
+        
+         <div flex="100" class="courses-details" layout="row" layout-align="center center"
+         ng-if="salon.photos.length>0 ">
+        <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
+            <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+                <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="photo in salon.photos"
+                         class="md-margin "
+                         flex-gt-sm="22"
+                         flex-gt-xs="46" flex-xs="80"
+                         ng-click="::$ctrl.showMediaObserver(salon.photos, $index)">                   
+                        <img ng-src="{{::photo.url}}" class="md-card-image">                 
+                    <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
+                        <span class="  md-margin">{{::photo.name}}</span>
+                    </md-card-content>
+            </div>
+        </div>
+    </div>
     </div>
 </div>`;
 
 export class SalonContactsComponentController {
 
-    static $inject = [ContactResourceName, 'constants', '$rootScope', SalonResourceName,"$scope"];
+    static $inject = [ContactResourceName, '$rootScope', SalonResourceName, "$scope",
+        MediaObserverFactoryName, 'constants'];
 
-    showAnimation:boolean;
-    showMap:boolean;
-    contacts:IContact[];
-    salons:ISalon[];
-    map:any;
+    showAnimation: boolean;
+    showMap: boolean;
+    contacts: IContact[];
+    salons: ISalon[];
+    map: any;
+    socialParams:any;
 
-    constructor(private contactResource:IContactResource,
-                private constants:IConstants, private $rootScope:IRootScope,
-                private salonResource:ISalonResource,private $scope:ISchedulerScope) {
-
+    constructor(private contactResource: IContactResource,
+                private $rootScope: IRootScope,
+                private salonResource: ISalonResource, private $scope: ISchedulerScope,
+                private mediaObserver: IMediaObserverFactory,
+                private constants: IConstants) {
 
 
     }
 
+    setSocialParams(photo) {
+        this.$rootScope.socialParams.host = this.constants.host;
+        this.$rootScope.socialParams.target = this.constants.host + "/#" +SalonContactsComponentUrl;
+        this.$rootScope.socialParams.image = this.constants.host + photo.url;
+        this.$rootScope.socialParams.title = photo.name;
+        this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
+    }
+
+    getPictureFlex(index, length) {
+        if (length > 3 && ( length % 3 == 1 && index >= length - 4 ) || ( length % 3 == 2 && index >= length - 5 )) {
+            return 46;
+        } else {
+            return 22;
+        }
+    }
+
+    showMediaObserver(items, index): void {
+        this.setSocialParams(items[index]);
+        this.mediaObserver.observe(items, index, this.socialParams);
+    }
+
     $onInit() {
         this.showAnimation = this.$rootScope.isBigSize;
-        this.map = { center: { latitude: 49.811210, longitude: 23.974013}, zoom: 18};
-        this.contacts = this.contactResource.query( {query: {'isAcademy': 'false'}} );
-        this.contacts.$promise.then( (contacts) => {
-            this.salons = this.salonResource.query({sort:'-isMain'});
+        this.map = {center: {latitude: 49.811210, longitude: 23.974013}, zoom: 18};
+        this.contacts = this.contactResource.query({query: {'isAcademy': 'false'}});
+        this.contacts.$promise.then((contacts) => {
+            this.salons = this.salonResource.query({sort: '-isMain'});
 
-            this.salons.$promise.then( (salons) => {
-                this.showMap=true;
-                salons.forEach( (salon)=> {
+            this.salons.$promise.then((salons) => {
+                this.showMap = true;
+                salons.forEach((salon)=> {
                     if (!salon.contacts) {
-                        salon.contacts=[];
+                        salon.contacts = [];
                     }
                     if (salon.isMain) {
-                        this.map.center.latitude= salon.latitude;
-                        this.map.center.longitude= salon.longitude;
+                        this.map.center.latitude = salon.latitude;
+                        this.map.center.longitude = salon.longitude;
                     }
-                    contacts.forEach( (contact)=> {
+                    contacts.forEach((contact)=> {
                         if (contact.salon === salon._id) {
-                            salon.contacts.push( contact );
+                            salon.contacts.push(contact);
                         }
-                    } )
-                } )
+                    })
+                })
 
-            } )
-        } );
+            })
+        });
     }
 
 

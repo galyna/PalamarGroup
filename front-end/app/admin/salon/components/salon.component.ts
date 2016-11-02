@@ -77,10 +77,7 @@ const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveFor
                                     <label for="historyNme">Назва </label>
                                     <input id="historyNme" ng-model="item.name" name="historyNme"/>
                                 </md-input-container>
-                                <md-input-container class="md-block  ">
-                                    <label for="ord">Порядок відображення</label>
-                                    <input id="ord" ng-model="item.order" type="number"/>
-                                </md-input-container>
+                              
                                 <md-button class="  md-raised"
                                            ng-click="$ctrl.deleteFromList($ctrl.salon.photos ,item)">
                                     Видалити
@@ -103,7 +100,7 @@ const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveFor
                             </md-button>
                             <div ngf-drop ng-model="masrerNewWork" ngf-pattern="image/*"
                                  class="cropArea">
-                                <img-crop area-type="rectangle" result-image-size="{w:400,h:400}" aspect-ratio="1"
+                                <img-crop area-type="rectangle" result-image-size="{w:600,h:600}" aspect-ratio="1"
                                           init-max-area="true"
                                           image="masrerNewWork  | ngfDataUrl"
                                           result-image="croppedhearFormsPhotoFile"
