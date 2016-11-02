@@ -17,8 +17,14 @@ button.md-button.md-fab.down-btn {
   }
 
 }
-.md-fab.down-btn.md-button.md-ink-ripple.md-focused{ background: white !important;}
-.md-fab.up-btn.md-button.md-ink-ripple.md-focused{ background: white !important;}
+
+.md-fab.down-btn.md-button.md-ink-ripple.md-focused {
+  background: white !important;
+}
+
+.md-fab.up-btn.md-button.md-ink-ripple.md-focused {
+  background: white !important;
+}
 
 button.md-button.md-fab.up-btn {
   position: absolute;
@@ -77,13 +83,44 @@ button.md-button.md-fab.side-up-btn {
 
 }
 
-/* Icon 4 */
-#nav-icon4 {
+#menu-container {
   z-index: 81;
   position: fixed;
-  top: 0;
-  //outline: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  top: 10px;
+  left: 10px;
+  width: 120px;
+  height: 55px;
+  border: 1px solid $primary;
+  border-left-width: 0;
+  background: rgba(white, 0.6);
+
+  @media (max-width: $layout-breakpoint-xs) {
+    width: 65px;
+    border: none;
+  }
 }
+
+.menu-label {
+  position: fixed;
+  top: 15px;
+  left: 73px;
+  width: 60px;
+  height: 45px;
+}
+
+/* Icon 4 */
+#nav-icon4 {
+  left: 5px;
+  position: fixed;
+  top: 10px;
+  @media (max-width: $layout-breakpoint-xs) {
+    border: none;
+  }
+  outline: none;
+}
+
 /* Icon 1 */
 
 #nav-icon4 {
@@ -152,7 +189,7 @@ button.md-button.md-fab.side-up-btn {
   transform-origin: left center;
 }
 
-#nav-icon4.open span:nth-child(1) {
+#menu-container.open #nav-icon4 span:nth-child(1) {
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
   -o-transform: rotate(45deg);
@@ -161,12 +198,12 @@ button.md-button.md-fab.side-up-btn {
   left: 8px;
 }
 
-#nav-icon4.open span:nth-child(2) {
+#menu-container.open #nav-icon4 span:nth-child(2) {
   width: 0%;
   opacity: 0;
 }
 
-#nav-icon4.open span:nth-child(3) {
+#menu-container.open #nav-icon4 span:nth-child(3) {
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
   -o-transform: rotate(-45deg);
@@ -174,8 +211,6 @@ button.md-button.md-fab.side-up-btn {
   top: 39px;
   left: 8px;
 }
-
-
 
 /* Icon 1 */
 .md-button.md-default-theme.md-fab, .md-button.md-fab, .md-button.md-fab, .md-focused {
@@ -299,11 +334,14 @@ button.md-button.md-fab.side-up-btn {
   }
 }
 
-.md-button.md-fab, .md-button.md-fab.md-default-theme{
+.md-button.md-fab, .md-button.md-fab.md-default-theme {
   border: none;
 }
 
 .comment-btn {
   margin-bottom: 20px
 }
-.near-master{width: 227px !important;}
+
+.near-master {
+  width: 227px !important;
+}

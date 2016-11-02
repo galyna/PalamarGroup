@@ -11,10 +11,15 @@ import {MastersComponentUrl} from "../salon/components/masters.component";
 import {IConstants} from "../core/core.config";
 import {IRootScope} from "../../typings";
 
-const template = `<div id="nav-icon4" ng-click="$ctrl.toggleMenu($event)">
-  <span></span>
-  <span></span>
-  <span></span>
+const template = `<div   ng-click="$ctrl.toggleMenu($event)" id="menu-container" >
+    <div id="nav-icon4" >
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div hide-xs="true" class="menu-label" layout="row" layout-align="center center " >
+        МЕНЮ
+    </div>
 </div>
    
 `;
@@ -119,11 +124,12 @@ export class MenuComponentController {
                 targetEvent: $event,
                 fullscreen: true
             } );
-
+            menuBtn.css('z-index',81);
             menuBtn.toggleClass( 'open' );
         } else {
 
             this.mdDialog.hide();
+            menuBtn.css('z-index',80);
             menuBtn.toggleClass( 'open' );
         }
 
