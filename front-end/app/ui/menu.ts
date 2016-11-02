@@ -23,7 +23,7 @@ const template = `<div   ng-click="$ctrl.toggleMenu($event)" id="menu-container"
 </div>
    
 `;
-const menuBtnSelector = "#nav-icon4";
+const menuBtnSelector = "#menu-container";
 
 const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout="column" layout-align="center stretch"
 
