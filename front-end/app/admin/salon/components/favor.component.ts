@@ -56,7 +56,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
         <md-tab label="Іконка" flex>
             <md-card>
                 <md-card-content >
-                    <div layout="column" layout-gt-xs="row">
+                    <div layout="column" >
                     <div >
                         <img ng-src="{{$ctrl.favor.photo.url}}" />
 </div>

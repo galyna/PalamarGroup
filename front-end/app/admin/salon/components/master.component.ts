@@ -124,7 +124,7 @@ const template:string = `<div flex layout="column">
         <md-tab label="Аватар" flex>
             <md-card>
                 <md-card-content  >
-                    <div layout="column" layout-gt-xs="row">
+                    <div layout="column" >
                      <div >
                         <img ng-src="{{$ctrl.master.photo.url}}" />
                          </div>
