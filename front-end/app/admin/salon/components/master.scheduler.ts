@@ -281,10 +281,9 @@ export class MasterSchedulerComponentController {
         this.weekConfig = {
             visible: true,
             viewType: "Week",
-           // angularAutoApply: true,
+            angularAutoApply: true,
             locale: "ru-ru",
             cellHeight: "40",
-            //headerHeight:'40',
             businessBeginsHour: "10",
             businessEndsHour: "19",
             hideUntilInit: true,

@@ -109,9 +109,9 @@ const template = `<div class=" description-container">
 
     <div class="master-scheduler" layout="row" flex layout-align="center center">
         <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
-            <div layout="row" layout-xs="column">
+            <div layout="row" layout-xs="column" class='master-calendar'>
                 <div hide show-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
-                    <daypilot-navigator style=" width: 280px" id="navi"
+                    <daypilot-navigator style=" width: 280px" id="navi-front"
                                         daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>
 
                 </div>
@@ -121,7 +121,7 @@ const template = `<div class=" description-container">
                                         daypilot-config="$ctrl.navigatorSmallConfig"></daypilot-navigator>
                 </div>
                 <div flex class="md-padding ">
-                    <daypilot-calendar id="week" daypilot-config="$ctrl.weekConfig"
+                    <daypilot-calendar id="week-front" daypilot-config="$ctrl.weekConfig"
                                        daypilot-events="$ctrl.events"></daypilot-calendar>
                 </div>
 

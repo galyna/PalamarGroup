@@ -71,7 +71,7 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                         api: 2,
                         angularAutoApply: true,
                         locale: "ru-ru",
-                        cellHeight: "30",
+                        cellHeight: "40",
                         businessBeginsHour: "10",
                         businessEndsHour: "19",
                         hideUntilInit: true,
@@ -145,10 +145,10 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                     var _this = this;
                     this.navigatorConfig = {
                         selectMode: "week",
-                        showMonths: 2,
-                        skipMonths: 2,
+                        showMonths: 3,
+                        skipMonths: 3,
                         locale: "ru-ru",
-                        cellHeight: "40.2",
+                        cellHeight: "34.5",
                         cellWidth: "30",
                         onTimeRangeSelected: function (args) {
                             _this.weekConfig.startDate = args.day;

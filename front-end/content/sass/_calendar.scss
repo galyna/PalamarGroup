@@ -345,28 +345,28 @@ pg-calendar {
 
 }
 
-.navigator_default_dayheader {
-  padding-right: 2px;
-}
+.master-calendar {
+  .navigator_default_dayheader {
+    padding-right: 2px;
+  }
 
-.calendar_default_cornerright {
-  .calendar_default_cornerright_inner {
+  .calendar_default_cornerright {
+    .calendar_default_cornerright_inner {
+      display: none;
+    }
     display: none;
   }
-  display: none;
+
+  .calendar_default_main > :nth-child(2) {
+
+    overflow: hidden !important;
+  }
+
+  .navigator_default_select {
+    background: rgba($primary, 0.4);
+  }
+  .navigator_default_title {
+    //top:-40px !important;
+  }
 }
 
-.calendar_default_main > :nth-child(2) {
-
-overflow: hidden !important;
-}
-
-.navigator_default_select {
-  background: rgba($primary, 0.4);
-}
-.navigator_default_title{
-  //top:-40px !important;
-}
-
-
-//.navigator_default_dayheader{top:40px!important; height:40px !important;}
