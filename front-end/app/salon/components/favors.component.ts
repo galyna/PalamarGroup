@@ -4,22 +4,21 @@ import {IConstants} from "../../core/core.config";
 import {IAppointmentResource, AppointmentResourceName, IAppointment} from "../../resources/appointment.resource";
 import {IRootScope} from "../../../typings";
 
-const template = `
-<div class="courses-details description-container" layout="column">
-   
+const template = `<div class="courses-details description-container" layout="column">
 
- <div ng-repeat="category in  $ctrl.categories">
- 
-  <div layout="row" flex ng-if="category.favors.length>0">
-        <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap invers header">
-                <div class="md-display-2"> {{category.name}}</div>
+
+    <div ng-repeat="category in  $ctrl.categories">
+
+        <div layout="row" flex ng-if="category.favors.length>0">
+            <div class="page-delimiter" flex>
+                <div class="fit-screen-wrap invers header">
+                    <div class="md-display-2"> {{category.name}}</div>
+                </div>
+
             </div>
-
         </div>
-    </div>
 
-    <div layout="row" layout-align="center center" ng-if="category.favors.length>0 ">
+        <div layout="row" layout-align="center center" ng-if="category.favors.length>0 ">
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
                 <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                     <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="favor in category.favors"
@@ -27,20 +26,20 @@ const template = `
                              ng-attr-flex-gt-sm="46"
                              flex-gt-xs="46" flex-xs="80"
                              ng-click="$ctrl.showFavor(favor._id)">
-                     
-                            <img ng-src="{{::favor.photo.url}}" class="md-card-image">
-                       
+
+                        <img ng-src="{{::favor.photo.url}}" class="md-card-image">
+
                         <md-card-content ng-if="favor.name" layout="column" flex="100" layout-align="center center">
                             <span class="  md-margin">{{::favor.name}}</span>
                         </md-card-content>
-                        </md-card>
+                    </md-card>
                 </div>
             </div>
         </div>
     </div>
- </div> 
+</div>
 <div class="courses description-container" layout="row" layout-align="center center">
-    <div layout="column" layout-align="center center">       
+    <div layout="column" layout-align="center center">
         <div layout="row" ng-if="$ctrl.masters.length>0" flex>
             <div class="page-delimiter" flex>
                 <div class="fit-screen-wrap invers header">
@@ -60,31 +59,34 @@ const template = `
                              data-aos-easing="ease-out-cubic"
                              flex="50"><img src="{{::master.photo.url}}" class="md-card-image "/>
                         </div>
-                          <div class="card-desc box " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
+                        <div class="card-desc box " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
                              data-aos-easing="ease-out-cubic"
-                             flex="50" layout="column" layout-align="center center">
-                              <div ng-if="master.isTop" class="corner-ribbon top-right black">Top Stylist</div>
-                            <md-card-title flex>
-                                <md-card-title-text flex layout-align="space-around center">
-                                    <div hide show-md="true" class="md-display-2">{{::master.name}}</div>
-                                    <div hide-md="true" class="md-display-1">{{::master.name}}</div>
-                                    <div >
-                                         <md-button class="  md-display-1 md-raised  " aria-label="Details"
-                                          ng-click="$ctrl.showMaster(master._id)">
-                                    Про майстра
-                                </md-button>
-
-                                    </div>
-                                </md-card-title-text>
-                            </md-card-title>
-                            <md-card-actions flex="25">
-                                <md-button class=" near-master xs-selected md-display-1 md-raised " aria-label="Details"
-                                           ng-click="$ctrl.showAppointmentDialog(master)">
-                                    Записатись
-                                </md-button>
-                            </md-card-actions>
+                             flex="50" layout="column" layout-align="space-around center">
+                            <div ng-if="master.rate && master.rate._id!=='0'" hide show-md="true" class="corner-ribbon top-right black"
+                             ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}" >
+                                {{master.rate.text}}
+                            </div>
+                            <div ng-if="master.rate && master.rate._id!=='0'" hide-md="true"  class="corner-ribbon-min top-right black"
+                            ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}">
+                                {{master.rate.text}}
+                            </div>
+                            <div layout="row" layout-align="center center" class="md-padding md-margin">
+                                <div hide show-gt-sm="true" flex="90" class="md-display-2">{{::master.name}}</div>
+                                <div hide show-sm="true"
+                                ="true" flex="90" class="md-display-1">{{::master.name}}
+                            </div>
                         </div>
-                         </md-card-content>
+                        <md-button class="  md-display-1 md-raised  " aria-label="Details"
+                                   ng-click="$ctrl.showMaster(master._id)">
+                            Про майстра
+                        </md-button>
+                        <md-button class=" near-master xs-selected md-display-1 md-raised " aria-label="Details"
+                                   ng-click="$ctrl.showAppointmentDialog(master)">
+                            Записатись
+                        </md-button>
+
+            </div>
+                    </md-card-content>
                 </md-card>
 
             </div>
@@ -93,14 +95,16 @@ const template = `
                 <div class="overlay-bg trigger-right"></div>
                 <md-card md-whiteframe="8" ng-click="vm.showDetails(course._id)">
                     <md-card-content layout="column">
-                     <div ng-if="$ctrl.master.isTop" class="card-desc-top-master" flex layout="column"
-                         layout-align=" space-around center">
-                        <md-card-title>
-                            <md-card-title-text flex layout="column" layout-align=" space-around center">
-                                <div class="md-headline">Top Stylist</div>
-                            </md-card-title-text>
-                        </md-card-title>
-                    </div>
+                        <div ng-if="master.rate && master.rate._id!=='0'" class="card-desc-top-master"
+                             ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}" flex
+                             layout="column"
+                             layout-align=" space-around center">
+                            <md-card-title>
+                                <md-card-title-text flex layout="column" layout-align=" space-around center">
+                                    <div class="md-headline"> {{master.rate.text}}</div>
+                                </md-card-title-text>
+                            </md-card-title>
+                        </div>
                         <div class="card-media "><img src="{{::master.photo.url}}" class="md-card-image"/></div>
                         <div class="card-desc "
                              layout="column" layout-align="center center">

@@ -20,27 +20,38 @@ const template = `<div class=" description-container">
                     </div>
                     <div class="card-desc box " data-aos="{{{true:'fade-left', false:'false'}[$ctrl.showAnimation]}}"
                          data-aos-easing="ease-out-cubic"
-                         flex="50" layout="column" layout-align="center center">
-                        <div ng-if="$ctrl.master.isTop" class="corner-ribbon top-right black">Top Stylist</div>
-                        <md-card-title flex>
-                            <md-card-title-text flex layout-align="space-around center">
-
-
-                                <div hide show-md="true" class="md-display-2">{{::$ctrl.master.name}}</div>
-                                <div hide-md="true" class="md-display-1">{{::$ctrl.master.name}}</div>
-                                <div class="descr-container">
-                                    <div class="md-title">{{::$ctrl.master.description}}</div>
-
-                                </div>
+                         flex="50" layout="column" layout-align="space-around center">
+                            <div ng-if="$ctrl.master.rate && $ctrl.master.rate._id!=='0'" hide show-md="true"
+                                 class="corner-ribbon top-right black"
+                                 ng-class="{'grey': $ctrl.master.rate._id==='2','white': $ctrl.master.rate._id==='1'}">
+                                {{$ctrl.master.rate.text}}
+                            </div>
+                            <div ng-if="$ctrl.master.rate && $ctrl.master.rate._id!=='0'" hide-md="true"
+                                 class="corner-ribbon-min top-right black"
+                                 ng-class="{'grey': $ctrl.master.rate._id==='2','white': $ctrl.master.rate._id==='1'}">
+                                {{$ctrl.master.rate.text}}
+                            </div>
+                            <div layout="row" layout-align="center center" class="md-padding md-margin">
+                                <div hide show-gt-sm="true" flex="90" class="md-display-2">{{::$ctrl.master.name}}</div>
+                                <div hide show-sm="true"
+                                ="true" flex="90" class="md-display-1">{{::$ctrl.master.name}}
+                            </div>
+                        </div>   
+                         <div  ng-if="$ctrl.master.description"  hide  show-gt-sm="true" layout="row" layout-align="center center" class="">
+                                <md-card-title>
+                            <md-card-title-text>
+                               
+                                <div class="md-title">{{::$ctrl.master.description}}</div>
                             </md-card-title-text>
                         </md-card-title>
-                        <md-card-actions flex="25">
-                            <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
-                                       ng-click="$ctrl.showAppointmentDialog()">
-                                Записатись
-                            </md-button>
-                        </md-card-actions>
-                    </div>
+                        </div>   
+                                                                                                                                
+                        <md-button class=" near-master xs-selected md-display-1 md-raised " aria-label="Details"
+                                   ng-click="$ctrl.showAppointmentDialog($ctrl.master)">
+                            Записатись
+                        </md-button>
+
+            </div>
                 </md-card-content>
             </md-card>
         </div>
@@ -48,14 +59,16 @@ const template = `<div class=" description-container">
 
             <md-card md-whiteframe="8">
                 <md-card-content layout="column">
-                    <div ng-if="$ctrl.master.isTop" class="card-desc-top-master" flex layout="column"
-                         layout-align=" space-around center">
-                        <md-card-title>
-                            <md-card-title-text flex layout="column" layout-align=" space-around center">
-                                <div class="md-headline">Top Stylist</div>
-                            </md-card-title-text>
-                        </md-card-title>
-                    </div>
+                    <div ng-if="$ctrl.master.rate && $ctrl.master.rate._id!=='0'" class="card-desc-top-master"
+                 ng-class="{'grey': $ctrl.master.rate._id==='2','white': $ctrl.master.rate._id==='1'}" flex
+                 layout="column"
+                 layout-align=" space-around center">
+                <md-card-title>
+                    <md-card-title-text flex layout="column" layout-align=" space-around center">
+                        <div class="md-headline"> {{::$ctrl.master.rate.text}}</div>
+                    </md-card-title-text>
+                </md-card-title>
+            </div>
                     <div class="card-media " ng-click="$ctrl.showMaster($ctrl.master._id)">
                         <img
                                 src="{{::$ctrl.master.photo.url}}"
@@ -79,8 +92,9 @@ const template = `<div class=" description-container">
             </md-card>
 
         </div>
-
     </div>
+    
+   
     <div flex layout-align="center center" layout="row">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
@@ -154,10 +168,8 @@ const template = `<div class=" description-container">
                          class="md-margin "
                          ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
                          flex-gt-xs="46" flex-xs="80"
-                         ng-click="$ctrl.showMaster(master._id)">
-                    <card-image-container>
-                        <img ng-src="{{::photo.url}}" class="md-card-image">
-                    </card-image-container>
+                         ng-click="$ctrl.showMaster(master._id)">                   
+                        <img ng-src="{{::photo.url}}" class="md-card-image">                 
                     <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                         <span class="  md-margin">{{::photo.name}}</span>
                     </md-card-content>
@@ -333,9 +345,9 @@ export class MasterComponentController {
             this.initWeekConfig();
             this.initNavigatorConfig();
             this.initNavigatorSmallConfig();
+            this.iniOnTimeRangeSelect();
             this.events = tasks.map( (task)=> {
                 this.updateTaskText( task );
-                this.iniOnTimeRangeSelect();
                 return angular.copy( task.scheduler );
             } );
 

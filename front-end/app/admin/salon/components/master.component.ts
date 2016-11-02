@@ -4,6 +4,7 @@ import IPhoto = pg.models.IPhoto;
 import {FavorResourceName, IFavorResource, IFavor} from "../../../resources/favor.resource";
 import IMasterFavor = pg.models.IMasterFavor;
 import {IAppointment, AppointmentResourceName, IAppointmentResource} from "../../../resources/appointment.resource";
+import {IConstants} from "../../../core/core.config";
 
 const template:string = `<div flex layout="column">
     <md-toolbar>
@@ -23,75 +24,102 @@ const template:string = `<div flex layout="column">
         </div>
     </md-toolbar>
     <md-tabs md-stretch-tabs="always" md-dynamic-height>
-        <md-tab label="Графік">
-            <pg-master-scheduler mode='master' appointment="$ctrl.appointment" masterid="$ctrl.master._id" mname="$ctrl.master.name" photo="$ctrl.master.photo.url"></pg-master-scheduler>
-        </md-tab>
         <md-tab label="Інфо">
             <md-card>
                 <md-card-content>
-                      <md-input-container>
-                       
-                        <md-checkbox ng-model="$ctrl.master.isTop" aria-label="Finished?"
-                                     ng-disabled="::!$root.it.can('modifySalon')">
-                           Топ стиліст
-                        </md-checkbox>
-                    </md-input-container>
                     <md-input-container class="md-block ">
-                        <label for="name">Ім’я </label>
+                        <label for="name">Ім'я </label>
                         <input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.master.name"
                                name="name"/>
                     </md-input-container>
-                      <md-input-container class="md-block">
+                    <md-input-container class="md-block">
+                        <label for="rate">Загальний рівень майстра</label>
+                        <md-select name="rate" ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.master.rate"
+                                   ng-model-options="{trackBy: '$value._id'}">
+                            <md-option ng-repeat="rate in $ctrl.rates" ng-value="rate">
+                                {{ rate.name }}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container class="md-block">
                         <label for="description">Про майстра</label>
                         <textarea ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.master.description"
                                   id="description" name="description" required></textarea>
                     </md-input-container>
-                      <md-input-container>
-                            <label for="order">Порядок відображення</label>
-                            <input id="order" ng-disabled="::!$root.it.can('modifySalon')"
-                                   ng-model="$ctrl.master.order" name="order" type="number"/>
-                        </md-input-container>
+                    <md-input-container class="md-block">
+                        <label for="order">Порядок відображення</label>
+                        <input id="order" ng-disabled="::!$root.it.can('modifySalon')"
+                               ng-model="$ctrl.master.order" name="order" type="number"/>
+                    </md-input-container>
                     <div>
                         <div class="md-block">
                             <md-subheader class="md-no-sticky">Послуги</md-subheader>
                             <div ng-repeat="service in $ctrl.master.services">
                                 <md-divider></md-divider>
                                 <div layout="row">
-                                  <img  ng-src="{{service.favor.photo.url}}" class="avatar" alt="{{service.favor.name}}" />
-                                    <div class="md-margin md-padding " id="prokgram" name="program">
+                                    <img ng-src="{{service.favor.photo.url}}" class="md-margin md-padding  avatar"
+                                         alt="{{service.favor.name}}"/>
+                                    <div class="md-margin md-padding " layout="column" name="program">
+                                        <div>Назва</div>
                                         {{service.favor.name}}
                                     </div>
-                                    <div class="md-margin md-padding " id="program" name="program">{{service.price}}
+                                    <div class="md-margin md-padding " layout="column">
+                                        <div>Ціна</div>
+                                        {{service.price}} грн.
                                     </div>
-                                    <md-button ng-if="::$root.it.can('modifySalon')" class="md-icon-button"
-                                               ng-click="$ctrl.deleteService(service)">
-                                        <md-icon md-svg-src="action:ic_delete_24px"></md-icon>
-                                    </md-button>
+                                    <div class="md-margin md-padding " layout="column">
+                                        <div>Рівень</div>
+                                        {{service.level.name}}
+                                    </div>
+                                    <div class="md-margin md-padding " layout="column">
+
+                                        <md-button ng-if="::$root.it.can('modifySalon')" class="md-icon-button"
+                                                   ng-click="$ctrl.deleteService(service)">
+                                            <md-icon md-svg-src="action:ic_delete_24px"></md-icon>
+                                        </md-button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
                         <div ng-if="::$root.it.can('modifySalon')" class="md-block">
                             <md-subheader class="md-no-sticky">Додати послугу
                             </md-subheader>
-
-                            <md-select ng-model="$ctrl.newService.favor" ng-model-options="{trackBy: '$value._id'}">
-                                <md-option ng-repeat="favor in $ctrl.favors" ng-value="favor">
-                                    {{ favor.name }}
-                                </md-option>
-                            </md-select>
                             <md-input-container layout="row" class="md-block">
-                                <label for="newProgram">ЦІНА</label>
-                                <input type="number" ng-model="$ctrl.newService.price"/>
-                            </md-input-container>
-                            <md-input-container class="md-block">
-                                <md-button ng-disabled="!$ctrl.newService" class=" " ng-click="$ctrl.addService()">
-                                    Додати
-                                </md-button>
-                            </md-input-container>
+                                <label for="service">Послуга</label>
+                                <md-select name="service" ng-model="$ctrl.newService.favor"
+                                           ng-model-options="{trackBy: '$value._id'}">
+                                    <md-option ng-repeat="favor in $ctrl.favors" ng-value="favor">
+                                        {{ favor.name }}
+                                    </md-option>
+                                </md-select>
+                                </md-select>
+                                <md-input-container layout="row" class="md-block">
+                                    <label for="level">Рівень</label>
+                                    <md-select name="level" ng-model="$ctrl.newService.level"
+                                               ng-model-options="{trackBy: '$value._id'}">
+                                        <md-option ng-repeat="level in $ctrl.levels" ng-value="level">
+                                            {{ level.name }}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container layout="row" class="md-block">
+                                    <label for="price">Ціна</label>
+                                    <input name="price" type="number" ng-model="$ctrl.newService.price"/>
+                                </md-input-container>
+                                <md-input-container class="md-block">
+                                    <md-button ng-disabled="!$ctrl.newService" class=" " ng-click="$ctrl.addService()">
+                                        Додати
+                                    </md-button>
+                                </md-input-container>
                         </div>
                     </div>
                 </md-card-content>
             </md-card>
+        </md-tab>
+        <md-tab label="Графік">
+            <pg-master-scheduler mode='master' appointment="$ctrl.appointment" masterid="$ctrl.master._id"
+                                 mname="$ctrl.master.name" photo="$ctrl.master.photo.url"></pg-master-scheduler>
         </md-tab>
         <md-tab label="Аватар" flex>
             <md-card>
@@ -179,7 +207,7 @@ const template:string = `<div flex layout="column">
                 </md-card-content>
             </md-card>
         </md-tab>
-         <md-tab label="Відео" flex>
+        <md-tab label="Відео" flex>
             <md-card>
                 <md-card-content layout="row">
                     <div flex="60">
@@ -227,7 +255,7 @@ const template:string = `<div flex layout="column">
 export class MasterComponentController {
     static $inject = ["$log", "$routeParams", "$mdToast",
         "$timeout", PhotoServiceName, MasterResourceName,
-        "Upload", FavorResourceName, '$mdDialog',AppointmentResourceName];
+        "Upload", FavorResourceName, '$mdDialog',AppointmentResourceName, 'constants'];
 
     originalMaster:IMaster;
     master:IMaster;
@@ -236,15 +264,20 @@ export class MasterComponentController {
     favors:IFavor[];
     newService:IMasterFavor;
     appointment:IAppointment;
+    levels:any[];
+    rates:any[];
+
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
                 private photoService:PhotoService, private MasterResource:IMasterResource,
                 private Upload:ng.angularFileUpload.IUploadService, private favorResource:IFavorResource,
-                private $mdDialog:ng.material.IDialogService,private AppointmentResource:IAppointmentResource) {
+                private $mdDialog:ng.material.IDialogService,private AppointmentResource:IAppointmentResource,
+                private constants:IConstants) {
     }
 
     $onInit() {
-
+        this.levels = this.constants.favorLevels;
+        this.rates = this.constants.rates;
         this.favors = this.favorResource.query();
         this.appointment=new this.AppointmentResource();
         if (this.$routeParams["id"]) {
@@ -292,6 +325,9 @@ export class MasterComponentController {
         if (this.newService) {
             if (!this.newService.price) {
                 this.newService.price = this.newService.favor.defPrice;
+            }
+            if (!this.newService.level) {
+                this.newService.level =  this.levels[0];
             }
             if (this.master.services.some( (ser)=> {
                     return ser.favor._id == this.newService.favor._id

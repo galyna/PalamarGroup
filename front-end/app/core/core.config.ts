@@ -1,15 +1,17 @@
 export interface IConstants {
-    host:string,
-    baseUrl:string,
-    apiUrl:string,
-    uploadDir:string,
-    photoUrl:string,
-    favorCategories:any[],
-    orderStatuses:any[],
-    showSalon:boolean
+    host: string,
+    baseUrl: string,
+    apiUrl: string,
+    uploadDir: string,
+    photoUrl: string,
+    favorCategories: any[],
+    favorLevels: any[],
+    rates: any[],
+    orderStatuses: any[],
+    showSalon: boolean
 }
 
-export let constants:IConstants = {
+export let constants: IConstants = {
     host: 'http://palamar.com.ua',
     baseUrl: '/',
     apiUrl: '/api',
@@ -24,25 +26,35 @@ export let constants:IConstants = {
         {_id: "hear", name: "ПЕРУКАРСЬКІ ПОСЛУГИ"},
         {_id: "neils", name: "НІГТЬОВА ЕСТЕТИКА"},
         {_id: "makeup", name: "ВІЗАЖ"}],
+    favorLevels: [
+        {_id: "0", name: "ПОЧАТКОВИЙ", text: "Junior Stylist"},
+        {_id: "1", name: "СЕРЕДНІЙ", text: "Middle Stylist"},
+        {_id: "2", name: "ТОП", text: "Top Stylist"}
+    ], rates: [
+        {_id: "0", name: "ВІДСУТНІЙ", text: ""},
+        {_id: "1", name: "ПОЧАТКОВИЙ", text: "Junior Stylist"},
+        {_id: "2", name: "СЕРЕДНІЙ", text: "Middle Stylist"},
+        {_id: "3", name: "ТОП", text: "Top Stylist"}
+    ],
     showSalon: true
 };
 
 debugConfig.$inject = ['$compileProvider'];
 export function debugConfig($compileProvider) {
-    $compileProvider.debugInfoEnabled( false );
+    $compileProvider.debugInfoEnabled(false);
 }
 
 materialConfig.$inject = ['$mdIconProvider', '$mdDateLocaleProvider'];
-export function materialConfig($mdIconProvider:ng.material.IIconProvider, $mdDateLocaleProvider) {
+export function materialConfig($mdIconProvider: ng.material.IIconProvider, $mdDateLocaleProvider) {
 
 
     $mdIconProvider
-        .iconSet( "action", "/content/images/icons/svg-sprite-action.svg" )
-        .iconSet( "social", "/content/images/icons/svg-sprite-social.svg" )
-        .iconSet( "communication", "/content/images/icons/svg-sprite-communication.svg" )
-        .iconSet( "content", "/content/images/icons/svg-sprite-content.svg" )
-        .iconSet( "navigation", "/content/images/icons/svg-sprite-navigation.svg" )
-        .iconSet( "av", "/content/images/icons/svg-sprite-av.svg" )
+        .iconSet("action", "/content/images/icons/svg-sprite-action.svg")
+        .iconSet("social", "/content/images/icons/svg-sprite-social.svg")
+        .iconSet("communication", "/content/images/icons/svg-sprite-communication.svg")
+        .iconSet("content", "/content/images/icons/svg-sprite-content.svg")
+        .iconSet("navigation", "/content/images/icons/svg-sprite-navigation.svg")
+        .iconSet("av", "/content/images/icons/svg-sprite-av.svg")
 
     // Example of a French localization.
     $mdDateLocaleProvider.months = ['Січень', 'Лютий', 'Березень', "Квітель", 'Травень', 'Липень', 'Червень', 'Серпень', "Вересень", 'Жовтень', 'Листопад', 'Грудень'];
@@ -67,6 +79,6 @@ export function materialConfig($mdIconProvider:ng.material.IIconProvider, $mdDat
     $mdDateLocaleProvider.msgOpenCalendar = 'Відкрийте календар';
 
     // You can also set when your calendar begins and ends.
-    $mdDateLocaleProvider.firstRenderableDate = new Date( 1776, 6, 4 );
+    $mdDateLocaleProvider.firstRenderableDate = new Date(1776, 6, 4);
 
 }

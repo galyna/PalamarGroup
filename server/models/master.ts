@@ -23,11 +23,13 @@ let MasterSchema = new Schema( {
     isTop:Boolean,
     services: [{
         favor: {type: Schema.Types.ObjectId, ref: 'Favor'},
-        price: Number
+        price: Number,
+        level: { _id: String, name: String,text: String},
     }],
     tasks: [{type: Schema.Types.ObjectId, ref: 'Task'}],
     works: [PhotoSchema],
-    videos: [VideoSchema]
+    videos: [VideoSchema],
+    rate: { _id: String, name: String,text: String}
 } );
 
 MasterSchema.post( 'remove', (master:IMasterModel) => {

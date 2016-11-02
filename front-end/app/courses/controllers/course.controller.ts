@@ -17,7 +17,7 @@ export class CourseController {
 
     static $inject = ['$log', '$routeParams', '$location', CourseResourceName,
         OrderResourceName, MediaObserverFactoryName, '$mdDialog', 'Upload',
-        '$timeout', ModelResourceName, 'constants', "$filter",
+        '$timeout', ModelResourceName, 'constants',
         '$rootScope', '$templateCache', '$mdMedia', 'orderByFilter', 'smoothScroll'];
     static componentName = 'CourseController';
 
@@ -35,7 +35,7 @@ export class CourseController {
                 private mdDialog:ng.material.IDialogService, private Upload:ng.angularFileUpload.IUploadService,
                 private $timeout:ng.ITimeoutService, private ModelResource:IModelResource,
                 private constants:IConstants,
-                private $filter, private $rootScope:IRootScope, private $templateCache:ng.ITemplateCacheService,
+                 private $rootScope:IRootScope, private $templateCache:ng.ITemplateCacheService,
                 private $mdMedia:ng.material.IMedia, private orderByFilter:ng.IFilterOrderBy,
                 private smoothScroll) {
         this.showAnimation = $rootScope.isBigSize;

@@ -12,7 +12,7 @@ const template = `<div class="courses description-container" layout="row" layout
                 <md-card flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
                 >
                     <md-card-content layout="row" layout-align="start none">
-                       
+
                         <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
                              data-aos-easing="ease-out-cubic"
                              flex="50" layout="column" layout-align="center center">
@@ -26,9 +26,9 @@ const template = `<div class="courses description-container" layout="row" layout
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
-                           
+
                         </div>
-                         <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
+                        <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
                              data-aos-easing="ease-out-cubic"
                              flex="50"><img src="{{::$ctrl.favor.photo.url}}" class="md-card-image "/>
                         </div>
@@ -50,7 +50,7 @@ const template = `<div class="courses description-container" layout="row" layout
                                     <div class="md-title">{{::$ctrl.favor.description}}</div>
                                 </md-card-title-text>
                             </md-card-title>
-                           
+
                         </div>
                     </md-card-content>
 
@@ -77,72 +77,75 @@ const template = `<div class="courses description-container" layout="row" layout
                              data-aos-easing="ease-out-cubic"
                              flex="50"><img src="{{::master.photo.url}}" class="md-card-image "/>
                         </div>
-                          <div class="card-desc box" data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
+                        <div class="card-desc box" data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
                              data-aos-easing="ease-out-cubic"
-                             flex="50" layout="column" layout-align="center center">
-                              <div ng-if="master.isTop" class="corner-ribbon top-right black">Top Stylist</div>
-                            <md-card-title flex>
-                                <md-card-title-text flex layout-align="space-around center">
-                                    <div hide show-md="true" class="md-display-2">{{::master.name}}</div>
-                                    <div hide-md="true" class="md-display-1">{{::master.name}}</div>
-                                    <div >
-                                         <md-button class="  md-display-1 md-raised  " aria-label="Details"
-                                          ng-click="$ctrl.showMaster(master._id)">
-                                    Про майстра
-                                </md-button>
-
-                                    </div>
-                                </md-card-title-text>
-                            </md-card-title>
-                            <md-card-actions flex="25">
-                                <md-button class=" near-master xs-selected md-display-1 md-raised " aria-label="Details"
-                                           ng-click="$ctrl.showAppointmentDialog(master)">
-                                    Записатись
-                                </md-button>
-                            </md-card-actions>
+                             flex="50" layout="column" layout-align="space-around center">
+                            <div ng-if="master.level" hide show-md="true" class="corner-ribbon top-right black"
+                             ng-class="{'grey': master.level._id==='1','white': master.level._id==='0'}" >
+                                {{master.level.text}}
+                            </div>
+                            <div ng-if="master.level" hide-md="true"  class="corner-ribbon-min top-right black"
+                            ng-class="{'grey': master.level._id==='1','white': master.level._id==='0'}">
+                                {{master.level.text}}
+                            </div>
+                            <div layout="row" layout-align="center center" class="md-padding md-margin">
+                                <div hide show-gt-sm="true" flex="90" class="md-display-2">{{::master.name}}</div>
+                                <div hide show-sm="true"
+                                ="true" flex="90" class="md-display-1">{{::master.name}}
+                            </div>
                         </div>
-                         </md-card-content>
-                </md-card>
+                        <md-button class="  md-display-1 md-raised  " aria-label="Details"
+                                   ng-click="$ctrl.showMaster(master._id)">
+                            Про майстра
+                        </md-button>
+                        <md-button class=" near-master xs-selected md-display-1 md-raised " aria-label="Details"
+                                   ng-click="$ctrl.showAppointmentDialog(master)">
+                            Записатись
+                        </md-button>
 
             </div>
+            </md-card-content>
+            </md-card>
 
-            <div hide-gt-xs="true" layout="row" layout-align="center center">
-                <div class="overlay-bg trigger-right"></div>
-                <md-card md-whiteframe="8" ng-click="vm.showDetails(course._id)">
-                    <md-card-content layout="column">
-                     <div ng-if="master.isTop" class="card-desc-top-master" flex layout="column"
+        </div>
+
+        <div hide-gt-xs="true" layout="row" layout-align="center center">
+            <div class="overlay-bg trigger-right"></div>
+            <md-card md-whiteframe="8" ng-click="vm.showDetails(course._id)">
+                <md-card-content layout="column">
+                    <div ng-if="master.level" class="card-desc-top-master"  ng-class="{'grey': master.level._id==='1','white': master.level._id==='0'}" flex layout="column"
                          layout-align=" space-around center">
                         <md-card-title>
                             <md-card-title-text flex layout="column" layout-align=" space-around center">
-                                <div class="md-headline">Top Stylist</div>
+                                <div class="md-headline">{{master.level.text}}</div>
                             </md-card-title-text>
                         </md-card-title>
                     </div>
-                        <div class="card-media "><img src="{{::master.photo.url}}" class="md-card-image"/></div>
-                        <div class="card-desc "
-                             layout="column" layout-align="center center">
-                            <md-card-title>
-                                <md-card-title-text>
-                                    <div class="md-headline">{{::master.name}}</div>
-                                    <div class="md-title">{{::master.description}}</div>
-                                </md-card-title-text>
-                            </md-card-title>
-                            <md-button class=" md-display-1 md-raised " aria-label="Details"
-                                       ng-click="$ctrl.showMaster(master._id)">
-                                Про майстра
-                            </md-button>
-                            <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
-                                       ng-click="$ctrl.showAppointmentDialog(master)">
-                                Записатись
-                            </md-button>
-                        </div>
-                    </md-card-content>
+                    <div class="card-media "><img src="{{::master.photo.url}}" class="md-card-image"/></div>
+                    <div class="card-desc "
+                         layout="column" layout-align="center center">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <div class="md-headline">{{::master.name}}</div>
+                                <div class="md-title">{{::master.description}}</div>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-button class=" md-display-1 md-raised " aria-label="Details"
+                                   ng-click="$ctrl.showMaster(master._id)">
+                            Про майстра
+                        </md-button>
+                        <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
+                                   ng-click="$ctrl.showAppointmentDialog(master)">
+                            Записатись
+                        </md-button>
+                    </div>
+                </md-card-content>
 
-                </md-card>
+            </md-card>
 
-            </div>
         </div>
     </div>
+</div>
 </div>   
 `;
 
@@ -221,10 +224,10 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
 class AppointmentDialogController {
 
     static $inject = ['$mdDialog', 'appointment'];
-    private appointment:IAppointment;
-    private originalAppointment:IAppointment;
+    private appointment: IAppointment;
+    private originalAppointment: IAppointment;
 
-    dayHour:any;
+    dayHour: any;
     dayHours = [{id: 1, value: '10:00'}, {id: 2, value: '10:30'}, {id: 3, value: '11:00'}, {id: 4, value: '11:30'},
         {id: 5, value: '12:00'}, {id: 6, value: '12:30'}, {id: 7, value: '13:00'}, {id: 8, value: '13:30'}, {
             id: 9,
@@ -236,8 +239,8 @@ class AppointmentDialogController {
         },
         {id: 15, value: '17:00'}, {id: 16, value: '17:30'}, {id: 17, value: '18:00'}, {id: 18, value: '18:30'}];
 
-    constructor(private $mdDialog:ng.material.IDialogService, appointment:IAppointment) {
-        this.appointment = angular.copy( appointment );
+    constructor(private $mdDialog: ng.material.IDialogService, appointment: IAppointment) {
+        this.appointment = angular.copy(appointment);
         this.originalAppointment = appointment;
         this.setTime();
     }
@@ -246,24 +249,24 @@ class AppointmentDialogController {
         if (this.appointment.date) {
             var minutes = this.appointment.date.getUTCMinutes();
             var hourValue = this.appointment.date.getUTCHours() + ':' + (  (minutes < 10) ? minutes + '0' : minutes);
-            this.dayHours.forEach( (hour)=> {
+            this.dayHours.forEach((hour)=> {
                 if (hour.value === hourValue) {
                     this.dayHour = hour
                 }
-            } )
+            })
         }
     }
 
     save(orderForm) {
         if (this.dayHour && this.appointment.date) {
-            var time = this.dayHour.value.split( ':' );
-            this.appointment.date.setHours( time[0] );
-            this.appointment.date.setMinutes( time[1] );
+            var time = this.dayHour.value.split(':');
+            this.appointment.date.setHours(time[0]);
+            this.appointment.date.setMinutes(time[1]);
             this.dayHour = null;
         }
 
-        angular.extend( this.originalAppointment, this.appointment );
-        this.$mdDialog.hide( this.originalAppointment );
+        angular.extend(this.originalAppointment, this.appointment);
+        this.$mdDialog.hide(this.originalAppointment);
     }
 
     cancel() {
@@ -274,70 +277,78 @@ class AppointmentDialogController {
 export class FavorComponentController {
 
     static $inject = ["$routeParams", '$mdDialog', "$location",
-        FavorResourceName, MasterResourceName, '$mdDialog', '$rootScope', "$log", AppointmentResourceName];
+        FavorResourceName, MasterResourceName, '$mdDialog', '$rootScope', "$log", AppointmentResourceName,
+        "orderByFilter"];
 
-    favor:IFavor;
-    masters:IMaster[];
-    private appointment:IAppointment;
+    favor: IFavor;
+    masters: IMaster[];
+    private appointment: IAppointment;
 
-    constructor(private $routeParams:ng.route.IRouteParamsService,
-                private $mdDialog:ng.material.IDialogService, private $location:ng.ILocationService,
-                private favorResource:IFavorResource,
-                private masterResource:IMasterResource, private mdDialog:ng.material.IDialogService,
-                private $rootScope:IRootScope, private $log:ng.ILogService,
-                private AppointmentResource:IAppointmentResource) {
+    constructor(private $routeParams: ng.route.IRouteParamsService,
+                private $mdDialog: ng.material.IDialogService, private $location: ng.ILocationService,
+                private favorResource: IFavorResource,
+                private masterResource: IMasterResource, private mdDialog: ng.material.IDialogService,
+                private $rootScope: IRootScope, private $log: ng.ILogService,
+                private AppointmentResource: IAppointmentResource,private orderByFilter:ng.IFilterOrderBy) {
         this.appointment = new this.AppointmentResource();
     }
 
     $onInit() {
         if (this.$routeParams["id"]) {
-            this.favorResource.get( {id: this.$routeParams["id"]} ).$promise
-                .then( (favor) => {
+            this.favorResource.get({id: this.$routeParams["id"]}).$promise
+                .then((favor) => {
                     this.favor = favor;
 
-                } );
-            this.masterResource.query( {populate: 'services.favor'} ).$promise
-                .then( (masters) => {
-                    this.masters = masters.filter( (master)=> {
+                });
+            this.masterResource.query({populate: 'services.favor'}).$promise
+                .then((masters) => {
+                    this.masters = masters.filter((master)=> {
 
-                        return master.services.some( (s)=> {
-                            return s.favor._id == this.$routeParams["id"];
-                        } );
-                    } )
-                } );
+                        return master.services.some((s)=> {
+                            if (s.favor._id == this.$routeParams["id"]) {
+                                master.level = s.level;
+                                return true;
+                            } else {
+                                return false;
+                            }
+
+                        });
+                    })
+                    this.masters= this.orderByFilter( this.masters, "level._id" ,true);
+                });
         }
     }
 
     showMaster(id) {
-        this.$location.path( `/master/${id}` );
+        this.$location.path(`/master/${id}`);
     }
 
     showAppointmentDialog(master) {
         this.appointment.master = master;
         if (master && master.services) {
-            var matched = master.services.filter( (s)=> {
+            var matched = master.services.filter((s)=> {
                 return s.favor._id == this.favor._id
-            } )
+            })
             if (matched.length > 0) {
                 this.appointment.service = matched[0];
             }
         }
 
 
-        this.mdDialog.show( {
+        this.mdDialog.show({
             template: appointmentTemplate,
             clickOutsideToClose: true,
             bindToController: true,
             controller: AppointmentDialogController,
             controllerAs: 'vm',
-            parent: angular.element( document.body ),
+            parent: angular.element(document.body),
 
             locals: {
                 appointment: this.appointment,
             },
-        } ).then( (result) => {
-            this.handleDialogResult( result );
-        } );
+        }).then((result) => {
+            this.handleDialogResult(result);
+        });
         ;
     }
 
@@ -346,33 +357,33 @@ export class FavorComponentController {
 
         if (this.appointment.service) {
             this.appointment.favors = [];
-            this.appointment.favors.push( this.appointment.service );
+            this.appointment.favors.push(this.appointment.service);
         }
         this.appointment.creationDate = new Date().toJSON();
-        this.appointment.date = new Date( this.appointment.date ).toJSON();
+        this.appointment.date = new Date(this.appointment.date).toJSON();
         this.appointment.$save()
-            .then( () => {
+            .then(() => {
                 this.mdDialog.hide();
                 this.showOrderConfirm();
-            } )
-            .catch( (err) => {
-                this.$log.error( err );
-            } )
-            .finally( () => {
+            })
+            .catch((err) => {
+                this.$log.error(err);
+            })
+            .finally(() => {
                 this.appointment = new this.AppointmentResource();
                 this.$rootScope.loading = false;
-            } );
+            });
 
     }
 
-    showOrderConfirm():void {
+    showOrderConfirm(): void {
         this.mdDialog.show(
             this.mdDialog.alert()
-                .clickOutsideToClose( true )
-                .title( 'Вашу запис прийнято. ' )
-                .textContent( 'З вами зв`яжеться адміністратор для підтвердження. Дякуємо.' )
-                .ariaLabel( 'Вашу заявку прийнято. ' )
-                .ok( 'Закрити' )
+                .clickOutsideToClose(true)
+                .title('Вашу запис прийнято. ')
+                .textContent('З вами зв`яжеться адміністратор для підтвердження. Дякуємо.')
+                .ariaLabel('Вашу заявку прийнято. ')
+                .ok('Закрити')
         );
 
     }

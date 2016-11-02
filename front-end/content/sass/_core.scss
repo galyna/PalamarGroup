@@ -64,7 +64,6 @@ html {
   min-height: 100vh;
 }
 
-
 .fit-screen-wrap {
   position: relative;
   display: table-cell;
@@ -113,8 +112,6 @@ md-card.md-default-theme, md-card {
     }
   }
 }
-
-
 
 .description-container {
   background-color: white;
@@ -333,8 +330,9 @@ md-card.md-default-theme, md-card {
   margin-bottom: 0;
 }
 
-.navigator_default_todaybox {border: none !important;}
-
+.navigator_default_todaybox {
+  border: none !important;
+}
 
 @media (min-width: $layout-breakpoint-md) {
 
@@ -358,7 +356,8 @@ md-card.md-default-theme, md-card {
   position: relative;
 
 }
-.corner-ribbon{
+
+.corner-ribbon {
   width: 200px;
   position: absolute;
   top: 25px;
@@ -371,34 +370,120 @@ md-card.md-default-theme, md-card {
   -webkit-transform: rotate(-45deg);
 }
 
-.corner-ribbon-min{
-  width: 150px;
+.corner-ribbon-min {
+  width: 175px;
   position: absolute;
-  padding-right: 20px;
+
   top: 25px;
   left: -50px;
   text-align: center;
-  line-height: 30px;
-  letter-spacing: 1px;
+  line-height: 33px;
+
   color: #f0f0f0;
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
 }
 
-.top-right{
+.top-right {
   top: 25px;
   right: -50px;
   left: auto;
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
 }
-.top-left{
+
+.top-left {
   top: 25px;
   left: -50px;
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
 }
 
-.black{background: #333;}
-.white{background: rgba(#f0f0f0, 0.8);; color:$primary;}
+.black {
+  background: #222;
+}
 
+.grey {
+  background: #666;
+}
+
+.white {
+  background: #f0f0f0;
+  color: $primary;
+}
+
+.brends-container {
+
+  padding: 0;
+  margin: 0 0 20px 0;
+  .brend {
+    position: relative;
+    display: block;
+    transition: top 0.3s linear;
+    top: 0px;
+    overflow: hidden;
+
+    &:hover {
+      @extend .md-whiteframe-12dp;
+      transition: top 0.3s linear;
+      top: -3px;
+    }
+
+    img {
+
+      max-width: 100%;
+      overflow: hidden;
+
+    }
+    @media (min-width: $layout-breakpoint-md) {
+
+      &.flex-gt-md-22 {
+
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 1 25%;
+      }
+
+    }
+
+    @media (min-width: $layout-breakpoint-sm) {
+
+      &.flex-gt-sm-22 {
+
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 1 25%;
+      }
+
+      &.flex-gt-sm-46 {
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 1 43%;
+      }
+
+    }
+
+    @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm) {
+
+      &.flex-gt-xs-46 {
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 1 43%;
+      }
+      &:first-child, &:nth-child(2) {
+        flex: 1 43%;
+      }
+    }
+
+    @media (max-width: $layout-breakpoint-xs) {
+      &.flex-xs-80 {
+        flex: 1 80%;
+        // Special override for the 1st & 2nd child default resizing
+        &:first-child, &:nth-child(2) {
+          flex: 1 80%;
+        }
+      }
+    }
+  }
+
+}

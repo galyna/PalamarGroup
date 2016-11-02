@@ -3,6 +3,7 @@ import {MasterResourceName, IMasterResource, IMaster} from "../../resources/mast
 import {FavorResourceName, IFavorResource, IFavor} from "../../resources/favor.resource";
 import {IConstants} from "../../core/core.config";
 import {TransformResourceName, ITransformResource, ITransform} from "../../resources/transform.resource";
+import {IBrendResource, IBrend, BrendResourceName} from "../../resources/brend.resource";
 
 
 const template = `<div class="courses-details description-container" layout="column">
@@ -22,10 +23,10 @@ const template = `<div class="courses-details description-container" layout="col
                          ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.categories.length)}}" flex-gt-xs="46"
                          flex-xs="80"
                          ng-click="::$ctrl.showFavors(category._id)">
-                    
-                        <img ng-src="{{'/content/images/services/'+category._id+'.jpg'}}" class="md-card-image">
-                 
-                    <md-card-content layout="column"  layout-align="center center">
+
+                    <img ng-src="{{'/content/images/services/'+category._id+'.jpg'}}" class="md-card-image">
+
+                    <md-card-content layout="column" layout-align="center center">
                         <span class="  md-margin">{{category.name}}</span>
                     </md-card-content>
                 </md-card>
@@ -53,13 +54,13 @@ const template = `<div class="courses-details description-container" layout="col
 
             </div>
             <!--<md-button hide show-gt-xs="true" class=" md-fab  side-up-btn"-->
-                       <!--data-aos="fade-left" data-aos-easing="ease-in-out-back"-->
-                       <!--data-aos-anchor="#trigger-right"-->
-                       <!--data-aos-anchor-placement="top-center" data-aos-delay="100" scroll-to="mainContent"-->
-                       <!--easing="easeInOutCubic"-->
-                       <!--duration="1800" aria-label="up">-->
-                <!--<md-icon class=""-->
-                         <!--md-svg-src="navigation:ic_arrow_downward_24px"></md-icon>-->
+            <!--data-aos="fade-left" data-aos-easing="ease-in-out-back"-->
+            <!--data-aos-anchor="#trigger-right"-->
+            <!--data-aos-anchor-placement="top-center" data-aos-delay="100" scroll-to="mainContent"-->
+            <!--easing="easeInOutCubic"-->
+            <!--duration="1800" aria-label="up">-->
+            <!--<md-icon class=""-->
+            <!--md-svg-src="navigation:ic_arrow_downward_24px"></md-icon>-->
             <!--</md-button>-->
         </div>
     </div>
@@ -76,12 +77,16 @@ const template = `<div class="courses-details description-container" layout="col
         <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="master in $ctrl.masters"
-                         class="md-margin " ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.masters.length)}}"
+                         class="md-margin box "
+                         ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.masters.length)}}"
                          flex-gt-xs="46" flex-xs="80"
-                         ng-click="$ctrl.showMaster(master._id)">      
-                        <div ng-if="master.isTop" class="corner-ribbon-min top-right white">Top Stylist</div>
-                        <img ng-src="{{::master.photo.url}}" class="md-card-image">                
-                    <md-card-content layout="column"  layout-align="center center">
+                         ng-click="$ctrl.showMaster(master._id)">
+                    <div ng-if="master.rate && master.rate._id!=='0'"
+                         class="corner-ribbon-min top-right black"
+                         ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}">{{master.rate.text}}
+                    </div>
+                    <img ng-src="{{::master.photo.url}}" class="md-card-image">
+                    <md-card-content layout="column" layout-align="center center">
                         <span class="  md-margin">{{::master.name}}</span>
                     </md-card-content>
 
@@ -89,38 +94,33 @@ const template = `<div class="courses-details description-container" layout="col
         </div>
 
     </div>
-    <div layout="row" flex>
-        <div class="page-delimiter content-block" flex>
-            <div class="fit-screen-wrap header-long " layout="column">
+    <!--<div layout="row" flex>-->
+        <!--<div class="page-delimiter content-block" flex>-->
+            <!--<div class="fit-screen-wrap header-long " layout="column">-->
 
-                <div layout="row" layout-align="center center">
-                    <div flex="60" flex-gt-sm="50"
-                         class="md-display-1 md-margin md-padding">
-                        <video class="screen" controls>
-                            <source type="video/mp4" src="../content/images/bg/bd.mp4"/>
-                        </video>
-                    </div>
-                    <div data-aos="flip-right" hide-gt-xs="true" flex="70"
-                         class="md-headline ">
-                        <video class="screen" controls>
-                            <source type="video/mp4" src="../content/images/bg/bd.mp4"/>
-                        </video>
-                    </div>
+                <!--<div layout="row" layout-align="center center">-->
+                    <!--<div flex="100" flex-gt-sm="50"-->
+                         <!--class="md-display-1  box ">-->
+                        <!--<video class="screen" style='display:block' controls>-->
+                            <!--<source type="video/mp4" src="../content/images/bg/bd.mp4"/>-->
+                        <!--</video>-->
+                    <!--</div>                  -->
 
-                </div>
-            </div>
-            <div class="overlay-description"></div>
-        </div>
-    </div>
-    <div layout="row" flex>
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="overlay-description"></div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div layout="row" flex ng-if="$ctrl.transforms.length>0 ">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
                 <div class="md-display-1"> ПЕРЕВТІЛЕННЯ</div>
             </div>
         </div>
     </div>
+ 
     <div ng-repeat="transform in $ctrl.transforms">
-        <div  layout="row" layout-align="center center" ng-if="transform.videos.length>0 ">
+        <div layout="row" layout-align="center center" ng-if="transform.videos.length>0 ">
             <div flex-xs="90" flex-gt-md="60" flex-md="80" flex-gt-xs="85">
                 <div layout="column" layout-margin layout layout-wrap layout-align="center center">
                     <md-card md-whiteframe="6" class="  courses-videos"
@@ -131,7 +131,7 @@ const template = `<div class="courses-details description-container" layout="col
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="video.url"></youtube-video>
                         </div>
-                        <md-card-content ng-if="video.name" layout="column"  layout-align="center center">
+                        <md-card-content ng-if="video.name" layout="column" layout-align="center center">
                             <span class="  md-margin">{{::video.name}}</span>
                         </md-card-content>
                     </md-card>
@@ -148,11 +148,11 @@ const template = `<div class="courses-details description-container" layout="col
                              ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,transform.photos.length)}}"
                              flex-gt-xs="46" flex-xs="80"
                              ng-click="$ctrl.showMaster(master._id)">
-                            <img ng-src="{{::photo.url}}" class="md-card-image">
+                        <img ng-src="{{::photo.url}}" class="md-card-image">
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                             <span class="  md-margin">{{::photo.name}}</span>
                         </md-card-content>
-                        </md-card>
+                    </md-card>
                 </div>
             </div>
         </div>
@@ -160,6 +160,29 @@ const template = `<div class="courses-details description-container" layout="col
     <div ng-if="$ctrl.showMoreTransforms" layout="row" layout-align=" center center" layout-align-xs="  center">
         <md-button ng-click="$ctrl.showTransforms()" class="comment-btn xs-selected md-raised ">Всі перевтіління
         </md-button>
+    </div>
+    
+     <div layout="row" flex ng-if="$ctrl.brends.length>0 ">
+        <div class="page-delimiter" flex>
+            <div class="fit-screen-wrap invers header">
+                <div class="md-display-1"> БРЕНДИ</div>
+            </div>
+        </div>
+    </div>
+    
+     <div layout="row" layout-align="center center">
+
+        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
+            <div class="brends-container" layout-margin layout layout-wrap layout-align="center center">
+             <a href="{{::bren.url}}"  class="md-margin brend " 
+               ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
+                             flex-gt-xs="46" flex-xs="80" ng-repeat="bren in $ctrl.brends">
+                                              
+                    <img ng-src="{{::bren.photo.url}}"  
+                         class="md-card-image"/>    </a>               
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -169,11 +192,12 @@ const template = `<div class="courses-details description-container" layout="col
 
 export class SalonHomeComponentController {
 
-    static $inject = [MasterResourceName, 'smoothScroll', "$location", 'constants', TransformResourceName];
+    static $inject = [MasterResourceName, 'smoothScroll', "$location", 'constants', TransformResourceName, BrendResourceName];
 
-    favors:IFavor[];
-    masters:IMaster[];
-    transforms:ITransform[];
+    favors: IFavor[];
+    masters: IMaster[];
+    brends: IBrend[];
+    transforms: ITransform[];
     days = [
         {
             name: "ПОНЕДІЛОК",
@@ -198,20 +222,22 @@ export class SalonHomeComponentController {
             name: "НЕДІЛЯ",
             program: 'зачинено',
         }];
-    categories:any;
-    showMoreTransforms:boolean;
+    categories: any;
+    showMoreTransforms: boolean;
 
 
-    constructor(private masterResource:IMasterResource,
-                private smoothScroll, private $location:ng.ILocationService,
-                private constants:IConstants, private TransformResource:ITransformResource) {
+    constructor(private masterResource: IMasterResource,
+                private smoothScroll, private $location: ng.ILocationService,
+                private constants: IConstants, private TransformResource: ITransformResource,
+                private BrendResource: IBrendResource) {
 
-        this.masters = this.masterResource.query();
-        this.transforms = this.TransformResource.query( {sort: "order", pageSize: 2} );
-        this.transforms.$promise.then( (transforms) => {
+        this.masters = this.masterResource.query({sort: "order"});
+        this.brends = this.BrendResource.query({sort: "order"});
+        this.transforms = this.TransformResource.query({sort: "order", pageSize: 2});
+        this.transforms.$promise.then((transforms) => {
             this.showMoreTransforms = transforms.length > 2;
-            transforms.splice( 1, transforms.length - 2 );
-        } );
+            transforms.splice(1, transforms.length - 2);
+        });
         this.categories = this.constants.favorCategories;
     }
 
@@ -222,20 +248,22 @@ export class SalonHomeComponentController {
             offset: 0,
 
         }
-        var element = document.getElementById( 'mainContent' );
-        this.smoothScroll( element, options );
+        var element = document.getElementById('mainContent');
+        this.smoothScroll(element, options);
     }
 
     showTransforms() {
-        this.$location.path( `/transforms` );
+        this.$location.path(`/transforms`);
     }
 
-    showFavors(id:String) {
-        this.$location.path( `/favors/${id}` );
+    showFavors(id: String) {
+        this.$location.path(`/favors/${id}`);
     }
 
-    showMaster(masterId:String) {
-        this.$location.path( `/master/${masterId}` );
+
+
+    showMaster(masterId: String) {
+        this.$location.path(`/master/${masterId}`);
     }
 
     getPictureFlex(index, length) {

@@ -21,7 +21,8 @@ declare module pg {
         export interface IMasterFavor {
             _id?:any,
             favor:IFavor,
-            price:number
+            price:number,
+            level: { _id:string, name:string, text:string}
         }
 
         export interface IMaster {
@@ -34,7 +35,9 @@ declare module pg {
             services:IMasterFavor[],
             works:IPhoto[],
             tasks:ITask[],
-            isTop:boolean
+            isTop:boolean,
+            level: { _id:string, name:string, text:string},
+            rate: { _id:string, name:string, text:string}
         }
 
         export interface IAppointment {
