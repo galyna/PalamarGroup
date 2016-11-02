@@ -24,6 +24,7 @@ const template = `<div class="courses description-container" layout="row" layout
                                 <md-card-title-text flex layout-align="space-around center">
                                     <div hide show-md="true" class="md-display-2">{{::product.name}}</div>
                                     <div hide-md="true" class="md-display-1">{{::product.name}}</div>
+                                    <div class="md-title">Ціна {{::product.price}} грн.</div>
                                     <div class="descr-container">
                                         <div class="md-title">{{::product.description}}</div>
 
@@ -48,6 +49,7 @@ const template = `<div class="courses description-container" layout="row" layout
                                   <md-card-title-text flex layout-align="space-around center">
                                     <div hide show-gt-sm="true" class="md-display-2">{{::product.name}}</div>
                                     <div  hide-gt-sm="true" class="md-display-1">{{::product.name}}</div>
+                                     <div class="md-title">Ціна {{::product.price}} грн.</div>
                                     <div  class="descr-container">
                                         <div hide show-gt-sm="true" class="md-title">{{::product.description}}</div>
                                         <div  hide-gt-sm="true" class="md-subhead">{{::product.description}}</div>
@@ -79,6 +81,7 @@ const template = `<div class="courses description-container" layout="row" layout
                                 <md-card-title-text flex layout-align="space-around center">
                                     <div hide show-gt-sm="true" class="md-display-2">{{::product.name}}</div>
                                     <div  hide-gt-sm="true" class="md-display-1">{{::product.name}}</div>
+                                     <div class="md-title">Ціна {{::product.price}} грн.</div>
                                     <div  class="descr-container">
                                         <div hide show-gt-sm="true" class="md-title">{{::product.description}}</div>
                                         <div  hide-gt-sm="true" class="md-subhead">{{::product.description}}</div>
@@ -117,6 +120,7 @@ const template = `<div class="courses description-container" layout="row" layout
                             <md-card-title>
                                 <md-card-title-text>
                                     <div class="md-headline">{{::product.name}}</div>
+                                     <div class="md-title">Ціна {{::product.price}} грн.</div>
                                     <div class="md-title">{{::product.description}}</div>
                                 </md-card-title-text>
                             </md-card-title>
@@ -156,6 +160,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                                         <img src="{{::vm.product.photo.url}}" />
                                         <div class="card-desc " flex="100" layout="column" layout-align="center center">                                          
                                                     <div flex class="md-title">{{::vm.product.name}}</div>
+                                                     <div class="md-headline">Ціна {{::vm.product.price}} грн.</div>
                                                       <div flex class="md-headline">{{::vm.product.description}}</div>                                                                                    
                                         </div>
                                     </div>
