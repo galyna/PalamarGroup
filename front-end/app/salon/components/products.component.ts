@@ -223,7 +223,7 @@ export class ProductsComponentController {
 
 
     $onInit() {
-        this.products = this.ProductResource.query({sort:"-order"});
+        this.products = this.ProductResource.query({sort:"order"});
         this.products.$promise.then((products) => {
                 this.products = products;
             }

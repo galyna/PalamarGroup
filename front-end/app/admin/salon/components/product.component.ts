@@ -35,7 +35,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                     <md-input-container class="md-block">
                         <label for="description">Опис</label>
                         <textarea ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.favor.description"
-                                  id="description" name="description" required></textarea>
+                                  id="description" name="description" ></textarea>
                     </md-input-container>
 
                       <md-input-container class="md-block">
@@ -140,7 +140,7 @@ export class ProductComponentController {
     }
 
     save(form:ng.IFormController) {
-        if (form.$invalid) return;
+
         this.favor.$save()
             .then( (favor) => {
                 this.$mdToast.showSimple( `Дані послуги збережено` );
