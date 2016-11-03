@@ -18,6 +18,7 @@ let ModelSchema = new Schema({
     profilePhotoUrl:String,
     backPhotoUrl:String,
     fullSizePhotoUrl:String,
+    comment:String
 });
 
 export var Model = model<IModel>('Model', ModelSchema);

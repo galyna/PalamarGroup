@@ -2,6 +2,7 @@
 import IPhoto = pg.models.IPhoto;
 import {IConstants} from "../../../core/core.config";
 import {IModel, IModelResource, ModelResourceName} from "../../../resources/model.resource";
+import {PagingServiceName, PagingService} from "../../../ui/admin.paging";
 
 interface IEditIModelModel extends IModel {
     oldIndex?:number;
@@ -11,7 +12,7 @@ interface IEditIModelModel extends IModel {
 export class AcademyModelController {
 
     static $inject = [ModelResourceName, '$log', 'Upload', '$timeout', '$location', 'constants',
-        "$mdToast", '$mdDialog'];
+        "$mdToast", '$mdDialog',PagingServiceName];
     static componentName = 'AcademyModelController';
 
     models:IModel[];
@@ -20,18 +21,36 @@ export class AcademyModelController {
     showModelEditForm:boolean;
     showModelCreateForm:boolean;
     showFormPhotoUpload:boolean;
+    paging:any;
 
 
     constructor(private ModelResource:IModelResource, private $log:ng.ILogService,
                 private Upload:ng.angularFileUpload.IUploadService, private $timeout:ng.ITimeoutService,
                 private $location:ng.ILocationService, private constants:IConstants,
-                private $mdToast:ng.material.IToastService, private $mdDialog:ng.material.IDialogService) {
-
-        this.models = ModelResource.query();
+                private $mdToast:ng.material.IToastService, private $mdDialog:ng.material.IDialogService,
+                private pagingService:PagingService) {
 
         this.newModelModel = this.getBlankModel();
+        this.showPage();
     }
 
+
+    prev() {
+        this.showPage( this.pagingService.prevPage() );
+    }
+
+    next() {
+        this.showPage( this.pagingService.nextPage() );
+    }
+
+    private showPage(page = 1) {
+        this.models = this.ModelResource.query( {page: page},
+            (res, headers) => {
+                let {total, page, perPage} = this.pagingService.parseHeaders( headers );
+                this.pagingService.update( {page: page, perPage: perPage, total: total} );
+                this.paging = angular.copy( this.pagingService.params() );
+            } );
+    }
 
     //course creation start
     showCreateForm():void {
@@ -41,8 +60,8 @@ export class AcademyModelController {
     }
 
     createModel(form:ng.IFormController):void {
-        this.$log.debug( "createModel ...$valid" + form.$valid );
-        if (form.$valid) {
+
+
             this.newModelModel.$save()
                 .then( (model)=> {
                     this.$log.debug( "success createModel..." );
@@ -56,18 +75,17 @@ export class AcademyModelController {
                 .finally( ()=> {
                     this.showModelCreateForm = false;
                     this.showModelEditForm = false;
+                    this.showPage();
                 } );
 
-        }
+
     }
 
     //course creation start
 
     // course edit start
     editModel(form:ng.IFormController):void {
-        this.$log.debug( "editModelModel ...$valid" + form.$valid );
-        this.$log.debug( "editModelModel ...vm.editModelModel._id===" + this.editModelModel._id );
-        if (form.$valid) {
+
             this.editModelModel.$save()
                 .then( ()=> {
                     this.models.splice( this.editModelModel.oldIndex, 1, this.editModelModel );
@@ -81,8 +99,9 @@ export class AcademyModelController {
                 .finally( ()=> {
                     this.showModelCreateForm = false;
                     this.showModelEditForm = false;
+                    this.showPage();
                 } );
-        }
+
     }
 
     showEditForm(model:IEditIModelModel):void {

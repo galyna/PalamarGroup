@@ -5,20 +5,20 @@
 
             <h2 class=" md-padding md-headline">ДОДАТИ ВІДГУК</h2>
             <span flex></span>
-            <md-button class="md-icon-button" ng-click="vm.cancel()">
+            <md-button class="md-icon-button" ng-click="::vm.cancel()">
                 <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>
             </md-button>
         </div>
     </md-toolbar>
-    <form name="commentForm" class="md-padding pop-form" flex novalidate>
+    <form name="commentForm" class="md-padding pop-form" flex novalidate ng-submit="vm.submitComment(commentForm)">
         <md-dialog-content flex>
             <md-dialog-content-body layout="column" layout-align="center stretch" flex>
                 <md-input-container flex="40">
                     <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
                     <label class="md-headline" for="nameС">Ім`я </label>
-                    <input class="md-headline" id="nameС" ng-model="vm.newComment.name" name="name" required/>
+                    <input class="md-headline" id="nameС" ng-model="vm.newComment.name" name="name" required />
                     <div ng-messages="commentForm.name.$error" role="alert"
-                         ng-show="commentForm.name.$touched && commentForm.name.$invalid ">
+                         ng-show="commentForm.$submitted && commentForm.name.$invalid ">
                         <div class="md-headline" ng-message="required">
                             Вкажіть своє ім`я
                         </div>
@@ -27,12 +27,18 @@
                 <md-input-container flex>
                     <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
                     <label class="md-headline" for="textС">Відгук</label>
-                    <textarea class="md-headline" id="textС" ng-model="vm.newComment.text" name="text"></textarea>
+                    <textarea class="md-headline" id="textС" ng-model="vm.newComment.text" name="text" required></textarea>
+                    <div ng-messages="commentForm.text.$error" role="alert"
+                         ng-show="commentForm.$submitted && commentForm.text.$invalid ">
+                        <div class="md-headline" ng-message="required">
+                            Вкажіть відгук
+                        </div>
+                    </div>
                 </md-input-container>
             </md-dialog-content-body>
         </md-dialog-content>
         <md-dialog-actions   layout-align-xs="center-center"  >
-            <md-button ng-click="vm.submitComment(commentForm)" class=" xs-selected md-raised md-headline">ДОДАТИ
+            <md-button type="submit" class=" xs-selected md-raised md-headline">ДОДАТИ
             </md-button>
         </md-dialog-actions>
 

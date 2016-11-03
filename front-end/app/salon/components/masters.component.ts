@@ -190,13 +190,19 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
             </md-button>
         </div>
     </md-toolbar>
-    <form name="orderForm" class="md-padding pop-form" novalidate flex>
+    <form name="orderForm" class="md-padding pop-form" novalidate flex ng-submit="vm.save(orderForm)">
         <md-dialog-content>
             <md-dialog-content-body>
                 <md-input-container class="md-block">
                     <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
-                    <label for="name">Як до вас звертатися</label>
-                    <input id="name" ng-model="vm.appointment.name" type="text" name="name">
+                    <label for="name">Як до вас звертатись?</label>
+                    <input id="name" ng-model="vm.appointment.name" type="text" name="name" required>
+                     <div ng-messages="orderForm.name.$error" role="alert"
+                         ng-show="orderForm.$submitted && orderForm.name.$invalid" >
+                        <div class="md-headline" ng-message="required">
+                             Залиште хоч якусь інформацію про себе, бажано номер телефону
+                        </div>
+                    </div>
                 </md-input-container>
                 <md-input-container class="md-block reduce-bottom-margin">
                     <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
@@ -245,7 +251,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
             </md-dialog-content-body>
         </md-dialog-content>
         <md-dialog-actions class="md-padding" layout="row" layout-align-xs="center center">
-            <md-button ng-click="vm.save(orderForm)" class=" xs-selected md-raised md-headline">ЗАПИСАТИСЬ</md-button>
+            <md-button type="submit" class=" xs-selected md-raised md-headline">ЗАПИСАТИСЬ</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>
@@ -253,10 +259,10 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
 class AppointmentDialogController {
 
     static $inject = ['$mdDialog', 'appointment'];
-    private appointment:IAppointment;
-    private originalAppointment:IAppointment;
+    private appointment: IAppointment;
+    private originalAppointment: IAppointment;
 
-    dayHour:any;
+    dayHour: any;
     dayHours = [{id: 1, value: '10:00'}, {id: 2, value: '10:30'}, {id: 3, value: '11:00'}, {id: 4, value: '11:30'},
         {id: 5, value: '12:00'}, {id: 6, value: '12:30'}, {id: 7, value: '13:00'}, {id: 8, value: '13:30'}, {
             id: 9,
@@ -268,34 +274,38 @@ class AppointmentDialogController {
         },
         {id: 15, value: '17:00'}, {id: 16, value: '17:30'}, {id: 17, value: '18:00'}, {id: 18, value: '18:30'}];
 
-    constructor(private $mdDialog:ng.material.IDialogService, appointment:IAppointment) {
-        this.appointment = angular.copy( appointment );
+    constructor(private $mdDialog: ng.material.IDialogService, appointment: IAppointment) {
+        this.appointment = angular.copy(appointment);
         this.originalAppointment = appointment;
         this.setTime();
     }
 
     setTime() {
+
         if (this.appointment.date) {
             var minutes = this.appointment.date.getUTCMinutes();
             var hourValue = this.appointment.date.getUTCHours() + ':' + (  (minutes < 10) ? minutes + '0' : minutes);
-            this.dayHours.forEach( (hour)=> {
+            this.dayHours.forEach((hour)=> {
                 if (hour.value === hourValue) {
                     this.dayHour = hour
                 }
-            } )
+            })
         }
     }
 
-    save(orderForm) {
-        if (this.dayHour && this.appointment.date) {
-            var time = this.dayHour.value.split( ':' );
-            this.appointment.date.setHours( time[0] );
-            this.appointment.date.setMinutes( time[1] );
-            this.dayHour = null;
-        }
 
-        angular.extend( this.originalAppointment, this.appointment );
-        this.$mdDialog.hide( this.originalAppointment );
+    save(orderForm) {
+        if (this.appointment.name || this.appointment.comment || this.appointment.phone) {
+            if (this.dayHour && this.appointment.date) {
+                var time = this.dayHour.value.split(':');
+                this.appointment.date.setHours(time[0]);
+                this.appointment.date.setMinutes(time[1]);
+                this.dayHour = null;
+            }
+
+            angular.extend(this.originalAppointment, this.appointment);
+            this.$mdDialog.hide(this.originalAppointment);
+        }
     }
 
     cancel() {
@@ -305,42 +315,44 @@ class AppointmentDialogController {
 
 export class MastersComponentController {
 
-    static $inject = ["$location", MasterResourceName,'$mdDialog', '$rootScope', "$log", AppointmentResourceName];
-    masters:IMaster[];
-    private appointment:IAppointment;
-    constructor( private $location:ng.ILocationService,
-                 private masterResource:IMasterResource,private mdDialog:ng.material.IDialogService,
-                 private $rootScope:IRootScope, private $log:ng.ILogService, private AppointmentResource:IAppointmentResource) {
+    static $inject = ["$location", MasterResourceName, '$mdDialog', '$rootScope', "$log", AppointmentResourceName];
+    masters: IMaster[];
+    private appointment: IAppointment;
+
+    constructor(private $location: ng.ILocationService,
+                private masterResource: IMasterResource, private mdDialog: ng.material.IDialogService,
+                private $rootScope: IRootScope, private $log: ng.ILogService, private AppointmentResource: IAppointmentResource) {
 
     }
+
     $onInit() {
 
-        this.masters=  this.masterResource.query({sort:{ "isTop": -1,"order":1},populate: 'services.favor'})
+        this.masters = this.masterResource.query({sort: {"isTop": -1, "order": 1}, populate: 'services.favor'})
         this.appointment = new this.AppointmentResource();
-        
+
     }
 
     showMaster(id) {
-        this.$location.path( `/master/${id}` );
+        this.$location.path(`/master/${id}`);
     }
 
     showAppointmentDialog(master) {
         this.appointment.master = master;
 
-        this.mdDialog.show( {
+        this.mdDialog.show({
             template: appointmentTemplate,
             clickOutsideToClose: true,
             bindToController: true,
             controller: AppointmentDialogController,
             controllerAs: 'vm',
-            parent: angular.element( document.body ),
+            parent: angular.element(document.body),
 
             locals: {
                 appointment: this.appointment,
             },
-        } ).then( (result) => {
-            this.handleDialogResult( result );
-        } );
+        }).then((result) => {
+            this.handleDialogResult(result);
+        });
         ;
     }
 
@@ -349,33 +361,33 @@ export class MastersComponentController {
 
         if (this.appointment.service) {
             this.appointment.favors = [];
-            this.appointment.favors.push( this.appointment.service );
+            this.appointment.favors.push(this.appointment.service);
         }
         this.appointment.creationDate = new Date().toJSON();
-        this.appointment.date = new Date( this.appointment.date ).toJSON();
+        this.appointment.date = new Date(this.appointment.date).toJSON();
         this.appointment.$save()
-            .then( () => {
+            .then(() => {
                 this.mdDialog.hide();
                 this.showOrderConfirm();
-            } )
-            .catch( (err) => {
-                this.$log.error( err );
-            } )
-            .finally( () => {
+            })
+            .catch((err) => {
+                this.$log.error(err);
+            })
+            .finally(() => {
                 this.appointment = new this.AppointmentResource();
                 this.$rootScope.loading = false;
-            } );
+            });
 
     }
 
-    showOrderConfirm():void {
+    showOrderConfirm(): void {
         this.mdDialog.show(
             this.mdDialog.alert()
-                .clickOutsideToClose( true )
-                .title( 'Вашу запис прийнято. ' )
-                .textContent( 'З вами зв`яжеться адміністратор для підтвердження. Дякуємо.' )
-                .ariaLabel( 'Вашу заявку прийнято. ' )
-                .ok( 'Закрити' )
+                .clickOutsideToClose(true)
+                .title('Вашу запис прийнято. ')
+                .textContent('З вами зв`яжеться адміністратор для підтвердження. Дякуємо.')
+                .ariaLabel('Вашу заявку прийнято. ')
+                .ok('Закрити')
         );
 
     }

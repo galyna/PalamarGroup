@@ -169,7 +169,6 @@ export class SalonContactsComponentController {
         this.$rootScope.socialParams.host = this.constants.host;
         this.$rootScope.socialParams.target = this.constants.host + "/#" +SalonContactsComponentUrl;
         this.$rootScope.socialParams.image = this.constants.host + photo.url;
-        this.$rootScope.socialParams.title = photo.name;
         this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
     }
 

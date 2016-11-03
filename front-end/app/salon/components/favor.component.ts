@@ -161,18 +161,27 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
             </md-button>
         </div>
     </md-toolbar>
-    <form name="orderForm" class="md-padding pop-form" novalidate flex>
+    <form name="orderForm" novalidate class="md-padding pop-form" ng-submit="vm.save(orderForm)" flex>
         <md-dialog-content>
             <md-dialog-content-body>
+
+              
                 <md-input-container class="md-block">
                     <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
-                    <label for="name">Як до вас звертатися</label>
-                    <input id="name" ng-model="vm.appointment.name" type="text" name="name">
+                    <label for="name">Як до вас звертатись?</label>
+                    <input id="name" ng-model="vm.appointment.name" type="text" name="name" required>
+                    <div ng-messages="orderForm.name.$error" role="alert"
+                         ng-show="orderForm.$submitted && orderForm.name.$invalid" >
+                        <div class="md-headline" ng-message="required">
+                            Залиште хоч якусь інформацію про себе, бажано номер телефону
+                        </div>
+                    </div>
                 </md-input-container>
                 <md-input-container class="md-block reduce-bottom-margin">
                     <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
                     <label for="phone">Телефон</label>
                     <input id="phone" ng-model="vm.appointment.phone" type="text" name="phone">
+
                 </md-input-container>
                 <div flex="100" layout="row" layout-xs="columm">
                     <div flex="50" flex-xs="100" class="order-picker-container " layout="row">
@@ -181,7 +190,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                     </div>
                     <md-input-container flex="50" flex-xs="100">
                         <md-icon md-svg-icon="action:ic_schedule_24px"></md-icon>
-                   
+
                         <md-select ng-model="vm.dayHour" ng-model-options="{trackBy: '$value.id'}">
                             <md-option ng-repeat="hour in vm.dayHours" ng-value="hour">
                                 {{ hour.value }}
@@ -204,8 +213,9 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                 <md-input-container ng-if="!vm.appointment.master" class="md-block ">
                     <label for="service">Послуга</label>
                     <div layout="row" layout-align=" start center  ">
-                                <img ng-src="{{vm.appointment.favor.photo.url}}" class="avatar" alt="{{vm.appointment.favor.name}}"/>
-                                <span>  {{ vm.appointment.favor.name }}  </span></div>
+                        <img ng-src="{{vm.appointment.favor.photo.url}}" class="avatar"
+                             alt="{{vm.appointment.favor.name}}"/>
+                        <span>  {{ vm.appointment.favor.name }}  </span></div>
                 </md-input-container>
                 <md-input-container class="md-block">
                     <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
@@ -216,7 +226,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
             </md-dialog-content-body>
         </md-dialog-content>
         <md-dialog-actions class="md-padding" layout="row" layout-align-xs="center center">
-            <md-button ng-click="vm.save(orderForm)" class=" xs-selected md-raised md-headline">ЗАПИСАТИСЬ</md-button>
+            <md-button type="submit" class=" xs-selected md-raised md-headline">ЗАПИСАТИСЬ</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>
@@ -258,15 +268,18 @@ class AppointmentDialogController {
     }
 
     save(orderForm) {
-        if (this.dayHour && this.appointment.date) {
-            var time = this.dayHour.value.split(':');
-            this.appointment.date.setHours(time[0]);
-            this.appointment.date.setMinutes(time[1]);
-            this.dayHour = null;
-        }
 
-        angular.extend(this.originalAppointment, this.appointment);
-        this.$mdDialog.hide(this.originalAppointment);
+        if (this.appointment.name || this.appointment.comment || this.appointment.phone) {
+            if (this.dayHour && this.appointment.date) {
+                var time = this.dayHour.value.split(':');
+                this.appointment.date.setHours(time[0]);
+                this.appointment.date.setMinutes(time[1]);
+                this.dayHour = null;
+            }
+
+            angular.extend(this.originalAppointment, this.appointment);
+            this.$mdDialog.hide(this.originalAppointment);
+        }
     }
 
     cancel() {
@@ -289,7 +302,7 @@ export class FavorComponentController {
                 private favorResource: IFavorResource,
                 private masterResource: IMasterResource, private mdDialog: ng.material.IDialogService,
                 private $rootScope: IRootScope, private $log: ng.ILogService,
-                private AppointmentResource: IAppointmentResource,private orderByFilter:ng.IFilterOrderBy) {
+                private AppointmentResource: IAppointmentResource, private orderByFilter: ng.IFilterOrderBy) {
         this.appointment = new this.AppointmentResource();
     }
 
@@ -314,7 +327,7 @@ export class FavorComponentController {
 
                         });
                     })
-                    this.masters= this.orderByFilter( this.masters, "level._id" ,true);
+                    this.masters = this.orderByFilter(this.masters, "level._id", true);
                 });
         }
     }
@@ -353,8 +366,6 @@ export class FavorComponentController {
     }
 
     handleDialogResult(result) {
-        this.$rootScope.loading = true;
-
         if (this.appointment.service) {
             this.appointment.favors = [];
             this.appointment.favors.push(this.appointment.service);
@@ -373,7 +384,6 @@ export class FavorComponentController {
                 this.appointment = new this.AppointmentResource();
                 this.$rootScope.loading = false;
             });
-
     }
 
     showOrderConfirm(): void {

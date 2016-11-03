@@ -2,19 +2,21 @@
     <div class="md-toolbar-tools">
         <h1>Моделі</h1>
         <span flex></span>
+        <pg-admin-paging
+                params="$ctrl.paging"
+                on-prev="$ctrl.prev()"
+                on-next="$ctrl.next()"
+        ></pg-admin-paging>
     </div>
 </md-toolbar>
 
-<md-tabs flex="grow" md-border-bottom >
+<md-tabs flex md-border-bottom >
     <md-tab label="Моделі">
-        <md-list>
-            <md-list-item class="md-3-line models-item"  ng-click="$root.it.can('modifyAcademy') && vm.showEditForm(item)"
+        <md-list flex>
+            <md-list-item class="md-1-line models-item"  ng-click="$root.it.can('modifyAcademy') && vm.showEditForm(item)"
          ng-if="!vm.showModelCreateForm && !vm.showModelEditForm" ng-repeat="item in vm.models track by $index"
              class=" md-margin md-title">
-            <div layout="column ">
-                <span ng-if="item.name"><b>Ім`я:</b> {{item.name}}</span>
-                <span ng-if="item.phone"><b>Телефон: </b>{{item.phone}}</span>
-                <span ng-if="item.email"><b>Email</b>: <a href="mailto:{{item.email}}">{{item.email}}</a></span>
+
 
                 <div class="md-margin" layout="row" layout-align="space-around end">
                     <md-icon ng-if="::$root.it.can('modifyAcademy')" ng-click="vm.showEditForm(item)" class="md-secondary" md-svg-icon="content:ic_create_24px">
@@ -25,18 +27,12 @@
                         <md-tooltip >Видалити</md-tooltip>
                     </md-icon>
                 </div>
-            </div>
-                <div layout="column ">
-                    <img  ng-src="{{item.fasPhotoUrl}}?{{$index}}" class="model-avatar md-margin"/>
-                    <img ng-src="{{item.profilePhotoUrl}}?{{$index}}" class="model-avatar md-margin"/>
-                </div>
-                <div layout="column ">
-                    <img ng-src="{{item.backPhotoUrl}}?{{$index}}" class="model-avatar md-margin"/>
-                    <img ng-src="{{item.fullSizePhotoUrl}}?{{$index}}" class="model-avatar md-margin"/>
-                </div>
 
 
-
+                    <img style="heigth:40px;width:40px;" ng-src="{{item.fasPhotoUrl}}?{{$index}}" class="model-avatar md-margin"/>
+                    <img style="heigth:40px;width:40px;" ng-src="{{item.profilePhotoUrl}}?{{$index}}" class="model-avatar md-margin"/>
+                    <img style="heigth:40px;width:40px;" ng-src="{{item.backPhotoUrl}}?{{$index}}" class="model-avatar md-margin"/>
+                    <img style="heigth:40px;width:40px;" ng-src="{{item.fullSizePhotoUrl}}?{{$index}}" class="model-avatar md-margin"/>
 
 
                 <md-divider></md-divider>
@@ -47,7 +43,7 @@
              ng-include="'app/admin/academy/views/model.edit.form.html'"></div>
     </md-tab>
     <md-tab label="Додати модель" ng-if="::$root.it.can('modifyAcademy')">
-        <div ng-include="'app/admin/academy/views/model.create.form.html'"></div>
+        <div flex ng-include="'app/admin/academy/views/model.create.form.html'"></div>
     </md-tab>
 </md-tabs>
 

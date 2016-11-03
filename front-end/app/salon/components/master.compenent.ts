@@ -194,13 +194,19 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
             </md-button>
         </div>
     </md-toolbar>
-    <form name="orderForm" class="md-padding pop-form" novalidate flex>
+    <form name="orderForm" class="md-padding pop-form" novalidate flex ng-submit="vm.save(orderForm)">
         <md-dialog-content>
             <md-dialog-content-body>
                 <md-input-container class="md-block">
                     <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
-                    <label for="name">Як до вас звертатися</label>
-                    <input id="name" ng-model="vm.appointment.name" type="text" name="name">
+                    <label for="name">Як до вас звертатись?</label>
+                    <input id="name" ng-model="vm.appointment.name" type="text" name="name" required>
+                     <div ng-messages="orderForm.name.$error" role="alert"
+                         ng-show="orderForm.$submitted && orderForm.name.$invalid" >
+                        <div class="md-headline" ng-message="required">
+                             Залиште хоч якусь інформацію про себе, бажано номер телефону
+                        </div>
+                    </div>
                 </md-input-container>
                 <md-input-container class="md-block reduce-bottom-margin">
                     <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
@@ -243,7 +249,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
             </md-dialog-content-body>
         </md-dialog-content>
         <md-dialog-actions class="md-padding" layout="row" layout-align-xs="center center">
-            <md-button ng-click="vm.save(orderForm)" class=" xs-selected md-raised md-headline">ЗАПИСАТИСЬ</md-button>
+            <md-button type="submit" class=" xs-selected md-raised md-headline">ЗАПИСАТИСЬ</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>
@@ -283,17 +289,18 @@ class AppointmentDialogController {
         }
     }
     save(orderForm) {
-        if (this.dayHour && this.appointment.date) {
-            var time = this.dayHour.value.split( ':' );
-            this.appointment.date.setHours( time[0] );
-            this.appointment.date.setMinutes( time[1] );
-            this.dayHour=null;
+        if (this.appointment.name || this.appointment.comment || this.appointment.phone) {
+            if (this.dayHour && this.appointment.date) {
+                var time = this.dayHour.value.split(':');
+                this.appointment.date.setHours(time[0]);
+                this.appointment.date.setMinutes(time[1]);
+                this.dayHour = null;
+            }
+
+            angular.extend(this.originalAppointment, this.appointment);
+            this.$mdDialog.hide(this.originalAppointment);
         }
-
-        angular.extend( this.originalAppointment, this.appointment );
-        this.$mdDialog.hide( this.originalAppointment );
     }
-
     cancel() {
         this.$mdDialog.cancel();
     }

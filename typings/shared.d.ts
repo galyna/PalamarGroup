@@ -169,6 +169,7 @@ declare module pg {
             profilePhotoUrl:string,
             backPhotoUrl:string,
             fullSizePhotoUrl:string,
+            comment:string
         }
 
         export interface ISalonClient {

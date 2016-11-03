@@ -22,7 +22,8 @@ export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
         videoContainer.append( videoTag );
     }
     //create a new instance
-    AOS.init( {} );
+ AOS.init( {} )
+
 
 
     $rootScope.$on( '$routeChangeStart', function () {
@@ -36,7 +37,7 @@ export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
         //hide loading gif
         $timeout( ()=> {
             $rootScope.loading = false;
-            AOS.refresh();
+           // AOS.refresh();
 
         }, 5 );
 

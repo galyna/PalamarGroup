@@ -83,7 +83,7 @@ export class SalonTransformsComponentController {
         this.$rootScope.socialParams.host = this.constants.host;
         this.$rootScope.socialParams.target = this.constants.host + "/#"+SalonTransformsComponentUrl;
         this.$rootScope.socialParams.image = this.constants.host + photo.url;
-        this.$rootScope.socialParams.title = photo.name;
+        this.$rootScope.socialParams.title = 'Перевтілення';
         this.socialParams = angular.copy( this.$rootScope.socialParams, this.socialParams );
     }
 

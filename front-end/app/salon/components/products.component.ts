@@ -1,4 +1,3 @@
-
 import {IProductResource, IProduct, ProductResourceName} from "../../resources/product.resource";
 import {IRootScope} from "../../../typings";
 import {IProductOrder, ProductOrderResourceName, IProductOrderResource} from "../../resources/product.order.resource";
@@ -152,24 +151,31 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
             </md-button>
         </div>
     </md-toolbar>
-    <form name="orderForm" class="md-padding pop-form" novalidate flex>
+    <form name="orderForm" class="md-padding pop-form" novalidate flex ng-submit="vm.save(orderForm)">
         <md-dialog-content>
-            <md-dialog-content-body >
-               <div class=" md-block" layout="row" layout-align="center">
-                                    <div class="card-media-product  layout="column" >
-                                        <img src="{{::vm.product.photo.url}}" />
-                                        <div class="card-desc " flex="100" layout="column" layout-align="center center">                                          
-                                                    <div flex class="md-title">{{::vm.product.name}}</div>
-                                                     <div class="md-headline">Ціна {{::vm.product.price}} грн.</div>
-                                                      <div flex class="md-headline">{{::vm.product.description}}</div>                                                                                    
-                                        </div>
-                                    </div>
-        </div>
+            <md-dialog-content-body>
+                <div class=" md-block" layout="row" layout-align="center">
+                    <div class="card-media-product  layout=" column
+                    " >
+                    <img src="{{::vm.product.photo.url}}"/>
+                    <div class="card-desc " flex="100" layout="column" layout-align="center center">
+                        <div flex class="md-title">{{::vm.product.name}}</div>
+                        <div class="md-headline">Ціна {{::vm.product.price}} грн.</div>
+                        <div flex class="md-headline">{{::vm.product.description}}</div>
+                    </div>
+                </div>
+                </div>
                 <md-input-container class="md-block">
                     <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
-                    <label for="name">Як до вас звертатися</label>
-                    <input id="name" ng-model="vm.productsOrder.name" type="text" name="name">
-                </md-input-container>                
+                    <label for="name">Як до вас звертатися?</label>
+                    <input id="name" ng-model="vm.productsOrder.name" type="text" name="name" required>
+                    <div ng-messages="orderForm.name.$error" role="alert"
+                         ng-show="orderForm.$submitted && orderForm.name.$invalid">
+                        <div class="md-headline" ng-message="required">
+                            Залиште хоч якусь інформацію про себе, бажано номер телефону
+                        </div>
+                    </div>
+                </md-input-container>
                 <md-input-container class="md-block">
                     <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
                     <label for="phone">Телефон</label>
@@ -184,28 +190,29 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
             </md-dialog-content-body>
         </md-dialog-content>
         <md-dialog-actions class="md-padding" layout="row" layout-align-xs="center center">
-            <md-button ng-click="vm.save(orderForm)" class=" xs-selected md-raised md-headline">ЗАМОВИТИ</md-button>
+            <md-button type="submit" class=" xs-selected md-raised md-headline">ЗАМОВИТИ</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>
 `
 class ProductOrderDialogController {
 
-    static $inject = ['$mdDialog', 'productsOrder','product'];
-    private product:IProduct
-    private productsOrder:IProductOrder;
-    private originalProductsOrder:IProductOrder;
+    static $inject = ['$mdDialog', 'productsOrder', 'product'];
+    private product: IProduct
+    private productsOrder: IProductOrder;
+    private originalProductsOrder: IProductOrder;
 
-    constructor(private $mdDialog:ng.material.IDialogService, productsOrder:IProductOrder,product:IProduct) {
-        this.product=product;
-        this.productsOrder = angular.copy( productsOrder );
+    constructor(private $mdDialog: ng.material.IDialogService, productsOrder: IProductOrder, product: IProduct) {
+        this.product = product;
+        this.productsOrder = angular.copy(productsOrder);
         this.originalProductsOrder = productsOrder;
     }
 
     save(orderForm) {
-
-        angular.extend( this.originalProductsOrder, this.productsOrder );
-        this.$mdDialog.hide( {order:this.originalProductsOrder,product:this.product} );
+        if (this.productsOrder.name || this.productsOrder.comment || this.productsOrder.phone) {
+            angular.extend(this.originalProductsOrder, this.productsOrder);
+            this.$mdDialog.hide({order: this.originalProductsOrder, product: this.product});
+        }
     }
 
     cancel() {
@@ -215,77 +222,75 @@ class ProductOrderDialogController {
 
 export class ProductsComponentController {
 
-    static $inject = ["$log", '$rootScope','$mdDialog',ProductOrderResourceName, ProductResourceName ];
+    static $inject = ["$log", '$rootScope', '$mdDialog', ProductOrderResourceName, ProductResourceName];
 
-    products:IProduct[];
-    productsOrder:IProductOrder;
-    showAnimation:boolean;
+    products: IProduct[];
+    productsOrder: IProductOrder;
+    showAnimation: boolean;
 
 
-    constructor(private $log:ng.ILogService, private $rootScope:IRootScope,private $mdDialog:ng.material.IDialogService,
-                private ProductOrderResource:IProductOrderResource, private ProductResource:IProductResource) {
+    constructor(private $log: ng.ILogService, private $rootScope: IRootScope, private $mdDialog: ng.material.IDialogService,
+                private ProductOrderResource: IProductOrderResource, private ProductResource: IProductResource) {
 
         this.showAnimation = $rootScope.isBigSize;
-        this.productsOrder=new this.ProductOrderResource();
+        this.productsOrder = new this.ProductOrderResource();
     }
-    
-  
-    
+
 
     $onInit() {
         this.products = this.ProductResource.query();
-        this.products.$promise.then( (products) => {
-                this.products= products;
+        this.products.$promise.then((products) => {
+                this.products = products;
             }
         );
     }
 
     showAppointmentDialog(product) {
-        this.$mdDialog.show( {
+        this.$mdDialog.show({
             template: appointmentTemplate,
             clickOutsideToClose: true,
             bindToController: true,
             controller: ProductOrderDialogController,
             controllerAs: 'vm',
-            parent: angular.element( document.body ),
+            parent: angular.element(document.body),
             locals: {
                 productsOrder: this.productsOrder,
-                product:product
+                product: product
             },
-        } ).then( (result) => {
-            this.handleDialogResult( result );
-        } );
+        }).then((result) => {
+            this.handleDialogResult(result);
+        });
         ;
     }
 
     handleDialogResult(result) {
         this.$rootScope.loading = true;
-        this.productsOrder=result.order;
-        this.productsOrder.product=result.product._id;
+        this.productsOrder = result.order;
+        this.productsOrder.product = result.product._id;
         this.productsOrder.date = new Date().toJSON();
         this.productsOrder.$save()
-            .then( () => {
+            .then(() => {
                 this.$mdDialog.hide();
                 this.showOrderConfirm();
-            } )
-            .catch( (err) => {
-                this.$log.error( err );
-            } )
-            .finally( () => {
+            })
+            .catch((err) => {
+                this.$log.error(err);
+            })
+            .finally(() => {
                 this.productsOrder = new this.ProductOrderResource();
                 this.$rootScope.loading = false;
-            } );
+            });
 
     }
 
-    showOrderConfirm():void {
+    showOrderConfirm(): void {
         this.$mdDialog.show(
             this.$mdDialog.alert()
-                .clickOutsideToClose( true )
-                .title( 'Ваше замовлення прийнято. ' )
-                .textContent( 'На протязі дня з вами зв`яжеться адміністратор. Дякуємо.' )
-                .ariaLabel( 'Ваше замовлення прийнято. ' )
-                .ok( 'Закрити' )
+                .clickOutsideToClose(true)
+                .title('Ваше замовлення прийнято. ')
+                .textContent('На протязі дня з вами зв`яжеться адміністратор. Дякуємо.')
+                .ariaLabel('Ваше замовлення прийнято. ')
+                .ok('Закрити')
         );
 
     }
@@ -295,5 +300,5 @@ export let ProductsComponentUrl = "/products";
 export let ProductsComponentName = 'pgProducts';
 export let ProductsComponentOptions = {
     template: template,
-    controller:ProductsComponentController
+    controller: ProductsComponentController
 };

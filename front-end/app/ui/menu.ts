@@ -11,7 +11,7 @@ import {MastersComponentUrl} from "../salon/components/masters.component";
 import {IConstants} from "../core/core.config";
 import {IRootScope} from "../../typings";
 
-const template = `<div   ng-click="$ctrl.toggleMenu($event)" id="menu-container" >
+const template = `<div   ng-click="::$ctrl.toggleMenu($event)" id="menu-container" >
     <div id="nav-icon4" >
         <span></span>
         <span></span>
@@ -28,38 +28,38 @@ const menuBtnSelector = "#menu-container";
 const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout="column" layout-align="center stretch"
 
 >
-    <div class="pg-menu-section" ng-if="vm.showSalon">
-        <div class="pg-menu-section-title" ng-click="vm.courses()">САЛОН</div>
+    <div class="pg-menu-section" ng-if="::vm.showSalon">
+        <div class="pg-menu-section-title" ng-click="::vm.goToURL(vm.SalonHomeComponentUrl)">САЛОН</div>
          <div layout="column" >
             <div layout="row" layout-xs="column">
-            <div flex ng-click="vm.goToURL(vm.SalonHomeComponentUrl)" class=" pg-menu-item ">ГОЛОВНА
+            <div flex ng-click="::vm.goToURL(vm.SalonHomeComponentUrl)" class=" pg-menu-item ">ГОЛОВНА
             </div>
-            <div flex ng-click="vm.goToURL(vm.FavorsComponentUrl)" class=" pg-menu-item ">ПОСЛУГИ
+            <div flex ng-click="::vm.goToURL(vm.FavorsComponentUrl)" class=" pg-menu-item ">ПОСЛУГИ
             </div>
-            <div flex ng-click="vm.goToURL(vm.MastersComponentUrl)" class=" pg-menu-item ">МАЙСТРИ
+            <div flex ng-click="::vm.goToURL(vm.MastersComponentUrl)" class=" pg-menu-item ">МАЙСТРИ
             </div>
            
         </div>
             <div layout="row" layout-xs="column">
            
-            <div flex ng-click="vm.goToURL(vm.SalonTransformsComponentUrl)" class=" pg-menu-item ">ПЕРЕВТІЛЕННЯ
+            <div flex ng-click="::vm.goToURL(vm.SalonTransformsComponentUrl)" class=" pg-menu-item ">ПЕРЕВТІЛЕННЯ
             </div>
-            <div flex ng-click="vm.goToURL(vm.ProductsComponentUrl)" class=" pg-menu-item ">ПРОДУКЦІЯ
+            <div flex ng-click="::vm.goToURL(vm.ProductsComponentUrl)" class=" pg-menu-item ">ПРОДУКЦІЯ
             </div>
-            <div flex ng-click="vm.goToURL(vm.SalonContactsComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
+            <div flex ng-click="::vm.goToURL(vm.SalonContactsComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
             </div>
         </div>
         </div>
        
     </div>
     <div class=" pg-menu-section">
-        <div class="pg-menu-section-title" ng-click="vm.courses()">АКАДЕМІЯ</div>
+        <div class="pg-menu-section-title" ng-click="::vm.goToURL('/courses')">АКАДЕМІЯ</div>
         <div layout="column" layout-gt-sm="row">
-            <div flex ng-click="vm.goToURL('/courses')" class=" pg-menu-item ">НАВЧАЛЬННЯ
+            <div flex ng-click="::vm.goToURL('/courses')" class=" pg-menu-item ">НАВЧАЛЬННЯ
             </div>
-            <div flex ng-click="vm.goToURL(vm.CourseCalendarComponentUrl)" class=" pg-menu-item ">КАЛАЕНДАР
+            <div flex ng-click="::vm.goToURL(vm.CourseCalendarComponentUrl)" class=" pg-menu-item ">КАЛАЕНДАР
             </div>
-            <div flex ng-click="vm.goToURL(vm.AcademyContactComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
+            <div flex ng-click="::vm.goToURL(vm.AcademyContactComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
             </div>
         </div>
     </div>
@@ -90,7 +90,7 @@ export class MenuComponentController {
 
     scrollToMain() {
         var options = {
-            duration: 300,
+            duration: 200,
             easing: 'easeInQuad',
             offset: 0,
 

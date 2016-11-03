@@ -42,22 +42,22 @@
                                 </a>
         </span>
         <span>
-            <md-icon ng-click="vm.close()" md-svg-icon="navigation:ic_close_24px"></md-icon>
+            <md-icon ng-click="::vm.close()" md-svg-icon="navigation:ic_close_24px"></md-icon>
         </span>
     </div>
     <div class="container">
-        <prev ng-click="vm.prev()">
+        <prev ng-click="::vm.prev()">
             <div>
                 <md-icon md-svg-icon="navigation:ic_arrow_back_24px">
                 </md-icon>
             </div>
         </prev>
-        <div class="img-container" ng-click="vm.next()">
+        <div class="img-container" ng-click="::vm.next()">
             <!--<img ng-repeat="item in vm.items" ng-src="{{item.url}}" ng-class="{'active': $index == vm.index}">-->
-            <img ng-if="!vm.isVideo()" ng-src="{{vm.img.current.url}}">
+            <img ng-if="::!vm.isVideo()" ng-src="{{vm.img.current.url}}">
         </div>
 
-        <next ng-click="vm.next()">
+        <next ng-click="::vm.next()">
             <div>
                 <md-icon md-svg-icon="navigation:ic_arrow_forward_24px">
                 </md-icon>
@@ -65,16 +65,3 @@
         </next>
     </div>
 </media-observer>
-<md-dialog class="menu-dialog " aria-label="menu" layout="column" layout-align="center center">
-    <div layout="row" class="close-row"><span flex></span>
-        <md-button class="md-icon-button" ng-click="vm.cancel()">
-            <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close menu"></md-icon>
-        </md-button>
-    </div>
-
-    <md-button ng-click="vm.courses()" class=" md-raised md-display-3">БЛОКИ
-    </md-button>
-    <md-button ng-click="vm.calendar()" class=" md-raised md-display-3">КАЛАНДАР
-    </md-button>
-
-</md-dialog>
