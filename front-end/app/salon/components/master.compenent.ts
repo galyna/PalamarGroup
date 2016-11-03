@@ -118,7 +118,7 @@ const template = `<div class=" description-container">
                     <daypilot-navigator style=" width: 280px" id="navis"
                                         daypilot-config="$ctrl.navigatorSmallConfig"></daypilot-navigator>
                 </div>
-                <div flex class="md-padding ">
+                <div flex class="md-padding " ng-if='$ctrl.weekConfig'>
                     <daypilot-calendar id="week-front" daypilot-config="$ctrl.weekConfig"
                                        daypilot-events="$ctrl.events"></daypilot-calendar>
                 </div>
@@ -421,7 +421,7 @@ export class MasterComponentController {
             businessEndsHour: "19",
             headerDateFormat: 'dd.MM',
             cellHeight: "40",
-           // durationBarVisible: "false",
+            durationBarVisible: "false",
             columnMarginRight: "0",
             hideUntilInit: true,
             eventMoveHandling: 'Disabled',
