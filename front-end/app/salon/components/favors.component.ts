@@ -7,12 +7,12 @@ import {IRootScope} from "../../../typings";
 const template = `<div class="courses-details description-container" layout="column">
 
 
-    <div ng-repeat="category in  $ctrl.categories">
+    <div ng-repeat="category in  $ctrl.categories track by $index">
 
         <div layout="row" flex ng-if="category.favors.length>0">
             <div class="page-delimiter" flex>
                 <div class="fit-screen-wrap invers header">
-                    <div class="md-display-2"> {{category.name}}</div>
+                    <div class="md-display-2"> {{::category.name}}</div>
                 </div>
 
             </div>
@@ -21,11 +21,11 @@ const template = `<div class="courses-details description-container" layout="col
         <div layout="row" layout-align="center center" ng-if="category.favors.length>0 ">
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
                 <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                    <md-card md-whiteframe="6"  ng-repeat="favor in category.favors"
+                    <md-card md-whiteframe="6"  ng-repeat="favor in category.favors track by $index"
                              class="md-margin "
                              ng-attr-flex-gt-sm="46"
                              flex-gt-xs="46" flex-xs="80"
-                             ng-click="$ctrl.showFavor(favor._id)">
+                             ng-click="::$ctrl.showFavor(favor._id)">
 
                         <img ng-src="{{::favor.photo.url}}" class="md-card-image">
 
@@ -40,7 +40,7 @@ const template = `<div class="courses-details description-container" layout="col
 </div>
 <div class="courses description-container" layout="row" layout-align="center center">
     <div layout="column" layout-align="center center">
-        <div layout="row" ng-if="$ctrl.masters.length>0" flex>
+        <div layout="row"  flex>
             <div class="page-delimiter" flex>
                 <div class="fit-screen-wrap invers header">
                     <div class="md-display-2"> Майстри</div>
@@ -62,11 +62,11 @@ const template = `<div class="courses-details description-container" layout="col
                              flex="50" layout="column" layout-align="space-around center">
                             <div ng-if="master.rate && master.rate._id!=='0'" hide show-md="true" class="corner-ribbon top-right black"
                              ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}" >
-                                {{master.rate.text}}
+                                {{::master.rate.text}}
                             </div>
                             <div ng-if="master.rate && master.rate._id!=='0'" hide-md="true"  class="corner-ribbon-min top-right black"
                             ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}">
-                                {{master.rate.text}}
+                                {{::master.rate.text}}
                             </div>
                             <div layout="row" layout-align="center center" class="md-padding md-margin">
                                 <div hide show-gt-sm="true" flex="90" class="md-display-2">{{::master.name}}</div>
@@ -75,11 +75,11 @@ const template = `<div class="courses-details description-container" layout="col
                             </div>
                         </div>
                         <md-button class="  md-display-1 md-raised  " aria-label="Details"
-                                   ng-click="$ctrl.showMaster(master._id)">
+                                   ng-click="::$ctrl.showMaster(master._id)">
                             Про майстра
                         </md-button>
                         <md-button class=" near-master xs-selected md-display-1 md-raised " aria-label="Details"
-                                   ng-click="$ctrl.showAppointmentDialog(master)">
+                                   ng-click=":;$ctrl.showAppointmentDialog(master)">
                             Записатись
                         </md-button>
 
@@ -91,7 +91,7 @@ const template = `<div class="courses-details description-container" layout="col
 
             <div hide-gt-xs="true" layout="row" layout-align="center center">
                 <div class="overlay-bg trigger-right"></div>
-                <md-card md-whiteframe="8" ng-click="vm.showDetails(course._id)">
+                <md-card md-whiteframe="8">
                     <md-card-content layout="column">
                         <div ng-if="master.rate && master.rate._id!=='0'" class="card-desc-top-master"
                              ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}" flex
@@ -99,7 +99,7 @@ const template = `<div class="courses-details description-container" layout="col
                              layout-align=" space-around center">
                             <md-card-title>
                                 <md-card-title-text flex layout="column" layout-align=" space-around center">
-                                    <div class="md-headline"> {{master.rate.text}}</div>
+                                    <div class="md-headline"> {{::master.rate.text}}</div>
                                 </md-card-title-text>
                             </md-card-title>
                         </div>
@@ -113,11 +113,11 @@ const template = `<div class="courses-details description-container" layout="col
                                 </md-card-title-text>
                             </md-card-title>
                             <md-button class=" md-display-1 md-raised " aria-label="Details"
-                                       ng-click="$ctrl.showMaster(master._id)">
+                                       ng-click="::$ctrl.showMaster(master._id)">
                                 Про майстра
                             </md-button>
                             <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
-                                       ng-click="$ctrl.showAppointmentDialog(master)">
+                                       ng-click="::$ctrl.showAppointmentDialog(master)">
                                 Записатись
                             </md-button>
                         </div>
@@ -137,12 +137,12 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
         <div class="md-toolbar-tools md-padding ">
             <h2 class=" md-padding ">ЗАПИСАТИСЬ НА ПРИЙОМ</h2>
             <span flex></span>
-            <md-button class="md-icon-button" ng-click="vm.cancel()">
+            <md-button class="md-icon-button" ng-click="::vm.cancel()">
                 <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>
             </md-button>
         </div>
     </md-toolbar>
-    <form name="orderForm" class="md-padding pop-form" novalidate flex ng-submit="vm.save(orderForm)">
+    <form name="orderForm" class="md-padding pop-form" novalidate flex ng-submit="::vm.save(orderForm)">
         <md-dialog-content>
             <md-dialog-content-body>
                 <md-input-container class="md-block">
@@ -163,7 +163,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                 </md-input-container>
                 <div flex="100" layout="row" layout-xs="columm">
                     <div flex="50" flex-xs="100" class="order-picker-container " layout="row">
-                        <md-datepicker class="order-date-picker" placeholder="Дата" flex ng-model="vm.appointment.date"
+                        <md-datepicker md-open-on-focus class="order-date-picker" placeholder="Дата" flex ng-model="vm.appointment.date"
                                        name="dateField"></md-datepicker>
                     </div>
                     <md-input-container flex="50" flex-xs="100">

@@ -95,7 +95,7 @@ const template = `<div class="courses-details description-container" layout="col
     </div>
  
     <div ng-repeat="transform in $ctrl.transforms track by $index">
-        <div layout="row" layout-align="center center" ng-if="transform.videos.length>0 ">
+        <div layout="row" layout-align="center center" >
             <div flex-xs="90" flex-gt-md="60" flex-md="80" flex-gt-xs="85">
                 <div layout="column" layout-margin layout layout-wrap layout-align="center center">
                     <md-card md-whiteframe="6" class="  courses-videos"
@@ -115,7 +115,7 @@ const template = `<div class="courses-details description-container" layout="col
 
         </div>
 
-        <div layout="row" layout-align="center center" ng-if="transform.photos.length>0 ">
+        <div layout="row" layout-align="center center" >
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
                 <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                     <md-card md-whiteframe="6"  ng-repeat="photo in ::transform.photos track by $index"

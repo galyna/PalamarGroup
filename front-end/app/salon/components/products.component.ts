@@ -12,10 +12,10 @@ const template = `<div class="courses description-container" layout="row" layout
                 <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
                 >
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media " 
+                        <div class="card-media "
                              flex="50"><img src="{{::product.photo.url}}" class="md-card-image "/>
                         </div>
-                        <div class="card-desc " 
+                        <div class="card-desc "
                              flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
@@ -30,7 +30,7 @@ const template = `<div class="courses description-container" layout="row" layout
                             </md-card-title>
                             <md-card-actions flex="25">
                                 <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
-                                           ng-click="$ctrl.showAppointmentDialog(product)">
+                                           ng-click="::$ctrl.showAppointmentDialog(product)">
                                     Замовити
                                 </md-button>
                             </md-card-actions>
@@ -39,50 +39,50 @@ const template = `<div class="courses description-container" layout="row" layout
                 </md-card>
                 <md-card id="trigger-right" ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-desc  " 
-                              flex layout="column" layout-align="center center">
+                        <div class="card-desc  "
+                             flex layout="column" layout-align="center center">
                             <md-card-title flex>
-                                  <md-card-title-text flex layout-align="space-around center">
+                                <md-card-title-text flex layout-align="space-around center">
                                     <div hide show-gt-sm="true" class="md-display-2">{{::product.name}}</div>
-                                    <div  hide-gt-sm="true" class="md-display-1">{{::product.name}}</div>
-                                     <div class="md-title">Ціна {{::product.price}} грн.</div>
-                                    <div  class="descr-container">
+                                    <div hide-gt-sm="true" class="md-display-1">{{::product.name}}</div>
+                                    <div class="md-title">Ціна {{::product.price}} грн.</div>
+                                    <div class="descr-container">
                                         <div hide show-gt-sm="true" class="md-title">{{::product.description}}</div>
-                                        <div  hide-gt-sm="true" class="md-subhead">{{::product.description}}</div>
+                                        <div hide-gt-sm="true" class="md-subhead">{{::product.description}}</div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-actions flex="25">
                                 <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
-                                           ng-click="$ctrl.showAppointmentDialog(product)">
+                                           ng-click="::$ctrl.showAppointmentDialog(product)">
                                     Замовити
                                 </md-button>
                             </md-card-actions>
                         </div>
-                        <div class="card-media " 
+                        <div class="card-media "
                              flex="50"><img src="{{::product.photo.url}}" class="md-card-image"/></div>
                     </md-card-content>
                 </md-card>
                 <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media "                              flex="50"><img src="{{::product.photo.url}}" class="md-card-image "/>
+                        <div class="card-media " flex="50"><img src="{{::product.photo.url}}" class="md-card-image "/>
                         </div>
                         <div class="card-desc " flex="50"
-                              layout="column" layout-align="center center">
+                             layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
                                     <div hide show-gt-sm="true" class="md-display-2">{{::product.name}}</div>
-                                    <div  hide-gt-sm="true" class="md-display-1">{{::product.name}}</div>
-                                     <div class="md-title">Ціна {{::product.price}} грн.</div>
-                                    <div  class="descr-container">
+                                    <div hide-gt-sm="true" class="md-display-1">{{::product.name}}</div>
+                                    <div class="md-title">Ціна {{::product.price}} грн.</div>
+                                    <div class="descr-container">
                                         <div hide show-gt-sm="true" class="md-title">{{::product.description}}</div>
-                                        <div  hide-gt-sm="true" class="md-subhead">{{::product.description}}</div>
+                                        <div hide-gt-sm="true" class="md-subhead">{{::product.description}}</div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-actions flex="25">
                                 <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
-                                           ng-click="$ctrl.showAppointmentDialog(product)">
+                                           ng-click="::$ctrl.showAppointmentDialog(product)">
                                     Замовити
                                 </md-button>
                             </md-card-actions>
@@ -91,12 +91,12 @@ const template = `<div class="courses description-container" layout="row" layout
                     </md-card-content>
                 </md-card>
                 <div class="overlay-bg"></div>
-              
+
             </div>
 
             <div hide-gt-xs="true" layout="row" layout-align="center center">
                 <div class="overlay-bg trigger-right"></div>
-                <md-card md-whiteframe="8" ng-click="vm.showDetails(course._id)">
+                <md-card md-whiteframe="8" ng-click="::vm.showDetails(course._id)">
                     <md-card-content layout="column">
                         <div class="card-media "><img src="{{::product.photo.url}}" class="md-card-image"/></div>
                         <div class="card-desc "
@@ -104,12 +104,12 @@ const template = `<div class="courses description-container" layout="row" layout
                             <md-card-title>
                                 <md-card-title-text>
                                     <div class="md-headline">{{::product.name}}</div>
-                                     <div class="md-title">Ціна {{::product.price}} грн.</div>
+                                    <div class="md-title">Ціна {{::product.price}} грн.</div>
                                     <div class="md-title">{{::product.description}}</div>
                                 </md-card-title-text>
                             </md-card-title>
                             <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
-                                       ng-click="$ctrl.showAppointmentDialog(product)">
+                                       ng-click="::$ctrl.showAppointmentDialog(product)">
                                 Замовити
                             </md-button>
                         </div>
@@ -136,7 +136,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
             </md-button>
         </div>
     </md-toolbar>
-    <form name="orderForm" class="md-padding pop-form" novalidate flex ng-submit="vm.save(orderForm)">
+    <form name="orderForm" class="md-padding pop-form" novalidate flex ng-submit="::vm.save(orderForm)">
         <md-dialog-content>
             <md-dialog-content-body>
                 <div class=" md-block" layout="row" layout-align="center">
@@ -193,7 +193,7 @@ class ProductOrderDialogController {
         this.originalProductsOrder = productsOrder;
     }
 
-    save(orderForm) {
+    save() {
         if (this.productsOrder.name || this.productsOrder.comment || this.productsOrder.phone) {
             angular.extend(this.originalProductsOrder, this.productsOrder);
             this.$mdDialog.hide({order: this.originalProductsOrder, product: this.product});

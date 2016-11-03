@@ -37,7 +37,7 @@ const template = `<div class="courses description-container" layout="row" layout
 
             <div hide-gt-xs="true" layout="row" layout-align="center center">
                 <div class="overlay-bg trigger-right"></div>
-                <md-card md-whiteframe="8" ng-click="vm.showDetails(course._id)">
+                <md-card md-whiteframe="8" >
                     <md-card-content layout="column">
                         <div class="card-media "><img src="{{::$ctrl.favor.photo.url}}" class="md-card-image"/></div>
                         <div class="card-desc "
@@ -78,11 +78,11 @@ const template = `<div class="courses description-container" layout="row" layout
                              flex="50" layout="column" layout-align="space-around center">
                             <div ng-if="master.level" hide show-md="true" class="corner-ribbon top-right black"
                              ng-class="{'grey': master.level._id==='1','white': master.level._id==='0'}" >
-                                {{master.level.text}}
+                                {{::master.level.text}}
                             </div>
                             <div ng-if="master.level" hide-md="true"  class="corner-ribbon-min top-right black"
                             ng-class="{'grey': master.level._id==='1','white': master.level._id==='0'}">
-                                {{master.level.text}}
+                                {{::master.level.text}}
                             </div>
                             <div layout="row" layout-align="center center" class="md-padding md-margin">
                                 <div hide show-gt-sm="true" flex="90" class="md-display-2">{{::master.name}}</div>
@@ -91,11 +91,11 @@ const template = `<div class="courses description-container" layout="row" layout
                             </div>
                         </div>
                         <md-button class="  md-display-1 md-raised  " aria-label="Details"
-                                   ng-click="$ctrl.showMaster(master._id)">
+                                   ng-click="::$ctrl.showMaster(master._id)">
                             Про майстра
                         </md-button>
                         <md-button class=" near-master xs-selected md-display-1 md-raised " aria-label="Details"
-                                   ng-click="$ctrl.showAppointmentDialog(master)">
+                                   ng-click="::$ctrl.showAppointmentDialog(master)">
                             Записатись
                         </md-button>
 
@@ -107,13 +107,13 @@ const template = `<div class="courses description-container" layout="row" layout
 
         <div hide-gt-xs="true" layout="row" layout-align="center center">
             <div class="overlay-bg trigger-right"></div>
-            <md-card md-whiteframe="8" ng-click="vm.showDetails(course._id)">
+            <md-card md-whiteframe="8" >
                 <md-card-content layout="column">
                     <div ng-if="master.level" class="card-desc-top-master"  ng-class="{'grey': master.level._id==='1','white': master.level._id==='0'}" flex layout="column"
                          layout-align=" space-around center">
                         <md-card-title>
                             <md-card-title-text flex layout="column" layout-align=" space-around center">
-                                <div class="md-headline">{{master.level.text}}</div>
+                                <div class="md-headline">{{::master.level.text}}</div>
                             </md-card-title-text>
                         </md-card-title>
                     </div>
@@ -127,11 +127,11 @@ const template = `<div class="courses description-container" layout="row" layout
                             </md-card-title-text>
                         </md-card-title>
                         <md-button class=" md-display-1 md-raised " aria-label="Details"
-                                   ng-click="$ctrl.showMaster(master._id)">
+                                   ng-click="::$ctrl.showMaster(master._id)">
                             Про майстра
                         </md-button>
                         <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
-                                   ng-click="$ctrl.showAppointmentDialog(master)">
+                                   ng-click="::$ctrl.showAppointmentDialog(master)">
                             Записатись
                         </md-button>
                     </div>
@@ -152,12 +152,12 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
         <div class="md-toolbar-tools md-padding ">
             <h2 class=" md-padding ">ЗАПИСАТИСЬ НА ПРИЙОМ</h2>
             <span flex></span>
-            <md-button class="md-icon-button" ng-click="vm.cancel()">
+            <md-button class="md-icon-button" ng-click="::vm.cancel()">
                 <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>
             </md-button>
         </div>
     </md-toolbar>
-    <form name="orderForm" novalidate class="md-padding pop-form" ng-submit="vm.save(orderForm)" flex>
+    <form name="orderForm" novalidate class="md-padding pop-form" ng-submit="::vm.save(orderForm)" flex>
         <md-dialog-content>
             <md-dialog-content-body>
 
@@ -181,7 +181,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                 </md-input-container>
                 <div flex="100" layout="row" layout-xs="columm">
                     <div flex="50" flex-xs="100" class="order-picker-container " layout="row">
-                        <md-datepicker class="order-date-picker" placeholder="Дата" flex ng-model="vm.appointment.date"
+                        <md-datepicker md-open-on-focus class="order-date-picker" placeholder="Дата" flex ng-model="vm.appointment.date"
                                        name="dateField"></md-datepicker>
                     </div>
                     <md-input-container flex="50" flex-xs="100">

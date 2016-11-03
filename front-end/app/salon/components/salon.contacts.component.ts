@@ -15,11 +15,11 @@ const template = `<div class="salon-contacts description-container" layout="colu
 
     <!--author-->
     <div layout="column" layout-align="center center" ng-repeat="salon in $ctrl.salons">
-        <div layout="row" flex ng-if="salon.contacts.length>0">
+        <div layout="row" flex >
             <div class="page-delimiter" flex>
                 <div class="fit-screen-wrap invers header">
                   
-                    <div class="md-display-1"> Салон на {{salon.address}}</div>
+                    <div class="md-display-1"> Салон на {{::salon.address}}</div>
                 </div>
 
             </div>
@@ -32,7 +32,7 @@ const template = `<div class="salon-contacts description-container" layout="colu
             </ui-gmap-markers>
         </ui-gmap-google-map>
         <div class="course-bg " layout-align="center center" flex
-             ng-repeat="contact in salon.contacts track by $index">
+             ng-repeat="contact in ::salon.contacts track by $index">
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
                 <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
@@ -120,10 +120,10 @@ const template = `<div class="salon-contacts description-container" layout="colu
         </div>
         
          <div flex="100" class="courses-details" layout="row" layout-align="center center"
-         ng-if="salon.photos.length>0 ">
+         >
         <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6"  ng-repeat="photo in salon.photos"
+                <md-card md-whiteframe="6"  ng-repeat="photo in ::salon.photos track by $index"
                          class="md-margin "
                          flex-gt-sm="22"
                          flex-gt-xs="46" flex-xs="80"

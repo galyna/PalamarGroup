@@ -47,7 +47,7 @@ const template = `<div class=" description-container">
                         </div>   
                                                                                                                                 
                         <md-button class=" near-master xs-selected md-display-1 md-raised " aria-label="Details"
-                                   ng-click="$ctrl.showAppointmentDialog($ctrl.master)">
+                                   ng-click="::$ctrl.showAppointmentDialog($ctrl.master)">
                             Записатись
                         </md-button>
 
@@ -69,7 +69,7 @@ const template = `<div class=" description-container">
                     </md-card-title-text>
                 </md-card-title>
             </div>
-                    <div class="card-media " ng-click="$ctrl.showMaster($ctrl.master._id)">
+                    <div class="card-media " >
                         <img
                                 src="{{::$ctrl.master.photo.url}}"
                                 class="md-card-image"/></div>
@@ -83,7 +83,7 @@ const template = `<div class=" description-container">
                         </md-card-title>
 
                         <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
-                                   ng-click="$ctrl.showAppointmentDialog(product)">
+                                   ng-click="::$ctrl.showAppointmentDialog(product)">
                             Записатись
                         </md-button>
                     </div>
@@ -140,7 +140,7 @@ const template = `<div class=" description-container">
     </div>
 
 
-    <div class="courses-details" layout="row" flex layout-align="center center" ng-if="$ctrl.master.videos.length>0">
+    <div class="courses-details" layout="row" flex layout-align="center center" >
         <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
             <div layout="column" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" class="  courses-videos"                         
@@ -148,7 +148,7 @@ const template = `<div class=" description-container">
                          flex>
                     <div flex class="embed-responsive embed-responsive-16by9">
                         <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
-                                       video-id="video.url"></youtube-video>
+                                       video-id="::video.url"></youtube-video>
                     </div>
                     <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
                         <span class="  md-margin">{{::video.name}}</span>
@@ -160,12 +160,12 @@ const template = `<div class=" description-container">
     </div>
 
     <div flex="100" class="courses-details" layout="row" layout-align="center center"
-         ng-if="$ctrl.master.works.length>0 ">
+        >
         <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6"  ng-repeat="photo in $ctrl.master.works"
+                <md-card md-whiteframe="6"  ng-repeat="photo in $ctrl.master.works track by $index"
                          class="md-margin "
-                         ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
+                         ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
                          flex-gt-xs="46" flex-xs="80"
                          ng-click="::$ctrl.showMediaObserver($ctrl.master.works, $index)">                   
                         <img ng-src="{{::photo.url}}" class="md-card-image">                 
@@ -186,12 +186,12 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
         <div class="md-toolbar-tools md-padding ">
             <h2 class=" md-padding ">ЗАПИСАТИСЬ НА ПРИЙОМ</h2>
             <span flex></span>
-            <md-button class="md-icon-button" ng-click="vm.cancel()">
+            <md-button class="md-icon-button" ng-click="::vm.cancel()">
                 <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>
             </md-button>
         </div>
     </md-toolbar>
-    <form name="orderForm" class="md-padding pop-form" novalidate flex ng-submit="vm.save(orderForm)">
+    <form name="orderForm" class="md-padding pop-form" novalidate flex ng-submit="::vm.save(orderForm)">
         <md-dialog-content>
             <md-dialog-content-body>
                 <md-input-container class="md-block">
@@ -212,7 +212,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                 </md-input-container>
                 <div flex="100" layout="row" layout-xs="columm">
                     <div flex="50" flex-xs="100" class="order-picker-container " layout="row">
-                        <md-datepicker class="order-date-picker" placeholder="Дата" flex ng-model="vm.appointment.date"
+                        <md-datepicker md-open-on-focus class="order-date-picker" placeholder="Дата" flex ng-model="vm.appointment.date"
                                        name="dateField"></md-datepicker>
                     </div>
                     <md-input-container flex="50" flex-xs="100">
@@ -321,6 +321,9 @@ export class MasterComponentController {
                 private constants:IConstants) {
         this.events = [];
         this.appointment = new this.AppointmentResource();
+
+    }
+    $onInit() {
         if (this.$routeParams["id"]) {
             this.MasterResource.get( {id: this.$routeParams["id"], populate: 'services.favor'} ).$promise
                 .then( (master) => {
@@ -332,6 +335,7 @@ export class MasterComponentController {
             this.loadEvents( new Date(), this.$routeParams["id"] );
         }
     }
+
 
     getStartAndEndOfWeek(date):Date[] {
         date = new Date( date );
@@ -417,12 +421,13 @@ export class MasterComponentController {
             businessEndsHour: "19",
             headerDateFormat: 'dd.MM',
             cellHeight: "40",
-            durationBarVisible: "false",
+           // durationBarVisible: "false",
             columnMarginRight: "0",
             hideUntilInit: true,
             eventMoveHandling: 'Disabled',
             eventResizeHandling: 'Disabled',
-           // heightSpec: 'BusinessHours'
+            heightSpec: 'BusinessHours'
+
         };
 
 
