@@ -109,13 +109,13 @@ const template = `<div class=" description-container">
         <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
             <div layout="row" layout-xs="column" class='master-calendar'>
                 <div hide show-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
-                    <daypilot-navigator style=" width: 280px" id="navi-front"
+                    <daypilot-navigator style=" width: 280px" id="navi-front" ng-if='$ctrl.navigatorConfig'
                                         daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>
 
                 </div>
                 <div hide-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
 
-                    <daypilot-navigator style=" width: 280px" id="navis"
+                    <daypilot-navigator style=" width: 280px" id="navis" ng-if='$ctrl.navigatorSmallConfig'
                                         daypilot-config="$ctrl.navigatorSmallConfig"></daypilot-navigator>
                 </div>
                 <div flex class="md-padding " ng-if='$ctrl.weekConfig'>
