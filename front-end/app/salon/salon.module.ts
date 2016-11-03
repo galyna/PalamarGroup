@@ -11,7 +11,7 @@ import {resourcesModule} from "../resources/resources.module";
 import {salonRoutes} from './salon.routes';
 import {SalonHomeComponentName, SalonHomeComponentOptions} from "./components/salon.home.component";
 import {FavorsComponentName, FavorsComponentOptions} from "./components/favors.component";
-import {MasterComponentName, MasterComponentOptions} from "./components/master.compenent";
+import {MasterComponentName, MasterComponentOptions} from "./components/salon.master.component";
 import {ProductsComponentOptions, ProductsComponentName} from "./components/products.component";
 import {SalonContactsComponentOptions, SalonContactsComponentName} from "./components/salon.contacts.component";
 import {SalonTransformsComponentName, SalonTransformsComponentOptions} from "./components/salon.transforms.component";

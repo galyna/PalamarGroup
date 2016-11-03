@@ -271,7 +271,7 @@ class AppointmentDialogController {
     constructor(private $mdDialog:ng.material.IDialogService, appointment:IAppointment) {
         this.appointment = angular.copy( appointment );
         this.originalAppointment = appointment;
-       this.setTime();
+        this.setTime();
     }
     setTime() {
         if (this.appointment.date) {
@@ -304,7 +304,7 @@ class AppointmentDialogController {
 export class MasterComponentController {
 
     static $inject = ["$log", "$routeParams", MasterResourceName, '$mdDialog', '$rootScope', AppointmentResourceName,
-      MediaObserverFactoryName,'constants'];
+        MediaObserverFactoryName,'constants'];
     master:IMaster;
     private appointment:IAppointment;
     events:IScheduler[];
@@ -312,7 +312,7 @@ export class MasterComponentController {
     navigatorConfig:any;
     navigatorSmallConfig:any;
     socialParams:any;
-  
+
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private MasterResource:IMasterResource, private mdDialog:ng.material.IDialogService,
                 private $rootScope:IRootScope, private AppointmentResource:IAppointmentResource,
