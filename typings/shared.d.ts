@@ -202,7 +202,8 @@ declare module pg {
             name:string,
             description:string,
             price:number,
-            photo:IPhoto
+            photo:IPhoto,
+            order:number,
         }
 
         export interface IBrend {

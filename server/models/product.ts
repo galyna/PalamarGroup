@@ -19,6 +19,7 @@ export let ProductSchema = new Schema({
     price: Number,
     description:String,
     photo: PhotoSchema,
+    order: Number
 });
 
 export var Product = model<IProductModel>('Product', ProductSchema);
