@@ -67,12 +67,12 @@
 
 <div class="page-container description-container">
     <div class="fit-screen-wrap">
-        <ng-view id="mainContent" flex ng-if="!$root.isAdminZone();"></ng-view>
+        <ng-view id="mainContent" flex ng-if="::!$root.isAdminZone();"></ng-view>
     </div>
 
 </div>
 <!--footer-->
-<pg-footer ng-if="!$root.isAdminZone()" ></pg-footer>
+<pg-footer ng-if="::!$root.isAdminZone()" ></pg-footer>
 
 </body>
 </html>

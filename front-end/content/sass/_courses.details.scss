@@ -197,6 +197,7 @@
     overflow: hidden;
 
     &:hover {
+      cursor: pointer;
       @extend .md-whiteframe-12dp;
       transition: top 0.3s linear;
       top: -3px;
@@ -288,6 +289,7 @@
     overflow: hidden;
 
     &:hover {
+      cursor: pointer;
       @extend .md-whiteframe-12dp;
       transition: top 0.3s linear;
       top: -3px;
@@ -346,6 +348,10 @@
 
     position: relative;
     display: block;
+
+    &:hover {
+      cursor: pointer;
+    }
 
     .hide_file {
       position: absolute;

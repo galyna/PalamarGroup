@@ -96,6 +96,9 @@ button.md-button.md-fab.side-up-btn {
   border-left-width: 0;
   background: rgba(white, 0.6);
 
+  &:hover {
+    cursor: pointer;
+  }
   @media (max-width: $layout-breakpoint-xs) {
     width: 65px;
     border: none;

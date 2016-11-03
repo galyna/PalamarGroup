@@ -16,7 +16,7 @@
                 </div>
                 <div class=" card-media" layout="column"
                      flex-gt-sm="50" layout-align="center center">
-                    <img src="{{vm.course.author.photoUrl}}"/>
+                    <img src="{{::vm.course.author.photoUrl}}"/>
                     <div class="md-padding author-name" layout="column" layout-align="space-around center">
                         <div class="md-headline">Автор</div>
                         <div class="md-headline">{{ ::vm.course.author.name}}</div>
@@ -37,11 +37,11 @@
                                 <div flex>{{::vm.course.price}} грн.</div>
                             </div>
                         </md-card-title>
-                        <md-button class="md-raised " flex aria-label="Play" ng-click="vm.showModelDialog($event)">
+                        <md-button class="md-raised " flex aria-label="Play" ng-click="::vm.showModelDialog($event)">
                             Стати моделлю
                         </md-button>
                         <md-button class=" md-raised xs-selected " aria-label="Play"
-                                   ng-click="vm.showOrderDialog($event)">
+                                   ng-click="::vm.showOrderDialog($event)">
                             Записатись
                         </md-button>
                         <md-button scroll-to="comments" easing="easeInOutCubic"
@@ -59,19 +59,19 @@
                                    socialshare-provider="facebook"
                                    socialshare-via="614392392043708"
                                    socialshare-caption="PALAMAR GROUP ACADEMY"
-                                   socialshare-description="{{vm.socialParams.description}}"
-                                   socialshare-media="{{vm.socialParams.image}}"
-                                   socialshare-url="{{vm.socialParams.target}}">
+                                   socialshare-description="{{::vm.socialParams.description}}"
+                                   socialshare-media="{{::vm.socialParams.image}}"
+                                   socialshare-url="{{::vm.socialParams.target}}">
                                     <md-icon class="social-image"
                                              md-svg-src="../content/images/icons/social/face.svg"></md-icon>
                                 </a>
                                 <a href=""
                                    socialshare
                                    socialshare-provider="vk"
-                                   socialshare-text="{{ vm.socialParams.title}}"
-                                   socialshare-description="{{vm.socialParams.description}}"
-                                   socialshare-media='{{vm.socialParams.image}}'
-                                   socialshare-url="{{vm.socialParams.target}}">
+                                   socialshare-text="{{ ::vm.socialParams.title}}"
+                                   socialshare-description="{{::vm.socialParams.description}}"
+                                   socialshare-media='{{::vm.socialParams.image}}'
+                                   socialshare-url="{{::vm.socialParams.target}}">
                                     <md-icon class="social-image"
                                              md-svg-src="../content/images/icons/social/vk-social-logotype.svg"></md-icon>
                                 </a>
@@ -80,14 +80,14 @@
                                    socialshare-provider="twitter"
                                    socialshare-text="{{ 'Запрошуємо на блок '+ vm.socialParams.title }}"
                                    socialshare-hashtags=""
-                                   socialshare-url="{{vm.socialParams.target}}">
+                                   socialshare-url="{{::vm.socialParams.target}}">
                                     <md-icon class="social-image"
                                              md-svg-src="../content/images/icons/social/twi.svg"></md-icon>
                                 </a>
                                 <a href=""
                                    socialshare
                                    socialshare-provider="google"
-                                   socialshare-url="{{vm.socialParams.target}}">
+                                   socialshare-url="{{::vm.socialParams.target}}">
                                     <md-icon class="social-image"
                                              md-svg-src="../content/images/icons/social/goo.svg"></md-icon>
 
@@ -103,15 +103,15 @@
 
     </div>
 
-    <div layout="row" flex ng-if="vm.course.days">
+    <div layout="row" flex ng-if="::vm.course.days">
         <div class="page-delimiter content-block" id="trigger-right" flex>
             <div class="fit-screen-wrap header-long " layout="column">
                 <div flex="none" layout="row" class="md-padding program-block  " layout-align=" center center">
                     <div ng-repeat="day in ::vm.course.days track by $index">
                         <div class="date-block md-margin "   layout="column"
                              layout-align=" center center">
-                            <div class=" md-display-2">{{ day.date| date:'dd.MM'}}</div>
-                            <div class="md-subhead  ">{{day.program}}</div>
+                            <div class=" md-display-2">{{ ::day.date| date:'dd.MM'}}</div>
+                            <div class="md-subhead  ">{{::day.program}}</div>
                         </div>
                     </div>
                 </div>
@@ -137,12 +137,12 @@
         <div  flex flex-gt-md="60" flex-md="80"  flex-gt-xs="60">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6"  ng-repeat="course in vm.course.hearFormsPhotos"
-                         class="md-margin " ng-attr-flex-gt-sm="{{vm.getPictureFlex($index,vm.course.hearFormsPhotos.length)}}"   flex-gt-xs="46" flex-xs="80"
+                         class="md-margin " ng-attr-flex-gt-sm="{{::vm.getPictureFlex($index,vm.course.hearFormsPhotos.length)}}"   flex-gt-xs="46" flex-xs="80"
                          ng-click="::vm.showMediaObserver(vm.course.hearFormsPhotos, $index)">
 
                         <img ng-src="{{::course.url}}" class="md-card-image">
 
-                    <md-card-content ng-if="course.name" layout="column" flex="100" layout-align="center center">
+                    <md-card-content ng-if="::course.name" layout="column" flex="100" layout-align="center center">
                         <span class="  md-margin">{{::course.name}}</span>
                     </md-card-content>
                 </md-card>
@@ -155,13 +155,13 @@
         <div flex flex-gt-md="60" flex-md="80" >
             <div layout="column" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" class="  courses-videos"
-                         ng-repeat="video in vm.course.videos track by $index"
+                         ng-repeat="video in ::vm.course.videos track by $index"
                          flex>
                     <div flex class="embed-responsive embed-responsive-16by9">
                         <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                        video-id="video.url"></youtube-video>
                     </div>
-                    <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
+                    <md-card-content ng-if="::video.name" layout="column" flex="100" layout-align="center center">
                         <span class="  md-margin">{{::video.name}}</span>
                     </md-card-content>
                 </md-card>
@@ -170,17 +170,17 @@
 
     </div>
 
-    <div layout="row" flex ng-if="vm.course.description">
+    <div layout="row" flex ng-if="::vm.course.description">
         <div class="page-delimiter content-block" flex>
             <div  class="fit-screen-wrap header-long " layout="column">
 
                 <div layout="row" layout-align="center center">
                     <div   hide-xs="true" flex="60" flex-gt-sm="50"
                          class="md-display-1 md-margin md-padding">
-                        {{vm.course.description}}
+                        {{::vm.course.description}}
                     </div>
                     <div    hide-gt-xs="true"  flex="70"
-                         class="md-headline ">{{vm.course.description}}
+                         class="md-headline ">{{::vm.course.description}}
                     </div>
 
                 </div>
@@ -202,13 +202,13 @@
         <div  flex-gt-md="60" flex-md="80"  flex-gt-xs="60" >
 
             <div class="courses-history" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6"  ng-repeat="course in vm.course.historyPhotos"
+                <md-card md-whiteframe="6"  ng-repeat="course in ::vm.course.historyPhotos"
                          class="md-margin " flex-gt-xs="46" flex-xs="80"
                          ng-click="::vm.showMediaObserver(vm.course.historyPhotos, $index)">
 
                         <img ng-src="{{::course.url}}" class="md-card-image">
 
-                    <md-card-content ng-if="course.name" layout="column"  layout-align="center center">
+                    <md-card-content ng-if="::course.name" layout="column"  layout-align="center center">
                         <span class="  md-margin">{{::course.name}}</span>
                     </md-card-content>
                 </md-card>
@@ -240,9 +240,9 @@
                             <div class="md-headline " layout="row">
                                 <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
                                 &nbsp;
-                                <span>{{ comment.name }}</span>
+                                <span>{{ ::comment.name }}</span>
                             </div>
-                            <div class="md-title ">{{ comment.text }}</div>
+                            <div class="md-title ">{{ ::comment.text }}</div>
                         </div>
                     </md-list-item>
 
@@ -250,7 +250,7 @@
             </div>
             <div layout="row" layout-align="  end center" layout-align-xs="  center">
 
-                <md-button ng-click="vm.showCommentDialog($event)" class="comment-btn xs-selected md-raised ">Додати
+                <md-button ng-click="::vm.showCommentDialog($event)" class="comment-btn xs-selected md-raised ">Додати
                     відгук
                 </md-button>
 

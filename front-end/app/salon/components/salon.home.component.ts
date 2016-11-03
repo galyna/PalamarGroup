@@ -20,16 +20,16 @@ const template = `<div class="courses-details description-container" layout="col
     <div layout="row" layout-align="center center">
         <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6"  ng-repeat="category in $ctrl.categories"
+                <md-card md-whiteframe="6"  ng-repeat="category in $ctrl.categories track by $index "
                          class="md-margin "
                          ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.categories.length)}}" flex-gt-xs="46"
                          flex-xs="80"
                          ng-click="::$ctrl.showFavors(category._id)">
 
-                    <img ng-src="{{'/content/images/services/'+category._id+'.jpg'}}" class="md-card-image">
+                    <img ng-src="{{'/content/images/services/'+ category._id+'.jpg'}}" class="md-card-image">
 
                     <md-card-content layout="column" layout-align="center center">
-                        <span class="  md-margin">{{category.name}}</span>
+                        <span class="  md-margin">{{::category.name}}</span>
                     </md-card-content>
                 </md-card>
 
@@ -40,20 +40,17 @@ const template = `<div class="courses-details description-container" layout="col
         <div class="page-delimiter content-block" id="trigger-right" flex>
             <div class="fit-screen-wrap header-long " layout="column">
                 <div flex="none" layout="row" class="md-padding program-block  " layout-align=" center center">
-                    <div ng-repeat="day in :: $ctrl.days track by $index">
+                    <div ng-repeat="day in ::$ctrl.days track by $index">
                         <div class="date-block md-margin " ng-class="{'date-block-disabled':day.program=='зачинено'}"
                               layout="column"
                              layout-align=" center center">
-                            <div class=" md-headline">{{ day.name}}</div>
-                            <div class="md-subhead  ">{{day.program}}</div>
+                            <div class=" md-headline">{{ ::day.name}}</div>
+                            <div class="md-subhead  ">{{::day.program}}</div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
             <div class="overlay-days">
-
             </div>
            
         </div>
@@ -70,14 +67,14 @@ const template = `<div class="courses-details description-container" layout="col
 
         <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6"  ng-repeat="master in $ctrl.masters"
+                <md-card md-whiteframe="6"  ng-repeat="master in $ctrl.masters track by $index"
                          class="md-margin box "
-                         ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.masters.length)}}"
+                         ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.masters.length)}}"
                          flex-gt-xs="46" flex-xs="80"
-                         ng-click="$ctrl.showMaster(master._id)">
+                         ng-click="::$ctrl.showMaster(master._id)">
                     <div ng-if="master.rate && master.rate._id!=='0'"
                          class="corner-ribbon-min top-right black"
-                         ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}">{{master.rate.text}}
+                         ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}">{{::master.rate.text}}
                     </div>
                     <img ng-src="{{::master.photo.url}}" class="md-card-image">
                     <md-card-content layout="column" layout-align="center center">
@@ -88,23 +85,7 @@ const template = `<div class="courses-details description-container" layout="col
         </div>
 
     </div>
-    <!--<div layout="row" flex>-->
-        <!--<div class="page-delimiter content-block" flex>-->
-            <!--<div class="fit-screen-wrap header-long " layout="column">-->
 
-                <!--<div layout="row" layout-align="center center">-->
-                    <!--<div flex="100" flex-gt-sm="50"-->
-                         <!--class="md-display-1  box ">-->
-                        <!--<video class="screen" style='display:block' controls>-->
-                            <!--<source type="video/mp4" src="../content/images/bg/bd.mp4"/>-->
-                        <!--</video>-->
-                    <!--</div>                  -->
-
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="overlay-description"></div>-->
-        <!--</div>-->
-    <!--</div>-->
     <div layout="row" flex ng-if="$ctrl.transforms.length>0 ">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
@@ -113,17 +94,17 @@ const template = `<div class="courses-details description-container" layout="col
         </div>
     </div>
  
-    <div ng-repeat="transform in $ctrl.transforms">
+    <div ng-repeat="transform in $ctrl.transforms track by $index">
         <div layout="row" layout-align="center center" ng-if="transform.videos.length>0 ">
             <div flex-xs="90" flex-gt-md="60" flex-md="80" flex-gt-xs="85">
                 <div layout="column" layout-margin layout layout-wrap layout-align="center center">
                     <md-card md-whiteframe="6" class="  courses-videos"
                              
-                             ng-repeat="video in transform.videos track by $index"
+                             ng-repeat="video in ::transform.videos track by $index"
                              flex>
                         <div flex class="embed-responsive embed-responsive-16by9">
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
-                                           video-id="video.url"></youtube-video>
+                                           video-id="::video.url"></youtube-video>
                         </div>
                         <md-card-content ng-if="video.name" layout="column" layout-align="center center">
                             <span class="  md-margin">{{::video.name}}</span>
@@ -137,9 +118,9 @@ const template = `<div class="courses-details description-container" layout="col
         <div layout="row" layout-align="center center" ng-if="transform.photos.length>0 ">
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
                 <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                    <md-card md-whiteframe="6"  ng-repeat="photo in transform.photos"
+                    <md-card md-whiteframe="6"  ng-repeat="photo in ::transform.photos track by $index"
                              class="md-margin "
-                             ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,transform.photos.length)}}"
+                             ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,transform.photos.length)}}"
                              flex-gt-xs="46" flex-xs="80"
                               ng-click="::$ctrl.showMediaObserver(transform.photos, $index)">
                         <img ng-src="{{::photo.url}}" class="md-card-image">
@@ -152,7 +133,7 @@ const template = `<div class="courses-details description-container" layout="col
         </div>
     </div>
     <div ng-if="$ctrl.showMoreTransforms" layout="row" layout-align=" center center" layout-align-xs="  center">
-        <md-button ng-click="$ctrl.showTransforms()" class="comment-btn xs-selected md-raised ">Всі перевтіління
+        <md-button ng-click="::$ctrl.showTransforms()" class="comment-btn xs-selected md-raised ">Всі перевтіління
         </md-button>
     </div>
     
@@ -169,8 +150,8 @@ const template = `<div class="courses-details description-container" layout="col
         <div flex  flex-gt-md="60" flex-gt-lg="40" flex-md="80" flex-gt-xs="60">
             <div flex class="brends-container" layout-margin layout layout-wrap layout-align="center center">
              <a href="{{::bren.url}}"  class="md-margin brend " layout="row"  layout-align="center center"
-              flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
-                             flex-gt-xs="46" flex-xs="80" ng-repeat="bren in $ctrl.brends">
+              flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
+                             flex-gt-xs="46" flex-xs="80" ng-repeat="bren in $ctrl.brends track by $index">
                                               
                     <img ng-src="{{::bren.photo.url}}"  
                          class="md-card-image"/>    </a>               

@@ -4,12 +4,12 @@
         <div class="md-toolbar-tools md-padding ">
             <h2 class=" md-padding ">ЗАПОВНІТЬ АНКЕТУ ЩОБ СТАТИ МОДЕЛЛЮ</h2>
             <span flex></span>
-            <md-button class="md-icon-button" ng-click="vm.cancel()">
+            <md-button class="md-icon-button" ng-click="::vm.cancel()">
                 <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>
             </md-button>
         </div>
     </md-toolbar>
-    <form name="orderForm" class="md-padding  pop-form" novalidate flex layout="column" ng-submit="vm.submitModel(orderForm)">
+    <form name="orderForm" class="md-padding  pop-form" novalidate flex layout="column" ng-submit="::vm.submitModel(orderForm)">
         <md-dialog-content>
             <md-dialog-content-body>
                 <md-input-container class="md-block">

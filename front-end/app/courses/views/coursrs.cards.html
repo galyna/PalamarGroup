@@ -25,7 +25,7 @@
                             </md-card-title>
                             <md-card-actions flex="25">
                                 <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
-                                           ng-click="vm.showDetails(course._id)">
+                                           ng-click="::vm.showDetails(course._id)">
                                     Деталі
                                 </md-button>
                             </md-card-actions>
@@ -48,7 +48,7 @@
                             </md-card-title>
                             <md-card-actions flex="25">
                                 <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
-                                           ng-click="vm.showDetails(course._id)">
+                                           ng-click="::vm.showDetails(course._id)">
                                     Деталі
                                 </md-button>
                             </md-card-actions>
@@ -75,7 +75,7 @@
                             </md-card-title>
                             <md-card-actions flex="25">
                                 <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
-                                           ng-click="vm.showDetails(course._id)">
+                                           ng-click="::vm.showDetails(course._id)">
                                     Деталі
                                 </md-button>
                             </md-card-actions>
@@ -89,7 +89,7 @@
 
             <div hide-gt-xs="true" layout="row" layout-align="center center">
                 <div class="overlay-bg trigger-right"></div>
-                <md-card md-whiteframe="8" ng-click="vm.showDetails(course._id)">
+                <md-card md-whiteframe="8" ng-click="::vm.showDetails(course._id)">
                     <md-card-content layout="column">
                         <div class="card-media "><img ng-src="{{::course.avatar}}" class="md-card-image"/></div>
                         <div class="card-desc "
