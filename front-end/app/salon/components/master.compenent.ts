@@ -128,7 +128,6 @@ const template = `<div class=" description-container">
 
     </div>
 
-
     <div flex layout-align="center center" layout="row"
          ng-if="$ctrl.master.videos.length>0 || $ctrl.master.works.length>0">
         <div class="page-delimiter" flex>
