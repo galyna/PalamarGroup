@@ -21,7 +21,7 @@ const template = `<div class="courses-details description-container" layout="col
         <div layout="row" layout-align="center center" ng-if="category.favors.length>0 ">
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
                 <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                    <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="favor in category.favors"
+                    <md-card md-whiteframe="6"  ng-repeat="favor in category.favors"
                              class="md-margin "
                              ng-attr-flex-gt-sm="46"
                              flex-gt-xs="46" flex-xs="80"
@@ -55,12 +55,10 @@ const template = `<div class="courses-details description-container" layout="col
                 <md-card flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
                 >
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
-                             data-aos-easing="ease-out-cubic"
+                        <div class="card-media " 
                              flex="50"><img src="{{::master.photo.url}}" class="md-card-image "/>
                         </div>
-                        <div class="card-desc box " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
-                             data-aos-easing="ease-out-cubic"
+                        <div class="card-desc box "
                              flex="50" layout="column" layout-align="space-around center">
                             <div ng-if="master.rate && master.rate._id!=='0'" hide show-md="true" class="corner-ribbon top-right black"
                              ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}" >

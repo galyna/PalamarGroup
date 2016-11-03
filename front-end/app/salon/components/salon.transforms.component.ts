@@ -18,7 +18,7 @@ const template = `<div class="courses-details description-container" layout="col
     <div layout="row" layout-align="center center" ng-if="transform.videos.length>0">
         <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
             <div layout="column" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" class="  courses-videos" data-aos="{{{true:'zoom-in-up', false:''}[$ctrl.showAnimation]}}"
+                <md-card md-whiteframe="6" class="  courses-videos" 
                          ng-repeat="video in transform.videos track by $index"
                          flex>
                     <div flex class="embed-responsive embed-responsive-16by9">
@@ -37,7 +37,7 @@ const template = `<div class="courses-details description-container" layout="col
      <div layout="row" layout-align="center center" ng-if="transform.photos.length>0">
         <div  flex flex-gt-md="60" flex-md="80"  flex-gt-xs="60">
          <div  class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="photo in transform.photos"
+                <md-card md-whiteframe="6"  ng-repeat="photo in transform.photos"
                          class="md-margin " ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,transform.photos.length)}}"  flex-gt-xs="46" flex-xs="80"
                          ng-click="::$ctrl.showMediaObserver(transform.photos, $index)">                  
                         <img ng-src="{{::photo.url}}" class="md-card-image">

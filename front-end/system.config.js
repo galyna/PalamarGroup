@@ -25,7 +25,6 @@ System.config({
         'angular-socialshare': 'node_modules/angular-socialshare/dist/angular-socialshare.js',
         'angular-youtube-embed': 'node_modules/angular-youtube-embed/src/angular-youtube-embed.js',
         'ngSmoothScroll': 'node_modules/ngSmoothScroll/lib/angular-smooth-scroll.js',
-        'aos': 'node_modules/aos/dist/aos.js',
         'jwt-decode': 'node_modules/jwt-decode/build/jwt-decode.min.js',
         'daypilot': 'lib/dayPilot/daypilot-all.min.js',
         'lodash': 'node_modules/lodash/lodash.js',
@@ -39,9 +38,7 @@ System.config({
         'youtube-iframe-api': 'https://www.youtube.com/iframe_api'
     },
     meta: {
-        'aos': {
-            format: "global"
-        },
+
         'uiGmapgoogle-maps': {
             deps: ['angular',
                 "angular-simple-logger",

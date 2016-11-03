@@ -13,7 +13,6 @@ import 'ng-file-upload';
 import 'ng-img-crop-full-extended';
 import 'angular-socialshare';
 import 'ngSmoothScroll';
-import 'aos';
 import 'angular-youtube-embed';
 import 'uiGmapgoogle-maps';
 import 'daypilot';

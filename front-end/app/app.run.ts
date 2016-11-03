@@ -1,5 +1,5 @@
 import {IRootScope} from "../typings";
-import AOS from "aos";
+
 
 appRun.$inject = ['$rootScope', '$timeout', '$mdMedia'];
 export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
@@ -22,7 +22,7 @@ export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
         videoContainer.append( videoTag );
     }
     //create a new instance
- AOS.init( {} )
+
 
 
 
@@ -37,7 +37,7 @@ export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
         //hide loading gif
         $timeout( ()=> {
             $rootScope.loading = false;
-           // AOS.refresh();
+
 
         }, 5 );
 

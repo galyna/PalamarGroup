@@ -20,7 +20,7 @@ const template = `<div class="courses-details description-container" layout="col
     <div layout="row" layout-align="center center">
         <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="category in $ctrl.categories"
+                <md-card md-whiteframe="6"  ng-repeat="category in $ctrl.categories"
                          class="md-margin "
                          ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.categories.length)}}" flex-gt-xs="46"
                          flex-xs="80"
@@ -42,7 +42,7 @@ const template = `<div class="courses-details description-container" layout="col
                 <div flex="none" layout="row" class="md-padding program-block  " layout-align=" center center">
                     <div ng-repeat="day in :: $ctrl.days track by $index">
                         <div class="date-block md-margin " ng-class="{'date-block-disabled':day.program=='зачинено'}"
-                             data-aos="fade-up" layout="column"
+                              layout="column"
                              layout-align=" center center">
                             <div class=" md-headline">{{ day.name}}</div>
                             <div class="md-subhead  ">{{day.program}}</div>
@@ -55,15 +55,7 @@ const template = `<div class="courses-details description-container" layout="col
             <div class="overlay-days">
 
             </div>
-            <!--<md-button hide show-gt-xs="true" class=" md-fab  side-up-btn"-->
-            <!--data-aos="fade-left" data-aos-easing="ease-in-out-back"-->
-            <!--data-aos-anchor="#trigger-right"-->
-            <!--data-aos-anchor-placement="top-center" data-aos-delay="100" scroll-to="mainContent"-->
-            <!--easing="easeInOutCubic"-->
-            <!--duration="1800" aria-label="up">-->
-            <!--<md-icon class=""-->
-            <!--md-svg-src="navigation:ic_arrow_downward_24px"></md-icon>-->
-            <!--</md-button>-->
+           
         </div>
     </div>
     <div layout="row" flex>
@@ -78,7 +70,7 @@ const template = `<div class="courses-details description-container" layout="col
 
         <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="master in $ctrl.masters"
+                <md-card md-whiteframe="6"  ng-repeat="master in $ctrl.masters"
                          class="md-margin box "
                          ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.masters.length)}}"
                          flex-gt-xs="46" flex-xs="80"
@@ -126,7 +118,7 @@ const template = `<div class="courses-details description-container" layout="col
             <div flex-xs="90" flex-gt-md="60" flex-md="80" flex-gt-xs="85">
                 <div layout="column" layout-margin layout layout-wrap layout-align="center center">
                     <md-card md-whiteframe="6" class="  courses-videos"
-                             data-aos="{{{true:'zoom-in-up', false:''}[$ctrl.showAnimation]}}"
+                             
                              ng-repeat="video in transform.videos track by $index"
                              flex>
                         <div flex class="embed-responsive embed-responsive-16by9">
@@ -145,7 +137,7 @@ const template = `<div class="courses-details description-container" layout="col
         <div layout="row" layout-align="center center" ng-if="transform.photos.length>0 ">
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
                 <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                    <md-card md-whiteframe="6" data-aos="zoom-in-up" ng-repeat="photo in transform.photos"
+                    <md-card md-whiteframe="6"  ng-repeat="photo in transform.photos"
                              class="md-margin "
                              ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,transform.photos.length)}}"
                              flex-gt-xs="46" flex-xs="80"

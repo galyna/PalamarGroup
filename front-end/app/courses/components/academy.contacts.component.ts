@@ -20,12 +20,12 @@ const template = `<div class="salon-contacts description-container" layout="colu
             <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
             >
                 <md-card-content layout="row" layout-align="start none">
-                    <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
-                         data-aos-easing="ease-out-cubic"
+                    <div class="card-media " 
+                       
                          flex="50"><img src="{{::contact.photo.url}}" class="md-card-image "/>
                     </div>
-                    <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
-                         data-aos-easing="ease-out-cubic"
+                    <div class="card-desc " 
+                        
                          flex layout="column" layout-align="center center">
                         <md-card-title flex>
                             <md-card-title-text layout-align="space-around center">
@@ -42,8 +42,8 @@ const template = `<div class="salon-contacts description-container" layout="colu
             </md-card>
             <md-card id="trigger-right" ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                 <md-card-content layout="row" layout-align="start none">
-                    <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
-                         data-aos-easing="ease-out-cubic"
+                    <div class="card-desc " 
+                        
                          flex layout="column" layout-align="center center">
                         <md-card-title flex>
                             <md-card-title-text layout-align="space-around center">
@@ -56,19 +56,17 @@ const template = `<div class="salon-contacts description-container" layout="colu
                         </md-card-title>
 
                     </div>
-                    <div class="card-media " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
-                         data-aos-easing="ease-out-cubic"
+                    <div class="card-media " 
+                        
                          flex="50"><img src="{{::contact.photo.url}}" class="md-card-image"/></div>
                 </md-card-content>
             </md-card>
             <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                 <md-card-content layout="row" layout-align="start none">
-                    <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
-                         data-aos-easing="ease-out-cubic"
+                    <div class="card-media " 
                          flex="50"><img src="{{::contact.photo.url}}" class="md-card-image "/>
                     </div>
-                    <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
-                         data-aos-easing="ease-out-cubic"
+                    <div class="card-desc " 
                          flex layout="column" layout-align="center center">
                         <md-card-title flex>
                             <md-card-title-text layout-align="space-around center">

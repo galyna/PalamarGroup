@@ -21,12 +21,10 @@ const template = `<div class="courses description-container" layout="row" layout
                 <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
                 >
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
-                             data-aos-easing="ease-out-cubic" ng-click="$ctrl.showMaster(master._id)"
+                        <div class="card-media "  ng-click="$ctrl.showMaster(master._id)"
                              flex="50"><img src="{{::master.photo.url}}" class="md-card-image "/>
                         </div>
-                        <div class="card-desc box" data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
-                             data-aos-easing="ease-out-cubic"
+                        <div class="card-desc box" 
                              flex="50" layout="column" layout-align="space-around center">
                             <div ng-if="master.rate && master.rate._id!=='0'" hide show-md="true"
                                  class="corner-ribbon top-right black"
@@ -58,8 +56,7 @@ const template = `<div class="courses description-container" layout="row" layout
             </md-card>
             <md-card id="trigger-right" ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                 <md-card-content layout="row" layout-align="start none">
-                    <div class="card-desc  box" data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
-                         data-aos-easing="ease-out-cubic"
+                    <div class="card-desc  box" 
                          flex="50" layout="column" layout-align="space-around center">
                         <div ng-if="master.rate && master.rate._id!=='0'" hide show-md="true"
                              class="corner-ribbon top-left black"
@@ -87,20 +84,17 @@ const template = `<div class="courses description-container" layout="row" layout
                     </md-button>
 
         </div>
-        <div class="card-media " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
-             data-aos-easing="ease-out-cubic" ng-click="$ctrl.showMaster(master._id)"
+        <div class="card-media "  ng-click="$ctrl.showMaster(master._id)"
              flex="50"><img src="{{::master.photo.url}}" class="md-card-image"/></div>
         </md-card-content>
         </md-card>
         <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
             <md-card-content layout="row" layout-align="start none">
-                <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
-                     data-aos-easing="ease-out-cubic" ng-click="$ctrl.showMaster(master._id)"
+                <div class="card-media "  ng-click="$ctrl.showMaster(master._id)"
                      flex="50"><img src="{{::master.photo.url}}" class="md-card-image "/>
                 </div>
                 <div class="card-desc box" flex="50"
-                     data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
-                     data-aos-easing="ease-out-cubic" flex="50" layout="column" layout-align="space-around center">
+                     flex="50" layout="column" layout-align="space-around center">
                     <div ng-if="master.rate && master.rate._id!=='0'" hide show-md="true"
                          class="corner-ribbon top-right black"
                          ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}">

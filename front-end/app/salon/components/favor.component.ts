@@ -13,8 +13,7 @@ const template = `<div class="courses description-container" layout="row" layout
                 >
                     <md-card-content layout="row" layout-align="start none">
 
-                        <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
-                             data-aos-easing="ease-out-cubic"
+                        <div class="card-desc " 
                              flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
@@ -28,8 +27,7 @@ const template = `<div class="courses description-container" layout="row" layout
                             </md-card-title>
 
                         </div>
-                        <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
-                             data-aos-easing="ease-out-cubic"
+                        <div class="card-media " 
                              flex="50"><img src="{{::$ctrl.favor.photo.url}}" class="md-card-image "/>
                         </div>
                     </md-card-content>
@@ -73,12 +71,10 @@ const template = `<div class="courses description-container" layout="row" layout
                 <md-card flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
                 >
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
-                             data-aos-easing="ease-out-cubic"
+                        <div class="card-media " 
                              flex="50"><img src="{{::master.photo.url}}" class="md-card-image "/>
                         </div>
-                        <div class="card-desc box" data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
-                             data-aos-easing="ease-out-cubic"
+                        <div class="card-desc box" 
                              flex="50" layout="column" layout-align="space-around center">
                             <div ng-if="master.level" hide show-md="true" class="corner-ribbon top-right black"
                              ng-class="{'grey': master.level._id==='1','white': master.level._id==='0'}" >

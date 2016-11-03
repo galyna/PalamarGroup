@@ -12,12 +12,10 @@ const template = `<div class="courses description-container" layout="row" layout
                 <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
                 >
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
-                             data-aos-easing="ease-out-cubic"
+                        <div class="card-media " 
                              flex="50"><img src="{{::product.photo.url}}" class="md-card-image "/>
                         </div>
-                        <div class="card-desc " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
-                             data-aos-easing="ease-out-cubic"
+                        <div class="card-desc " 
                              flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
@@ -41,8 +39,7 @@ const template = `<div class="courses description-container" layout="row" layout
                 </md-card>
                 <md-card id="trigger-right" ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-desc  " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
-                             data-aos-easing="ease-out-cubic"
+                        <div class="card-desc  " 
                               flex layout="column" layout-align="center center">
                             <md-card-title flex>
                                   <md-card-title-text flex layout-align="space-around center">
@@ -62,20 +59,16 @@ const template = `<div class="courses description-container" layout="row" layout
                                 </md-button>
                             </md-card-actions>
                         </div>
-                        <div class="card-media " data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
-                             data-aos-easing="ease-out-cubic"
+                        <div class="card-media " 
                              flex="50"><img src="{{::product.photo.url}}" class="md-card-image"/></div>
                     </md-card-content>
                 </md-card>
                 <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media " data-aos="{{{true:'fade-right', false:'false'}[vm.showAnimation]}}"
-                             data-aos-easing="ease-out-cubic"
-                             flex="50"><img src="{{::product.photo.url}}" class="md-card-image "/>
+                        <div class="card-media "                              flex="50"><img src="{{::product.photo.url}}" class="md-card-image "/>
                         </div>
                         <div class="card-desc " flex="50"
-                             data-aos="{{{true:'fade-left', false:'false'}[vm.showAnimation]}}"
-                             data-aos-easing="ease-out-cubic" layout="column" layout-align="center center">
+                              layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
                                     <div hide show-gt-sm="true" class="md-display-2">{{::product.name}}</div>
@@ -98,15 +91,7 @@ const template = `<div class="courses description-container" layout="row" layout
                     </md-card-content>
                 </md-card>
                 <div class="overlay-bg"></div>
-                <!--<md-button hide show-gt-xs="true" class=" md-fab  side-up-btn"-->
-
-                <!--data-aos-anchor="#trigger-right"-->
-                <!--data-aos-anchor-placement="top-center" data-aos-delay="100" scroll-to="mainContent"-->
-                <!--easing="easeInOutCubic"-->
-                <!--duration="1800" aria-label="up">-->
-                <!--<md-icon class=""-->
-                <!--md-svg-src="navigation:ic_arrow_downward_24px"></md-icon>-->
-                <!--</md-button>-->
+              
             </div>
 
             <div hide-gt-xs="true" layout="row" layout-align="center center">
