@@ -38,7 +38,7 @@ const template = `<div class="courses-details description-container" layout="col
         </div>
     </div>
 </div>
-<div class="courses description-container" layout="row" layout-align="center center">
+<div ng-if="$ctrl.masters.length>0" class="courses description-container" layout="row" layout-align="center center">
     <div layout="column" layout-align="center center">
         <div layout="row"  flex>
             <div class="page-delimiter" flex>
