@@ -304,7 +304,7 @@ class AppointmentDialogController {
 export class MasterComponentController {
 
     static $inject = ["$log", "$routeParams", MasterResourceName, '$mdDialog', '$rootScope', AppointmentResourceName,
-        MediaObserverFactoryName,'constants'];
+        MediaObserverFactoryName,'constants', "orderByFilter"];
     master:IMaster;
     private appointment:IAppointment;
     events:IScheduler[];
@@ -317,7 +317,7 @@ export class MasterComponentController {
                 private MasterResource:IMasterResource, private mdDialog:ng.material.IDialogService,
                 private $rootScope:IRootScope, private AppointmentResource:IAppointmentResource,
                 private mediaObserver:IMediaObserverFactory,
-                private constants:IConstants) {
+                private constants:IConstants, private orderByFilter: ng.IFilterOrderBy) {
         this.events = [];
         this.appointment = new this.AppointmentResource();
 
@@ -327,6 +327,8 @@ export class MasterComponentController {
             this.MasterResource.get( {id: this.$routeParams["id"], populate: 'services.favor'} ).$promise
                 .then( (master) => {
                     this.master = master;
+                    this.master.videos=this.orderByFilter(this.master.videos, "order");
+                    this.master.works=this.orderByFilter(this.master.works, "order");
                 } ).catch( (err)=> {
                 this.$log.error( err );
 
