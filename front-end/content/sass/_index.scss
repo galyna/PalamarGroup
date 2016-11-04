@@ -180,7 +180,11 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     height: 90vh;
     position: fixed;
     bottom: 0%;
-
+    z-index: -100;
+  }
+  #logo-container{
+    a{ color: white;
+     }
   }
   .screen {
     overflow: hidden;
