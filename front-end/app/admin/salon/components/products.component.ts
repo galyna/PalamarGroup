@@ -90,6 +90,14 @@ export class ProductsComponentController {
         } );
     }
 
+    prev() {
+        this.showPage( this.pagingService.prevPage() );
+    }
+
+    next() {
+        this.showPage( this.pagingService.nextPage() );
+    }
+
     private showPage(page = 1) {
         this.favors = this.favorResource.query( {page: page},
             (res, headers) => {

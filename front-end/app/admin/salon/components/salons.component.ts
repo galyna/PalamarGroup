@@ -96,6 +96,14 @@ export class SalonsComponentController {
         } );
     }
 
+    prev() {
+        this.showPage( this.pagingService.prevPage() );
+    }
+
+    next() {
+        this.showPage( this.pagingService.nextPage() );
+    }
+
     private showPage(page = 1) {
         this.salons = this.SalonResource.query( {page: page},
             (res, headers) => {

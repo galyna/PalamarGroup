@@ -89,6 +89,13 @@ export class ContactsComponentController {
         } );
     }
 
+    prev() {
+        this.showPage( this.pagingService.prevPage() );
+    }
+
+    next() {
+        this.showPage( this.pagingService.nextPage() );
+    }
     private showPage(page = 1) {
         this.contacts = this.contactResource.query( {page: page,  query:{'isAcademy': 'true'}},
             (res, headers) => {

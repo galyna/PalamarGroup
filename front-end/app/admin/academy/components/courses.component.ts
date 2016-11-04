@@ -1,12 +1,17 @@
 import IPhoto = pg.models.IPhoto;
 import {ICourseResource, ICourse, CourseResourceName} from "../../../resources/course.resource";
 import {AdminCourseComponentUrl} from "./course.component";
+import {PagingService, PagingServiceName} from "../../../ui/admin.paging";
 
 const template = `<md-toolbar>
 <div class="md-toolbar-tools">
     <h1>Курси</h1>
     <span flex></span>
-    
+      <pg-admin-paging
+                params="$ctrl.paging"
+                on-prev="$ctrl.prev()"
+                on-next="$ctrl.next()"
+        ></pg-admin-paging>
     </div>
     </md-toolbar>
 <md-button ng-click="$ctrl.showEditForm()" ng-if="::$root.it.can('modifyAcademy')"
@@ -40,19 +45,36 @@ const template = `<md-toolbar>
 export class AdminCoursesController {
 
     static $inject = [CourseResourceName, '$log', '$timeout', '$location', '$mdDialog',
-        '$mdToast'];
+        '$mdToast', PagingServiceName];
 
-    courses:ICourse[];
+    courses: ICourse[];
+    paging: any;
 
-    constructor(private CourseResource:ICourseResource, private $log:ng.ILogService,
-                private $timeout:ng.ITimeoutService, private $location:ng.ILocationService,
-                private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService) {
-        this.courses = this.getCourses();
+    constructor(private CourseResource: ICourseResource, private $log: ng.ILogService,
+                private $timeout: ng.ITimeoutService, private $location: ng.ILocationService,
+                private $mdDialog: ng.material.IDialogService, private $mdToast: ng.material.IToastService,
+                private pagingService: PagingService) {
     }
 
-    //TODO: add paging handling
-    getCourses() {
-        return this.CourseResource.query();
+    $onInit() {
+        this.showPage();
+    }
+
+    prev() {
+        this.showPage(this.pagingService.prevPage());
+    }
+
+    next() {
+        this.showPage(this.pagingService.nextPage());
+    }
+
+    private showPage(page = 1) {
+        this.courses = this.CourseResource.query({page: page},
+            (res, headers) => {
+                let {total, page, perPage} = this.pagingService.parseHeaders(headers);
+                this.pagingService.update({page: page, perPage: perPage, total: total});
+                this.paging = angular.copy(this.pagingService.params());
+            });
     }
 
     showEditForm(course = new this.CourseResource()) {
@@ -61,7 +83,7 @@ export class AdminCoursesController {
         this.$location.url(url);
     }
 
-    showDeleteDialog(ev, course:ICourse) {
+    showDeleteDialog(ev, course: ICourse) {
         let confirm = this.$mdDialog.confirm()
             .title("Підтвердження дії")
             .textContent(`Ви дійсно бажаєте видалити курс ${course.name}?`)
@@ -76,46 +98,48 @@ export class AdminCoursesController {
             });
     }
 
-    deleteCourse(course:ICourse) {
+    deleteCourse(course: ICourse) {
         return course.$delete()
             .then((course) => {
                 this.$mdToast.showSimple(`курс ${course.name} видалено`);
             })
-            .catch( (err)=> {
-                this.$log.error( err );
+            .catch((err)=> {
+                this.$log.error(err);
                 this.showErrorDialog();
-            } )
+            })
             .finally(()=> {
-                this.courses = this.getCourses();
+                this.showPage(this.pagingService.currentPage());
             });
     }
 
-    cloneCourse(course:ICourse) {
+    cloneCourse(course: ICourse) {
         var newCourse = new this.CourseResource(course);
         delete newCourse._id;
         newCourse.days = [];
         newCourse.isVisible = false;
         newCourse.$save()
             .then(this.showEditForm.bind(this))
-            .catch( (err)=> {
-                this.$log.error( err );
+            .catch((err)=> {
+                this.$log.error(err);
                 this.showErrorDialog();
-            } );
+            }).finally(()=> {
+            this.showPage(this.pagingService.currentPage());
+        });
     }
 
     //noinspection JSMethodCanBeStatic
-    deleteFromList(list:any[], item:any):void {
+    deleteFromList(list: any[], item: any): void {
         list.splice(list.indexOf(item), 1);
     }
 
 
     showErrorDialog() {
         let confirm = this.$mdDialog.alert()
-            .title( "Помилка" )
-            .textContent( `Спробуйте будь ласка пізніше` )
-            .ariaLabel( "Помилка" )
-            .ok( 'OK' )
-        return this.$mdDialog.show( confirm );
+            .title("Помилка")
+            .textContent(`Спробуйте будь ласка пізніше`)
+            .ariaLabel("Помилка")
+            .ok('OK')
+        return this.$mdDialog.show(confirm);
 
     }
 }
