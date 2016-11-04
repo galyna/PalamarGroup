@@ -79,7 +79,7 @@ const template = `<div class="courses-details description-container" layout="col
                             Про майстра
                         </md-button>
                         <md-button class=" near-master xs-selected md-display-1 md-raised " aria-label="Details"
-                                   ng-click=":;$ctrl.showAppointmentDialog(master)">
+                                   ng-click="::$ctrl.showAppointmentDialog(master)">
                             Записатись
                         </md-button>
 
