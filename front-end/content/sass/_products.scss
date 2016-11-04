@@ -1,8 +1,10 @@
 .card-media-product {
   width: 300px;
+  overflow: hidden;
   max-width: 100%;
   vertical-align: middle;
   .card-desc {
+
     text-align: center;
     width: 100%;
   }
@@ -15,4 +17,19 @@
       border: none;
     }
   }
+}
+
+.products {
+  .card-desc {
+
+    text-align: center;
+
+  }
+  md-card.md-default-theme, md-card {
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
 }

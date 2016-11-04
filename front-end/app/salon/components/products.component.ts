@@ -2,7 +2,7 @@ import {IProductResource, IProduct, ProductResourceName} from "../../resources/p
 import {IRootScope} from "../../../typings";
 import {IProductOrder, ProductOrderResourceName, IProductOrderResource} from "../../resources/product.order.resource";
 
-const template = `<div class="courses description-container" layout="row" layout-align="center center">
+const template = `<div class="courses description-container products" layout="row" layout-align="center center">
     <div layout="column" layout-align="center center">
 
         <div class="course-bg " layout-align="center center" flex
@@ -10,7 +10,7 @@ const template = `<div class="courses description-container" layout="row" layout
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
                 <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
-                >
+                ng-click="::$ctrl.showAppointmentDialog(product)">
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-media "
                              flex="50"><img src="{{::product.photo.url}}" class="md-card-image "/>
@@ -32,14 +32,14 @@ const template = `<div class="courses description-container" layout="row" layout
                             </md-card-title>
                             <md-card-actions flex="25">
                                 <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
-                                           ng-click="::$ctrl.showAppointmentDialog(product)">
+                                           >
                                     Замовити
                                 </md-button>
                             </md-card-actions>
                         </div>
                     </md-card-content>
                 </md-card>
-                <md-card  ng-if="$odd "  flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
+                <md-card  ng-if="$odd "  flex-md="90" flex-sm="70" flex="100" md-whiteframe="5" ng-click="::$ctrl.showAppointmentDialog(product)">
                      <md-card-content layout="row" layout-align="start none">                        
                         <div class="card-desc "
                              flex="50" layout="column" layout-align="center center">
@@ -58,7 +58,7 @@ const template = `<div class="courses description-container" layout="row" layout
                             </md-card-title>
                             <md-card-actions flex="25">
                                 <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
-                                           ng-click="::$ctrl.showAppointmentDialog(product)">
+                                           >
                                     Замовити
                                 </md-button>
                             </md-card-actions>
@@ -68,7 +68,7 @@ const template = `<div class="courses description-container" layout="row" layout
                         </div>
                     </md-card-content>
                 </md-card>
-                <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
+                <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5" ng-click="::$ctrl.showAppointmentDialog(product)">
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-media "
                              flex="50"><img src="{{::product.photo.url}}" class="md-card-image "/>
@@ -90,7 +90,7 @@ const template = `<div class="courses description-container" layout="row" layout
                             </md-card-title>
                             <md-card-actions flex="25">
                                 <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
-                                           ng-click="::$ctrl.showAppointmentDialog(product)">
+                                          >
                                     Замовити
                                 </md-button>
                             </md-card-actions>
