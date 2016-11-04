@@ -195,7 +195,7 @@ const template:string = `<div flex layout="column">
                             </md-button>
                             <div ngf-drop ng-model="masrerNewWork" ngf-pattern="image/*"
                                  class="cropArea">
-                                <img-crop area-type="rectangle" result-image-size="{w:800,h:800}" aspect-ratio="1"
+                                <img-crop area-type="rectangle" result-image-size="{w:500,h:500}" aspect-ratio="1"
                                           init-max-area="true"
                                           image="masrerNewWork  | ngfDataUrl"
                                           result-image="croppedhearFormsPhotoFile"
