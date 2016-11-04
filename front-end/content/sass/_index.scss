@@ -1,5 +1,4 @@
 
-
 #loading {
   z-index: 700;
   position: fixed;
@@ -10,7 +9,8 @@
   min-height: 100%;
   background-color: rgba(white, 0.99);
 
-  @-webkit-keyframes rotating /* Safari and Chrome */ {
+  @-webkit-keyframes rotating /* Safari and Chrome */
+  {
     from {
       -ms-transform: rotate(0deg);
       -moz-transform: rotate(0deg);
@@ -128,7 +128,7 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
   }
 
   .pg-menu-section {
-    margin:7% 0 0 0;
+    margin: 7% 0 0 0;
     width: 100%;
     display: table;
     min-height: 20px;
@@ -171,12 +171,25 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
   overflow: hidden;
   overflow-y: auto;
 
+  .page-container {
+    z-index: 100;
+    overflow: hidden;
+
+    }
+  #video-container {
+    height: 90vh;
+    position: fixed;
+    bottom: 0%;
+
+  }
   .screen {
+    overflow: hidden;
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
+    bottom: 0%;
     min-width: 100%;
-    min-height: 100%;
+    min-height:150%;
     width: auto;
     height: auto;
     z-index: -100;
@@ -185,11 +198,11 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
     background-size: cover;
-    -webkit-filter: contrast(150%);
-    -moz-filter: contrast(150%);
-    -o-filter: contrast(150%);
-
-    filter: contrast(150%);
+    //-webkit-filter: contrast(150%);
+    //-moz-filter: contrast(150%);
+    //-o-filter: contrast(150%);
+    //
+    //filter: contrast(150%);
 
     background: linear-gradient(
                     rgba(0, 0, 0, 0.9),
@@ -313,10 +326,10 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
 
     }
   }
-  .social-header{
+  .social-header {
     height: 50px;
     width: 600px;
-    background:rgba( $primary,0.8) ;
+    background: rgba($primary, 0.8);
     color: white;
 
     @media (max-width: $layout-breakpoint-xs) {
@@ -324,16 +337,15 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     }
   }
 
-  .social-container{
+  .social-container {
     width: 600px;
-    padding-left: 1px ;
-    background:rgba( white,0.5);
+    padding-left: 1px;
+    background: rgba(white, 0.5);
 
     @media (max-width: $layout-breakpoint-xs) {
       width: 300px;
     }
   }
-
 
   .avatar {
     margin-top: 0px;
@@ -353,15 +365,15 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     }
   }
 
-  .header-contacts{
+  .header-contacts {
     margin-bottom: 16px;
 
   }
 
-  .footer-contacts{
+  .footer-contacts {
     font-weight: 900;
     width: 600px;
-    background:rgba( white,0.5);
+    background: rgba(white, 0.5);
 
     @media (max-width: $layout-breakpoint-xs) {
       width: 300px;
@@ -374,10 +386,10 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     color: black;
     font-weight: 600;
     font-family: 'microsquare', sans-serif;
-    padding:  100px 0px 20px 0px;
+    padding: 100px 0px 20px 0px;
 
     @media (max-width: $layout-breakpoint-xs) {
-      padding:  80px 0px 20px 0px;
+      padding: 80px 0px 20px 0px;
       .md-display-1 {
         font-size: 28px;
       }
@@ -396,10 +408,10 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     -ms-filter: blur(1px);
     filter: blur(1px);
 
-    @media (min-height: 1286px){
+    @media (min-height: 1286px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_full.jpg") no-repeat center center fixed;
     }
-    @media  (min-width: 1923px) {
+    @media (min-width: 1923px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_full.jpg") no-repeat center center fixed;
     }
 
