@@ -18,13 +18,15 @@ const template = `<div class="courses description-container" layout="row" layout
                         <div class="card-desc "
                              flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
-                                <md-card-title-text flex layout-align="space-around center">
-                                    <div hide show-md="true" class="md-display-2">{{::product.name}}</div>
-                                    <div hide-md="true" class="md-display-1">{{::product.name}}</div>
-                                    <div class="md-title">Ціна {{::product.price}} грн.</div>
-                                    <div class="descr-container">
-                                        <div class="md-title">{{::product.description}}</div>
-
+                                <md-card-title-text  layout-align="space-around center">
+                                    <div   hide show-gt-sm="true" class="md-display-2 ">{{::product.name}}</div>
+                                    <div hide-gt-sm="true" class="md-headline">{{::product.name}}</div>
+                                    
+                                    <div hide show-gt-sm="true" class="md-title">Ціна {{::product.price}} грн.</div>
+                                     <div hide-gt-sm="true" class="md-subhead">Ціна {{::product.price}} грн.</div>
+                                    <div  class="descr-container">
+                                        <div  hide show-gt-sm="true" class="md-title md-padding">{{::product.description}}</div>
+                                        <div hide-gt-sm="true" class="md-subhead">{{::product.description}}</div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
@@ -37,57 +39,62 @@ const template = `<div class="courses description-container" layout="row" layout
                         </div>
                     </md-card-content>
                 </md-card>
-                <md-card id="trigger-right" ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
-                    <md-card-content layout="row" layout-align="start none">
-                        <div class="card-desc  "
-                             flex layout="column" layout-align="center center">
+                <md-card  ng-if="$odd "  flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
+                     <md-card-content layout="row" layout-align="start none">                        
+                        <div class="card-desc "
+                             flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
-                                <md-card-title-text flex layout-align="space-around center">
-                                    <div hide show-gt-sm="true" class="md-display-2">{{::product.name}}</div>
-                                    <div hide-gt-sm="true" class="md-display-1">{{::product.name}}</div>
-                                    <div class="md-title">Ціна {{::product.price}} грн.</div>
-                                    <div class="descr-container">
-                                        <div hide show-gt-sm="true" class="md-title">{{::product.description}}</div>
+                                <md-card-title-text  layout-align="space-around center">
+                                    <div   hide show-gt-sm="true" class="md-display-2 ">{{::product.name}}</div>
+                                    <div hide-gt-sm="true" class="md-headline">{{::product.name}}</div>
+                                    
+                                   <div hide show-gt-sm="true" class="md-title">Ціна {{::product.price}} грн.</div>
+                                     <div hide-gt-sm="true" class="md-subhead">Ціна {{::product.price}} грн.</div>
+                                    <div  class="descr-container">
+                                        <div  hide show-gt-sm="true" class="md-title md-padding">{{::product.description}}</div>
                                         <div hide-gt-sm="true" class="md-subhead">{{::product.description}}</div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-actions flex="25">
-                                <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
+                                <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
                                            ng-click="::$ctrl.showAppointmentDialog(product)">
                                     Замовити
                                 </md-button>
                             </md-card-actions>
                         </div>
                         <div class="card-media "
-                             flex="50"><img src="{{::product.photo.url}}" class="md-card-image"/></div>
+                             flex="50"><img src="{{::product.photo.url}}" class="md-card-image "/>
+                        </div>
                     </md-card-content>
                 </md-card>
                 <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media " flex="50"><img src="{{::product.photo.url}}" class="md-card-image "/>
+                        <div class="card-media "
+                             flex="50"><img src="{{::product.photo.url}}" class="md-card-image "/>
                         </div>
-                        <div class="card-desc " flex="50"
-                             layout="column" layout-align="center center">
+                        <div class="card-desc "
+                             flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
-                                <md-card-title-text flex layout-align="space-around center">
-                                    <div hide show-gt-sm="true" class="md-display-2">{{::product.name}}</div>
-                                    <div hide-gt-sm="true" class="md-display-1">{{::product.name}}</div>
-                                    <div class="md-title">Ціна {{::product.price}} грн.</div>
-                                    <div class="descr-container">
-                                        <div hide show-gt-sm="true" class="md-title">{{::product.description}}</div>
+                                <md-card-title-text  layout-align="space-around center">
+                                    <div   hide show-gt-sm="true" class="md-display-2 ">{{::product.name}}</div>
+                                    <div hide-gt-sm="true" class="md-headline">{{::product.name}}</div>
+                                    
+                                    <div hide show-gt-sm="true" class="md-title">Ціна {{::product.price}} грн.</div>
+                                     <div hide-gt-sm="true" class="md-subhead">Ціна {{::product.price}} грн.</div>
+                                    <div  class="descr-container">
+                                        <div  hide show-gt-sm="true" class="md-title md-padding">{{::product.description}}</div>
                                         <div hide-gt-sm="true" class="md-subhead">{{::product.description}}</div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-actions flex="25">
-                                <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
+                                <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
                                            ng-click="::$ctrl.showAppointmentDialog(product)">
                                     Замовити
                                 </md-button>
                             </md-card-actions>
                         </div>
-
                     </md-card-content>
                 </md-card>
                 <div class="overlay-bg"></div>
@@ -96,7 +103,7 @@ const template = `<div class="courses description-container" layout="row" layout
 
             <div hide-gt-xs="true" layout="row" layout-align="center center">
                 <div class="overlay-bg trigger-right"></div>
-                <md-card md-whiteframe="8" ng-click="::vm.showDetails(course._id)">
+                <md-card md-whiteframe="8" ng-click="::$ctrl.showAppointmentDialog(product)">
                     <md-card-content layout="column">
                         <div class="card-media "><img src="{{::product.photo.url}}" class="md-card-image"/></div>
                         <div class="card-desc "
@@ -104,8 +111,8 @@ const template = `<div class="courses description-container" layout="row" layout
                             <md-card-title>
                                 <md-card-title-text>
                                     <div class="md-headline">{{::product.name}}</div>
-                                    <div class="md-title">Ціна {{::product.price}} грн.</div>
-                                    <div class="md-title">{{::product.description}}</div>
+                                    <div class="md-title md-padding">Ціна {{::product.price}} грн.</div>
+                                    <div class="md-subhead">{{::product.description}}</div>
                                 </md-card-title-text>
                             </md-card-title>
                             <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
@@ -125,7 +132,7 @@ const template = `<div class="courses description-container" layout="row" layout
 
 `;
 
-const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗАПИСАТИСЬ НА БЛОК" flex-sm="85" flex-xs="95" flex-gt-sm="65"
+const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗАПИСАТИСЬ НА БЛОК" flex-sm="65" flex-xs="95" flex-gt-sm="45"
            layout="column">
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools md-padding ">
@@ -140,15 +147,16 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
         <md-dialog-content>
             <md-dialog-content-body>
                 <div class=" md-block" layout="row" layout-align="center">
-                    <div class="card-media-product  layout=" column
-                    " >
-                    <img src="{{::vm.product.photo.url}}"/>
-                    <div class="card-desc " flex="100" layout="column" layout-align="center center">
-                        <div flex class="md-title">{{::vm.product.name}}</div>
-                        <div class="md-headline">Ціна {{::vm.product.price}} грн.</div>
-                        <div flex class="md-headline">{{::vm.product.description}}</div>
+                    <div class="card-media-product" layout="column" layout-align="center center">
+                        <img src="{{::vm.product.photo.url}}"/>
+                        <div class="card-desc md-padding" layout="column" layout-align="center center">
+                            <div flex class="md-headline">{{::vm.product.name}}</div>
+                            <div class="md-subhead">Ціна {{::vm.product.price}} грн.</div>
+                            <div flex class="md-subhead" layout="row" layout-align="center center">
+                                {{::vm.product.description}}
+                            </div>
+                        </div>
                     </div>
-                </div>
                 </div>
                 <md-input-container class="md-block">
                     <md-icon md-svg-icon="social:ic_person_24px"></md-icon>

@@ -28,9 +28,9 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                         <input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.favor.name" name="name"/>
                     </md-input-container>
                      <md-input-container class="md-block">
-                        <label for="order">Порядок відображення</label>
-                        <input id="order" ng-disabled="::!$root.it.can('modifySalon')"
-                               ng-model="$ctrl.favor.order" name="order" type="number"/>
+                        <label for="order1">Порядок відображення</label>
+                        <input id="order1" ng-disabled="::!$root.it.can('modifySalon')"
+                               ng-model="$ctrl.favor.order" name="order1" type="number"/>
                     </md-input-container>
                     <md-input-container class="md-block">
                         <label for="description">Опис</label>
@@ -40,7 +40,8 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
 
                       <md-input-container class="md-block">
                         <label for="defPrice">Ціна</label>
-                        <input ng-disabled="::!$root.it.can('modifySalon')" type="number" ng-model="$ctrl.favor.price" id="defPrice" name="defPrice"/>
+                        <input ng-disabled="::!$root.it.can('modifySalon')"
+                         type="number" ng-model="$ctrl.favor.price" id="defPrice" name="defPrice"/>
                     </md-input-container>
                 </md-card-content>
             </md-card>

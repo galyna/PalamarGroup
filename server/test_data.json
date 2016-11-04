@@ -1171,5 +1171,75 @@
         "facebook": "http://facebook.com/someid"
       }
     }
+  ],
+  "Product": [
+    {
+      "_id": "581b61fce91976eb66a3a052",
+      "description": "Будь особливою з Ol essential haircare від Davines",
+      "price": 200,
+      "name": "Ol SHAMPOO",
+      "__v": 0,
+      "photo": {
+        "url": "/api/photo/a5745cbe-d017-495c-944c-047440ee56ec.jpg"
+      },
+      "order": 1
+    },
+    {
+      "_id": "581b647fe91976eb66a3a056",
+      "description": "Лінія для профілактики та лікування випадіння волосся Kemon P Factor System",
+      "__v": 0,
+      "photo": {
+        "url": "/api/photo/b044da62-d8df-443c-bae4-d230da93c34a.jpg",
+        "_id": "581c4a2f4c4f3704e0347c99"
+      },
+      "name": "Kemon P Factor System Balsem",
+      "price": 300,
+      "order": 2
+    },
+    {
+      "_id": "581b6595e91976eb66a3a059",
+      "description": "Відновлення для вашого волосся від KEMON",
+      "__v": 0,
+      "name": "NUTRIZIONE",
+      "price": 200,
+      "photo": {
+        "url": "/api/photo/d6ca2256-e1a6-4d2f-ba4e-a0c5b202ffde.jpg",
+        "_id": "581c4a074c4f3704e0347c97"
+      },
+      "order": 3
+    },
+    {
+      "_id": "581b6243e91976eb66a3a053",
+      "name": "Kemon Happy Color Cold Shampoo",
+      "description": "Дієвий засіб для збереження чистого кольору та нейтралізації жовтизни",
+      "price": 200,
+      "__v": 0,
+      "photo": {
+        "url": "/api/photo/ab433a3c-a8ab-4b83-b10e-e1d0ffcc88a7.jpg"
+      },
+      "order": 4
+    },
+    {
+      "_id": "581b63f0e91976eb66a3a054",
+      "description": "Для того щоб ваші кудряшки були в форм",
+      "__v": 0,
+      "photo": {
+        "url": "/api/photo/44f2d38a-b33f-42d2-b1a5-cfafb651f487.jpg"
+      },
+      "name": "CYRLY",
+      "price": 60,
+      "order": 4
+    },
+    {
+      "_id": "581b6549e91976eb66a3a058",
+      "description": "Відновлення для вашого волосся від KEMON",
+      "name": "NUOVA FIBRA",
+      "price": 100,
+      "__v": 0,
+      "photo": {
+        "url": "/api/photo/5b98c304-8b26-478c-b6dc-79fbe324c282.jpg"
+      },
+      "order": 6
+    }
   ]
 }
