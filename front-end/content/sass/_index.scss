@@ -177,7 +177,8 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
 
     }
   #video-container {
-    height: 90vh;
+   // height: 90vh;
+     height:100vh;
     position: fixed;
     bottom: 0%;
     z-index: -100;
@@ -187,13 +188,14 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
      }
   }
   .screen {
-    overflow: hidden;
     position: absolute;
-    top: 40%;
+    top: 50%;
+   // top: 40%;
     left: 50%;
     bottom: 0%;
     min-width: 100%;
-    min-height:150%;
+   //min-height:150%;
+    min-height:100%;
     width: auto;
     height: auto;
     z-index: -100;
