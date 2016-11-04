@@ -98,7 +98,7 @@ export class TransformsComponentController {
     }
 
     private showPage(page = 1) {
-        this.transforms = this.TransformResource.query( {page: page},
+        this.transforms = this.TransformResource.query( {page: page,  perPage: 10},
             (res, headers) => {
                 let {total, page, perPage} = this.pagingService.parseHeaders( headers );
                 this.pagingService.update( {page: page, perPage: perPage, total: total} );

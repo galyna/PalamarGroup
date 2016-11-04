@@ -140,22 +140,22 @@ class EditDialogController {
 
     static $inject = ['$mdDialog', 'constants', 'order'];
 
-    private order:IOrder;
-    private originalOrder:IOrder;
-    private orderStatuses:any;
-   
-    constructor(private $mdDialog:ng.material.IDialogService, private constants:IConstants, order:IOrder) {
-        this.order = angular.copy( order );
+    private order: IOrder;
+    private originalOrder: IOrder;
+    private orderStatuses: any;
+
+    constructor(private $mdDialog: ng.material.IDialogService, private constants: IConstants, order: IOrder) {
+        this.order = angular.copy(order);
         this.originalOrder = order;
         this.orderStatuses = constants.orderStatuses;
 
-       
+
     }
 
-    save($form:ng.IFormController) {
+    save($form: ng.IFormController) {
         if ($form.$valid) {
-            angular.extend( this.originalOrder, this.order );
-            this.$mdDialog.hide( this.originalOrder );
+            angular.extend(this.originalOrder, this.order);
+            this.$mdDialog.hide(this.originalOrder);
         }
     }
 
@@ -167,49 +167,55 @@ export class AdminOrdersController {
 
     static $inject = ["$filter", "$mdDialog", "$mdToast", "$mdMedia", OrderResourceName, PagingServiceName,];
 
-    orders:IOrder[];
-    paging:any;
-    private order:IOrder;
-    private start:Date;
-    private end:Date;
+    orders: IOrder[];
+    paging: any;
+    private order: IOrder;
+    private start: Date;
+    private end: Date;
 
 
+    constructor(private $filter: ng.IFilterService, private $mdDialog: ng.material.IDialogService,
+                private $mdToast: ng.material.IToastService,
+                private $mdMedia: ng.material.IMedia, private orderResource: IOrderResource,
+                private pagingService: PagingService) {
 
-    constructor(private $filter:ng.IFilterService, private $mdDialog:ng.material.IDialogService,
-                private $mdToast:ng.material.IToastService,
-                private $mdMedia:ng.material.IMedia, private orderResource:IOrderResource,
-                private pagingService:PagingService) {
-       
         this.setDefaultDates();
-       
+
 
     }
+
     setDefaultDates() {
-        this.end= new Date();
-        this.start= new Date();
+        this.end = new Date();
+        this.start = new Date();
         this.start.setMonth(this.start.getMonth() - 1);
-        this.start.setHours(0,0,0)
+        this.start.setHours(0, 0, 0)
     }
 
     private showPage(page = 1) {
-        this.orders = this.orderResource.query( {page: page, sort: {"status": 1,  "date": -1}, query:{'date': {"$lte":this.end.toJSON(),"$gte":this.start.toJSON()}}},
+        this.orders = this.orderResource.query({
+                page: page,
+                perPage: 10,
+                sort: {"status": 1, "date": -1},
+                query: {'date': {"$lte": this.end.toJSON(), "$gte": this.start.toJSON()}}
+            },
             (res, headers) => {
-                let {total, page, perPage} = this.pagingService.parseHeaders( headers );
-                this.pagingService.update( {page: page, perPage: perPage, total: total} );
-                this.paging = angular.copy( this.pagingService.params() );
-            } );
-    } 
-    
+                let {total, page, perPage} = this.pagingService.parseHeaders(headers);
+                this.pagingService.update({page: page, perPage: perPage, total: total});
+                this.paging = angular.copy(this.pagingService.params());
+            });
+    }
+
     Search() {
         this.showPage();
     }
+
     $onInit() {
         this.showPage();
     }
 
-    showEditOrderDialog(ev:MouseEvent, order:IOrder) {
+    showEditOrderDialog(ev: MouseEvent, order: IOrder) {
 
-        this.$mdDialog.show( {
+        this.$mdDialog.show({
             template: editOrderDialogTemplate,
             controller: EditDialogController,
             controllerAs: '$ctrl',
@@ -217,67 +223,67 @@ export class AdminOrdersController {
             locals: {
                 order: order
             },
-            parent: angular.element( document.body ),
+            parent: angular.element(document.body),
             targetEvent: ev,
-        } ).then( (order) => this.saveOrder( order ) );
+        }).then((order) => this.saveOrder(order));
     }
 
 
-    saveOrder(order:IOrder) {
+    saveOrder(order: IOrder) {
 
-        order.$save().then( () => {
-            this.$mdToast.showSimple( `Запис збережено` );
-        } ).catch( (err)=> {
+        order.$save().then(() => {
+            this.$mdToast.showSimple(`Запис збережено`);
+        }).catch((err)=> {
             this.showErrorDialog();
-        } ).finally( ()=> {
-            this.showPage( this.pagingService.currentPage() );
-        } );
+        }).finally(()=> {
+            this.showPage(this.pagingService.currentPage());
+        });
         ;
     }
 
-   
-    showDeleteDialog(ev, order:IOrder) {
-        let confirm = this.$mdDialog.confirm()
-            .title( "Підтвердження дії" )
-            .textContent( `Ви дійсно бажаєте видалити Запис ${order.name || ''}?` )
-            .ariaLabel( "Підтвердження дії" )
-            .targetEvent( ev )
-            .ok( 'Так' )
-            .cancel( 'Ні' );
 
-        return this.$mdDialog.show( confirm )
-            .then( () => {
-                return this.deleteOrder( order );
-            } );
+    showDeleteDialog(ev, order: IOrder) {
+        let confirm = this.$mdDialog.confirm()
+            .title("Підтвердження дії")
+            .textContent(`Ви дійсно бажаєте видалити Запис ${order.name || ''}?`)
+            .ariaLabel("Підтвердження дії")
+            .targetEvent(ev)
+            .ok('Так')
+            .cancel('Ні');
+
+        return this.$mdDialog.show(confirm)
+            .then(() => {
+                return this.deleteOrder(order);
+            });
     }
 
     showErrorDialog() {
         let confirm = this.$mdDialog.alert()
-            .title( "Помилка" )
-            .textContent( `Спробуйте будь ласка пізніше` )
-            .ariaLabel( "Помилка" )
-            .ok( 'OK' )
-        return this.$mdDialog.show( confirm );
+            .title("Помилка")
+            .textContent(`Спробуйте будь ласка пізніше`)
+            .ariaLabel("Помилка")
+            .ok('OK')
+        return this.$mdDialog.show(confirm);
 
     }
 
-    deleteOrder(order:IOrder) {
+    deleteOrder(order: IOrder) {
 
-        order.$delete().then( () => {
-            this.$mdToast.showSimple( `Замовлення видалено` );
-        } ).catch( (err) => {
-            this.$mdToast.showSimple( err.message );
-        } ).finally( ()=> {
-            this.showPage( this.pagingService.currentPage() );
-        } );
+        order.$delete().then(() => {
+            this.$mdToast.showSimple(`Замовлення видалено`);
+        }).catch((err) => {
+            this.$mdToast.showSimple(err.message);
+        }).finally(()=> {
+            this.showPage(this.pagingService.currentPage());
+        });
         ;
     }
 
-    getOrderTitle(order:IOrder) {
+    getOrderTitle(order: IOrder) {
         let format = "dd.MM.yyyy";
         if (order.event_dates.length > 0) {
-            let firstDate = this.$filter( 'date' )( order.event_dates[0], format );
-            let lastDate = this.$filter( 'date' )( order.event_dates[order.event_dates.length - 1], format );
+            let firstDate = this.$filter('date')(order.event_dates[0], format);
+            let lastDate = this.$filter('date')(order.event_dates[order.event_dates.length - 1], format);
             return order.event_name + " " + firstDate + "-" + lastDate;
         } else {
             return "";
@@ -285,19 +291,19 @@ export class AdminOrdersController {
     }
 
     prev() {
-        this.showPage( this.pagingService.prevPage() );
+        this.showPage(this.pagingService.prevPage());
     }
 
     next() {
-        this.showPage( this.pagingService.nextPage() );
+        this.showPage(this.pagingService.nextPage());
     }
 
-  
+
 }
 
 export let AdminOrdersComponentUrl = '/academy/orders';
 export let AdminOrdersComponentName = 'pgAdminOrders';
-export let AdminOrdersComponentOptions:ng.IComponentOptions = {
+export let AdminOrdersComponentOptions: ng.IComponentOptions = {
     controller: AdminOrdersController,
     template: template
 };

@@ -59,7 +59,7 @@ export class UsersComponentController {
     }
 
     private showPage(page = 1) {
-        this.users = this.UserResource.query({page: page},
+        this.users = this.UserResource.query({page: page, perPage:10},
             (res, headers) => {
                 let {total, page, perPage} = this.pagingService.parseHeaders(headers);
                 this.pagingService.update({page: page, perPage: perPage, total: total});

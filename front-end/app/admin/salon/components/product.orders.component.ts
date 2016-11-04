@@ -285,6 +285,7 @@ export class ProductOrdersComponentController {
         this.orders = this.orderResource.query(
             {
                 page: page,
+                perPage: 10,
                 sort: {"status": 1, "date": -1},
                 query:{'date': {"$lte":this.end.toJSON(),"$gte":this.start.toJSON()}},
                 populate: 'product'

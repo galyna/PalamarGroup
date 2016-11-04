@@ -345,6 +345,7 @@ export class AppointmentsComponentController {
     private showPage(page = 1) {
         this.appointments = this.AppointmentResource.query( {
                 page: page,
+                perPage: 10,
                 sort: {"status": 1, "creationDate": -1},
                 query:{'creationDate': {"$lte":this.end.toJSON(),"$gte":this.start.toJSON()}},
                 populate: 'favors.favor'

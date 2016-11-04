@@ -109,7 +109,7 @@ export class FavorsComponentController {
     }
 
     private showPage(page = 1) {
-        this.favors = this.favorResource.query( {page: page},
+        this.favors = this.favorResource.query( {page: page , perPage: 10},
             (res, headers) => {
                 let {total, page, perPage} = this.pagingService.parseHeaders( headers );
                 this.pagingService.update( {page: page, perPage: perPage, total: total} );

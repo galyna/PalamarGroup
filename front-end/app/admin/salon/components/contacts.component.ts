@@ -97,7 +97,7 @@ export class ContactsComponentController {
         this.showPage( this.pagingService.nextPage() );
     }
     private showPage(page = 1) {
-        this.contacts = this.contactResource.query( {page: page,query:{'isAcademy': 'false'}},
+        this.contacts = this.contactResource.query( {page: page,  perPage: 10, query:{'isAcademy': 'false'}},
             (res, headers) => {
                 let {total, page, perPage} = this.pagingService.parseHeaders( headers );
                 this.pagingService.update( {page: page, perPage: perPage, total: total} );

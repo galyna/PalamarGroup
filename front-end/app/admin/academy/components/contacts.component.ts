@@ -1,5 +1,5 @@
-import {ContactResourceName,IContactResource,IContact} from "../../../resources/contact.resource";
-import {PagingServiceName,PagingService} from "../../../ui/admin.paging";
+import {ContactResourceName, IContactResource, IContact} from "../../../resources/contact.resource";
+import {PagingServiceName, PagingService} from "../../../ui/admin.paging";
 const template = `<md-toolbar>
     <div class="md-toolbar-tools">
         <h3>Контакти академії</h3>
@@ -42,75 +42,81 @@ const template = `<md-toolbar>
 
 export class ContactsComponentController {
 
-    static $inject = ["$filter", "$location", "$mdDialog", "$mdToast", "$mdMedia",ContactResourceName, PagingServiceName];
-    
-    contacts:IContact[];
-    paging:any;
+    static $inject = ["$filter", "$location", "$mdDialog", "$mdToast", "$mdMedia", ContactResourceName, PagingServiceName];
 
-    constructor(private $filter:ng.IFilterService, private $location:ng.ILocationService, private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService,
-                private $mdMedia:ng.material.IMedia, private contactResource:IContactResource,
+    contacts: IContact[];
+    paging: any;
+
+    constructor(private $filter: ng.IFilterService, private $location: ng.ILocationService, private $mdDialog: ng.material.IDialogService, private $mdToast: ng.material.IToastService,
+                private $mdMedia: ng.material.IMedia, private contactResource: IContactResource,
                 private pagingService: PagingService) {
 
     }
+
     $onInit() {
         this.showPage();
     }
 
-    addContact(){
+    addContact() {
         this.$location.path("/academy/contact");
     }
 
-    editContact(contact: IContact){
+    editContact(contact: IContact) {
         this.$location.path(`/academy/contact/${contact._id}`);
     }
 
-    showDeleteDialog(ev, contact:IContact) {
+    showDeleteDialog(ev, contact: IContact) {
         let confirm = this.$mdDialog.confirm()
-            .title( "Підтвердження дії" )
-            .textContent( `Ви дійсно бажаєте видалити Адміністратора ${contact.name||''}?` )
-            .ariaLabel( "Підтвердження дії" )
-            .targetEvent( ev )
-            .ok( 'Так' )
-            .cancel( 'Ні' );
+            .title("Підтвердження дії")
+            .textContent(`Ви дійсно бажаєте видалити Адміністратора ${contact.name || ''}?`)
+            .ariaLabel("Підтвердження дії")
+            .targetEvent(ev)
+            .ok('Так')
+            .cancel('Ні');
 
-        return this.$mdDialog.show( confirm )
-            .then( () => {
-                return this.deleteFavor( contact );
-            } );
+        return this.$mdDialog.show(confirm)
+            .then(() => {
+                return this.deleteFavor(contact);
+            });
     }
 
-    deleteFavor(contact:IContact) {
-        contact.$delete().then( () => {
-            this.$mdToast.showSimple( `Адміністратора видалено` );
-        } ).catch( (err)=> {
+    deleteFavor(contact: IContact) {
+        contact.$delete().then(() => {
+            this.$mdToast.showSimple(`Адміністратора видалено`);
+        }).catch((err)=> {
             this.showErrorDialog();
-        } ).finally( ()=> {
-            this.showPage( this.pagingService.currentPage() );
-        } );
+        }).finally(()=> {
+            this.showPage(this.pagingService.currentPage());
+        });
     }
 
     prev() {
-        this.showPage( this.pagingService.prevPage() );
+        this.showPage(this.pagingService.prevPage());
     }
 
     next() {
-        this.showPage( this.pagingService.nextPage() );
+        this.showPage(this.pagingService.nextPage());
     }
+
     private showPage(page = 1) {
-        this.contacts = this.contactResource.query( {page: page,  query:{'isAcademy': 'true'}},
+        this.contacts = this.contactResource.query({
+                page: page,
+                perPage: 5, query: {'isAcademy': 'true'}
+            },
             (res, headers) => {
-                let {total, page, perPage} = this.pagingService.parseHeaders( headers );
-                this.pagingService.update( {page: page, perPage: perPage, total: total} );
-                this.paging = angular.copy( this.pagingService.params() );
-            } );
+                let {total, page, perPage} = this.pagingService.parseHeaders(headers);
+                this.pagingService.update({page: page, perPage: perPage, total: total});
+                this.paging = angular.copy(this.pagingService.params());
+            });
     }
+
     showErrorDialog() {
         let confirm = this.$mdDialog.alert()
-            .title( "Помилка" )
-            .textContent( `Спробуйте будь ласка пізніше` )
-            .ariaLabel( "Помилка" )
-            .ok( 'OK' )
-        return this.$mdDialog.show( confirm );
+            .title("Помилка")
+            .textContent(`Спробуйте будь ласка пізніше`)
+            .ariaLabel("Помилка")
+            .ok('OK')
+        return this.$mdDialog.show(confirm);
 
     }
 }

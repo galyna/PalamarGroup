@@ -105,7 +105,7 @@ export class SalonsComponentController {
     }
 
     private showPage(page = 1) {
-        this.salons = this.SalonResource.query( {page: page},
+        this.salons = this.SalonResource.query( {page: page,  perPage: 10},
             (res, headers) => {
                 let {total, page, perPage} = this.pagingService.parseHeaders( headers );
                 this.pagingService.update( {page: page, perPage: perPage, total: total} );

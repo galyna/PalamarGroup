@@ -44,7 +44,7 @@ export class AcademyModelController {
     }
 
     private showPage(page = 1) {
-        this.models = this.ModelResource.query( {page: page},
+        this.models = this.ModelResource.query( {page: page,  perPage:10},
             (res, headers) => {
                 let {total, page, perPage} = this.pagingService.parseHeaders( headers );
                 this.pagingService.update( {page: page, perPage: perPage, total: total} );
