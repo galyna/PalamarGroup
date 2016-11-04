@@ -15,7 +15,8 @@ declare module pg {
             description:string,
             category:{ _id:string, name:string},
             defPrice:number,
-            photo:IPhoto
+            photo:IPhoto,
+            order:number
         }
 
         export interface IMasterFavor {

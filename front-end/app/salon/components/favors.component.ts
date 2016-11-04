@@ -285,7 +285,7 @@ export class FavorsComponentController {
         this.favors = [];
         if (this.$routeParams["category"] && this.$routeParams["category"] != ":category") {
             this.appointment = new this.AppointmentResource();
-            this.favors = this.favorResource.query();
+            this.favors = this.favorResource.query({sort: "order"});
             this.favors.$promise.then((favors) => {
                 this.categories.forEach((category)=> {
                     category.favors = favors.filter((favor)=> {
@@ -304,7 +304,7 @@ export class FavorsComponentController {
                     })
                 });
         } else {
-            this.favors = this.favorResource.query();
+            this.favors = this.favorResource.query({sort: "order"});
             this.favors.$promise.then((favors) => {
                 this.categories.forEach((category)=> {
                     category.favors = favors.filter((favor)=> {

@@ -18,6 +18,7 @@ export let FavorSchema = new Schema({
     params:[{  name: String,level: { _id: String, name: String,text: String},}],
     defPrice: Number,
     photo: PhotoSchema,
+    order: Number
 });
 
 export var Favor = model<IFavorModel>('Favor', FavorSchema);
