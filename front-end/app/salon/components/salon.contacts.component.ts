@@ -24,7 +24,7 @@ const template = `<div class="salon-contacts description-container" layout="colu
 
             </div>
         </div>
-        <ui-gmap-google-map ng-if="$ctrl.showMap && salon.map" id="map"
+        <ui-gmap-google-map ng-if="$ctrl.showMap && salon.latitude && salon.longitude" id="map"
                             center='{ latitude: salon.latitude, longitude: salon.longitude}' zoom='$ctrl.map.zoom'>
             <ui-gmap-marker coords="{ latitude: salon.latitude, longitude: salon.longitude}" idkey="$index">
               

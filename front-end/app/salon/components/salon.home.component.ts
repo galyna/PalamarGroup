@@ -73,8 +73,8 @@ const template = `<div class="courses-details description-container" layout="col
                          flex-gt-xs="46" flex-xs="80"
                          ng-click="::$ctrl.showMaster(master._id)">
                     <div ng-if="master.rate && master.rate._id!=='0'"
-                         class="corner-ribbon-min top-right black"
-                         ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}">{{::master.rate.text}}
+                         class="corner-ribbon-min top-right white"
+                         ng-class="{'grey': master.rate._id==='2'}">{{::master.rate.text}}
                     </div>
                     <img ng-src="{{::master.photo.url}}" class="md-card-image">
                     <md-card-content layout="column" layout-align="center center">
@@ -210,7 +210,7 @@ export class SalonHomeComponentController {
 
         this.masters = this.masterResource.query({sort: "order"});
         this.brends = this.BrendResource.query({sort: "order"});
-        this.transforms = this.TransformResource.query({sort: "order", pageSize: 2});
+        this.transforms = this.TransformResource.query({sort: "order", page: 1,  perPage: 2});
         this.transforms.$promise.then((transforms) => {
             this.showMoreTransforms = transforms.length > 2;
             transforms.splice(1, transforms.length - 2);
