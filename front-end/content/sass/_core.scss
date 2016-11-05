@@ -420,15 +420,10 @@ md-card.md-default-theme, md-card {
   .brend {
     position: relative;
     display: block;
-    transition: top 0.3s linear;
-    top: 0px;
+
     overflow: hidden;
 
-    &:hover {
-      @extend .md-whiteframe-12dp;
-      transition: top 0.3s linear;
-      top: -3px;
-    }
+
 
     img {
 
@@ -442,7 +437,7 @@ md-card.md-default-theme, md-card {
 
         max-height: 100%;
         box-sizing: border-box;
-        flex: 1 25%;
+        flex: 1 18%;
       }
 
     }
@@ -453,7 +448,7 @@ md-card.md-default-theme, md-card {
 
         max-height: 100%;
         box-sizing: border-box;
-        flex: 1 25%;
+        flex: 1 18%;
       }
 
       &.flex-gt-sm-46 {
