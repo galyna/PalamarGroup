@@ -27,13 +27,13 @@ const template = `<div class="courses description-container" layout="row" layout
                         <div class="card-desc box"
                              flex="50" layout="column" layout-align="space-around center">
                             <div ng-if="master.rate && master.rate._id!=='0'" hide show-md="true"
-                                 class="corner-ribbon top-right black"
-                                 ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}">
+                                 class="corner-ribbon top-right white"
+                                 ng-class="{'grey': master.rate._id==='2'}">
                                 {{::master.rate.text}}
                             </div>
                             <div ng-if="master.rate && master.rate._id!=='0'" hide-md="true"
-                                 class="corner-ribbon-min top-right black"
-                                 ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}">
+                                 class="corner-ribbon-min top-right white"
+                                 ng-class="{'grey': master.rate._id==='2'}">
                                 {{::master.rate.text}}
                             </div>
                             <div layout="row" layout-align="center center" class="md-padding md-margin">
@@ -59,14 +59,14 @@ const template = `<div class="courses description-container" layout="row" layout
                     <div class="card-desc  box"
                          flex="50" layout="column" layout-align="space-around center">
                         <div ng-if="master.rate && master.rate._id!=='0'" hide show-md="true"
-                             class="corner-ribbon top-left black"
-                             ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}">
+                             class="corner-ribbon top-left white"
+                             ng-class="{'grey': master.rate._id==='2'}">
                             {{::master.rate.text}}
                         </div>
                         <div ng-if="master.rate && master.rate._id!=='0'" hide-md="true"
-                             class="corner-ribbon-min top-left black"
-                             ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}">
-                            {{::master.rate.text}}
+                            class="corner-ribbon-min top-left white"
+                                 ng-class="{'grey': master.rate._id==='2'}">
+                                 {{::master.rate.text}}
                         </div>
                         <div layout="row" layout-align="center center" class="md-padding md-margin">
                             <div hide show-gt-sm="true" flex="90" class="md-display-2">{{::master.name}}</div>
@@ -96,13 +96,13 @@ const template = `<div class="courses description-container" layout="row" layout
                 <div class="card-desc box" flex="50"
                      flex="50" layout="column" layout-align="space-around center">
                     <div ng-if="master.rate && master.rate._id!=='0'" hide show-md="true"
-                         class="corner-ribbon top-right black"
-                         ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}">
-                        {{::master.rate.text}}
+                         class="corner-ribbon-min top-right white"
+                                 ng-class="{'grey': master.rate._id==='2'}">
+                                {{::master.rate.text}}
                     </div>
                     <div ng-if="master.rate && master.rate._id!=='0'" hide-md="true"
-                         class="corner-ribbon-min top-right black"
-                         ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}">
+                         class="corner-ribbon-min top-right white"
+                         ng-class="{'grey': master.rate._id==='2'}">
                         {{::master.rate.text}}
                     </div>
                     <div layout="row" layout-align="center center" class="md-padding md-margin">
@@ -131,8 +131,8 @@ const template = `<div class="courses description-container" layout="row" layout
     <div class="overlay-bg trigger-right"></div>
     <md-card md-whiteframe="8">
         <md-card-content layout="column">
-            <div ng-if="master.rate && master.rate._id!=='0'" class="card-desc-top-master"
-                 ng-class="{'grey': master.rate._id==='2','white': master.rate._id==='1'}" flex
+            <div ng-if="master.rate && master.rate._id!=='0'" class="card-desc-top-master white
+                 ng-class="{'grey': master.rate._id==='2'}" flex
                  layout="column"
                  layout-align=" space-around center">
                 <md-card-title>
