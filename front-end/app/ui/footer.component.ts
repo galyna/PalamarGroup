@@ -6,7 +6,7 @@ const template = `<div class="page-footer " ng-if="::!$root.isAdminZone()" class
 
     <div class="fit-screen-wrap">
         <div class="page-header-wrap" layout="column" layout-align="center center">
-            <div layout="row" flex layout-align="start start">
+            <div layout="row" flex layout-align="start center">
                 <div layout="column" flex>
                     <div layout="column" ng-repeat="salon in $ctrl.salons track by $index">
                         <div ng-if="salon._id!='isAcademy' && salon.contacts.length>0"
