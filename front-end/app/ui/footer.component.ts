@@ -7,30 +7,7 @@ const template = `<div class="page-footer " ng-if="::!$root.isAdminZone()" class
     <div class="fit-screen-wrap">
 
         <div class="page-header-wrap" layout="column" layout-align="center center">
-            <div layout="column">
-                <div layout="row" class="social-header" layout-align="center center">
-                    <div class="md-subhead md-padding"> Слідкуйте за нами в  </div>
-                    <a href="https://www.facebook.com/hashtag/palamar_group" target="_blank">
-                        <md-icon class="md-social-image"
-                                 md-svg-src="../content/images/icons/social/face.svg"></md-icon>
-                    </a>
-                    <a href="https://www.instagram.com/palamar_group/" target="_blank">
-                        <md-icon class="md-social-image"
-                                 md-svg-src="../content/images/icons/social/insta.svg"></md-icon>
-                    </a>
-
-                </div>
-                <!--<div class='social-container' layout="row" layout-align="center center">-->
-                <!--<iframe hide show-gt-xs="true" scrolling="no" marginheight="0" frameborder="0" width="598"-->
-                <!--style="height: 399px;"-->
-                <!--src="http://facebookgalleria.com/gallery.php?id=StudioPalamar&display=uploaded_photos&rows=2&margin=2&cols=3&width=197&font_size=11&title_color=000000&hide_next_back=0&share_buttons=1&shape=square&frame=1&token=b155a40e-9451-11e6-b31c-30eb0f887bd0"></iframe>-->
-                <!--<iframe hide-gt-xs="true" scrolling="no" marginheight="0" frameborder="0" width="295"-->
-                <!--style="height: 442px;"-->
-                <!--src="http://facebookgalleria.com/gallery.php?id=StudioPalamar&display=uploaded_photos&rows=3&margin=2&cols=2&width=145&font_size=11&title_color=000000&hide_next_back=0&share_buttons=1&shape=square&frame=1&token=b155a40e-9451-11e6-b31c-30eb0f887bd0"></iframe>-->
-                <!---->
-                <!--</div>-->
-
-            </div>
+           
             <div layout="row" flex layout-align="start start" >
                 <div layout="column" flex>
                     <!--<div class="md-title social-header md-padding header-contacts ">Контакти</div>-->
@@ -64,21 +41,21 @@ const template = `<div class="page-footer " ng-if="::!$root.isAdminZone()" class
                 </div>
 
             </div>
+            <div layout="column">
+                <div layout="row" class="social-header" layout-align="center center">
+                    <div class="md-subhead md-padding"> Слідкуйте за нами в  </div>
+                    <a href="https://www.facebook.com/hashtag/palamar_group" target="_blank">
+                        <md-icon class="md-social-image"
+                                 md-svg-src="../content/images/icons/social/face.svg"></md-icon>
+                    </a>
+                    <a href="https://www.instagram.com/palamar_group/" target="_blank">
+                        <md-icon class="md-social-image"
+                                 md-svg-src="../content/images/icons/social/insta.svg"></md-icon>
+                    </a>
 
-            <!--<div layout="column" layout-gt-md="row" flex layout-align="center center" class="md-margin"-->
-            <!--&gt;-->
-
-                <!--<ui-gmap-google-map id="map" class="footer-man"-->
-                                    <!--center='$ctrl.map.center' zoom='$ctrl.map.zoom' options="$ctrl.map.options">-->
-                    <!--<ui-gmap-marker ng-repeat="salon in $ctrl.salons track by $index "-->
-                                    <!--coords="{ latitude: salon.latitude, longitude: salon.longitude}" idkey="$index">-->
-
-                    <!--</ui-gmap-marker>-->
-                    <!--</ui-gmap-markers>-->
-                <!--</ui-gmap-google-map>-->
-
-
-            <!--</div>-->
+                </div>
+              
+            </div>
         </div>
 
     </div>

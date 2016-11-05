@@ -37,14 +37,14 @@ const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveFor
                         <input id="name" ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.salon.name"
                                name="name"/>
                     </md-input-container>
-                    <md-input-container class="md-block ">
-                        <label>Телефон</label>
-                        <input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.salon.phone" name="name"/>
-                    </md-input-container>
-                    <md-input-container class="md-block ">
-                        <label>Email</label>
-                        <input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.salon.email" name="name"/>
-                    </md-input-container>
+                    <!--<md-input-container class="md-block ">-->
+                        <!--<label>Телефон</label>-->
+                        <!--<input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.salon.phone" name="name"/>-->
+                    <!--</md-input-container>-->
+                    <!--<md-input-container class="md-block ">-->
+                        <!--<label>Email</label>-->
+                        <!--<input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.salon.email" name="name"/>-->
+                    <!--</md-input-container>-->
                      <md-input-container class="md-block ">
                         <label>Адреса</label>
                         <input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.salon.address" name="name"/>
