@@ -5,14 +5,12 @@ import {ISalonResource, SalonResourceName, ISalon} from "../resources/salon.reso
 const template = `<div class="page-footer " ng-if="::!$root.isAdminZone()" class="md-whiteframe-z4" flex>
 
     <div class="fit-screen-wrap">
-
         <div class="page-header-wrap" layout="column" layout-align="center center">
-           
-            <div layout="row" flex layout-align="start start" >
+            <div layout="row" flex layout-align="start start">
                 <div layout="column" flex>
-                    <!--<div class="md-title social-header md-padding header-contacts ">Контакти</div>-->
                     <div layout="column" ng-repeat="salon in $ctrl.salons track by $index">
-                        <div ng-if="::salon._id!='isAcademy'" class="md-subhead social-header md-padding">Салон на
+                        <div ng-if="salon._id!='isAcademy' && salon.contacts.length>0"
+                             class="md-subhead social-header md-padding">Салон на
                             {{::salon.address}}
                         </div>
                         <div ng-if="::salon._id=='isAcademy'" class="md-subhead social-header md-padding">Академія</div>
@@ -37,24 +35,19 @@ const template = `<div class="page-footer " ng-if="::!$root.isAdminZone()" class
                             </div>
                         </div>
                     </div>
+                    <div layout="row" class="social-header" layout-align="center center">
+                        <div class="md-subhead md-padding"> Слідкуйте за нами в</div>
+                        <a href="https://www.facebook.com/hashtag/palamar_group" target="_blank">
+                            <md-icon class="md-social-image"
+                                     md-svg-src="../content/images/icons/social/face.svg"></md-icon>
+                        </a>
+                        <a href="https://www.instagram.com/palamar_group/" target="_blank">
+                            <md-icon class="md-social-image"
+                                     md-svg-src="../content/images/icons/social/insta.svg"></md-icon>
+                        </a>
 
+                    </div>
                 </div>
-
-            </div>
-            <div layout="column">
-                <div layout="row" class="social-header" layout-align="center center">
-                    <div class="md-subhead md-padding"> Слідкуйте за нами в  </div>
-                    <a href="https://www.facebook.com/hashtag/palamar_group" target="_blank">
-                        <md-icon class="md-social-image"
-                                 md-svg-src="../content/images/icons/social/face.svg"></md-icon>
-                    </a>
-                    <a href="https://www.instagram.com/palamar_group/" target="_blank">
-                        <md-icon class="md-social-image"
-                                 md-svg-src="../content/images/icons/social/insta.svg"></md-icon>
-                    </a>
-
-                </div>
-              
             </div>
         </div>
 
