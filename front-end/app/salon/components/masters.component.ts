@@ -28,12 +28,12 @@ const template = `<div class="courses description-container" layout="row" layout
                              flex="50" layout="column" layout-align="space-around center">
                             <div ng-if="master.rate && master.rate._id!=='0'" hide show-md="true"
                                  class="corner-ribbon top-right white"
-                                 ng-class="{'grey': master.rate._id==='2'}">
+                                 >
                                 {{::master.rate.text}}
                             </div>
                             <div ng-if="master.rate && master.rate._id!=='0'" hide-md="true"
                                  class="corner-ribbon-min top-right white"
-                                 ng-class="{'grey': master.rate._id==='2'}">
+                             >
                                 {{::master.rate.text}}
                             </div>
                             <div layout="row" layout-align="center center" class="md-padding md-margin">
@@ -60,12 +60,12 @@ const template = `<div class="courses description-container" layout="row" layout
                          flex="50" layout="column" layout-align="space-around center">
                         <div ng-if="master.rate && master.rate._id!=='0'" hide show-md="true"
                              class="corner-ribbon top-left white"
-                             ng-class="{'grey': master.rate._id==='2'}">
+                             >
                             {{::master.rate.text}}
                         </div>
                         <div ng-if="master.rate && master.rate._id!=='0'" hide-md="true"
                             class="corner-ribbon-min top-left white"
-                                 ng-class="{'grey': master.rate._id==='2'}">
+                                 >
                                  {{::master.rate.text}}
                         </div>
                         <div layout="row" layout-align="center center" class="md-padding md-margin">
@@ -97,12 +97,12 @@ const template = `<div class="courses description-container" layout="row" layout
                      flex="50" layout="column" layout-align="space-around center">
                     <div ng-if="master.rate && master.rate._id!=='0'" hide show-md="true"
                          class="corner-ribbon-min top-right white"
-                                 ng-class="{'grey': master.rate._id==='2'}">
+                                >
                                 {{::master.rate.text}}
                     </div>
                     <div ng-if="master.rate && master.rate._id!=='0'" hide-md="true"
                          class="corner-ribbon-min top-right white"
-                         ng-class="{'grey': master.rate._id==='2'}">
+                       >
                         {{::master.rate.text}}
                     </div>
                     <div layout="row" layout-align="center center" class="md-padding md-margin">
@@ -132,7 +132,7 @@ const template = `<div class="courses description-container" layout="row" layout
     <md-card md-whiteframe="8">
         <md-card-content layout="column">
             <div ng-if="master.rate && master.rate._id!=='0'" class="card-desc-top-master white
-                 ng-class="{'grey': master.rate._id==='2'}" flex
+                flex
                  layout="column"
                  layout-align=" space-around center">
                 <md-card-title>

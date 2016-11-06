@@ -69,13 +69,12 @@ const template = `<div class="courses-details description-container" layout="col
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6"  ng-repeat="master in $ctrl.masters track by $index"
                          class="md-margin box "
-                           ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
-                       
+                           ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"                       
                          flex-gt-xs="46" flex-xs="80"
                          ng-click="::$ctrl.showMaster(master._id)">
                     <div ng-if="master.rate && master.rate._id!=='0'"
                          class="corner-ribbon-min top-right white"
-                         ng-class="{'grey': master.rate._id==='2'}">{{::master.rate.text}}
+                       >{{::master.rate.text}}
                     </div>
                     <img ng-src="{{::master.photo.url}}" class="md-card-image">
                     <md-card-content layout="column" layout-align="center center">

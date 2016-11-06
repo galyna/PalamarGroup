@@ -22,13 +22,13 @@ const template = `<div class=" description-container">
                     <div class="card-desc  "
                          flex="50" layout="column" layout-align="space-around center">
                         <div ng-if="$ctrl.master.rate && $ctrl.master.rate._id!=='0'" hide show-md="true"
-                             class="corner-ribbon top-right black"
-                             ng-class="{'grey': $ctrl.master.rate._id==='2','white': $ctrl.master.rate._id==='1'}">
+                             class="corner-ribbon top-right white"
+                        >
                             {{$ctrl.master.rate.text}}
                         </div>
                         <div ng-if="$ctrl.master.rate && $ctrl.master.rate._id!=='0'" hide-md="true"
-                             class="corner-ribbon-min top-right black"
-                             ng-class="{'grey': $ctrl.master.rate._id==='2','white': $ctrl.master.rate._id==='1'}">
+                             class="corner-ribbon-min top-right white"
+                        >
                             {{$ctrl.master.rate.text}}
                         </div>
                         <div layout="row" layout-align="center center" class="md-padding md-margin">
@@ -38,7 +38,7 @@ const template = `<div class=" description-container">
                         </div>
 
                         <div class="md-padding md-margin" ng-if="$ctrl.master.description" hide show-gt-sm="true"
-                             layout="row" layout-align="center center" >
+                             layout="row" layout-align="center center">
                             <md-card-title>
                                 <md-card-title-text>
 
@@ -46,7 +46,7 @@ const template = `<div class=" description-container">
                                 </md-card-title-text>
                             </md-card-title>
                         </div>
-                        <div flex="20" 
+                        <div flex="20"
                              layout="row" layout-align="center center">
                             <md-button class=" md-margin near-master xs-selected md-display-1 md-raised "
                                        aria-label="Details"
@@ -63,8 +63,8 @@ const template = `<div class=" description-container">
 
             <md-card md-whiteframe="8">
                 <md-card-content layout="column">
-                    <div ng-if="$ctrl.master.rate && $ctrl.master.rate._id!=='0'" class="card-desc-top-master"
-                         ng-class="{'grey': $ctrl.master.rate._id==='2','white': $ctrl.master.rate._id==='1'}" flex
+                    <div ng-if="$ctrl.master.rate && $ctrl.master.rate._id!=='0'" class="card-desc-top-master white"
+                         flex
                          layout="column"
                          layout-align=" space-around center">
                         <md-card-title>

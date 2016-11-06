@@ -76,12 +76,12 @@ const template = `<div class="courses description-container" layout="row" layout
                         </div>
                         <div class="card-desc box" 
                              flex="50" layout="column" layout-align="space-around center">
-                            <div ng-if="master.level" hide show-md="true" class="corner-ribbon top-right black"
-                             ng-class="{'grey': master.level._id==='1','white': master.level._id==='0'}" >
+                            <div ng-if="master.level" hide show-md="true" class="corner-ribbon top-right white"
+                              >
                                 {{::master.level.text}}
                             </div>
-                            <div ng-if="master.level" hide-md="true"  class="corner-ribbon-min top-right black"
-                            ng-class="{'grey': master.level._id==='1','white': master.level._id==='0'}">
+                            <div ng-if="master.level" hide-md="true"  class="corner-ribbon-min top-right white"
+                            >
                                 {{::master.level.text}}
                             </div>
                             <div layout="row" layout-align="center center" class="md-padding md-margin">
