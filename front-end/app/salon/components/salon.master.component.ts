@@ -15,43 +15,47 @@ const template = `<div class=" description-container">
 
             <md-card flex-gt-md="70" flex-md="80" flex-gt-xs="85" md-whiteframe="5"
             >
-                <md-card-content layout="row" layout-align="start none">
-                    <div class="card-media " 
+                <md-card-content flex layout="row" layout-align="start none">
+                    <div class="card-media "
                          flex="50"><img src="{{::$ctrl.master.photo.url}}" class="md-card-image "/>
                     </div>
-                    <div class="card-desc box " 
+                    <div class="card-desc  "
                          flex="50" layout="column" layout-align="space-around center">
-                            <div ng-if="$ctrl.master.rate && $ctrl.master.rate._id!=='0'" hide show-md="true"
-                                 class="corner-ribbon top-right black"
-                                 ng-class="{'grey': $ctrl.master.rate._id==='2','white': $ctrl.master.rate._id==='1'}">
-                                {{$ctrl.master.rate.text}}
+                        <div ng-if="$ctrl.master.rate && $ctrl.master.rate._id!=='0'" hide show-md="true"
+                             class="corner-ribbon top-right black"
+                             ng-class="{'grey': $ctrl.master.rate._id==='2','white': $ctrl.master.rate._id==='1'}">
+                            {{$ctrl.master.rate.text}}
+                        </div>
+                        <div ng-if="$ctrl.master.rate && $ctrl.master.rate._id!=='0'" hide-md="true"
+                             class="corner-ribbon-min top-right black"
+                             ng-class="{'grey': $ctrl.master.rate._id==='2','white': $ctrl.master.rate._id==='1'}">
+                            {{$ctrl.master.rate.text}}
+                        </div>
+                        <div layout="row" layout-align="center center" class="md-padding md-margin">
+                            <div hide show-gt-sm="true" flex="90" class="md-display-2">{{::$ctrl.master.name}}</div>
+                            <div hide show-sm="true" flex="90" class="md-display-1">{{::$ctrl.master.name}}
                             </div>
-                            <div ng-if="$ctrl.master.rate && $ctrl.master.rate._id!=='0'" hide-md="true"
-                                 class="corner-ribbon-min top-right black"
-                                 ng-class="{'grey': $ctrl.master.rate._id==='2','white': $ctrl.master.rate._id==='1'}">
-                                {{$ctrl.master.rate.text}}
-                            </div>
-                            <div layout="row" layout-align="center center" class="md-padding md-margin">
-                                <div hide show-gt-sm="true" flex="90" class="md-display-2">{{::$ctrl.master.name}}</div>
-                                <div hide show-sm="true"
-                                ="true" flex="90" class="md-display-1">{{::$ctrl.master.name}}
-                            </div>
-                        </div>   
-                         <div  ng-if="$ctrl.master.description"  hide  show-gt-sm="true" layout="row" layout-align="center center" class="">
-                                <md-card-title>
-                            <md-card-title-text>
-                               
-                                <div class="md-title">{{::$ctrl.master.description}}</div>
-                            </md-card-title-text>
-                        </md-card-title>
-                        </div>   
-                                                                                                                                
-                        <md-button class=" near-master xs-selected md-display-1 md-raised " aria-label="Details"
-                                   ng-click="::$ctrl.showAppointmentDialog($ctrl.master)">
-                            Записатись
-                        </md-button>
+                        </div>
 
-            </div>
+                        <div class="md-padding md-margin" ng-if="$ctrl.master.description" hide show-gt-sm="true"
+                             layout="row" layout-align="center center" >
+                            <md-card-title>
+                                <md-card-title-text>
+
+                                    <div class="md-title">{{::$ctrl.master.description}}</div>
+                                </md-card-title-text>
+                            </md-card-title>
+                        </div>
+                        <div flex="20" 
+                             layout="row" layout-align="center center">
+                            <md-button class=" md-margin near-master xs-selected md-display-1 md-raised "
+                                       aria-label="Details"
+                                       ng-click="::$ctrl.showAppointmentDialog($ctrl.master)">
+                                Записатись
+                            </md-button>
+                        </div>
+                    </div>
+
                 </md-card-content>
             </md-card>
         </div>
@@ -60,16 +64,16 @@ const template = `<div class=" description-container">
             <md-card md-whiteframe="8">
                 <md-card-content layout="column">
                     <div ng-if="$ctrl.master.rate && $ctrl.master.rate._id!=='0'" class="card-desc-top-master"
-                 ng-class="{'grey': $ctrl.master.rate._id==='2','white': $ctrl.master.rate._id==='1'}" flex
-                 layout="column"
-                 layout-align=" space-around center">
-                <md-card-title>
-                    <md-card-title-text flex layout="column" layout-align=" space-around center">
-                        <div class="md-headline"> {{::$ctrl.master.rate.text}}</div>
-                    </md-card-title-text>
-                </md-card-title>
-            </div>
-                    <div class="card-media " >
+                         ng-class="{'grey': $ctrl.master.rate._id==='2','white': $ctrl.master.rate._id==='1'}" flex
+                         layout="column"
+                         layout-align=" space-around center">
+                        <md-card-title>
+                            <md-card-title-text flex layout="column" layout-align=" space-around center">
+                                <div class="md-headline"> {{::$ctrl.master.rate.text}}</div>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </div>
+                    <div class="card-media ">
                         <img
                                 src="{{::$ctrl.master.photo.url}}"
                                 class="md-card-image"/></div>
@@ -93,8 +97,8 @@ const template = `<div class=" description-container">
 
         </div>
     </div>
-    
-   
+
+
     <div flex layout-align="center center" layout="row">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
@@ -139,10 +143,10 @@ const template = `<div class=" description-container">
     </div>
 
 
-    <div class="courses-details" layout="row" flex layout-align="center center" >
+    <div class="courses-details" layout="row" flex layout-align="center center">
         <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
             <div layout="column" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" class="  courses-videos"                         
+                <md-card md-whiteframe="6" class="  courses-videos"
                          ng-repeat="video in $ctrl.master.videos track by $index"
                          flex>
                     <div flex class="embed-responsive embed-responsive-16by9">
@@ -159,15 +163,15 @@ const template = `<div class=" description-container">
     </div>
 
     <div flex="100" class="courses-details" layout="row" layout-align="center center"
-        >
+    >
         <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6"  ng-repeat="photo in $ctrl.master.works track by $index"
+                <md-card md-whiteframe="6" ng-repeat="photo in $ctrl.master.works track by $index"
                          class="md-margin "
                          ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
                          flex-gt-xs="46" flex-xs="80"
-                         ng-click="::$ctrl.showMediaObserver($ctrl.master.works, $index)">                   
-                        <img ng-src="{{::photo.url}}" class="md-card-image">                 
+                         ng-click="::$ctrl.showMediaObserver($ctrl.master.works, $index)">
+                    <img ng-src="{{::photo.url}}" class="md-card-image">
                     <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                         <span class="  md-margin">{{::photo.name}}</span>
                     </md-card-content>
