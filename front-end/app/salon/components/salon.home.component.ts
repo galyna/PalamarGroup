@@ -50,7 +50,7 @@ const template = `<div class="courses-details description-container" layout="col
                     </div>
                 </div>
             </div>
-            <div class="overlay-days">
+            <div class=" overlay-description">
             </div>
            
         </div>
@@ -60,7 +60,7 @@ const template = `<div class="courses-details description-container" layout="col
             <div class="fit-screen-wrap invers header">
                 <div class="md-display-2"> МАЙСТРИ</div>
             </div>
-
+           
         </div>
     </div>
     <div layout="row" layout-align="center center">
@@ -88,8 +88,12 @@ const template = `<div class="courses-details description-container" layout="col
 
     <div layout="row" flex ng-if="$ctrl.transforms.length>0 ">
         <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap invers header">
-                <div class="md-display-1"> ПЕРЕВТІЛЕННЯ</div>
+            <div class="fit-screen-wrap    header-super2">
+            <div show-xs hide-gt-xs='true' class="md-display-1"> ПЕРЕВТІЛЕННЯ</div>
+                <div hide-xs class="md-display-2"> ПЕРЕВТІЛЕННЯ</div>
+            </div>
+            
+            <div class="overlay-days">
             </div>
         </div>
     </div>
@@ -140,9 +144,12 @@ const template = `<div class="courses-details description-container" layout="col
     
      <div layout="row" flex ng-if="$ctrl.brends.length>0 ">
         <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap invers header">
+            <div class="fit-screen-wrap header-super2">
                 <div class="md-display-1"> БРЕНДИ</div>
             </div>
+            <div class="overlay-comments">
+            </div>
+       
         </div>
     </div>
     

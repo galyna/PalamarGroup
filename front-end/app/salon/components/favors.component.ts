@@ -38,17 +38,21 @@ const template = `<div class="courses-details description-container" layout="col
         </div>
     </div>
 </div>
-<div ng-if="$ctrl.masters.length>0" class="courses description-container" layout="row" layout-align="center center">
-    <div layout="column" layout-align="center center">
-        <div layout="row" flex>
-            <div class="page-delimiter" flex>
-                <div class="fit-screen-wrap invers header">
-                    <div class="md-display-2"> Майстри</div>
-                </div>
-
-            </div>
+<div layout="row"  ng-if="$ctrl.masters.length>0" flex>
+    <div class="page-delimiter" flex>
+        <div class="fit-screen-wrap  header-super2">
+            <div flex class="md-display-2"> Майстри</div>
+        </div>
+        <div class="overlay-masters">
         </div>
 
+    </div>
+</div>
+
+<div  ng-if="$ctrl.masters.length>0" class="courses description-container" layout="row" layout-align="center center">
+
+    <div layout="column" layout-align="center center">
+      
         <div class="course-bg " ng-repeat="master in $ctrl.masters track by $index" layout-align="center center" flex>
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
@@ -56,7 +60,7 @@ const template = `<div class="courses-details description-container" layout="col
                 >
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-media "
-                             flex="50"><img src="{{::master.photo.url}}" class="md-card-image "/>
+                             flex="50"><img ng-src="{{master.photo.url}}"   ng-if="!!master.photo.url"class="md-card-image "/>
                         </div>
                         <div class="card-desc box "
                              flex="50" layout="column" layout-align="space-around center">
@@ -105,7 +109,7 @@ const template = `<div class="courses-details description-container" layout="col
                             </md-card-title-text>
                         </md-card-title>
                     </div>
-                    <div class="card-media "><img src="{{::master.photo.url}}" class="md-card-image"/></div>
+                    <div class="card-media "><img ng-src="{{master.photo.url}}"  ng-if="!!master.photo.url" class="md-card-image"/></div>
                     <div class="card-desc "
                          layout="column" layout-align="center center">
                         <md-card-title>
@@ -213,10 +217,10 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
 class AppointmentDialogController {
 
     static $inject = ['$mdDialog', 'appointment'];
-    private appointment:IAppointment;
-    private originalAppointment:IAppointment;
+    private appointment: IAppointment;
+    private originalAppointment: IAppointment;
 
-    dayHour:any;
+    dayHour: any;
     dayHours = [{id: 1, value: '10:00'}, {id: 2, value: '10:30'}, {id: 3, value: '11:00'}, {id: 4, value: '11:30'},
         {id: 5, value: '12:00'}, {id: 6, value: '12:30'}, {id: 7, value: '13:00'}, {id: 8, value: '13:30'}, {
             id: 9,
@@ -228,7 +232,7 @@ class AppointmentDialogController {
         },
         {id: 15, value: '17:00'}, {id: 16, value: '17:30'}, {id: 17, value: '18:00'}, {id: 18, value: '18:30'}];
 
-    constructor(private $mdDialog:ng.material.IDialogService, appointment:IAppointment) {
+    constructor(private $mdDialog: ng.material.IDialogService, appointment: IAppointment) {
         this.appointment = angular.copy(appointment);
         this.originalAppointment = appointment;
         this.setTime();
@@ -269,39 +273,37 @@ export class FavorsComponentController {
     static $inject = [FavorResourceName, 'constants', "$routeParams", "$location", MasterResourceName,
         '$mdDialog', '$rootScope', "$log", AppointmentResourceName];
 
-    favors:any;
-    masters:IMaster[];
-    categories:any;
-    private appointment:IAppointment;
+    favors: any;
+    masters: IMaster[];
+    categories: any;
+    private appointment: IAppointment;
 
-    constructor(private favorResource:IFavorResource,
-                private constants:IConstants,
-                private $routeParams:ng.route.IRouteParamsService, private $location:ng.ILocationService,
-                private MasterResource:IMasterResource, private mdDialog:ng.material.IDialogService,
-                private $rootScope:IRootScope, private $log:ng.ILogService, private AppointmentResource:IAppointmentResource) {
-        this.categories = this.constants.favorCategories;
+    constructor(private favorResource: IFavorResource,
+                private constants: IConstants,
+                private $routeParams: ng.route.IRouteParamsService, private $location: ng.ILocationService,
+                private MasterResource: IMasterResource, private mdDialog: ng.material.IDialogService,
+                private $rootScope: IRootScope, private $log: ng.ILogService, private AppointmentResource: IAppointmentResource) {
+
 
     }
 
     $onInit() {
         this.favors = [];
+        this.categories = angular.copy(this.constants.favorCategories);
         if (this.$routeParams["category"] && this.$routeParams["category"] != ":category") {
+            var category = this.$routeParams["category"]
             this.appointment = new this.AppointmentResource();
-            this.favors = this.favorResource.query({sort: "order"});
-            this.favors.$promise.then((favors) => {
-                this.categories.forEach((category)=> {
-                    category.favors = favors.filter((favor)=> {
-                        return category.name == favor.category.name && category._id == this.$routeParams["category"];
-                    });
+            this.favors = this.favorResource.query({sort: "order", query: {"category._id": category}});
+            this.categories.find(cat=>cat._id == category).favors = this.favors;
 
-                })
-            });
-            this.MasterResource.query({populate: 'services.favor', sort: "order"}).$promise
+            this.MasterResource.query({
+                populate: 'services.favor',
+                sort: "order"
+            }).$promise
                 .then((masters) => {
                     this.masters = masters.filter((master)=> {
-
                         return master.services.some((s)=> {
-                            return s.favor.category._id == this.$routeParams["category"];
+                            return s.favor.category._id == category;
                         });
                     })
                 });
@@ -370,7 +372,7 @@ export class FavorsComponentController {
 
     }
 
-    showOrderConfirm():void {
+    showOrderConfirm(): void {
         this.mdDialog.show(
             this.mdDialog.alert()
                 .clickOutsideToClose(true)

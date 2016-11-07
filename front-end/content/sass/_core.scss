@@ -162,6 +162,12 @@ md-card.md-default-theme, md-card {
     height: 150px;
 
   }
+
+  .header-super2 {
+    height: 300px;
+
+  }
+
   .header-super {
     height: 350px;
 
@@ -257,33 +263,93 @@ md-card.md-default-theme, md-card {
     -o-filter: blur(1px);
     -ms-filter: blur(1px);
     filter: blur(1px);
-    @media (min-height: 1286px) {
-      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_full.jpg") no-repeat center center fixed;
-    }
+
     @media (min-width: 1923px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_full.jpg") no-repeat center center fixed;
     }
+
+    @media (min-height: 1286px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_full.jpg") no-repeat center center fixed;
+    }
+
     @media (max-height: 1286px) and (max-width: 1923px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1923_1282.jpg") no-repeat center center fixed;
     }
-    @media (max-height: 1026px) and (max-width: 1539px) {
+
+    @media (max-height: 1024px) and (max-width: 1536px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1539_1026.jpg") no-repeat center center fixed;
     }
 
-    @media (max-height: 802px) and (max-width: 1203px) {
+    @media (max-height: 800px) and (max-width: 1200px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1203_802.jpg") no-repeat center center fixed;
     }
 
-    @media (max-height: 642px) and (max-width: 963px) {
+    @media (max-height: 640px) and (max-width: 960px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_963_642.jpg") no-repeat center center fixed;
+    }
+    @media (max-height: 400px) and (max-width: 720px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_723_482.jpg") no-repeat center center fixed;
+    }
+
+  }
+
+  .overlay-masters {
+    @extend .overlay;
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px);
+
+
+    @media (min-height: 1286px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_full.jpg") no-repeat center center fixed;
+    }
+
+    @media (max-height: 1333px) and (max-width: 2000px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_2000.jpg") no-repeat center center fixed;
+    }
+
+    @media (max-height: 1026px) and (max-width: 1500px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618.jpg") no-repeat center center fixed;
+    }
+
+    @media (max-height: 802px) and (max-width: 1200px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_1200.jpg") no-repeat center center fixed;
+    }
+
+    @media (max-height: 642px) and (max-width: 963px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_963.jpg") no-repeat center center fixed;
     }
 
     @media (max-height: 400px) and (max-width: 723px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_723_482.jpg") no-repeat center center fixed;
     }
 
+
   }
 
+  .overlay-brends {
+    @extend .overlay;
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px);
+
+    @media (min-height: 1000px) and (min-width: 963px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_h.jpg") no-repeat center center fixed;
+    }
+    @media (max-height: 1000px) and (max-width: 1500px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)),url("../images/bg/slider/IMG_6924.jpg") no-repeat center center fixed;
+    }
+    @media (max-width: 1200px) and (max-height: 800px) {
+      background:linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_1200.jpg") no-repeat 25% 15% fixed;
+    }
+
+
+
+  }
 }
 
 .order-picker-container {

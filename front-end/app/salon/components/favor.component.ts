@@ -3,7 +3,7 @@ import {IRootScope} from "../../../typings";
 import {IAppointmentResource, AppointmentResourceName, IAppointment} from "../../resources/appointment.resource";
 import {FavorResourceName, IFavorResource, IFavor} from "../../resources/favor.resource";
 
-const template = `<div class="courses description-container" layout="row" layout-align="center center">
+const template = `<div class="courses description-container">
     <div layout="column" layout-align="center center">
 
         <div class="course-bg " layout-align="center center" flex>
@@ -13,7 +13,7 @@ const template = `<div class="courses description-container" layout="row" layout
                 >
                     <md-card-content layout="row" layout-align="start none">
 
-                        <div class="card-desc " 
+                        <div class="card-desc "
                              flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
@@ -27,7 +27,7 @@ const template = `<div class="courses description-container" layout="row" layout
                             </md-card-title>
 
                         </div>
-                        <div class="card-media " 
+                        <div class="card-media "
                              flex="50"><img src="{{::$ctrl.favor.photo.url}}" class="md-card-image "/>
                         </div>
                     </md-card-content>
@@ -37,7 +37,7 @@ const template = `<div class="courses description-container" layout="row" layout
 
             <div hide-gt-xs="true" layout="row" layout-align="center center">
                 <div class="overlay-bg trigger-right"></div>
-                <md-card md-whiteframe="8" >
+                <md-card md-whiteframe="8">
                     <md-card-content layout="column">
                         <div class="card-media "><img src="{{::$ctrl.favor.photo.url}}" class="md-card-image"/></div>
                         <div class="card-desc "
@@ -48,99 +48,102 @@ const template = `<div class="courses description-container" layout="row" layout
                                     <div class="md-title">{{::$ctrl.favor.description}}</div>
                                 </md-card-title-text>
                             </md-card-title>
-
                         </div>
                     </md-card-content>
-
                 </md-card>
-
             </div>
-        </div>
-        <div layout="row" ng-if="$ctrl.masters.length>0" flex>
-            <div class="page-delimiter" flex>
-                <div class="fit-screen-wrap invers header">
-                    <div class="md-display-2"> Майстри</div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="course-bg " ng-repeat="master in $ctrl.masters track by $index" layout-align="center center" flex>
-            <div hide show-gt-xs="true" layout="row" layout-align="center center">
-
-                <md-card flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
-                >
-                    <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media " 
-                             flex="50"><img src="{{::master.photo.url}}" class="md-card-image "/>
-                        </div>
-                        <div class="card-desc box" 
-                             flex="50" layout="column" layout-align="space-around center">
-                            <div ng-if="master.level" hide show-md="true" class="corner-ribbon top-right white"
-                              >
-                                {{::master.level.text}}
-                            </div>
-                            <div ng-if="master.level" hide-md="true"  class="corner-ribbon-min top-right white"
-                            >
-                                {{::master.level.text}}
-                            </div>
-                            <div layout="row" layout-align="center center" class="md-padding md-margin">
-                                <div hide show-gt-sm="true" flex="90" class="md-display-2">{{::master.name}}</div>
-                                <div hide show-sm="true"
-                                ="true" flex="90" class="md-display-1">{{::master.name}}
-                            </div>
-                        </div>
-                        <md-button class="  md-display-1 md-raised  " aria-label="Details"
-                                   ng-click="::$ctrl.showMaster(master._id)">
-                            Про майстра
-                        </md-button>
-                        <md-button class=" near-master xs-selected md-display-1 md-raised " aria-label="Details"
-                                   ng-click="::$ctrl.showAppointmentDialog(master)">
-                            Записатись
-                        </md-button>
-
-            </div>
-            </md-card-content>
-            </md-card>
-
-        </div>
-
-        <div hide-gt-xs="true" layout="row" layout-align="center center">
-            <div class="overlay-bg trigger-right"></div>
-            <md-card md-whiteframe="8" >
-                <md-card-content layout="column">
-                    <div ng-if="master.level" class="card-desc-top-master"  ng-class="{'grey': master.level._id==='1','white': master.level._id==='0'}" flex layout="column"
-                         layout-align=" space-around center">
-                        <md-card-title>
-                            <md-card-title-text flex layout="column" layout-align=" space-around center">
-                                <div class="md-headline">{{::master.level.text}}</div>
-                            </md-card-title-text>
-                        </md-card-title>
-                    </div>
-                    <div class="card-media "><img src="{{::master.photo.url}}" class="md-card-image"/></div>
-                    <div class="card-desc "
-                         layout="column" layout-align="center center">
-                        <md-card-title>
-                            <md-card-title-text>
-                                <div class="md-headline">{{::master.name}}</div>
-                                <div class="md-title">{{::master.description}}</div>
-                            </md-card-title-text>
-                        </md-card-title>
-                        <md-button class=" md-display-1 md-raised " aria-label="Details"
-                                   ng-click="::$ctrl.showMaster(master._id)">
-                            Про майстра
-                        </md-button>
-                        <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
-                                   ng-click="::$ctrl.showAppointmentDialog(master)">
-                            Записатись
-                        </md-button>
-                    </div>
-                </md-card-content>
-
-            </md-card>
-
         </div>
     </div>
+    <div layout="row" ng-if="$ctrl.masters.length>0" flex>
+        <div class="page-delimiter" flex>
+            <div class="fit-screen-wrap  header-super2">
+                <div flex class="md-display-2"> Майстри</div>
+            </div>
+            <div class="overlay-comments">
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="$ctrl.masters.length>0" class="course-bg " layout="column"
+         ng-repeat="master in $ctrl.masters track by $index" layout-align="center center" flex>
+        <div hide show-gt-xs="true" layout="row" layout-align="center center">
+
+            <md-card flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
+            >
+                <md-card-content layout="row" layout-align="start none">
+                    <div class="card-media "
+                         flex="50"><img src="{{::master.photo.url}}" class="md-card-image "/>
+                    </div>
+                    <div class="card-desc box"
+                         flex="50" layout="column" layout-align="space-around center">
+                        <div ng-if="master.level" hide show-md="true" class="corner-ribbon top-right white"
+                        >
+                            {{::master.level.text}}
+                        </div>
+                        <div ng-if="master.level" hide-md="true" class="corner-ribbon-min top-right white"
+                        >
+                            {{::master.level.text}}
+                        </div>
+                        <div layout="row" layout-align="center center" class="md-padding md-margin">
+                            <div hide show-gt-sm="true" flex="90" class="md-display-2">{{::master.name}}</div>
+                            <div hide show-sm="true"
+                            ="true" flex="90" class="md-display-1">{{::master.name}}
+                        </div>
+                    </div>
+                    <md-button class="  md-display-1 md-raised  " aria-label="Details"
+                               ng-click="::$ctrl.showMaster(master._id)">
+                        Про майстра
+                    </md-button>
+                    <md-button class=" near-master xs-selected md-display-1 md-raised " aria-label="Details"
+                               ng-click="::$ctrl.showAppointmentDialog(master)">
+                        Записатись
+                    </md-button>
+
+        </div>
+        </md-card-content>
+        </md-card>
+
+    </div>
+
+    <div hide-gt-xs="true" layout="row" layout-align="center center">
+        <div class="overlay-bg trigger-right"></div>
+        <md-card md-whiteframe="8">
+            <md-card-content layout="column">
+                <div ng-if="master.level" class="card-desc-top-master"
+                     ng-class="{'grey': master.level._id==='1','white': master.level._id==='0'}" flex
+                     layout="column"
+                     layout-align=" space-around center">
+                    <md-card-title>
+                        <md-card-title-text flex layout="column" layout-align=" space-around center">
+                            <div class="md-headline">{{::master.level.text}}</div>
+                        </md-card-title-text>
+                    </md-card-title>
+                </div>
+                <div class="card-media "><img src="{{master.photo.url}}" class="md-card-image"/></div>
+                <div class="card-desc "
+                     layout="column" layout-align="center center">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <div class="md-headline">{{::master.name}}</div>
+                            <div class="md-title">{{::master.description}}</div>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-button class=" md-display-1 md-raised " aria-label="Details"
+                               ng-click="::$ctrl.showMaster(master._id)">
+                        Про майстра
+                    </md-button>
+                    <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
+                               ng-click="::$ctrl.showAppointmentDialog(master)">
+                        Записатись
+                    </md-button>
+                </div>
+            </md-card-content>
+
+        </md-card>
+
+    </div>
+</div>
+</div>
 </div>
 </div>   
 `;
@@ -312,7 +315,6 @@ export class FavorComponentController {
             this.masterResource.query({populate: 'services.favor'}).$promise
                 .then((masters) => {
                     this.masters = masters.filter((master)=> {
-
                         return master.services.some((s)=> {
                             if (s.favor._id == this.$routeParams["id"]) {
                                 master.level = s.level;

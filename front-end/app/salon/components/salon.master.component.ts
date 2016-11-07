@@ -7,8 +7,6 @@ import {MediaObserverFactoryName, IMediaObserverFactory} from "../../ui/mediaObs
 import {IConstants} from "../../core/core.config";
 
 const template = `<div class=" description-container">
-
-
     <div class=" courses" layout-align="center center" layout="column"
     >
         <div hide show-gt-xs="true" layout="row" layout-align="center center">
@@ -97,48 +95,58 @@ const template = `<div class=" description-container">
 
         </div>
     </div>
-
-
     <div flex layout-align="center center" layout="row">
         <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap invers header">
-                <div class="md-display-1"> ГРАФІК РОБОТИ</div>
-                <div class="md-subhead md-padding"> вибери час щоб записатись</div>
+            <div class="fit-screen-wrap">
+                <div class=" header"  layout="column" layout-align="center center">
+                    <div class="md-display-1"> ГРАФІК РОБОТИ</div>
+                    <div class="md-title md-padding"> ВИБЕРИ ЧАС ТА ЗАПИШИСЬ</div>
+                </div>
+                <div class="master-scheduler" layout="row" flex layout-align="center center">
+                    <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
+                        <div layout="row" layout-xs="column" class='master-calendar'>
+                            <div hide show-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
+                                <daypilot-navigator style=" width: 280px" id="navi-front" ng-if='$ctrl.navigatorConfig'
+                                                    daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>
+
+                            </div>
+                            <div hide-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
+
+                                <daypilot-navigator style=" width: 280px" id="navis" ng-if='$ctrl.navigatorSmallConfig'
+                                                    daypilot-config="$ctrl.navigatorSmallConfig"></daypilot-navigator>
+                            </div>
+                            <div flex class="md-padding " ng-if='$ctrl.weekConfig'>
+                                <daypilot-calendar id="week-front" daypilot-config="$ctrl.weekConfig"
+                                                   daypilot-events="$ctrl.events"></daypilot-calendar>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="overlay-comments">
             </div>
 
         </div>
     </div>
-
-    <div class="master-scheduler" layout="row" flex layout-align="center center">
-        <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
-            <div layout="row" layout-xs="column" class='master-calendar'>
-                <div hide show-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
-                    <daypilot-navigator style=" width: 280px" id="navi-front" ng-if='$ctrl.navigatorConfig'
-                                        daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>
-
-                </div>
-                <div hide-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
-
-                    <daypilot-navigator style=" width: 280px" id="navis" ng-if='$ctrl.navigatorSmallConfig'
-                                        daypilot-config="$ctrl.navigatorSmallConfig"></daypilot-navigator>
-                </div>
-                <div flex class="md-padding " ng-if='$ctrl.weekConfig'>
-                    <daypilot-calendar id="week-front" daypilot-config="$ctrl.weekConfig"
-                                       daypilot-events="$ctrl.events"></daypilot-calendar>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
     <div flex layout-align="center center" layout="row"
          ng-if="$ctrl.master.videos.length>0 || $ctrl.master.works.length>0">
         <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap invers header">
+            <div class="fit-screen-wrap  invers header">
                 <div class="md-display-2"> РОБОТИ МАЙСТРА</div>
             </div>
 
+        </div>
+    </div>
+
+    <div layout="row" ng-if="$ctrl.masters.length>0" flex>
+        <div class="page-delimiter" flex>
+            <div class="fit-screen-wrap  header-super2">
+                <div flex class="md-display-2"> Майстри</div>
+            </div>
+            <div class="overlay-comments">
+            </div>
         </div>
     </div>
 
@@ -257,10 +265,10 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
 class AppointmentDialogController {
 
     static $inject = ['$mdDialog', 'appointment'];
-    private appointment:IAppointment;
-    private originalAppointment:IAppointment;
+    private appointment: IAppointment;
+    private originalAppointment: IAppointment;
 
-    dayHour:any;
+    dayHour: any;
     dayHours = [{id: 1, value: '10:00'}, {id: 2, value: '10:30'}, {id: 3, value: '11:00'}, {id: 4, value: '11:30'},
         {id: 5, value: '12:00'}, {id: 6, value: '12:30'}, {id: 7, value: '13:00'}, {id: 8, value: '13:30'}, {
             id: 9,
@@ -272,22 +280,24 @@ class AppointmentDialogController {
         },
         {id: 15, value: '17:00'}, {id: 16, value: '17:30'}, {id: 17, value: '18:00'}, {id: 18, value: '18:30'}];
 
-    constructor(private $mdDialog:ng.material.IDialogService, appointment:IAppointment) {
-        this.appointment = angular.copy( appointment );
+    constructor(private $mdDialog: ng.material.IDialogService, appointment: IAppointment) {
+        this.appointment = angular.copy(appointment);
         this.originalAppointment = appointment;
         this.setTime();
     }
+
     setTime() {
         if (this.appointment.date) {
             var minutes = this.appointment.date.getUTCMinutes();
             var hourValue = this.appointment.date.getUTCHours() + ':' + (  (minutes < 10) ? minutes + '0' : minutes);
-            this.dayHours.forEach( (hour)=> {
+            this.dayHours.forEach((hour)=> {
                 if (hour.value === hourValue) {
                     this.dayHour = hour
                 }
-            } )
+            })
         }
     }
+
     save(orderForm) {
         if (this.appointment.name || this.appointment.comment || this.appointment.phone) {
             if (this.dayHour && this.appointment.date) {
@@ -301,6 +311,7 @@ class AppointmentDialogController {
             this.$mdDialog.hide(this.originalAppointment);
         }
     }
+
     cancel() {
         this.$mdDialog.cancel();
     }
@@ -308,76 +319,77 @@ class AppointmentDialogController {
 export class MasterComponentController {
 
     static $inject = ["$log", "$routeParams", MasterResourceName, '$mdDialog', '$rootScope', AppointmentResourceName,
-        MediaObserverFactoryName,'constants', "orderByFilter"];
-    master:IMaster;
-    private appointment:IAppointment;
-    events:IScheduler[];
-    weekConfig:any;
-    navigatorConfig:any;
-    navigatorSmallConfig:any;
-    socialParams:any;
+        MediaObserverFactoryName, 'constants', "orderByFilter"];
+    master: IMaster;
+    private appointment: IAppointment;
+    events: IScheduler[];
+    weekConfig: any;
+    navigatorConfig: any;
+    navigatorSmallConfig: any;
+    socialParams: any;
 
-    constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
-                private MasterResource:IMasterResource, private mdDialog:ng.material.IDialogService,
-                private $rootScope:IRootScope, private AppointmentResource:IAppointmentResource,
-                private mediaObserver:IMediaObserverFactory,
-                private constants:IConstants, private orderByFilter: ng.IFilterOrderBy) {
+    constructor(private $log: ng.ILogService, private $routeParams: ng.route.IRouteParamsService,
+                private MasterResource: IMasterResource, private mdDialog: ng.material.IDialogService,
+                private $rootScope: IRootScope, private AppointmentResource: IAppointmentResource,
+                private mediaObserver: IMediaObserverFactory,
+                private constants: IConstants, private orderByFilter: ng.IFilterOrderBy) {
         this.events = [];
         this.appointment = new this.AppointmentResource();
 
     }
+
     $onInit() {
         if (this.$routeParams["id"]) {
-            this.MasterResource.get( {id: this.$routeParams["id"], populate: 'services.favor'} ).$promise
-                .then( (master) => {
+            this.MasterResource.get({id: this.$routeParams["id"], populate: 'services.favor'}).$promise
+                .then((master) => {
                     this.master = master;
-                    this.master.videos=this.orderByFilter(this.master.videos, "order");
-                    this.master.works=this.orderByFilter(this.master.works, "order");
-                } ).catch( (err)=> {
-                this.$log.error( err );
+                    this.master.videos = this.orderByFilter(this.master.videos, "order");
+                    this.master.works = this.orderByFilter(this.master.works, "order");
+                }).catch((err)=> {
+                this.$log.error(err);
 
-            } );
-            this.loadEvents( new Date(), this.$routeParams["id"] );
+            });
+            this.loadEvents(new Date(), this.$routeParams["id"]);
         }
     }
 
 
-    getStartAndEndOfWeek(date):Date[] {
-        date = new Date( date );
+    getStartAndEndOfWeek(date): Date[] {
+        date = new Date(date);
         date.setUTCHours(0);
         var day = date.getDay(),
             diff = date.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
-        var start = new Date( date.setDate( diff ) );
-        var end = new Date( date.setDate( start.getDate() + 7 ) );
+        var start = new Date(date.setDate(diff));
+        var end = new Date(date.setDate(start.getDate() + 7));
         return [start, end];
     }
 
     loadEvents(start, masterId) {
 
-        var days = this.getStartAndEndOfWeek( start );
+        var days = this.getStartAndEndOfWeek(start);
         var params = {
             id: masterId,
             start: days[0].toISOString(),
             end: days[1].toISOString(),
         }
-        this.MasterResource.getTasks( params ).$promise.then( (tasks) => {
+        this.MasterResource.getTasks(params).$promise.then((tasks) => {
             this.initWeekConfig();
             this.initNavigatorConfig();
             this.initNavigatorSmallConfig();
             this.iniOnTimeRangeSelect();
-            this.events = tasks.map( (task)=> {
-                this.updateTaskText( task );
-                return angular.copy( task.scheduler );
-            } );
+            this.events = tasks.map((task)=> {
+                this.updateTaskText(task);
+                return angular.copy(task.scheduler);
+            });
 
-        } ).catch( (err)=> {
-            this.$log.error( err );
+        }).catch((err)=> {
+            this.$log.error(err);
 
-        } );
+        });
     }
 
 
-    updateTaskText(task:ITask) {
+    updateTaskText(task: ITask) {
 
         task.scheduler.borderColor = "gray";
         task.scheduler.barColor = "gray";
@@ -396,7 +408,7 @@ export class MasterComponentController {
             cellWidth: "40",
             onTimeRangeSelected: (args)=> {
                 this.weekConfig.startDate = args.day;
-                this.loadEvents( args.day, this.master._id );
+                this.loadEvents(args.day, this.master._id);
             }
         };
     }
@@ -411,7 +423,7 @@ export class MasterComponentController {
             cellWidth: "30",
             onTimeRangeSelected: (args)=> {
                 this.weekConfig.startDate = args.day;
-                this.loadEvents( args.day, this.master._id );
+                this.loadEvents(args.day, this.master._id);
             }
         };
     }
@@ -443,17 +455,17 @@ export class MasterComponentController {
         this.weekConfig.eventResizeHandling = 'Update';
         this.weekConfig.onTimeRangeSelected = (args)=> {
 
-            this.appointment.date = new Date( args.start.toString() ),
+            this.appointment.date = new Date(args.start.toString()),
                 this.showAppointmentDialog()
         };
     }
 
     setSocialParams(photo) {
         this.$rootScope.socialParams.host = this.constants.host;
-        this.$rootScope.socialParams.target = this.constants.host+ "/#master"+this.master._id;
+        this.$rootScope.socialParams.target = this.constants.host + "/#master" + this.master._id;
         this.$rootScope.socialParams.image = this.constants.host + photo.url;
-        this.$rootScope.socialParams.title ="Робота майстра " +this.master.name;
-        this.socialParams = angular.copy( this.$rootScope.socialParams, this.socialParams );
+        this.$rootScope.socialParams.title = "Робота майстра " + this.master.name;
+        this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
     }
 
     getPictureFlex(index, length) {
@@ -464,59 +476,62 @@ export class MasterComponentController {
         }
     }
 
-    showMediaObserver(items, index):void {
+    showMediaObserver(items, index): void {
         this.setSocialParams(items[index]);
         this.mediaObserver.observe(items, index, this.socialParams);
     }
 
     showAppointmentDialog() {
         this.appointment.master = this.master;
-        this.mdDialog.show( {
+        this.mdDialog.show({
             template: appointmentTemplate,
             clickOutsideToClose: true,
             bindToController: true,
             controller: AppointmentDialogController,
             controllerAs: 'vm',
-            parent: angular.element( document.body ),
+            parent: angular.element(document.body),
 
             locals: {
                 appointment: this.appointment,
             },
-        } ).then( (result) => {
-            this.handleDialogResult( result );
-        } );
+        }).then((result) => {
+            this.handleDialogResult(result);
+        });
         ;
     }
 
     handleDialogResult(result) {
         this.$rootScope.loading = true;
         this.appointment.master = this.master;
-        if(this.appointment.service){ this.appointment.favors=[]; this.appointment.favors.push(this.appointment.service);}
-        this.appointment.creationDate=new Date().toJSON();
+        if (this.appointment.service) {
+            this.appointment.favors = [];
+            this.appointment.favors.push(this.appointment.service);
+        }
+        this.appointment.creationDate = new Date().toJSON();
         this.appointment.date = new Date(this.appointment.date).toJSON();
         this.appointment.$save()
-            .then( () => {
+            .then(() => {
                 this.mdDialog.hide();
                 this.showOrderConfirm();
-            } )
-            .catch( (err) => {
-                this.$log.error( err );
-            } )
-            .finally( () => {
+            })
+            .catch((err) => {
+                this.$log.error(err);
+            })
+            .finally(() => {
                 this.appointment = new this.AppointmentResource();
                 this.$rootScope.loading = false;
-            } );
+            });
 
     }
 
-    showOrderConfirm():void {
+    showOrderConfirm(): void {
         this.mdDialog.show(
             this.mdDialog.alert()
-                .clickOutsideToClose( true )
-                .title( 'Вашу запис прийнято. ' )
-                .textContent( 'З вами зв`яжеться адміністратор для підтвердження. Дякуємо.' )
-                .ariaLabel( 'Вашу заявку прийнято. ' )
-                .ok( 'Закрити' )
+                .clickOutsideToClose(true)
+                .title('Вашу запис прийнято. ')
+                .textContent('З вами зв`яжеться адміністратор для підтвердження. Дякуємо.')
+                .ariaLabel('Вашу заявку прийнято. ')
+                .ok('Закрити')
         );
 
     }
