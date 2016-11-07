@@ -44,7 +44,7 @@ const template:string = `<div flex layout="column">
                     <md-input-container class="md-block">
                         <label for="description">Про майстра</label>
                         <textarea ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.master.description"
-                                  id="description" name="description" required></textarea>
+                                  id="description" name="description" ></textarea>
                     </md-input-container>
                     <md-input-container class="md-block">
                         <label for="order">Порядок відображення</label>
