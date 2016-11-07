@@ -194,12 +194,10 @@ md-card.md-default-theme, md-card {
     -ms-filter: blur(1px);
     filter: blur(1px);
 
-    @media (min-height: 1286px) {
+    @media (min-height: 300px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_full.jpg") no-repeat center center fixed;
     }
-    @media (min-width: 1923px) {
-      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_full.jpg") no-repeat center center fixed;
-    }
+
 
     @media (max-height: 1286px) and (max-width: 1923px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1923_1282.jpg") no-repeat center center fixed;
@@ -227,11 +225,8 @@ md-card.md-default-theme, md-card {
     -o-filter: blur(1px);
     -ms-filter: blur(1px);
     filter: blur(1px);
-    @media (min-width: 1923px) {
-      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_full.jpg") no-repeat center center fixed;
-    }
 
-    @media (min-height: 1286px) {
+    @media (min-height: 300px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_full.jpg") no-repeat center center fixed;
     }
 
@@ -264,7 +259,7 @@ md-card.md-default-theme, md-card {
     -ms-filter: blur(1px);
     filter: blur(1px);
 
-    @media (min-width: 1923px) {
+    @media (min-width: 623px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_full.jpg") no-repeat center center fixed;
     }
 
@@ -302,10 +297,12 @@ md-card.md-default-theme, md-card {
     filter: blur(1px);
 
 
-    @media (min-height: 1286px) {
+    @media (min-height: 686px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_full.jpg") no-repeat center center fixed;
     }
-
+    @media (max-height: 1667px) and (max-width: 2500px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_2500.jpg") no-repeat center center fixed;
+    }
     @media (max-height: 1333px) and (max-width: 2000px) {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_2000.jpg") no-repeat center center fixed;
     }
@@ -329,6 +326,42 @@ md-card.md-default-theme, md-card {
 
   }
 
+  .overlay-trans {
+    @extend .overlay;
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px);
+
+
+    @media (min-height: 300px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_full.jpg") no-repeat center center fixed;
+    }
+    @media (max-height: 1667px) and (max-width: 2500px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_2500.jpg") no-repeat center center fixed;
+    }
+
+    @media (max-height: 1280px) and (max-width: 1920px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_h.jpg") no-repeat center center fixed;
+    }
+
+    @media (max-height: 1000px) and (max-width: 1500px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924.jpg") no-repeat center center fixed;
+    }
+
+    @media (max-height: 802px) and (max-width: 1200px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_1200.jpg") no-repeat center center fixed;
+    }
+
+    @media (max-height: 642px) and (max-width: 963px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_963.jpg") no-repeat center center fixed;
+    }
+
+
+
+
+  }
   .overlay-brends {
     @extend .overlay;
     -webkit-filter: blur(1px);

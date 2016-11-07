@@ -56,10 +56,10 @@ const template = `<div class="courses description-container">
     </div>
     <div layout="row" ng-if="$ctrl.masters.length>0" flex>
         <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap  header-super2">
+            <div class="fit-screen-wrap  header-super">
                 <div flex class="md-display-2"> Майстри</div>
             </div>
-            <div class="overlay-comments">
+            <div class="overlay-masters">
             </div>
         </div>
     </div>

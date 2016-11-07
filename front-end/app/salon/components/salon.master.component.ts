@@ -140,15 +140,6 @@ const template = `<div class=" description-container">
         </div>
     </div>
 
-    <div layout="row" ng-if="$ctrl.masters.length>0" flex>
-        <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap  header-super2">
-                <div flex class="md-display-2"> Майстри</div>
-            </div>
-            <div class="overlay-comments">
-            </div>
-        </div>
-    </div>
 
 
     <div class="courses-details" layout="row" flex layout-align="center center">

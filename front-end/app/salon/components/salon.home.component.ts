@@ -72,10 +72,7 @@ const template = `<div class="courses-details description-container" layout="col
                            ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"                       
                          flex-gt-xs="46" flex-xs="80"
                          ng-click="::$ctrl.showMaster(master._id)">
-                    <div ng-if="master.rate && master.rate._id!=='0'"
-                         class="corner-ribbon-min top-right white"
-                       >{{::master.rate.text}}
-                    </div>
+                   
                     <img ng-src="{{::master.photo.url}}" class="md-card-image">
                     <md-card-content layout="column" layout-align="center center">
                         <span class="  md-margin">{{::master.name}}</span>
@@ -88,12 +85,12 @@ const template = `<div class="courses-details description-container" layout="col
 
     <div layout="row" flex ng-if="$ctrl.transforms.length>0 ">
         <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap    header-super2">
+            <div class="fit-screen-wrap    header-super">
             <div show-xs hide-gt-xs='true' class="md-display-1"> ПЕРЕВТІЛЕННЯ</div>
                 <div hide-xs class="md-display-2"> ПЕРЕВТІЛЕННЯ</div>
             </div>
             
-            <div class="overlay-days">
+            <div class="overlay-trans ">
             </div>
         </div>
     </div>
@@ -144,8 +141,8 @@ const template = `<div class="courses-details description-container" layout="col
     
      <div layout="row" flex ng-if="$ctrl.brends.length>0 ">
         <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap header-super2">
-                <div class="md-display-1"> БРЕНДИ</div>
+            <div class="fit-screen-wrap header-super">
+                <div class="md-display-2"> БРЕНДИ</div>
             </div>
             <div class="overlay-comments">
             </div>
