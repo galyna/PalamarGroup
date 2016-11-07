@@ -150,6 +150,17 @@ const template = `<div class=" description-container">
                     </div>
 
                 </div>
+                
+                 <div layout="row" layout-align="center center">
+                    <div   hide-xs="true" flex="60" flex-gt-sm="50"
+                         class="md-display-1 md-margin md-padding">
+                        {{::$ctrl.master.description}}
+                    </div>
+                    <div    hide-gt-xs="true"  flex="70"
+                         class="md-headline ">{{::$ctrl.master.description}}
+                    </div>
+
+                </div>
             </div>
             <div class="overlay-comments">
             </div>
@@ -165,9 +176,8 @@ const template = `<div class=" description-container">
 
         </div>
     </div>
-
-
-    <div class="courses-details" layout="row" flex layout-align="center center">
+    
+     <div class="courses-details" layout="row" flex layout-align="center center">
         <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
             <div layout="column" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" class="  courses-videos"
@@ -202,6 +212,10 @@ const template = `<div class=" description-container">
             </div>
         </div>
     </div>
+
+
+
+   
 
 </div>
 
