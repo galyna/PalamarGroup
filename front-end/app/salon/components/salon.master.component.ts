@@ -15,36 +15,46 @@ const template = `<div class=" description-container">
             >
                 <md-card-content flex layout="row" layout-align="start none">
                     <div class="card-media "
-                         flex="50"><img src="{{::$ctrl.master.photo.url}}" class="md-card-image "/>
+                         flex="50"><img src="{{::$ctrl.master.photo.url}}" class="md-card-image clickable-element"/>
                     </div>
                     <div class="card-desc  "
                          flex="50" layout="column" layout-align="space-around center">
                         <div ng-if="$ctrl.master.rate && $ctrl.master.rate._id!=='0'" hide show-md="true"
                              class="corner-ribbon top-right white"
                         >
-                            {{$ctrl.master.rate.text}}
+                            {{::$ctrl.master.rate.text}}
                         </div>
                         <div ng-if="$ctrl.master.rate && $ctrl.master.rate._id!=='0'" hide-md="true"
                              class="corner-ribbon-min top-right white"
                         >
-                            {{$ctrl.master.rate.text}}
+                            {{::$ctrl.master.rate.text}}
                         </div>
                         <div layout="row" layout-align="center center" class="md-padding md-margin">
                             <div hide show-gt-sm="true" flex="90" class="md-display-2">{{::$ctrl.master.name}}</div>
                             <div hide show-sm="true" flex="90" class="md-display-1">{{::$ctrl.master.name}}
                             </div>
                         </div>
-
-                        <div class="md-padding md-margin" ng-if="$ctrl.master.description" hide show-gt-sm="true"
-                             layout="row" layout-align="center center">
-                            <md-card-title>
-                                <md-card-title-text>
-
-                                    <div class="md-title">{{::$ctrl.master.description}}</div>
-                                </md-card-title-text>
-                            </md-card-title>
+                        <div hide show-gt-sm="true" class="md-title">
+                            Вибери послугу та запишись
                         </div>
-                        <div flex="20"
+                        <div hide show-gt-sm="true" layout="row" class=" program-block-master  ">
+                            <div layout="column"
+                                 ng-repeat="service in $ctrl.master.services.slice(0,18) track by $index"
+                                 layout-align=" start center">
+                                <div class="date-block md-margin "
+                                     ng-click="::$ctrl.showAppointmentDialog(service)"
+                                     ng-style="{'background-image':'url({{::service.favor.photo.url}})'}"
+                                     layout="column"
+                                     layout-align=" center center">
+
+                                </div>
+                                <div class="  md-title date-text">
+                                    {{ ::service.favor.name}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div flex="20" hide show-sm="true"
                              layout="row" layout-align="center center">
                             <md-button class=" md-margin near-master xs-selected md-display-1 md-raised "
                                        aria-label="Details"
@@ -80,10 +90,26 @@ const template = `<div class=" description-container">
                         <md-card-title>
                             <md-card-title-text>
                                 <div class="md-headline">{{::$ctrl.master.name}}</div>
-                                <div class="md-title">{{::$ctrl.master.description}}</div>
+
                             </md-card-title-text>
                         </md-card-title>
+                        <div class="md-title">
+                            Вибери послугу та запишись
+                        </div>
+                        <div layout="row" class=" program-block-master  ">
+                            <div layout="column"
+                                 ng-repeat="service in $ctrl.master.services track by $index"
+                                 layout-align=" start center">
+                                <div class="date-block md-margin "
+                                     ng-click="::$ctrl.showAppointmentDialog(service)"
+                                     ng-style="{'background-image':'url({{::service.favor.photo.url}})'}"
+                                     layout="column"
+                                     layout-align=" center center">
 
+                                </div>
+
+                            </div>
+                        </div>
                         <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
                                    ng-click="::$ctrl.showAppointmentDialog(product)">
                             Записатись
@@ -98,7 +124,7 @@ const template = `<div class=" description-container">
     <div flex layout-align="center center" layout="row">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap">
-                <div class=" header"  layout="column" layout-align="center center">
+                <div class=" header" layout="column" layout-align="center center">
                     <div class="md-display-1"> ГРАФІК РОБОТИ</div>
                     <div class="md-title md-padding"> ВИБЕРИ ЧАС ТА ЗАПИШИСЬ</div>
                 </div>
@@ -139,7 +165,6 @@ const template = `<div class=" description-container">
 
         </div>
     </div>
-
 
 
     <div class="courses-details" layout="row" flex layout-align="center center">
@@ -186,7 +211,8 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
            layout="column">
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools md-padding ">
-            <h2 class=" md-padding ">ЗАПИСАТИСЬ НА ПРИЙОМ</h2>
+            <h2  hide show-gt-sm='true' class=" md-padding ">Записатись на прйом до майстра {{::vm.appointment.master.name}}</h2>
+            <h2 hide-gt-sm='true' class=" md-padding ">Записатись  до {{::vm.appointment.master.name}}</h2>
             <span flex></span>
             <md-button class="md-icon-button" ng-click="::vm.cancel()">
                 <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>
@@ -472,8 +498,9 @@ export class MasterComponentController {
         this.mediaObserver.observe(items, index, this.socialParams);
     }
 
-    showAppointmentDialog() {
+    showAppointmentDialog(service=null) {
         this.appointment.master = this.master;
+        this.appointment.service =service;
         this.mdDialog.show({
             template: appointmentTemplate,
             clickOutsideToClose: true,

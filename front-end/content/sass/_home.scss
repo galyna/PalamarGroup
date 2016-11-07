@@ -1,0 +1,64 @@
+.program-block-master {
+  display: flex;
+  width: 100%;
+  margin-top: 40px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  flex-wrap: wrap;
+  overflow: visible;
+
+  @media (max-width: $layout-breakpoint-xs) {
+    margin-top: 10px;
+  }
+
+  .date-text {
+    left: 0;
+    top: -40px;
+    color: $primary;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    vertical-align: middle;
+    opacity: 0;
+    white-space: nowrap;
+    transition: opacity .3s linear;
+
+  }
+
+  .date-block {
+
+    box-sizing: border-box;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 50px;
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    z-index: 80;
+    transition: all .3s ease-in-out;
+
+    &:hover ~ .date-text {
+      opacity: 1;
+
+    }
+    &:hover {
+      transform: scale(1.5);
+      cursor: pointer;
+      @extend .md-whiteframe-8dp;
+    }
+
+  }
+
+}
+
+.clickable-element {
+  &:hover {
+    cursor: pointer;
+
+  }
+}
