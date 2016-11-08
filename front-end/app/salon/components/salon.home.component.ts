@@ -18,7 +18,7 @@ const template = `<div class="courses-details description-container" layout="col
         </div>
     </div>
     <div layout="row" layout-align="center center">
-        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
+        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="70">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6"  ng-repeat="category in $ctrl.categories track by $index "
                          class="md-margin "
@@ -65,7 +65,7 @@ const template = `<div class="courses-details description-container" layout="col
     </div>
     <div layout="row" layout-align="center center">
 
-        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
+        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="70">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6"  ng-repeat="master in $ctrl.masters track by $index"
                          class="md-margin box "
@@ -97,7 +97,7 @@ const template = `<div class="courses-details description-container" layout="col
  
     <div ng-repeat="transform in $ctrl.transforms track by $index">
         <div layout="row" layout-align="center center" >
-            <div flex-xs="90" flex-gt-md="60" flex-md="80" flex-gt-xs="85">
+            <div flex-xs="90" flex-gt-md="60" flex-md="80" flex-gt-xs="70">
                 <div layout="column" layout-margin layout layout-wrap layout-align="center center">
                     <md-card md-whiteframe="6" class="  courses-videos"
                              
@@ -117,7 +117,7 @@ const template = `<div class="courses-details description-container" layout="col
         </div>
 
         <div layout="row" layout-align="center center" >
-            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
+            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="70">
                 <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                     <md-card md-whiteframe="6"  ng-repeat="photo in ::transform.photos track by $index"
                              class="md-margin "
@@ -152,7 +152,7 @@ const template = `<div class="courses-details description-container" layout="col
     
      <div layout="row" layout-align="center center">
 
-        <div flex  flex-gt-md="60" flex-gt-lg="40" flex-md="80" flex-gt-xs="60">
+        <div flex  flex-gt-md="60" flex-gt-lg="40" flex-md="80" flex-gt-xs="70">
             <div flex class="brends-container" layout-margin layout layout-wrap layout-align="center center">
              <a href="{{::bren.url}}"  class="md-margin brend " layout="row"  layout-align="center center"
               flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
