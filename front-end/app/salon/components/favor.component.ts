@@ -17,7 +17,7 @@ const template = `<div class="courses description-container">
                              flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text flex layout-align="space-around center">
-                                    <div hide show-md="true" class="md-display-2">{{::$ctrl.favor.name}}</div>
+                                    <div hide show-md="true" class="md-display-2 capitalize">{{::$ctrl.favor.name}}</div>
                                     <div hide-md="true" class="md-display-1">{{::$ctrl.favor.name}}</div>
                                     <div class="favor-container ">
                                         <div class="md-title">{{::$ctrl.favor.description}}</div>
@@ -44,7 +44,7 @@ const template = `<div class="courses description-container">
                              layout="column" layout-align="space-around center">
                             <md-card-title>
                                 <md-card-title-text>
-                                    <div class="md-headline">{{::$ctrl.favor.name}}</div>
+                                    <div class="md-headline capitalize md-margin">{{::$ctrl.favor.name}}</div>
                                     <div class="md-title">{{::$ctrl.favor.description}}</div>
                                 </md-card-title-text>
                             </md-card-title>
@@ -85,7 +85,7 @@ const template = `<div class="courses description-container">
                             {{::master.level.text}}
                         </div>
                         <div layout="row" layout-align="center center" class="md-padding md-margin">
-                            <div hide show-gt-sm="true" flex="90" class="md-display-2">{{::master.name}}</div>
+                            <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">{{::master.name}}</div>
                             <div hide show-sm="true"
                             ="true" flex="90" class="md-display-1">{{::master.name}}
                         </div>
@@ -124,7 +124,7 @@ const template = `<div class="courses description-container">
                      layout="column" layout-align="center center">
                     <md-card-title>
                         <md-card-title-text>
-                            <div class="md-headline">{{::master.name}}</div>
+                            <div class="md-headline capitalize md-padding">{{::master.name}}</div>
                             <div class="md-title">{{::master.description}}</div>
                         </md-card-title-text>
                     </md-card-title>
