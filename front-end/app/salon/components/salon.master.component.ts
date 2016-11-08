@@ -29,8 +29,8 @@ const template = `<div class=" description-container">
                         >
                             {{::$ctrl.master.rate.text}}
                         </div>
-                        <div layout="row" layout-align="center center" class="md-padding md-margin">
-                            <div hide show-gt-sm="true" flex="90" class="md-display-2">{{::$ctrl.master.name}}</div>
+                        <div layout="row" layout-align="center center" class="md-padding md-margin ">
+                            <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">{{::$ctrl.master.name}}</div>
                             <div hide show-sm="true" flex="90" class="md-display-1">{{::$ctrl.master.name}}
                             </div>
                         </div>
@@ -48,7 +48,7 @@ const template = `<div class=" description-container">
                                      layout-align=" center center">
 
                                 </div>
-                                <div class="  md-title date-text">
+                                <div class="  md-headline date-text capitalize">
                                     {{ ::service.favor.name}}
                                 </div>
                             </div>

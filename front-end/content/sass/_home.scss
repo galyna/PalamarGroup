@@ -1,7 +1,7 @@
 .program-block-master {
   display: flex;
   width: 100%;
-  margin-top: 40px;
+  margin-top: 45px;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
@@ -15,7 +15,7 @@
 
   .date-text {
     left: 0;
-    top: -40px;
+    top: -45px;
     color: $primary;
     width: 100%;
     position: absolute;
@@ -62,3 +62,5 @@
 
   }
 }
+.capitalize{
+  text-transform: uppercase;}
