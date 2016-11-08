@@ -15,7 +15,7 @@ const template = `<div class=" description-container">
             >
                 <md-card-content flex layout="row" layout-align="start none">
                     <div class="card-media "
-                         flex="50"><img src="{{::$ctrl.master.photo.url}}" class="md-card-image clickable-element"/>
+                         flex="50"><img src="{{::$ctrl.master.photo.url}}" class="md-card-image "/>
                     </div>
                     <div class="card-desc  "
                          flex="50" layout="column" layout-align="space-around center">
@@ -37,7 +37,7 @@ const template = `<div class=" description-container">
                         <div hide show-gt-sm="true" class="md-title">
                             Вибери послугу та запишись
                         </div>
-                        <div hide show-gt-sm="true" layout="row" class=" program-block-master  ">
+                        <div flex="40"  hide show-gt-sm="true" layout="row" class=" program-block-master  ">
                             <div layout="column"
                                  ng-repeat="service in $ctrl.master.services.slice(0,18) track by $index"
                                  layout-align=" start center">
