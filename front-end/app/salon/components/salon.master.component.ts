@@ -15,7 +15,7 @@ const template = `<div class=" description-container">
             >
                 <md-card-content flex layout="row" layout-align="start none">
                     <div class="card-media "
-                         flex="50"><img src="{{::$ctrl.master.photo.url}}" class="md-card-image "/>
+                         flex="50"><img ng-src="{{::$ctrl.master.photo.url}}" class="md-card-image "/>
                     </div>
                     <div class="card-desc  "
                          flex="50" layout="column" layout-align="space-around center">

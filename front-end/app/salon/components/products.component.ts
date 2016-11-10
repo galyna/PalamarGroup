@@ -13,7 +13,7 @@ const template = `<div class="courses description-container products" layout="ro
                 ng-click="::$ctrl.showAppointmentDialog(product)">
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-media "
-                             flex="50"><img src="{{::product.photo.url}}" class="md-card-image "/>
+                             flex="50"><img ng-src="{{::product.photo.url}}" class="md-card-image "/>
                         </div>
                         <div class="card-desc "
                              flex="50" layout="column" layout-align="center center">
@@ -64,14 +64,14 @@ const template = `<div class="courses description-container products" layout="ro
                             </md-card-actions>
                         </div>
                         <div class="card-media "
-                             flex="50"><img src="{{::product.photo.url}}" class="md-card-image "/>
+                             flex="50"><img ng-src="{{::product.photo.url}}" class="md-card-image "/>
                         </div>
                     </md-card-content>
                 </md-card>
                 <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5" ng-click="::$ctrl.showAppointmentDialog(product)">
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-media "
-                             flex="50"><img src="{{::product.photo.url}}" class="md-card-image "/>
+                             flex="50"><img ng-src="{{::product.photo.url}}" class="md-card-image "/>
                         </div>
                         <div class="card-desc "
                              flex="50" layout="column" layout-align="center center">
@@ -105,7 +105,7 @@ const template = `<div class="courses description-container products" layout="ro
                 <div class="overlay-bg trigger-right"></div>
                 <md-card md-whiteframe="8" ng-click="::$ctrl.showAppointmentDialog(product)">
                     <md-card-content layout="column">
-                        <div class="card-media "><img src="{{::product.photo.url}}" class="md-card-image"/></div>
+                        <div class="card-media "><img ng-src="{{::product.photo.url}}" class="md-card-image"/></div>
                         <div class="card-desc "
                              layout="column" layout-align="space-around center">
                             <md-card-title>
@@ -148,7 +148,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
             <md-dialog-content-body>
                 <div class=" md-block" layout="row" layout-align="center">
                     <div class="card-media-product" layout="column" layout-align="center center">
-                        <img src="{{::vm.product.photo.url}}"/>
+                        <img ng-src="{{::vm.product.photo.url}}"/>
                         <div class="card-desc md-padding" layout="column" layout-align="center center">
                             <div flex class="md-headline">{{::vm.product.name}}</div>
                             <div class="md-subhead">Ціна {{::vm.product.price}} грн.</div>

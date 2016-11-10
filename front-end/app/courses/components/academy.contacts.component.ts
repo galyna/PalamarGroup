@@ -22,7 +22,7 @@ const template = `<div class="salon-contacts description-container" layout="colu
                 <md-card-content layout="row" layout-align="start none">
                     <div class="card-media " 
                        
-                         flex="50"><img src="{{::contact.photo.url}}" class="md-card-image "/>
+                         flex="50"><img ng-src="{{::contact.photo.url}}" class="md-card-image "/>
                     </div>
                     <div class="card-desc " 
                         
@@ -58,13 +58,13 @@ const template = `<div class="salon-contacts description-container" layout="colu
                     </div>
                     <div class="card-media " 
                         
-                         flex="50"><img src="{{::contact.photo.url}}" class="md-card-image"/></div>
+                         flex="50"><img ng-src="{{::contact.photo.url}}" class="md-card-image"/></div>
                 </md-card-content>
             </md-card>
             <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                 <md-card-content layout="row" layout-align="start none">
                     <div class="card-media " 
-                         flex="50"><img src="{{::contact.photo.url}}" class="md-card-image "/>
+                         flex="50"><img ng-src="{{::contact.photo.url}}" class="md-card-image "/>
                     </div>
                     <div class="card-desc " 
                          flex layout="column" layout-align="center center">
@@ -87,7 +87,7 @@ const template = `<div class="salon-contacts description-container" layout="colu
             <div class="overlay-bg trigger-right"></div>
             <md-card md-whiteframe="8">
                 <md-card-content layout="column">
-                    <div class="card-media "><img src="{{::contact.photo.url}}" class="md-card-image"/></div>
+                    <div class="card-media "><img ng-src="{{::contact.photo.url}}" class="md-card-image"/></div>
                     <div class="card-desc "
                          layout="column" layout-align="space-around center">
                         <md-card-title>

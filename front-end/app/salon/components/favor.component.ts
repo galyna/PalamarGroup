@@ -28,7 +28,7 @@ const template = `<div class="courses description-container">
 
                         </div>
                         <div class="card-media "
-                             flex="50"><img src="{{::$ctrl.favor.photo.url}}" class="md-card-image "/>
+                             flex="50"><img ng-src="{{::$ctrl.favor.photo.url}}" class="md-card-image "/>
                         </div>
                     </md-card-content>
                 </md-card>
@@ -39,7 +39,7 @@ const template = `<div class="courses description-container">
                 <div class="overlay-bg trigger-right"></div>
                 <md-card md-whiteframe="8">
                     <md-card-content layout="column">
-                        <div class="card-media "><img src="{{::$ctrl.favor.photo.url}}" class="md-card-image"/></div>
+                        <div class="card-media "><img ng-src="{{::$ctrl.favor.photo.url}}" class="md-card-image"/></div>
                         <div class="card-desc "
                              layout="column" layout-align="space-around center">
                             <md-card-title>
@@ -72,7 +72,7 @@ const template = `<div class="courses description-container">
             >
                 <md-card-content layout="row" layout-align="start none">
                     <div class="card-media "
-                         flex="50"><img src="{{::master.photo.url}}" class="md-card-image "/>
+                         flex="50"><img ng-src="{{::master.photo.url}}" class="md-card-image "/>
                     </div>
                     <div class="card-desc box"
                          flex="50" layout="column" layout-align="space-around center">
@@ -119,7 +119,7 @@ const template = `<div class="courses description-container">
                         </md-card-title-text>
                     </md-card-title>
                 </div>
-                <div class="card-media "><img src="{{master.photo.url}}" class="md-card-image"/></div>
+                <div class="card-media "><img ng-src="{{master.photo.url}}" class="md-card-image"/></div>
                 <div class="card-desc "
                      layout="column" layout-align="center center">
                     <md-card-title>
