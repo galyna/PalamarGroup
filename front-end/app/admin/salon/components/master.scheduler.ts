@@ -73,17 +73,17 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                         <div ng-repeat="favor in $ctrl.appointment.favors">
                             <div layout="row" flex>
                                 <img ng-src="{{favor.photo}}" class="avatar" alt="{{favor.photo}}"/>
-                                <div flex layout="column"  layout="center">
-                                   
-                                     <div  id="prokgram" name="program">
-                                    {{favor.name}}
-                                </div>
-                                    <div  id="program" name="program">
+                                <div flex layout="column" layout="center">
+
+                                    <div id="prokgram" name="program">
+                                        {{favor.name}}
+                                    </div>
+                                    <div id="program" name="program">
                                         {{favor.price}} грн.
                                     </div>
                                 </div>
-                               
-                                <md-button  ng-if="::$root.it.can('modifySalon')"
+
+                                <md-button ng-if="::$root.it.can('modifySalon')"
                                            class="md-icon-button"
                                            ng-click="$ctrl.deleteService(favor)">
                                     <md-icon md-svg-src="action:ic_delete_24px"></md-icon>

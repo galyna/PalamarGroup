@@ -98,14 +98,13 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                             <input ng-disabled="::!$root.it.can('modifySalon')" type="text"
                                    ng-model="$ctrl.appointment.phone">
                         </md-input-container>
-                        <div layout="column">
+                        <md-input-container class="md-block" layout="column" style="margin-left:-20px;" layout="start start" flex>
                             <label>Дата прийому</label>
-                            <div class="order-picker-conteiner ">
-                                <md-datepicker class="order-dete-pcker" ng-disabled='true' placeholder="Дата" flex
-                                               ng-model="$ctrl.appointment.date"
-                                               name="dateField"></md-datepicker>
-                            </div>
-                        </div>
+                            <md-datepicker ng-disabled='true'  placeholder="Дата" flex
+                                           ng-model="$ctrl.appointment.date"
+                                           name="dateField"></md-datepicker>
+                        </md-input-container>
+
                         <md-input-container class="md-block">
                             <md-icon md-svg-icon="action:ic_schedule_24px"></md-icon>
                             <label>Час прийому</label>
@@ -147,11 +146,17 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                                     <div layout="row" layout-align="start center  ">
                                         <img ng-src="{{service.favor.photo.url}}" class="avatar"
                                              alt="{{service.favor.name}}"/>
-                                        <div class=" md-padding " id="prokgram" name="program">
-                                            {{service.favor.name}}
+                                        <div flex layout="column" layout="center">
+
+                                            <div id="prokgram" name="program">
+                                                {{::service.favor.name}}
+                                            </div>
+                                            <div id="program" name="program">
+                                                {{service.price}} грн.
+                                            </div>
                                         </div>
-                                        <div class="m md-padding " id="program" name="program">{{service.price}} грн.
-                                        </div>
+
+
                                         <md-button class=" md-padding" ng-if="::$root.it.can('modifySalon')"
                                                    class="md-icon-button"
                                                    ng-click="$ctrl.deleteService(service)">
