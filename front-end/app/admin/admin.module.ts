@@ -12,7 +12,9 @@ import 'angular-animate';
 import 'ng-file-upload';
 import 'ng-img-crop-full-extended';
 import 'angular-youtube-embed';
-import 'daypilot';
+import 'daypilot-common';
+import 'daypilot-calendar';
+import 'daypilot-navigator';
 
 import {coreModule} from "../core/core.module";
 import {resourcesModule} from "../resources/resources.module";
@@ -23,12 +25,6 @@ import {adminRoutes} from './admin.routes';
 import {adminRun} from "./admin.run";
 import {usersModule} from "../users/users.module";
 
-// import '../../lib/dayPilot/src/daypilot-common.src.js'
-// import '../../lib/dayPilot/src/daypilot-calendar.src.js'
-// import '../../lib/dayPilot/src/daypilot-datepicker.src.js'
-// import '../../lib/dayPilot/src/daypilot-month.src.js'
-// import '../../lib/dayPilot/src/daypilot-modal.src.js'
-// import '../../lib/dayPilot/src/daypilot-navigator.src.js'
 
 //components
 import {AcademyModelController} from './academy/controllers/models.controller';
