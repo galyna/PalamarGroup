@@ -434,7 +434,7 @@ export class MasterComponentController {
             selectMode: "week",
             showMonths: 1,
             skipMonths: 1,
-            locale: "ru-ru",
+            locale: "uk-ua",
             cellHeight: "40",
             cellWidth: "40",
             onTimeRangeSelected: (args)=> {
@@ -449,7 +449,7 @@ export class MasterComponentController {
             selectMode: "week",
             showMonths: 3,
             skipMonths: 3,
-            locale: "ru-ru",
+            locale: "uk-ua",
             cellHeight: "34.5",
             cellWidth: "30",
             onTimeRangeSelected: (args)=> {
@@ -464,7 +464,7 @@ export class MasterComponentController {
             visible: true,
             viewType: "Week",
             angularAutoApply: true,
-            locale: "ru-ru",
+            locale: "uk-ua",
             businessBeginsHour: "10",
             businessEndsHour: "19",
             headerDateFormat: 'dd.MM',

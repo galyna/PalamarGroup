@@ -15,7 +15,9 @@ import 'angular-socialshare';
 import 'ngSmoothScroll';
 import 'angular-youtube-embed';
 import 'uiGmapgoogle-maps';
-import 'daypilot';
+import 'daypilot-common';
+import 'daypilot-calendar';
+import 'daypilot-navigator';
 
 import {uiModule} from './ui/ui.module';
 import {coursesModule} from './courses/courses.module';
@@ -36,13 +38,14 @@ let app = angular.module('yuliaPalamarApp', [
     'ngRoute',
     'ngFileUpload',
     'ngImgCrop',
-   '720kb.socialshare',
+    '720kb.socialshare',
     'smoothScroll',
     'templates',
     'youtube-embed',
     'uiGmapgoogle-maps',
     'daypilot',
-   
+,
+
     coreModule.name,
     resourcesModule.name,
     uiModule.name,

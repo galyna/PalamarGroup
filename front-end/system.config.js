@@ -26,7 +26,9 @@ System.config({
         'angular-youtube-embed': 'node_modules/angular-youtube-embed/src/angular-youtube-embed.js',
         'ngSmoothScroll': 'node_modules/ngSmoothScroll/lib/angular-smooth-scroll.js',
         'jwt-decode': 'node_modules/jwt-decode/build/jwt-decode.min.js',
-        'daypilot': 'lib/dayPilot/daypilot-all.min.js',
+        'daypilot-common': 'lib/dayPilot/daypilot-common.src.js',
+        'daypilot-calendar': 'lib/dayPilot/daypilot-calendar.src.js',
+        'daypilot-navigator': 'lib/dayPilot/daypilot-navigator.src.js',
         'lodash': 'node_modules/lodash/lodash.js',
         'angular-simple-logger': 'node_modules/angular-simple-logger/dist/angular-simple-logger.min.js',
         'uiGmapgoogle-maps': 'node_modules/angular-google-maps/dist/angular-google-maps.js',
@@ -38,6 +40,7 @@ System.config({
         'youtube-iframe-api': 'https://www.youtube.com/iframe_api'
     },
     meta: {
+
 
         'uiGmapgoogle-maps': {
             deps: ['angular',
