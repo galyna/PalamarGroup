@@ -6,7 +6,7 @@
                 &laquo;
             </md-button>
             <div flex></div>
-            <h2 class='calendar-md-title'><span>{{ calendar.start | date:titleFormat:timezone }}</span></h2>
+            <h2 class='calendar-md-title'><span>{{monthHeaderFormatter( calendar.start )}}</span></h2>
             <div flex></div>
             <md-button class="md-icon-button next-prev" ng-click='next()' aria-label="Next month">
                 <md-tooltip ng-if="::tooltips()">Next month</md-tooltip>
@@ -15,21 +15,20 @@
         </div>
     </md-toolbar>
     <!-- agenda view -->
-    <md-content ng-if='weekLayout === columnWeekLayout' class='agenda'>
-        <div ng-repeat='week in calendar.weeks track by $index'>
-            <div class="courses-calendar " ng-if="sameMonth(day)" ng-class='{"disabled" : isDisabled(day), active: active === day }' ng-click='handleDayClick(day)' ng-repeat='day in week' layout>
-                <md-tooltip ng-if="::tooltips()">{{ day | date:dayTooltipFormat:timezone }}</md-tooltip>
-                <div class="calendar-day md-padding" >{{ day | date:dayFormat:timezone }}</div>
-                <div class="courses-calendar " flex ng-bind-html='dataService.data[dayKey(day)]'></div>
-            </div>
-        </div>
-    </md-content>
+    <!--<md-content ng-if='weekLayout === columnWeekLayout' class='agenda'>-->
+        <!--<div ng-repeat='week in calendar.weeks track by $index'>-->
+            <!--<div class="courses-calendar " ng-if="sameMonth(day)" ng-class='{"disabled" : isDisabled(day), active: active === day }' ng-click='handleDayClick(day)' ng-repeat='day in week' layout>-->
+                <!--<md-tooltip ng-if="::tooltips()">{{ day | date:dayTooltipFormat:timezone }}</md-tooltip>-->
+                <!--<div class="calendar-day md-padding" >{{ day | date:dayFormat:timezone }}</div>-->
+                <!--<div class="courses-calendar " flex ng-bind-html='dataService.data[dayKey(day)]'></div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</md-content>-->
     <!-- calendar view -->
     <md-content ng-if='weekLayout !== columnWeekLayout' flex layout="column" class='calendar'>
         <div layout='row' class='subheader'>
-            <div layout-padding class='subheader-day' flex ng-repeat='day in calendar.weeks[0]'>
-              <md-tooltip ng-if="::tooltips()">{{ day | date:dayLabelTooltipFormat }}</md-tooltip>
-              {{ day | date:dayLabelFormat }}
+            <div layout-padding class='subheader-day' flex ng-repeat='day in shortDays'>
+              {{ day }}
             </div>
         </div>
         <div ng-if='week.length' ng-repeat='week in calendar.weeks track by $index' flex layout='row'>

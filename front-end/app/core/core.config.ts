@@ -75,6 +75,10 @@ export function materialConfig($mdIconProvider: ng.material.IIconProvider, $mdDa
 
 
     };
+
+    $mdDateLocaleProvider.monthHeaderFormatter = function(date) {
+        return $mdDateLocaleProvider.months[date.getMonth()] + ' ' + date.getFullYear();
+    };
     $mdDateLocaleProvider.msgCalendar = 'Календар';
     $mdDateLocaleProvider.msgOpenCalendar = 'Відкрийте календар';
 

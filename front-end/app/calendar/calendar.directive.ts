@@ -1,11 +1,11 @@
 import {IPgCalendarDataService, PgCalendarData} from "./calendar.data.service";
 import {IPgCalendarFactory} from "./calendar.factory";
 
-pgCalendarDirective.$inject = ["$compile", "$parse", "$http", "$q", "$templateCache", "pgCalendar", "pgCalendarData"];
+pgCalendarDirective.$inject = ["$compile", "$parse", "$http", "$q", "$templateCache", "pgCalendar", "pgCalendarData",'$mdDateLocale'];
 export function pgCalendarDirective($compile:ng.ICompileService, $parse:ng.IParseService,
                                     $http:ng.IHttpService, $q:ng.IQService,
                                     $templateCache:ng.ITemplateCacheService,
-                                    pgCalendar, CalendarData:IPgCalendarDataService) {
+                                    pgCalendar, CalendarData:IPgCalendarDataService,$mdDateLocale) {
 
     var defaultTemplate = "/* calendar.html */";
 
@@ -62,10 +62,10 @@ export function pgCalendarDirective($compile:ng.ICompileService, $parse:ng.IPars
             }
 
             // Set the defaults here.
-            $scope.titleFormat = $scope.titleFormat || "MMMM yyyy";
+            $scope.monthHeaderFormatter =$mdDateLocale.monthHeaderFormatter;
             $scope.dayLabelFormat = $scope.dayLabelFormat || "EEE";
             $scope.dayLabelTooltipFormat = $scope.dayLabelTooltipFormat || "EEEE";
-            $scope.dayFormat = $scope.dayFormat || "d";
+            $scope.shortDays = $mdDateLocale.shortDays;
             $scope.dayTooltipFormat = $scope.dayTooltipFormat || "fullDate";
             $scope.disableFutureSelection = $scope.disableFutureSelection || false;
 
