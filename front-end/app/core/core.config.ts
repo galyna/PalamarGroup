@@ -36,7 +36,7 @@ export let constants: IConstants = {
         {_id: "2", name: "СЕРЕДНІЙ", text: "Middle Stylist"},
         {_id: "3", name: "ТОП", text: "Top Stylist"}
     ],
-    showSalon: false
+    showSalon: true
 };
 
 debugConfig.$inject = ['$compileProvider'];
