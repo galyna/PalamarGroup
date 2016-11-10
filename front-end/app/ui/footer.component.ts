@@ -14,18 +14,18 @@ const template = `<div class="page-footer " ng-if="::!$root.isAdminZone()" class
                             {{::salon.address}}
                         </div>
                         <div ng-if="::salon._id=='isAcademy'" class="md-subhead social-header md-padding">Академія</div>
-                        <div layout="column" ng-repeat="contact in salon.contacts" class="footer-contacts">
+                        <div layout="column" ng-repeat="contact in salon.contacts" class="footer-contacts" flex>
                             <div layout="row" layout-align="start center">
                                 <img ng-src="{{::contact.photo.url}}"
                                      class="avatar md-padding"
                                      alt="{{::contact.name}}"/>
-                                <div hide show-gt-xs="true" layout="row" layout-align="center center">
+                                <div hide-xs="true"  layout="row" layout-align="start center" flex >
                                     <div class="md-subhead md-padding"> {{::contact.name}}</div>
                                     <div class="md-title md-padding "> {{::contact.phone}}</div>
                                 </div>
 
 
-                                <div hide-gt-xs="true" layout="row" layout-align="center " class=" md-padding">
+                                <div hide-gt-xs="true" show-xs="true" layout="row" layout-align="center " flex >
                                     <div layout="column" layout-align="center ">
                                         <div class="md-subhead"> {{::contact.name}}</div>
                                         <div class="md-subhead"> {{::contact.phone}}</div>

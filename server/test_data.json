@@ -2799,5 +2799,146 @@
         "_id": "581c851c3ea3c7102275900f"
       }
     }
+  ],
+  "Salon": [
+    {
+      "_id": "580f88b7e91976eb66a39fc9",
+      "isMain": true,
+      "isAcademy": true,
+      "address": "вул.Щирецька 36",
+      "longitude": "23.973777",
+      "latitude": "49.811077",
+      "photos": [
+        {
+          "name": "",
+          "url": "/api/photo/2574d830-ec60-4388-a661-2d2834df6c67.jpg",
+          "order": 0,
+          "_id": "581e1cf8464cc5208e8159dc"
+        },
+        {
+          "name": "",
+          "url": "/api/photo/e8bc5743-1020-4221-b375-99cf4d113c91.jpg",
+          "order": 0,
+          "_id": "581e1cf8464cc5208e8159db"
+        },
+        {
+          "name": "",
+          "url": "/api/photo/56630fef-14da-4755-b800-5d48a15dd180.jpg",
+          "order": 0,
+          "_id": "581e1cf8464cc5208e8159da"
+        }
+      ],
+      "__v": 2,
+      "name": "вул.Щирецька 36"
+    }
+  ],
+  "Transform": [
+    {
+      "_id": "581e2e07af06dc22703834e6",
+      "name": "VT",
+      "url": "http://vtholding.com/",
+      "__v": 0,
+      "photo": {
+        "url": "/api/photo/8953fe43-99cb-470e-9e63-8165972d068e.jpg",
+        "_id": "581e2e34af06dc22703834e7"
+      }
+    },
+    {
+      "_id": "581e2ed6af06dc22703834ea",
+      "name": "sayple",
+      "__v": 0,
+      "photo": {
+        "url": "/api/photo/84704e53-6cf1-4181-80e7-eaa7700b3d99.jpg",
+        "_id": "581e2f62af06dc22703834eb"
+      },
+      "url": "https://vk.com/albums358551474"
+    },
+    {
+      "_id": "581e355237686823b4278b77",
+      "url": "http://www.kemonua.com/",
+      "name": "kemonua",
+      "__v": 0,
+      "photo": {
+        "url": "/api/photo/8a7f946b-3b34-41cd-b68b-f5aae68a2b9a.jpg",
+        "_id": "581e355c37686823b4278b78"
+      }
+    }
+  ],
+  "Contact": [
+    {
+      "_id": "57e1abb3ab19ca3f1ebb3dcf",
+      "name": "Юлія Герас",
+      "phone": "095 260 0486",
+      "address": "м. Львів, Щирецька 36",
+      "email": "Gerasima2015@gmail.com",
+      "isAcademy": true,
+      "__v": 0,
+      "photo": {
+        "name": "",
+        "order": 0,
+        "url": "/api/photo/ce6bbe33-e892-45c9-a380-7ae081c9c0c1.jpg",
+        "_id": "581e2bce04db46216a7fd231"
+      }
+    },
+    {
+      "_id": "581e1d9e464cc5208e8159df",
+      "name": "Оля Гургун",
+      "isAcademy": false,
+      "salon": "580f88b7e91976eb66a39fc9",
+      "__v": 0,
+      "phone": "067 264 6216",
+      "photo": {
+        "order": 0,
+        "url": "/api/photo/358643ea-89f2-4f20-9db2-18b436806c00.jpg",
+        "name": "",
+        "_id": "581e1dcf464cc5208e8159e0"
+      }
+    },
+    {
+      "_id": "581e1f3b04db46216a7fd1fe",
+      "name": "Оля",
+      "isAcademy": false,
+      "photo": {
+        "name": "",
+        "url": "/api/photo/0ea5a079-cb19-4e83-8ff4-4b7674db6615.jpg",
+        "order": 0,
+        "_id": "581e1f3b04db46216a7fd1ff"
+      },
+      "phone": "067 264 6216",
+      "salon": "580f88b7e91976eb66a39fc9",
+      "__v": 0
+    }
+  ],
+  "Brend": [
+    {
+      "_id": "581e2e07af06dc22703834e6",
+      "name": "VT",
+      "url": "http://vtholding.com/",
+      "__v": 0,
+      "photo": {
+        "url": "/api/photo/8953fe43-99cb-470e-9e63-8165972d068e.jpg",
+        "_id": "581e2e34af06dc22703834e7"
+      }
+    },
+    {
+      "_id": "581e2ed6af06dc22703834ea",
+      "name": "sayple",
+      "__v": 0,
+      "photo": {
+        "url": "/api/photo/84704e53-6cf1-4181-80e7-eaa7700b3d99.jpg",
+        "_id": "581e2f62af06dc22703834eb"
+      },
+      "url": "https://vk.com/albums358551474"
+    },
+    {
+      "_id": "581e355237686823b4278b77",
+      "url": "http://www.kemonua.com/",
+      "name": "kemonua",
+      "__v": 0,
+      "photo": {
+        "url": "/api/photo/8a7f946b-3b34-41cd-b68b-f5aae68a2b9a.jpg",
+        "_id": "581e355c37686823b4278b78"
+      }
+    }
   ]
 }

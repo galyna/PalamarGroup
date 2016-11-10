@@ -17,7 +17,7 @@ const template = `<div   ng-click="::$ctrl.toggleMenu($event)" id="menu-containe
         <span></span>
         <span></span>
     </div>
-    <div hide-xs="true" class="menu-label" layout="row" layout-align="center center " >
+    <div hide show-gt-xs="true" class="menu-label" layout="row" layout-align="center center " >
         МЕНЮ
     </div>
 </div>

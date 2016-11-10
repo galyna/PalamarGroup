@@ -338,7 +338,9 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     width: 600px;
     background: rgba($primary, 0.7);
     color: white;
-
+    @media (max-width: $layout-breakpoint-sm) {
+      width:   585px;;
+    }
     @media (max-width: $layout-breakpoint-xs) {
       width: 300px;
     }
@@ -348,7 +350,9 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     width: 600px;
     padding-left: 1px;
     background: rgba(white, 0.5);
-
+    @media (max-width: $layout-breakpoint-sm) {
+      width:   585px;;
+    }
     @media (max-width: $layout-breakpoint-xs) {
       width: 300px;
     }
@@ -380,7 +384,12 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
   .footer-contacts {
     font-weight: 900;
     width: 600px;
+
     background: rgba(white, 0.5);
+
+    @media (max-width: $layout-breakpoint-sm) {
+      width:   585px;;
+    }
 
     @media (max-width: $layout-breakpoint-xs) {
       width: 300px;

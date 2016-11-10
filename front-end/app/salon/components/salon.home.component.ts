@@ -215,10 +215,10 @@ export class SalonHomeComponentController {
 
         this.masters = this.masterResource.query({sort: "order"});
         this.brends = this.BrendResource.query({sort: "order"});
-        this.transforms = this.TransformResource.query({sort: "order", page: 1,  perPage: 2});
+        this.transforms = this.TransformResource.query({sort: "order", page: 1,  perPage: 3});
         this.transforms.$promise.then((transforms) => {
             this.showMoreTransforms = transforms.length > 2;
-            transforms.splice(1, transforms.length - 2);
+            transforms.splice(2, 1);
         });
         this.categories = this.constants.favorCategories;
     }
