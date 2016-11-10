@@ -455,7 +455,7 @@ export class MasterSchedulerComponentController {
     updateTaskText(task) {
         task.scheduler.text = ``;
         if (!task.appointment.name) {
-            task.scheduler.text = task.schedusler.text + `<div>Замовника не вказано</div>`;
+            task.scheduler.text = task.scheduler.text + `<div>Замовника не вказано</div>`;
         } else {
             task.scheduler.borderColor = "blue";
             task.scheduler.barColor = "blue";
@@ -491,6 +491,7 @@ export class MasterSchedulerComponentController {
             task.scheduler.borderColor = "grey";
             task.scheduler.barColor = "grey";
         }
+
         if (task.appointment.isPreOrder) {
             task.scheduler.borderColor = "green";
             task.scheduler.barColor = "green";

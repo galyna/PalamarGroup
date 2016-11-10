@@ -9,7 +9,7 @@ import {IConstants} from "../../core/core.config";
 const template = `<div class=" description-container">
     <div class=" courses" layout-align="center center" layout="column"
     >
-        <div hide show-gt-xs="true" layout="row" layout-align="center center">
+        <div hide hide-xs="true" show-gt-xs="true" layout="row" layout-align="center center">
 
             <md-card flex-gt-md="70" flex-md="80" flex-gt-xs="85" md-whiteframe="5"
             >
@@ -67,7 +67,7 @@ const template = `<div class=" description-container">
                 </md-card-content>
             </md-card>
         </div>
-        <div hide-gt-xs="true" layout="row" layout-align="center center">
+        <div show-xs="true" hide layout="row" layout-align="center center">
 
             <md-card md-whiteframe="8">
                 <md-card-content layout="column">
@@ -411,12 +411,15 @@ export class MasterComponentController {
             this.initNavigatorConfig();
             this.initNavigatorSmallConfig();
             this.iniOnTimeRangeSelect();
-            this.events = tasks.filter((task)=> {
-                return !task.appointment.isPreOrder
-            }).map((task)=> {
-                    this.updateTaskText(task);
-                    return angular.copy(task.scheduler);
-              });
+            tasks = tasks.filter((task)=> {
+                return task.appointment.isPreOrder == false;
+            })
+            this.events = tasks.map((task)=> {
+                task.scheduler.borderColor = "gray";
+                task.scheduler.barColor = "gray";
+                task.scheduler.text = `<div><span>Запис</span></div>`;
+                return angular.copy(task.scheduler);
+            });
 
         }).catch((err)=> {
             this.$log.error(err);
@@ -424,15 +427,6 @@ export class MasterComponentController {
         });
     }
 
-
-    updateTaskText(task: ITask) {
-
-        task.scheduler.borderColor = "gray";
-        task.scheduler.barColor = "gray";
-        task.scheduler.text = `<div><span>Запис</span></div>`;
-
-
-    }
 
     initNavigatorSmallConfig() {
         this.navigatorSmallConfig = {
@@ -470,17 +464,14 @@ export class MasterComponentController {
             viewType: "Week",
             angularAutoApply: true,
             locale: "uk-ua",
+            cellHeight: "32",
             businessBeginsHour: "10",
             businessEndsHour: "19",
-            headerDateFormat: 'dd.MM',
-            cellHeight: "32",
-            durationBarVisible: "false",
-            columnMarginRight: "0",
             hideUntilInit: true,
+            headerDateFormat: 'dd.MM',
             eventMoveHandling: 'Disabled',
             eventResizeHandling: 'Disabled',
             heightSpec: 'BusinessHours',
-           startDate:new Date()
 
         };
 
@@ -488,8 +479,6 @@ export class MasterComponentController {
     }
 
     iniOnTimeRangeSelect() {
-
-        this.weekConfig.eventResizeHandling = 'Update';
         this.weekConfig.onTimeRangeSelected = (args)=> {
             this.appointment.date = new Date(args.start.toString());
             if (this.appointment.date > new Date()) {

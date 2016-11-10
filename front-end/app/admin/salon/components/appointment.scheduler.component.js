@@ -71,13 +71,14 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                         api: 2,
                         angularAutoApply: true,
                         locale: "uk-ua",
-                        cellHeight: "40",
+                        cellHeight: "32",
                         businessBeginsHour: "10",
                         businessEndsHour: "19",
                         hideUntilInit: true,
                         headerDateFormat: 'dd.MM',
                         eventMoveHandling: 'Disabled',
                         heightSpec: 'BusinessHours',
+                        startDate: new Date(),
                         onTimeRangeSelect: function (args) {
                             var params = {
                                 appointment: angular.copy(_this.appointment),
@@ -87,7 +88,9 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                                     id: DayPilot.guid()
                                 }
                             };
-                            params.appointment.favors = _this.getFavors();
+                            if (!params.appointment.isConsultation) {
+                                params.appointment.favors = _this.getFavors();
+                            }
                             _this.updateTaskText(params);
                             _this.MasterResource.addTask({ id: _this.masterId }, params).$promise.then(function (task) {
                                 _this.tasks.push(task);
@@ -148,8 +151,8 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                         showMonths: 3,
                         skipMonths: 3,
                         locale: "uk-ua",
-                        cellHeight: "34.5",
-                        cellWidth: "30",
+                        cellHeight: "26.5",
+                        cellWidth: "26",
                         onTimeRangeSelected: function (args) {
                             _this.weekConfig.startDate = args.day;
                             _this.loadEvents(args.day);
@@ -176,23 +179,35 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                         task.scheduler.barColor = "blue";
                         task.scheduler.text = "<div><span>\u0417\u0430\u043C\u043E\u0432\u043D\u0438\u043A:</span><span> " + task.appointment.name + "</span></div>";
                     }
-                    if (task.appointment.favors.length == 0) {
-                        task.scheduler.text = task.scheduler.text + "<div>\u041F\u043E\u0441\u043B\u0443\u0433\u0438 \u043D\u0435 \u0432\u043A\u0430\u0437\u0430\u043D\u0456</div>";
+                    if (task.appointment.isConsultation) {
+                        task.scheduler.text = task.scheduler.text + "<div>\u0417\u0430\u043F\u0438\u0441 \u043D\u0430 \u043A\u043E\u043D\u0441\u0443\u043B\u044C\u0442\u0430\u0446\u0456\u044E</div>";
+                        task.scheduler.borderColor = "yellow";
+                        task.scheduler.barColor = "yellow";
+                        task.appointment.favors = [];
                     }
                     else {
-                        var favors = task.appointment.favors.map(function (f) {
-                            return f.name;
-                        }).join(' ');
-                        task.scheduler.text = task.scheduler.text + ("<div><span>\u041F\u043E\u0441\u043B\u0443\u0433\u0438:</span><span> " + favors + "</span></div>");
-                    }
-                    if (task.appointment.favors.length == 0 || !task.appointment.name) {
-                        task.scheduler.borderColor = "red";
-                        task.scheduler.barColor = "red";
+                        if (task.appointment.favors.length == 0) {
+                            task.scheduler.text = task.scheduler.text + "<div>\u041F\u043E\u0441\u043B\u0443\u0433\u0438 \u043D\u0435 \u0432\u043A\u0430\u0437\u0430\u043D\u0456</div>";
+                        }
+                        else {
+                            var favors = task.appointment.favors.map(function (f) {
+                                return f.name;
+                            }).join(' ');
+                            task.scheduler.text = task.scheduler.text + ("<div><span>\u041F\u043E\u0441\u043B\u0443\u0433\u0438:</span><span> " + favors + "</span></div>");
+                        }
+                        if (task.appointment.favors.length == 0 || !task.appointment.name) {
+                            task.scheduler.borderColor = "red";
+                            task.scheduler.barColor = "red";
+                        }
                     }
                     if (task.appointment.isDayOff) {
                         task.scheduler.text = "<div>\u0427\u0430\u0441 \u0431\u0435\u0437 \u0437\u0430\u043C\u043E\u0432\u043B\u0435\u043D\u044C</div>";
                         task.scheduler.borderColor = "grey";
                         task.scheduler.barColor = "grey";
+                    }
+                    if (task.appointment.isPreOrder) {
+                        task.scheduler.borderColor = "green";
+                        task.scheduler.barColor = "green";
                     }
                 };
                 AppointmentSchedulerComponentController.prototype.updateMaster = function (task) {
