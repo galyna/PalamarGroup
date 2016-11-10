@@ -34,7 +34,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                     </md-input-container>
                
                         <label>Салон</label>
-                    <md-select  ng-if="$root.it.can('modifySalon') "  ng-model="$ctrl.newSalon" ng-model-options="{trackBy: '$value._id'}">
+                    <md-select  ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.newSalon" ng-model-options="{trackBy: '$value._id'}">
                         <md-option ng-repeat="salon in $ctrl.salons" ng-value="salon">
                             <div layout="row" layout-align=" start center  ">
                            
