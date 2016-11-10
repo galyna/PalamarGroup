@@ -72,7 +72,7 @@ const template = `<div class="courses description-container">
             >
                 <md-card-content layout="row" layout-align="start none">
                     <div class="card-media "
-                         flex="50"><img ng-src="{{::master.photo.url}}" class="md-card-image "/>
+                         flex="50"><img ng-src="{{::master.photo.url}}" class="md-card-image clickable-element "  ng-click="::$ctrl.showMaster(master._id)"/>
                     </div>
                     <div class="card-desc box"
                          flex="50" layout="column" layout-align="space-around center">
@@ -119,7 +119,7 @@ const template = `<div class="courses description-container">
                         </md-card-title-text>
                     </md-card-title>
                 </div>
-                <div class="card-media "><img ng-src="{{master.photo.url}}" class="md-card-image"/></div>
+                <div class="card-media "><img ng-src="{{master.photo.url}}" class="md-card-image" ng-click="::$ctrl.showMaster(master._id)"/></div>
                 <div class="card-desc "
                      layout="column" layout-align="center center">
                     <md-card-title>

@@ -137,7 +137,7 @@ const template = `<div class="courses-details description-container" layout="col
                             </md-card-title-text>
                         </md-card-title>
                     </div>
-                    <div class="card-media "><img ng-src="{{master.photo.url}}" ng-if="!!master.photo.url"
+                    <div class="card-media " ng-click="::$ctrl.showMaster(master._id)"><img ng-src="{{master.photo.url}}" ng-if="!!master.photo.url"
                                                   class="md-card-image"/></div>
                     <div class="card-desc "
                          layout="column" layout-align="center center">
