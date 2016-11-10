@@ -54,13 +54,15 @@ declare module pg {
             master?:IMaster,
             service:IMasterFavor,
             favors?:IMasterFavor[],
-            
+            isConsultation:boolean
         }
 
         export interface ITask {
             _id?:any,
             appointment:{
                 isDayOff:boolean,
+                isPreOrder:boolean,
+                isConsultation:boolean,
                 name:string,
                 phone:string,
                 email:string,

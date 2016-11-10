@@ -42,7 +42,7 @@ export function MasterResource($resource:ng.resource.IResourceService, constants
     };
     let getTasksDescriptor:IActionDescriptor = {
         method: "GET",
-        params: {id: '@id', start: '@start',end: '@end',},
+        params: {id: '@id', start: '@start',end: '@end'},
         url: `${constants.apiUrl}/master/:id/tasks/:start/:end`,
         isArray: true,
     };

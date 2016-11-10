@@ -10,12 +10,14 @@ export interface ITaskModel extends pg.models.ITask, Document {
 let TaskSchema = new Schema( {
     appointment: {
         isDayOff:{type: Boolean, default: false },
+        isPreOrder:{type: Boolean, default: false },
         name: String,
         phone: String,
         email: String,
         date: {type: Date, default: Date.now},
         comment: String,
         admin_comment: String,
+        isConsultation:{type: Boolean, default: false },
         master: {type: Schema.Types.ObjectId, ref: 'Master'},
         favors: [{
             name: String,

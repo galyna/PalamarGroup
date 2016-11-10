@@ -12,6 +12,7 @@ let AppointmentSchema = new Schema( {
     name: String,
     phone: String,
     email: String,
+    isConsultation:{type: Boolean, default: false },
     status: {type: Number, default: 0},
     date: {type: Date, default: null},
     creationDate: {type: Date, default: Date.now},

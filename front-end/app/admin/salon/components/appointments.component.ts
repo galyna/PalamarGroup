@@ -98,9 +98,9 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                             <input ng-disabled="::!$root.it.can('modifySalon')" type="text"
                                    ng-model="$ctrl.appointment.phone">
                         </md-input-container>
-                        <div  layout="column">
+                        <div layout="column">
                             <label>Дата прийому</label>
-                            <div class="order-picker-conteiner " >
+                            <div class="order-picker-conteiner ">
                                 <md-datepicker class="order-dete-pcker" ng-disabled='true' placeholder="Дата" flex
                                                ng-model="$ctrl.appointment.date"
                                                name="dateField"></md-datepicker>
@@ -112,6 +112,11 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                             <input ng-disabled="true" type="text"
                                    ng-model="$ctrl.dayHour"/>
                         </md-input-container>
+                        <md-input-container class="md-block">
+                            <md-checkbox ng-disabled="::!$root.it.can('modifySalon')"
+                                         ng-model="$ctrl.appointment.isConsultation">Записатись на консультацію
+                            </md-checkbox>
+                        </md-input-container>
 
                         <md-input-container class="md-block">
                             <label>Коментар замовника</label>
@@ -120,7 +125,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                         </md-input-container>
                     </div>
                     <div flex="100" flex-gt-sm="30" layout="column" class="md-margin">
-                        <md-subheader class="md-no-sticky">Майстер та послуги
+                        <md-subheader class="md-no-sticky">Майстер
                         </md-subheader>
 
                         <md-input-container class="md-block">
@@ -134,72 +139,77 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                                 </md-option>
                             </md-select>
                         </md-input-container>
+                        <div ng-if="!$ctrl.appointment.isConsultation">
+                            <md-input-container class="md-block">
+                                <md-subheader class="md-no-sticky">Послуги</md-subheader>
+                                <div ng-repeat="service in $ctrl.appointment.favors">
 
-                        <md-input-container class="md-block">
-                            <md-subheader class="md-no-sticky">Послуги</md-subheader>
-                            <div ng-repeat="service in $ctrl.appointment.favors">
-
-                                <div layout="row" layout-align="start center  ">
-                                    <img ng-src="{{service.favor.photo.url}}" class="avatar"
-                                         alt="{{service.favor.name}}"/>
-                                    <div class=" md-padding " id="prokgram" name="program">
-                                        {{service.favor.name}}
+                                    <div layout="row" layout-align="start center  ">
+                                        <img ng-src="{{service.favor.photo.url}}" class="avatar"
+                                             alt="{{service.favor.name}}"/>
+                                        <div class=" md-padding " id="prokgram" name="program">
+                                            {{service.favor.name}}
+                                        </div>
+                                        <div class="m md-padding " id="program" name="program">{{service.price}} грн.
+                                        </div>
+                                        <md-button class=" md-padding" ng-if="::$root.it.can('modifySalon')"
+                                                   class="md-icon-button"
+                                                   ng-click="$ctrl.deleteService(service)">
+                                            <md-icon md-svg-src="action:ic_delete_24px"></md-icon>
+                                        </md-button>
                                     </div>
-                                    <div class="m md-padding " id="program" name="program">{{service.price}} грн.
-                                    </div>
-                                    <md-button class=" md-padding" ng-if="::$root.it.can('modifySalon')"
-                                               class="md-icon-button"
-                                               ng-click="$ctrl.deleteService(service)">
-                                        <md-icon md-svg-src="action:ic_delete_24px"></md-icon>
-                                    </md-button>
                                 </div>
-                            </div>
-                        </md-input-container>
+                            </md-input-container>
 
 
-                        <md-subheader class="md-no-sticky" ng-if=" ::$root.it.can('modifySalon')">Додати послугу
-                        </md-subheader>
+                            <md-subheader class="md-no-sticky" ng-if=" ::$root.it.can('modifySalon') ">Додати послугу
+                            </md-subheader>
 
-                        <md-select ng-if=" ::$root.it.can('modifySalon')" ng-model="$ctrl.newService"
-                                   ng-model-options="{trackBy: '$value.favor._id'}">
-                            <md-option ng-repeat="favor in $ctrl.favors" ng-value="favor">
-                                <div layout="row" layout-align=" start center  ">
-                                    <img ng-src="{{favor.favor.photo.url}}" class="avatar" alt="{{favor.favor.name}}"/>
-                                    <span>  {{ favor.favor.name }}  </span></div>
+                            <md-select ng-if=" ::$root.it.can('modifySalon') " ng-model="$ctrl.newService"
+                                       ng-model-options="{trackBy: '$value.favor._id'}">
+                                <md-option ng-repeat="favor in $ctrl.favors" ng-value="favor">
+                                    <div layout="row" layout-align=" start center  ">
+                                        <img ng-src="{{favor.favor.photo.url}}" class="avatar"
+                                             alt="{{favor.favor.name}}"/>
+                                        <span>  {{ favor.favor.name }}  </span></div>
 
-                            </md-option>
-                        </md-select>
-                        <md-input-container ng-if=" ::$root.it.can('modifySalon')" layout="row" class="md-block">
-                            <label for="newProgram">ЦІНА</label>
-                            <input type="number" ng-model="$ctrl.newService.price"/>
+                                </md-option>
+                            </md-select>
+                            <md-input-container ng-if=" ::$root.it.can('modifySalon')" layout="row" class="md-block">
+                                <label for="newProgram">ЦІНА</label>
+                                <input type="number" ng-model="$ctrl.newService.price"/>
 
-                        </md-input-container>
-                        <md-button ng-if=" ::$root.it.can('modifySalon')" ng-disabled="!$ctrl.newService.favor"
-                                   class=" " ng-click="$ctrl.addService()">
-                            Додати
-                        </md-button>
-
+                            </md-input-container>
+                            <md-button ng-if=" ::$root.it.can('modifySalon')" ng-disabled="!$ctrl.newService.favor"
+                                       class=" " ng-click="$ctrl.addService()">
+                                Додати
+                            </md-button>
+                        </div>
                     </div>
                     <div flex="100" flex-gt-sm="30" layout="column" class="md-margin">
 
                         <md-subheader class="md-no-sticky">Адміністративна частина
                         </md-subheader>
                         <md-input-container>
-                        <label>Статас</label>
-                        <md-select ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.appointment.status"
-                                   >
-                            <md-option ng-repeat="status in $ctrl.orderStatuses" ng-value="status._id">                          
+                            <label>Статас</label>
+                            <md-select ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.appointment.status"
+                            >
+                                <md-option ng-repeat="status in $ctrl.orderStatuses" ng-value="status._id">
                                     <span>  {{ status.name }}  </span>
-                            </md-option>
-                        </md-select>
-                    </md-input-container>    
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
 
                         <md-input-container>
                             <label>Коментар адміністратора</label>
                             <textarea ng-disabled="::!$root.it.can('modifySalon')"
                                       ng-model="$ctrl.appointment.admin_comment"></textarea>
                         </md-input-container>
-
+                        <md-input-container class="md-block">
+                            <md-checkbox ng-disabled="::!$root.it.can('modifySalon')"
+                                         ng-model="$ctrl.appointment.isPreOrder">Попереднє замовлення
+                            </md-checkbox>
+                        </md-input-container>
                     </div>
                 </div>
                 <div flex layout="row" ng-if="::$root.it.can('modifySalon') && $ctrl.appointment.master">

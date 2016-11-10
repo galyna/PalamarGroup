@@ -13,7 +13,9 @@ const template:string = `<div flex layout="column">
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
                 <md-tooltip>Майстри</md-tooltip>
             </md-button>
-            <span flex></span>
+             <div flex layout="row"  layout-align="  center center "> <img ng-if="$ctrl.master.photo.url" ng-src="{{$ctrl.master.photo.url}}" class="avatar " alt="{{master.name}}" />
+                                   <h3 ng-if="$ctrl.master.name">{{$ctrl.master.name}}</h3> </div>
+           
             <md-button ng-if="::$root.it.can('modifySalon')" ng-click="$ctrl.cancel()" ng-disabled="saveForm.$pristine">
                 <span>Скасувати</span>
                 <md-tooltip>Скасувати зміни</md-tooltip>
@@ -23,8 +25,12 @@ const template:string = `<div flex layout="column">
             </md-button>
         </div>
     </md-toolbar>
-    <md-tabs md-stretch-tabs="always" md-dynamic-height>
-        <md-tab label="Інфо">
+    <md-tabs md-stretch-tabs="always" md-dynamic-height>      
+        <md-tab flex label="Графік">
+            <pg-master-scheduler mode='master' appointment="$ctrl.appointment" masterid="$ctrl.master._id"
+                                 mname="$ctrl.master.name" photo="$ctrl.master.photo.url"></pg-master-scheduler>
+        </md-tab>
+        <md-tab flex label="Інфо">
             <md-card>
                 <md-card-content>
                     <md-input-container class="md-block ">
@@ -117,11 +123,7 @@ const template:string = `<div flex layout="column">
                 </md-card-content>
             </md-card>
         </md-tab>
-        <md-tab label="Графік">
-            <pg-master-scheduler mode='master' appointment="$ctrl.appointment" masterid="$ctrl.master._id"
-                                 mname="$ctrl.master.name" photo="$ctrl.master.photo.url"></pg-master-scheduler>
-        </md-tab>
-        <md-tab label="Аватар" flex>
+        <md-tab flex label="Аватар" flex>
             <md-card>
                 <md-card-content  >
                     <div layout="column" >

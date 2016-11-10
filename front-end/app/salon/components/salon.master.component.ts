@@ -247,7 +247,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                         </div>
                     </div>
                 </md-input-container>
-                <md-input-container class="md-block reduce-bottom-margin">
+                <md-input-container class="md-block reduce-bottom-margin ">
                     <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
                     <label for="phone">Телефон</label>
                     <input id="phone" ng-model="vm.appointment.phone" type="text" name="phone">
@@ -267,7 +267,10 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                         </md-select>
                     </md-input-container>
                 </div>
-                <md-input-container class="md-block ">
+                 <md-input-container class="md-block md-padding reduce-bottom-margin ">
+                      <md-checkbox  ng-model="vm.appointment.isConsultation">Записатись на консультацію</md-checkbox> 
+                </md-input-container>
+                <md-input-container ng-if="!vm.appointment.isConsultation" class="md-block md-padding">
                     <label for="service">Послуга</label>
                     <md-select ng-model="vm.appointment.service"
                                ng-model-options="{trackBy: '$value._id'}">
@@ -408,10 +411,12 @@ export class MasterComponentController {
             this.initNavigatorConfig();
             this.initNavigatorSmallConfig();
             this.iniOnTimeRangeSelect();
-            this.events = tasks.map((task)=> {
-                this.updateTaskText(task);
-                return angular.copy(task.scheduler);
-            });
+            this.events = tasks.filter((task)=> {
+                return !task.appointment.isPreOrder
+            }).map((task)=> {
+                    this.updateTaskText(task);
+                    return angular.copy(task.scheduler);
+              });
 
         }).catch((err)=> {
             this.$log.error(err);
@@ -450,8 +455,8 @@ export class MasterComponentController {
             showMonths: 3,
             skipMonths: 3,
             locale: "uk-ua",
-            cellHeight: "34.5",
-            cellWidth: "30",
+            cellHeight: "26.5",
+            cellWidth: "26",
             onTimeRangeSelected: (args)=> {
                 this.weekConfig.startDate = args.day;
                 this.loadEvents(args.day, this.master._id);
@@ -468,13 +473,14 @@ export class MasterComponentController {
             businessBeginsHour: "10",
             businessEndsHour: "19",
             headerDateFormat: 'dd.MM',
-            cellHeight: "40",
+            cellHeight: "32",
             durationBarVisible: "false",
             columnMarginRight: "0",
             hideUntilInit: true,
             eventMoveHandling: 'Disabled',
             eventResizeHandling: 'Disabled',
-            heightSpec: 'BusinessHours'
+            heightSpec: 'BusinessHours',
+           startDate:new Date()
 
         };
 

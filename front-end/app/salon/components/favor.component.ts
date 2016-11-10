@@ -198,7 +198,10 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                         </md-select>
                     </md-input-container>
                 </div>
-                <md-input-container ng-if="vm.appointment.master" class="md-block md-padding">
+                 <md-input-container class="md-block md-padding reduce-bottom-margin ">
+                      <md-checkbox  ng-model="vm.appointment.isConsultation">Записатись на консультацію</md-checkbox> 
+                </md-input-container>
+                <md-input-container ng-if="!vm.appointment.isConsultation"  class="md-block md-padding">
                     <label for="service">Послуга</label>
                     <md-select ng-model="vm.appointment.service"
                                ng-model-options="{trackBy: '$value._id'}">

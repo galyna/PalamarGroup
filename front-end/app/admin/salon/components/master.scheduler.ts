@@ -4,11 +4,10 @@ import IMasterFavor = pg.models.IMasterFavor;
 
 
 const template = `
- <div layout="row" ng-if="$ctrl.photo" layout-align="  center  "> <img  ng-src="{{$ctrl.photo}}" class="avatar " alt="{{master.name}}" />
-                                   <h3>{{::$ctrl.mname}}</h3> </div>
+
  <div layout="row" class="master-scheduler" layout-xs="column">
-                <div hide show-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
-                    <daypilot-navigator  style=" width: 280px" id="navi"
+                <div hide show-gt-xs="true" class="md-padding " layout="row" layout-align="start start">
+                    <daypilot-navigator  style=" width: 270px;top:0;" id="navi"
                                         daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>
                    
                 </div>
@@ -28,7 +27,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 
     <md-toolbar>
         <div class="md-toolbar-tools">
-          <img  ng-src="{{$ctrl.masterPhoto}}" class="avatar" alt="{{$ctrl.masterPhoto}}" />
+            <img ng-src="{{$ctrl.masterPhoto}}" class="avatar" alt="{{$ctrl.masterPhoto}}"/>
             <h2>Деталі замовлення</h2>
             <span flex></span>
             <md-button class="md-icon-button" ng-click="$ctrl.cancel()">
@@ -53,49 +52,65 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                         <input ng-disabled="::!$root.it.can('modifySalon')" type="text"
                                ng-model="$ctrl.appointment.phone">
                     </md-input-container>
-                   
+
                     <md-input-container class="md-block">
                         <label>Коментар замовника</label>
                         <input ng-disabled="::!$root.it.can('modifySalon')" type="text"
                                ng-model="$ctrl.appointment.comment"/>
                     </md-input-container>
+                    <md-input-container class="md-block">
+                        <md-checkbox ng-disabled="::!$root.it.can('modifySalon')"
+                                     ng-model="$ctrl.appointment.isConsultation">Записатись на консультацію
+                        </md-checkbox>
+                    </md-input-container>
                 </div>
-                <div flex="100" flex-gt-sm="30" layout="column" ng-if="!$ctrl.appointment.isDayOff " 
-                 class="md-margin md-whiteframe-z8">
-                  <md-subheader ng-if="$ctrl.appointment.favors.length>0"  class="md-no-sticky">Послуги</md-subheader>
-                    <md-input-container ng-if="$ctrl.appointment.favors.length>0"  class="md-block">
-                      
+                <div flex="100" flex-gt-sm="30" layout="column"
+                     ng-if="!$ctrl.appointment.isDayOff && !$ctrl.appointment.isConsultation "
+                     class="md-margin md-whiteframe-z8">
+                    <md-subheader ng-if="$ctrl.appointment.favors.length>0" class="md-no-sticky">Послуги</md-subheader>
+                    <md-input-container ng-if="$ctrl.appointment.favors.length>0" class="md-block">
+
                         <div ng-repeat="favor in $ctrl.appointment.favors">
-                            <div layout="row">
-                              <img  ng-src="{{favor.photo}}" class="avatar" alt="{{favor.photo}}" />
-                                <div class=" md-padding" id="prokgram" name="program">
-                                {{favor.name}}
+                            <div layout="row" flex>
+                                <img ng-src="{{favor.photo}}" class="avatar" alt="{{favor.photo}}"/>
+                                <div flex layout="column"  layout="center">
+                                   
+                                     <div  id="prokgram" name="program">
+                                    {{favor.name}}
                                 </div>
-                                <div class=" md-padding" id="program" name="program">
-                                {{favor.price}} грн.
+                                    <div  id="program" name="program">
+                                        {{favor.price}} грн.
+                                    </div>
                                 </div>
-                                <md-button class=" md-padding " ng-if="::$root.it.can('modifySalon')" class="md-icon-button"
+                               
+                                <md-button  ng-if="::$root.it.can('modifySalon')"
+                                           class="md-icon-button"
                                            ng-click="$ctrl.deleteService(favor)">
                                     <md-icon md-svg-src="action:ic_delete_24px"></md-icon>
                                 </md-button>
                             </div>
                         </div>
                     </md-input-container>
-                    <md-subheader ng-if="$ctrl.showAddFavors && $root.it.can('modifySalon')" class="md-no-sticky">Додати послугу
+                    <md-subheader ng-if="$ctrl.showAddFavors && $root.it.can('modifySalon')" class="md-no-sticky">Додати
+                        послугу
                     </md-subheader>
-                    <md-select ng-if="$ctrl.showAddFavors && $root.it.can('modifySalon') "  ng-model="$ctrl.newService" ng-model-options="{trackBy: '$value._id'}">
+                    <md-select ng-if="$ctrl.showAddFavors && $root.it.can('modifySalon') " ng-model="$ctrl.newService"
+                               ng-model-options="{trackBy: '$value._id'}">
                         <md-option ng-repeat="services in $ctrl.services" ng-value="services">
                             <div layout="row" layout-align=" start center  ">
-                                 <img  ng-src="{{services.favor.photo.url}}" class="avatar" alt="{{services.favor.name}}" />
-                                   <span>  {{ services.favor.name }}  </span>  </div>
+                                <img ng-src="{{services.favor.photo.url}}" class="avatar"
+                                     alt="{{services.favor.name}}"/>
+                                <span>  {{ services.favor.name }}  </span></div>
                         </md-option>
                     </md-select>
-                    <md-input-container ng-if="$ctrl.showAddFavors && $root.it.can('modifySalon')" layout="row" class="md-block">
+                    <md-input-container ng-if="$ctrl.showAddFavors && $root.it.can('modifySalon')" layout="row"
+                                        class="md-block">
                         <label for="newProgram">ЦІНА</label>
                         <input type="number" ng-model="$ctrl.newService.price"/>
 
                     </md-input-container>
-                    <md-button ng-if="$ctrl.showAddFavors && $root.it.can('modifySalon')" ng-disabled="!$ctrl.newService " class="md-raised " ng-click="$ctrl.addService()">
+                    <md-button ng-if="$ctrl.showAddFavors && $root.it.can('modifySalon')"
+                               ng-disabled="!$ctrl.newService " class="md-raised " ng-click="$ctrl.addService()">
                         Додати послугу
                     </md-button>
 
@@ -103,34 +118,40 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                 <div flex="100" flex-gt-sm="30" layout="column" class="md-margin">
                     <md-subheader class=" md-margin  md-no-sticky">Адміністративна частина
                     </md-subheader>
-                   <md-input-container class="md-block">
+                    <md-input-container class="md-block">
                         <label>Коментар адміністратора</label>
-                            <textarea class=" md-padding  " ng-disabled="::!$root.it.can('modifySalon')"
-                                      ng-model="$ctrl.appointment.admin_comment"></textarea>
+                        <textarea class=" md-padding  " ng-disabled="::!$root.it.can('modifySalon')"
+                                  ng-model="$ctrl.appointment.admin_comment"></textarea>
                     </md-input-container>
                     <md-input-container class="md-block">
-                      <md-checkbox ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.appointment.isDayOff">Час без замовлень</md-checkbox> 
-                        </md-input-container>
+                        <md-checkbox ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.appointment.isDayOff">
+                            Час без замовлень
+                        </md-checkbox>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <md-checkbox ng-disabled="::!$root.it.can('modifySalon')"
+                                     ng-model="$ctrl.appointment.isPreOrder">Попереднє замовлення
+                        </md-checkbox>
+                    </md-input-container>
                 </div>
             </div>
-             <div class=" md-padding " ng-if="::$root.it.can('modifySalon')" layout-gt-sm="row" layout="column">
+            <div class=" md-padding " ng-if="::$root.it.can('modifySalon')" layout-gt-sm="row" layout="column">
 
-        <span flex></span>
+                <span flex></span>
 
-        <md-button class=" md-primary md-accent"  ng-click="$ctrl.delete()" aria-label="cancel">
-            Видалити
-        </md-button>
-        <md-button class=" md-raised md-primary md-accent" ng-click="$ctrl.save()" aria-label="save">
-            Зберегти
-        </md-button>
+                <md-button class=" md-primary md-accent" ng-click="$ctrl.delete()" aria-label="cancel">
+                    Видалити
+                </md-button>
+                <md-button class=" md-raised md-primary md-accent" ng-click="$ctrl.save()" aria-label="save">
+                    Зберегти
+                </md-button>
 
-        <md-button class="md-raised  md-primary" ng-click="$ctrl.cancel()" aria-label="cancel">
-            Відмінити
-        </md-button>
-                </div>
+                <md-button class="md-raised  md-primary" ng-click="$ctrl.cancel()" aria-label="cancel">
+                    Відмінити
+                </md-button>
+            </div>
         </div>
     </md-dialog-content>
-
 
 
 </md-dialog>
@@ -283,7 +304,7 @@ export class MasterSchedulerComponentController {
             viewType: "Week",
             angularAutoApply: true,
             locale: "uk-ua",
-            cellHeight: "40",
+            cellHeight: "32",
             businessBeginsHour: "10",
             businessEndsHour: "19",
             hideUntilInit: true,
@@ -291,6 +312,7 @@ export class MasterSchedulerComponentController {
             eventMoveHandling: 'Disabled',
             eventResizeHandling: 'Disabled',
             heightSpec: 'BusinessHours',
+            startDate:new Date(),
             onEventClick: (args)=> {
                 var tasks = this.tasks.filter( (task)=> {
                     return task != null && task.scheduler.id === args.e.id();
@@ -329,8 +351,8 @@ export class MasterSchedulerComponentController {
             showMonths: 3,
             skipMonths: 3,
             locale: "uk-ua",
-            cellHeight: "34.5",
-            cellWidth: "30",
+            cellHeight: "26.5",
+            cellWidth: "26",
             onTimeRangeSelected: (args)=> {
                 this.weekConfig.startDate = args.day;
                 this.loadEvents( args.day );
@@ -430,34 +452,48 @@ export class MasterSchedulerComponentController {
 
     }
 
-    updateTaskText(task:ITask) {
+    updateTaskText(task) {
         task.scheduler.text = ``;
         if (!task.appointment.name) {
-            task.scheduler.text = task.scheduler.text + `<div>Замовника не вказано</div>`;
+            task.scheduler.text = task.schedusler.text + `<div>Замовника не вказано</div>`;
         } else {
             task.scheduler.borderColor = "blue";
             task.scheduler.barColor = "blue";
             task.scheduler.text = `<div><span>Замовник:</span><span> ${task.appointment.name}</span></div>`;
         }
 
-        if (task.appointment.favors.length == 0) {
-            task.scheduler.text = task.scheduler.text + `<div>Послуги не вказані</div>`;
+        if (task.appointment.isConsultation) {
+            task.scheduler.text = task.scheduler.text + `<div>Запис на консультацію</div>`;
+            task.scheduler.borderColor = "yellow";
+            task.scheduler.barColor = "yellow";
+            task.appointment.favors=[];
+        }
+        else {
+            if (task.appointment.favors.length == 0) {
 
-        } else {
-            var favors = task.appointment.favors.map( (f)=> {
-                return f.name;
-            } ).join( ' ' );
-            task.scheduler.text = task.scheduler.text + `<div><span>Послуги:</span><span> ${favors}</span></div>`;
+                task.scheduler.text = task.scheduler.text + `<div>Послуги не вказані</div>`;
+
+            } else {
+                var favors = task.appointment.favors.map((f)=> {
+                    return f.name;
+                }).join(' ');
+                task.scheduler.text = task.scheduler.text + `<div><span>Послуги:</span><span> ${favors}</span></div>`;
+            }
+            if (task.appointment.favors.length == 0 || !task.appointment.name) {
+                task.scheduler.borderColor = "red";
+                task.scheduler.barColor = "red";
+            }
         }
-        if (task.appointment.favors.length == 0 || !task.appointment.name) {
-            task.scheduler.borderColor = "red";
-            task.scheduler.barColor = "red";
-        }
+
 
         if (task.appointment.isDayOff) {
             task.scheduler.text = `<div>Час без замовлень</div>`;
             task.scheduler.borderColor = "grey";
             task.scheduler.barColor = "grey";
+        }
+        if (task.appointment.isPreOrder) {
+            task.scheduler.borderColor = "green";
+            task.scheduler.barColor = "green";
         }
 
     }
@@ -547,9 +583,6 @@ export class MasterSchedulerComponentController {
 export let MasterSchedulerComponentName = 'pgMasterScheduler';
 export let MasterSchedulerComponentOptions:ng.IComponentOptions = {
     controller: MasterSchedulerComponentController,
-    template: template,
-    bindings: {
-        'mname': "=",
-        'photo': '='
-    }
+    template: template
+
 };
