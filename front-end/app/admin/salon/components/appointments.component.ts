@@ -73,8 +73,8 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
     <form name="orderEditForm" ng-submit="$ctrl.save(orderEditForm)">
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <p ng-if="$ctrl.appointment.date">Запис створено
-                    {{$ctrl.appointment.creationDate|date:'dd.MM.yyyy'}}</p>
+                <p ng-if="$ctrl.appointment.creationDate">Запис створено
+                    {{$ctrl.appointment.creationDate |date:'dd.MM.yyyy'}}</p>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="$ctrl.cancel()">
                     <md-icon md-svg-src="navigation:ic_close_24px" aria-label="Close dialog"></md-icon>
@@ -379,8 +379,8 @@ export class AppointmentsComponentController {
                 masters: this.masters
             },
             parent: angular.element( document.body ),
-            targetEvent: ev,
-            fullscreen: true
+            targetEvent: ev
+
         } ).then( (appointment) => this.saveAppointment( appointment ) );
     }
 
