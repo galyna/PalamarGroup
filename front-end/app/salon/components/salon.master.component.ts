@@ -254,7 +254,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                 </md-input-container>
                 <div flex="100" layout="row" layout-xs="columm">
                     <div flex="50" flex-xs="100" class="order-picker-container " layout="row">
-                        <md-datepicker md-open-on-focus class="order-date-picker" placeholder="Дата" flex ng-model="vm.appointment.date"
+                        <md-datepicker md-open-on-focus class="order-date-picker" md-min-date="vm.startDate" placeholder="Дата" flex ng-model="vm.appointment.date"
                                        name="dateField"></md-datepicker>
                     </div>
                     <md-input-container flex="50" flex-xs="100">
@@ -298,7 +298,7 @@ class AppointmentDialogController {
     static $inject = ['$mdDialog', 'appointment'];
     private appointment: IAppointment;
     private originalAppointment: IAppointment;
-
+    startDate = new Date();
     dayHour: any;
     dayHours = [{id: 1, value: '10:00'}, {id: 2, value: '10:30'}, {id: 3, value: '11:00'}, {id: 4, value: '11:30'},
         {id: 5, value: '12:00'}, {id: 6, value: '12:30'}, {id: 7, value: '13:00'}, {id: 8, value: '13:30'}, {
@@ -485,9 +485,10 @@ export class MasterComponentController {
 
         this.weekConfig.eventResizeHandling = 'Update';
         this.weekConfig.onTimeRangeSelected = (args)=> {
-
-            this.appointment.date = new Date(args.start.toString()),
+            this.appointment.date = new Date(args.start.toString());
+            if (this.appointment.date > new Date()) {
                 this.showAppointmentDialog()
+            }
         };
     }
 
@@ -512,9 +513,9 @@ export class MasterComponentController {
         this.mediaObserver.observe(items, index, this.socialParams);
     }
 
-    showAppointmentDialog(service=null) {
+    showAppointmentDialog(service = null) {
         this.appointment.master = this.master;
-        this.appointment.service =service;
+        this.appointment.service = service;
         this.mdDialog.show({
             template: appointmentTemplate,
             clickOutsideToClose: true,
