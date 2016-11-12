@@ -23,12 +23,12 @@
                     </div>
                 </div>
                 <div  class="card-desc "   flex-gt-sm="50"
-                     layout="column" layout-align=" space-between center">
+                     layout="column" layout-align=" space-between center" class="md-margin">
 
-                    <div flex layuot="column" layout-align="space-between stretch">
+
                         <md-card-title layout="column" layout-align="space-around center">
                             <md-card-title-text hide show-gt-sm="true"  layout="column"
-                                                layout-align=" space-around center">
+                                                layout-align=" center center">
 
                                 <div class="md-display-1  md-padding">{{::vm.course.name}}</div>
                             </md-card-title-text>
@@ -37,10 +37,10 @@
                                 <div flex>{{::vm.course.price}} грн.</div>
                             </div>
                         </md-card-title>
-                        <md-button class="md-raised " flex aria-label="Play" ng-click="::vm.showModelDialog($event)">
+                        <md-button class="md-raised md-margin"  aria-label="Play" ng-click="::vm.showModelDialog($event)">
                             Стати моделлю
                         </md-button>
-                        <md-button class=" md-raised xs-selected " aria-label="Play"
+                        <md-button class=" md-raised xs-selected md-margin" aria-label="Play"
                                    ng-click="::vm.showOrderDialog($event)">
                             Записатись
                         </md-button>
@@ -96,7 +96,7 @@
 
                             </div>
                         </div>
-                    </div>
+
                 </div>
             </md-card-content>
         </md-card>

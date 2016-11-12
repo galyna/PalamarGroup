@@ -511,73 +511,69 @@ md-card.md-default-theme, md-card {
   color: $primary;
 }
 
-.brends-container {
+.program-block-master {
+  display: flex;
+  width: 100%;
+  margin-top: 45px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  flex-wrap: wrap;
+  overflow: visible;
 
-  padding: 0;
-  margin: 0 0 20px 0;
-  .brend {
-    position: relative;
-    display: flex;
+  @media (max-width: $layout-breakpoint-xs) {
+    margin-top: 10px;
+  }
 
-    overflow: hidden;
+  .date-text {
+    left: 0;
+    top: -45px;
+    color: $primary;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    vertical-align: middle;
+    opacity: 0;
+    white-space: nowrap;
+    transition: opacity .3s linear;
 
+  }
 
+  .date-block {
 
-    img {
+    box-sizing: border-box;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 50px;
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    z-index: 80;
+    transition: all .3s ease-in-out;
 
-      max-width: 100%;
-      overflow: hidden;
+    &:hover ~ .date-text {
+      opacity: 1;
 
     }
-    @media (min-width: $layout-breakpoint-md) {
-
-      &.flex-gt-md-22 {
-
-        max-height: 100%;
-        box-sizing: border-box;
-        flex: 1 18%;
-      }
-
+    &:hover {
+      transform: scale(1.5);
+      cursor: pointer;
+      @extend .md-whiteframe-8dp;
     }
 
-    @media (min-width: $layout-breakpoint-sm) {
-
-      &.flex-gt-sm-22 {
-
-        max-height: 100%;
-        box-sizing: border-box;
-        flex: 1 18%;
-      }
-
-      &.flex-gt-sm-46 {
-        max-height: 100%;
-        box-sizing: border-box;
-        flex: 1 43%;
-      }
-
-    }
-
-    @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm) {
-
-      &.flex-gt-xs-46 {
-        max-height: 100%;
-        box-sizing: border-box;
-        flex: 1 43%;
-      }
-      &:first-child, &:nth-child(2) {
-        flex: 1 43%;
-      }
-    }
-
-    @media (max-width: $layout-breakpoint-xs) {
-      &.flex-xs-80 {
-        flex: 1 80%;
-        // Special override for the 1st & 2nd child default resizing
-        &:first-child, &:nth-child(2) {
-          flex: 1 80%;
-        }
-      }
-    }
   }
 
 }
+
+.clickable-element {
+  &:hover {
+    cursor: pointer;
+
+  }
+}
+.capitalize{
+  text-transform: uppercase;}
