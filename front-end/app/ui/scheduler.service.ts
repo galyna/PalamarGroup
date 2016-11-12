@@ -6,7 +6,8 @@ export interface ISchedulerService {
     getWeekConfig(): any;
     getNavigatorSmallConfig(): any;
     getNavigatorConfig(): any;
-    getStartAndEndOfWeek(date): Date[]
+    getStartAndEndOfWeek(date): Date[];
+    updateTaskText(task):void;
 }
 
 export let SchedulerServiceName = 'SchedulerService'
@@ -15,6 +16,52 @@ export class SchedulerService implements ISchedulerService {
     static $inject = [];
 
     constructor() {
+
+    }
+
+    updateTaskText(task) {
+        task.scheduler.text = ``;
+        if (!task.appointment.name) {
+            task.scheduler.text = task.scheduler.text + `<div>Замовника не вказано</div>`;
+        } else {
+            task.scheduler.borderColor = "blue";
+            task.scheduler.barColor = "blue";
+            task.scheduler.text = `<div><span>Замовник:</span><span> ${task.appointment.name}</span></div>`;
+        }
+
+        if (task.appointment.isConsultation) {
+            task.scheduler.text = task.scheduler.text + `<div>Запис на консультацію</div>`;
+            task.scheduler.borderColor = "yellow";
+            task.scheduler.barColor = "yellow";
+            task.appointment.favors=[];
+        }
+        else {
+            if (task.appointment.favors.length == 0) {
+
+                task.scheduler.text = task.scheduler.text + `<div>Послуги не вказані</div>`;
+
+            } else {
+                var favors = task.appointment.favors.map((f)=> {
+                    return f.name;
+                }).join(' ');
+                task.scheduler.text = task.scheduler.text + `<div><span>Послуги:</span><span> ${favors}</span></div>`;
+            }
+            if (task.appointment.favors.length == 0 || !task.appointment.name) {
+                task.scheduler.borderColor = "red";
+                task.scheduler.barColor = "red";
+            }
+        }
+
+
+        if (task.appointment.isDayOff) {
+            task.scheduler.text = `<div>Час без замовлень</div>`;
+            task.scheduler.borderColor = "grey";
+            task.scheduler.barColor = "grey";
+        }
+        if (task.appointment.isPreOrder) {
+            task.scheduler.borderColor = "green";
+            task.scheduler.barColor = "green";
+        }
 
     }
     getStartAndEndOfWeek(date): Date[] {

@@ -1,23 +1,27 @@
-System.register(["../../../resources/master.resource"], function(exports_1, context_1) {
+System.register(["../../../resources/master.resource", "../../../ui/scheduler.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var master_resource_1;
+    var master_resource_1, scheduler_service_1;
     var template, AppointmentSchedulerComponentController, AppointmentSchedulerComponentName, AppointmentSchedulerComponentOptions;
     return {
         setters:[
             function (master_resource_1_1) {
                 master_resource_1 = master_resource_1_1;
+            },
+            function (scheduler_service_1_1) {
+                scheduler_service_1 = scheduler_service_1_1;
             }],
         execute: function() {
             template = "\n <div layout=\"row\" class=\"master-scheduler\" layout-xs=\"column\">\n                <div hide show-gt-xs=\"true\"  layout=\"row\" layout-align=\"center center\">\n                    <daypilot-navigator  style=\" width: 280px\" id=\"navi\"\n                                        daypilot-config=\"$ctrl.navigatorConfig\"></daypilot-navigator>\n                   \n                </div>\n                <div hide-gt-xs=\"true\" class=\"md-padding \" layout=\"row\" layout-align=\"center center\">\n                   \n                    <daypilot-navigator  style=\" width: 280px\" id=\"navis\"\n                                        daypilot-config=\"$ctrl.navigatorSmallConfig\"></daypilot-navigator>\n                </div>\n                <div flex class=\"md-padding \">\n                    <daypilot-calendar id=\"week\" daypilot-config=\"$ctrl.weekConfig\"\n                                       daypilot-events=\"$ctrl.events\"></daypilot-calendar>\n                </div>\n\n            </div>";
             AppointmentSchedulerComponentController = (function () {
-                function AppointmentSchedulerComponentController($log, $timeout, $mdDialog, MasterResource, $routeParams, $scope) {
+                function AppointmentSchedulerComponentController($log, $timeout, $mdDialog, MasterResource, $routeParams, $scope, SchedulerService) {
                     this.$log = $log;
                     this.$timeout = $timeout;
                     this.$mdDialog = $mdDialog;
                     this.MasterResource = MasterResource;
                     this.$routeParams = $routeParams;
                     this.$scope = $scope;
+                    this.SchedulerService = SchedulerService;
                     this.events = [];
                     this.tasks = [];
                 }
@@ -35,18 +39,10 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                     this.initNavigatorSmallConfig();
                     this.loadEvents(new Date());
                 };
-                AppointmentSchedulerComponentController.prototype.getStartAndEndOfWeek = function (date) {
-                    date = new Date(date);
-                    date.setUTCHours(0);
-                    var day = date.getDay(), diff = date.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
-                    var start = new Date(date.setDate(diff));
-                    var end = new Date(date.setDate(start.getDate() + 7));
-                    return [start, end];
-                };
                 AppointmentSchedulerComponentController.prototype.loadEvents = function (start) {
                     var _this = this;
                     if (this.masterId) {
-                        var days = this.getStartAndEndOfWeek(start);
+                        var days = this.SchedulerService.getStartAndEndOfWeek(start);
                         var params = {
                             id: this.masterId,
                             start: days[0].toISOString(),
@@ -65,98 +61,68 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                 };
                 AppointmentSchedulerComponentController.prototype.initWeekConfig = function () {
                     var _this = this;
-                    this.weekConfig = {
-                        visible: true,
-                        viewType: "Week",
-                        api: 2,
-                        angularAutoApply: true,
-                        locale: "uk-ua",
-                        cellHeight: "32",
-                        businessBeginsHour: "10",
-                        businessEndsHour: "19",
-                        hideUntilInit: true,
-                        headerDateFormat: 'dd.MM',
-                        eventMoveHandling: 'Disabled',
-                        heightSpec: 'BusinessHours',
-                        startDate: new Date(),
-                        onTimeRangeSelect: function (args) {
-                            var params = {
-                                appointment: angular.copy(_this.appointment),
-                                scheduler: {
-                                    start: args.start.toString(),
-                                    end: args.end.toString(),
-                                    id: DayPilot.guid()
-                                }
-                            };
-                            if (!params.appointment.isConsultation) {
-                                params.appointment.favors = _this.getFavors();
+                    this.weekConfig = this.SchedulerService.getWeekConfig();
+                    this.weekConfig.onTimeRangeSelect = function (args) {
+                        var params = {
+                            appointment: angular.copy(_this.appointment),
+                            scheduler: {
+                                start: args.start.toString(),
+                                end: args.end.toString(),
+                                id: DayPilot.guid()
                             }
-                            _this.updateTaskText(params);
-                            _this.MasterResource.addTask({ id: _this.masterId }, params).$promise.then(function (task) {
-                                _this.tasks.push(task);
-                                _this.events.push(task.scheduler);
+                        };
+                        if (!params.appointment.isConsultation) {
+                            params.appointment.favors = _this.getFavors();
+                        }
+                        _this.SchedulerService.updateTaskText(params);
+                        _this.MasterResource.addTask({ id: _this.masterId }, params).$promise.then(function (task) {
+                            _this.tasks.push(task);
+                            _this.events.push(task.scheduler);
+                            _this.$scope.week.update();
+                        });
+                    };
+                    this.weekConfig.onEventResize = function (args) {
+                        var event = {
+                            id: args.e.id(),
+                            start: args.newStart.toString(),
+                            end: args.newEnd.toString(),
+                            text: args.e.text(),
+                            borderColor: args.e.borderColor,
+                            barColor: args.e.barColor,
+                        };
+                        var originalTask;
+                        var tasks = _this.tasks.filter(function (task) {
+                            return task != null && task.scheduler.id === event.id;
+                        });
+                        if (tasks.length > 0 && event) {
+                            var task = tasks[0];
+                            originalTask = angular.copy(task);
+                            task.scheduler = event;
+                            _this.MasterResource.updateTask({ id: _this.masterId }, task).$promise.then(function (newTask) {
+                                _this.tasks.splice(_this.tasks.indexOf(task), 1, newTask);
+                            }).catch(function (err) {
+                                _this.revertResize(originalTask);
                                 _this.$scope.week.update();
+                                _this.$log.error(err);
+                                _this.showErrorDialog();
                             });
-                        },
-                        onEventResize: function (args) {
-                            var event = {
-                                id: args.e.id(),
-                                start: args.newStart.toString(),
-                                end: args.newEnd.toString(),
-                                text: args.e.text(),
-                                borderColor: args.e.borderColor,
-                                barColor: args.e.barColor,
-                            };
-                            var originalTask;
-                            var tasks = _this.tasks.filter(function (task) {
-                                return task != null && task.scheduler.id === event.id;
-                            });
-                            if (tasks.length > 0 && event) {
-                                var task = tasks[0];
-                                originalTask = angular.copy(task);
-                                task.scheduler = event;
-                                _this.MasterResource.updateTask({ id: _this.masterId }, task).$promise.then(function (newTask) {
-                                    _this.tasks.splice(_this.tasks.indexOf(task), 1, newTask);
-                                }).catch(function (err) {
-                                    _this.revertResize(originalTask);
-                                    _this.$scope.week.update();
-                                    _this.$log.error(err);
-                                    _this.showErrorDialog();
-                                });
-                            }
-                        },
-                        onEventClick: function (args) {
                         }
                     };
                 };
                 AppointmentSchedulerComponentController.prototype.initNavigatorSmallConfig = function () {
                     var _this = this;
-                    this.navigatorSmallConfig = {
-                        selectMode: "week",
-                        showMonths: 1,
-                        skipMonths: 1,
-                        locale: "uk-ua",
-                        cellHeight: "40",
-                        cellWidth: "40",
-                        onTimeRangeSelected: function (args) {
-                            _this.weekConfig.startDate = args.day;
-                            _this.loadEvents(args.day);
-                        }
+                    this.navigatorSmallConfig = this.SchedulerService.getNavigatorSmallConfig();
+                    this.navigatorSmallConfig.onTimeRangeSelected = function (args) {
+                        _this.weekConfig.startDate = args.day;
+                        _this.loadEvents(args.day);
                     };
                 };
                 AppointmentSchedulerComponentController.prototype.initNavigatorConfig = function () {
                     var _this = this;
-                    this.navigatorConfig = {
-                        selectMode: "week",
-                        showMonths: 3,
-                        skipMonths: 3,
-                        locale: "uk-ua",
-                        cellHeight: "26.5",
-                        cellWidth: "26",
-                        onTimeRangeSelected: function (args) {
-                            _this.weekConfig.startDate = args.day;
-                            _this.loadEvents(args.day);
-                        }
+                    this.navigatorConfig = this.SchedulerService.getNavigatorConfig();
+                    this.navigatorConfig.onTimeRangeSelected = function (args) {
+                        _this.weekConfig.startDate = args.day;
+                        _this.loadEvents(args.day);
                     };
                 };
                 AppointmentSchedulerComponentController.prototype.getFavors = function () {
@@ -169,50 +135,9 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                         };
                     });
                 };
-                AppointmentSchedulerComponentController.prototype.updateTaskText = function (task) {
-                    task.scheduler.text = "";
-                    if (!task.appointment.name) {
-                        task.scheduler.text = task.scheduler.text + "<div>\u0417\u0430\u043C\u043E\u0432\u043D\u0438\u043A\u0430 \u043D\u0435 \u0432\u043A\u0430\u0437\u0430\u043D\u043E</div>";
-                    }
-                    else {
-                        task.scheduler.borderColor = "blue";
-                        task.scheduler.barColor = "blue";
-                        task.scheduler.text = "<div><span>\u0417\u0430\u043C\u043E\u0432\u043D\u0438\u043A:</span><span> " + task.appointment.name + "</span></div>";
-                    }
-                    if (task.appointment.isConsultation) {
-                        task.scheduler.text = task.scheduler.text + "<div>\u0417\u0430\u043F\u0438\u0441 \u043D\u0430 \u043A\u043E\u043D\u0441\u0443\u043B\u044C\u0442\u0430\u0446\u0456\u044E</div>";
-                        task.scheduler.borderColor = "yellow";
-                        task.scheduler.barColor = "yellow";
-                        task.appointment.favors = [];
-                    }
-                    else {
-                        if (task.appointment.favors.length == 0) {
-                            task.scheduler.text = task.scheduler.text + "<div>\u041F\u043E\u0441\u043B\u0443\u0433\u0438 \u043D\u0435 \u0432\u043A\u0430\u0437\u0430\u043D\u0456</div>";
-                        }
-                        else {
-                            var favors = task.appointment.favors.map(function (f) {
-                                return f.name;
-                            }).join(' ');
-                            task.scheduler.text = task.scheduler.text + ("<div><span>\u041F\u043E\u0441\u043B\u0443\u0433\u0438:</span><span> " + favors + "</span></div>");
-                        }
-                        if (task.appointment.favors.length == 0 || !task.appointment.name) {
-                            task.scheduler.borderColor = "red";
-                            task.scheduler.barColor = "red";
-                        }
-                    }
-                    if (task.appointment.isDayOff) {
-                        task.scheduler.text = "<div>\u0427\u0430\u0441 \u0431\u0435\u0437 \u0437\u0430\u043C\u043E\u0432\u043B\u0435\u043D\u044C</div>";
-                        task.scheduler.borderColor = "grey";
-                        task.scheduler.barColor = "grey";
-                    }
-                    if (task.appointment.isPreOrder) {
-                        task.scheduler.borderColor = "green";
-                        task.scheduler.barColor = "green";
-                    }
-                };
                 AppointmentSchedulerComponentController.prototype.updateMaster = function (task) {
                     var _this = this;
-                    this.updateTaskText(task);
+                    this.SchedulerService.updateTaskText(task);
                     this.MasterResource.updateTask({ id: this.masterId }, task).$promise.then(function (newTask) {
                         _this.tasks.splice(_this.tasks.indexOf(task), 1, newTask);
                         var tempEvents = _this.events.filter(function (e) {
@@ -261,7 +186,8 @@ System.register(["../../../resources/master.resource"], function(exports_1, cont
                         .ok('OK');
                     return this.$mdDialog.show(confirm);
                 };
-                AppointmentSchedulerComponentController.$inject = ["$log", '$timeout', "$mdDialog", master_resource_1.MasterResourceName, "$routeParams", '$scope'];
+                AppointmentSchedulerComponentController.$inject = ["$log", '$timeout', "$mdDialog", master_resource_1.MasterResourceName,
+                    "$routeParams", '$scope', scheduler_service_1.SchedulerServiceName];
                 return AppointmentSchedulerComponentController;
             }());
             exports_1("AppointmentSchedulerComponentController", AppointmentSchedulerComponentController);

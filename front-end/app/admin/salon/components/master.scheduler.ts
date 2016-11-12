@@ -1,6 +1,7 @@
 import {IMaster, MasterResourceName, IMasterResource, ITask, IScheduler} from "../../../resources/master.resource";
 import {ItServiceName, ItService} from "../../../users/services/it.service";
 import IMasterFavor = pg.models.IMasterFavor;
+import {SchedulerServiceName, ISchedulerService} from "../../../ui/scheduler.service";
 
 
 const template = `
@@ -158,71 +159,71 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 `;
 
 export interface ISchedulerScope extends ng.IScope {
-    week:any;
+    week: any;
 }
 class EditDialogController {
 
 
     static $inject = ['$mdDialog', "$mdToast", 'task'];
-    private services:any[];
-    private masters:IMaster[];
-    private masterPhoto:string;
-    private newService:IMasterFavor;
-    private appointment:any;
-    private originalAppointment:any;
+    private services: any[];
+    private masters: IMaster[];
+    private masterPhoto: string;
+    private newService: IMasterFavor;
+    private appointment: any;
+    private originalAppointment: any;
     private showAddFavors;
 
 
-    constructor(private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService, private task) {
-        this.appointment = angular.copy( task.appointment );
+    constructor(private $mdDialog: ng.material.IDialogService, private $mdToast: ng.material.IToastService, private task) {
+        this.appointment = angular.copy(task.appointment);
         this.originalAppointment = this.appointment;
         this.setServices();
     }
 
     deleteService(favor) {
-        this.appointment.favors.splice( this.appointment.favors.indexOf( favor ), 1 )
+        this.appointment.favors.splice(this.appointment.favors.indexOf(favor), 1)
     }
 
     addService() {
-        if (!this.appointment.favors.some( (f)=> {
+        if (!this.appointment.favors.some((f)=> {
                 return this.newService._id === f.id;
-            } )) {
-            this.appointment.favors.push( {
+            })) {
+            this.appointment.favors.push({
                 name: this.newService.favor.name,
                 photo: this.newService.favor.photo.url,
                 id: this.newService._id,
                 price: this.newService.price,
 
-            } );
+            });
             this.newService = null;
         } else {
-            this.$mdToast.showSimple( `Така послуга вже існує` );
+            this.$mdToast.showSimple(`Така послуга вже існує`);
         }
 
     }
 
     setServices() {
         this.showAddFavors = false;
-        this.masters.forEach( (m)=> {
+        this.masters.forEach((m)=> {
             if (m._id === this.appointment.master) {
                 this.services = m.services;
                 this.masterPhoto = m.photo.url;
                 this.showAddFavors = true;
                 return;
             }
-        } )
+        })
     }
 
     save() {
 
-        angular.extend( this.originalAppointment, this.appointment );
+        angular.extend(this.originalAppointment, this.appointment);
         this.task.appointment = this.originalAppointment;
-        this.$mdDialog.hide( {action: "save", task: this.task} );
+        this.$mdDialog.hide({action: "save", task: this.task});
 
     }
 
     delete() {
-        this.$mdDialog.hide( {action: "delete", task: this.task} );
+        this.$mdDialog.hide({action: "delete", task: this.task});
 
     }
 
@@ -232,27 +233,26 @@ class EditDialogController {
 }
 export class MasterSchedulerComponentController {
 
-    static $inject = ["$log", '$timeout', "$mdDialog", "$scope", MasterResourceName, "$routeParams", ItServiceName];
+    static $inject = ["$log", '$timeout', "$mdDialog", "$scope", MasterResourceName, "$routeParams", ItServiceName, SchedulerServiceName];
 
-    masterId:string;
-    masters:IMaster[];
-    events:IScheduler[];
-    weekConfig:any;
-    navigatorConfig:any;
-    navigatorSmallConfig:any;
-    tasks:ITask[];
-    photo:string;
-    mname:string;
-    mode:string;
+    masterId: string;
+    masters: IMaster[];
+    events: IScheduler[];
+    weekConfig: any;
+    navigatorConfig: any;
+    navigatorSmallConfig: any;
+    tasks: ITask[];
+    photo: string;
+    mode: string;
 
 
-    constructor(private $log:ng.ILogService, private $timeout:ng.ITimeoutService, private $mdDialog:ng.material.IDialogService,
-                private $scope:ISchedulerScope, private MasterResource:IMasterResource, private $routeParams:ng.route.IRouteParamsService,
-                private ItService:ItService) {
+    constructor(private $log: ng.ILogService, private $timeout: ng.ITimeoutService, private $mdDialog: ng.material.IDialogService,
+                private $scope: ISchedulerScope, private MasterResource: IMasterResource, private $routeParams: ng.route.IRouteParamsService,
+                private ItService: ItService, private SchedulerService: ISchedulerService) {
         this.events = [];
         this.tasks = [];
 
-        this.masters = this.MasterResource.query( {populate: 'services.favor'} );
+        this.masters = this.MasterResource.query({populate: 'services.favor'});
         if (this.$routeParams["id"]) {
             this.masterId = this.$routeParams["id"]
         }
@@ -263,103 +263,64 @@ export class MasterSchedulerComponentController {
         this.initWeekConfig();
         this.initNavigatorConfig();
         this.initNavigatorSmallConfig();
-        this.loadEvents( new Date() );
+        this.loadEvents(new Date());
     }
 
-
-    getStartAndEndOfWeek(date):Date[] {
-        date = new Date( date );
-        date.setUTCHours(0);
-        var day = date.getDay(),
-            diff = date.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
-        var start = new Date( date.setDate( diff ) );
-        var end = new Date( date.setDate( start.getDate() + 7 ) );
-        return [start, end];
-    }
 
     loadEvents(start) {
         if (this.masterId) {
-            var days = this.getStartAndEndOfWeek( start );
+            var days = this.SchedulerService.getStartAndEndOfWeek(start);
             var params = {
                 id: this.masterId,
                 start: days[0].toISOString(),
                 end: days[1].toISOString(),
             }
-            this.MasterResource.getTasks( params ).$promise.then( (tasks) => {
+            this.MasterResource.getTasks(params).$promise.then((tasks) => {
                 this.tasks = tasks;
-                this.events = this.tasks.map( (task)=> {
-                    return angular.copy( task.scheduler );
-                } );
+                this.events = this.tasks.map((task)=> {
+                    return angular.copy(task.scheduler);
+                });
 
-            } ).catch( (err)=> {
-                this.$log.error( err );
+            }).catch((err)=> {
+                this.$log.error(err);
                 this.showErrorDialog();
-            } );
+            });
         }
     }
 
     initWeekConfig() {
-        this.weekConfig = {
-            visible: true,
-            viewType: "Week",
-            angularAutoApply: true,
-            locale: "uk-ua",
-            cellHeight: "32",
-            businessBeginsHour: "10",
-            businessEndsHour: "19",
-            hideUntilInit: true,
-            headerDateFormat: 'dd.MM',
-            eventMoveHandling: 'Disabled',
-            eventResizeHandling: 'Disabled',
-            heightSpec: 'BusinessHours',
-            startDate:new Date(),
-            onEventClick: (args)=> {
-                var tasks = this.tasks.filter( (task)=> {
-                    return task != null && task.scheduler.id === args.e.id();
-                } );
-                if (tasks.length > 0) {
-                    this.createEditDialod( tasks[0] );
-                }
+        this.weekConfig = this.SchedulerService.getWeekConfig();
+        this.weekConfig.onEventClick = (args)=> {
+            var tasks = this.tasks.filter((task)=> {
+                return task != null && task.scheduler.id === args.e.id();
+            });
+            if (tasks.length > 0) {
+                this.createEditDialod(tasks[0]);
             }
         };
 
-        if (this.ItService.can( 'modifySalon' )) {
-            this.weekConfig.eventResizeHandling= 'Update';
+        if (this.ItService.can('modifySalon')) {
+            this.weekConfig.eventResizeHandling = 'Update';
             this.iniOnTimeRangeSelect();
             this.iniOnEventResize();
         }
     }
 
     initNavigatorSmallConfig() {
-        this.navigatorSmallConfig = {
-            selectMode: "week",
-            showMonths: 1,
-            skipMonths: 1,
-            locale: "uk-ua",
-            cellHeight: "40",
-            cellWidth: "40",
-            onTimeRangeSelected: (args)=> {
+        this.navigatorSmallConfig = this.SchedulerService.getNavigatorSmallConfig()
+        this.navigatorSmallConfig.onTimeRangeSelected= (args)=> {
                 this.weekConfig.startDate = args.day;
-                this.loadEvents( args.day );
-            }
+                this.loadEvents(args.day);
         };
     }
 
     initNavigatorConfig() {
-        this.navigatorConfig = {
-            selectMode: "week",
-            showMonths: 3,
-            skipMonths: 3,
-            locale: "uk-ua",
-            cellHeight: "26.5",
-            cellWidth: "26",
-            onTimeRangeSelected: (args)=> {
-                this.weekConfig.startDate = args.day;
-                this.loadEvents( args.day );
-            }
+        this.navigatorConfig = this.SchedulerService.getNavigatorConfig()
+        this.navigatorConfig.onTimeRangeSelected= (args)=> {
+            this.weekConfig.startDate = args.day;
+            this.loadEvents(args.day);
         };
     }
-   
 
     iniOnEventResize() {
         this.weekConfig.onEventResize = (args)=> {
@@ -373,21 +334,21 @@ export class MasterSchedulerComponentController {
             };
             var originalTask;
 
-            var tasks = this.tasks.filter( (task)=> {
+            var tasks = this.tasks.filter((task)=> {
                 return task != null && task.scheduler.id === event.id;
-            } );
+            });
             if (tasks.length > 0 && event) {
                 var task = tasks[0];
-                originalTask = angular.copy( task );
+                originalTask = angular.copy(task);
                 task.scheduler = event;
-                this.MasterResource.updateTask( {id: this.masterId}, task ).$promise.then( (newTask) => {
-                    this.tasks.splice( this.tasks.indexOf( task ), 1, newTask );
-                } ) .catch( (err)=> {
-                    this.revertResize( originalTask );
+                this.MasterResource.updateTask({id: this.masterId}, task).$promise.then((newTask) => {
+                    this.tasks.splice(this.tasks.indexOf(task), 1, newTask);
+                }) .catch((err)=> {
+                    this.revertResize(originalTask);
                     this.$scope.week.update();
-                    this.$log.error( err );
+                    this.$log.error(err);
                     this.showErrorDialog();
-                } );
+                });
             }
         }
     }
@@ -408,18 +369,18 @@ export class MasterSchedulerComponentController {
                     id: DayPilot.guid()
                 }
             };
-            this.MasterResource.addTask( {id: this.masterId}, params ).$promise.then( (task) => {
-                this.tasks.push( task );
-                this.events.push( task.scheduler );
+            this.MasterResource.addTask({id: this.masterId}, params).$promise.then((task) => {
+                this.tasks.push(task);
+                this.events.push(task.scheduler);
                 this.$scope.week.update();
-            } );
+            });
 
 
         };
     }
 
     createEditDialod(task) {
-        this.$mdDialog.show( {
+        this.$mdDialog.show({
             template: editOrderDialogTemplate,
             controller: EditDialogController,
             controllerAs: '$ctrl',
@@ -429,21 +390,21 @@ export class MasterSchedulerComponentController {
                 task: task,
                 masters: this.masters
             },
-            parent: angular.element( document.body ),
+            parent: angular.element(document.body),
 
-        } ).then( (result) => {
+        }).then((result) => {
 
-            this.handleDialogResult( result );
-        } );
+            this.handleDialogResult(result);
+        });
     }
 
     handleDialogResult(result) {
         switch (result.action) {
             case "delete":
-                this.deleteMasterTask( result.task );
+                this.deleteMasterTask(result.task);
                 break;
             case "save":
-                this.updateMaster( result.task );
+                this.updateMaster(result.task);
 
                 break;
             default:
@@ -452,137 +413,90 @@ export class MasterSchedulerComponentController {
 
     }
 
-    updateTaskText(task) {
-        task.scheduler.text = ``;
-        if (!task.appointment.name) {
-            task.scheduler.text = task.scheduler.text + `<div>Замовника не вказано</div>`;
-        } else {
-            task.scheduler.borderColor = "blue";
-            task.scheduler.barColor = "blue";
-            task.scheduler.text = `<div><span>Замовник:</span><span> ${task.appointment.name}</span></div>`;
-        }
+    updateMaster(task: ITask) {
+        this.SchedulerService.updateTaskText(task);
 
-        if (task.appointment.isConsultation) {
-            task.scheduler.text = task.scheduler.text + `<div>Запис на консультацію</div>`;
-            task.scheduler.borderColor = "yellow";
-            task.scheduler.barColor = "yellow";
-            task.appointment.favors=[];
-        }
-        else {
-            if (task.appointment.favors.length == 0) {
-
-                task.scheduler.text = task.scheduler.text + `<div>Послуги не вказані</div>`;
-
-            } else {
-                var favors = task.appointment.favors.map((f)=> {
-                    return f.name;
-                }).join(' ');
-                task.scheduler.text = task.scheduler.text + `<div><span>Послуги:</span><span> ${favors}</span></div>`;
-            }
-            if (task.appointment.favors.length == 0 || !task.appointment.name) {
-                task.scheduler.borderColor = "red";
-                task.scheduler.barColor = "red";
-            }
-        }
-
-
-        if (task.appointment.isDayOff) {
-            task.scheduler.text = `<div>Час без замовлень</div>`;
-            task.scheduler.borderColor = "grey";
-            task.scheduler.barColor = "grey";
-        }
-
-        if (task.appointment.isPreOrder) {
-            task.scheduler.borderColor = "green";
-            task.scheduler.barColor = "green";
-        }
-
-    }
-
-    updateMaster(task:ITask) {
-        this.updateTaskText( task );
-
-        this.MasterResource.updateTask( {id: this.masterId}, task ).$promise.then( (newTask) => {
-            this.tasks.splice( this.tasks.indexOf( task ), 1, newTask );
-            var tempEvents = this.events.filter( (e)=> {
+        this.MasterResource.updateTask({id: this.masterId}, task).$promise.then((newTask) => {
+            this.tasks.splice(this.tasks.indexOf(task), 1, newTask);
+            var tempEvents = this.events.filter((e)=> {
                 return e.id == newTask.scheduler.id;
-            } )
+            })
 
             if (tempEvents.length > 0 && event) {
 
-                this.events.splice( this.events.indexOf( tempEvents[0] ), 1, newTask.scheduler );
+                this.events.splice(this.events.indexOf(tempEvents[0]), 1, newTask.scheduler);
             }
-        } ).catch( (err)=> {
-            this.$log.error( err );
+        }).catch((err)=> {
+            this.$log.error(err);
             this.showErrorDialog();
-        } );
+        });
 
 
     }
 
     updateMasterOnResize(event) {
         var originalTask;
-        var tasks = this.tasks.filter( (task)=> {
+        var tasks = this.tasks.filter((task)=> {
             return task != null && task.scheduler.id === event.id;
-        } );
+        });
         if (tasks.length > 0 && event) {
             var task = tasks[0];
             originalTask = task;
             task.scheduler = event;
-            this.MasterResource.updateTask( {id: this.masterId}, task ).$promise.then( (newTask) => {
-                this.tasks.splice( this.tasks.indexOf( task ), 1, newTask );
-            } ) .catch( (err)=> {
-                this.revertResize( originalTask );
-                this.$log.error( err );
+            this.MasterResource.updateTask({id: this.masterId}, task).$promise.then((newTask) => {
+                this.tasks.splice(this.tasks.indexOf(task), 1, newTask);
+            }) .catch((err)=> {
+                this.revertResize(originalTask);
+                this.$log.error(err);
                 this.showErrorDialog();
-            } );
+            });
         }
     }
 
     revertResize(originalTask) {
 
-        var events = this.events.filter( (e)=> {
+        var events = this.events.filter((e)=> {
             return e.id == originalTask.scheduler.id;
-        } )
+        })
         if (events.length > 0) {
-            this.events.splice( this.events.indexOf( events[0] ), 1, originalTask.scheduler );
+            this.events.splice(this.events.indexOf(events[0]), 1, originalTask.scheduler);
 
         }
 
     }
 
-    deleteMasterTask(deleteTask:ITask) {
+    deleteMasterTask(deleteTask: ITask) {
 
-        this.MasterResource.deleteTask( {id: this.masterId, taskId: deleteTask._id} ).$promise.then( (master) => {
-            this.tasks.splice( this.tasks.indexOf( deleteTask ), 1 );
-            var events = this.events.filter( (e)=> {
+        this.MasterResource.deleteTask({id: this.masterId, taskId: deleteTask._id}).$promise.then((master) => {
+            this.tasks.splice(this.tasks.indexOf(deleteTask), 1);
+            var events = this.events.filter((e)=> {
                 return e.id == deleteTask.scheduler.id;
-            } )
+            })
             if (events.length > 0 && event) {
-                this.events.splice( this.events.indexOf( events[0] ), 1 );
+                this.events.splice(this.events.indexOf(events[0]), 1);
             }
-        } ).catch( (err)=> {
-            this.$log.error( err );
+        }).catch((err)=> {
+            this.$log.error(err);
             this.showErrorDialog();
 
-        } );
+        });
 
     }
 
     showErrorDialog() {
         let confirm = this.$mdDialog.alert()
-            .title( "Помилка" )
-            .textContent( `Спробуйте будь ласка пізніше` )
-            .ariaLabel( "Помилка" )
-            .ok( 'OK' )
-        return this.$mdDialog.show( confirm );
+            .title("Помилка")
+            .textContent(`Спробуйте будь ласка пізніше`)
+            .ariaLabel("Помилка")
+            .ok('OK')
+        return this.$mdDialog.show(confirm);
 
     }
 
 }
 
 export let MasterSchedulerComponentName = 'pgMasterScheduler';
-export let MasterSchedulerComponentOptions:ng.IComponentOptions = {
+export let MasterSchedulerComponentOptions: ng.IComponentOptions = {
     controller: MasterSchedulerComponentController,
     template: template
 
