@@ -15,6 +15,7 @@ import {
 import {courseDatesFilterName, courseDatesFilter} from "./course.dates.filter";
 import {MenuComponentName, MenuComponentOptions} from "./menu";
 import {FooterComponentName, FooterComponentOptions} from "./footer.component";
+import {SchedulerServiceName, SchedulerService} from "./scheduler.service";
 
 export let uiModule = angular.module('ui', [
     'youtube-embed',
@@ -22,6 +23,7 @@ export let uiModule = angular.module('ui', [
 ])
     .factory(MediaObserverFactoryName, MediaObserverFactory)
     .service(PagingServiceName, PagingService)
+    .service(SchedulerServiceName, SchedulerService)
     .component(adminPagingComponentName, adminPagingComponentOptions)
     .filter(courseDatesFilterName, courseDatesFilter)
     .directive(chooseFileButtonDirectiveName, chooseFileButtonDirectiveFactory)

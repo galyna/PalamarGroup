@@ -1,5 +1,5 @@
 import {MasterResourceName, IMasterResource, IMaster, IScheduler} from "../../resources/master.resource";
-import {AppointmentService, IAppointmentService} from "../servises/appointment.service";
+import {AppointmentServiceName, IAppointmentService} from "../servises/appointment.service";
 ;
 import {IAppointmentResource, AppointmentResourceName, IAppointment} from "../../resources/appointment.resource";
 import ITask = pg.models.ITask;
@@ -7,6 +7,7 @@ import IMasterFavor = pg.models.IMasterFavor;
 import {MediaObserverFactoryName, IMediaObserverFactory} from "../../ui/mediaObserver.service";
 import {IConstants} from "../../core/core.config";
 import {IRootScope} from "../../../typings";
+import {SchedulerServiceName, ISchedulerService} from "../../ui/scheduler.service";
 
 const template = `<div class=" description-container">
     <div class=" courses" layout-align="center center" layout="column"
@@ -227,9 +228,9 @@ const template = `<div class=" description-container">
 export class MasterComponentController {
 
     static $inject = ["$log", "$routeParams", MasterResourceName,
-        AppointmentService.componentName, AppointmentResourceName,
+        AppointmentServiceName, AppointmentResourceName,
         MediaObserverFactoryName, 'constants', "orderByFilter",
-        '$mdDialog', '$rootScope'];
+        '$mdDialog', '$rootScope', SchedulerServiceName];
 
     master: IMaster;
     events: IScheduler[];
@@ -243,13 +244,12 @@ export class MasterComponentController {
                 private AppointmentResource: IAppointmentResource,
                 private mediaObserver: IMediaObserverFactory,
                 private constants: IConstants, private orderByFilter: ng.IFilterOrderBy,
-                private $mdDialog: ng.material.IDialogService, private $rootScope: IRootScope,) {
-        this.events = [];
-
-
+                private $mdDialog: ng.material.IDialogService,
+                private $rootScope: IRootScope, private SchedulerService: ISchedulerService) {
     }
 
     $onInit() {
+        this.events = [];
         if (this.$routeParams["id"]) {
             this.MasterResource.get({id: this.$routeParams["id"], populate: 'services.favor'}).$promise
                 .then((master) => {
@@ -258,101 +258,58 @@ export class MasterComponentController {
                     this.master.works = this.orderByFilter(this.master.works, "order");
                 }).catch((err)=> {
                 this.$log.error(err);
-
             });
             this.loadEvents(new Date(), this.$routeParams["id"]);
         }
     }
 
 
-    getStartAndEndOfWeek(date): Date[] {
-        date = new Date(date);
-        date.setUTCHours(0);
-        var day = date.getDay(),
-            diff = date.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
-        var start = new Date(date.setDate(diff));
-        var end = new Date(date.setDate(start.getDate() + 7));
-        return [start, end];
-    }
-
     loadEvents(start, masterId) {
 
-        var days = this.getStartAndEndOfWeek(start);
+        var days = this.SchedulerService.getStartAndEndOfWeek(start);
         var params = {
             id: masterId,
             start: days[0].toISOString(),
             end: days[1].toISOString(),
         }
         this.MasterResource.getTasks(params).$promise.then((tasks) => {
-            this.initWeekConfig();
-            this.initNavigatorConfig();
-            this.initNavigatorSmallConfig();
-            this.iniOnTimeRangeSelect();
-            tasks = tasks.filter((task)=> {
-                return task.appointment.isPreOrder == false;
-            })
-            this.events = tasks.map((task)=> {
-                task.scheduler.borderColor = "gray";
-                task.scheduler.barColor = "gray";
-                task.scheduler.text = `<div><span>Запис</span></div>`;
-                return angular.copy(task.scheduler);
-            });
-
+            this.initTasks(tasks);
         }).catch((err)=> {
             this.$log.error(err);
 
         });
     }
 
+    initTasks(tasks) {
+        this.weekConfig = this.SchedulerService.getWeekConfig();
+        this.initNavigatorConfig();
+        this.initNavigatorSmallConfig();
+        this.iniOnTimeRangeSelect();
+        tasks = tasks.filter((task)=> {
+            return task.appointment.isPreOrder == false;
+        })
+        this.events = tasks.map((task)=> {
+            task.scheduler.borderColor = "gray";
+            task.scheduler.barColor = "gray";
+            task.scheduler.text = `<div><span>Запис</span></div>`;
+            return angular.copy(task.scheduler);
+        });
+    }
 
     initNavigatorSmallConfig() {
-        this.navigatorSmallConfig = {
-            selectMode: "week",
-            showMonths: 1,
-            skipMonths: 1,
-            locale: "uk-ua",
-            cellHeight: "40",
-            cellWidth: "40",
-            onTimeRangeSelected: (args)=> {
-                this.weekConfig.startDate = args.day;
-                this.loadEvents(args.day, this.master._id);
-            }
+        this.navigatorSmallConfig = this.SchedulerService.getNavigatorSmallConfig();
+        this.navigatorSmallConfig.onTimeRangeSelected = (args)=> {
+            this.weekConfig.startDate = args.day;
+            this.loadEvents(args.day, this.master._id);
         };
     }
 
     initNavigatorConfig() {
-        this.navigatorConfig = {
-            selectMode: "week",
-            showMonths: 3,
-            skipMonths: 3,
-            locale: "uk-ua",
-            cellHeight: "26.5",
-            cellWidth: "26",
-            onTimeRangeSelected: (args)=> {
-                this.weekConfig.startDate = args.day;
-                this.loadEvents(args.day, this.master._id);
-            }
+        this.navigatorConfig = this.SchedulerService.getNavigatorConfig();
+        this.navigatorConfig.onTimeRangeSelected = (args)=> {
+            this.weekConfig.startDate = args.day;
+            this.loadEvents(args.day, this.master._id);
         };
-    }
-
-    initWeekConfig() {
-        this.weekConfig = {
-            visible: true,
-            viewType: "Week",
-            angularAutoApply: true,
-            locale: "uk-ua",
-            cellHeight: "32",
-            businessBeginsHour: "10",
-            businessEndsHour: "19",
-            hideUntilInit: true,
-            headerDateFormat: 'dd.MM',
-            eventMoveHandling: 'Disabled',
-            eventResizeHandling: 'Disabled',
-            heightSpec: 'BusinessHours',
-
-        };
-
-
     }
 
     iniOnTimeRangeSelect() {

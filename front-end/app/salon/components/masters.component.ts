@@ -1,6 +1,6 @@
 import {MasterResourceName, IMasterResource, IMaster} from "../../resources/master.resource";
 import {IAppointmentResource, AppointmentResourceName} from "../../resources/appointment.resource";
-import {AppointmentService, IAppointmentService} from "../servises/appointment.service";
+import {AppointmentServiceName, IAppointmentService} from "../servises/appointment.service";
 
 const template = `<div class="courses description-container" layout="row" layout-align="center center">
     <div layout="column" layout-align="center center">
@@ -271,7 +271,7 @@ const template = `<div class="courses description-container" layout="row" layout
 
 export class MastersComponentController {
 
-    static $inject = ["$location", MasterResourceName, AppointmentService.componentName, AppointmentResourceName];
+    static $inject = ["$location", MasterResourceName, AppointmentServiceName, AppointmentResourceName];
     masters: IMaster[];
 
 

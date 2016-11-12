@@ -151,11 +151,10 @@ export class AppointmentFormComponentController {
 export interface IAppointmentService {
     onShowDialog(appointment: IAppointment): void;
 }
-
+export let AppointmentServiceName = 'appointmentService'
 export class AppointmentService implements IAppointmentService {
 
     static $inject = ['$mdDialog', '$rootScope', "$log"];
-    static componentName = 'appointmentService';
     private appointment: IAppointment;
 
     constructor(private $mdDialog: ng.material.IDialogService,

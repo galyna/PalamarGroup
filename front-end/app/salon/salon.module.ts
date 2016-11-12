@@ -17,20 +17,20 @@ import {SalonContactsComponentOptions, SalonContactsComponentName} from "./compo
 import {SalonTransformsComponentName, SalonTransformsComponentOptions} from "./components/salon.transforms.component";
 import {FavorComponentName, FavorComponentOptions} from "./components/favor.component";
 import {MastersComponentName, MastersComponentOptions} from "./components/masters.component";
-import {AppointmentService} from "./servises/appointment.service";
+import {AppointmentService, AppointmentServiceName} from "./servises/appointment.service";
 
 
-let app = angular.module( 'salon', ['ngMaterial', resourcesModule.name] )
-    .config( salonRoutes )
-    .service(AppointmentService.componentName, AppointmentService)
-    .component( SalonHomeComponentName, SalonHomeComponentOptions )
-    .component( FavorsComponentName, FavorsComponentOptions )
-    .component( FavorComponentName, FavorComponentOptions )
-    .component( MasterComponentName, MasterComponentOptions )
-    .component( MastersComponentName, MastersComponentOptions )
-    .component( SalonContactsComponentName, SalonContactsComponentOptions )
-    .component( ProductsComponentName, ProductsComponentOptions )
-    .component( SalonTransformsComponentName, SalonTransformsComponentOptions );
+let app = angular.module('salon', ['ngMaterial', resourcesModule.name])
+    .config(salonRoutes)
+    .service(AppointmentServiceName, AppointmentService)
+    .component(SalonHomeComponentName, SalonHomeComponentOptions)
+    .component(FavorsComponentName, FavorsComponentOptions)
+    .component(FavorComponentName, FavorComponentOptions)
+    .component(MasterComponentName, MasterComponentOptions)
+    .component(MastersComponentName, MastersComponentOptions)
+    .component(SalonContactsComponentName, SalonContactsComponentOptions)
+    .component(ProductsComponentName, ProductsComponentOptions)
+    .component(SalonTransformsComponentName, SalonTransformsComponentOptions);
 
 export let salonModule = app;
 

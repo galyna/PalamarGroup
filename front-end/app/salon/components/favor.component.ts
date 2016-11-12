@@ -1,7 +1,7 @@
 import {MasterResourceName, IMasterResource, IMaster} from "../../resources/master.resource";
 import {IAppointmentResource, AppointmentResourceName} from "../../resources/appointment.resource";
 import {FavorResourceName, IFavorResource, IFavor} from "../../resources/favor.resource";
-import {AppointmentService, IAppointmentService} from "../servises/appointment.service";
+import {AppointmentServiceName, IAppointmentService} from "../servises/appointment.service";
 
 const template = `<div class="courses description-container">
     <div layout="column" layout-align="center center">
@@ -153,7 +153,7 @@ export class FavorComponentController {
     static $inject = ["$routeParams",  "$location",
         FavorResourceName, MasterResourceName,
         AppointmentResourceName, "orderByFilter",
-        AppointmentService.componentName];
+        AppointmentServiceName];
 
     favor: IFavor;
     masters: IMaster[];
