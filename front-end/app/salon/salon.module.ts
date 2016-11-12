@@ -17,10 +17,12 @@ import {SalonContactsComponentOptions, SalonContactsComponentName} from "./compo
 import {SalonTransformsComponentName, SalonTransformsComponentOptions} from "./components/salon.transforms.component";
 import {FavorComponentName, FavorComponentOptions} from "./components/favor.component";
 import {MastersComponentName, MastersComponentOptions} from "./components/masters.component";
+import {AppointmentService} from "./servises/appointment.service";
 
 
 let app = angular.module( 'salon', ['ngMaterial', resourcesModule.name] )
     .config( salonRoutes )
+    .service(AppointmentService.componentName, AppointmentService)
     .component( SalonHomeComponentName, SalonHomeComponentOptions )
     .component( FavorsComponentName, FavorsComponentOptions )
     .component( FavorComponentName, FavorComponentOptions )
@@ -29,6 +31,7 @@ let app = angular.module( 'salon', ['ngMaterial', resourcesModule.name] )
     .component( SalonContactsComponentName, SalonContactsComponentOptions )
     .component( ProductsComponentName, ProductsComponentOptions )
     .component( SalonTransformsComponentName, SalonTransformsComponentOptions );
+
 export let salonModule = app;
 
 
