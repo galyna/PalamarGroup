@@ -26,7 +26,7 @@ let template = `<md-sidenav
     <ul class="pg-left-sidenav">
         <li ng-repeat="item in ::$ctrl.items" ng-if="item.visible()">
             <span ng-if="item.items">
-                <button class="md-button md-ink-ripple" ng-bind="item.text" ng-click="item.opened = !item.opened">
+                <button class="md-button md-ink-ripple" ng-bind="item.text" ng-click="$ctrl.goToRoot(item)">
                     <md-icon md-svg-src="navigation:ic_expand_more_24px"></md-icon>          
                 </button>
             </span>
@@ -46,22 +46,22 @@ export class LeftSidenavComponentController {
 
     static $inject = ['$mdSidenav', '$location', '$route', ItServiceName, 'constants'];
 
-    componentId:string;
-    items:any[];
-    showSalon:boolean;
+    componentId: string;
+    items: any[];
+    showSalon: boolean;
 
     constructor(private $mdSidenav: ng.material.ISidenavService,
-                private $location:ng.ILocationService, private $route: ng.route.IRouteService,
-                public it:ItService, private constants:IConstants) {
+                private $location: ng.ILocationService, private $route: ng.route.IRouteService,
+                public it: ItService, private constants: IConstants) {
         this.componentId = LeftSidenavComponentName;
         this.showSalon = constants.showSalon;
 
         this.items = [
             {
                 text: 'Академія',
-                opened: this.it.is( 'academyUser' ),
+                opened: this.it.is('academyUser'),
                 visible: ()=> {
-                    return this.it.is( 'academyUser' )
+                    return this.it.is('academyUser')
                 },
                 items: [
                     {
@@ -100,7 +100,7 @@ export class LeftSidenavComponentController {
                         }
                     },
                     {
-                        text:'Відгуки',
+                        text: 'Відгуки',
                         url: CommentsComponentUrl,
                         visible: ()=> {
                             return true;
@@ -110,9 +110,9 @@ export class LeftSidenavComponentController {
             },
             {
                 text: 'Салон',
-                opened: this.it.is( 'salonUser' ),
+                opened: this.it.is('salonUser'),
                 visible: ()=> {
-                    return this.it.is( 'salonUser' )
+                    return this.it.is('salonUser')
                 },
                 items: [
                     {
@@ -171,21 +171,33 @@ export class LeftSidenavComponentController {
                 text: 'Користувачі',
                 url: usersComponentUrl,
                 visible: ()=> {
-                    return this.it.is( 'admin' );
+                    return this.it.is('admin');
                 }
             }
 
         ]
     }
 
+    goToRoot(item) {
+        item.opened = !item.opened;
+        if (item.opened) {
+            this.items.forEach((it)=> {
+                if (it.text !== item.text) {
+                    it.opened = false;
+                }
+            })
+        }
+
+    }
+
     goTo(item) {
         if (!item.url) return;
-        this.$location.url( item.url );
+        this.$location.url(item.url);
         this.$route.reload();
         this.$mdSidenav(LeftSidenavComponentName).close();
     }
-    
-    active(item){
+
+    active(item) {
         return item.url === this.$location.path();
     }
 

@@ -60,7 +60,9 @@ const template = `<form name="saveUserForm" novalidate ng-submit="$ctrl.save(sav
             <md-button type="submit" class="md-raised">Зберегти</md-button>
         </div>
     </md-toolbar>
-    <md-card>
+        <md-tabs md-stretch-tabs="always" md-dynamic-height>
+        <md-tab label="Інфо">
+    <md-card flex>
         <md-card-content>
             <md-input-container class="md-block">
                 <label>Email</label>
@@ -85,6 +87,8 @@ const template = `<form name="saveUserForm" novalidate ng-submit="$ctrl.save(sav
             </md-button>
         </md-card-content>
     </md-card>
+     </md-tab>
+      </md-tabs>
 </form>
 `;
 
