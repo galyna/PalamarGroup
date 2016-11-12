@@ -4,46 +4,50 @@
 import {IAppointmentResource, AppointmentResourceName, IAppointment} from "../../resources/appointment.resource";
 import {IRootScope} from "../../../typings";
 
-const template =   `<md-dialog class="pop-form-dialog" aria-label="ЗАПИСАТИСЬ НА БЛОК" flex-sm="85" flex-xs="95" flex-gt-sm="65"
+const template = `<md-dialog class="pop-form-dialog" aria-label="ЗАПИСАТИСЬ НА БЛОК" flex-sm="85" flex-xs="95" flex-gt-sm="65"
            layout="column">
     <md-toolbar class="md-hue-2">
-        <div  class="md-toolbar-tools md-padding ">
-         <h2  hide show-gt-sm='true' class=" md-padding ">Записатись на прйом до майстра {{::vm.appointment.master.name}}</h2>
-            <h2 hide-gt-sm='true' class=" md-padding ">Записатись  до {{::vm.appointment.master.name}}</h2>
+        <div class="md-toolbar-tools md-padding ">
+            <h2 hide show-gt-sm='true' class=" md-padding ">Записатись на прйом до майстра
+                {{::vm.appointment.master.name}}</h2>
+            <h2 hide-gt-sm='true' class=" md-padding ">Записатись до {{::vm.appointment.master.name}}</h2>
             <span flex></span>
             <md-button class="md-icon-button" ng-click="::vm.cancel()">
                 <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>
             </md-button>
         </div>
     </md-toolbar>
-    <form name="orderForm" novalidate class="md-padding pop-form" ng-submit="::vm.save(orderForm)" flex>
+    <form name="orderForm" novalidate class="md-padding pop-form md-margin" ng-submit="::vm.save(orderForm)" flex>
         <md-dialog-content>
-            <md-dialog-content-body>
-
-              
-                <md-input-container class="md-block">
-                    <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
-                    <label for="name">Як до вас звертатись?</label>
-                    <input id="name" ng-model="vm.appointment.name" type="text" name="name" required>
-                    <div ng-messages="orderForm.name.$error" role="alert"
-                         ng-show="orderForm.$submitted && orderForm.name.$invalid" >
-                        <div class="md-headline" ng-message="required">
-                            Залиште хоч якусь інформацію про себе, бажано номер телефону
+            <md-dialog-content-body class=''>
+                <div  layout="row" layout-xs="column"  >
+                    <md-input-container flex="50" flex-xs="100" >
+                        <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
+                        <label for="name">Як до вас звертатись?</label>
+                        <input  id="name" ng-model="vm.appointment.name" type="text" name="name"  required>
+                        <div ng-messages="orderForm.name.$error" role="alert"
+                             ng-show="orderForm.$submitted && orderForm.name.$invalid">
+                            <div class="md-headline" ng-message="required">
+                                Залиште хоч якусь інформацію про себе, бажано номер телефону
+                            </div>
                         </div>
-                    </div>
-                </md-input-container>
-                <md-input-container class="md-block reduce-bottom-margin">
-                    <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
-                    <label for="phone">Телефон</label>
-                    <input id="phone" ng-model="vm.appointment.phone" type="text" name="phone">
 
-                </md-input-container>
-                <div flex="100" layout="row" layout-xs="columm">
+                    </md-input-container>
+                    <md-input-container flex="50" flex-xs="100" >
+                        <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
+                        <label for="phone">Телефон</label>
+                        <input id="phone" ng-model="vm.appointment.phone" type="text" name="phone">
+
+                    </md-input-container>
+                </div>
+                <div flex="100" layout="row"   >
                     <div flex="50" flex-xs="100" class="order-picker-container " layout="row">
-                        <md-datepicker md-open-on-focus class="order-date-picker"  md-min-date="vm.startDate" placeholder="Дата" flex ng-model="vm.appointment.date"
+                        <md-datepicker md-open-on-focus class="order-date-picker" md-min-date="vm.startDate"
+                                       placeholder="Дата" flex ng-model="vm.appointment.date"
                                        name="dateField"></md-datepicker>
                     </div>
-                    <md-input-container flex="50" flex-xs="100">
+                    <div flex="50" flex-xs="100" class="time-container " layout="row">
+                         <md-input-container flex>
                         <md-icon md-svg-icon="action:ic_schedule_24px"></md-icon>
 
                         <md-select ng-model="vm.dayHour" ng-model-options="{trackBy: '$value.id'}">
@@ -52,35 +56,35 @@ const template =   `<md-dialog class="pop-form-dialog" aria-label="ЗАПИСА�
                             </md-option>
                         </md-select>
                     </md-input-container>
+                    </div>
+                   
                 </div>
-                 <md-input-container class="md-block md-padding reduce-bottom-margin ">
-                      <md-checkbox  ng-model="vm.appointment.isConsultation">Записатись на консультацію</md-checkbox> 
-                </md-input-container>
-                <md-input-container ng-if="!vm.appointment.isConsultation"  class="md-block md-padding">
-                    <label for="service">Послуга</label>
-                    <md-select ng-model="vm.appointment.service"
-                               ng-model-options="{trackBy: '$value._id'}">
-                        <md-option ng-repeat="service in vm.appointment.master.services" ng-value="service">
-                            <div layout="row" layout-align=" start center  ">
-                                <img ng-src="{{service.favor.photo.url}}" class="avatar" alt="{{service.favor.name}}"/>
-                                <span>  {{ service.favor.name }}  </span></div>
-                        </md-option>
-                        </md-option>
-                    </md-select>
-                </md-input-container>
-                <md-input-container ng-if="!vm.appointment.master" class="md-block ">
-                    <label for="service">Послуга</label>
-                    <div layout="row" layout-align=" start center  ">
-                        <img ng-src="{{vm.appointment.favor.photo.url}}" class="avatar"
-                             alt="{{vm.appointment.favor.name}}"/>
-                        <span>  {{ vm.appointment.favor.name }}  </span></div>
-                </md-input-container>
-                <md-input-container class="md-block">
+                <div flex layout="row" layout-xs="column"  >
+                    <md-input-container  flex="50" flex-xs="100" ng-if="!vm.appointment.isConsultation">
+                        <label for="service">Послуга</label>
+                        <md-select ng-model="vm.appointment.service" 
+                                   ng-model-options="{trackBy: '$value._id'}">
+                            <md-option ng-repeat="service in vm.appointment.master.services" ng-value="service">
+                                <div layout="row" layout-align=" start center  ">
+                                    <img ng-src="{{service.favor.photo.url}}" class="avatar"
+                                         alt="{{service.favor.name}}"/>
+                                    <span>  {{ service.favor.name }}  </span></div>
+                            </md-option>
+                            </md-option>
+                        </md-select>
+
+                    </md-input-container>
+                    <md-input-container style="padding-bottom:0;" class='md-padding' flex="50" flex-xs="100" class=" reduce-bottom-margin">
+                        <md-checkbox  ng-model="vm.appointment.isConsultation">Записатись на консультацію</md-checkbox>
+
+                    </md-input-container>
+                </div>
+                <md-input-container class="md-block"  class='md-margin'>
                     <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
                     <label for="comment">Додаткова інформація</label>
                     <textarea id="comment" ng-model="vm.appointment.comment" name="comment"></textarea>
                 </md-input-container>
-                <p class=" md-headline">Після запису з Вами звяжеться адміністратор для підтвердження</p>
+
             </md-dialog-content-body>
         </md-dialog-content>
         <md-dialog-actions class="md-padding" layout="row" layout-align-xs="center center">
