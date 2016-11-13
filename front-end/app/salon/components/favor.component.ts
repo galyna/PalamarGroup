@@ -215,7 +215,7 @@ export class FavorComponentController {
 
 }
 
-export let FavorComponentUrl = "/favor/:id";
+export let FavorComponentUrl = "/service/:id";
 export let FavorComponentName = 'pgFavor';
 export let FavorComponentOptions = {
     template: template,

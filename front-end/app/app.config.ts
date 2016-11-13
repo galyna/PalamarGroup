@@ -3,8 +3,9 @@ import {IRootScope} from "../typings";
  * Created by Galyna on 16.03.2016.
  */
 
-materialConfig.$inject = ['uiGmapGoogleMapApiProvider','$mdThemingProvider'];
-export function materialConfig(uiGmapGoogleMapApiProvider,$mdThemingProvider) {
+materialConfig.$inject = ['uiGmapGoogleMapApiProvider','$mdThemingProvider','$locationProvider'];
+export function materialConfig(uiGmapGoogleMapApiProvider,$mdThemingProvider,$locationProvider) {
+    $locationProvider.hashPrefix('!');
     $mdThemingProvider.definePalette('amazingPaletteName', {
         '50': '000000',
         '100': '000000',

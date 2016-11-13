@@ -244,7 +244,7 @@ export class FavorsComponentController {
 
 
     showFavor(id) {
-        this.$location.path(`/favor/${id}`);
+        this.$location.path(`/service/${id}`);
     }
 
     showMaster(id) {
@@ -269,7 +269,7 @@ export class FavorsComponentController {
     }
 }
 
-export let FavorsComponentUrl = "/favors/:category";
+export let FavorsComponentUrl = "/services/:category";
 export let FavorsComponentName = 'pgFavors';
 export let FavorsComponentOptions = {
     template: template,

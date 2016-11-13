@@ -1,5 +1,6 @@
 import * as express from 'express';
 let passport = require("passport");
+let prerender = require('prerender-node')
 import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
 import * as slash from 'express-slash';
@@ -22,6 +23,7 @@ if (env !== 'prod') {
 
 mongoose.connect(config.mongoUrl);
 
+app.use(require('prerender-node').set('prerenderToken', 'gwcevm1MYEYi1TQwAHtn'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(multipart());
@@ -32,12 +34,12 @@ app.use('/api', api);
 
 //static content
 let pathes;
-if(env === 'prod'){
+if (env === 'prod') {
     pathes = {
         admin: '../front-end/dist/admin.html',
         all: '../front-end/dist'
     };
-}else {
+} else {
     pathes = {
         admin: '../front-end/admin.html',
         all: '../front-end'
@@ -50,7 +52,7 @@ app.use(slash());
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-    var err:any = new Error('Not Found');
+    var err: any = new Error('Not Found');
     err.status = 404;
     next(err);
 });
@@ -61,8 +63,8 @@ app.use((req, res, next) => {
 app.use((err: any, req, res, next) => {
     if (err.name === 'UnauthorizedError') {
         res.status(401);
-        res.json({"message" : err.name + ": " + err.message});
-    }else{
+        res.json({"message": err.name + ": " + err.message});
+    } else {
         next(err);
     }
 });
@@ -70,7 +72,7 @@ app.use((err: any, req, res, next) => {
 // development error handler
 // will print stacktrace
 if (env !== 'prod') {
-    app.use((err:any, req, res, next) => {
+    app.use((err: any, req, res, next) => {
         res.status(err.status || 500);
         res.json({
             message: err.message,
@@ -81,7 +83,7 @@ if (env !== 'prod') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use((err:any, req, res, next) => {
+app.use((err: any, req, res, next) => {
     res.status(err.status || 500);
     res.json({
         message: err.message,
@@ -89,7 +91,7 @@ app.use((err:any, req, res, next) => {
     });
 });
 
-app.listen(port, 'localhost', ()=>{
+app.listen(port, 'localhost', ()=> {
     console.log(`origin: ${config.origin}`);
     console.log(`port: ${port}`);
     console.log(`environment: ${env}`);

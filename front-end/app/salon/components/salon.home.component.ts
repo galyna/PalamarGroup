@@ -239,7 +239,7 @@ export class SalonHomeComponentController {
     }
 
     showFavors(id: String) {
-        this.$location.path(`/favors/${id}`);
+        this.$location.path(`/services/${id}`);
     }
 
 
