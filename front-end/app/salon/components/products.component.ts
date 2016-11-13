@@ -116,7 +116,7 @@ const template = `<div class="courses description-container products" layout="ro
                                 </md-card-title-text>
                             </md-card-title>
                             <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
-                                       ng-click="::$ctrl.showAppointmentDialog(product)">
+                                       >
                                 Замовити
                             </md-button>
                         </div>
