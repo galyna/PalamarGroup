@@ -2,9 +2,9 @@
 import {IRootScope} from "../typings";
 
 
-appRun.$inject = ['$rootScope', '$timeout', '$mdMedia'];
-export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
-    FastClick.attach(document.body);
+appRun.$inject = ['$rootScope', '$timeout', '$mdMedia','$window'];
+export function appRun($rootScope:IRootScope, $timeout, $mdMedia,$window) {
+    $window.FastClick.attach(document.body);
     $rootScope.socialParams = {
         host: "",
         target: "",
