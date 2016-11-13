@@ -22,9 +22,9 @@ const template = `<md-dialog class="pop-form-dialog" aria-label="ЗАПИСАТ�
             <md-dialog-content-body class=''>
                 <div layout="row" layout-xs="column">
                     <md-input-container flex="50" flex-xs="100">
-                        <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
+                        <md-icon  md-svg-icon="social:ic_person_24px"></md-icon>
                         <label for="name">Як до вас звертатись?</label>
-                        <input id="name" ng-model="vm.appointment.name" type="text" name="name" required>
+                        <input  id="name" ng-model="vm.appointment.name" type="text" name="name" required>
                         <div ng-messages="orderForm.name.$error" role="alert"
                              ng-show="orderForm.$submitted && orderForm.name.$invalid">
                             <div class="md-headline" ng-message="required">
@@ -34,9 +34,9 @@ const template = `<md-dialog class="pop-form-dialog" aria-label="ЗАПИСАТ�
 
                     </md-input-container>
                     <md-input-container flex="50" flex-xs="100">
-                        <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
+                        <md-icon   md-svg-icon="communication:ic_call_24px"></md-icon>
                         <label for="phone">Телефон</label>
-                        <input id="phone" ng-model="vm.appointment.phone" type="text" name="phone">
+                        <input   id="phone" ng-model="vm.appointment.phone" type="text" name="phone">
 
                     </md-input-container>
                 </div>
@@ -49,9 +49,9 @@ const template = `<md-dialog class="pop-form-dialog" aria-label="ЗАПИСАТ�
                     </div>
                     <div flex="50" flex-xs="100" class="time-container " layout="row">
                         <md-input-container flex>
-                            <md-icon md-svg-icon="action:ic_schedule_24px"></md-icon>
-
-                            <md-select ng-model="vm.dayHour" ng-model-options="{trackBy: '$value.id'}">
+                            <md-icon   md-svg-icon="action:ic_schedule_24px"></md-icon>
+                            <label for="time">Час</label>
+                            <md-select name="time"  ng-model="vm.dayHour" ng-model-options="{trackBy: '$value.id'}">
                                 <md-option ng-repeat="hour in vm.dayHours" ng-value="hour">
                                     {{ hour.value }}
                                 </md-option>
@@ -81,10 +81,10 @@ const template = `<md-dialog class="pop-form-dialog" aria-label="ЗАПИСАТ�
 
                     </md-input-container>
                 </div>
-                <md-input-container class="md-block" class='md-margin'>
-                    <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
+                <md-input-container  class="md-block" class='md-margin'>
+                    <md-icon   md-svg-icon="communication:ic_chat_24px"></md-icon>
                     <label for="comment">Додаткова інформація</label>
-                    <textarea id="comment" ng-model="vm.appointment.comment" name="comment"></textarea>
+                    <textarea   id="comment" ng-model="vm.appointment.comment" name="comment"></textarea>
                 </md-input-container>
 
             </md-dialog-content-body>

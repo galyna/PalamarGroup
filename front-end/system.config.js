@@ -32,9 +32,7 @@ System.config({
         'lodash': 'node_modules/lodash/lodash.js',
         'angular-simple-logger': 'node_modules/angular-simple-logger/dist/angular-simple-logger.min.js',
         'uiGmapgoogle-maps': 'node_modules/angular-google-maps/dist/angular-google-maps.js',
-        'googleapis': '//maps.googleapis.com/maps/api/js?sensor=false',
-        "angular-touch": 'node_modules/angular-touch/angular-touch.min.js',
-        'fastclick': 'node_modules/fastclick/lib/fastclick.js'
+        'googleapis': '//maps.googleapis.com/maps/api/js?sensor=false'
     },
 
     map: {
@@ -44,10 +42,6 @@ System.config({
         'angular-touch': {
             deps: ['angular'
             ],
-            format: "global"
-        },
-        'fastclick': {
-
             format: "global"
         },
 

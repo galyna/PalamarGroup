@@ -4,15 +4,6 @@ declare namespace angular.angularFileUpload {
     }  
 }
 
-declare module "aos" {
-    interface AOSConstructor {
-        new (): any,
-        init(options: any):any,
-        refresh():any
-    }
-    let AOS: AOSConstructor;
-    export = AOS;
-}
 
 declare module "jwt-decode" {
     interface IJwtDecode{
@@ -23,5 +14,3 @@ declare module "jwt-decode" {
 }
 
 declare var DayPilot: any;
-
-declare var FastClick: any;
