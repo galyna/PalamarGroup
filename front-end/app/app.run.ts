@@ -1,8 +1,10 @@
+///<reference path="../../typings/browser.extensions.d.ts"/>
 import {IRootScope} from "../typings";
 
 
 appRun.$inject = ['$rootScope', '$timeout', '$mdMedia'];
 export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
+    FastClick.attach(document.body);
     $rootScope.socialParams = {
         host: "",
         target: "",
@@ -21,10 +23,6 @@ export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
         var videoContainer = angular.element( document.querySelector( '#video-container' ) );
         videoContainer.append( videoTag );
     }
-
-
-
-
 
     $rootScope.$on( '$routeChangeStart', function () {
         //show loading gif

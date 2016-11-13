@@ -23,3 +23,5 @@ declare module "jwt-decode" {
 }
 
 declare var DayPilot: any;
+
+declare var FastClick: any;

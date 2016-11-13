@@ -18,6 +18,7 @@
     "angular-socialshare": "^2.1.12",
     "angular-touch": "^1.5.8",
     "angular-youtube-embed": "^1.2.0",
+    "fastclick": "^1.0.6",
     "jwt-decode": "^2.1.0",
     "lodash": "^4.16.4",
     "material-design-icons": "^2.2.3",

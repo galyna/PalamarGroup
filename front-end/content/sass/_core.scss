@@ -391,14 +391,14 @@ md-card.md-default-theme, md-card {
 
 .order-picker-container {
   position: relative;
-  height: 50px;
+  height: 80px;
 
   .order-date-picker {
     position: absolute;
     height: 100%;
     width: 100%;
     top: 0px;
-    left: 0px;
+    left: -5px;
     right: 0;
 
     .md-button.md-icon-button {
@@ -440,7 +440,9 @@ md-card.md-default-theme, md-card {
   .add-right-padding {
     padding-right: 15px;
   }
-
+  .add-left-margin {
+    margin-left:10px !important;
+  }
 }
 
 .navigator_default_todaybox {

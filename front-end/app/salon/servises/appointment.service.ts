@@ -20,11 +20,11 @@ const template = `<md-dialog class="pop-form-dialog" aria-label="ЗАПИСАТ�
     <form name="orderForm" novalidate class="md-padding pop-form md-margin" ng-submit="::vm.save(orderForm)" flex>
         <md-dialog-content>
             <md-dialog-content-body class=''>
-                <div  layout="row" layout-xs="column"  >
-                    <md-input-container flex="50" flex-xs="100" >
+                <div layout="row" layout-xs="column">
+                    <md-input-container flex="50" flex-xs="100">
                         <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
                         <label for="name">Як до вас звертатись?</label>
-                        <input  id="name" ng-model="vm.appointment.name" type="text" name="name"  required>
+                        <input id="name" ng-model="vm.appointment.name" type="text" name="name" required>
                         <div ng-messages="orderForm.name.$error" role="alert"
                              ng-show="orderForm.$submitted && orderForm.name.$invalid">
                             <div class="md-headline" ng-message="required">
@@ -33,36 +33,37 @@ const template = `<md-dialog class="pop-form-dialog" aria-label="ЗАПИСАТ�
                         </div>
 
                     </md-input-container>
-                    <md-input-container flex="50" flex-xs="100" >
+                    <md-input-container flex="50" flex-xs="100">
                         <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
                         <label for="phone">Телефон</label>
                         <input id="phone" ng-model="vm.appointment.phone" type="text" name="phone">
 
                     </md-input-container>
                 </div>
-                <div flex="100" layout="row"   >
+                <div flex="100" layout="row">
                     <div flex="50" flex-xs="100" class="order-picker-container " layout="row">
                         <md-datepicker md-open-on-focus class="order-date-picker" md-min-date="vm.startDate"
                                        placeholder="Дата" flex ng-model="vm.appointment.date"
-                                       name="dateField"></md-datepicker>
+                                       name="dateField"  ></md-datepicker>
+                        
                     </div>
                     <div flex="50" flex-xs="100" class="time-container " layout="row">
-                         <md-input-container flex>
-                        <md-icon md-svg-icon="action:ic_schedule_24px"></md-icon>
+                        <md-input-container flex>
+                            <md-icon md-svg-icon="action:ic_schedule_24px"></md-icon>
 
-                        <md-select ng-model="vm.dayHour" ng-model-options="{trackBy: '$value.id'}">
-                            <md-option ng-repeat="hour in vm.dayHours" ng-value="hour">
-                                {{ hour.value }}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
+                            <md-select ng-model="vm.dayHour" ng-model-options="{trackBy: '$value.id'}">
+                                <md-option ng-repeat="hour in vm.dayHours" ng-value="hour">
+                                    {{ hour.value }}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
                     </div>
-                   
+
                 </div>
-                <div flex layout="row" layout-xs="column"  >
-                    <md-input-container  flex="50" flex-xs="100" ng-if="!vm.appointment.isConsultation">
+                <div flex layout="row" layout-xs="column">
+                    <md-input-container flex="50" flex-xs="100" ng-if="!vm.appointment.isConsultation">
                         <label for="service">Послуга</label>
-                        <md-select ng-model="vm.appointment.service" 
+                        <md-select ng-model="vm.appointment.service"
                                    ng-model-options="{trackBy: '$value._id'}">
                             <md-option ng-repeat="service in vm.appointment.master.services" ng-value="service">
                                 <div layout="row" layout-align=" start center  ">
@@ -74,12 +75,13 @@ const template = `<md-dialog class="pop-form-dialog" aria-label="ЗАПИСАТ�
                         </md-select>
 
                     </md-input-container>
-                    <md-input-container style="padding-bottom:0;" class='md-padding' flex="50" flex-xs="100" class=" reduce-bottom-margin">
-                        <md-checkbox  ng-model="vm.appointment.isConsultation">Записатись на консультацію</md-checkbox>
+                    <md-input-container style="padding-bottom:0;" class='md-padding' flex="50" flex-xs="100"
+                                        class=" reduce-bottom-margin">
+                        <md-checkbox ng-model="vm.appointment.isConsultation">Записатись на консультацію</md-checkbox>
 
                     </md-input-container>
                 </div>
-                <md-input-container class="md-block"  class='md-margin'>
+                <md-input-container class="md-block" class='md-margin'>
                     <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
                     <label for="comment">Додаткова інформація</label>
                     <textarea id="comment" ng-model="vm.appointment.comment" name="comment"></textarea>
@@ -99,6 +101,7 @@ export class AppointmentFormComponentController {
     static $inject = ['$mdDialog', 'appointment'];
     private appointment: IAppointment;
     private originalAppointment: IAppointment;
+    datePattern = "/^(((0[1-9]|[12]\d|3[01])-(0[13578]|1[02])-((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)-(0[13456789]|1[012])-((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])-02-((19|[2-9]\d)\d{2}))|(29-02-((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/";
     startDate = new Date();
     dayHour: any;
     dayHours = [{id: 1, value: '10:00'}, {id: 2, value: '10:30'}, {id: 3, value: '11:00'}, {id: 4, value: '11:30'},
