@@ -165,7 +165,7 @@ const template = `<div class=" description-container">
 
                 </div>
             </div>
-            <div class="overlay-comments">
+            <div class="overlay-description">
             </div>
 
         </div>
