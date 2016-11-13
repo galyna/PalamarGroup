@@ -50,11 +50,30 @@ html {
   right: 0;
   left: 0;
   z-index: 1;
+
   -moz-background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+
+  background-position: center;
+  -moz-background-position: center;
+  -webkit-background-position: center;
+  -moz-background-position: center;
+  -o-background-position: center;
+
+  background-attachment: fixed;
+  -moz-background-attachment: fixed;
+  -webkit-background-attachment: fixed;
+  -moz-background-attachment: fixed;
+  -o-background-attachment: fixed;
+
+  background-repeat: no-repeat;
+  -moz-background-repeat: no-repeat;
+  -webkit-background-repeat: no-repeat;
+  -moz-background-repeat: no-repeat;
+  -o-background-repeat: no-repeat;
 
 }
 
@@ -278,12 +297,12 @@ md-card.md-default-theme, md-card {
       background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1203_802.jpg") no-repeat center center fixed;
     }
 
-    //@media (max-height: 640px) and (max-width: 960px) {
-    //  background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_963_642.jpg") no-repeat center center fixed;
-    //}
-    //@media (max-height: 400px) and (max-width: 720px) {
-    //  background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_723_482.jpg") no-repeat center center fixed;
-    //}
+    @media (max-height: 640px) and (max-width: 960px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_963_642.jpg") no-repeat center center fixed;
+    }
+    @media (max-height: 400px) and (max-width: 720px) {
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_723_482.jpg") no-repeat center center fixed;
+    }
 
   }
 
@@ -331,27 +350,28 @@ md-card.md-default-theme, md-card {
     -ms-filter: blur(1px);
     filter: blur(1px);
 
+
     @media (min-height: 300px) {
-      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_full.jpg") no-repeat center center fixed;
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_full.jpg") ;
     }
     @media (max-height: 1667px) and (max-width: 2500px) {
-      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_2500.jpg") no-repeat center center fixed;
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_2500.jpg") ;
     }
 
     @media (max-height: 1280px) and (max-width: 1920px) {
-      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_h.jpg") no-repeat center center fixed;
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_h.jpg");
     }
 
     @media (max-height: 1000px) and (max-width: 1500px) {
-      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924.jpg") no-repeat center center fixed;
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924.jpg");
     }
 
     @media (max-height: 802px) and (max-width: 1200px) {
-      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_1200.jpg") no-repeat center center fixed;
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_1200.jpg") ;
     }
 
     @media (max-height: 642px) and (max-width: 963px) {
-      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_963.jpg") no-repeat center center fixed;
+      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_963.jpg");
     }
 
   }
