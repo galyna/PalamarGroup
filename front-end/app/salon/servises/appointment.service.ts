@@ -75,7 +75,7 @@ const template = `<md-dialog class="pop-form-dialog" aria-label="ЗАПИСАТ�
                         </md-select>
 
                     </md-input-container>
-                    <md-input-container style="padding-bottom:0;" class='md-padding' flex="50" flex-xs="100"
+                    <md-input-container style="padding-bottom:0;padding-left: 5px;" class='md-padding' flex="50" flex-xs="100"
                                         class=" reduce-bottom-margin">
                         <md-checkbox ng-model="vm.appointment.isConsultation">Записатись на консультацію</md-checkbox>
 
