@@ -18,7 +18,7 @@ import 'uiGmapgoogle-maps';
 import 'daypilot-common';
 import 'daypilot-calendar';
 import 'daypilot-navigator';
-
+import 'angular-touch';
 import {uiModule} from './ui/ui.module';
 import {coursesModule} from './courses/courses.module';
 import {salonModule} from './salon/salon.module';
@@ -44,7 +44,7 @@ let app = angular.module('yuliaPalamarApp', [
     'youtube-embed',
     'uiGmapgoogle-maps',
     'daypilot',
-
+    'ngTouch',
 
     coreModule.name,
     resourcesModule.name,

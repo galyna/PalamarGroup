@@ -28,6 +28,7 @@ body {
 html {
   background-color: white;
   touch-action: manipulation;
+  -ms-touch-action: manipulation;
 }
 
 :focus {
