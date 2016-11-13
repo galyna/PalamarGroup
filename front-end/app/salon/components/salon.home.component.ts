@@ -118,7 +118,7 @@ const template = `<div class="courses-details description-container" layout="col
 
         <div layout="row" layout-align="center center" >
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="70">
-                <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+                <div class="courses-hear-forms" layout layout-wrap layout-align="center center">
                     <md-card md-whiteframe="6"  ng-repeat="photo in ::transform.photos track by $index"
                              class="md-margin "
                                ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
@@ -139,7 +139,7 @@ const template = `<div class="courses-details description-container" layout="col
         </md-button>
     </div>
     
-     <div layout="row" flex ng-if="$ctrl.brends.length>0 ">
+     <div layout="row" flex ng-if="$ctrl.brends.length>0 " class="md-padding">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap header-super">
                 <div class="md-display-2"> БРЕНДИ</div>
