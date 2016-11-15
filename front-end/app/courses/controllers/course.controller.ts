@@ -72,7 +72,7 @@ export class CourseController {
         this.$rootScope.socialParams.host = this.constants.host;
         this.$rootScope.socialParams.target = this.constants.host + "/academy/course/" + course._id;
         this.$rootScope.socialParams.image = this.constants.host + course.avatar;
-        this.$rootScope.socialParams.title = course.name;
+        this.$rootScope.socialParams.title ='Запрошуємо на '+ course.name;
         this.$rootScope.socialParams.description = course.description.slice(0, 920);
         ;
         this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
