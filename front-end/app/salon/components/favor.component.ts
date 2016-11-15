@@ -65,7 +65,7 @@ const template = `<div class="courses description-container">
     </div>
 
     <div ng-if="$ctrl.masters.length>0" class="course-bg " layout="column"
-         ng-repeat="master in $ctrl.masters track by $index" layout-align="center center" flex>
+         ng-repeat="master in $ctrl.masters | orderBy:['-level._id','order']" track by $index" layout-align="center center" flex>
         <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
             <md-card flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
@@ -152,7 +152,7 @@ export class FavorComponentController {
 
     static $inject = ["$routeParams",  "$location",
         FavorResourceName, MasterResourceName,
-        AppointmentResourceName, "orderByFilter",
+        AppointmentResourceName,
         AppointmentServiceName];
 
     favor: IFavor;
@@ -161,7 +161,6 @@ export class FavorComponentController {
     constructor(private $routeParams: ng.route.IRouteParamsService, private $location: ng.ILocationService,
                 private favorResource: IFavorResource, private masterResource: IMasterResource,
                 private AppointmentResource: IAppointmentResource,
-                private orderByFilter: ng.IFilterOrderBy,
                 private AppointmentService: IAppointmentService) {
 
     }
@@ -188,7 +187,7 @@ export class FavorComponentController {
 
                         });
                     })
-                    this.masters = this.orderByFilter(this.masters, "level._id", true);
+
                 });
         }
     }
