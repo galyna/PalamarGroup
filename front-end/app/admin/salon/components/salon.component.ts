@@ -149,9 +149,24 @@ export class SalonComponentController {
 
     }
 
+    uploadCollPhoto(dataUrl, name) {
+        if (!this.salon._id) {
+            this.salon.$save()
+                .then((master) => {
+                    this.$mdToast.showSimple( `Дані салону збережено` );
+                    this.photoSave(dataUrl, name, this.salon.photos);
+                })
+                .catch((err)=> {
+                    this.$log.error(err);
+                    this.showErrorDialog();
+                });
 
-    //TODO: add file param type
-    uploadCollPhoto(dataUrl, name, collection:IPhoto[]) {
+        } else {
+            this.photoSave(dataUrl, name, this.salon.photos)
+        }
+    }
+
+    photoSave(dataUrl, name, collection: IPhoto[]) {
         this.photoService.save( this.photoService.dataUrltoFile( dataUrl, name ) ).then( (url)=> {
             collection.push( {
                 name: "",
@@ -165,7 +180,6 @@ export class SalonComponentController {
             this.showWorkUpload = false;
         } );
     }
-
 
 
     deleteFromList(list:any[], item:any) {

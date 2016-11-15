@@ -322,52 +322,52 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
 class AdminCourseController {
 
     static $inject = ["$log", "$routeParams", "$mdToast", "$timeout",
-        PhotoServiceName, "CourseResource", "Upload", "$mdDialog"];
+        PhotoServiceName, "CourseResource", "$mdDialog"];
 
-    originalCourse:ICourse;
-    course:ICourse;
-    newDate:Date;
-    newProgram:string;
-    showHistoryPhotoUpload:boolean;
-    showFormPhotoUpload:boolean;
-    showAuthorPhotoUpload:boolean;
+    originalCourse: ICourse;
+    course: ICourse;
+    newDate: Date;
+    newProgram: string;
+    showHistoryPhotoUpload: boolean;
+    showFormPhotoUpload: boolean;
+    showAuthorPhotoUpload: boolean;
 
-    constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
-                private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
-                private photoService:PhotoService, private CourseResource:ICourseResource,
-                private Upload:ng.angularFileUpload.IUploadService,private $mdDialog:ng.material.IDialogService) {
+    constructor(private $log: ng.ILogService, private $routeParams: ng.route.IRouteParamsService,
+                private $mdToast: ng.material.IToastService, private $timeout: ng.ITimeoutService,
+                private photoService: PhotoService, private CourseResource: ICourseResource,
+                 private $mdDialog: ng.material.IDialogService) {
     }
 
     $onInit() {
         if (this.$routeParams["id"]) {
-            this.CourseResource.get( {id: this.$routeParams["id"]} ).$promise
-                .then( (course) => {
+            this.CourseResource.get({id: this.$routeParams["id"]}).$promise
+                .then((course) => {
                     this.originalCourse = course;
-                    this.course = angular.copy( this.originalCourse );
-                } ).catch( (err)=> {
-                this.$log.error( err );
+                    this.course = angular.copy(this.originalCourse);
+                }).catch((err)=> {
+                this.$log.error(err);
                 this.showErrorDialog();
-            } );
+            });
         } else {
             this.originalCourse = new this.CourseResource();
-            this.course = angular.copy( this.originalCourse );
+            this.course = angular.copy(this.originalCourse);
         }
     }
 
     cancel() {
-        this.course = angular.copy( this.originalCourse );
+        this.course = angular.copy(this.originalCourse);
     }
 
-    saveCourse(form:ng.IFormController) {
+    saveCourse(form: ng.IFormController) {
         if (form.$invalid) return;
         this.course.$save()
-            .then( (course) => {
-                this.$mdToast.showSimple( `курс ${course.name} збережено` );
-            } )
-            .catch( (err)=> {
-                this.$log.error( err );
+            .then((course) => {
+                this.$mdToast.showSimple(`курс ${course.name} збережено`);
+            })
+            .catch((err)=> {
+                this.$log.error(err);
                 this.showErrorDialog();
-            } );
+            });
     }
 
     deleteAuthorPhoto() {
@@ -375,125 +375,117 @@ class AdminCourseController {
     }
 
     addVideo(id) {
-        this.course.videos.push( {
+        if(!this.course.videos){this.course.videos= [];}
+        this.course.videos.push({
             name: "",
             url: id,
             order: 0
-        } );
+        });
         this.course.$save()
-            .then( (course) => {
-                this.$mdToast.showSimple( `курс ${course.name} збережено` );
-            } )
-            .catch( (err)=> {
-                this.$log.error( err );
+            .then((course) => {
+                this.$mdToast.showSimple(`курс ${course.name} збережено`);
+            })
+            .catch((err)=> {
+                this.$log.error(err);
                 this.showErrorDialog();
-            } );
+            });
     }
 
-    uploadAvatarPhoto(dataUrl, name, model):void {
-        this.Upload.upload<{url:string}>( {
-            method: 'POST',
-            url: '/api/photo',
-            data: {
-                file: this.Upload.dataUrltoBlob( dataUrl, name )
-            }
-        } ).then( (response)=> {
-            this.$timeout( ()=> {
-                model.avatar = response.data.url;
-            } );
-        } ).catch( function (err) {
-                this.showErrorDialog();
-            this.$log.debug( "fail upload file..." + err );
-        } ).finally( function () {
-            this.$timeout( function () {
+    uploadAvatarPhoto(dataUrl, name, model): void {
+        this.photoService.save( this.photoService.dataUrltoFile( dataUrl, name ) ).then( (url)=> {
+                model.avatar = url;
+        }).catch(function (err) {
+            this.showErrorDialog();
+            this.$log.debug("fail upload file..." + err);
+        }).finally(function () {
+            this.$timeout(function () {
                 this.showAuthorPhotoUpload = false;
-            } );
-        } );
+            });
+        });
     };
 
-    uploadAuthorPhoto(dataUrl, name, model):void {
-        this.Upload.upload<{url:string}>( {
-            method: 'POST',
-            url: '/api/photo',
-            data: {
-                file: this.Upload.dataUrltoBlob( dataUrl, name )
-            }
-
-        } ).then( (response)=> {
-            this.$timeout( ()=> {
-                model.author.photoUrl = response.data.url;
-            } );
-        } ).catch( function (err) {
-                this.showErrorDialog();
-            this.$log.debug( "fail upload file..." + err );
-        } ).finally( function () {
-            this.$timeout( function () {
+    uploadAuthorPhoto(dataUrl, name, model): void {
+        this.photoService.save( this.photoService.dataUrltoFile( dataUrl, name ) ).then( (url)=> {
+                model.author.photoUrl = url;
+        }).catch(function (err) {
+            this.showErrorDialog();
+            this.$log.debug("fail upload file..." + err);
+        }).finally(function () {
+            this.$timeout(function () {
                 this.showAuthorPhotoUpload = false;
-            } );
-        } );
+            });
+        });
     };
 
-    //TODO: add file param type
-    uploadCollPhoto(dataUrl, name, collection:IPhoto[]):void {
-        this.Upload.upload<{url:string}>( {
-            method: 'POST',
-            url: '/api/photo',
-            data: {
-                file: this.Upload.dataUrltoBlob( dataUrl, name )
-            }
+    uploadCollPhoto(dataUrl, name, collection: IPhoto[]) {
+        if (!this.course._id) {
+            this.course.$save()
+                .then((master) => {
+                    this.$mdToast.showSimple( `Дані салону збережено` );
+                    collection=[];
+                    this.photoSave(dataUrl, name, collection);
+                })
+                .catch((err)=> {
+                    this.$log.error(err);
+                    this.showErrorDialog();
+                });
 
-        } ).then( (response)=> {
-            this.$timeout( ()=> {
-                collection.push( {
-                    name: "",
-                    url: response.data.url,
-                    order: 0
-                } );
+        } else {
+            this.photoSave(dataUrl, name, collection)
+        }
+    }
+
+    photoSave(dataUrl, name, collection: IPhoto[]) {
+        this.photoService.save( this.photoService.dataUrltoFile( dataUrl, name ) ).then( (url)=> {
+            collection.push( {
+                name: "",
+                url: url,
+                order: 0
             } );
         } ).catch( (err)=> {
-                this.showErrorDialog();
-            this.$log.debug( "fail upload file..." + err );
+            this.$log.error( err );
+            this.showErrorDialog();
         } ).finally( ()=> {
-            this.$timeout( ()=> {
-                this.showFormPhotoUpload = false;
-                this.showHistoryPhotoUpload = false;
-            } );
+            this.showFormPhotoUpload = false;
+            this.showHistoryPhotoUpload = false;
         } );
     }
+
 
     //noinspection JSMethodCanBeStatic
     addDate() {
-        this.course.days.push( {date: this.newDate, program: this.newProgram} );
+        this.course.days.push({date: this.newDate, program: this.newProgram});
         this.newDate = null;
         this.newProgram = null;
     }
 
-    deleteDate(day:any) {
-        this.course.days.splice( this.course.days.indexOf( day ), 1 );
+    deleteDate(day: any) {
+        this.course.days.splice(this.course.days.indexOf(day), 1);
     }
 
     showErrorToast(text = 'Помилка, спробуйте пізніше') {
-        this.$mdToast.showSimple( text );
+        this.$mdToast.showSimple(text);
     }
 
     //noinspection JSMethodCanBeStatic
-    deleteFromList(list:any[], item:any) {
-        list.splice( list.indexOf( item ), 1 );
+    deleteFromList(list: any[], item: any) {
+        list.splice(list.indexOf(item), 1);
     }
+
     showErrorDialog() {
         let confirm = this.$mdDialog.alert()
-            .title( "Помилка" )
-            .textContent( `Спробуйте будь ласка пізніше` )
-            .ariaLabel( "Помилка" )
-            .ok( 'OK' )
-        return this.$mdDialog.show( confirm );
+            .title("Помилка")
+            .textContent(`Спробуйте будь ласка пізніше`)
+            .ariaLabel("Помилка")
+            .ok('OK')
+        return this.$mdDialog.show(confirm);
 
     }
 }
 
 export let AdminCourseComponentName = 'pgAdminCourse';
 export let AdminCourseComponentUrl = '/academy/course/:id?';
-export let AdminCourseComponentOptions:ng.IComponentOptions = {
+export let AdminCourseComponentOptions: ng.IComponentOptions = {
     template: template,
     controller: AdminCourseController
 };

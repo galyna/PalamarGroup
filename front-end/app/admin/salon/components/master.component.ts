@@ -6,7 +6,7 @@ import IMasterFavor = pg.models.IMasterFavor;
 import {IAppointment, AppointmentResourceName, IAppointmentResource} from "../../../resources/appointment.resource";
 import {IConstants} from "../../../core/core.config";
 
-const template:string = `<div flex layout="column">
+const template: string = `<div flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button" ng-href="#/salon/masters">
@@ -258,61 +258,61 @@ const template:string = `<div flex layout="column">
 export class MasterComponentController {
     static $inject = ["$log", "$routeParams", "$mdToast",
         "$timeout", PhotoServiceName, MasterResourceName,
-        "Upload", FavorResourceName, '$mdDialog',AppointmentResourceName, 'constants'];
+        "Upload", FavorResourceName, '$mdDialog', AppointmentResourceName, 'constants'];
 
-    originalMaster:IMaster;
-    master:IMaster;
-    showPhotoUpload:boolean;
-    showWorkUpload:boolean;
-    favors:IFavor[];
-    newService:IMasterFavor;
-    appointment:IAppointment;
-    levels:any[];
-    rates:any[];
+    originalMaster: IMaster;
+    master: IMaster;
+    showPhotoUpload: boolean;
+    showWorkUpload: boolean;
+    favors: IFavor[];
+    newService: IMasterFavor;
+    appointment: IAppointment;
+    levels: any[];
+    rates: any[];
 
-    constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
-                private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
-                private photoService:PhotoService, private MasterResource:IMasterResource,
-                private Upload:ng.angularFileUpload.IUploadService, private favorResource:IFavorResource,
-                private $mdDialog:ng.material.IDialogService,private AppointmentResource:IAppointmentResource,
-                private constants:IConstants) {
+    constructor(private $log: ng.ILogService, private $routeParams: ng.route.IRouteParamsService,
+                private $mdToast: ng.material.IToastService, private $timeout: ng.ITimeoutService,
+                private photoService: PhotoService, private MasterResource: IMasterResource,
+                private Upload: ng.angularFileUpload.IUploadService, private favorResource: IFavorResource,
+                private $mdDialog: ng.material.IDialogService, private AppointmentResource: IAppointmentResource,
+                private constants: IConstants) {
     }
 
     $onInit() {
         this.levels = this.constants.favorLevels;
         this.rates = this.constants.rates;
         this.favors = this.favorResource.query();
-        this.appointment=new this.AppointmentResource();
+        this.appointment = new this.AppointmentResource();
         if (this.$routeParams["id"]) {
-            this.MasterResource.get( {id: this.$routeParams["id"], populate: 'services.favor'} ).$promise
-                .then( (master) => {
+            this.MasterResource.get({id: this.$routeParams["id"], populate: 'services.favor'}).$promise
+                .then((master) => {
                     this.originalMaster = master;
-                    this.master = angular.copy( this.originalMaster );
-                } ).catch( (err)=> {
-                this.$log.error( err );
+                    this.master = angular.copy(this.originalMaster);
+                }).catch((err)=> {
+                this.$log.error(err);
                 this.showErrorDialog();
-            } );
+            });
         } else {
             this.originalMaster = new this.MasterResource();
-            this.master = angular.copy( this.originalMaster );
+            this.master = angular.copy(this.originalMaster);
         }
     }
 
 
     cancel() {
-        this.master = angular.copy( this.originalMaster );
+        this.master = angular.copy(this.originalMaster);
     }
 
     save() {
 
-        this.master.$save( {populate: 'services.favor'} )
-            .then( (master) => {
-                this.$mdToast.showSimple( `Дані майстра збережено` );
-            } )
-            .catch( (err)=> {
-                this.$log.error( err );
+        this.master.$save({populate: 'services.favor'})
+            .then((master) => {
+                this.$mdToast.showSimple(`Дані майстра збережено`);
+            })
+            .catch((err)=> {
+                this.$log.error(err);
                 this.showErrorDialog();
-            } );
+            });
     }
 
     deletePhoto() {
@@ -320,7 +320,7 @@ export class MasterComponentController {
     }
 
     deleteService(service) {
-        this.deleteFromList( this.master.services, service );
+        this.deleteFromList(this.master.services, service);
     }
 
     addService() {
@@ -330,80 +330,99 @@ export class MasterComponentController {
                 this.newService.price = this.newService.favor.defPrice;
             }
             if (!this.newService.level) {
-                this.newService.level =  this.levels[0];
+                this.newService.level = this.levels[0];
             }
-            if (this.master.services.some( (ser)=> {
+            if (this.master.services.some((ser)=> {
                     return ser.favor._id == this.newService.favor._id
-                } )) {
-                this.$mdToast.showSimple( `Така Послуга вже існує` );
+                })) {
+                this.$mdToast.showSimple(`Така Послуга вже існує`);
                 return;
             }
-            this.master.services.push( this.newService );
+            this.master.services.push(this.newService);
             this.newService = null;
         }
     }
-    
+
     addVideo(id) {
-        this.master.videos.push( {
+        if (!this.master.videos) {
+            this.master.videos = [];
+        }
+        this.master.videos.push({
             name: "",
             url: id,
             order: 0
-        } );
+        });
         this.master.$save()
-            .then( (course) => {
-                this.$mdToast.showSimple( `майстра ${course.name} збережено` );
-            } )
-            .catch( (err)=> {
-                this.$log.error( err );
+            .then((course) => {
+                this.$mdToast.showSimple(`майстра ${course.name} збережено`);
+            })
+            .catch((err)=> {
+                this.$log.error(err);
                 this.showErrorDialog();
-            } );
+            });
     }
 
     uploadPhoto(dataUrl, name, model) {
-        this.photoService.save( this.photoService.dataUrltoFile( dataUrl, name ) )
-            .then( (url)=> {
+        this.photoService.save(this.photoService.dataUrltoFile(dataUrl, name))
+            .then((url)=> {
                 model.photo = {
                     url: url
                 }
-            } ).catch( (err)=> {
-            this.$log.error( err );
+            }).catch((err)=> {
+            this.$log.error(err);
             this.showErrorDialog();
-        } ).finally( () => {
-            this.$timeout( () => {
+        }).finally(() => {
+            this.$timeout(() => {
                 this.showPhotoUpload = false;
-            } );
-        } );
+            });
+        });
     };
 
-    //TODO: add file param type
-    uploadCollPhoto(dataUrl, name, collection:IPhoto[]) {
-        this.photoService.save( this.photoService.dataUrltoFile( dataUrl, name ) ).then( (url)=> {
-            collection.push( {
+    uploadCollPhoto(dataUrl, name) {
+        if (!this.master._id) {
+            this.master.$save({populate: 'services.favor'})
+                .then((master) => {
+                    this.$mdToast.showSimple(`Дані майстра збережено`);
+
+                    this.photoSave(dataUrl, name, this.master.works);
+                })
+                .catch((err)=> {
+                    this.$log.error(err);
+                    this.showErrorDialog();
+                });
+
+        } else {
+            this.photoSave(dataUrl, name, this.master.works)
+        }
+    }
+
+    photoSave(dataUrl, name, collection: IPhoto[]) {
+        this.photoService.save(this.photoService.dataUrltoFile(dataUrl, name)).then((url)=> {
+            collection.push({
                 name: "",
                 url: url,
                 order: 0
-            } );
-        } ).catch( (err)=> {
-            this.$log.error( err );
+            });
+        }).catch((err)=> {
+            this.$log.error(err);
             this.showErrorDialog();
-        } ).finally( ()=> {
+        }).finally(()=> {
             this.showWorkUpload = false;
-        } );
+        });
     }
 
-
-    deleteFromList(list:any[], item:any) {
-        list.splice( list.indexOf( item ), 1 );
+    deleteFromList(list: any[], item: any) {
+        list.splice(list.indexOf(item), 1);
     }
 
 
     showErrorDialog() {
         let confirm = this.$mdDialog.alert()
-            .title( "Помилка" )
-            .textContent( `Спробуйте будь ласка пізніше` )
-            .ariaLabel( "Помилка" )
-            .ok( 'OK' )
-        return this.$mdDialog.show( confirm );
+            .title("Помилка")
+            .textContent(`Спробуйте будь ласка пізніше`)
+            .ariaLabel("Помилка")
+            .ok('OK')
+        return this.$mdDialog.show(confirm);
 
     }
 

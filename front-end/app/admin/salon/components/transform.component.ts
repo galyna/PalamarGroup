@@ -164,24 +164,43 @@ export class TransformComponentController {
     }
 
 
-    //TODO: add file param type
-    uploadCollPhoto(dataUrl, name, collection:IPhoto[]) {
-        this.photoService.save( this.photoService.dataUrltoFile( dataUrl, name ) ).then( (url)=> {
-            collection.push( {
+    uploadCollPhoto(dataUrl, name) {
+        if (!this.transform._id) {
+            this.transform.$save({populate: 'services.favor'})
+                .then((master) => {
+
+                    this.$mdToast.showSimple(`Дані майстра збережено`);
+                    this.photoSave(dataUrl, name, this.transform.photos);
+                })
+                .catch((err)=> {
+                    this.$log.error(err);
+                    this.showErrorDialog();
+                });
+
+        } else {
+            this.photoSave(dataUrl, name, this.transform.photos)
+        }
+    }
+
+    photoSave(dataUrl, name, collection: IPhoto[]) {
+        this.photoService.save(this.photoService.dataUrltoFile(dataUrl, name)).then((url)=> {
+            collection.push({
                 name: "",
                 url: url,
                 order: 0
-            } );
-        } ).catch( (err)=> {
-            this.$log.error( err );
+            });
+        }).catch((err)=> {
+            this.$log.error(err);
             this.showErrorDialog();
-        } ).finally( ()=> {
+        }).finally(()=> {
             this.showWorkUpload = false;
-        } );
+        });
     }
 
 
+
     addVideo(id) {
+        if(!this.transform.videos){this.transform.videos= [];}
         this.transform.videos.push( {
             name: "",
             url: id,
@@ -227,6 +246,8 @@ export class TransformComponentController {
         return this.$mdDialog.show( confirm );
 
     }
+
+
 }
 
 export let TransformComponentUrl ="/salon/transform/:id?";
