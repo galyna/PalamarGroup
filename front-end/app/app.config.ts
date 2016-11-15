@@ -5,7 +5,11 @@ import {IRootScope} from "../typings";
 
 materialConfig.$inject = ['uiGmapGoogleMapApiProvider','$mdThemingProvider','$locationProvider'];
 export function materialConfig(uiGmapGoogleMapApiProvider,$mdThemingProvider,$locationProvider) {
-   // $locationProvider.hashPrefix('!');
+    $locationProvider.html5Mode({
+        enabled: true
+    });
+    $locationProvider.hashPrefix('!');
+
     $mdThemingProvider.definePalette('amazingPaletteName', {
         '50': '000000',
         '100': '000000',

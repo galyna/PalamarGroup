@@ -230,7 +230,7 @@ export class MasterComponentController {
     static $inject = ["$log", "$routeParams", MasterResourceName,
         AppointmentServiceName, AppointmentResourceName,
         MediaObserverFactoryName, 'constants', "orderByFilter",
-        '$mdDialog', '$rootScope', SchedulerServiceName];
+        '$mdDialog', '$rootScope', SchedulerServiceName,'$location'];
 
     master: IMaster;
     events: IScheduler[];
@@ -245,7 +245,7 @@ export class MasterComponentController {
                 private mediaObserver: IMediaObserverFactory,
                 private constants: IConstants, private orderByFilter: ng.IFilterOrderBy,
                 private $mdDialog: ng.material.IDialogService,
-                private $rootScope: IRootScope, private SchedulerService: ISchedulerService) {
+                private $rootScope: IRootScope, private SchedulerService: ISchedulerService, private $location: ng.ILocationService) {
     }
 
     $onInit() {
@@ -258,6 +258,7 @@ export class MasterComponentController {
                     this.master.works = this.orderByFilter(this.master.works, "order");
                 }).catch((err)=> {
                 this.$log.error(err);
+                this.$location.path(`/masters`);
             });
             this.loadEvents(new Date(), this.$routeParams["id"]);
         }

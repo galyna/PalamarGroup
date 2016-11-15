@@ -1,6 +1,7 @@
 import * as express from 'express';
 let passport = require("passport");
 let prerender = require('prerender-node')
+let path = require('path');
 import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
 import * as slash from 'express-slash';
@@ -29,26 +30,40 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(multipart());
 
 //rest api routes
+
 app.use(passport.initialize());
-app.use('/api', api);
+
 
 //static content
 let pathes;
 if (env === 'prod') {
     pathes = {
         admin: '../front-end/dist/admin.html',
-        all: '../front-end/dist'
+        all: '../front-end/dist',
+        content:'../front-end/dist/content/',
+        index: '../front-end/dist/index.html'
+
     };
 } else {
     pathes = {
         admin: '../front-end/admin.html',
-        all: '../front-end'
+        all: '../front-end/',
+        content:'../front-end/content/',
+        index: `..${path.sep}front-end${path.sep}index.html`
     };
 }
 app.use('/admin', express.static(pathes.admin));
+app.use('/content', express.static(pathes.content));
 app.use('/', express.static(pathes.all));
 
+app.use('/api', api);
+
+app.get('/*', function (req, res) {
+    res.sendFile(path.resolve(pathes.index));
+});
+
 app.use(slash());
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -68,6 +83,7 @@ app.use((err: any, req, res, next) => {
         next(err);
     }
 });
+
 
 // development error handler
 // will print stacktrace

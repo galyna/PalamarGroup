@@ -102,7 +102,7 @@ export class SalonTransformsComponentController {
 
 }
 
-export let SalonTransformsComponentUrl = "/transforms";
+export let SalonTransformsComponentUrl = "/transformations";
 export let SalonTransformsComponentName = 'pgSalonTransforms';
 export let SalonTransformsComponentOptions = {
     template: template,

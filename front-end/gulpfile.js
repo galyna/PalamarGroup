@@ -70,10 +70,11 @@ gulp.task('test', function () {
 
 gulp.task('prod:js', ['prod:move_js', 'prod:build_js']);
 
-gulp.task('prod:move_js', () => {
+gulp.task('prod:move_js', function() {
     gulp.src(['node_modules/systemjs/dist/system.js', 'system.config.js'])
-        .pipe(gulp.dest('dist/'));
-});
+    .pipe(gulp.dest('dist/'));
+})
+
 
 gulp.task('prod:build_js', function () {
     let systemConfig = './system.config.js',
@@ -117,6 +118,8 @@ gulp.task('prod:content', function () {
     gulp.src(['content/**/*', '!content/sass/**/*', '!content/sass/'])
         .pipe(gulp.dest('dist/content/'));
     gulp.src(['palamar_logo.ico']).pipe(gulp.dest('dist'));
+    gulp.src(['robots.txt']).pipe(gulp.dest('dist'));
+    gulp.src(['sitemap.xml']).pipe(gulp.dest('dist'));
 });
 
 gulp.task('prod:clean', function () {

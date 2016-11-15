@@ -4,12 +4,12 @@ System.register(['./controllers/courses.controller', './controllers/course.contr
     var courses_controller_1, course_controller_1, course_calendar_component_1, academy_contacts_component_1;
     function coursesRoutes($routeProvider) {
         $routeProvider
-            .when('/courses', {
+            .when('/academy', {
             templateUrl: 'app/courses/views/coursrs.cards.html',
             controller: courses_controller_1.CoursesController.componentName,
             controllerAs: "vm"
         })
-            .when('/course/:id', {
+            .when('/academy/course/:id', {
             templateUrl: 'app/courses/views/courses.details.html',
             controller: course_controller_1.CourseController.componentName,
             controllerAs: "vm"

@@ -73,7 +73,7 @@ System.register(["../../resources/course.resource"], function(exports_1, context
                     angular.forEach(this.coursesDateMap, function (course) {
                         var cDate = course.date;
                         if (cDate.getDate() == date.getDate() && cDate.getFullYear() == date.getFullYear() && cDate.getMonth() == date.getMonth()) {
-                            _this.$location.url('/course/' + course.coursesId);
+                            _this.$location.url('/academy/course/' + course.coursesId);
                             return;
                         }
                     });
@@ -82,7 +82,7 @@ System.register(["../../resources/course.resource"], function(exports_1, context
                 return CalendarComponentController;
             }());
             exports_1("CalendarComponentController", CalendarComponentController);
-            exports_1("CourseCalendarComponentUrl", CourseCalendarComponentUrl = "/calendar");
+            exports_1("CourseCalendarComponentUrl", CourseCalendarComponentUrl = "/academy/calendar");
             exports_1("CourseCalendarComponentName", CourseCalendarComponentName = 'pgCourseCalendar');
             exports_1("CourseCalendarComponentOptions", CourseCalendarComponentOptions = {
                 template: template,

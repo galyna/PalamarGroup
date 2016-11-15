@@ -1,0 +1,17 @@
+User-agent: Yandex
+Disallow: /admin.html
+Disallow: /content/
+Host: palamar.com.ua
+
+User-agent: Google
+Disallow: /content/
+Disallow: /admin.html
+
+
+User-agent: *
+Crawl-delay:30
+Disallow: /admin.html
+Disallow: /content/
+
+
+Sitemap: http://palamar.com.ua/sitemap.xml

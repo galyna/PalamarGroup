@@ -150,7 +150,7 @@ const template = `<div class="courses description-container">
 
 export class FavorComponentController {
 
-    static $inject = ["$routeParams",  "$location",
+    static $inject = ["$routeParams", "$location",
         FavorResourceName, MasterResourceName,
         AppointmentResourceName,
         AppointmentServiceName];
@@ -171,7 +171,10 @@ export class FavorComponentController {
                 .then((favor) => {
                     this.favor = favor;
 
-                });
+                }).catch((err)=> {
+                this.$location.path(`/services`);
+            });
+
             this.masterResource.query({
                 populate: 'services.favor'
             }).$promise
@@ -187,8 +190,8 @@ export class FavorComponentController {
 
                         });
                     })
-
                 });
+
         }
     }
 

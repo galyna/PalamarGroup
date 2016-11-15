@@ -6,12 +6,12 @@ import {AcademyContactComponentUrl} from "./components/academy.contacts.componen
 coursesRoutes.$inject = ['$routeProvider'];
 export function coursesRoutes($routeProvider:ng.route.IRouteProvider) {
     $routeProvider
-        .when('/courses', {
+        .when('/academy', {
             templateUrl: 'app/courses/views/coursrs.cards.html',
             controller: CoursesController.componentName,
             controllerAs: "vm"
         })
-        .when('/course/:id', {
+        .when('/academy/course/:id', {
             templateUrl: 'app/courses/views/courses.details.html',
             controller: CourseController.componentName,
             controllerAs: "vm"

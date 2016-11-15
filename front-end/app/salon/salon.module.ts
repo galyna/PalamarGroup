@@ -18,6 +18,7 @@ import {SalonTransformsComponentName, SalonTransformsComponentOptions} from "./c
 import {FavorComponentName, FavorComponentOptions} from "./components/favor.component";
 import {MastersComponentName, MastersComponentOptions} from "./components/masters.component";
 import {AppointmentService, AppointmentServiceName} from "./servises/appointment.service";
+import {FavorsMastersComponentOptions, FavorsMastersComponentName} from "./components/favors.masters.component";
 
 
 let app = angular.module('salon', ['ngMaterial', resourcesModule.name])
@@ -25,6 +26,7 @@ let app = angular.module('salon', ['ngMaterial', resourcesModule.name])
     .service(AppointmentServiceName, AppointmentService)
     .component(SalonHomeComponentName, SalonHomeComponentOptions)
     .component(FavorsComponentName, FavorsComponentOptions)
+    .component(FavorsMastersComponentName, FavorsMastersComponentOptions)
     .component(FavorComponentName, FavorComponentOptions)
     .component(MasterComponentName, MasterComponentOptions)
     .component(MastersComponentName, MastersComponentOptions)

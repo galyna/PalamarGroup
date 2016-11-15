@@ -114,7 +114,7 @@ export class CalendarComponentController {
         angular.forEach( this.coursesDateMap, (course) => {
             var cDate =  course.date ;
             if (cDate.getDate() == date.getDate() && cDate.getFullYear() == date.getFullYear() && cDate.getMonth() == date.getMonth()) {
-                this.$location.url( '/course/' + course.coursesId );
+                this.$location.url( '/academy/course/' + course.coursesId );
                 return;
             }
 
@@ -123,7 +123,7 @@ export class CalendarComponentController {
     }
 }
 
-export let CourseCalendarComponentUrl = "/calendar";
+export let CourseCalendarComponentUrl = "/academy/calendar";
 export let CourseCalendarComponentName = 'pgCourseCalendar';
 export let CourseCalendarComponentOptions = {
     template: template,

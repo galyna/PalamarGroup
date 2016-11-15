@@ -47,6 +47,9 @@ export class CourseController {
             course.hearFormsPhotos = this.orderByFilter(course.hearFormsPhotos, "order");
             course.historyPhotos = this.orderByFilter(course.historyPhotos, "order");
 
+        }).catch((err)=> {
+            this.$log.error(err);
+            this.$location.path(`/academy`);
         });
 
         this.order = new OrderResource();
@@ -67,7 +70,7 @@ export class CourseController {
 
     setSocialParams(course: ICourse) {
         this.$rootScope.socialParams.host = this.constants.host;
-        this.$rootScope.socialParams.target = this.constants.host + "/#/course/" + course._id;
+        this.$rootScope.socialParams.target = this.constants.host + "/academy/course/" + course._id;
         this.$rootScope.socialParams.image = this.constants.host + course.avatar;
         this.$rootScope.socialParams.title = course.name;
         this.$rootScope.socialParams.description = course.description.slice(0, 920);
