@@ -7,43 +7,43 @@
 
 
     <url>
-        <loc>http://palamar.com.ua/</loc>
+        <loc>http://palamar.com.ua</loc>
         <lastmod>2016-11-15T13:26:40+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://palamar.com.ua/masters</loc>
+        <loc>http://palamar.com.ua/beauty-parlour/masters</loc>
         <lastmod>2016-11-15T13:26:40+00:00</lastmod>
         <changefreq>Weekly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>http://palamar.com.ua/services/:category</loc>
+        <loc>http://palamar.com.ua/beauty-parlour/services</loc>
         <lastmod>2016-11-15T13:26:40+00:00</lastmod>
         <changefreq>Weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>http://palamar.com.ua/products</loc>
+        <loc>http://palamar.com.ua/beauty-parlour/products</loc>
         <lastmod>2016-11-15T13:26:40+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://palamar.com.ua/transformations</loc>
+        <loc>http://palamar.com.ua/beauty-parlour/transformations</loc>
         <lastmod>2016-11-15T13:26:40+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>http://palamar.com.ua/salon/contacts</loc>
+        <loc>http://palamar.com.ua/beauty-parlour/contacts</loc>
         <lastmod>2016-11-15T13:26:40+00:00</lastmod>
         <changefreq>Weekly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>http://palamar.com.ua/courses</loc>
+        <loc>http://palamar.com.ua/academy</loc>
         <lastmod>2016-11-15T13:26:40+00:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.8</priority>
