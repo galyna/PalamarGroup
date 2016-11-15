@@ -148,7 +148,7 @@ export class AcademyContactComponentController {
     }
 
 }
-export let AcademyContactComponentUrl = "/academycontact";
+export let AcademyContactComponentUrl = "/academy/contact";
 export let AcademyContactComponentName = 'pgAcademyContact';
 export let AcademyContactComponentOptions = {
     template: template,
