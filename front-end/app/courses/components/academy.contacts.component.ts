@@ -29,7 +29,7 @@ const template = `<div class="salon-contacts description-container" layout="colu
                          flex layout="column" layout-align="center center">
                         <md-card-title flex>
                             <md-card-title-text layout-align="space-around center">
-                                <div class="md-title">Координатор</div>
+                                <div class="md-title">Координатор Академії</div>
                                 <div class="md-display-1">{{::contact.name}}</div>
                                 <div class="descr-container">
                                     <div class="md-display-1">{{::contact.phone}}</div>
@@ -47,7 +47,7 @@ const template = `<div class="salon-contacts description-container" layout="colu
                          flex layout="column" layout-align="center center">
                         <md-card-title flex>
                             <md-card-title-text layout-align="space-around center">
-                                <div class="md-title">Координатор</div>
+                                <div class="md-title">Координатор Академії</div>
                                 <div class="md-display-1">{{::contact.name}}</div>
                                 <div class="descr-container">
                                     <div class="md-display-1">{{::contact.phone}}</div>
@@ -70,7 +70,7 @@ const template = `<div class="salon-contacts description-container" layout="colu
                          flex layout="column" layout-align="center center">
                         <md-card-title flex>
                             <md-card-title-text layout-align="space-around center">
-                                <div class="md-title">Координатор</div>
+                                <div class="md-title">Координатор Академії</div>
                                 <div class="md-display-1">{{::contact.name}}</div>
                                 <div class="descr-container">
                                     <div class="md-display-1">{{::contact.phone}}</div>
@@ -92,7 +92,8 @@ const template = `<div class="salon-contacts description-container" layout="colu
                          layout="column" layout-align="space-around center">
                         <md-card-title>
                             <md-card-title-text>
-                                <div class="md-headline">{{::contact.name}}</div>
+                             <div class="md-headline ">Координатор Академії</div>
+                                <div class="md-headline md-padding">{{::contact.name}}</div>
                                 <div class="md-headline">{{::contact.phone}}</div>
                             </md-card-title-text>
                         </md-card-title>
