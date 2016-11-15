@@ -289,7 +289,7 @@ export class ProductsComponentController {
     }
 }
 
-export let ProductsComponentUrl = "/products";
+export let ProductsComponentUrl = "/beauty-parlour/products";
 export let ProductsComponentName = 'pgProducts';
 export let ProductsComponentOptions = {
     template: template,

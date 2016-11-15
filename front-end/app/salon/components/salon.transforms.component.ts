@@ -81,7 +81,7 @@ export class SalonTransformsComponentController {
 
     setSocialParams(photo) {
         this.$rootScope.socialParams.host = this.constants.host;
-        this.$rootScope.socialParams.target = this.constants.host + "/#"+SalonTransformsComponentUrl;
+        this.$rootScope.socialParams.target = this.constants.host +SalonTransformsComponentUrl;
         this.$rootScope.socialParams.image = this.constants.host + photo.url;
         this.$rootScope.socialParams.title = 'Перевтілення';
         this.socialParams = angular.copy( this.$rootScope.socialParams, this.socialParams );
@@ -102,7 +102,7 @@ export class SalonTransformsComponentController {
 
 }
 
-export let SalonTransformsComponentUrl = "/transformations";
+export let SalonTransformsComponentUrl = "/beauty-parlour/transformations";
 export let SalonTransformsComponentName = 'pgSalonTransforms';
 export let SalonTransformsComponentOptions = {
     template: template,

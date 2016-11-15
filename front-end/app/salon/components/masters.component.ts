@@ -286,7 +286,7 @@ export class MastersComponentController {
     }
 
     showMaster(id) {
-        this.$location.path(`/master/${id}`);
+        this.$location.path(`/beauty-parlour/master/${id}`);
     }
 
     showAppointmentDialog(master, service = null) {
@@ -298,7 +298,7 @@ export class MastersComponentController {
 
 }
 
-export let MastersComponentUrl = "/masters";
+export let MastersComponentUrl = "/beauty-parlour/masters";
 export let MastersComponentName = 'pgMasters';
 export let MastersComponentOptions = {
     template: template,

@@ -172,7 +172,7 @@ export class FavorComponentController {
                     this.favor = favor;
 
                 }).catch((err)=> {
-                this.$location.path(`/services`);
+                this.$location.path(`/beauty-parlour/services`);
             });
 
             this.masterResource.query({
@@ -196,7 +196,7 @@ export class FavorComponentController {
     }
 
     showMaster(id) {
-        this.$location.path(`/master/${id}`);
+        this.$location.path(`/beauty-parlour/master/${id}`);
     }
 
     showAppointmentDialog(master) {
@@ -217,7 +217,7 @@ export class FavorComponentController {
 
 }
 
-export let FavorComponentUrl = "/service/:id";
+export let FavorComponentUrl = "/beauty-parlour/service/:id";
 export let FavorComponentName = 'pgFavor';
 export let FavorComponentOptions = {
     template: template,

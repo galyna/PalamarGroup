@@ -76,7 +76,7 @@ export class FavorsComponentController {
 
 
     showFavor(id) {
-        this.$location.path(`/service/${id}`);
+        this.$location.path(`/beauty-parlour/service/${id}`);
     }
 
 
@@ -89,7 +89,7 @@ export class FavorsComponentController {
     }
 }
 
-export let FavorsComponentUrl = "/services";
+export let FavorsComponentUrl = "/beauty-parlour/services";
 export let FavorsComponentName = 'pgFavors';
 export let FavorsComponentOptions = {
     template: template,

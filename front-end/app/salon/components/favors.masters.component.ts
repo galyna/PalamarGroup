@@ -215,7 +215,7 @@ export class FavorsMastersComponentController {
                 this.favors = favors;
                 if (this.favors.length > 0) {
                     this.categories.find(cat=>cat._id == category).favors = this.favors;
-                }else{this.$location.path(`/services`);}
+                }else{this.$location.path(`/beauty-parlour/services`);}
 
             });
 
@@ -242,11 +242,11 @@ export class FavorsMastersComponentController {
 
 
     showFavor(id) {
-        this.$location.path(`/service/${id}`);
+        this.$location.path(`/beauty-parlour/service/${id}`);
     }
 
     showMaster(id) {
-        this.$location.path(`/master/${id}`);
+        this.$location.path(`/beauty-parlour/master/${id}`);
     }
 
     
@@ -268,7 +268,7 @@ export class FavorsMastersComponentController {
 
 }
 
-export let FavorsMastersComponentUrl =  "/services/:category";
+export let FavorsMastersComponentUrl =  "/beauty-parlour/services/:category";
 export let FavorsMastersComponentName = 'pgFavorsMasters';
 export let FavorsMastersComponentOptions = {
     template: template,

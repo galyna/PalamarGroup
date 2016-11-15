@@ -235,17 +235,15 @@ export class SalonHomeComponentController {
     }
 
     showTransforms() {
-        this.$location.path(`/transforms`);
+        this.$location.path(`/beauty-parlour/transforms`);
     }
 
     showFavors(id: String) {
-        this.$location.path(`/services/${id}`);
+        this.$location.path(`/beauty-parlour/services/${id}`);
     }
 
-
-
     showMaster(masterId: String) {
-        this.$location.path(`/master/${masterId}`);
+        this.$location.path(`/beauty-parlour/master/${masterId}`);
     }
 
     setSocialParams(photo) {
@@ -270,7 +268,7 @@ export class SalonHomeComponentController {
     }
 }
 
-export let SalonHomeComponentUrl = "/home";
+export let SalonHomeComponentUrl = "/beauty-parlour";
 export let SalonHomeComponentName = 'pgSalonHome';
 export let SalonHomeComponentOptions = {
     template: template,

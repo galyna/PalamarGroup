@@ -17,10 +17,10 @@ let port = parseInt(process.env['PORT']) || 8080;
 let env = process.env['TYPE'];
 
 //TODO: remove on production
-if (env !== 'prod') {
-    mongoose.set('debug', true);
-    app.use('/setup', setupRouter);
-}
+// if (env !== 'prod') {
+//     //mongoose.set('debug', true);
+//    // app.use('/setup', setupRouter);
+// }
 
 mongoose.connect(config.mongoUrl);
 

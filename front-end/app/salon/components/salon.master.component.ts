@@ -258,7 +258,7 @@ export class MasterComponentController {
                     this.master.works = this.orderByFilter(this.master.works, "order");
                 }).catch((err)=> {
                 this.$log.error(err);
-                this.$location.path(`/masters`);
+                this.$location.path(`/beauty-parlour/masters`);
             });
             this.loadEvents(new Date(), this.$routeParams["id"]);
         }
@@ -331,7 +331,7 @@ export class MasterComponentController {
 
     setSocialParams(photo) {
         this.$rootScope.socialParams.host = this.constants.host;
-        this.$rootScope.socialParams.target = this.constants.host + "/#master" + this.master._id;
+        this.$rootScope.socialParams.target = this.constants.host + "/beauty-parlour/master/" + this.master._id;
         this.$rootScope.socialParams.image = this.constants.host + photo.url;
         this.$rootScope.socialParams.title = "Робота майстра " + this.master.name;
         this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
@@ -371,7 +371,7 @@ export class MasterComponentController {
 
 }
 
-export let MasterComponentUrl = "/master/:id";
+export let MasterComponentUrl = "/beauty-parlour/master/:id";
 export let MasterComponentName = 'pgMaster';
 export let MasterComponentOptions = {
     template: template,
