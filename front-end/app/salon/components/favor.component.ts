@@ -185,8 +185,8 @@ const template = `<div class="courses description-container">
         <div  flex flex-gt-md="60" flex-md="80"  flex-gt-xs="60">
          <div  class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6"  ng-repeat="photo in $ctrl.favor.photos | orderBy:'order' track by $index"
-                         class="md-margin " ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,transform.photos.length)}}"  flex-gt-xs="46" flex-xs="80"
-                         ng-click="::$ctrl.showMediaObserver(transform.photos, $index)">                  
+                         class="md-margin " ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.favor.photos.length)}}"  flex-gt-xs="46" flex-xs="80"
+                         ng-click="::$ctrl.showMediaObserver($ctrl.favor.photos | orderBy:'order', $index)">                  
                         <img ng-src="{{::photo.url}}" class="md-card-image">
                     <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                         <span class="  md-margin">{{::photo.name}}</span>
@@ -219,7 +219,7 @@ export class FavorComponentController {
                 private AppointmentResource: IAppointmentResource,
                 private AppointmentService: IAppointmentService, private mediaObserver: IMediaObserverFactory,
                 private constants: IConstants,
-                private $rootScope: IRootScope,) {
+                private $rootScope: IRootScope) {
 
     }
 
@@ -289,6 +289,7 @@ export class FavorComponentController {
         this.$rootScope.socialParams.title =  this.favor.name;
         this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
     }
+
     showMediaObserver(items, index): void {
         this.setSocialParams(items[index]);
         this.mediaObserver.observe(items, index, this.socialParams);

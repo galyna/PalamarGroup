@@ -207,7 +207,7 @@ const template = `<div class=" description-container">
                          class="md-margin "
                          ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
                          flex-gt-xs="46" flex-xs="80"
-                         ng-click="::$ctrl.showMediaObserver($ctrl.master.works, $index)">
+                         ng-click="::$ctrl.showMediaObserver($ctrl.master.works | orderBy:'order', $index)">
                     <img ng-src="{{::photo.url}}" class="md-card-image">
                     <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                         <span class="  md-margin">{{::photo.name}}</span>

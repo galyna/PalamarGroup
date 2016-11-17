@@ -124,13 +124,13 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
 
         <div layout="row" layout-align="center center" >
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="70">
-                <div class="courses-hear-forms" layout layout-wrap layout-align="center center">
-                    <md-card md-whiteframe="6"  ng-repeat="photo in ::transform.photos track by $index"
+                <div class="courses-hear-forms " layout layout-wrap layout-align="center center" style="padding-top:8px;padding-bottom:0;margin-bottom:0;">
+                    <md-card md-whiteframe="6"  ng-repeat="photo in ::transform.photos  | orderBy:'order' track by $index"
                              class="md-margin "
                                ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
                        
                              flex-gt-xs="46" flex-xs="80"
-                              ng-click="::$ctrl.showMediaObserver(transform.photos, $index)">
+                              ng-click="::$ctrl.showMediaObserver(transform.photos  | orderBy:'order', $index)">
                         <img ng-src="{{::photo.url}}" class="md-card-image">
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                             <span class="  md-margin">{{::photo.name}}</span>
@@ -140,7 +140,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
             </div>
         </div>
     </div>
-    <div ng-if="$ctrl.showMoreTransforms" layout="row" layout-align=" center center" layout-align-xs="  center">
+    <div ng-if="$ctrl.showMoreTransforms" class="md-padding"  layout="row" layout-align=" center center" layout-align-xs="  center">
         <md-button ng-click="::$ctrl.showTransforms()" class="comment-btn xs-selected md-raised ">Всі перевтіління
         </md-button>
     </div>

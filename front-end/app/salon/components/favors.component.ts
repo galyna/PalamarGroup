@@ -3,6 +3,8 @@ import {FavorResourceName, IFavorResource} from "../../resources/favor.resource"
 import {IConstants} from "../../core/core.config";
 import {IAppointmentResource, AppointmentResourceName} from "../../resources/appointment.resource";
 import {AppointmentServiceName, IAppointmentService} from "../servises/appointment.service";
+import {IMediaObserverFactory, MediaObserverFactoryName} from "../../ui/mediaObserver.service";
+import {IRootScope} from "../../../typings";
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
 
@@ -75,8 +77,8 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
         <div  flex flex-gt-md="60" flex-md="80"  flex-gt-xs="60">
          <div  class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6"  ng-repeat="photo in $ctrl.photos  track by $index"
-                         class="md-margin " flex-gt-sm="22"  flex-gt-xs="46" flex-xs="80"
-                         ng-click="::$ctrl.showMediaObserver(transform.photos, $index)">                  
+                         class="md-margin " ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.photos.length)}}"  flex-gt-xs="46" flex-xs="80"
+                         ng-click="::$ctrl.showMediaObserver($ctrl.photos, $index)">                  
                         <img ng-src="{{::photo.url}}" class="md-card-image">
                     <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                         <span class="  md-margin">{{::photo.name}}</span>
@@ -94,7 +96,8 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
 
 export class FavorsComponentController {
 
-    static $inject = [FavorResourceName, 'constants', "$routeParams", "$location", 'orderByFilter'];
+    static $inject = [FavorResourceName, MediaObserverFactoryName,
+        '$rootScope','constants', "$routeParams", "$location", 'orderByFilter'];
 
     favors: any;
     masters: IMaster[];
@@ -102,8 +105,10 @@ export class FavorsComponentController {
     markerReadySEO: string;
     photos: any;
     videos: any;
+    socialParams:any;
 
-    constructor(private favorResource: IFavorResource, private constants: IConstants,
+    constructor(private favorResource: IFavorResource, private mediaObserver: IMediaObserverFactory,
+                private $rootScope: IRootScope,private constants: IConstants,
                 private $routeParams: ng.route.IRouteParamsService,
                 private $location: ng.ILocationService, private orderByFilter: ng.IFilterOrderBy) {
 
@@ -176,6 +181,18 @@ export class FavorsComponentController {
         } else {
             return 22;
         }
+    }
+    setSocialParams(photo) {
+        this.$rootScope.socialParams.host = this.constants.host;
+        this.$rootScope.socialParams.target = this.constants.host + "/beauty-parlour/services/" ;
+        this.$rootScope.socialParams.image = this.constants.host + photo.url;
+        this.$rootScope.socialParams.title =  "Послуги салону";
+        this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
+    }
+
+    showMediaObserver(items, index): void {
+        this.setSocialParams(items[index]);
+        this.mediaObserver.observe(items, index, this.socialParams);
     }
 }
 
