@@ -135,6 +135,24 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
             </div>
         </div>
     </div>
+    <div class="courses-details" layout="row" flex layout-align="center center">
+        <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
+            <div layout="column" layout-margin layout layout-wrap layout-align="center center">
+                <md-card md-whiteframe="6" class="  courses-videos"
+                         ng-repeat="video in ::salon.videos track by $index"
+                         flex>
+                    <div flex class="embed-responsive embed-responsive-16by9">
+                        <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
+                                       video-id="::video.url"></youtube-video>
+                    </div>
+                    <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
+                        <span class="  md-margin">{{::video.name}}</span>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+
+    </div>
     </div>
 </div>`;
 

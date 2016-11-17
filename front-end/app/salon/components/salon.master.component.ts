@@ -184,7 +184,7 @@ const template = `<div class=" description-container">
         <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
             <div layout="column" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" class="  courses-videos"
-                         ng-repeat="video in $ctrl.master.videos track by $index"
+                         ng-repeat="video in $ctrl.master.videos | orderBy:'order' track by $index"
                          flex>
                     <div flex class="embed-responsive embed-responsive-16by9">
                         <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
@@ -203,7 +203,7 @@ const template = `<div class=" description-container">
     >
         <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" ng-repeat="photo in $ctrl.master.works track by $index"
+                <md-card md-whiteframe="6" ng-repeat="photo in $ctrl.master.works | orderBy:'order' track by $index"
                          class="md-margin "
                          ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
                          flex-gt-xs="46" flex-xs="80"
@@ -229,7 +229,7 @@ export class MasterComponentController {
 
     static $inject = ["$log", "$routeParams", MasterResourceName,
         AppointmentServiceName, AppointmentResourceName,
-        MediaObserverFactoryName, 'constants', "orderByFilter",
+        MediaObserverFactoryName, 'constants',
         '$mdDialog', '$rootScope', SchedulerServiceName,'$location'];
 
     master: IMaster;
@@ -243,7 +243,7 @@ export class MasterComponentController {
                 private MasterResource: IMasterResource, private AppointmentService: IAppointmentService,
                 private AppointmentResource: IAppointmentResource,
                 private mediaObserver: IMediaObserverFactory,
-                private constants: IConstants, private orderByFilter: ng.IFilterOrderBy,
+                private constants: IConstants,
                 private $mdDialog: ng.material.IDialogService,
                 private $rootScope: IRootScope, private SchedulerService: ISchedulerService, private $location: ng.ILocationService) {
     }
@@ -254,8 +254,7 @@ export class MasterComponentController {
             this.MasterResource.get({id: this.$routeParams["id"], populate: 'services.favor'}).$promise
                 .then((master) => {
                     this.master = master;
-                    this.master.videos = this.orderByFilter(this.master.videos, "order");
-                    this.master.works = this.orderByFilter(this.master.works, "order");
+
                 }).catch((err)=> {
                 this.$log.error(err);
                 this.$location.path(`/beauty-parlour/masters`);

@@ -74,7 +74,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                             </md-button>
                             <div ngf-drop ng-model="masrerNewWork" ngf-pattern="image/*"
                                  class="cropArea">
-                                <img-crop area-type="rectangle" result-image-size="{w:400,h:400}" aspect-ratio="1"
+                                <img-crop area-type="rectangle" result-image-size="{w:500,h:500}" aspect-ratio="1"
                                           init-max-area="true"
                                           image="masrerNewWork  | ngfDataUrl"
                                           result-image="croppedhearFormsPhotoFile"
@@ -103,6 +103,10 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                                 <md-input-container class="md-block  ">
                                     <label for="historyNme">Назва відео</label>
                                     <input id="historyNme" ng-model="item.name" name="historyNme"/>
+                                </md-input-container>
+                                <md-input-container class="md-block  ">
+                                    <label for="historyNme">ID</label>
+                                    <input id="historyNme" ng-model="item.url" name="historyNme"/>
                                 </md-input-container>
                                 <md-input-container class="md-block  ">
                                     <label for="ord">Порядок відображення</label>

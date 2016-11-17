@@ -22,18 +22,18 @@ export class SnapshotsService {
 
 
     saveSnapshots() {
-        // var result = htmlSnapshots.run({
-        //     input: "sitemap",
-        //     port: "8080",
-        //     source: "sitemap.xml",
-        //     snapshotScript: {script: "removeScripts"},
-        //     phantomjsOptions: ["--load-images=false", "--ignore-ssl-errors=true"],
-        //     outputDir: './snapshots',
-        //     outputDirClean: true,
-        //     selector: "#dynamic-content",
-        //      processLimit: 1,
-        //     // timeout:2000
-        // });
+        var result = htmlSnapshots.run({
+            input: "sitemap",
+            port: "8080",
+            source: "sitemap.xml",
+            snapshotScript: {script: "removeScripts"},
+            phantomjsOptions: ["--load-images=false", "--ignore-ssl-errors=true"],
+            outputDir: './snapshots',
+            outputDirClean: true,
+            selector: "#dynamic-content",
+             processLimit: 1,
+            // timeout:2000
+        });
     }
 
 

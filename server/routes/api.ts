@@ -20,6 +20,8 @@ import {Transform} from "../models/transform";
 import {Appointment} from "../models/appointment";
 import {Product} from "../models/product";
 import {Brend} from "../models/brend";
+import {ProductOrder} from "../models/product.order";
+import {Salon} from "../models/salon";
 
 //endpoints
 import {emailEndpoint} from "./email.endpoint";
@@ -31,9 +33,7 @@ import IOrder = pg.models.IOrder;
 import {salonClientApi, salonClientOptions} from "./salon.client.endpoint";
 import {tasksOptions, tasksApi} from './tasks.endpoint';
 import {appointmentOptions} from './appointment.options';
-import {ProductOrder} from "../models/product.order";
-import {Salon} from "../models/salon";
-
+import {snapshotEndpoint} from "./snapshot.endpoint";
 
 let api = express.Router();
 
@@ -97,7 +97,7 @@ restify.serve(api, Brend,tasksOptions);
 restify.serve(api, Salon,tasksOptions);
 api.use('/photo', photoEndpoint);
 api.use('/email', emailEndpoint);
-
+api.use('/snapshot', snapshotEndpoint);
 api.post('/authenticate', (req, res, next) => {
 
     passport.authenticate('local', (err, user, info) => {

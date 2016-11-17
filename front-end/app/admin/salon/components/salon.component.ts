@@ -113,7 +113,52 @@ const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveFor
                 </md-card-content>
             </md-card>
         </md-tab>
+  <md-tab label="Відео" flex>
+            <md-card>
+                <md-card-content layout="row">
+                    <div flex="60">
+                        <md-subheader class="md-no-sticky">Відео</md-subheader>
+                        <div class="md-padding md-margin"
+                             ng-repeat="item in $ctrl.salon.videos track by $index"
+                             ng-click="null">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
+                                               video-id="item.url"></youtube-video>
+                            </div>
+                            <div layout="column" ng-if="::$root.it.can('modifySalon')">
+                                <md-input-container class="md-block  ">
+                                    <label for="historyNme">Назва відео</label>
+                                    <input id="historyNme" ng-model="item.name" name="historyNme"/>
+                                </md-input-container>
+                                 <md-input-container class="md-block  ">
+                                    <label for="historyNme">ID</label>
+                                    <input id="historyNme" ng-model="item.url" name="historyNme"/>
+                                </md-input-container>
+                                <md-input-container class="md-block  ">
+                                    <label for="ord">Порядок відображення</label>
+                                    <input id="ord" ng-model="item.order" type="number"/>
+                                </md-input-container>
+                                <md-button class="  md-raised"
+                                           ng-click="$ctrl.deleteFromList($ctrl.master.videos,item)">
+                                    Видалити
+                                </md-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div flex ng-if="::$root.it.can('modifySalon')">
+                        <md-input-container class="md-block  ">
+                            <label for="videoId">ID</label>
+                            <input id="videoId" ng-model="videoId" name="videoId"/>
+                        </md-input-container>
+                        <md-button class="md-raised" ng-if="::$root.it.can('modifySalon')"
+                                   ng-click="$ctrl.addVideo(videoId)">
+                            Додати відео
+                        </md-button>
 
+                    </div>
+                </md-card-content>
+            </md-card>
+        </md-tab>
     </md-tabs>
 </form>`;
 
@@ -181,6 +226,24 @@ export class SalonComponentController {
         } );
     }
 
+    addVideo(id) {
+        if (!this.salon.videos) {
+            this.salon.videos = [];
+        }
+        this.salon.videos.push({
+            name: "",
+            url: id,
+            order: 0
+        });
+        this.salon.$save()
+            .then((course) => {
+                this.$mdToast.showSimple(`salon video збережено`);
+            })
+            .catch((err)=> {
+                this.$log.error(err);
+                this.showErrorDialog();
+            });
+    }
 
     deleteFromList(list:any[], item:any) {
         list.splice( list.indexOf( item ), 1 );

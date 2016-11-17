@@ -236,6 +236,10 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                                             <label for="historyNme">Назва відео</label>
                                             <input id="historyNme" ng-model="item.name" name="historyNme"/>
                                         </md-input-container>
+                                         <md-input-container class="md-block  ">
+                                    <label for="historyNme">ID</label>
+                                    <input id="historyNme" ng-model="item.url" name="historyNme"/>
+                                </md-input-container>
                                         <md-input-container class="md-block  ">
                                             <label for="ord">Порядок відображення</label>
                                             <input id="ord" ng-model="item.order" type="number"/>

@@ -181,7 +181,59 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
         </div>
     </div>
 </div>
-</div>   
+
+   
+</div>
+</div>  
+  <div class="courses-details description-container" layout="column">
+    <div layout="row" ng-if="$ctrl.videos.length>0 || $ctrl.photos.length>0" flex>
+        <div class="page-delimiter" flex>
+            <div class="fit-screen-wrap  header-super">
+                <div flex class="md-display-2"> Роботи та навчання</div>
+            </div>
+            <div class="overlay-days">
+            </div>
+        </div>
+    </div>
+
+ <div >
+    <div layout="row" layout-align="center center" >
+        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
+            <div layout="column" layout-margin layout layout-wrap layout-align="center center">
+                <md-card md-whiteframe="6" class="  courses-videos" 
+                         ng-repeat="video in $ctrl.videos  track by $index"
+                         flex>
+                    <div flex class="embed-responsive embed-responsive-16by9">
+                        <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
+                                       video-id="::video.url"></youtube-video>
+                    </div>
+                    <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
+                        <span class="  md-margin">{{::video.name}}</span>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+
+    </div>
+
+     <div layout="row" layout-align="center center" >
+        <div  flex flex-gt-md="60" flex-md="80"  flex-gt-xs="60">
+         <div  class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+                <md-card md-whiteframe="6"  ng-repeat="photo in $ctrl.photos  track by $index"
+                         class="md-margin " ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.photos.length)}}"  flex-gt-xs="46" flex-xs="80"
+                         ng-click="::$ctrl.showMediaObserver(transform.photos, $index)">                  
+                        <img ng-src="{{::photo.url}}" class="md-card-image">
+                    <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
+                        <span class="  md-margin">{{::photo.name}}</span>
+                    </md-card-content>
+</md-card>
+            </div>
+            
+        </div>
+         
+    </div>
+ </div>   
+</div>
 `;
 
 
@@ -189,17 +241,19 @@ export class FavorsMastersComponentController {
 
 
     static $inject = [FavorResourceName, 'constants', "$routeParams", "$location", MasterResourceName,
-        AppointmentServiceName, AppointmentResourceName, '$q'];
+        AppointmentServiceName, AppointmentResourceName, '$q', 'orderByFilter'];
 
     favors: any;
     masters: IMaster[];
     category: any;
     markerReadySEO: string;
+    photos: any;
+    videos: any;
 
     constructor(private favorResource: IFavorResource, private constants: IConstants,
                 private $routeParams: ng.route.IRouteParamsService, private $location: ng.ILocationService,
                 private MasterResource: IMasterResource, private AppointmentService: IAppointmentService,
-                private AppointmentResource: IAppointmentResource, private $q) {
+                private AppointmentResource: IAppointmentResource, private $q, private orderByFilter: ng.IFilterOrderBy) {
 
 
     }
@@ -207,19 +261,45 @@ export class FavorsMastersComponentController {
     $onInit() {
         this.favors = [];
         var categories = angular.copy(this.constants.favorCategories);
-
+        this.photos = [];
+        this.videos = [];
         if (this.$routeParams["category"]) {
             this.category = categories.filter((cat)=> {
                 return cat.url == this.$routeParams["category"]
             })[0];
-            this.favors = this.favorResource.query({sort: "order", query: {"category._id": this.category._id}});
+
+            var favorsPromise = this.favorResource.query({
+                sort: "order",
+                query: {"category._id": this.category._id}
+            }).$promise;
+            this.setFavors(favorsPromise);
             var masterPromise = this.MasterResource.query({populate: 'services.favor', sort: "order"}).$promise;
             this.setMasters(masterPromise, this.category._id);
 
-            this.$q.all([masterPromise, this.favors.$promise]).then((tt) => {
+            this.$q.all([masterPromise, favorsPromise]).then((tt) => {
                 this.markerReadySEO = "dynamic-content";
             });
         }
+    }
+
+    setFavors(favorsPromise) {
+        favorsPromise.then((favors) => {
+            this.favors = favors;
+            this.favors.forEach((fav)=> {
+                if (fav.photos && fav.photos.length > 0) {
+                    this.photos = this.photos.concat(fav.photos);
+                }
+                if (fav.videos && fav.videos.length > 0) {
+                    this.videos = this.videos.concat(fav.videos);
+                }
+
+
+            })
+            this.photos = this.orderByFilter(this.photos, "order");
+            this.videos = this.orderByFilter(this.videos, "order");
+            this.photos.splice(9, this.photos.length - 10)
+            this.videos.splice(2, this.videos.length - 3)
+        });
     }
 
     setMasters(masterPromise, categoryId) {

@@ -10,6 +10,11 @@ export interface IFavorModel extends pg.models.IFavor, Document{
     photo: IPhotoModel,
 }
 
+let VideoSchema = new Schema({
+    name: String,
+    url: String,
+    order: Number
+});
 
 export let FavorSchema = new Schema({
     name: String,
@@ -18,7 +23,9 @@ export let FavorSchema = new Schema({
     params:[{  name: String,level: { _id: String, name: String,text: String},}],
     defPrice: Number,
     photo: PhotoSchema,
-    order: Number
+    order: Number,
+    photos: [PhotoSchema],
+    videos: [VideoSchema]
 });
 
 export var Favor = model<IFavorModel>('Favor', FavorSchema);

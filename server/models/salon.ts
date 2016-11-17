@@ -9,6 +9,12 @@ export interface ISalonModel extends pg.models.ISalon, Document{
     photo: IPhotoModel[]
 }
 
+let VideoSchema = new Schema({
+    name: String,
+    url: String,
+    order: Number
+});
+
 let SalonSchema = new Schema({
     name: String,
     phone: String,
@@ -18,6 +24,7 @@ let SalonSchema = new Schema({
     longitude:String,
     isMain:Boolean,
     isAcademy:Boolean,
+    videos: [VideoSchema]
 });
 
 export var Salon = model<ISalonModel>('Salon', SalonSchema);

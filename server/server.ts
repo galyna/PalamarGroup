@@ -115,6 +115,6 @@ app.listen(port, 'localhost', ()=> {
     console.log(`environment: ${env}`);
 });
 
-botHandler.saveSnapshots();
+//botHandler.saveSnapshots();
 
 export default app;

@@ -6,7 +6,7 @@ import IMasterFavor = pg.models.IMasterFavor;
 import {IAppointment, AppointmentResourceName, IAppointmentResource} from "../../../resources/appointment.resource";
 import {IConstants} from "../../../core/core.config";
 
-const template: string = `<div flex layout="column">
+const template = `<div flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button" ng-href="#/salon/masters">
@@ -231,6 +231,10 @@ const template: string = `<div flex layout="column">
                                 <md-input-container class="md-block  ">
                                     <label for="historyNme">Назва відео</label>
                                     <input id="historyNme" ng-model="item.name" name="historyNme"/>
+                                </md-input-container>
+                                 <md-input-container class="md-block  ">
+                                    <label for="historyNme">ID</label>
+                                    <input id="historyNme" ng-model="item.url" name="historyNme"/>
                                 </md-input-container>
                                 <md-input-container class="md-block  ">
                                     <label for="ord">Порядок відображення</label>

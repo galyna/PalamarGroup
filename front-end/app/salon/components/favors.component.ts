@@ -39,44 +39,131 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
         </div>
     </div>
 </div>
-</div>   
+</div> 
+  <div class="courses-details description-container" layout="column">
+    <div layout="row" ng-if="$ctrl.videos.length>0 || $ctrl.photos.length>0" flex>
+        <div class="page-delimiter" flex>
+            <div class="fit-screen-wrap  header-super">
+                <div flex class="md-display-2"> Роботи та навчання</div>
+            </div>
+            <div class="overlay-days">
+            </div>
+        </div>
+    </div>
+
+ <div >
+    <div layout="row" layout-align="center center" >
+        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
+            <div layout="column" layout-margin layout layout-wrap layout-align="center center">
+                <md-card md-whiteframe="6" class="  courses-videos" 
+                         ng-repeat="video in $ctrl.videos  track by $index"
+                         flex>
+                    <div flex class="embed-responsive embed-responsive-16by9">
+                        <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
+                                       video-id="::video.url"></youtube-video>
+                    </div>
+                    <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
+                        <span class="  md-margin">{{::video.name}}</span>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+
+    </div>
+
+     <div layout="row" layout-align="center center" >
+        <div  flex flex-gt-md="60" flex-md="80"  flex-gt-xs="60">
+         <div  class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+                <md-card md-whiteframe="6"  ng-repeat="photo in $ctrl.photos  track by $index"
+                         class="md-margin " flex-gt-sm="22"  flex-gt-xs="46" flex-xs="80"
+                         ng-click="::$ctrl.showMediaObserver(transform.photos, $index)">                  
+                        <img ng-src="{{::photo.url}}" class="md-card-image">
+                    <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
+                        <span class="  md-margin">{{::photo.name}}</span>
+                    </md-card-content>
+</md-card>
+            </div>
+            
+        </div>
+         
+    </div>
+ </div>   
+</div>
 `;
 
 
 export class FavorsComponentController {
 
-    static $inject = [FavorResourceName, 'constants', "$routeParams", "$location"];
+    static $inject = [FavorResourceName, 'constants', "$routeParams", "$location", 'orderByFilter'];
 
     favors: any;
     masters: IMaster[];
     categories: any;
     markerReadySEO: string;
+    photos: any;
+    videos: any;
 
     constructor(private favorResource: IFavorResource, private constants: IConstants,
-                private $routeParams: ng.route.IRouteParamsService, private $location: ng.ILocationService,) {
+                private $routeParams: ng.route.IRouteParamsService,
+                private $location: ng.ILocationService, private orderByFilter: ng.IFilterOrderBy) {
 
 
     }
 
     $onInit() {
         this.favors = [];
+        this.photos = [];
+        this.videos = [];
         this.categories = angular.copy(this.constants.favorCategories);
         this.favorResource.query({sort: "order"}).$promise.then((favors) => {
             this.favors = favors;
             if (this.favors.length > 0) {
 
                 this.categories.forEach((category)=> {
+                    var catVideo = [];
+                    var catPhoto = [];
                     category.favors = favors.filter((favor)=> {
+                        if (category.name == favor.category.name) {
+                            catPhoto = catPhoto.concat(this.loadPhoto(favor));
+                            catVideo = catVideo.concat(this.loadVideo(favor));
+                        }
                         return category.name == favor.category.name;
                     });
 
-                    this.markerReadySEO = "dynamic-content";
+                    catPhoto.splice(6, catPhoto.length - 6)
+                    catVideo.splice(0, catVideo.length - 1)
+                    this.photos = this.photos.concat(catPhoto);
+                    this.videos = this.videos.concat(catVideo);
+                    catVideo = [];
+                    catPhoto = [];
                 })
+
+                this.markerReadySEO = "dynamic-content";
             }
 
         });
 
     }
+
+    loadPhoto(favor) {
+        var temp = []
+        if (favor.photos && favor.photos.length > 0) {
+            var ph = this.orderByFilter(favor.photos, "order");
+            temp.push(ph[0])
+        }
+        return temp
+    }
+
+    loadVideo(favor) {
+        var temp = []
+        if (favor.videos && favor.videos.length > 0) {
+            var vi = this.orderByFilter(favor.videos, "order");
+            temp.push(vi[0])
+        }
+        return temp
+
+    }
+
 
 
     showFavor(id) {
