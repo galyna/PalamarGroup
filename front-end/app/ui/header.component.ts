@@ -1,7 +1,7 @@
 const template = `<div class="container-wrapper description-container ">
     <div class="page-header">
   
-     <div ng-if="$ctrl.isVideoLoaded" ng-click="$ctrl.handleVideoRuning()" hide show-md="true" class="stop-video-container" layout="row" layout-align="center center " >
+     <div  ng-click="$ctrl.handleVideoRuning()" class="stop-video-container" layout="row" layout-align="center center " >
         <div ng-if="$ctrl.runVideo" class="stop-label">ЗУПИНТИ ВІДЕО</div>
         <div ng-if="!$ctrl.runVideo" class="stop-label">ЗAПУСПИТИ ВІДЕО</div>
     </div>
@@ -61,7 +61,7 @@ export class SalonHeaderComponentController {
     }
 
     $onInit() {
-        if (this.$mdMedia('gt-md')) {
+        if (this.$mdMedia('md')) {
             this.videoElement = angular.element(` <video  hide show-gt-md="true" class="screen" muted autoplay
                                               loop="true" onloadedmetadata="this.muted = true" >
                                            <source type="video/mp4" src="../content/images/bg/bg1.mp4"/>

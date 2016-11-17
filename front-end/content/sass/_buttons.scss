@@ -84,6 +84,7 @@ button.md-button.md-fab.side-up-btn {
 }
 
 .stop-video-container {
+  display: flex;
   z-index: 70;
   position: absolute;
   top: 10px;
@@ -92,22 +93,20 @@ button.md-button.md-fab.side-up-btn {
   height: 55px;
   border: 1px solid $primary;
   color: $primary;
-  display: flex;
   align-items: center;
   background: rgba(white, 0.6);
- //border-right-width: 0;
+opacity: 0;
   &:hover {
     cursor: pointer;
   }
-  @media (max-width: $layout-breakpoint-xs) {
-    width: 65px;
-    border: none;
-  }
+ ;
 
+  @media (min-width: $layout-breakpoint-md) {
+    opacity: 1;
+  }
   .stop-label {
 
-    width:85px;
-
+    width: 85px;
 
   }
 }
@@ -122,7 +121,7 @@ button.md-button.md-fab.side-up-btn {
   width: 120px;
   height: 55px;
   border: 1px solid $primary;
- // border-left-width: 0;
+  // border-left-width: 0;
   background: rgba(white, 0.6);
 
   &:hover {
