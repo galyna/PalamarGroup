@@ -343,7 +343,7 @@
       }
     }
 
-    @media (min-width: $layout-breakpoint-md) {
+    @media (min-width: $layout-breakpoint-sm) {
       md-card-content.show-description-favor {
 
         background-color: rgba($primary, 0.7);
