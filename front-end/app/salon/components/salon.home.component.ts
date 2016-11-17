@@ -147,7 +147,9 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
      <div layout="row" ng-if="$ctrl.videos.length>0 " flex>
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap  header-super">
-                <div flex class="md-display-2"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
+             <div show-xs hide-gt-xs='true' class="md-display-1"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
+                <div hide-xs class="md-display-2"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
+                
             </div>
             <div class="overlay-days">
             </div>
