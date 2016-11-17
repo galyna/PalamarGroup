@@ -13,6 +13,7 @@ import {TestController} from './controllers/test.controller';
 import {CourseController} from "./controllers/course.controller";
 import {CourseCalendarComponentName, CourseCalendarComponentOptions} from "./components/course.calendar.component";
 import {AcademyContactComponentName, AcademyContactComponentOptions} from "./components/academy.contacts.component";
+import {AcademyVideoComponentOptions, AcademyVideoComponentName} from "./components/academy.video.component";
 
 
 let app = angular.module('courses', [ 'ngMaterial', resourcesModule.name])
@@ -21,5 +22,6 @@ let app = angular.module('courses', [ 'ngMaterial', resourcesModule.name])
     .controller(CourseController.componentName, CourseController)
     .controller(TestController.componentName, TestController)
      .component(CourseCalendarComponentName,CourseCalendarComponentOptions )
+    .component(AcademyVideoComponentName,AcademyVideoComponentOptions )
     .component(AcademyContactComponentName,AcademyContactComponentOptions );
 export let coursesModule = app;

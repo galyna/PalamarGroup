@@ -1,10 +1,7 @@
 import {ContactResourceName, IContactResource, IContact} from "../../resources/contact.resource";
 import IUploadPromise = angular.angularFileUpload.IUploadPromise;
-import {IConstants} from "../../core/core.config";
 
-import {ICourseResource, CourseResourceName, ICourse} from "../../resources/course.resource";
-import {IModelResource, IModel, ModelResourceName} from "../../resources/model.resource";
-import {IOrder, IOrderResource, OrderResourceName} from "../../resources/order.resource";
+import {IOrder, } from "../../resources/order.resource";
 import {IRootScope} from "../../../typings";
 import {SalonResourceName, ISalonResource} from "../../resources/salon.resource";
 
@@ -117,17 +114,14 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
 
 export class AcademyContactComponentController {
 
-    static $inject = [ContactResourceName, '$rootScope', SalonResourceName, '$q'];
+    static $inject = [ContactResourceName,  SalonResourceName, '$q'];
 
-
-    order:IOrder;
-    showAnimation:boolean;
     contacts:IContact[];
     map:any;
     marker:any;
     markerReadySEO: string;
 
-    constructor(private contactResource:IContactResource, private $rootScope:IRootScope,
+    constructor(private contactResource:IContactResource,
                 private salonResource:ISalonResource, private $q) {
         
     }
@@ -135,7 +129,7 @@ export class AcademyContactComponentController {
     $onInit() {
         this.map = {center: {latitude: 49.811077, longitude: 23.973777}, zoom: 18};
         this.marker = {latitude: 49.811077, longitude: 23.973777};
-        this.showAnimation = this.$rootScope.isBigSize;
+
         var mainPromise = this.salonResource.query( {query: {'isAcademy': 'true'}} ).$promise;
         mainPromise.then( (salons) => {
             if (salons.length>0) {

@@ -6,6 +6,7 @@ import {SalonContactsComponentUrl} from "../salon/components/salon.contacts.comp
 import {SalonTransformsComponentUrl} from "../salon/components/salon.transforms.component";
 import {FavorsComponentUrl} from "../salon/components/favors.component";
 import {MastersComponentUrl} from "../salon/components/masters.component";
+import {AcademyVideoComponentUrl} from "../courses/components/academy.video.component";
 
 
 import {IConstants} from "../core/core.config";
@@ -59,6 +60,8 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
             </div>
             <div flex ng-click="::vm.goToURL(vm.CourseCalendarComponentUrl)" class=" pg-menu-item ">КАЛАЕНДАР
             </div>
+             <div flex ng-click="::vm.goToURL(vm.AcademyVideoComponentUrl)" class=" pg-menu-item ">ВІДЕО
+            </div>
             <div flex ng-click="::vm.goToURL(vm.AcademyContactComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
             </div>
         </div>
@@ -72,7 +75,7 @@ export class MenuComponentController {
     static $inject = ['$mdDialog', '$location', 'constants', 'smoothScroll', '$rootScope'];
     static componentName = 'MenuComponentController';
 
-    showSalon:boolean
+    showSalon: boolean
     SalonHomeComponentUrl = SalonHomeComponentUrl;
     CourseCalendarComponentUrl = CourseCalendarComponentUrl;
     AcademyContactComponentUrl = AcademyContactComponentUrl;
@@ -80,11 +83,12 @@ export class MenuComponentController {
     SalonContactsComponentUrl = SalonContactsComponentUrl;
     SalonTransformsComponentUrl = SalonTransformsComponentUrl;
     FavorsComponentUrl = FavorsComponentUrl;
-    MastersComponentUrl=MastersComponentUrl;
-    
+    MastersComponentUrl = MastersComponentUrl;
+    AcademyVideoComponentUrl = AcademyVideoComponentUrl;
 
-    constructor(private mdDialog:ng.material.IDialogService, private $location,
-                private constants:IConstants, private smoothScroll, private $rootScope:IRootScope) {
+
+    constructor(private mdDialog: ng.material.IDialogService, private $location,
+                private constants: IConstants, private smoothScroll, private $rootScope: IRootScope) {
         this.showSalon = constants.showSalon;
     }
 
@@ -95,42 +99,42 @@ export class MenuComponentController {
             offset: 0,
 
         }
-        var element = document.getElementById( 'mainContent' );
-        this.smoothScroll( element, options );
+        var element = document.getElementById('mainContent');
+        this.smoothScroll(element, options);
     }
 
-    goToURL(url):void {
-        this.$location.url( url );
-        this.mdDialog.hide().then( ()=> {
+    goToURL(url): void {
+        this.$location.url(url);
+        this.mdDialog.hide().then(()=> {
             this.scrollToMain();
-        } );
+        });
         ;
-        angular.element( document.querySelector( menuBtnSelector ) ).toggleClass( 'open' );
+        angular.element(document.querySelector(menuBtnSelector)).toggleClass('open');
 
     }
 
 
-    toggleMenu($event):void {
-        var menuBtn = angular.element( $event.currentTarget );
+    toggleMenu($event): void {
+        var menuBtn = angular.element($event.currentTarget);
 
-        if (!menuBtn.hasClass( 'open' )) {
-            this.mdDialog.show( {
+        if (!menuBtn.hasClass('open')) {
+            this.mdDialog.show({
                 template: dialogTemplate,
                 clickOutsideToClose: true,
                 bindToController: true,
                 controller: MenuComponentOptions.controller,
                 controllerAs: 'vm',
-                parent: angular.element( document.body ),
+                parent: angular.element(document.body),
                 targetEvent: $event,
                 fullscreen: true
-            } );
-            menuBtn.css('z-index',81);
-            menuBtn.toggleClass( 'open' );
+            });
+            menuBtn.css('z-index', 81);
+            menuBtn.toggleClass('open');
         } else {
 
             this.mdDialog.hide();
-            menuBtn.css('z-index',80);
-            menuBtn.toggleClass( 'open' );
+            menuBtn.css('z-index', 80);
+            menuBtn.toggleClass('open');
         }
 
     }

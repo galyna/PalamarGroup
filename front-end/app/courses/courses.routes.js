@@ -1,7 +1,7 @@
-System.register(['./controllers/courses.controller', './controllers/course.controller', "./components/course.calendar.component", "./components/academy.contacts.component"], function(exports_1, context_1) {
+System.register(['./controllers/courses.controller', './controllers/course.controller', "./components/course.calendar.component", "./components/academy.contacts.component", "./components/academy.video.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var courses_controller_1, course_controller_1, course_calendar_component_1, academy_contacts_component_1;
+    var courses_controller_1, course_controller_1, course_calendar_component_1, academy_contacts_component_1, academy_video_component_1;
     function coursesRoutes($routeProvider) {
         $routeProvider
             .when('/academy', {
@@ -19,6 +19,9 @@ System.register(['./controllers/courses.controller', './controllers/course.contr
         })
             .when(academy_contacts_component_1.AcademyContactComponentUrl, {
             template: '<pg-academy-contact></pg-academy-contact>',
+        })
+            .when(academy_video_component_1.AcademyVideoComponentUrl, {
+            template: '<pg-academy-video></pg-academy-video>',
         })
             .when('/test', {
             templateUrl: 'app/courses/views/test.html',
@@ -40,6 +43,9 @@ System.register(['./controllers/courses.controller', './controllers/course.contr
             },
             function (academy_contacts_component_1_1) {
                 academy_contacts_component_1 = academy_contacts_component_1_1;
+            },
+            function (academy_video_component_1_1) {
+                academy_video_component_1 = academy_video_component_1_1;
             }],
         execute: function() {
             coursesRoutes.$inject = ['$routeProvider'];

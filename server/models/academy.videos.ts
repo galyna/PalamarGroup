@@ -18,7 +18,8 @@ let VideoSchema = new Schema( {
 } );
 
 let AcademyVideosSchema = new Schema( {
-    videos: [VideoSchema]
+    videos: [VideoSchema],
+    name: String
 } );
 
 

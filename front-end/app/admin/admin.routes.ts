@@ -10,6 +10,8 @@ import {userComponentUrl} from "./components/user.component";
 import {CommentsComponentUrl} from "./academy/components/comments.component";
 import {ContactComponentUrl} from "./academy/components/contact.component";
 import {ContactsComponentUrl} from "./academy/components/contacts.component";
+import {VideoComponentUrl} from "./academy/components/video.component";
+import {VideosComponentUrl} from "./academy/components/videos.component";
 
 adminRoutes.$inject = ['$routeProvider'];
 export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
@@ -78,6 +80,18 @@ export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
         })
         .when(ContactComponentUrl, {
             template: '<pg-contact></pg-contact>',
+            resolve: {
+                auth: [ItServiceName, (it: ItService) => it.canAsync('readAcademy')]
+            }
+        })
+        .when(VideosComponentUrl, {
+            template: '<pg-videos></pg-videos>',
+            resolve: {
+                auth: [ItServiceName, (it: ItService) => it.canAsync('readAcademy')]
+            }
+        })
+        .when(VideoComponentUrl, {
+            template: '<pg-video></pg-video>',
             resolve: {
                 auth: [ItServiceName, (it: ItService) => it.canAsync('readAcademy')]
             }

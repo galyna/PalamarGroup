@@ -2,6 +2,7 @@ import {CoursesController} from './controllers/courses.controller';
 import {CourseController} from './controllers/course.controller';
 import {CourseCalendarComponentUrl} from "./components/course.calendar.component";
 import {AcademyContactComponentUrl} from "./components/academy.contacts.component";
+import {AcademyVideoComponentUrl} from "./components/academy.video.component";
 
 coursesRoutes.$inject = ['$routeProvider'];
 export function coursesRoutes($routeProvider:ng.route.IRouteProvider) {
@@ -21,6 +22,9 @@ export function coursesRoutes($routeProvider:ng.route.IRouteProvider) {
         })
         .when(AcademyContactComponentUrl, {
             template: '<pg-academy-contact></pg-academy-contact>',
+        })
+        .when(AcademyVideoComponentUrl, {
+            template: '<pg-academy-video></pg-academy-video>',
         })
         .when('/test', {
             templateUrl: 'app/courses/views/test.html',

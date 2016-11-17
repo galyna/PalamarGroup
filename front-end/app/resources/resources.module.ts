@@ -20,6 +20,7 @@ import {BrendResourceName, BrendResource} from "./brend.resource";
 import {ProductResourceName, ProductResource} from "./product.resource";
 import {ProductOrderResource, ProductOrderResourceName} from "./product.order.resource";
 import {SalonResource, SalonResourceName} from "./salon.resource";
+import {AcademyVideosResource, AcademyVideosResourceName} from "./academy.video.resource";
 
 export let resourcesModule = angular.module('resources', ['ngResource', coreModule.name])
     .factory(CourseResourceName, CourseResource)
@@ -36,5 +37,6 @@ export let resourcesModule = angular.module('resources', ['ngResource', coreModu
     .service(ProductResourceName, ProductResource)
     .service(SalonResourceName, SalonResource)
     .service(ProductOrderResourceName, ProductOrderResource)
+    .service(AcademyVideosResourceName, AcademyVideosResource)
     .service(EmailService.componentName, EmailService)
     .service(PhotoServiceName, PhotoService);

@@ -16,6 +16,7 @@ import {AdminCoursesComponentUrl} from "../../admin/academy/components/courses.c
 import {AdminOrdersComponentUrl} from "../../admin/academy/components/orders.component";
 import {CommentsComponentUrl} from "../../admin/academy/components/comments.component";
 import {ContactsComponentUrl} from "../../admin/academy/components/contacts.component";
+import {VideosComponentUrl} from "../../admin/academy/components/videos.component";
 
 
 let template = `<md-sidenav
@@ -72,6 +73,13 @@ export class LeftSidenavComponentController {
                         }
                     },
                     {
+                        text: 'Відео',
+                        url: VideosComponentUrl,
+                        visible: ()=> {
+                            return true;
+                        }
+                    },
+                    {
                         text: 'Записи',
                         url: AdminOrdersComponentUrl,
                         visible: ()=> {
@@ -81,13 +89,6 @@ export class LeftSidenavComponentController {
                     {
                         text: 'Моделі',
                         url: '/academy/models',
-                        visible: ()=> {
-                            return true;
-                        }
-                    },
-                    {
-                        text: 'Розсилка',
-                        url: '/academy/delivery',
                         visible: ()=> {
                             return true;
                         }
@@ -105,7 +106,15 @@ export class LeftSidenavComponentController {
                         visible: ()=> {
                             return true;
                         }
+                    },
+                    {
+                        text: 'Розсилка',
+                        url: '/academy/delivery',
+                        visible: ()=> {
+                            return true;
+                        }
                     }
+
                 ]
             },
             {

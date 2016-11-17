@@ -45,6 +45,8 @@ import {userComponentName, userComponentOptions} from "./components/user.compone
 import {CommentsComponentName, CommentsComponentOptions} from "./academy/components/comments.component";
 import {ContactsComponentName, ContactsComponentOptions} from "./academy/components/contacts.component";
 import {ContactComponentName, ContactComponentOptions} from "./academy/components/contact.component";
+import {VideosComponentOptions, VideosComponentName} from "./academy/components/videos.component";
+import {VideoComponentName, VideoComponentOptions} from "./academy/components/video.component";
 
 let app = angular.module('admin', [
     'ngRoute',
@@ -78,7 +80,9 @@ let app = angular.module('admin', [
     .component(userComponentName, userComponentOptions)
     .component(CommentsComponentName, CommentsComponentOptions)
     .component(ContactsComponentName, ContactsComponentOptions)
-    .component(ContactComponentName, ContactComponentOptions);
+    .component(ContactComponentName, ContactComponentOptions)
+    .component(VideosComponentName, VideosComponentOptions)
+    .component(VideoComponentName,VideoComponentOptions);
 
 
 export let adminModule = app;

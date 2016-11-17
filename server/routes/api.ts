@@ -22,6 +22,7 @@ import {Product} from "../models/product";
 import {Brend} from "../models/brend";
 import {ProductOrder} from "../models/product.order";
 import {Salon} from "../models/salon";
+import {AcademyVideos} from "../models/academy.videos";
 
 //endpoints
 import {emailEndpoint} from "./email.endpoint";
@@ -82,10 +83,10 @@ restify.serve(api, Course,coursesOptions);
 
 api.use('/user', userApi);
 restify.serve(api, User, userOptions);
-
+restify.serve(api, Master, tasksOptions);
 restify.serve(api, Model,modelOptions);
 restify.serve(api, Order, orderOptions);
-restify.serve(api, Master, tasksOptions);
+restify.serve(api, AcademyVideos, orderOptions);
 restify.serve(api, ProductOrder,appointmentOptions);
 restify.serve(api, Appointment,appointmentOptions);
 api.use('/salonclient', salonClientApi);
