@@ -58,7 +58,7 @@ export class AcademyVideoComponentController {
     videos: IAcademyVideos[];
     markerReadySEO: string;
 
-    constructor(private AcademyVideosResource: IAcademyVideosResource,) {
+    constructor(private AcademyVideosResource: IAcademyVideosResource) {
 
     }
 

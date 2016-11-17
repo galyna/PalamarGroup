@@ -19,7 +19,8 @@ let VideoSchema = new Schema( {
 
 let AcademyVideosSchema = new Schema( {
     videos: [VideoSchema],
-    name: String
+    name: String,
+    order: Number
 } );
 
 

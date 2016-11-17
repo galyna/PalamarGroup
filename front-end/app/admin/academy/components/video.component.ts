@@ -27,7 +27,11 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                         <label for="name">Назва Групи</label>
                         <input ng-disabled="::!$root.it.can('modifyAcademy')" id="name" ng-model="$ctrl.contact.name" name="name"/>
                     </md-input-container>
-                  
+                  <md-input-container>
+                            <label for="order">Порядок відображення</label>
+                            <input id="order" ng-disabled="::!$root.it.can('modifyAcademy')"
+                                   ng-model="$ctrl.contact.order" name="order" type="number"/>
+                        </md-input-container>
                                  
                 </md-card-content>
             </md-card>

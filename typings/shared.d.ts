@@ -4,6 +4,7 @@ declare module pg {
         export  interface IAcademyVideos {
             _id: any,
             name: string,
+            order: number,
             videos: IVideo[],
         }
 

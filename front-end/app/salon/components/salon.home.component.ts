@@ -6,6 +6,10 @@ import {TransformResourceName, ITransformResource, ITransform} from "../../resou
 import {IBrendResource, IBrend, BrendResourceName} from "../../resources/brend.resource";
 import {MediaObserverFactoryName, IMediaObserverFactory} from "../../ui/mediaObserver.service";
 import {IRootScope} from "../../../typings";
+import {
+    IAcademyVideosResource, IAcademyVideos,
+    AcademyVideosResourceName
+} from "../../resources/academy.video.resource";
 
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
@@ -140,7 +144,42 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
         <md-button ng-click="::$ctrl.showTransforms()" class="comment-btn xs-selected md-raised ">Всі перевтіління
         </md-button>
     </div>
+     <div layout="row" ng-if="$ctrl.videos.length>0 " flex>
+        <div class="page-delimiter" flex>
+            <div class="fit-screen-wrap  header-super">
+                <div flex class="md-display-2"> Роботи та навчання</div>
+            </div>
+            <div class="overlay-days">
+            </div>
+        </div>
+    </div>
+    <div ng-repeat="group in $ctrl.videos">
+ 
+    <div layout="row" layout-align="center center" >
+        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
+            <div layout="column" layout-margin layout layout-wrap layout-align="center center">
+                <md-card md-whiteframe="6" class="  courses-videos" 
+                         ng-repeat="video in ::group.videos track by $index"
+                         flex>
+                    <div flex class="embed-responsive embed-responsive-16by9">
+                        <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
+                                       video-id="::video.url"></youtube-video>
+                    </div>
+                    <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
+                        <span class="  md-margin">{{::video.name}}</span>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+
+    </div>
+
     
+ </div> 
+   <div ng-if="$ctrl.showMoreVideos" layout="row" layout-align=" center center" layout-align-xs="  center">
+        <md-button ng-click="::$ctrl.showVideos()" class="comment-btn xs-selected md-raised ">Всі відео
+        </md-button>
+    </div>
      <div layout="row" flex ng-if="$ctrl.brends.length>0 " class="md-padding">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap header-super">
@@ -175,7 +214,8 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
 export class SalonHomeComponentController {
 
     static $inject = [MasterResourceName, 'smoothScroll', "$location", 'constants',
-        TransformResourceName, BrendResourceName, "$rootScope", MediaObserverFactoryName, '$q',FavorResourceName];
+        TransformResourceName, BrendResourceName, "$rootScope", MediaObserverFactoryName,
+        '$q',FavorResourceName,AcademyVideosResourceName];
 
     favors: IFavor[];
     masters: IMaster[];
@@ -209,12 +249,15 @@ export class SalonHomeComponentController {
     categories: any;
     showMoreTransforms: boolean;
     socialParams: any;
+    videos: IAcademyVideos[];
+    showMoreVideos:boolean;
 
     constructor(private masterResource: IMasterResource,
                 private smoothScroll, private $location: ng.ILocationService,
                 private constants: IConstants, private TransformResource: ITransformResource,
                 private BrendResource: IBrendResource, private $rootScope: IRootScope,
-                private mediaObserver: IMediaObserverFactory, private $q,private favorResource: IFavorResource,) {
+                private mediaObserver: IMediaObserverFactory, private $q,private favorResource: IFavorResource,
+                private AcademyVideosResource: IAcademyVideosResource) {
         this.categories = this.constants.favorCategories;
     }
 
@@ -226,14 +269,19 @@ export class SalonHomeComponentController {
 
         this.transforms.$promise.then((transforms) => {
             this.showMoreTransforms = transforms.length > 2;
-            transforms.splice(2, 1);
+            transforms.splice(2, transforms.length -2);
         });
 
 
         var favorPromise= this.favorResource.query({sort: "order"}).$promise;
         this.initFavors(favorPromise);
 
-        this.$q.all([this.masters.$promise, this.brends.$promise,this.transforms.$promise,favorPromise]).then((result) => {
+        this.videos= this.AcademyVideosResource.query({sort: 'order', page: 1, perPage: 3});
+        this.videos.$promise.then((videos) => {
+            this.showMoreVideos = videos.length > 2;
+            videos.splice(2, videos.length-2);
+        });
+        this.$q.all([this.masters.$promise, this.brends.$promise,this.transforms.$promise,favorPromise, this.videos.$promise]).then((result) => {
             this.markerReadySEO = "dynamic-content";
         });
 
@@ -268,6 +316,10 @@ export class SalonHomeComponentController {
 
     showTransforms() {
         this.$location.path(`/beauty-parlour/transforms`);
+    }
+
+    showVideos() {
+        this.$location.path(`/academy/videos`);
     }
 
     showFavors(id: String) {
