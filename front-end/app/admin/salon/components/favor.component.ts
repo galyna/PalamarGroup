@@ -25,7 +25,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                 <md-card-content>
                     <md-input-container class="md-block ">
                         <label for="name">Назва</label>
-                        <input id="name" ng-model="$ctrl.transform.name" name="name"/>
+                        <input id="name" ng-model="$ctrl.favor.name" name="name"/>
                     </md-input-container>
                         <md-input-container class="md-block">
                         <label for="order1">Порядок відображення</label>
