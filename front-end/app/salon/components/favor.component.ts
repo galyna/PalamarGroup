@@ -164,7 +164,7 @@ const template = `<div class="courses description-container">
  <div >
     <div layout="row" layout-align="center center" >
         <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
-            <div layout="column" layout-margin  layout-align="center center" class="embed-responsive-container">
+            <div layout="column" layout-margin  layout-align="center center" class="embed-responsive-container" ng-if="$ctrl.favor.videos.length>0">
                 <md-card md-whiteframe="6" class="  courses-videos" 
                          ng-repeat="video in $ctrl.favor.videos | orderBy:'order' track by $index"
                          flex>
