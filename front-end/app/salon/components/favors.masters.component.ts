@@ -24,7 +24,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                      ng-attr-flex-gt-sm="46"
                      flex-gt-xs="46" flex-xs="80"
                      ng-click="::$ctrl.showFavor(favor._id)">
- <img ng-src="{{::favor.photo.url}}" class="md-card-image">                                 
+ <img ng-src="{{::favor.photo.url}}" >                                 
                     <md-card-content layout="column" class="  show-description-favor" layout-align="center center">
                         <span class="  md-margin">{{::favor.name}}</span>
                          <div class=" md-margin show-description-content">{{::favor.description}}</div>
