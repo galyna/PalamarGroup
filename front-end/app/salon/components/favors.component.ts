@@ -134,8 +134,7 @@ export class FavorsComponentController {
                     catVideo.splice(0, catVideo.length - 1)
                     this.photos = this.photos.concat(catPhoto);
                     this.videos = this.videos.concat(catVideo);
-                    catVideo = [];
-                    catPhoto = [];
+
                 })
 
                 this.markerReadySEO = "dynamic-content";
