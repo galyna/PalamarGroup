@@ -1,7 +1,7 @@
 const template = `<div class="container-wrapper description-container ">
     <div class="page-header">
   
-     <div ng-if="$ctrl.isVideoLoaded" ng-click="$ctrl.handleVideoRuning()" hide show-gt-md="true" class="stop-video-container" layout="row" layout-align="center center " >
+     <div ng-if="$ctrl.isVideoLoaded" ng-click="$ctrl.handleVideoRuning()" hide show-md="true" class="stop-video-container" layout="row" layout-align="center center " >
         <div ng-if="$ctrl.runVideo" class="stop-label">ЗУПИНТИ ВІДЕО</div>
         <div ng-if="!$ctrl.runVideo" class="stop-label">ЗAПУСПИТИ ВІДЕО</div>
     </div>
