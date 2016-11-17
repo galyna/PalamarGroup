@@ -130,7 +130,7 @@ export class FavorsComponentController {
                         return category.name == favor.category.name;
                     });
 
-                    catPhoto.splice(5, catPhoto.length - 6)
+                    catPhoto.splice(2, catPhoto.length - 3)
                     catVideo.splice(0, catVideo.length - 1)
                     this.photos = this.photos.concat(catPhoto);
                     this.videos = this.videos.concat(catVideo);
