@@ -58,15 +58,11 @@ export class CalendarComponentController {
                        </div>                  
                     </div>`
         } else {
-            return ` <div class="hovereffect course-marker">
+            return ` <div class="course-marker"> <div class="hovereffect ">
                        <img  src="${picture}" alt="">
-                      <div class="overlay">
-                     <h2>${name}</h2>
-                      <button class="md-button detail-btn" aria-label="Play" >
-                            Деталі
-                        </button>
+                      <div class="overlay">                                        
                        </div>                  
-                    </div>`
+                    </div>  <div class="it-name">${name}</div></div>`
 
         }
     }
