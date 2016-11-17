@@ -15,14 +15,7 @@ export function appRun($rootScope:IRootScope, $timeout, $mdMedia) {
     $rootScope.loading = false;
     
     $rootScope.isBigSize = $mdMedia( 'gt-lg' );
-    if ($mdMedia( 'gt-md' ) ) {
-        var videoTag = angular.element( ` <video  hide show-gt-md="true" class="screen" muted autoplay
-                                              loop="true" onloadedmetadata="this.muted = true" >
-                                           <source type="video/mp4" src="../content/images/bg/bg1.mp4"/>
-                                                           </video>` );
-        var videoContainer = angular.element( document.querySelector( '#video-container' ) );
-        videoContainer.append( videoTag );
-    }
+
 
     $rootScope.$on( '$routeChangeStart', function () {
         //show loading gif

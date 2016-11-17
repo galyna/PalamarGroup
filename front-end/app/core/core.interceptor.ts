@@ -8,6 +8,7 @@ export function httpInterceptorConfig($httpProvider: ng.IHttpProvider) {
 
 loadingInterceptor.$inject = ['$q', '$rootScope'];
 function loadingInterceptor ($q: ng.IQService, $rootScope: IRootScope) {
+    $rootScope.loading = true;
     return {
         request: function (config: ng.IRequestConfig) {
             $rootScope.loading = true;

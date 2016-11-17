@@ -83,6 +83,35 @@ button.md-button.md-fab.side-up-btn {
 
 }
 
+.stop-video-container {
+  z-index: 70;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 120px;
+  height: 55px;
+  border: 1px solid $primary;
+  color: $primary;
+  display: flex;
+  align-items: center;
+  background: rgba(white, 0.6);
+ //border-right-width: 0;
+  &:hover {
+    cursor: pointer;
+  }
+  @media (max-width: $layout-breakpoint-xs) {
+    width: 65px;
+    border: none;
+  }
+
+  .stop-label {
+
+    width:85px;
+
+
+  }
+}
+
 #menu-container {
   z-index: 70;
   position: fixed;
@@ -93,7 +122,7 @@ button.md-button.md-fab.side-up-btn {
   width: 120px;
   height: 55px;
   border: 1px solid $primary;
-  border-left-width: 0;
+ // border-left-width: 0;
   background: rgba(white, 0.6);
 
   &:hover {
@@ -290,9 +319,10 @@ button.md-button.md-fab.side-up-btn {
 
 }
 
-md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-icon{
+md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-icon {
   background-color: black;
 }
+
 .social-image {
   width: 30px;
   margin: 5px;

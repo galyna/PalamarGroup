@@ -38,46 +38,8 @@
 <pg-menu></pg-menu>
 
 <!--header-->
+<pg-header ng-if="::!$root.isAdminZone()" ></pg-header>
 
-<div class="container-wrapper description-container ">
-    <div class="page-header">
-        <div class="fit-screen-wrap">
-            <div class="page-header-wrap "  layout="row" layout-align="center center">
-                <div id="logo-container" >
-                    <a href="#/home"  layout="row" layout-align="center center" >
-                    <img class="logo-img md-padding"  src="../content/images/logo/palamar_logo.png"/>
-                    <div class="md-padding" >
-                        <h1 class="featured-area-title"> PALAMAR GROUP</h1>
-                        <div  class="featured-area-subtitle">
-                            beauty parlour & academy
-                        </div>
-                    </div>
-                        <img class="logo-img md-padding"  src="../content/images/logo/palamar_logo.png"/>
-
-                    </a>
-                </div>
-                <div id="video-container" >
-
-                </div>
-            </div>
-        </div>
-
-        <div class="pic-wrapper" >
-            <figure class="pic-1"></figure>
-            <figure  class="pic-2"></figure>
-            <figure  class="pic-3"></figure>
-            <figure class="pic-4"></figure>
-            <figure class="pic-5"></figure>
-
-
-        </div>
-        <md-button  easing="easeInOutCubic" scroll-to="mainContent"
-                   duration="100" class=" md-fab  down-btn" aria-label="down">
-            <md-icon class=""
-                     md-svg-src="navigation:ic_arrow_downward_24px"></md-icon>
-        </md-button>
-    </div>
-</div>
 
 <div class="page-container description-container">
     <div class="fit-screen-wrap">
