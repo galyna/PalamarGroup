@@ -8,7 +8,7 @@ import {MediaObserverFactoryName, IMediaObserverFactory} from "../../ui/mediaObs
 import {IRootScope} from "../../../typings";
 
 
-const template = `<div class="courses-details description-container" layout="column">
+const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
     <div layout="row" flex>
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
@@ -24,12 +24,12 @@ const template = `<div class="courses-details description-container" layout="col
                          class="md-margin "
                          ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.categories.length)}}" flex-gt-xs="46"
                          flex-xs="80"
-                         ng-click="::$ctrl.showFavors(category._id)">
+                         ng-click="::$ctrl.showFavors(category.url)">
 
                     <img ng-src="{{'/content/images/services/'+ category._id+'.jpg'}}" class="md-card-image">
 
-                    <md-card-content layout="column" layout-align="center center">
-                        <span class="  md-margin">{{::category.name}}</span>
+                    <md-card-content  layout="column"  layout-align="center center">
+                        <span class="  md-margin">{{::category.name}}</span>                       
                     </md-card-content>
                 </md-card>
 
@@ -73,9 +73,11 @@ const template = `<div class="courses-details description-container" layout="col
                          flex-gt-xs="46" flex-xs="80"
                          ng-click="::$ctrl.showMaster(master._id)">
                    
-                    <img ng-src="{{::master.photo.url}}" class="md-card-image">
-                    <md-card-content layout="column" layout-align="center center">
+                    <img ng-src="{{::master.photo.url}}" class=" ">
+                    <md-card-content layout="column" class="  show-description" layout-align="center center">
                         <span class="  md-margin">{{::master.name}}</span>
+                         <div class=" md-margin show-description-content">{{::master.rate.text}}</div>
+                         <div class=" md-margin  subtitle">{{::master.subtitle}}</div>
                     </md-card-content>
 
             </div>
@@ -173,11 +175,12 @@ const template = `<div class="courses-details description-container" layout="col
 export class SalonHomeComponentController {
 
     static $inject = [MasterResourceName, 'smoothScroll', "$location", 'constants',
-        TransformResourceName, BrendResourceName, "$rootScope", MediaObserverFactoryName];
+        TransformResourceName, BrendResourceName, "$rootScope", MediaObserverFactoryName, '$q',FavorResourceName];
 
     favors: IFavor[];
     masters: IMaster[];
     brends: IBrend[];
+    markerReadySEO: string;
     transforms: ITransform[];
     days = [
         {
@@ -205,22 +208,51 @@ export class SalonHomeComponentController {
         }];
     categories: any;
     showMoreTransforms: boolean;
-    socialParams:any;
+    socialParams: any;
 
     constructor(private masterResource: IMasterResource,
                 private smoothScroll, private $location: ng.ILocationService,
                 private constants: IConstants, private TransformResource: ITransformResource,
-                private BrendResource: IBrendResource, private $rootScope:IRootScope,
-                private mediaObserver:IMediaObserverFactory) {
+                private BrendResource: IBrendResource, private $rootScope: IRootScope,
+                private mediaObserver: IMediaObserverFactory, private $q,private favorResource: IFavorResource,) {
+        this.categories = this.constants.favorCategories;
+    }
+
+    $onInit() {
 
         this.masters = this.masterResource.query({sort: "order"});
         this.brends = this.BrendResource.query({sort: "order"});
-        this.transforms = this.TransformResource.query({sort: "order", page: 1,  perPage: 3});
+        this.transforms = this.TransformResource.query({sort: "order", page: 1, perPage: 3});
+
         this.transforms.$promise.then((transforms) => {
             this.showMoreTransforms = transforms.length > 2;
             transforms.splice(2, 1);
         });
-        this.categories = this.constants.favorCategories;
+
+
+        var favorPromise= this.favorResource.query({sort: "order"}).$promise;
+        this.initFavors(favorPromise);
+
+        this.$q.all([this.masters.$promise, this.brends.$promise,this.transforms.$promise,favorPromise]).then((result) => {
+            this.markerReadySEO = "dynamic-content";
+        });
+
+    }
+
+    initFavors(favorPromise) {
+        favorPromise.then((favors) => {
+            this.favors = favors;
+            if (this.favors.length > 0) {
+
+                this.categories.forEach((category)=> {
+                    category.favors = favors.filter((favor)=> {
+                        return category.name == favor.category.name;
+                    });
+                })
+            }
+
+        });
+
     }
 
     scrollToMain() {
@@ -248,10 +280,10 @@ export class SalonHomeComponentController {
 
     setSocialParams(photo) {
         this.$rootScope.socialParams.host = this.constants.host;
-        this.$rootScope.socialParams.target = this.constants.host ;
+        this.$rootScope.socialParams.target = this.constants.host;
         this.$rootScope.socialParams.image = this.constants.host + photo.url;
         this.$rootScope.socialParams.title = 'Перевтілення';
-        this.socialParams = angular.copy( this.$rootScope.socialParams, this.socialParams );
+        this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
     }
 
     getPictureFlex(index, length) {
@@ -262,7 +294,7 @@ export class SalonHomeComponentController {
         }
     }
 
-    showMediaObserver(items, index):void {
+    showMediaObserver(items, index): void {
         this.setSocialParams(items[index]);
         this.mediaObserver.observe(items, index, this.socialParams);
     }

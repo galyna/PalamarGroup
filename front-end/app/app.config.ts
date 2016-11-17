@@ -41,4 +41,5 @@ export function materialConfig(uiGmapGoogleMapApiProvider,$mdThemingProvider,$lo
         libraries: 'weather,geometry,visualization'
     } );
 
+
 }

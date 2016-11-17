@@ -451,7 +451,7 @@ md-card.md-default-theme, md-card {
 
 @media (min-width: $layout-breakpoint-md) {
 
-  .md-card-image {
+  .md-card-image{
     transition: transform 0.3s;
     &:hover {
       transform: scale(1.1, 1.1);

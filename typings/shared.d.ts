@@ -12,6 +12,7 @@ declare module pg {
         export interface IFavor {
             _id:any,
             name:string,
+            subtitle:string,
             description:string,
             category:{ _id:string, name:string},
             defPrice:number,
@@ -29,6 +30,7 @@ declare module pg {
         export interface IMaster {
             _id:any,
             name:string,
+            subtitle:string,
             description:string,
             photo:IPhoto,
             order:number,

@@ -9,7 +9,7 @@ import {IRootScope} from "../../../typings";
 import {SalonResourceName, ISalonResource} from "../../resources/salon.resource";
 
 
-const template = `<div class="salon-contacts description-container" layout="column">
+const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-contacts description-container" layout="column">
 
     <!--author-->
     <div layout="column" layout-align="center center" >
@@ -117,7 +117,7 @@ const template = `<div class="salon-contacts description-container" layout="colu
 
 export class AcademyContactComponentController {
 
-    static $inject = [ContactResourceName, '$rootScope', SalonResourceName];
+    static $inject = [ContactResourceName, '$rootScope', SalonResourceName, '$q'];
 
 
     order:IOrder;
@@ -125,8 +125,10 @@ export class AcademyContactComponentController {
     contacts:IContact[];
     map:any;
     marker:any;
+    markerReadySEO: string;
 
-    constructor(private contactResource:IContactResource, private $rootScope:IRootScope, private salonResource:ISalonResource) {
+    constructor(private contactResource:IContactResource, private $rootScope:IRootScope,
+                private salonResource:ISalonResource, private $q) {
         
     }
 
@@ -134,8 +136,8 @@ export class AcademyContactComponentController {
         this.map = {center: {latitude: 49.811077, longitude: 23.973777}, zoom: 18};
         this.marker = {latitude: 49.811077, longitude: 23.973777};
         this.showAnimation = this.$rootScope.isBigSize;
-        var mainSalons = this.salonResource.query( {query: {'isAcademy': 'true'}} );
-        mainSalons.$promise.then( (salons) => {
+        var mainPromise = this.salonResource.query( {query: {'isAcademy': 'true'}} ).$promise;
+        mainPromise.then( (salons) => {
             if (salons.length>0) {
              var academySalon= salons[0];
                 this.map.center.latitude=academySalon.latitude;
@@ -145,7 +147,10 @@ export class AcademyContactComponentController {
             }
         } );
         this.contacts = this.contactResource.query( {query: {'isAcademy': 'true'}} );
-       
+
+        this.$q.all([mainPromise, this.contacts.$promise]).then((result) => {
+            this.markerReadySEO = "dynamic-content";
+        });
     }
 
 }

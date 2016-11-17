@@ -23,9 +23,9 @@ export let constants: IConstants = {
         {_id: 2, name: "Оплачено"},
         {_id: 3, name: "Відмова"}],
     favorCategories: [
-        {_id: "hear", name: "ПЕРУКАРСЬКІ ПОСЛУГИ"},
-        {_id: "neils", name: "НІГТЬОВА ЕСТЕТИКА"},
-        {_id: "makeup", name: "ВІЗАЖ"}],
+        {_id: "hear", name: "ПЕРУКАРСЬКІ ПОСЛУГИ",url:"hairdressing"},
+        {_id: "neils", name: "НІГТЬОВА ЕСТЕТИКА",url:"nail-aesthetics"},
+        {_id: "makeup", name: "ВІЗАЖ",url:"makeup"}],
     favorLevels: [
         {_id: "0", name: "ПОЧАТКОВИЙ", text: "Junior Stylist"},
         {_id: "1", name: "СЕРЕДНІЙ", text: "Middle Stylist"},

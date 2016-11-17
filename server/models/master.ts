@@ -18,6 +18,7 @@ let VideoSchema = new Schema( {
 let MasterSchema = new Schema( {
     name: String,
     description: String,
+    subtitle:String,
     order: Number,
     photo: PhotoSchema,
     isTop:Boolean,

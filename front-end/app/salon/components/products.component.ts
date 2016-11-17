@@ -2,7 +2,7 @@ import {IProductResource, IProduct, ProductResourceName} from "../../resources/p
 import {IRootScope} from "../../../typings";
 import {IProductOrder, ProductOrderResourceName, IProductOrderResource} from "../../resources/product.order.resource";
 
-const template = `<div class="courses description-container products" layout="row" layout-align="center center">
+const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses description-container products" layout="row" layout-align="center center">
     <div layout="column" layout-align="center center">
 
         <div class="course-bg " layout-align="center center" flex
@@ -220,6 +220,7 @@ export class ProductsComponentController {
     products: IProduct[];
     productsOrder: IProductOrder;
     showAnimation: boolean;
+    markerReadySEO: string;
 
 
     constructor(private $log: ng.ILogService, private $rootScope: IRootScope, private $mdDialog: ng.material.IDialogService,
@@ -232,10 +233,11 @@ export class ProductsComponentController {
 
     $onInit() {
         this.products = this.ProductResource.query({sort:"order"});
-        this.products.$promise.then((products) => {
-                this.products = products;
+        this.products.$promise.then(() => {
+            this.markerReadySEO = "dynamic-content";
             }
         );
+
     }
 
     showAppointmentDialog(product) {

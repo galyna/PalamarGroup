@@ -108,8 +108,6 @@
       width: 170px;
       text-align: center;
 
-
-
       .date-text {
         left: 20%;
         position: absolute;
@@ -192,15 +190,19 @@
   md-card.md-default-theme, md-card {
     position: relative;
     display: block;
-    // transition: top 0.3s linear;
+    transition: top 0.3s linear;
     top: 0px;
     overflow: hidden;
 
     &:hover {
       cursor: pointer;
       @extend .md-whiteframe-12dp;
-      transition: top 0.3s linear;
+     // transition: top 0.3s linear;
       top: -3px;
+    }
+
+    .show-description-content {
+       display: none;
     }
 
     img {
@@ -222,6 +224,165 @@
       background-color: rgba($primary, 0.7);
       overflow: hidden;
       white-space: nowrap;
+
+      -webkit-transition: all 0.5s ease-in-out;
+      -moz-transition: all 0.5s ease-in-out;
+      -o-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+      .show-description-content {
+        display: none;
+      }
+      .subtitle {
+        display: none;
+      }
+    }
+
+
+
+    @media (max-width: $layout-breakpoint-xs) {
+      md-card-content.show-description {
+        padding-top: 10px;
+        padding-bottom:  10px;
+        max-height: 100%;
+        height: 100%;
+        color: #2b2b2b;
+        background-color: white;
+        position: relative;
+        text-transform: none;
+        white-space: pre-wrap;
+        .show-description-content {
+          display: block;
+          font-size: 16px;
+          text-align: center;
+        }
+        .subtitle {
+          text-align: center;
+          display: block;
+          text-transform: uppercase;
+
+
+        }
+        span {
+          text-transform: uppercase;
+          text-align: center;
+          font-size: 30px;
+        }
+      }
+    }
+
+    @media (min-width: $layout-breakpoint-sm) {
+       md-card-content.show-description {
+        background-color: rgba($primary, 0.7);
+        position: absolute;
+      }
+
+      &:hover md-card-content.show-description {
+        max-height: 100%;
+        height: 100%;
+        background-color: rgba($primary, 0.7);
+        position: absolute;
+        text-transform: none;
+        white-space: pre-wrap;
+        .show-description-content {
+          display: block;
+          font-size: 16px;
+          text-align: center;
+        }
+        .subtitle {
+          text-align: center;
+          display: block;
+          text-transform: uppercase;
+          //font-size: 20px;
+
+
+
+        }
+      }
+
+    }
+
+    @media (min-width: $layout-breakpoint-md) {
+
+      &:hover md-card-content.show-description span {
+          text-transform: uppercase;
+          text-align: center;
+          font-size: 30px;
+        }
+
+    }
+
+    @media (max-width: $layout-breakpoint-xs) {
+      md-card-content.show-description-favor {
+        padding-top: 10px;
+        padding-bottom:  10px;
+        max-height: 100%;
+        height: 100%;
+        color: #2b2b2b;
+        background-color: white;
+        position: relative;
+        text-transform: none;
+        white-space: pre-wrap;
+        .show-description-content {
+          display: block;
+          font-size: 16px;
+          text-align: center;
+        }
+        .subtitle {
+          text-align: center;
+          display: block;
+          text-transform: uppercase;
+
+
+        }
+
+        span {
+          text-transform: uppercase;
+          text-align: center;
+          font-size: 30px;
+        }
+      }
+    }
+
+    @media (min-width: $layout-breakpoint-md) {
+      md-card-content.show-description-favor {
+
+        background-color: rgba($primary, 0.7);
+        position: absolute;
+
+      }
+
+
+
+      &:hover md-card-content.show-description-favor {
+        max-height: 100%;
+        height: 100%;
+        background-color: rgba($primary, 0.7);
+        position: absolute;
+        text-transform: none;
+        white-space: pre-wrap;
+        .show-description-content {
+          display: block;
+          font-size: 16px;
+          text-align: center;
+        }
+        .subtitle {
+          text-align: center;
+          display: block;
+          text-transform: uppercase;
+          //font-size: 20px;
+
+
+
+        }
+      }
+      &:hover md-card-content.show-description-favor span {
+        text-transform: uppercase;
+        text-align: center;
+        @media (min-width: $layout-breakpoint-md) {
+          font-size: 36px;
+
+        }
+      }
 
     }
 

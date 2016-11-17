@@ -47,6 +47,11 @@ const template: string = `<div flex layout="column">
                             </md-option>
                         </md-select>
                     </md-input-container>
+                     <md-input-container class="md-block">
+                        <label for="description">Короткий опис</label>
+                        <textarea ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.master.subtitle"
+                                  id="subtitle" name="subtitle" ></textarea>
+                    </md-input-container>
                     <md-input-container class="md-block">
                         <label for="description">Про майстра</label>
                         <textarea ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.master.description"

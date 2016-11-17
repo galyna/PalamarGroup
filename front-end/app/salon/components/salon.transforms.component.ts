@@ -4,7 +4,7 @@ import {IMediaObserverFactory, MediaObserverFactoryName} from "../../ui/mediaObs
 import {IConstants} from "../../core/core.config";
 
 
-const template = `<div class="courses-details description-container" layout="column">
+const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
     <div layout="row" flex>
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
@@ -66,7 +66,7 @@ export class SalonTransformsComponentController {
     showAnimation:boolean;
     transforms:ITransform[];
     socialParams:any;
-
+    markerReadySEO: string;
     constructor(private TransformResource:ITransformResource, private $rootScope:IRootScope,
                 private mediaObserver:IMediaObserverFactory,
                 private constants:IConstants) {
@@ -75,8 +75,9 @@ export class SalonTransformsComponentController {
 
     $onInit() {
         this.transforms = this.TransformResource.query({sort: "order"});
-
-
+        this.transforms.$promise.then((transforms)=> {
+            this.markerReadySEO = "dynamic-content";
+        });
     }
 
     setSocialParams(photo) {

@@ -18,6 +18,7 @@ export class CoursesController {
     courses:ICourse[];
     calendarDirection = 'horizontal';
     showAnimation:boolean;
+    markerReadySEO: string;
 
 
     constructor($scope, private $sce, private $location, private $rootScope:IRootScope, private pgCalendarData:IPgCalendarDataService,
@@ -34,11 +35,10 @@ export class CoursesController {
     }
 
     getCourses() {
-        this.courses = this.CourseResource.query();
+        this.courses = this.CourseResource.query({sort: "order"});
         this.courses.$promise.then( (courses) => {
-                this.courses = this.orderByFilter( courses, "order" )
-            }
-        );
+            this.markerReadySEO = "dynamic-content";
+            });
     }
 
     showDetails(id:string) {

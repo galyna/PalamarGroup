@@ -1,6 +1,5 @@
 import * as express from 'express';
 let passport = require("passport");
-let prerender = require('prerender-node')
 let path = require('path');
 import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
@@ -11,6 +10,7 @@ import "./models/user";
 import "./auth/passport";
 import {setupRouter} from './routes/setup.endpoint';
 import api from './routes/api';
+import {botHandler} from './services/snapshots.service';
 
 let app = express();
 let port = parseInt(process.env['PORT']) || 8080;
@@ -40,7 +40,7 @@ if (env === 'prod') {
     pathes = {
         admin: '../front-end/dist/admin.html',
         all: '../front-end/dist',
-        content:'../front-end/dist/content/',
+        content: '../front-end/dist/content/',
         index: '../front-end/dist/index.html'
 
     };
@@ -48,13 +48,15 @@ if (env === 'prod') {
     pathes = {
         admin: '../front-end/admin.html',
         all: '../front-end/',
-        content:'../front-end/content/',
+        content: '../front-end/content/',
         index: `..${path.sep}front-end${path.sep}index.html`
     };
 }
 app.use('/admin', express.static(pathes.admin));
 app.use('/content', express.static(pathes.content));
-app.use('/', express.static(pathes.all));
+app.use('/', function (req, res, next) {
+    botHandler.handleBots(req, res, next);
+}, express.static(pathes.all));
 
 app.use('/api', api);
 
@@ -112,5 +114,7 @@ app.listen(port, 'localhost', ()=> {
     console.log(`port: ${port}`);
     console.log(`environment: ${env}`);
 });
+
+botHandler.saveSnapshots();
 
 export default app;

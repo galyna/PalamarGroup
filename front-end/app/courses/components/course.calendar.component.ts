@@ -4,7 +4,14 @@ import ICourse = pg.models.ICourse;
 import {IRootScope} from "../../../typings";
 
 
-const template = `<div layout="row" flex layout-align="center stretch"> <pg-calendar 
+const template = ` <div layout="row" flex>
+        <div class="page-delimiter" flex>
+            <div class="fit-screen-wrap invers header">
+                <div class="md-display-2"> КАЛЕНДАР ПОДІЙ АКАДЕМІЇ</div>
+            </div>
+
+        </div>
+    </div><div ng-attr-id="{{ $ctrl.markerReadySEO }}" layout="row" flex layout-align="center stretch"> <pg-calendar 
                              calendar-direction="$ctrl.calendarDirection"
                              on-prev-month="prevMonth"
                              on-next-month="nextMonth"
@@ -33,7 +40,7 @@ export class CalendarComponentController {
     courses:ICourse[];
     calendarDirection = 'horizontal';
     coursesDateMap:ICourseDates[];
-
+    markerReadySEO: string;
     constructor(private pgCalendarData:IPgCalendarDataService,private $rootScope:IRootScope,
                 private CourseResource:ICourseResource, private $sce,
                 private $location, private orderByFilter:ng.IFilterOrderBy, private smoothScroll) {
@@ -78,6 +85,7 @@ export class CalendarComponentController {
                 } );
 
                 this.scrollToMain();
+                this.markerReadySEO = "dynamic-content";
             }
         );
     }

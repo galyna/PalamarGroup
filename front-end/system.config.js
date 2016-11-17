@@ -39,12 +39,6 @@ System.config({
         'youtube-iframe-api': 'https://www.youtube.com/iframe_api'
     },
     meta: {
-        'angular-touch': {
-            deps: ['angular'
-            ],
-            format: "global"
-        },
-
         'uiGmapgoogle-maps': {
             deps: ['angular',
                 "angular-simple-logger",

@@ -4,40 +4,38 @@ import {IConstants} from "../../core/core.config";
 import {IAppointmentResource, AppointmentResourceName} from "../../resources/appointment.resource";
 import {AppointmentServiceName, IAppointmentService} from "../servises/appointment.service";
 
-const template = `<div class="courses-details description-container" layout="column">
+const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
 
-
-    <div ng-repeat="category in  $ctrl.categories track by $index">
-
-        <div layout="row" flex ng-if="category.favors.length>0">
-            <div class="page-delimiter" flex>
-                <div class="fit-screen-wrap invers header">
-                    <div class="md-display-2"> {{::category.name}}</div>
-                </div>
-
+    <div layout="row" flex>
+        <div class="page-delimiter" flex>
+            <div class="fit-screen-wrap invers header">
+                <div class="md-display-2"> {{::$ctrl.category.name}}</div>
             </div>
+
         </div>
+    </div>
 
-        <div layout="row" layout-align="center center" ng-if="category.favors.length>0 ">
-            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
-                <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                    <md-card md-whiteframe="6" ng-repeat="favor in category.favors track by $index"
-                             class="md-margin "
-                             ng-attr-flex-gt-sm="46"
-                             flex-gt-xs="46" flex-xs="80"
-                             ng-click="::$ctrl.showFavor(favor._id)">
-
-                        <img ng-src="{{::favor.photo.url}}" class="md-card-image">
-
-                        <md-card-content ng-if="favor.name" layout="column" flex="100" layout-align="center center">
-                            <span class="  md-margin">{{::favor.name}}</span>
-                        </md-card-content>
-                    </md-card>
-                </div>
-            </div>
+    <div layout="row" layout-align="center center"
+    ">
+    <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
+        <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+            <md-card md-whiteframe="6" ng-repeat="favor in $ctrl.favors track by $index"
+                     class="md-margin "
+                     ng-attr-flex-gt-sm="46"
+                     flex-gt-xs="46" flex-xs="80"
+                     ng-click="::$ctrl.showFavor(favor._id)">
+ <img ng-src="{{::favor.photo.url}}" class="md-card-image">                                 
+                    <md-card-content layout="column" class="  show-description-favor" layout-align="center center">
+                        <span class="  md-margin">{{::favor.name}}</span>
+                         <div class=" md-margin show-description-content">{{::favor.description}}</div>
+                       
+                    </md-card-content>
+            </md-card>
         </div>
     </div>
 </div>
+</div>
+
 <div layout="row" ng-if="$ctrl.masters.length>0" flex>
     <div class="page-delimiter" flex>
         <div class="fit-screen-wrap  header-super">
@@ -76,7 +74,9 @@ const template = `<div class="courses-details description-container" layout="col
                                 {{::master.rate.text}}
                             </div>
                             <div layout="row" layout-align="center center" class="md-padding ">
-                                <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">{{::master.name}}</div>
+                                <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">
+                                    {{::master.name}}
+                                </div>
                                 <div hide show-sm="true"
                                 ="true" flex="90" class="md-display-1">{{::master.name}}
                             </div>
@@ -137,8 +137,9 @@ const template = `<div class="courses-details description-container" layout="col
                             </md-card-title-text>
                         </md-card-title>
                     </div>
-                    <div class="card-media " ng-click="::$ctrl.showMaster(master._id)"><img ng-src="{{master.photo.url}}" ng-if="!!master.photo.url"
-                                                  class="md-card-image"/></div>
+                    <div class="card-media " ng-click="::$ctrl.showMaster(master._id)"><img
+                            ng-src="{{master.photo.url}}" ng-if="!!master.photo.url"
+                            class="md-card-image"/></div>
                     <div class="card-desc "
                          layout="column" layout-align="center center">
                         <md-card-title>
@@ -184,62 +185,53 @@ const template = `<div class="courses-details description-container" layout="col
 `;
 
 
-
-
 export class FavorsMastersComponentController {
 
 
     static $inject = [FavorResourceName, 'constants', "$routeParams", "$location", MasterResourceName,
-        AppointmentServiceName, AppointmentResourceName];
+        AppointmentServiceName, AppointmentResourceName, '$q'];
 
     favors: any;
     masters: IMaster[];
-    categories: any;
+    category: any;
+    markerReadySEO: string;
 
     constructor(private favorResource: IFavorResource, private constants: IConstants,
                 private $routeParams: ng.route.IRouteParamsService, private $location: ng.ILocationService,
-                private MasterResource: IMasterResource,private AppointmentService: IAppointmentService,
-                private AppointmentResource: IAppointmentResource) {
+                private MasterResource: IMasterResource, private AppointmentService: IAppointmentService,
+                private AppointmentResource: IAppointmentResource, private $q) {
 
 
     }
 
     $onInit() {
         this.favors = [];
-        this.categories = angular.copy(this.constants.favorCategories);
-        if (this.$routeParams["category"] && this.$routeParams["category"] != ":category") {
-            var category = this.$routeParams["category"]
+        var categories = angular.copy(this.constants.favorCategories);
 
-            this.favors = this.favorResource.query({sort: "order", query: {"category._id": category}})
-                .$promise.then((favors) => {
-                this.favors = favors;
-                if (this.favors.length > 0) {
-                    this.categories.find(cat=>cat._id == category).favors = this.favors;
-                }else{this.$location.path(`/beauty-parlour/services`);}
+        if (this.$routeParams["category"]) {
+            this.category = categories.filter((cat)=> {
+                return cat.url == this.$routeParams["category"]
+            })[0];
+            this.favors = this.favorResource.query({sort: "order", query: {"category._id": this.category._id}});
+            var masterPromise = this.MasterResource.query({populate: 'services.favor', sort: "order"}).$promise;
+            this.setMasters(masterPromise, this.category._id);
 
+            this.$q.all([masterPromise, this.favors.$promise]).then((tt) => {
+                this.markerReadySEO = "dynamic-content";
             });
-
-            this.getMasters(category);
-
         }
     }
 
-    getMasters(category) {
-        this.MasterResource.query({
-            populate: 'services.favor',
-            sort: "order"
-        }).$promise
-            .then((masters) => {
-                this.masters = masters.filter((master)=> {
-                    master.services = master.services.filter((s)=> {
-                        return s.favor.category._id == category;
-                    });
-                    return master.services.length > 0;
-                })
-
-            });
+    setMasters(masterPromise, categoryId) {
+        masterPromise.then((masters) => {
+            this.masters = masters.filter((master)=> {
+                master.services = master.services.filter((s)=> {
+                    return s.favor.category._id == categoryId;
+                });
+                return master.services.length > 0;
+            })
+        });
     }
-
 
     showFavor(id) {
         this.$location.path(`/beauty-parlour/service/${id}`);
@@ -249,7 +241,7 @@ export class FavorsMastersComponentController {
         this.$location.path(`/beauty-parlour/master/${id}`);
     }
 
-    
+
     showAppointmentDialog(master, service = null) {
         var appointment = new this.AppointmentResource();
         appointment.master = master;
@@ -268,7 +260,7 @@ export class FavorsMastersComponentController {
 
 }
 
-export let FavorsMastersComponentUrl =  "/beauty-parlour/services/:category";
+export let FavorsMastersComponentUrl = "/beauty-parlour/services/:category";
 export let FavorsMastersComponentName = 'pgFavorsMasters';
 export let FavorsMastersComponentOptions = {
     template: template,

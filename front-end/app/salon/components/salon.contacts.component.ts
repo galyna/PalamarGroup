@@ -11,7 +11,7 @@ import {ISchedulerScope} from "../../admin/salon/components/master.scheduler";
 import {IMediaObserverFactory, MediaObserverFactoryName} from "../../ui/mediaObserver.service";
 
 
-const template = `<div class="salon-contacts description-container" layout="column">
+const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-contacts description-container" layout="column">
 
     <!--author-->
     <div layout="column" layout-align="center center" ng-repeat="salon in $ctrl.salons">
@@ -149,6 +149,7 @@ export class SalonContactsComponentController {
     salons: ISalon[];
     map: any;
     socialParams:any;
+    markerReadySEO: string;
 
     constructor(private contactResource: IContactResource,
                 private $rootScope: IRootScope,
@@ -200,9 +201,10 @@ export class SalonContactsComponentController {
                         if (contact.salon === salon._id) {
                             salon.contacts.push(contact);
                         }
+
                     })
                 })
-
+                this.markerReadySEO = "dynamic-content";
             })
         });
     }

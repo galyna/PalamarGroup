@@ -27,7 +27,7 @@ export class CourseController {
     newComment: any;
     socialParams: any;
     showAnimation: boolean;
-
+    markerReadySEO: string;
 
     constructor(private $log: ng.ILogService, $routeParams: IRouteParams,
                 private $location: ng.ILocationService, private CourseResource: ICourseResource,
@@ -42,10 +42,10 @@ export class CourseController {
 
         this.course = CourseResource.get({id: $routeParams.id});
         this.course.$promise.then((course)=> {
-
             this.setSocialParams(course);
             course.hearFormsPhotos = this.orderByFilter(course.hearFormsPhotos, "order");
             course.historyPhotos = this.orderByFilter(course.historyPhotos, "order");
+            this.markerReadySEO = "dynamic-content";
 
         }).catch((err)=> {
             this.$log.error(err);
@@ -72,7 +72,7 @@ export class CourseController {
         this.$rootScope.socialParams.host = this.constants.host;
         this.$rootScope.socialParams.target = this.constants.host + "/academy/course/" + course._id;
         this.$rootScope.socialParams.image = this.constants.host + course.avatar;
-        this.$rootScope.socialParams.title ='Запрошуємо на '+ course.name;
+        this.$rootScope.socialParams.title = 'Запрошуємо на ' + course.name;
         this.$rootScope.socialParams.description = course.description.slice(0, 920);
         ;
         this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
@@ -142,6 +142,7 @@ export class CourseController {
             });
         }
     }
+
     showModelConfirm(): void {
 
         this.mdDialog.show(

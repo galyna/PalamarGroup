@@ -2,7 +2,7 @@ import {MasterResourceName, IMasterResource, IMaster} from "../../resources/mast
 import {IAppointmentResource, AppointmentResourceName} from "../../resources/appointment.resource";
 import {AppointmentServiceName, IAppointmentService} from "../servises/appointment.service";
 
-const template = `<div class="courses description-container" layout="row" layout-align="center center">
+const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses description-container" layout="row" layout-align="center center">
     <div layout="column" layout-align="center center">
 
         <div layout="row" flex>
@@ -273,7 +273,7 @@ export class MastersComponentController {
 
     static $inject = ["$location", MasterResourceName, AppointmentServiceName, AppointmentResourceName];
     masters: IMaster[];
-
+    markerReadySEO: string;
 
     constructor(private $location: ng.ILocationService,
                 private masterResource: IMasterResource,private AppointmentService: IAppointmentService,
@@ -283,6 +283,9 @@ export class MastersComponentController {
 
     $onInit() {
         this.masters = this.masterResource.query({sort: {"isTop": 1, "order": 1}, populate: 'services.favor'})
+        this.masters.$promise.then((result) => {
+            this.markerReadySEO = "dynamic-content";
+        });
     }
 
     showMaster(id) {

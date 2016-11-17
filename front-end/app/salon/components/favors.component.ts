@@ -4,7 +4,7 @@ import {IConstants} from "../../core/core.config";
 import {IAppointmentResource, AppointmentResourceName} from "../../resources/appointment.resource";
 import {AppointmentServiceName, IAppointmentService} from "../servises/appointment.service";
 
-const template = `<div class="courses-details description-container" layout="column">
+const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
 
 
     <div ng-repeat="category in  $ctrl.categories track by $index">
@@ -27,11 +27,12 @@ const template = `<div class="courses-details description-container" layout="col
                              flex-gt-xs="46" flex-xs="80"
                              ng-click="::$ctrl.showFavor(favor._id)">
 
-                        <img ng-src="{{::favor.photo.url}}" class="md-card-image">
-
-                        <md-card-content ng-if="favor.name" layout="column" flex="100" layout-align="center center">
-                            <span class="  md-margin">{{::favor.name}}</span>
-                        </md-card-content>
+                        <img ng-src="{{::favor.photo.url}}" class="md-card-image">                                 
+                    <md-card-content layout="column" class="  show-description-favor" layout-align="center center">
+                        <span class="  md-margin">{{::favor.name}}</span>
+                         <div class=" md-margin show-description-content">{{::favor.description}}</div>
+                       
+                    </md-card-content>
                     </md-card>
                 </div>
             </div>
@@ -49,6 +50,7 @@ export class FavorsComponentController {
     favors: any;
     masters: IMaster[];
     categories: any;
+    markerReadySEO: string;
 
     constructor(private favorResource: IFavorResource, private constants: IConstants,
                 private $routeParams: ng.route.IRouteParamsService, private $location: ng.ILocationService,) {
@@ -62,11 +64,13 @@ export class FavorsComponentController {
         this.favorResource.query({sort: "order"}).$promise.then((favors) => {
             this.favors = favors;
             if (this.favors.length > 0) {
+
                 this.categories.forEach((category)=> {
                     category.favors = favors.filter((favor)=> {
                         return category.name == favor.category.name;
                     });
 
+                    this.markerReadySEO = "dynamic-content";
                 })
             }
 
