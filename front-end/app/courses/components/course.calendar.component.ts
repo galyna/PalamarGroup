@@ -7,7 +7,7 @@ import {IRootScope} from "../../../typings";
 const template = ` <div layout="row" flex>
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
-                <div class="md-display-2"> КАЛЕНДАР ПОДІЙ АКАДЕМІЇ</div>
+                <div class="md-display-1"> КАЛЕНДАР НАВЧАЛЬНИХ ЗАХОДІВ АКАДЕМІЇ</div>
             </div>
 
         </div>
