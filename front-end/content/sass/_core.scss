@@ -145,6 +145,19 @@ md-card.md-default-theme, md-card {
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
+.embed-responsive-container{
+
+  @media (max-width: $layout-breakpoint-sm) {
+    min-height:400px;;
+
+  }
+
+  @media (min-width: $layout-breakpoint-sm) {
+    min-height:600px;;
+
+  }
+
+}
 
 .embed-responsive {
   position: relative;

@@ -182,7 +182,7 @@ const template = `<div class=" description-container">
     
      <div class="courses-details" layout="row" flex layout-align="center center">
         <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
-            <div layout="column" layout-margin layout layout-wrap layout-align="center center">
+            <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
                 <md-card md-whiteframe="6" class="  courses-videos"
                          ng-repeat="video in $ctrl.master.videos | orderBy:'order' track by $index"
                          flex>

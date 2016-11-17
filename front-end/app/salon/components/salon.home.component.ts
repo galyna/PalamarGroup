@@ -102,9 +102,9 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
     </div>
  
     <div ng-repeat="transform in $ctrl.transforms track by $index">
-        <div layout="row" layout-align="center center" >
+        <div layout="row" layout-align="center center" ng-if="transform.videos.length>0">
             <div flex-xs="90" flex-gt-md="60" flex-md="80" flex-gt-xs="70">
-                <div layout="column" layout-margin layout layout-wrap layout-align="center center">
+                <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
                     <md-card md-whiteframe="6" class="  courses-videos"
                              
                              ng-repeat="video in ::transform.videos track by $index"
@@ -159,7 +159,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
  
     <div layout="row" layout-align="center center" >
         <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
-            <div layout="column" layout-margin layout layout-wrap layout-align="center center">
+            <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
                 <md-card md-whiteframe="6" class="  courses-videos" 
                          ng-repeat="video in ::group.videos track by $index"
                          flex>
@@ -317,7 +317,7 @@ export class SalonHomeComponentController {
     }
 
     showTransforms() {
-        this.$location.path(`/beauty-parlour/transforms`);
+        this.$location.path(`/beauty-parlour/transformations`);
     }
 
     showVideos() {

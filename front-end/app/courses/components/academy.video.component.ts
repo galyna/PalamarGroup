@@ -25,7 +25,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
     </div>
     <div layout="row" layout-align="center center" >
         <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
-            <div layout="column" layout-margin layout layout-wrap layout-align="center center">
+            <div layout="column" layout-margin  layout-align="center center" class="embed-responsive-container" >
                 <md-card md-whiteframe="6" class="  courses-videos" 
                          ng-repeat="video in ::group.videos track by $index"
                          flex>

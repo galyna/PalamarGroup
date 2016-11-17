@@ -222,9 +222,9 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
 
                     <md-card>
                         <md-card-content layout="row">
-                            <div flex="60">
+                            <div flex="60" >
                                 <md-subheader class="md-no-sticky">Відео</md-subheader>
-                                <div class="md-padding md-margin"
+                                <div class="md-padding md-margin" class="embed-responsive-container"
                                      ng-repeat="item in $ctrl.course.videos track by $index"
                                      ng-click="null">
                                     <div class="embed-responsive embed-responsive-16by9">
