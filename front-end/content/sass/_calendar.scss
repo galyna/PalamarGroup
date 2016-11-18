@@ -194,7 +194,7 @@ pg-calendar {
           .it-name {
             min-height: 35px;
             background-color: #3e3e3e;
-            opacity: 0;
+
             color: white;
             width: 100%;
             text-align: center;
@@ -202,7 +202,7 @@ pg-calendar {
             font-size: 13px;
             overflow: hidden;
             z-index: 3;
-            display: flex;
+            display: none;
             justify-content: center;
             align-content: center;
             align-items: center;
@@ -217,8 +217,7 @@ pg-calendar {
               transform: scale(1.5);
               z-index: 3;
               .it-name {
-                opacity: 1;
-
+                display: flex;
               }
             }
           }
