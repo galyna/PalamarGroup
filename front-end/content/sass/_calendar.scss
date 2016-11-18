@@ -10,7 +10,7 @@ pg-calendar {
   margin-bottom:  2% ;
   width: 110vh;
   min-height: 400px;
-  height: 90vh;
+  height: 85vh;
   max-width: 100vh;
 
   @media (max-width: $layout-breakpoint-xs) {
@@ -208,10 +208,10 @@ pg-calendar {
             align-items: center;
             padding: 4px;
             bottom: 0px;
-
             transition: all .3s ease-in-out;
           }
-          @media (min-height: 1360px) {
+
+          @media (min-width: 1280px) {
             &:hover {
               box-shadow: $calendar-md-shadow-course;
               transform: scale(1.5);
