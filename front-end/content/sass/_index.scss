@@ -212,8 +212,8 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
                     rgba(0, 0, 0, 0.9),
                     rgba(0, 0, 0, 0.9)
     );
-opacity: 0;
-    @media (min-width: $layout-breakpoint-md) {
+    opacity: 0;
+    @media (min-width: 1280px) {
       opacity: 1;
     }
   }
@@ -336,7 +336,7 @@ opacity: 0;
     background: rgba($primary, 0.7);
     color: white;
     @media (max-width: $layout-breakpoint-sm) {
-      width:   585px;;
+      width: 585px;;
     }
     @media (max-width: $layout-breakpoint-xs) {
       width: 300px;
@@ -348,7 +348,7 @@ opacity: 0;
     padding-left: 1px;
     background: rgba(white, 0.5);
     @media (max-width: $layout-breakpoint-sm) {
-      width:   585px;;
+      width: 585px;;
     }
     @media (max-width: $layout-breakpoint-xs) {
       width: 300px;
@@ -385,7 +385,7 @@ opacity: 0;
     background: rgba(white, 0.5);
 
     @media (max-width: $layout-breakpoint-sm) {
-      width:   585px;;
+      width: 585px;;
     }
 
     @media (max-width: $layout-breakpoint-xs) {
@@ -422,14 +422,14 @@ opacity: 0;
     filter: blur(1px);
 
     @media (min-height: 1286px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_full.jpg") ;
+      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_full.jpg");
     }
     @media (min-width: 1923px) {
       background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_full.jpg");
     }
 
     @media (max-height: 1286px) and (max-width: 1923px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_1923_1282.jpg") ;
+      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_1923_1282.jpg");
     }
 
     @media (max-height: 1026px) and (max-width: 1539px) {
@@ -437,7 +437,7 @@ opacity: 0;
     }
 
     @media (max-height: 802px) and (max-width: 1203px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_1203_800.jpg") ;
+      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_1203_800.jpg");
     }
 
     @media (max-height: 642px) and (max-width: 963px) {
@@ -445,7 +445,7 @@ opacity: 0;
     }
 
     @media (max-height: 400px) and (max-width: 723px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_723_482.jpg") ;
+      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_723_482.jpg");
     }
 
   }

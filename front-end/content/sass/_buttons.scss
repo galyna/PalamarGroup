@@ -101,7 +101,7 @@ opacity: 0;
   }
  ;
 
-  @media (min-width: $layout-breakpoint-md) {
+  @media (min-width: 1280px) {
     opacity: 1;
   }
   .stop-label {

@@ -61,7 +61,7 @@ export class SalonHeaderComponentController {
     }
 
     $onInit() {
-        if (this.$mdMedia('md')) {
+        if (this.$mdMedia('1280px')) {
             this.videoElement = angular.element(` <video  hide show-gt-md="true" class="screen" muted autoplay
                                               loop="true" onloadedmetadata="this.muted = true" >
                                            <source type="video/mp4" src="../content/images/bg/bg1.mp4"/>
