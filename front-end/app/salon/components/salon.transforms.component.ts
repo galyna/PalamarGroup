@@ -60,32 +60,45 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
 export class SalonTransformsComponentController {
 
 
-    static $inject = [TransformResourceName, "$rootScope", MediaObserverFactoryName,'constants'
+    static $inject = [TransformResourceName, "$rootScope", MediaObserverFactoryName, 'constants', 'smoothScroll'
     ];
 
-    showAnimation:boolean;
-    transforms:ITransform[];
-    socialParams:any;
+    showAnimation: boolean;
+    transforms: ITransform[];
+    socialParams: any;
     markerReadySEO: string;
-    constructor(private TransformResource:ITransformResource, private $rootScope:IRootScope,
-                private mediaObserver:IMediaObserverFactory,
-                private constants:IConstants) {
-        this.showAnimation = $rootScope.isBigSize;
+
+    constructor(private TransformResource: ITransformResource, private $rootScope: IRootScope,
+                private mediaObserver: IMediaObserverFactory,
+                private constants: IConstants, private smoothScroll) {
+
     }
 
     $onInit() {
         this.transforms = this.TransformResource.query({sort: "order"});
         this.transforms.$promise.then((transforms)=> {
+            this.scrollToMain();
             this.markerReadySEO = "dynamic-content";
         });
     }
 
+    scrollToMain() {
+        var options = {
+            duration: 100,
+            easing: 'easeInQuad',
+            offset: 0,
+
+        }
+        var element = document.getElementById('mainContent');
+        this.smoothScroll(element, options);
+    }
+
     setSocialParams(photo) {
         this.$rootScope.socialParams.host = this.constants.host;
-        this.$rootScope.socialParams.target = this.constants.host +SalonTransformsComponentUrl;
+        this.$rootScope.socialParams.target = this.constants.host + SalonTransformsComponentUrl;
         this.$rootScope.socialParams.image = this.constants.host + photo.url;
         this.$rootScope.socialParams.title = 'Перевтілення';
-        this.socialParams = angular.copy( this.$rootScope.socialParams, this.socialParams );
+        this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
     }
 
     getPictureFlex(index, length) {
@@ -96,7 +109,7 @@ export class SalonTransformsComponentController {
         }
     }
 
-    showMediaObserver(items, index):void {
+    showMediaObserver(items, index): void {
         this.setSocialParams(items[index]);
         this.mediaObserver.observe(items, index, this.socialParams);
     }

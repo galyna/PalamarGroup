@@ -94,7 +94,7 @@ export class MenuComponentController {
 
     scrollToMain() {
         var options = {
-            duration: 200,
+            duration: 100,
             easing: 'easeInQuad',
             offset: 0,
 
@@ -106,7 +106,8 @@ export class MenuComponentController {
     goToURL(url): void {
         this.$location.url(url);
         this.mdDialog.hide().then(()=> {
-            this.scrollToMain();
+            if(url==SalonHomeComponentUrl){
+            this.scrollToMain();}
         });
         ;
         angular.element(document.querySelector(menuBtnSelector)).toggleClass('open');

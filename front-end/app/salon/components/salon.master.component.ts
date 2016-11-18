@@ -230,7 +230,7 @@ export class MasterComponentController {
     static $inject = ["$log", "$routeParams", MasterResourceName,
         AppointmentServiceName, AppointmentResourceName,
         MediaObserverFactoryName, 'constants',
-        '$mdDialog', '$rootScope', SchedulerServiceName,'$location'];
+        '$mdDialog', '$rootScope', SchedulerServiceName,'$location','smoothScroll'];
 
     master: IMaster;
     events: IScheduler[];
@@ -245,16 +245,18 @@ export class MasterComponentController {
                 private mediaObserver: IMediaObserverFactory,
                 private constants: IConstants,
                 private $mdDialog: ng.material.IDialogService,
-                private $rootScope: IRootScope, private SchedulerService: ISchedulerService, private $location: ng.ILocationService) {
+                private $rootScope: IRootScope, private SchedulerService: ISchedulerService,
+                private $location: ng.ILocationService,private smoothScroll) {
     }
 
     $onInit() {
         this.events = [];
         if (this.$routeParams["id"]) {
+
             this.MasterResource.get({id: this.$routeParams["id"], populate: 'services.favor'}).$promise
                 .then((master) => {
                     this.master = master;
-
+                    this.scrollToMain();
                 }).catch((err)=> {
                 this.$log.error(err);
                 this.$location.path(`/beauty-parlour/masters`);
@@ -263,6 +265,16 @@ export class MasterComponentController {
         }
     }
 
+    scrollToMain() {
+        var options = {
+            duration: 100,
+            easing: 'easeInQuad',
+            offset: 0,
+
+        }
+        var element = document.getElementById('mainContent');
+        this.smoothScroll(element, options);
+    }
 
     loadEvents(start, masterId) {
 

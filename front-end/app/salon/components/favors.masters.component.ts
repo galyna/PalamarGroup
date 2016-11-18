@@ -244,7 +244,7 @@ export class FavorsMastersComponentController {
 
     static $inject = [FavorResourceName, 'constants', "$routeParams", "$location", MasterResourceName,
         AppointmentServiceName, AppointmentResourceName, '$q', 'orderByFilter',  MediaObserverFactoryName,
-        '$rootScope'];
+        '$rootScope', 'smoothScroll'];
 
     favors: any;
     masters: IMaster[];
@@ -259,7 +259,7 @@ export class FavorsMastersComponentController {
                 private MasterResource: IMasterResource, private AppointmentService: IAppointmentService,
                 private AppointmentResource: IAppointmentResource, private $q, private orderByFilter: ng.IFilterOrderBy,
                 private mediaObserver: IMediaObserverFactory,
-                private $rootScope: IRootScope) {
+                private $rootScope: IRootScope,private smoothScroll) {
 
 
     }
@@ -291,6 +291,7 @@ export class FavorsMastersComponentController {
     setFavors(favorsPromise) {
         favorsPromise.then((favors) => {
             this.favors = favors;
+            this.scrollToMain();
             this.favors.forEach((fav)=> {
                 if (fav.photos && fav.photos.length > 0) {
                     this.photos = this.photos.concat(fav.photos);
@@ -333,6 +334,17 @@ export class FavorsMastersComponentController {
         appointment.master = master;
         appointment.service = service;
         this.AppointmentService.onShowDialog(appointment);
+    }
+
+    scrollToMain() {
+        var options = {
+            duration: 100,
+            easing: 'easeInQuad',
+            offset: 0,
+
+        }
+        var element = document.getElementById('mainContent');
+        this.smoothScroll(element, options);
     }
 
 

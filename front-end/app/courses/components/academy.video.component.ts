@@ -53,23 +53,32 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
 
 export class AcademyVideoComponentController {
 
-    static $inject = [AcademyVideosResourceName];
+    static $inject = [AcademyVideosResourceName, 'smoothScroll'];
 
     videos: IAcademyVideos[];
     markerReadySEO: string;
 
-    constructor(private AcademyVideosResource: IAcademyVideosResource) {
+    constructor(private AcademyVideosResource: IAcademyVideosResource,private smoothScroll) {
 
     }
 
     $onInit() {
-
-
         var mainPromise = this.AcademyVideosResource.query({sort: 'order'}).$promise;
         mainPromise.then((videos) => {
+            this.scrollToMain();
             this.videos = videos;
             this.markerReadySEO = "dynamic-content";
         });
+    }
+    scrollToMain() {
+        var options = {
+            duration: 100,
+            easing: 'easeInQuad',
+            offset: 0,
+
+        }
+        var element = document.getElementById('mainContent');
+        this.smoothScroll(element, options);
     }
 
 }

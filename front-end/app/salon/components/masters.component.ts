@@ -271,19 +271,20 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses de
 
 export class MastersComponentController {
 
-    static $inject = ["$location", MasterResourceName, AppointmentServiceName, AppointmentResourceName];
+    static $inject = ["$location", MasterResourceName, AppointmentServiceName, AppointmentResourceName, 'smoothScroll'];
     masters: IMaster[];
     markerReadySEO: string;
 
     constructor(private $location: ng.ILocationService,
                 private masterResource: IMasterResource,private AppointmentService: IAppointmentService,
-                private AppointmentResource: IAppointmentResource) {
+                private AppointmentResource: IAppointmentResource,private smoothScroll) {
 
     }
 
     $onInit() {
         this.masters = this.masterResource.query({sort: {"isTop": 1, "order": 1}, populate: 'services.favor'})
         this.masters.$promise.then((result) => {
+            this.scrollToMain();
             this.markerReadySEO = "dynamic-content";
         });
     }
@@ -297,6 +298,16 @@ export class MastersComponentController {
         appointment.master = master;
         appointment.service = service;
         this.AppointmentService.onShowDialog(appointment);
+    }
+    scrollToMain() {
+        var options = {
+            duration: 100,
+            easing: 'easeInQuad',
+            offset: 0,
+
+        }
+        var element = document.getElementById('mainContent');
+        this.smoothScroll(element, options);
     }
 
 }

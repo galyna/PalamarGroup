@@ -215,7 +215,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
 
 export class SalonHomeComponentController {
 
-    static $inject = [MasterResourceName, 'smoothScroll', "$location", 'constants',
+    static $inject = [MasterResourceName, "$location", 'constants',
         TransformResourceName, BrendResourceName, "$rootScope", MediaObserverFactoryName,
         '$q',FavorResourceName,AcademyVideosResourceName];
 
@@ -255,7 +255,7 @@ export class SalonHomeComponentController {
     showMoreVideos:boolean;
 
     constructor(private masterResource: IMasterResource,
-                private smoothScroll, private $location: ng.ILocationService,
+                 private $location: ng.ILocationService,
                 private constants: IConstants, private TransformResource: ITransformResource,
                 private BrendResource: IBrendResource, private $rootScope: IRootScope,
                 private mediaObserver: IMediaObserverFactory, private $q,private favorResource: IFavorResource,
@@ -265,7 +265,8 @@ export class SalonHomeComponentController {
 
     $onInit() {
 
-        this.masters = this.masterResource.query({sort: "order"});
+        this.masters = this.masterResource.query({sort: "order"})
+
         this.brends = this.BrendResource.query({sort: "order"});
         this.transforms = this.TransformResource.query({sort: "order", page: 1, perPage: 3});
 
@@ -307,16 +308,6 @@ export class SalonHomeComponentController {
 
     }
 
-    scrollToMain() {
-        var options = {
-            duration: 400,
-            easing: 'easeInQuad',
-            offset: 0,
-
-        }
-        var element = document.getElementById('mainContent');
-        this.smoothScroll(element, options);
-    }
 
     showTransforms() {
         this.$location.path(`/beauty-parlour/transformations`);

@@ -19,6 +19,7 @@ export class CourseController {
         OrderResourceName, MediaObserverFactoryName, '$mdDialog', 'Upload',
         '$timeout', ModelResourceName, 'constants',
         '$rootScope', '$templateCache', '$mdMedia', 'orderByFilter', 'smoothScroll'];
+
     static componentName = 'CourseController';
 
     course: ICourse;
@@ -38,10 +39,11 @@ export class CourseController {
                 private $rootScope: IRootScope, private $templateCache: ng.ITemplateCacheService,
                 private $mdMedia: ng.material.IMedia, private orderByFilter: ng.IFilterOrderBy,
                 private smoothScroll) {
-        this.showAnimation = $rootScope.isBigSize;
+
 
         this.course = CourseResource.get({id: $routeParams.id});
         this.course.$promise.then((course)=> {
+            this.scrollToMain();
             this.setSocialParams(course);
             course.hearFormsPhotos = this.orderByFilter(course.hearFormsPhotos, "order");
             course.historyPhotos = this.orderByFilter(course.historyPhotos, "order");
@@ -58,6 +60,17 @@ export class CourseController {
 
         this.newModel = this.getBlankModel();
 
+    }
+
+    scrollToMain() {
+        var options = {
+            duration: 100,
+            easing: 'easeInQuad',
+            offset: 0,
+
+        }
+        var element = document.getElementById('mainContent');
+        this.smoothScroll(element, options);
     }
 
     getPictureFlex(index, length) {

@@ -114,7 +114,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
 
 export class AcademyContactComponentController {
 
-    static $inject = [ContactResourceName,  SalonResourceName, '$q'];
+    static $inject = [ContactResourceName,  SalonResourceName, '$q', 'smoothScroll'];
 
     contacts:IContact[];
     map:any;
@@ -122,7 +122,7 @@ export class AcademyContactComponentController {
     markerReadySEO: string;
 
     constructor(private contactResource:IContactResource,
-                private salonResource:ISalonResource, private $q) {
+                private salonResource:ISalonResource, private $q,private smoothScroll) {
         
     }
 
@@ -132,6 +132,7 @@ export class AcademyContactComponentController {
 
         var mainPromise = this.salonResource.query( {query: {'isAcademy': 'true'}} ).$promise;
         mainPromise.then( (salons) => {
+            this.scrollToMain();
             if (salons.length>0) {
              var academySalon= salons[0];
                 this.map.center.latitude=academySalon.latitude;
@@ -146,7 +147,16 @@ export class AcademyContactComponentController {
             this.markerReadySEO = "dynamic-content";
         });
     }
+    scrollToMain() {
+        var options = {
+            duration: 100,
+            easing: 'easeInQuad',
+            offset: 0,
 
+        }
+        var element = document.getElementById('mainContent');
+        this.smoothScroll(element, options);
+    }
 }
 export let AcademyContactComponentUrl = "/academy/contact";
 export let AcademyContactComponentName = 'pgAcademyContact';

@@ -6,44 +6,58 @@ import {IRootScope} from "../../../typings";
  */
 
 export interface ICourseDates {
-    date:string;
-    coursesId:any;
+    date: string;
+    coursesId: any;
 }
 
 export class CoursesController {
 
     static $inject = ['$scope', '$sce', '$location', '$rootScope',
-        'pgCalendarData', CourseResourceName, '$mdMedia', 'orderByFilter'];
+        'pgCalendarData', CourseResourceName, '$mdMedia', 'orderByFilter', 'smoothScroll'];
     static componentName = 'CoursesController';
-    courses:ICourse[];
+    courses: ICourse[];
     calendarDirection = 'horizontal';
-    showAnimation:boolean;
+    showAnimation: boolean;
     markerReadySEO: string;
 
 
-    constructor($scope, private $sce, private $location, private $rootScope:IRootScope, private pgCalendarData:IPgCalendarDataService,
-                private CourseResource:ICourseResource, private $mdMedia, private orderByFilter:ng.IFilterOrderBy) {
-        
+    constructor($scope, private $sce, private $location, private $rootScope: IRootScope,
+                private pgCalendarData: IPgCalendarDataService,
+                private CourseResource: ICourseResource, private $mdMedia,
+                private orderByFilter: ng.IFilterOrderBy, private smoothScroll) {
+
         this.showAnimation = $rootScope.isBigSize;
 
-        $scope.$on( "$destroy", () => {
+        $scope.$on("$destroy", () => {
             this.courses = null;
             this.showDetails = null;
-        } )
+        })
 
         this.getCourses();
     }
 
     getCourses() {
         this.courses = this.CourseResource.query({sort: "order"});
-        this.courses.$promise.then( (courses) => {
+        this.courses.$promise.then((courses) => {
+            this.scrollToMain();
             this.markerReadySEO = "dynamic-content";
-            });
+        });
     }
 
-    showDetails(id:string) {
-        this.$rootScope.loading=true;
-        this.$location.url( '/academy/course/' + id );
+    scrollToMain() {
+        var options = {
+            duration: 100,
+            easing: 'easeInQuad',
+            offset: 0,
+
+        }
+        var element = document.getElementById('mainContent');
+        this.smoothScroll(element, options);
+    }
+
+    showDetails(id: string) {
+        this.$rootScope.loading = true;
+        this.$location.url('/academy/course/' + id);
     }
 }
 

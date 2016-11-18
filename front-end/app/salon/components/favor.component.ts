@@ -208,7 +208,8 @@ export class FavorComponentController {
 
     static $inject = ["$routeParams", "$location",
         FavorResourceName, MasterResourceName,
-        AppointmentResourceName, AppointmentServiceName, MediaObserverFactoryName, 'constants', '$rootScope',];
+        AppointmentResourceName, AppointmentServiceName, MediaObserverFactoryName,
+        'constants', '$rootScope', 'smoothScroll'];
 
     favor: IFavor;
     masters: IMaster[];
@@ -219,16 +220,17 @@ export class FavorComponentController {
                 private AppointmentResource: IAppointmentResource,
                 private AppointmentService: IAppointmentService, private mediaObserver: IMediaObserverFactory,
                 private constants: IConstants,
-                private $rootScope: IRootScope) {
+                private $rootScope: IRootScope,private smoothScroll) {
 
     }
 
     $onInit() {
         if (this.$routeParams["id"]) {
+
             this.favorResource.get({id: this.$routeParams["id"]}).$promise
                 .then((favor) => {
                     this.favor = favor;
-
+                    this.scrollToMain();
                 }).catch((err)=> {
                 this.$location.path(`/beauty-parlour/services`);
             });
@@ -251,6 +253,18 @@ export class FavorComponentController {
                 });
 
         }
+    }
+
+
+    scrollToMain() {
+        var options = {
+            duration: 100,
+            easing: 'easeInQuad',
+            offset: 0,
+
+        }
+        var element = document.getElementById('mainContent');
+        this.smoothScroll(element, options);
     }
 
     showMaster(id) {

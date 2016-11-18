@@ -159,7 +159,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
 export class SalonContactsComponentController {
 
     static $inject = [ContactResourceName, '$rootScope', SalonResourceName, "$scope",
-        MediaObserverFactoryName, 'constants'];
+        MediaObserverFactoryName, 'constants', 'smoothScroll'];
 
     showAnimation: boolean;
     showMap: boolean;
@@ -173,7 +173,7 @@ export class SalonContactsComponentController {
                 private $rootScope: IRootScope,
                 private salonResource: ISalonResource, private $scope: ISchedulerScope,
                 private mediaObserver: IMediaObserverFactory,
-                private constants: IConstants) {
+                private constants: IConstants, private smoothScroll) {
 
 
     }
@@ -198,11 +198,23 @@ export class SalonContactsComponentController {
         this.mediaObserver.observe(items, index, this.socialParams);
     }
 
+    scrollToMain() {
+        var options = {
+            duration: 100,
+            easing: 'easeInQuad',
+            offset: 0,
+
+        }
+        var element = document.getElementById('mainContent');
+        this.smoothScroll(element, options);
+    }
+
     $onInit() {
         this.showAnimation = this.$rootScope.isBigSize;
         this.map = {center: {latitude: 49.811210, longitude: 23.974013}, zoom: 18};
         this.contacts = this.contactResource.query({query: {'isAcademy': 'false'}});
         this.contacts.$promise.then((contacts) => {
+            this.scrollToMain();
             this.salons = this.salonResource.query({sort: '-isMain'});
 
             this.salons.$promise.then((salons) => {

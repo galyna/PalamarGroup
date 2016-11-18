@@ -215,7 +215,7 @@ class ProductOrderDialogController {
 
 export class ProductsComponentController {
 
-    static $inject = ["$log", '$rootScope', '$mdDialog', ProductOrderResourceName, ProductResourceName];
+    static $inject = ["$log", '$rootScope', '$mdDialog', ProductOrderResourceName, ProductResourceName, 'smoothScroll'];
 
     products: IProduct[];
     productsOrder: IProductOrder;
@@ -223,8 +223,10 @@ export class ProductsComponentController {
     markerReadySEO: string;
 
 
-    constructor(private $log: ng.ILogService, private $rootScope: IRootScope, private $mdDialog: ng.material.IDialogService,
-                private ProductOrderResource: IProductOrderResource, private ProductResource: IProductResource) {
+    constructor(private $log: ng.ILogService, private $rootScope: IRootScope,
+                private $mdDialog: ng.material.IDialogService,
+                private ProductOrderResource: IProductOrderResource,
+                private ProductResource: IProductResource, private smoothScroll) {
 
         this.showAnimation = $rootScope.isBigSize;
         this.productsOrder = new this.ProductOrderResource();
@@ -232,9 +234,10 @@ export class ProductsComponentController {
 
 
     $onInit() {
-        this.products = this.ProductResource.query({sort:"order"});
+        this.products = this.ProductResource.query({sort: "order"});
         this.products.$promise.then(() => {
-            this.markerReadySEO = "dynamic-content";
+                this.scrollToMain();
+                this.markerReadySEO = "dynamic-content";
             }
         );
 
@@ -288,6 +291,17 @@ export class ProductsComponentController {
                 .ok('Закрити')
         );
 
+    }
+
+    scrollToMain() {
+        var options = {
+            duration: 100,
+            easing: 'easeInQuad',
+            offset: 0,
+
+        }
+        var element = document.getElementById('mainContent');
+        this.smoothScroll(element, options);
     }
 }
 

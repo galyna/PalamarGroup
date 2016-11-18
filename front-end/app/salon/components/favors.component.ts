@@ -97,7 +97,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
 export class FavorsComponentController {
 
     static $inject = [FavorResourceName, MediaObserverFactoryName,
-        '$rootScope','constants', "$routeParams", "$location", 'orderByFilter'];
+        '$rootScope','constants', "$routeParams", "$location", 'orderByFilter','smoothScroll'];
 
     favors: any;
     masters: IMaster[];
@@ -110,7 +110,7 @@ export class FavorsComponentController {
     constructor(private favorResource: IFavorResource, private mediaObserver: IMediaObserverFactory,
                 private $rootScope: IRootScope,private constants: IConstants,
                 private $routeParams: ng.route.IRouteParamsService,
-                private $location: ng.ILocationService, private orderByFilter: ng.IFilterOrderBy) {
+                private $location: ng.ILocationService, private orderByFilter: ng.IFilterOrderBy,private smoothScroll) {
 
 
     }
@@ -123,7 +123,7 @@ export class FavorsComponentController {
         this.favorResource.query({sort: "order"}).$promise.then((favors) => {
             this.favors = favors;
             if (this.favors.length > 0) {
-
+                this.scrollToMain();
                 this.categories.forEach((category)=> {
                     var catVideo = [];
                     var catPhoto = [];
@@ -148,7 +148,16 @@ export class FavorsComponentController {
         });
 
     }
+    scrollToMain() {
+        var options = {
+            duration: 100,
+            easing: 'easeInQuad',
+            offset: 0,
 
+        }
+        var element = document.getElementById('mainContent');
+        this.smoothScroll(element, options);
+    }
     loadPhoto(favor) {
         var temp = []
         if (favor.photos && favor.photos.length > 0) {
