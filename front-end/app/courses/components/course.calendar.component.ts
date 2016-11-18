@@ -50,21 +50,11 @@ export class CalendarComponentController {
 
 
     setCoursesCalendarTemplate(picture, name) {
-        if (!!('ontouchstart' in window)) {
-            return ` <div class="touch-device course-marker">
-                       <img  src="${picture}" alt="">
-                      <div class="overlay">
-                     <h2>${name}</h2>                    
-                       </div>                  
-                    </div>`
-        } else {
-            return ` <div class="course-marker"> <div class="hovereffect ">
-                       <img  src="${picture}" alt="">
-                      <div class="overlay">                                        
-                       </div>                  
-                    </div>  <div class="it-name">${name}</div></div>`
 
-        }
+            return ` <div class="course-marker"> 
+                       <img  src="${picture}" alt="">                                  
+                      <div class="it-name">${name}</div></div>`
+
     }
 
     getCourses() {
