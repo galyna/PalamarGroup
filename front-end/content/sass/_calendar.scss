@@ -211,15 +211,18 @@ pg-calendar {
 
             transition: all .3s ease-in-out;
           }
-          &:hover {
-            box-shadow: $calendar-md-shadow-course;
-            transform: scale(1.5);
-            z-index: 3;
-            .it-name {
-              opacity: 1;
+          @media (min-height: 1360px) {
+            &:hover {
+              box-shadow: $calendar-md-shadow-course;
+              transform: scale(1.5);
+              z-index: 3;
+              .it-name {
+                opacity: 1;
 
+              }
             }
           }
+
         }
 
 
