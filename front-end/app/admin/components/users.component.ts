@@ -6,7 +6,7 @@ const template = `<md-button ng-click="$ctrl.edit()"
     <md-icon md-svg-icon="content:ic_add_24px"></md-icon>
     <md-tooltip>Додати користувача</md-tooltip>
 </md-button>
-<md-toolbar md-scroll-shrink ng-if="true">
+<md-toolbar md-scroll-shrink>
     <div class="md-toolbar-tools">
         <h1>Користувачі</h1>
             <span flex></span>

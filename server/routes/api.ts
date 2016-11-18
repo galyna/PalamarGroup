@@ -26,15 +26,17 @@ import {AcademyVideos} from "../models/academy.videos";
 
 //endpoints
 import {emailEndpoint} from "./email.endpoint";
-import {orderOptions,modelOptions} from "./order.options";
-import {courseApi,coursesOptions} from "./course.endpoint";
+import {orderOptions, modelOptions} from "./order.options";
+import {courseApi, coursesOptions} from "./course.endpoint";
 import {courseGetCommentsApi} from "./comment.endpoint";
 import {userOptions, userApi} from "./user.endpoint";
 import IOrder = pg.models.IOrder;
 import {salonClientApi, salonClientOptions} from "./salon.client.endpoint";
 import {tasksOptions, tasksApi} from './tasks.endpoint';
 import {appointmentOptions} from './appointment.options';
-import {snapshotEndpoint} from "./snapshot.endpoint";
+
+import {botHandler} from '../services/snapshots.service';
+import {SeoPage} from "../models/seo.page";
 
 let api = express.Router();
 
@@ -67,7 +69,7 @@ let readOnlyOptions = {
 
 api.use(paging.preRead);
 
-restify.serve(api, Contact,coursesOptions);
+restify.serve(api, Contact, coursesOptions);
 
 api.use('/course/comments', courseGetCommentsApi);
 api.use('/master/:id', (req: any, res, next) => {
@@ -79,26 +81,110 @@ api.use('/course/:id', (req: any, res, next) => {
     req.courseId = req.params.id;
     next();
 }, courseApi);
-restify.serve(api, Course,coursesOptions);
+restify.serve(api, Course, coursesOptions);
 
 api.use('/user', userApi);
 restify.serve(api, User, userOptions);
 restify.serve(api, Master, tasksOptions);
-restify.serve(api, Model,modelOptions);
+restify.serve(api, Model, modelOptions);
 restify.serve(api, Order, orderOptions);
 restify.serve(api, AcademyVideos, orderOptions);
-restify.serve(api, ProductOrder,appointmentOptions);
-restify.serve(api, Appointment,appointmentOptions);
+restify.serve(api, ProductOrder, appointmentOptions);
+restify.serve(api, Appointment, appointmentOptions);
 api.use('/salonclient', salonClientApi);
-restify.serve(api, SalonClient,salonClientOptions);
-restify.serve(api, Favor,tasksOptions);
-restify.serve(api, Transform,tasksOptions);
-restify.serve(api, Product,tasksOptions);
-restify.serve(api, Brend,tasksOptions);
-restify.serve(api, Salon,tasksOptions);
+restify.serve(api, SalonClient, salonClientOptions);
+restify.serve(api, Favor, tasksOptions);
+restify.serve(api, Transform, tasksOptions);
+restify.serve(api, Product, tasksOptions);
+restify.serve(api, Brend, tasksOptions);
+restify.serve(api, Salon, tasksOptions);
+restify.serve(api, SeoPage);
 api.use('/photo', photoEndpoint);
 api.use('/email', emailEndpoint);
-api.use('/snapshot', snapshotEndpoint);
+api.use('/stubs', (req: any, res, next) => {
+
+    var pages = [
+        {description: "", name: "home", text: "Головна", title: "PALAMAR GROUP beauty parlour & academy Головна сторінка"},
+        {description: "", name: "services", text: "Послуги", title: "PALAMAR GROUP beauty parlour & academy Послуги"},
+        {description: "", name: "masters", text: "Майстри", title: "PALAMAR GROUP beauty parlour & academy Майстри"},
+        {
+            description: "",
+            name: "transforms",
+            text: "Перевтіленні",
+            title: "PALAMAR GROUP beauty parlour & academy Перевтілення"
+        },
+        {
+            description: "",
+            name: "products",
+            text: "Продікція",
+            title: "PALAMAR GROUP beauty parlour & academy Продікція"
+        },
+        {
+            description: "",
+            name: "salon.contacts",
+            text: "Контакти салону",
+            title: "PALAMAR GROUP beauty parlour & academy Контакти салону"
+        },
+        {
+            description: "",
+            name: "hairdressing",
+            text: "Перукарські послуги",
+            title: "PALAMAR GROUP beauty parlour & academy Перукарські послуги"
+        },
+        {
+            description: "",
+            name: "nail-aesthetics",
+            text: "Нігтьва естетика",
+            title: "PALAMAR GROUP beauty parlour & academy Нігтьва естетика"
+        },
+        {description: "", name: "makeup", text: "Візаж", title: "PALAMAR GROUP beauty parlour & academy Візаж"},
+        {
+            description: "",
+            name: "academy",
+            text: "Академія курси",
+            title: "PALAMAR GROUP beauty parlour & academy Програма навчання"
+        },
+        {
+            description: "",
+            name: "calendar",
+            text: "Академія календар",
+            title: "PALAMAR GROUP beauty parlour & academy Календар навчання"
+        },
+        {
+            description: "",
+            name: "video",
+            text: "Академія відео",
+            title: "PALAMAR GROUP beauty parlour & academy Академія Відео"
+        },
+        {
+            description: "",
+            name: "academy.contacts",
+            text: "Академія контакти",
+            title: "PALAMAR GROUP beauty parlour & academy Академія контакти"
+        }];
+    try {
+        pages.forEach((p)=> {
+            p.description = "Студія краси та навчальний центр для працівників салонів краси. м. Львів"
+            SeoPage.create(p);
+        })
+        res.end();
+        //await user.save();
+    } catch (err) {
+        return next(err);
+    }
+
+});
+api.use('/snapshots', (req: any, res, next) => {
+    try {
+        botHandler.saveSnapshots();
+        //await user.save();
+    } catch (err) {
+        return next(err);
+    }
+
+    res.end();
+});
+
 api.post('/authenticate', (req, res, next) => {
 
     passport.authenticate('local', (err, user, info) => {
@@ -111,11 +197,11 @@ api.post('/authenticate', (req, res, next) => {
         }
 
         // If a user is found
-        if(user){
+        if (user) {
             token = user.generateJwt();
             res.status(200);
             res.json({
-                "token" : token
+                "token": token
             });
         } else {
             // If user is not found

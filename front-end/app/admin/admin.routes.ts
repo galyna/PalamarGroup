@@ -12,6 +12,7 @@ import {ContactComponentUrl} from "./academy/components/contact.component";
 import {ContactsComponentUrl} from "./academy/components/contacts.component";
 import {VideoComponentUrl} from "./academy/components/video.component";
 import {VideosComponentUrl} from "./academy/components/videos.component";
+import {SeosComponentUrl} from "./components/seos.component";
 
 adminRoutes.$inject = ['$routeProvider'];
 export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
@@ -94,6 +95,12 @@ export function adminRoutes($routeProvider:ng.route.IRouteProvider) {
             template: '<pg-video></pg-video>',
             resolve: {
                 auth: [ItServiceName, (it: ItService) => it.canAsync('readAcademy')]
+            }
+        })
+        .when(SeosComponentUrl, {
+            template: '<pg-seos></pg-seos>',
+            resolve: {
+                auth: [ItServiceName, (it: ItService) => it.canAsync('admin')]
             }
         })
         .otherwise({

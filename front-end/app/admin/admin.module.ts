@@ -32,8 +32,8 @@ import {AcademyDeliveryController} from './academy/controllers/delivery.controll
 import {DeliveryService} from "./academy/services/delivery.service";
 import {EmailAdvComponentName, EmailAdvComponentOptions} from "./academy/components/email.adv.component";
 import {
-SalonClientFormComponentName,
-SalonClientFormComponentOptions
+    SalonClientFormComponentName,
+    SalonClientFormComponentOptions
 } from "./academy/components/salon.client.form.component";
 import {AdminOrdersComponentName, AdminOrdersComponentOptions} from "./academy/components/orders.component";
 import {AdminCoursesComponentName, AdminCoursesComponentOptions} from "./academy/components/courses.component";
@@ -47,6 +47,7 @@ import {ContactsComponentName, ContactsComponentOptions} from "./academy/compone
 import {ContactComponentName, ContactComponentOptions} from "./academy/components/contact.component";
 import {VideosComponentOptions, VideosComponentName} from "./academy/components/videos.component";
 import {VideoComponentName, VideoComponentOptions} from "./academy/components/video.component";
+import {SeosComponentName, SeosComponentOptions} from "./components/seos.component";
 
 let app = angular.module('admin', [
     'ngRoute',
@@ -82,7 +83,8 @@ let app = angular.module('admin', [
     .component(ContactsComponentName, ContactsComponentOptions)
     .component(ContactComponentName, ContactComponentOptions)
     .component(VideosComponentName, VideosComponentOptions)
-    .component(VideoComponentName,VideoComponentOptions);
+    .component(VideoComponentName, VideoComponentOptions)
+    .component(SeosComponentName, SeosComponentOptions);
 
 
 export let adminModule = app;

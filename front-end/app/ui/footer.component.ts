@@ -8,7 +8,11 @@ const template = `<div class="page-footer " ng-if="::!$root.isAdminZone()" class
         <div class="page-header-wrap" layout="column" layout-align="center center">
             <div layout="row" flex layout-align="start center">
                 <div layout="column" flex>
+                <div   class="md-subhead social-header city">Львів
+                            
+                        </div>
                     <div layout="column" ng-repeat="salon in $ctrl.salons track by $index">
+                     
                         <div ng-if="salon._id!='isAcademy' && salon.contacts.length>0"
                              class="md-subhead social-header md-padding">Салон на
                             {{::salon.address}}
@@ -70,7 +74,7 @@ export class FooterComponentController {
     showMap: boolean;
     contacts: IContact[];
     salons: ISalon[];
-    //map: any;
+    map: any;
 
     constructor(private contactResource: IContactResource,
                 private constants: IConstants, private $rootScope: IRootScope,
@@ -80,9 +84,9 @@ export class FooterComponentController {
 
     $onInit() {
         this.showAnimation = this.$rootScope.isBigSize;
-        // this.map = {
-        //     center: {latitude: 49.811210, longitude: 23.974013}, zoom: 14
-        // };
+         this.map = {
+             center: {latitude: 49.811210, longitude: 23.974013}, zoom: 14
+         };
         this.contacts = this.contactResource.query();
         this.contacts.$promise.then((contacts) => {
             this.salons = this.salonResource.query({sort: '-isMain'});

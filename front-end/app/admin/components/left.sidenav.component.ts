@@ -1,5 +1,6 @@
 import {ItServiceName, ItService} from "../../users/services/it.service";
 import {usersComponentUrl} from "./users.component";
+import {SeosComponentUrl} from "./seos.component";
 import {IConstants} from "../../core/core.config";
 
 import {MastersComponentUrl} from "../../admin/salon/components/masters.component";
@@ -175,6 +176,13 @@ export class LeftSidenavComponentController {
                         }
                     },
                 ]
+            },
+            {
+                text: 'SEO',
+                url: SeosComponentUrl,
+                visible: ()=> {
+                    return this.it.is('admin');
+                }
             },
             {
                 text: 'Користувачі',

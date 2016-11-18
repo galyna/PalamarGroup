@@ -1,6 +1,17 @@
 declare module pg {
     module models {
 
+        export  interface ISeoPage {
+            _id: any,
+            name: string,
+            description:string,
+            description_ru:string,
+            title: string,
+            keywords:string,
+            keywords_ru:string,
+            text:string
+        }
+
         export  interface IAcademyVideos {
             _id: any,
             name: string,

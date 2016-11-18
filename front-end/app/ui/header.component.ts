@@ -12,8 +12,8 @@ const template = `<div class="container-wrapper description-container ">
                     <a href="/beauty-parlour" layout="row" layout-align="center center">
                         <img class="logo-img md-padding" src="../content/images/logo/palamar_logo.png"/>
                         <div class="md-padding">
-                            <h1 class="featured-area-title"> PALAMAR GROUP</h1>
-                            <div class="featured-area-subtitle">
+                            <h1 lang="en" class="featured-area-title"> PALAMAR GROUP</h1>
+                            <div  lang="en" class="featured-area-subtitle">
                                 beauty parlour & academy
                             </div>
                         </div>

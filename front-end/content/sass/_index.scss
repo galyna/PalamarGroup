@@ -341,8 +341,14 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     @media (max-width: $layout-breakpoint-xs) {
       width: 300px;
     }
-  }
 
+
+  }
+  .city{    font-size: 30px;
+    text-transform: uppercase;
+    padding-top: 16px;
+    padding-bottom: 0;
+    margin-bottom: 0;}
   .social-container {
     width: 600px;
     padding-left: 1px;

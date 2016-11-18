@@ -56,7 +56,7 @@ export class CoursesController {
     }
 
     showDetails(id: string) {
-        this.$rootScope.loading = true;
+
         this.$location.url('/academy/course/' + id);
     }
 }

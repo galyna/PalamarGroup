@@ -2,6 +2,7 @@ import {ITransform, ITransformResource, TransformResourceName} from "../../resou
 import {IRootScope} from "../../../typings";
 import {IMediaObserverFactory, MediaObserverFactoryName} from "../../ui/mediaObserver.service";
 import {IConstants} from "../../core/core.config";
+import {ISeoPageResource, SeoPageResourceName} from "../../resources/seo.page.resource";
 
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
@@ -60,17 +61,18 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
 export class SalonTransformsComponentController {
 
 
-    static $inject = [TransformResourceName, "$rootScope", MediaObserverFactoryName, 'constants', 'smoothScroll'
-    ];
+    static $inject = [TransformResourceName, "$rootScope", MediaObserverFactoryName, 'constants', 'smoothScroll',
+        SeoPageResourceName, '$q'];
 
     showAnimation: boolean;
     transforms: ITransform[];
     socialParams: any;
     markerReadySEO: string;
+    seo: any;
 
     constructor(private TransformResource: ITransformResource, private $rootScope: IRootScope,
                 private mediaObserver: IMediaObserverFactory,
-                private constants: IConstants, private smoothScroll) {
+                private constants: IConstants, private smoothScroll, private SeoPageResource: ISeoPageResource, private  $q) {
 
     }
 
@@ -78,6 +80,17 @@ export class SalonTransformsComponentController {
         this.transforms = this.TransformResource.query({sort: "order"});
         this.transforms.$promise.then((transforms)=> {
             this.scrollToMain();
+        });
+
+        this.seo = this.SeoPageResource.query({query: {"name": "transforms"}}).$promise.then((seo)=> {
+            if (seo.length > 0) {
+                this.$rootScope.seo = seo[0];
+                document.title = this.$rootScope.seo.title;
+            }
+
+        });
+        ;
+        this.$q.all([this.transforms.$promise, this.seo]).then((result) => {
             this.markerReadySEO = "dynamic-content";
         });
     }

@@ -106,7 +106,9 @@ button.md-button.md-fab.side-up-btn {
   }
 
   .stop-label {
-
+    letter-spacing: 2px;
+    //font-size: 30px;
+    font-weight: 700;
     width: 85px;
 
   }
@@ -119,7 +121,7 @@ button.md-button.md-fab.side-up-btn {
   padding-bottom: 5px;
   top: 10px;
   left: 10px;
-  width: 120px;
+  width: 125px;
   height: 55px;
   border: 1px solid $primary;
   // border-left-width: 0;
@@ -138,8 +140,11 @@ button.md-button.md-fab.side-up-btn {
   position: fixed;
   top: 15px;
   left: 73px;
-  width: 60px;
+  width: 66px;
   height: 45px;
+  letter-spacing: 2px;
+  //font-size: 30px;
+  font-weight: 700;
 }
 
 /* Icon 4 */
