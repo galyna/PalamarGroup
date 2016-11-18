@@ -10,7 +10,7 @@ pg-calendar {
   margin-bottom:  2% ;
   width: 110vh;
   min-height: 400px;
-  height: 100vh;
+  height: 90vh;
   max-width: 100vh;
 
   @media (max-width: $layout-breakpoint-xs) {
@@ -178,26 +178,14 @@ pg-calendar {
             opacity: 1;
           }
 
-          .overlay {
-            opacity: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
 
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            overflow: hidden;
-            top: 0;
-            left: 0;
-            background-color: rgba($primary, 0.5);
-          }
 
         }
 
         .detail-btn {
           display: none;
         }
+
         .course-marker {
           position: absolute;
           width: 100%;
@@ -234,82 +222,6 @@ pg-calendar {
           }
         }
 
-        .hovereffect {
-          width: 100%;
-          height: 100%;
-          transition: all .3s ease-in-out;
-          overflow: visible;
-          position: absolute;
-          text-align: center;
-          cursor: pointer;
-          img {
-
-
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -100;
-
-          }
-          .detail-btn {
-            min-width: 70%;
-            font-size: 10px;
-          }
-
-          &:hover {
-            box-shadow: $calendar-md-shadow-course;
-            //transform: scale(1.5);
-            z-index: 2;
-            h2 {
-              opacity: 1;
-
-            }
-
-            .overlay {
-              opacity: 1;
-              z-index: 3;
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-
-              -webkit-transition-delay: 0s;
-              transition-delay: 0s;
-              -webkit-transform: translate(0px, 0px);
-              -ms-transform: translate(0px, 0px);
-              transform: translate(0px, 0px);
-              position: absolute;
-              overflow: hidden;
-              top: 0;
-              bottom: 0;
-              right: 0;
-              left: 0;
-              // background-color: rgba($primary, 0.8);
-            }
-
-          }
-
-        }
-
-        @media (min-height: 220px) and (max-height: 850px) {
-          .hovereffect h2 {
-            font-size: 13px;
-          }
-          .course-marker {
-            .detail-btn {
-              display: none;
-            }
-          }
-        }
-        @media (min-width: 100px) and (max-width: 520px) {
-          .hovereffect h2 {
-            font-size: 8px;
-          }
-        }
-        @media (min-width: 900px) {
-          .touch-device h2 {
-            font-size: 22px;
-          }
-        }
 
         // Subheader row.
         > :first-child {
