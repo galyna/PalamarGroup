@@ -95,15 +95,16 @@ button.md-button.md-fab.side-up-btn {
   color: $primary;
   align-items: center;
   background: rgba(white, 0.6);
-opacity: 0;
+  opacity: 0;
   &:hover {
     cursor: pointer;
   }
- ;
+;
 
   @media (min-width: 1280px) {
     opacity: 1;
   }
+
   .stop-label {
 
     width: 85px;
