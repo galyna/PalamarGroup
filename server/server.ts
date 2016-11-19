@@ -24,7 +24,6 @@ let env = process.env['TYPE'];
 
 mongoose.connect(config.mongoUrl);
 
-app.use(require('prerender-node').set('prerenderToken', 'gwcevm1MYEYi1TQwAHtn'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(multipart());
