@@ -10,7 +10,7 @@ import "./models/user";
 import "./auth/passport";
 import {setupRouter} from './routes/setup.endpoint';
 import api from './routes/api';
-import {botHandler} from './services/snapshots.service';
+
 
 let app = express();
 let port = parseInt(process.env['PORT']) || 8080;
@@ -53,10 +53,6 @@ if (env === 'prod') {
 }
 app.use('/admin', express.static(pathes.admin));
 app.use('/content', express.static(pathes.content));
-app.use('/', function (req, res, next) {
-    botHandler.handleBots(req, res, next);
-}, express.static(pathes.all));
-
 app.use('/api', api);
 
 app.get('/*', function (req, res) {
