@@ -18,20 +18,14 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
     <div layout="column" layout-align="center center" ng-repeat="salon in $ctrl.salons">
         <div layout="row" flex >
             <div class="page-delimiter" flex>
-                <div class="fit-screen-wrap invers header">
-                  
-                    <div class="md-display-1"> Салон на {{::salon.address}}</div>
+                <div class="fit-screen-wrap invers header">                  
+                    <div class="md-display-1"> Адреса салону {{::salon.address}}</div>
+                     <div class="md-title md-padding"> {{::salon.description}}</div>
                 </div>
 
             </div>
         </div>
-        <ui-gmap-google-map ng-if="$ctrl.showMap && salon.latitude && salon.longitude" id="map"
-                            center='{ latitude: salon.latitude, longitude: salon.longitude}' zoom='$ctrl.map.zoom'>
-            <ui-gmap-marker coords="{ latitude: salon.latitude, longitude: salon.longitude}" idkey="$index">
-              
-            </ui-gmap-marker>
-            </ui-gmap-markers>
-        </ui-gmap-google-map>
+       
         <div class="course-bg " layout-align="center center" flex
              ng-repeat="contact in ::salon.contacts track by $index">
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
@@ -119,7 +113,13 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
             
             
         </div>
-        
+         <ui-gmap-google-map ng-if="$ctrl.showMap && salon.latitude && salon.longitude" id="map"
+                            center='{ latitude: salon.latitude, longitude: salon.longitude}' zoom='$ctrl.map.zoom'>
+            <ui-gmap-marker coords="{ latitude: salon.latitude, longitude: salon.longitude}" idkey="$index">
+              
+            </ui-gmap-marker>
+            </ui-gmap-markers>
+        </ui-gmap-google-map>
          <div flex="100" class="courses-details" layout="row" layout-align="center center"
          >
         <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">

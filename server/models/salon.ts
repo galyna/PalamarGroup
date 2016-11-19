@@ -18,6 +18,7 @@ let VideoSchema = new Schema({
 let SalonSchema = new Schema({
     name: String,
     phone: String,
+    description:String,
     photos: [PhotoSchema],
     address: String,
     latitude: String,

@@ -1,14 +1,22 @@
 import {ContactResourceName, IContactResource, IContact} from "../../resources/contact.resource";
 import IUploadPromise = angular.angularFileUpload.IUploadPromise;
 
-import {IOrder, } from "../../resources/order.resource";
+import {IOrder,} from "../../resources/order.resource";
 import {IRootScope} from "../../../typings";
 import {SalonResourceName, ISalonResource} from "../../resources/salon.resource";
 import {ISeoPageResource, SeoPageResourceName} from "../../resources/seo.page.resource";
 
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-contacts description-container" layout="column">
+   <div layout="row" flex >
+            <div class="page-delimiter" flex>
+                <div class="fit-screen-wrap invers header">                  
+                    <div class="md-display-1"> Адреса {{$ctrl.salon.address}}</div>
+                      <div class="md-title md-padding"> {{$ctrl.salon.description}}</div>
+                </div>
 
+            </div>
+        </div>
     <!--author-->
     <div layout="column" layout-align="center center" >
     <div class="course-bg " layout-align="center center" flex
@@ -115,18 +123,19 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
 
 export class AcademyContactComponentController {
 
-    static $inject = [ContactResourceName,  SalonResourceName, '$q', 'smoothScroll',SeoPageResourceName,'$rootScope'];
+    static $inject = [ContactResourceName, SalonResourceName, '$q', 'smoothScroll', SeoPageResourceName, '$rootScope'];
 
-    contacts:IContact[];
-    map:any;
-    marker:any;
+    contacts: IContact[];
+    map: any;
+    marker: any;
     markerReadySEO: string;
-    seo:any;
+    seo: any;
+    salon: any;
 
-    constructor(private contactResource:IContactResource,
-                private salonResource:ISalonResource, private $q,private smoothScroll,
-                private SeoPageResource:ISeoPageResource,private $rootScope) {
-        
+    constructor(private contactResource: IContactResource,
+                private salonResource: ISalonResource, private $q, private smoothScroll,
+                private SeoPageResource: ISeoPageResource, private $rootScope) {
+
     }
 
     $onInit() {
@@ -140,23 +149,24 @@ export class AcademyContactComponentController {
         this.map = {center: {latitude: 49.811077, longitude: 23.973777}, zoom: 18};
         this.marker = {latitude: 49.811077, longitude: 23.973777};
 
-        var mainPromise = this.salonResource.query( {query: {'isAcademy': 'true'}} ).$promise;
-        mainPromise.then( (salons) => {
+        var mainPromise = this.salonResource.query({query: {'isAcademy': 'true'}}).$promise;
+        mainPromise.then((salons) => {
             this.scrollToMain();
-            if (salons.length>0) {
-             var academySalon= salons[0];
-                this.map.center.latitude=academySalon.latitude;
-                this.map.center.longitude=academySalon.longitude;
-                this.marker.latitude=academySalon.latitude;
-                this.marker.longitude=academySalon.longitude;
+            if (salons.length > 0) {
+                this.salon = salons[0];
+                this.map.center.latitude = this.salon.latitude;
+                this.map.center.longitude = this.salon.longitude;
+                this.marker.latitude = this.salon.latitude;
+                this.marker.longitude = this.salon.longitude;
             }
-        } );
-        this.contacts = this.contactResource.query( {query: {'isAcademy': 'true'}} );
+        });
+        this.contacts = this.contactResource.query({query: {'isAcademy': 'true'}});
 
-        this.$q.all([mainPromise, this.contacts.$promise,this.seo.$promise]).then((result) => {
+        this.$q.all([mainPromise, this.contacts.$promise, this.seo.$promise]).then((result) => {
             this.markerReadySEO = "dynamic-content";
         });
     }
+
     scrollToMain() {
         var options = {
             duration: 100,

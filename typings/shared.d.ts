@@ -256,6 +256,7 @@ declare module pg {
             _id?: any,
             name: string,
             phone: string,
+            description:string,
             photos: IPhoto[],
             videos: IVideo[],
             contacts: IContact[],

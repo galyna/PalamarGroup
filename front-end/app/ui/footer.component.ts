@@ -14,7 +14,7 @@ const template = `<div class="page-footer " ng-if="::!$root.isAdminZone()" class
                     <div layout="column" ng-repeat="salon in $ctrl.salons track by $index">
                      
                         <div ng-if="salon._id!='isAcademy' && salon.contacts.length>0"
-                             class="md-subhead social-header md-padding">Салон на
+                             class="md-subhead social-header md-padding">Адреса салону
                             {{::salon.address}}
                         </div>
                         <div ng-if="::salon._id=='isAcademy'" class="md-subhead social-header md-padding">Академія</div>
