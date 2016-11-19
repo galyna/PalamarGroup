@@ -122,6 +122,7 @@ export class SnapshotsService {
 
 
     saveSnapshots() {
+        console.log("saveSnapshots "+ new Date().toTimeString())
         var result = htmlSnapshots.run({
             input: "sitemap",
             source: path.resolve('../front-end/dist/sitemap.xml'),
