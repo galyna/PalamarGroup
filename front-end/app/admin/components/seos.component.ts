@@ -1,5 +1,5 @@
 import {ISeoPageResource, SeoPageResourceName, ISeoPage} from "../../resources/seo.page.resource";
-const template = `<md-button hg-hide=" this.ganerationRuned" ng-click="$ctrl.generateSnapshots()"
+const template = `<md-button ng-hide="this.ganerationRuned" ng-click="$ctrl.generateSnapshots()"
            class="md-primary "  aria-label="new">
     Генерувати seo
 </md-button>
@@ -128,29 +128,22 @@ export class SeosComponentController {
     showRunedDialog() {
         let confirm = this.$mdDialog.alert()
             .title("Запущено генерацію сторінок ")
-            .textContent(`Будь ласка зачекайте більше 20 хвилин, щоб процес завершився. Не запускате його знова протягом цього часу.`)
+            .textContent(`Будь ласка зачекайте більше 20 хвилин, щоб процес завершився. Не запускате його знову протягом цього часу.`)
             .ariaLabel("дочекайтесь")
             .ok('OK')
         return this.$mdDialog.show(confirm);
 
     }
-    showResultDialog(pages) {
-        let confirm = this.$mdDialog.alert()
-            .title("Зевершився процес генерації сторінок")
-            .textContent(`Успішно згенеровані сторінки: `+ pages.join(','))
-            .ariaLabel("дочекайтесь")
-            .ok('OK')
-        return this.$mdDialog.show(confirm);
 
-    }
 
     generateSnapshots() {
         if(!this.ganerationRuned){
         this.ganerationRuned=true;
+            this.showRunedDialog()
         this.SeoPageResource.getSnapshots().$promise.then((pages)=> {
             this.ganerationRuned=false;
-            this.showResultDialog(pages);
-        });}else{this.showRunedDialog()}
+            
+        });}else{}
     }
 
 }

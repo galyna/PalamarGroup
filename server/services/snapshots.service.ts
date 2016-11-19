@@ -1,6 +1,7 @@
 import {Course, ICourseModel} from "../models/course";
 import {Master} from "../models/master";
 import {Favor} from "../models/favor";
+import {config} from "../config";
 let path = require('path');
 let sm = require('sitemap');
 let fs = require('fs');
@@ -159,7 +160,7 @@ export class SnapshotsService {
                             this.addCollection(favors, urls, "/beauty-parlour/service/");
 
                             var sitemap = sm.createSitemap({
-                                hostname: 'http://localhost:8080',
+                                hostname: config.origin,
                                 cacheTime: 600000,  //600 sec (10 min) cache purge period
                                 urls: urls
                             });
@@ -167,7 +168,7 @@ export class SnapshotsService {
                             fs.writeFileSync(path.resolve('../front-end/dist/sitemap.xml'), sitemap.toString());
                             this.saveSnapshots();
                             console.log("snapshots generution started at"+ new Date().toTimeString())
-
+                            res.end();
                         });
                     });
                 });

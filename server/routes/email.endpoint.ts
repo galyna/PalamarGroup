@@ -60,7 +60,7 @@ emailEndpoint.route( '/adv/:courseId' )
 </head>
 <body>
 <div  style=" display: table;">
-<a style="text-decoration: none;" href="${config.origin + '#/course/' + req.course._id}">
+<a style="text-decoration: none;" href="${config.origin + '/course/' + req.course._id}">
     <div class="logo " style=" background-color: white;
             width: 1000px;height: 100px;">
         <div class="page-header-wrap " style=" text-align: center;margin: auto; 
@@ -152,7 +152,7 @@ emailEndpoint.route( '/adv/:courseId' )
             border-radius: 0px;
             text-align: center;
             transition: background-color 0.3s;
-            min-width: 200px;text-decoration: none;"  href="${config.origin + '#/course/' + req.course._id}"  ng-transclude=""
+            min-width: 200px;text-decoration: none;"  href="${config.origin + '/course/' + req.course._id}"  ng-transclude=""
                     aria-label="Details" ><div style="cursor: pointer; font-size: 40px;">
                                     Деталі
            </div></a>
