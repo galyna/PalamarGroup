@@ -13,13 +13,13 @@ const template = `<div class="page-footer " ng-if="::!$root.isAdminZone()" class
                         </div>
                     <div layout="column" ng-repeat="salon in $ctrl.salons track by $index">
                      
-                        <div ng-if="salon._id!='isAcademy' && salon.contacts.length>0"
+                        <div ng-if="salon._id!='isAcademy' && salon.contacts.length>0" ng-click=" $ctrl.showContacts()"
                              class="md-subhead social-header md-padding">Адреса салону
                             {{::salon.address}}
                         </div>
-                        <div ng-if="::salon._id=='isAcademy'" class="md-subhead social-header md-padding">Академія</div>
-                        <div layout="column" ng-repeat="contact in salon.contacts" class="footer-contacts" flex>
-                            <div layout="row" layout-align="start center">
+                        <div ng-if="::salon._id=='isAcademy'" class="md-subhead social-header md-padding" ng-click="$ctrl.showAcademyContacts()">Академія</div>
+                        <div layout="column" ng-repeat="contact in salon.contacts" class="footer-contacts" flex ng-click="salon._id!='isAcademy' && $ctrl.showContacts()">
+                            <div layout="row" layout-align="start center" ng-click="salon._id=='isAcademy' && $ctrl.showAcademyContacts()">
                                 <img ng-src="{{::contact.photo.url}}"
                                      class="avatar md-padding"
                                      alt="{{::contact.name}}"/>
@@ -68,7 +68,7 @@ const template = `<div class="page-footer " ng-if="::!$root.isAdminZone()" class
 
 export class FooterComponentController {
 
-    static $inject = [ContactResourceName, 'constants', '$rootScope', SalonResourceName,];
+    static $inject = [ContactResourceName, 'constants', '$rootScope', SalonResourceName,'$location'];
 
     showAnimation: boolean;
     showMap: boolean;
@@ -78,8 +78,17 @@ export class FooterComponentController {
 
     constructor(private contactResource: IContactResource,
                 private constants: IConstants, private $rootScope: IRootScope,
-                private salonResource: ISalonResource) {
+                private salonResource: ISalonResource,private $location) {
 
+    }
+
+
+    showAcademyContacts(masterId: String) {
+        this.$location.path(`/academy/contacts`);
+    }
+
+    showContacts(masterId: String) {
+        this.$location.path(`/beauty-parlour/contacts`);
     }
 
     $onInit() {

@@ -94,7 +94,7 @@ export class SnapshotsService {
             title: "PALAMAR GROUP beauty parlour & academy Академія Відео"
         },
         {
-            url: "/academy/contact",
+            url: "/academy/contacts",
             description: "",
             name: "academy.contacts",
             text: "Академія контакти",

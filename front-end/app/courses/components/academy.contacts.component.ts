@@ -178,7 +178,7 @@ export class AcademyContactComponentController {
         this.smoothScroll(element, options);
     }
 }
-export let AcademyContactComponentUrl = "/academy/contact";
+export let AcademyContactComponentUrl = "/academy/contacts";
 export let AcademyContactComponentName = 'pgAcademyContact';
 export let AcademyContactComponentOptions = {
     template: template,

@@ -334,6 +334,7 @@ export class SalonHomeComponentController {
         this.$location.path(`/beauty-parlour/master/${masterId}`);
     }
 
+
     setSocialParams(photo) {
         this.$rootScope.socialParams.host = this.constants.host;
         this.$rootScope.socialParams.target = this.constants.host;
