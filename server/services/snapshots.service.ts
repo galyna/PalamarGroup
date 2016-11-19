@@ -124,7 +124,7 @@ export class SnapshotsService {
     saveSnapshots() {
         var result = htmlSnapshots.run({
             input: "sitemap",
-            port: "80",
+            port: "8080",
             source: path.resolve('../front-end/dist/sitemap.xml'),
             snapshotScript: {script: "removeScripts"},
             phantomjsOptions: ["--load-images=false", "--ignore-ssl-errors=true"],
