@@ -1,5 +1,3 @@
-
-
 import {Course} from "../models/course";
 import {Master} from "../models/master";
 import {Favor} from "../models/favor";
@@ -122,16 +120,17 @@ export class SnapshotsService {
 
 
     saveSnapshots() {
-        console.log("saveSnapshots "+ new Date().toTimeString())
+        console.log("saveSnapshots start " + new Date().toTimeString())
         var result = htmlSnapshots.run({
             input: "sitemap",
             source: path.resolve('../front-end/dist/sitemap.xml'),
-
+            port: "8080",
             phantomjsOptions: ["--load-images=false", "--ignore-ssl-errors=true"],
             outputDir: './snapshots',
             selector: "#dynamic-content",
-            processLimit: 4}, function(err, snapshotsCompleted) {
-            console.log("snapshots generution finished at"+ new Date().toTimeString())
+            processLimit: 4
+        }, function (err, snapshotsCompleted) {
+            console.log("snapshots generution finished at" + new Date().toTimeString())
             console.log(snapshotsCompleted.join(','));
         });
 
@@ -147,38 +146,38 @@ export class SnapshotsService {
     saveSitemap(req: any, res, next) {
 
 
-            var urls = this.pages.map((p)=> {
-                return {url: p.url, priority: 0.8};
-            });
+        var urls = this.pages.map((p)=> {
+            return {url: p.url, priority: 0.8};
+        });
 
-            try {
-                Course.find().exec().then((courses)=> {
-                    this.addCollection(courses, urls, "/academy/course/");
+        try {
+            Course.find().exec().then((courses)=> {
+                this.addCollection(courses, urls, "/academy/course/");
 
-                    Master.find().exec().then((masters)=> {
-                        this.addCollection(masters, urls, "/beauty-parlour/master/");
+                Master.find().exec().then((masters)=> {
+                    this.addCollection(masters, urls, "/beauty-parlour/master/");
 
-                        Favor.find().exec().then((favors)=> {
-                            this.addCollection(favors, urls, "/beauty-parlour/service/");
+                    Favor.find().exec().then((favors)=> {
+                        this.addCollection(favors, urls, "/beauty-parlour/service/");
 
-                            var sitemap = sm.createSitemap({
-                                hostname: config.origin,
-                                cacheTime: 600000,  //600 sec (10 min) cache purge period
-                                urls: urls
-                            });
-
-                            fs.writeFileSync(path.resolve('../front-end/dist/sitemap.xml'), sitemap.toString());
-                            this.saveSnapshots();
-                            console.log("snapshots generution started at"+ new Date().toTimeString())
-                            res.end();
+                        var sitemap = sm.createSitemap({
+                            hostname: config.origin,
+                            cacheTime: 600000,  //600 sec (10 min) cache purge period
+                            urls: urls
                         });
+
+                        fs.writeFileSync(path.resolve('../front-end/dist/sitemap.xml'), sitemap.toString());
+                        this.saveSnapshots();
+                        console.log("snapshots generution started at" + new Date().toTimeString())
+                        res.end();
                     });
                 });
+            });
 
 
-            } catch (err) {
-                return next(err);
-            }
+        } catch (err) {
+            return next(err);
+        }
 
     }
 
