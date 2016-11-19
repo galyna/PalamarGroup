@@ -125,7 +125,7 @@ export class SnapshotsService {
             input: "sitemap",
             port: "8080",
             source: path.resolve('../front-end/dist/sitemap.xml'),
-            outputDirClean: true,
+
             phantomjsOptions: ["--load-images=false", "--ignore-ssl-errors=true"],
             outputDir: './snapshots',
             selector: "#dynamic-content",
@@ -162,7 +162,7 @@ export class SnapshotsService {
                         this.addCollection(favors, urls, "/beauty-parlour/service/");
 
                         var sitemap = sm.createSitemap({
-                            hostname: 'http://localhost:8080',
+                            hostname: config.origin,
                             cacheTime: 600000,  //600 sec (10 min) cache purge period,
                             urls: urls
                         });
