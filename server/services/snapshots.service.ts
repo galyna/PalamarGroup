@@ -126,7 +126,7 @@ export class SnapshotsService {
             port: "8080",
             source: path.resolve('../front-end/dist/sitemap.xml'),
 
-            phantomjsOptions: ["--load-images=false", "--ignore-ssl-errors=true"],
+            phantomjsOptions: ["--load-images=false", "--ignore-ssl-errors=true","--debug=true"],
             outputDir: './snapshots',
             selector: "#dynamic-content",
             processLimit: 4
@@ -166,10 +166,10 @@ export class SnapshotsService {
                             cacheTime: 600000,  //600 sec (10 min) cache purge period,
                             urls: urls
                         });
-                        console.log("'../front-end/dist/sitemap.xml' at" + new Date().toTimeString())
+
                         fs.writeFileSync(path.resolve('../front-end/dist/sitemap.xml'), sitemap.toString());
                         this.saveSnapshots();
-                        console.log("snapshots generution started at" + new Date().toTimeString())
+
                         res.end();
                     });
                 });
