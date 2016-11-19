@@ -89,7 +89,7 @@ export class SalonTransformsComponentController {
             }
 
         });
-        ;
+
         this.$q.all([this.transforms.$promise, this.seo]).then((result) => {
             this.markerReadySEO = "dynamic-content";
         });

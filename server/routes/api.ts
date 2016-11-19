@@ -4,6 +4,7 @@ import {currentUser} from '../auth/current_user';
 import photoEndpoint from './photo.endpoint';
 import {auth} from "../auth/auth";
 let passport = require("passport");
+;
 import {config} from "../config";
 import {paging} from "../services/paging.service";
 
@@ -103,67 +104,8 @@ api.use('/photo', photoEndpoint);
 api.use('/email', emailEndpoint);
 api.use('/stubs', (req: any, res, next) => {
 
-    var pages = [
-        {description: "", name: "home", text: "Головна", title: "PALAMAR GROUP beauty parlour & academy Головна сторінка"},
-        {description: "", name: "services", text: "Послуги", title: "PALAMAR GROUP beauty parlour & academy Послуги"},
-        {description: "", name: "masters", text: "Майстри", title: "PALAMAR GROUP beauty parlour & academy Майстри"},
-        {
-            description: "",
-            name: "transforms",
-            text: "Перевтіленні",
-            title: "PALAMAR GROUP beauty parlour & academy Перевтілення"
-        },
-        {
-            description: "",
-            name: "products",
-            text: "Продікція",
-            title: "PALAMAR GROUP beauty parlour & academy Продікція"
-        },
-        {
-            description: "",
-            name: "salon.contacts",
-            text: "Контакти салону",
-            title: "PALAMAR GROUP beauty parlour & academy Контакти салону"
-        },
-        {
-            description: "",
-            name: "hairdressing",
-            text: "Перукарські послуги",
-            title: "PALAMAR GROUP beauty parlour & academy Перукарські послуги"
-        },
-        {
-            description: "",
-            name: "nail-aesthetics",
-            text: "Нігтьва естетика",
-            title: "PALAMAR GROUP beauty parlour & academy Нігтьва естетика"
-        },
-        {description: "", name: "makeup", text: "Візаж", title: "PALAMAR GROUP beauty parlour & academy Візаж"},
-        {
-            description: "",
-            name: "academy",
-            text: "Академія курси",
-            title: "PALAMAR GROUP beauty parlour & academy Програма навчання"
-        },
-        {
-            description: "",
-            name: "calendar",
-            text: "Академія календар",
-            title: "PALAMAR GROUP beauty parlour & academy Календар навчання"
-        },
-        {
-            description: "",
-            name: "video",
-            text: "Академія відео",
-            title: "PALAMAR GROUP beauty parlour & academy Академія Відео"
-        },
-        {
-            description: "",
-            name: "academy.contacts",
-            text: "Академія контакти",
-            title: "PALAMAR GROUP beauty parlour & academy Академія контакти"
-        }];
     try {
-        pages.forEach((p)=> {
+        botHandler.getpages().forEach((p)=> {
             p.description = "Студія краси та навчальний центр для працівників салонів краси. м. Львів"
             SeoPage.create(p);
         })
@@ -176,14 +118,15 @@ api.use('/stubs', (req: any, res, next) => {
 });
 api.use('/snapshots', (req: any, res, next) => {
     try {
-        botHandler.saveSnapshots();
-        //await user.save();
+        botHandler.saveSitemap(req, res, next);
     } catch (err) {
         return next(err);
     }
 
-    res.end();
 });
+
+
+
 
 api.post('/authenticate', (req, res, next) => {
 

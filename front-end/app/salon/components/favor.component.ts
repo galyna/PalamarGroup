@@ -6,7 +6,7 @@ import {MediaObserverFactoryName, IMediaObserverFactory} from "../../ui/mediaObs
 import {IConstants} from "../../core/core.config";
 import {IRootScope} from "../../../typings";
 
-const template = `<div class="courses description-container">
+const template = `<div class="courses description-container" ng-attr-id="{{ $ctrl.markerReadySEO }}"  >
  
 
         <div class="course-bg " layout-align="center center" flex layout="column" >
@@ -209,35 +209,40 @@ export class FavorComponentController {
     static $inject = ["$routeParams", "$location",
         FavorResourceName, MasterResourceName,
         AppointmentResourceName, AppointmentServiceName, MediaObserverFactoryName,
-        'constants', '$rootScope', 'smoothScroll'];
+        'constants', '$rootScope', 'smoothScroll','$q'];
 
     favor: IFavor;
     masters: IMaster[];
     socialParams: any;
+    markerReadySEO: string;
 
     constructor(private $routeParams: ng.route.IRouteParamsService, private $location: ng.ILocationService,
                 private favorResource: IFavorResource, private masterResource: IMasterResource,
                 private AppointmentResource: IAppointmentResource,
                 private AppointmentService: IAppointmentService, private mediaObserver: IMediaObserverFactory,
                 private constants: IConstants,
-                private $rootScope: IRootScope,private smoothScroll) {
+                private $rootScope: IRootScope,private smoothScroll,private  $q) {
 
     }
 
     $onInit() {
         if (this.$routeParams["id"]) {
 
-            this.favorResource.get({id: this.$routeParams["id"]}).$promise
+            this.favor= this.favorResource.get({id: this.$routeParams["id"]})
+            this.favor.$promise
                 .then((favor) => {
                     this.favor = favor;
+                    document.title = this.$rootScope.seoBase + favor.name  ;
+                    this.$rootScope.seo.description=favor.description;
                     this.scrollToMain();
                 }).catch((err)=> {
                 this.$location.path(`/beauty-parlour/services`);
             });
 
-            this.masterResource.query({
+            this.masters= this.masterResource.query({
                 populate: 'services.favor'
-            }).$promise
+            })
+            this.masters.$promise
                 .then((masters) => {
                     this.masters = masters.filter((master)=> {
                         return master.services.some((s)=> {
@@ -252,6 +257,9 @@ export class FavorComponentController {
                     })
                 });
 
+            this.$q.all([this.favor.$promise, this.masters.$promise]).then((result) => {
+                this.markerReadySEO = "dynamic-content";
+            });
         }
     }
 

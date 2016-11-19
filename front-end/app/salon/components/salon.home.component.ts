@@ -10,6 +10,7 @@ import {
     IAcademyVideosResource, IAcademyVideos,
     AcademyVideosResourceName
 } from "../../resources/academy.video.resource";
+import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
 
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
@@ -217,7 +218,7 @@ export class SalonHomeComponentController {
 
     static $inject = [MasterResourceName, "$location", 'constants',
         TransformResourceName, BrendResourceName, "$rootScope", MediaObserverFactoryName,
-        '$q',FavorResourceName,AcademyVideosResourceName];
+        '$q',FavorResourceName,AcademyVideosResourceName,SeoPageResourceName];
 
     favors: IFavor[];
     masters: IMaster[];
@@ -253,18 +254,24 @@ export class SalonHomeComponentController {
     socialParams: any;
     videos: IAcademyVideos[];
     showMoreVideos:boolean;
-
+    seo:any;
     constructor(private masterResource: IMasterResource,
                  private $location: ng.ILocationService,
                 private constants: IConstants, private TransformResource: ITransformResource,
                 private BrendResource: IBrendResource, private $rootScope: IRootScope,
                 private mediaObserver: IMediaObserverFactory, private $q,private favorResource: IFavorResource,
-                private AcademyVideosResource: IAcademyVideosResource) {
+                private AcademyVideosResource: IAcademyVideosResource,private SeoPageResource:ISeoPageResource) {
         this.categories = this.constants.favorCategories;
     }
 
     $onInit() {
+        this.seo = this.SeoPageResource.query({query: {"name": "home"}}).$promise.then((seo)=> {
+            if (seo.length > 0) {
+                this.$rootScope.seo = seo[0];
+                document.title = this.$rootScope.seo.title;
+            }
 
+        });
         this.masters = this.masterResource.query({sort: "order"})
 
         this.brends = this.BrendResource.query({sort: "order"});
@@ -286,7 +293,9 @@ export class SalonHomeComponentController {
             this.showMoreVideos = videos.length > 2;
             videos.splice(2, videos.length-2);
         });
-        this.$q.all([this.masters.$promise, this.brends.$promise,this.transforms.$promise,favorPromise, this.videos.$promise]).then((result) => {
+
+        this.$q.all([this.masters.$promise, this.brends.$promise,
+            this.transforms.$promise,favorPromise, this.videos.$promise,this.seo.$promise]).then((result) => {
             this.markerReadySEO = "dynamic-content";
         });
 

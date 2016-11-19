@@ -4,6 +4,7 @@ declare module pg {
         export  interface ISeoPage {
             _id: any,
             name: string,
+            url: string,
             description:string,
             description_ru:string,
             title: string,

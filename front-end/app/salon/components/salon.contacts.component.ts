@@ -9,6 +9,7 @@ import {IOrder, IOrderResource, OrderResourceName} from "../../resources/order.r
 import {IRootScope} from "../../../typings";
 import {ISchedulerScope} from "../../admin/salon/components/master.scheduler";
 import {IMediaObserverFactory, MediaObserverFactoryName} from "../../ui/mediaObserver.service";
+import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
 
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-contacts description-container" layout="column">
@@ -159,7 +160,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
 export class SalonContactsComponentController {
 
     static $inject = [ContactResourceName, '$rootScope', SalonResourceName, "$scope",
-        MediaObserverFactoryName, 'constants', 'smoothScroll'];
+        MediaObserverFactoryName, 'constants', 'smoothScroll',SeoPageResourceName,"$q"];
 
     showAnimation: boolean;
     showMap: boolean;
@@ -168,12 +169,13 @@ export class SalonContactsComponentController {
     map: any;
     socialParams:any;
     markerReadySEO: string;
+    seo:any;
 
     constructor(private contactResource: IContactResource,
                 private $rootScope: IRootScope,
                 private salonResource: ISalonResource, private $scope: ISchedulerScope,
                 private mediaObserver: IMediaObserverFactory,
-                private constants: IConstants, private smoothScroll) {
+                private constants: IConstants, private smoothScroll,private SeoPageResource:ISeoPageResource, private $q) {
 
 
     }
@@ -210,7 +212,14 @@ export class SalonContactsComponentController {
     }
 
     $onInit() {
-        this.showAnimation = this.$rootScope.isBigSize;
+        this.seo = this.SeoPageResource.query({query: {"name": "academy.contacts"}}).$promise.then((seo)=> {
+            if (seo.length > 0) {
+                this.$rootScope.seo = seo[0];
+                document.title = this.$rootScope.seo.title;
+            }
+
+        });
+
         this.map = {center: {latitude: 49.811210, longitude: 23.974013}, zoom: 18};
         this.contacts = this.contactResource.query({query: {'isAcademy': 'false'}});
         this.contacts.$promise.then((contacts) => {
@@ -234,8 +243,12 @@ export class SalonContactsComponentController {
 
                     })
                 })
-                this.markerReadySEO = "dynamic-content";
+
             })
+        });
+
+        this.$q.all([this.contacts.$promise, this.seo.$promise]).then((result) => {
+            this.markerReadySEO = "dynamic-content";
         });
     }
 

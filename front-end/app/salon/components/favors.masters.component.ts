@@ -5,6 +5,7 @@ import {IAppointmentResource, AppointmentResourceName} from "../../resources/app
 import {AppointmentServiceName, IAppointmentService} from "../servises/appointment.service";
 import {MediaObserverFactoryName, IMediaObserverFactory} from "../../ui/mediaObserver.service";
 import {IRootScope} from "../../../typings";
+import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
 
@@ -244,7 +245,7 @@ export class FavorsMastersComponentController {
 
     static $inject = [FavorResourceName, 'constants', "$routeParams", "$location", MasterResourceName,
         AppointmentServiceName, AppointmentResourceName, '$q', 'orderByFilter',  MediaObserverFactoryName,
-        '$rootScope', 'smoothScroll'];
+        '$rootScope', 'smoothScroll',SeoPageResourceName];
 
     favors: any;
     masters: IMaster[];
@@ -253,23 +254,32 @@ export class FavorsMastersComponentController {
     photos: any;
     videos: any;
     socialParams:any;
+    seo:any;
 
     constructor(private favorResource: IFavorResource, private constants: IConstants,
                 private $routeParams: ng.route.IRouteParamsService, private $location: ng.ILocationService,
                 private MasterResource: IMasterResource, private AppointmentService: IAppointmentService,
                 private AppointmentResource: IAppointmentResource, private $q, private orderByFilter: ng.IFilterOrderBy,
                 private mediaObserver: IMediaObserverFactory,
-                private $rootScope: IRootScope,private smoothScroll) {
+                private $rootScope: IRootScope,private smoothScroll,private SeoPageResource:ISeoPageResource) {
 
 
     }
 
     $onInit() {
+
         this.favors = [];
         var categories = angular.copy(this.constants.favorCategories);
         this.photos = [];
         this.videos = [];
         if (this.$routeParams["category"]) {
+            this.seo = this.SeoPageResource.query({query: {"name": this.$routeParams["category"]}}).$promise.then((seo)=> {
+                if (seo.length > 0) {
+                    this.$rootScope.seo = seo[0];
+                    document.title = this.$rootScope.seo.title;
+                }
+
+            });
             this.category = categories.filter((cat)=> {
                 return cat.url == this.$routeParams["category"]
             })[0];
@@ -282,10 +292,11 @@ export class FavorsMastersComponentController {
             var masterPromise = this.MasterResource.query({populate: 'services.favor', sort: "order"}).$promise;
             this.setMasters(masterPromise, this.category._id);
 
-            this.$q.all([masterPromise, favorsPromise]).then((tt) => {
+            this.$q.all([masterPromise, favorsPromise,this.seo.$promise]).then((tt) => {
                 this.markerReadySEO = "dynamic-content";
             });
         }
+
     }
 
     setFavors(favorsPromise) {

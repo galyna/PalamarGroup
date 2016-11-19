@@ -119,7 +119,7 @@ gulp.task('prod:content', function () {
         .pipe(gulp.dest('dist/content/'));
     gulp.src(['palamar_logo.ico']).pipe(gulp.dest('dist'));
     gulp.src(['robots.txt']).pipe(gulp.dest('dist'));
-    gulp.src(['sitemap.xml']).pipe(gulp.dest('dist'));
+
 });
 
 gulp.task('prod:clean', function () {

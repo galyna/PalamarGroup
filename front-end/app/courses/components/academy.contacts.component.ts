@@ -4,6 +4,7 @@ import IUploadPromise = angular.angularFileUpload.IUploadPromise;
 import {IOrder, } from "../../resources/order.resource";
 import {IRootScope} from "../../../typings";
 import {SalonResourceName, ISalonResource} from "../../resources/salon.resource";
+import {ISeoPageResource, SeoPageResourceName} from "../../resources/seo.page.resource";
 
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-contacts description-container" layout="column">
@@ -114,19 +115,28 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
 
 export class AcademyContactComponentController {
 
-    static $inject = [ContactResourceName,  SalonResourceName, '$q', 'smoothScroll'];
+    static $inject = [ContactResourceName,  SalonResourceName, '$q', 'smoothScroll',SeoPageResourceName,'$rootScope'];
 
     contacts:IContact[];
     map:any;
     marker:any;
     markerReadySEO: string;
+    seo:any;
 
     constructor(private contactResource:IContactResource,
-                private salonResource:ISalonResource, private $q,private smoothScroll) {
+                private salonResource:ISalonResource, private $q,private smoothScroll,
+                private SeoPageResource:ISeoPageResource,private $rootScope) {
         
     }
 
     $onInit() {
+        this.seo = this.SeoPageResource.query({query: {"name": "academy.contacts"}}).$promise.then((seo)=> {
+            if (seo.length > 0) {
+                this.$rootScope.seo = seo[0];
+                document.title = this.$rootScope.seo.title;
+            }
+
+        });
         this.map = {center: {latitude: 49.811077, longitude: 23.973777}, zoom: 18};
         this.marker = {latitude: 49.811077, longitude: 23.973777};
 
@@ -143,7 +153,7 @@ export class AcademyContactComponentController {
         } );
         this.contacts = this.contactResource.query( {query: {'isAcademy': 'true'}} );
 
-        this.$q.all([mainPromise, this.contacts.$promise]).then((result) => {
+        this.$q.all([mainPromise, this.contacts.$promise,this.seo.$promise]).then((result) => {
             this.markerReadySEO = "dynamic-content";
         });
     }

@@ -1,10 +1,9 @@
-import {MasterResourceName, IMasterResource, IMaster} from "../../resources/master.resource";
+import { IMaster} from "../../resources/master.resource";
 import {FavorResourceName, IFavorResource} from "../../resources/favor.resource";
 import {IConstants} from "../../core/core.config";
-import {IAppointmentResource, AppointmentResourceName} from "../../resources/appointment.resource";
-import {AppointmentServiceName, IAppointmentService} from "../servises/appointment.service";
 import {IMediaObserverFactory, MediaObserverFactoryName} from "../../ui/mediaObserver.service";
 import {IRootScope} from "../../../typings";
+import {ISeoPageResource, SeoPageResourceName} from "../../resources/seo.page.resource";
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
 
@@ -97,7 +96,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
 export class FavorsComponentController {
 
     static $inject = [FavorResourceName, MediaObserverFactoryName,
-        '$rootScope','constants', "$routeParams", "$location", 'orderByFilter','smoothScroll'];
+        '$rootScope','constants', "$routeParams", "$location", 'orderByFilter','smoothScroll',SeoPageResourceName,"$q"];
 
     favors: any;
     masters: IMaster[];
@@ -106,21 +105,31 @@ export class FavorsComponentController {
     photos: any;
     videos: any;
     socialParams:any;
+    seo:any;
 
     constructor(private favorResource: IFavorResource, private mediaObserver: IMediaObserverFactory,
                 private $rootScope: IRootScope,private constants: IConstants,
                 private $routeParams: ng.route.IRouteParamsService,
-                private $location: ng.ILocationService, private orderByFilter: ng.IFilterOrderBy,private smoothScroll) {
+                private $location: ng.ILocationService, private orderByFilter: ng.IFilterOrderBy,
+                private smoothScroll,private SeoPageResource:ISeoPageResource, private $q) {
 
 
     }
 
     $onInit() {
+        this.seo = this.SeoPageResource.query({query: {"name": "services"}}).$promise.then((seo)=> {
+            if (seo.length > 0) {
+                this.$rootScope.seo = seo[0];
+                document.title = this.$rootScope.seo.title;
+            }
+
+        });
         this.favors = [];
         this.photos = [];
         this.videos = [];
         this.categories = angular.copy(this.constants.favorCategories);
-        this.favorResource.query({sort: "order"}).$promise.then((favors) => {
+        this.favors= this.favorResource.query({sort: "order"})
+        this.favors.$promise.then((favors) => {
             this.favors = favors;
             if (this.favors.length > 0) {
                 this.scrollToMain();
@@ -142,12 +151,14 @@ export class FavorsComponentController {
 
                 })
 
-                this.markerReadySEO = "dynamic-content";
             }
 
         });
-
+        this.$q.all([this.favors.$promise, this.seo.$promise]).then((result) => {
+            this.markerReadySEO = "dynamic-content";
+        });
     }
+
     scrollToMain() {
         var options = {
             duration: 100,

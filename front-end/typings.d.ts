@@ -13,5 +13,6 @@ export interface IRootScope extends ng.IRootScopeService {
         title:string,
         image:string,
         description:string}
-    seo:ISeoPage;
+    seo:any;
+    seoBase:string;
 }

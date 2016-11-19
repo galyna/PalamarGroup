@@ -47,6 +47,9 @@ export class CourseController {
             this.setSocialParams(course);
             course.hearFormsPhotos = this.orderByFilter(course.hearFormsPhotos, "order");
             course.historyPhotos = this.orderByFilter(course.historyPhotos, "order");
+            document.title = this.$rootScope.seoBase + "Академія " + course.name + " від " + course.author.name;
+            this.$rootScope.seo.description = "Ціна курсу:" + course.price + "грн. ";
+                this.$rootScope.seo.description =this.$rootScope.seo.description + course.description;
             this.markerReadySEO = "dynamic-content";
 
         }).catch((err)=> {
@@ -86,8 +89,8 @@ export class CourseController {
         this.$rootScope.socialParams.target = this.constants.host + "/academy/course/" + course._id;
         this.$rootScope.socialParams.image = this.constants.host + course.avatar;
         this.$rootScope.socialParams.title = 'Запрошуємо на ' + course.name;
-        this.$rootScope.socialParams.description = course.description.slice(0, 920);
-        ;
+            this.$rootScope.socialParams.description = course.description;
+
         this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
     }
 

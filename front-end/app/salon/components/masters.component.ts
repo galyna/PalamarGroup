@@ -1,6 +1,8 @@
 import {MasterResourceName, IMasterResource, IMaster} from "../../resources/master.resource";
 import {IAppointmentResource, AppointmentResourceName} from "../../resources/appointment.resource";
 import {AppointmentServiceName, IAppointmentService} from "../servises/appointment.service";
+import {ISeoPageResource, SeoPageResourceName} from "../../resources/seo.page.resource";
+import {IRootScope} from "../../../typings";
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses description-container" layout="row" layout-align="center center">
     <div layout="column" layout-align="center center">
@@ -271,20 +273,34 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses de
 
 export class MastersComponentController {
 
-    static $inject = ["$location", MasterResourceName, AppointmentServiceName, AppointmentResourceName, 'smoothScroll'];
+    static $inject = ["$location", MasterResourceName, AppointmentServiceName, AppointmentResourceName,
+        'smoothScroll', SeoPageResourceName, "$q", '$rootScope'];
     masters: IMaster[];
     markerReadySEO: string;
+    seo: any;
 
     constructor(private $location: ng.ILocationService,
-                private masterResource: IMasterResource,private AppointmentService: IAppointmentService,
-                private AppointmentResource: IAppointmentResource,private smoothScroll) {
+                private masterResource: IMasterResource, private AppointmentService: IAppointmentService,
+                private AppointmentResource: IAppointmentResource, private smoothScroll,
+                private SeoPageResource: ISeoPageResource, private $q, private $rootScope: IRootScope) {
 
     }
 
     $onInit() {
+        this.seo = this.SeoPageResource.query({query: {"name": "masters"}}).$promise.then((seo)=> {
+            if (seo.length > 0) {
+                this.$rootScope.seo = seo[0];
+                document.title = this.$rootScope.seo.title;
+            }
+
+        });
         this.masters = this.masterResource.query({sort: {"isTop": 1, "order": 1}, populate: 'services.favor'})
         this.masters.$promise.then((result) => {
             this.scrollToMain();
+
+        });
+
+        this.$q.all([this.seo.$promise, this.masters.$promise]).then((result) => {
             this.markerReadySEO = "dynamic-content";
         });
     }
@@ -299,6 +315,7 @@ export class MastersComponentController {
         appointment.service = service;
         this.AppointmentService.onShowDialog(appointment);
     }
+
     scrollToMain() {
         var options = {
             duration: 100,

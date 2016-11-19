@@ -15,6 +15,7 @@ export interface ISeoPageModel extends pg.models.ISeoPage, Document{
 
 export let SeoPageSchema = new Schema({
     name: String,
+    url: String,
     text: String,
     description:String,
     description_ru:String,

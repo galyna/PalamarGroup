@@ -1,6 +1,7 @@
 import {IProductResource, IProduct, ProductResourceName} from "../../resources/product.resource";
 import {IRootScope} from "../../../typings";
 import {IProductOrder, ProductOrderResourceName, IProductOrderResource} from "../../resources/product.order.resource";
+import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses description-container products" layout="row" layout-align="center center">
     <div layout="column" layout-align="center center">
@@ -215,18 +216,18 @@ class ProductOrderDialogController {
 
 export class ProductsComponentController {
 
-    static $inject = ["$log", '$rootScope', '$mdDialog', ProductOrderResourceName, ProductResourceName, 'smoothScroll'];
+    static $inject = ["$log", '$rootScope', '$mdDialog', ProductOrderResourceName, ProductResourceName, 'smoothScroll',SeoPageResourceName,"$q"];
 
     products: IProduct[];
     productsOrder: IProductOrder;
     showAnimation: boolean;
     markerReadySEO: string;
-
+    seo:any;
 
     constructor(private $log: ng.ILogService, private $rootScope: IRootScope,
                 private $mdDialog: ng.material.IDialogService,
                 private ProductOrderResource: IProductOrderResource,
-                private ProductResource: IProductResource, private smoothScroll) {
+                private ProductResource: IProductResource, private smoothScroll,private SeoPageResource:ISeoPageResource, private $q) {
 
         this.showAnimation = $rootScope.isBigSize;
         this.productsOrder = new this.ProductOrderResource();
@@ -234,13 +235,21 @@ export class ProductsComponentController {
 
 
     $onInit() {
+        this.seo = this.SeoPageResource.query({query: {"name": "products"}}).$promise.then((seo)=> {
+            if (seo.length > 0) {
+                this.$rootScope.seo = seo[0];
+                document.title = this.$rootScope.seo.title;
+            }
+
+        });
         this.products = this.ProductResource.query({sort: "order"});
         this.products.$promise.then(() => {
                 this.scrollToMain();
-                this.markerReadySEO = "dynamic-content";
             }
         );
-
+        this.$q.all([this.products.$promise,this.seo.$promise]).then((tt) => {
+            this.markerReadySEO = "dynamic-content";
+        });
     }
 
     showAppointmentDialog(product) {

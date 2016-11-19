@@ -2,6 +2,7 @@ import {CourseResourceName, ICourseResource} from "../../resources/course.resour
 import {IPgCalendarDataService} from "../../calendar/calendar.data.service";
 import ICourse = pg.models.ICourse;
 import {IRootScope} from "../../../typings";
+import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
 
 
 const template = ` <div layout="row" flex>
@@ -35,15 +36,19 @@ export interface ICourseDates {
 
 export class CalendarComponentController {
 
-    static $inject = ['pgCalendarData','$rootScope', CourseResourceName, '$sce', '$location', 'orderByFilter', 'smoothScroll'];
+    static $inject = ['pgCalendarData','$rootScope', CourseResourceName, '$sce',
+        '$location', 'orderByFilter', 'smoothScroll',
+        SeoPageResourceName,"$q"];
 
+    seo:any;
     courses:ICourse[];
     calendarDirection = 'horizontal';
     coursesDateMap:ICourseDates[];
     markerReadySEO: string;
     constructor(private pgCalendarData:IPgCalendarDataService,private $rootScope:IRootScope,
                 private CourseResource:ICourseResource, private $sce,
-                private $location, private orderByFilter:ng.IFilterOrderBy, private smoothScroll) {
+                private $location, private orderByFilter:ng.IFilterOrderBy, private smoothScroll,
+                private SeoPageResource:ISeoPageResource, private $q) {
 
         this.getCourses();
     }
@@ -58,6 +63,13 @@ export class CalendarComponentController {
     }
 
     getCourses() {
+        this.seo = this.SeoPageResource.query({query: {"name": "calendar"}}).$promise.then((seo)=> {
+            if (seo.length > 0) {
+                this.$rootScope.seo = seo[0];
+                document.title = this.$rootScope.seo.title;
+            }
+
+        });
         this.coursesDateMap = [];
         this.courses = this.CourseResource.query();
         this.courses.$promise.then( (courses) => {
@@ -71,9 +83,12 @@ export class CalendarComponentController {
                 } );
 
                 this.scrollToMain();
-                this.markerReadySEO = "dynamic-content";
-            }
-        );
+
+            });
+
+        this.$q.all([this.courses.$promise, this.seo.$promise]).then((result) => {
+            this.markerReadySEO = "dynamic-content";
+        });
     }
 
 

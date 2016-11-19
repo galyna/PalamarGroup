@@ -2,6 +2,8 @@ import {
     IAcademyVideosResource, AcademyVideosResourceName,
     IAcademyVideos
 } from "../../resources/academy.video.resource";
+import {ISeoPageResource, SeoPageResourceName} from "../../resources/seo.page.resource";
+import {SalonResourceName} from "../../resources/salon.resource";
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
     <div layout="row" flex>
@@ -53,20 +55,31 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
 
 export class AcademyVideoComponentController {
 
-    static $inject = [AcademyVideosResourceName, 'smoothScroll'];
+    static $inject = [AcademyVideosResourceName, 'smoothScroll',  SeoPageResourceName,'$q', '$rootScope'];
 
     videos: IAcademyVideos[];
     markerReadySEO: string;
-
-    constructor(private AcademyVideosResource: IAcademyVideosResource,private smoothScroll) {
+    seo:any;
+    constructor(private AcademyVideosResource: IAcademyVideosResource,private smoothScroll,private SeoPageResource:ISeoPageResource,private $q,
+    private $rootScope) {
 
     }
 
     $onInit() {
+        this.seo = this.SeoPageResource.query({query: {"name": "video"}}).$promise.then((seo)=> {
+            if (seo.length > 0) {
+                this.$rootScope.seo = seo[0];
+                document.title = this.$rootScope.seo.title;
+            }
+
+        });
         var mainPromise = this.AcademyVideosResource.query({sort: 'order'}).$promise;
         mainPromise.then((videos) => {
             this.scrollToMain();
             this.videos = videos;
+
+        });
+        this.$q.all([mainPromise, this.seo.$promise]).then((result) => {
             this.markerReadySEO = "dynamic-content";
         });
     }

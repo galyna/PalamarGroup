@@ -8,8 +8,9 @@ import {MediaObserverFactoryName, IMediaObserverFactory} from "../../ui/mediaObs
 import {IConstants} from "../../core/core.config";
 import {IRootScope} from "../../../typings";
 import {SchedulerServiceName, ISchedulerService} from "../../ui/scheduler.service";
+import ISeoPage = pg.models.ISeoPage;
 
-const template = `<div class=" description-container">
+const template = `<div class=" description-container" ng-attr-id="{{ $ctrl.markerReadySEO }}"  >
     <div class=" courses" layout-align="center center" layout="column"
     >
         <div hide hide-xs="true" show-gt-xs="true" layout="row" layout-align="center center">
@@ -238,6 +239,7 @@ export class MasterComponentController {
     navigatorConfig: any;
     navigatorSmallConfig: any;
     socialParams: any;
+    markerReadySEO: string;
 
     constructor(private $log: ng.ILogService, private $routeParams: ng.route.IRouteParamsService,
                 private MasterResource: IMasterResource, private AppointmentService: IAppointmentService,
@@ -251,17 +253,23 @@ export class MasterComponentController {
 
     $onInit() {
         this.events = [];
+
+
         if (this.$routeParams["id"]) {
 
             this.MasterResource.get({id: this.$routeParams["id"], populate: 'services.favor'}).$promise
                 .then((master) => {
                     this.master = master;
+                    document.title = this.$rootScope.seoBase + master.name +" "+master.subtitle ;
+                    this.$rootScope.seo.description=master.description;
                     this.scrollToMain();
+                    this.markerReadySEO = "dynamic-content";
                 }).catch((err)=> {
                 this.$log.error(err);
                 this.$location.path(`/beauty-parlour/masters`);
             });
             this.loadEvents(new Date(), this.$routeParams["id"]);
+            ;
         }
     }
 
