@@ -124,7 +124,7 @@ export class SnapshotsService {
         var result = htmlSnapshots.run({
             input: "sitemap",
             source: path.resolve('../front-end/dist/sitemap.xml'),
-            port: "8080",
+
             phantomjsOptions: ["--load-images=false", "--ignore-ssl-errors=true"],
             outputDir: './snapshots',
             selector: "#dynamic-content",
@@ -162,10 +162,11 @@ export class SnapshotsService {
 
                         var sitemap = sm.createSitemap({
                             hostname: config.origin,
-                            cacheTime: 600000,  //600 sec (10 min) cache purge period
+                            cacheTime: 600000,  //600 sec (10 min) cache purge period,
+                            port: "8080",
                             urls: urls
                         });
-
+                        console.log("'../front-end/dist/sitemap.xml' at" + new Date().toTimeString())
                         fs.writeFileSync(path.resolve('../front-end/dist/sitemap.xml'), sitemap.toString());
                         this.saveSnapshots();
                         console.log("snapshots generution started at" + new Date().toTimeString())
