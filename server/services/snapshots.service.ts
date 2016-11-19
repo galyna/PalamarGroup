@@ -4,7 +4,7 @@ import {Course} from "../models/course";
 import {Master} from "../models/master";
 import {Favor} from "../models/favor";
 import {config} from "../config";
-var system = require('system');
+
 let path = require('path');
 let sm = require('sitemap');
 let fs = require('fs');
