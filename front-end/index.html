@@ -21,20 +21,6 @@
     <meta name="fragment" content="!" />
     <base href="/" />
 
-    <!--build:prod-->
-    <script src="node_modules/systemjs/dist/system.js"></script>
-    <script src="system.config.js"></script>
-
-    <link rel="stylesheet"  href="content/css/app.css"/>
-    <!--endbuild-->
-
-    <script>
-        console.log("System.import('youtube-iframe-api');")
-        System.import('youtube-iframe-api');
-        System.import('app');
-
-    </script>
-
     <link rel="shortcut icon" href="content/images/palamar_logo.ico">
 
 </head>
@@ -57,6 +43,18 @@
 </div>
 <!--footer-->
 <pg-footer ng-if="::!$root.isAdminZone()" ></pg-footer>
+<!--build:prod-->
+<script src="node_modules/systemjs/dist/system.js"></script>
+<script src="system.config.js"></script>
 
+<link rel="stylesheet"  href="content/css/app.css"/>
+<!--endbuild-->
+
+<script>
+    console.log("System.import('youtube-iframe-api');")
+    System.import('youtube-iframe-api');
+    System.import('app');
+
+</script>
 </body>
 </html>
