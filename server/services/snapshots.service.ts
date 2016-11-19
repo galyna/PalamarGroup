@@ -126,7 +126,7 @@ export class SnapshotsService {
         var result = htmlSnapshots.run({
             input: "sitemap",
             source: path.resolve('../front-end/dist/sitemap.xml'),
-            snapshotScript: {script: "removeScripts"},
+
             phantomjsOptions: ["--load-images=false", "--ignore-ssl-errors=true"],
             outputDir: './snapshots',
             selector: "#dynamic-content",
