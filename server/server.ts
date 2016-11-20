@@ -32,13 +32,13 @@ app.use(multipart());
 
 app.use(passport.initialize());
 
-
+app.use('/api', api);
 //static content
 let pathes;
 if (env === 'prod') {
     pathes = {
         admin: '../front-end/dist/admin.html',
-        all: '../front-end/dist',
+        all: '../front-end/dist/',
         content: '../front-end/dist/content/',
         index: '../front-end/dist/index.html'
 
@@ -53,8 +53,8 @@ if (env === 'prod') {
 }
 app.use('/admin', express.static(pathes.admin));
 app.use('/content', express.static(pathes.content));
-app.use('/api', api);
 
+app.use('/', express.static(pathes.all));
 app.get('/*', function (req, res) {
     res.sendFile(path.resolve(pathes.index));
 });
