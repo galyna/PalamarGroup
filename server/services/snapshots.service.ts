@@ -122,7 +122,7 @@ export class SnapshotsService {
 
     saveSnapshots( res, next) {
         console.log("saveSnapshots start " + new Date().toTimeString());
-        try {
+
             var result = htmlSnapshots.run({
                 input: "sitemap",
                 port: "8080",
@@ -136,9 +136,7 @@ export class SnapshotsService {
                 console.log(snapshotsCompleted.join(','));
                 res.json(snapshotsCompleted);
             });
-        } catch (err) {
-            return next(err);
-        }
+
     }
 
 
