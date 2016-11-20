@@ -55,7 +55,7 @@ if (env === 'prod') {
 app.use('/admin', express.static(pathes.admin));
 app.use('/content', express.static(pathes.content));
 app.use('/', function (req, res, next) {
-    botHandler.handleBots(req, res, next);
+   // botHandler.handleBots(req, res, next);
 }, express.static(pathes.all));
 
 app.get('/*', function (req, res) {
