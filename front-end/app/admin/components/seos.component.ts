@@ -151,7 +151,7 @@ export class SeosComponentController {
             this.ganerationRuned = true;
 
             this.SeoPageResource.getSnapshots().$promise.then(()=> {
-                this.ganerationRuned = false;
+
 
             });
         } else {
