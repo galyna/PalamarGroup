@@ -153,7 +153,10 @@ export class SeosComponentController {
             this.SeoPageResource.getSnapshots().$promise.then((pages)=> {
                 this.ganerationRuned = false;
                 this.showResultDialog(pages)
-            });
+            }).catch(()=> {
+                this.ganerationRuned = false;
+
+            });;
         } else {
             this.showRunedDialog()
         }
