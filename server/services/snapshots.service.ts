@@ -3,6 +3,7 @@ import {Master} from "../models/master";
 import {Favor} from "../models/favor";
 import {config} from "../config";
 
+
 let path = require('path');
 let sm = require('sitemap');
 let fs = require('fs');
@@ -186,6 +187,9 @@ export class SnapshotsService {
         return this.pages;
     }
 
+ createShot(){
 
+
+ }
 }
 export let botHandler = new SnapshotsService();

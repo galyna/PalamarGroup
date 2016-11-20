@@ -2,7 +2,7 @@
 <html lang="uk" itemscope itemtype="http://schema.org/Event">
 <head>
     <title >PALAMAR GROUP </title>
-
+    <link rel="shortcut icon" href="content/images/palamar_logo.ico">
     <meta charset="utf-8">
     <meta http-equiv="Content-Language" content="uk-UA,en,ru">
 
@@ -14,15 +14,24 @@
     <meta name="keywords" lang="ru" content="{{$root.seo.keywords_ru}}t">
 
 
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="MobileOptimized" content="320"/>
     <meta name="HandheldFriendly" content="true"/>
     <meta name="fragment" content="!" />
     <base href="/" />
 
-    <link rel="shortcut icon" href="content/images/palamar_logo.ico">
+    <!--build:prod-->
+    <script src="node_modules/systemjs/dist/system.js"></script>
+    <script src="system.config.js"></script>
+    <link rel="stylesheet"  href="content/css/app.css"/>
+    <!--endbuild-->
 
+    <script>
+        console.log("System.import('youtube-iframe-api');")
+        System.import('youtube-iframe-api');
+        System.import('app');
+
+    </script>
 </head>
 
 <body ng-cloak layout="column">
@@ -43,18 +52,6 @@
 </div>
 <!--footer-->
 <pg-footer ng-if="::!$root.isAdminZone()" ></pg-footer>
-<!--build:prod-->
-<script src="node_modules/systemjs/dist/system.js"></script>
-<script src="system.config.js"></script>
 
-<link rel="stylesheet"  href="content/css/app.css"/>
-<!--endbuild-->
-
-<script>
-    console.log("System.import('youtube-iframe-api');")
-    System.import('youtube-iframe-api');
-    System.import('app');
-
-</script>
 </body>
 </html>
