@@ -1,5 +1,5 @@
 import {ISeoPageResource, SeoPageResourceName, ISeoPage} from "../../resources/seo.page.resource";
-const template = `<md-button ng-hide="this.ganerationRuned" ng-click="$ctrl.generateSnapshots()"
+const template = `<md-button  ng-click="$ctrl.generateSnapshots()"
            class="md-primary "  aria-label="new">
     Генерувати seo
 </md-button>
@@ -86,7 +86,7 @@ export class SeosComponentController {
 
     seoPage: ISeoPage;
     seopages: ISeoPage[];
-    ganerationRuned:boolean;
+    ganerationRuned: boolean;
 
 
     constructor(private SeoPageResource: ISeoPageResource, private $mdToast, private $mdDialog) {
@@ -125,25 +125,38 @@ export class SeosComponentController {
         return this.$mdDialog.show(confirm);
 
     }
+
     showRunedDialog() {
         let confirm = this.$mdDialog.alert()
             .title("Запущено генерацію сторінок ")
-            .textContent(`Будь ласка зачекайте більше 20 хвилин, щоб процес завершився. Не запускате його знову протягом цього часу.`)
+            .textContent(`Будь ласка зачекайте кілька хвилин, щоб процес завершився.`)
             .ariaLabel("дочекайтесь")
             .ok('OK')
         return this.$mdDialog.show(confirm);
 
     }
 
+    showResultDialog(count) {
+        let confirm = this.$mdDialog.alert()
+            .title("Запущено генерацію сторінок ")
+            .textContent(`Генерація закінчилась успішно Згенеровано ` + count + ` сторінок`)
+            .ariaLabel("дочекайтесь")
+            .ok('OK')
+        return this.$mdDialog.show(confirm);
+
+    }
 
     generateSnapshots() {
-        if(!this.ganerationRuned){
-        this.ganerationRuned=true;
+        if (!this.ganerationRuned) {
+            this.ganerationRuned = true;
+
+            this.SeoPageResource.getSnapshots().$promise.then((pages)=> {
+                this.ganerationRuned = false;
+                this.showResultDialog(pages.length)
+            });
+        } else {
             this.showRunedDialog()
-        this.SeoPageResource.getSnapshots().$promise.then((pages)=> {
-            this.ganerationRuned=false;
-            
-        });}else{}
+        }
     }
 
 }

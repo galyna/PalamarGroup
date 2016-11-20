@@ -120,21 +120,25 @@ export class SnapshotsService {
     }
 
 
-    saveSnapshots() {
-        console.log("saveSnapshots start " + new Date().toTimeString())
-        var result = htmlSnapshots.run({
-            input: "sitemap",
-            port: "8080",
-            source: path.resolve('../front-end/dist/sitemap.xml'),
-            //phantomjsOptions: ["--load-images=false", "--ignore-ssl-errors=true","--debug=true"],
-            outputDir: './snapshots',
-            selector: "#dynamic-content",
-            processLimit: 4
-        }, function (err, snapshotsCompleted) {
-            console.log("snapshots generution finished at" + new Date().toTimeString())
-            console.log(snapshotsCompleted.join(','));
-        });
-
+    saveSnapshots( res, next) {
+        console.log("saveSnapshots start " + new Date().toTimeString());
+        try {
+            var result = htmlSnapshots.run({
+                input: "sitemap",
+                port: "8080",
+                source: path.resolve('../front-end/dist/sitemap.xml'),
+                //phantomjsOptions: ["--load-images=false", "--ignore-ssl-errors=true","--debug=true"],
+                outputDir: './snapshots',
+                selector: "#dynamic-content",
+                processLimit: 4
+            }, function (err, snapshotsCompleted) {
+                console.log("snapshots generution finished at" + new Date().toTimeString())
+                console.log(snapshotsCompleted.join(','));
+                res.json(snapshotsCompleted);
+            });
+        } catch (err) {
+            return next(err);
+        }
     }
 
 
@@ -144,7 +148,7 @@ export class SnapshotsService {
         });
     }
 
-    saveSitemap(req: any, res, next) {
+    saveSitemap(res, next) {
 
 
         var urls = this.pages.map((p)=> {
@@ -168,9 +172,9 @@ export class SnapshotsService {
                         });
 
                         fs.writeFileSync(path.resolve('../front-end/dist/sitemap.xml'), sitemap.toString());
-                        this.saveSnapshots();
+                        this.saveSnapshots( res, next);
 
-                        res.end();
+
                     });
                 });
             });
@@ -186,9 +190,9 @@ export class SnapshotsService {
         return this.pages;
     }
 
- createShot(){
+    createShot() {
 
 
- }
+    }
 }
 export let botHandler = new SnapshotsService();

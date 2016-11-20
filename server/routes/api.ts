@@ -118,7 +118,7 @@ api.use('/stubs', (req: any, res, next) => {
 });
 api.use('/snapshots', (req: any, res, next) => {
     try {
-        botHandler.saveSitemap(req, res, next);
+        botHandler.saveSitemap( res, next);
     } catch (err) {
         return next(err);
     }
