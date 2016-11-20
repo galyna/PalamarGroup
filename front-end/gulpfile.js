@@ -71,7 +71,7 @@ gulp.task('test', function () {
 gulp.task('prod:js', ['prod:move_js', 'prod:build_js']);
 
 gulp.task('prod:move_js', function() {
-    gulp.src(['node_modules/systemjs/dist/system.js', 'system.config.js'])
+    gulp.src(['node_modules/systemjs/dist/system.js', 'node_modules/systemjs/dist/system.js', 'system.config.js'])
     .pipe(gulp.dest('dist/'));
 })
 
