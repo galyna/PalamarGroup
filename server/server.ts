@@ -32,7 +32,7 @@ app.use(multipart());
 //rest api routes
 
 app.use(passport.initialize());
-
+app.use(require('express-html-snapshots').middleware);
 app.use('/api', api);
 //static content
 let pathes;
