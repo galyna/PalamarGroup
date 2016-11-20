@@ -139,7 +139,7 @@ export class SeosComponentController {
     showResultDialog(count) {
         let confirm = this.$mdDialog.alert()
             .title("Запущено генерацію сторінок ")
-            .textContent(`Генерація закінчилась успішно Згенеровано ` + count + ` сторінок`)
+            .textContent(`Генерація закінчилась успішно Згенеровано ` )
             .ariaLabel("дочекайтесь")
             .ok('OK')
         return this.$mdDialog.show(confirm);
@@ -150,9 +150,9 @@ export class SeosComponentController {
         if (!this.ganerationRuned) {
             this.ganerationRuned = true;
 
-            this.SeoPageResource.getSnapshots().$promise.then((pages)=> {
+            this.SeoPageResource.getSnapshots().$promise.then(()=> {
                 this.ganerationRuned = false;
-                this.showResultDialog(pages.length)
+
             });
         } else {
             this.showRunedDialog()
