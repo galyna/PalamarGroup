@@ -134,7 +134,7 @@ export class SnapshotsService {
             }, function (err, snapshotsCompleted) {
                 console.log("snapshots generution finished at" + new Date().toTimeString())
                 console.log(snapshotsCompleted.join(','));
-
+                res.json(snapshotsCompleted);
             });
 
     }
@@ -171,8 +171,7 @@ export class SnapshotsService {
 
                         fs.writeFileSync(path.resolve('../front-end/dist/sitemap.xml'), sitemap.toString());
                         this.saveSnapshots( res, next);
-                        res.status = 200;
-                        res.end();
+
                     });
                 });
             });
