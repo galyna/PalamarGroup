@@ -5,12 +5,12 @@ import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
 import * as slash from 'express-slash';
 let multipart = require('connect-multiparty');
-
+import {botHandler} from './services/snapshots.service';
 import {config} from "./config";
 import "./models/user";
 import "./auth/passport";
 import {setupRouter} from './routes/setup.endpoint';
-import {botHandler} from './services/snapshots.service';
+
 import api from './routes/api';
 
 
@@ -33,7 +33,7 @@ app.use(multipart());
 //rest api routes
 
 app.use(passport.initialize());
-app.use(require('express-html-snapshots').middleware);
+
 app.use('/api', api);
 //static content
 let pathes;
@@ -55,11 +55,11 @@ if (env === 'prod') {
 }
 app.use('/admin', express.static(pathes.admin));
 app.use('/content', express.static(pathes.content));
-app.use('/', express.static(pathes.all));
 
-// app.use('/', function (req, res, next) {
-//     botHandler.handleBots(req, res, next);
-// }, express.static(pathes.all));
+
+app.use('/', function (req, res, next) {
+    botHandler.handleBots(req, res, next);
+}, express.static(pathes.all));
 
 app.get('/*', function (req, res) {
     res.sendFile(path.resolve(pathes.index));
