@@ -71,7 +71,7 @@ gulp.task('test', function () {
 gulp.task('prod:js', ['prod:move_js', 'prod:build_js']);
 
 gulp.task('prod:move_js', function() {
-    gulp.src(['node_modules/systemjs/dist/system.js', 'node_modules/systemjs/dist/system-polyfills.js', 'system.config.js'])
+    gulp.src(['node_modules/systemjs/dist/system.js', 'node_modules/systemjs/dist/system-polyfills.js', 'system.config.js','robots.txt'])
     .pipe(gulp.dest('dist/'));
 })
 
@@ -118,7 +118,6 @@ gulp.task('prod:content', function () {
     gulp.src(['content/**/*', '!content/sass/**/*', '!content/sass/'])
         .pipe(gulp.dest('dist/content/'));
     gulp.src(['palamar_logo.ico']).pipe(gulp.dest('dist'));
-    gulp.src(['robots.txt']).pipe(gulp.dest('dist'));
 
 });
 

@@ -124,10 +124,10 @@ export class SnapshotsService {
                 input: "sitemap",
                 port: "8080",
                 source: path.resolve('../front-end/dist/sitemap.xml'),
-                phantomjsOptions: [ "--ignore-ssl-errors=true","--debug=true"],
+                phantomjsOptions: ["--load-images=false", "--ignore-ssl-errors=true","--debug=true"],
                 outputDir: './snapshots',
                 selector: "#dynamic-content",
-                processLimit: 4
+                processLimit: 1
             }, function (err, snapshotsCompleted) {
                 console.log("snapshots generution finished at" + new Date().toTimeString())
                 console.log(snapshotsCompleted.join(','));

@@ -42,21 +42,30 @@ if (env === 'prod') {
         admin: '../front-end/dist/admin.html',
         all: '../front-end/dist/',
         content: '../front-end/dist/content/',
-        index: '../front-end/dist/index.html'
+        index: '../front-end/dist/index.html',
+        robots:'../front-end/dist/robots.txt',
+        sitemap:'../front-end/dist/sitemap.xml',
 
     };
 } else {
     pathes = {
         admin: '../front-end/admin.html',
         all: '../front-end/',
+        sitemap:'../front-end/dist/sitemap.xml',
         content: '../front-end/content/',
+        robots:'../front-end/dist/robots.txt',
         index: `..${path.sep}front-end${path.sep}index.html`
     };
 }
 app.use('/admin', express.static(pathes.admin));
 app.use('/content', express.static(pathes.content));
 
-
+app.use('/robots.txt', function (req, res, next) {
+    res.sendFile(path.resolve(pathes.robots));
+});
+app.use('/sitemap.xml', function (req, res, next) {
+    res.sendFile(path.resolve(pathes.sitemap));
+});
 app.use('/', function (req, res, next) {
     botHandler.handleBots(req, res, next);
 }, express.static(pathes.all));
