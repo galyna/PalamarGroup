@@ -3,7 +3,7 @@ import {Master} from "../models/master";
 import {Favor} from "../models/favor";
 import {config} from "../config";
 
-
+let isBot = require('isbot');
 let path = require('path');
 let sm = require('sitemap');
 let fs = require('fs');
@@ -108,11 +108,8 @@ export class SnapshotsService {
     }
 
     handleBots(req, res, next) {
-        var bots = ['AdsBot-Google','googlebot', 'yahoo', 'bingbot', 'baiduspider', 'yandex', 'yeti',
-            'yodaobot', 'gigabot', 'ia_archiver', 'facebookexternalhit', 'twitterbot',
-            'developers\.google\.com'];//, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36']
-        if (bots.find((bot)=>req.headers['user-agent'].toLocaleLowerCase() == bot)) {
 
+        if (isBot(req.headers['user-agent'])) {
             res.sendFile(path.resolve('./snapshots', req.url.replace(/^\/|\/$/g, ''), 'index.html'));
         } else {
             next();
