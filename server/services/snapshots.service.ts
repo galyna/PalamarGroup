@@ -119,43 +119,37 @@ export class SnapshotsService {
 
     startMakeSnapshots() {
         schedule.scheduleJob({
-            hour: 14
-        }, function () {
-            this.makeStaticPages()
-        });
-    }
+            hour: 16,
+            minute:26
+        }, ()=> {
+            var urls = this.pages.map((p)=> {
+                return {url: p.url, priority: 0.8};
+            });
+             console.log("startMakeSnapshots");
+            Course.find().exec().then((courses)=> {
+                this.addCollection(courses, urls, "/academy/course/");
 
+                Master.find().exec().then((masters)=> {
+                    this.addCollection(masters, urls, "/beauty-parlour/master/");
 
-    makeStaticPages() {
+                    Favor.find().exec().then((favors)=> {
+                        this.addCollection(favors, urls, "/beauty-parlour/service/");
 
-        var urls = this.pages.map((p)=> {
-            return {url: p.url, priority: 0.8};
-        });
+                        var sitemap = sm.createSitemap({
+                            hostname: config.origin,
+                            cacheTime: 600000,  //600 sec (10 min) cache purge period,
+                            urls: urls
+                        });
 
-        Course.find().exec().then((courses)=> {
-            this.addCollection(courses, urls, "/academy/course/");
+                        fs.writeFileSync(path.resolve('../front-end/dist/sitemap.xml'), sitemap.toString());
+                        this.saveSnapshots();
 
-            Master.find().exec().then((masters)=> {
-                this.addCollection(masters, urls, "/beauty-parlour/master/");
-
-                Favor.find().exec().then((favors)=> {
-                    this.addCollection(favors, urls, "/beauty-parlour/service/");
-
-                    var sitemap = sm.createSitemap({
-                        hostname: config.origin,
-                        cacheTime: 600000,  //600 sec (10 min) cache purge period,
-                        urls: urls
                     });
-
-                    fs.writeFileSync(path.resolve('../front-end/dist/sitemap.xml'), sitemap.toString());
-                    this.saveSnapshots();
-
                 });
             });
         });
-
-
     }
+
 
 
     saveSnapshots() {
@@ -168,7 +162,10 @@ export class SnapshotsService {
             phantomjsOptions: ["--ignore-ssl-errors=true", "--debug=true"],
             outputDir: './snapshots',
             selector: "#dynamic-content",
-            processLimit: 1
+            processLimit: 1,
+            timeout:30000,
+            checkInterval:500,
+            pollInterval:1000,
         }, function (err, snapshotsCompleted) {
             console.log("snapshots generution finished at" + new Date().toTimeString())
             console.log(snapshotsCompleted.join(','));
