@@ -66,6 +66,7 @@ app.use('/robots.txt', function (req, res, next) {
 app.use('/sitemap.xml', function (req, res, next) {
     res.sendFile(path.resolve(pathes.sitemap));
 });
+
 app.use('/', function (req, res, next) {
     botHandler.handleBots(req, res, next);
 }, express.static(pathes.all));
@@ -123,5 +124,8 @@ app.listen(port, 'localhost', ()=> {
     console.log(`port: ${port}`);
     console.log(`environment: ${env}`);
 });
+
+//start schrduleed making of smapshots
+botHandler.startMakeSnapshots()
 
 export default app;
