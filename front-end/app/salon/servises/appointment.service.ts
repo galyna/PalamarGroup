@@ -264,7 +264,7 @@ export class AppointmentService implements IAppointmentService {
             controller: AppointmentFormComponentController,
             controllerAs: 'vm',
             parent: angular.element(document.querySelector('#mainContent')),
-            fullscreen: this.$mdMedia('(max-width: 1000px)'),
+            fullscreen: this.$mdMedia('(max-width: 600px)'),
             locals: {
                 appointment: appointment,
             },

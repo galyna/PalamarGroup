@@ -45,14 +45,7 @@ html {
   box-sizing: border-box;
 }
 
-.appointment-dialog{
-  min-height: 400px;
-  min-width: 300px;
-  @media (max-width: $layout-breakpoint-xs) {
-    min-height: 100%;
-    min-width: 100%;
-  }
-}
+
 
 .overlay {
   position: absolute;
@@ -147,12 +140,11 @@ md-card.md-default-theme, md-card {
 .embed-responsive-container{
   min-height:400px;;
   min-width: 300px;
-width: 100%;
-  height: 100%;
+
 
   @media (max-width: $layout-breakpoint-xs) {
     min-height:400px;;
-    width: 100vw;
+    width: 90vw;
   }
 
   @media (min-width: $layout-breakpoint-sm) {
