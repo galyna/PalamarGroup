@@ -1,4 +1,24 @@
+.logo-img {
 
+
+  @media (min-width: $layout-breakpoint-lg) {
+    width: 160px;
+    height: 150px;
+  }
+  @media (min-width: $layout-breakpoint-md) {
+    width: 140px;
+    height: 135px;
+  }
+  @media (min-width: $layout-breakpoint-sm) and (max-width: $layout-breakpoint-md) {
+    width: 110px;
+    height: 105px;
+
+  }
+  @media (max-width: $layout-breakpoint-xs) {
+    width: 70px;;
+    height: 65px;
+  }
+}
 #loading {
   z-index: 700;
   position: fixed;
@@ -49,29 +69,14 @@
     -o-animation: rotating 2s linear infinite;
     animation: rotating 2s linear infinite;
   }
+
   .logo-img {
     animation: rotating 2s linear infinite 0s;
     -o-animation: rotating 2s linear infinite 0s;
     -moz-animation: rotating 2s linear infinite 0s;
     -webkit-animation: rotating 2s linear infinite 0s;
 
-    @media (min-width: $layout-breakpoint-lg) {
-      width: 160px;
-      height: 150px;
-    }
-    @media (min-width: $layout-breakpoint-md) {
-      width: 140px;
-      height: 135px;
-    }
-    @media (min-width: $layout-breakpoint-sm) and (max-width: $layout-breakpoint-md) {
-      width: 110px;
-      height: 105px;
 
-    }
-    @media (max-width: $layout-breakpoint-xs) {
-      width: 70px;;
-      height: 65px;
-    }
   }
 }
 
@@ -164,27 +169,40 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
   bottom: 0
 }
 
-.page-header, .page-footer, .page-container {
+.page-header, .page-footer {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  //overflow: hidden;
+
+}
+
+.page-container {
+
   position: relative;
-  display: table;
-  width: 100%;
-  overflow: hidden;
-  overflow-y: auto;
+background-color: white;
+}
+
+.page-header {
+  position: relative;
+  height: 100vh;
 
   #video-container {
     height: 90vh;
     //  height:100vh;
     position: fixed;
     bottom: 0%;
-    z-index: -100;
+    //z-index: -1;
     left: 0;
     right: 0;
-  }
-  #logo-container {
-    a {
-      color: white;
+    display: none;
+    @media (min-width: 1360px) {
+      display: block;
     }
   }
+
   .screen {
     position: absolute;
     //top: 50%;
@@ -196,7 +214,6 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     //min-height: 100%;
     width: auto;
     height: auto;
-    z-index: -100;
     -ms-transform: translateX(-50%) translateY(-50%);
     -moz-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);
@@ -212,22 +229,11 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
                     rgba(0, 0, 0, 0.9),
                     rgba(0, 0, 0, 0.9)
     );
-    opacity: 0;
-    @media (min-width: 1360px) {
-      opacity: 1;
-    }
+
+
   }
 }
 
-.page-header, .page-footer {
-
-  text-align: center;
-  a {
-    text-decoration: none;
-  }
-  color: white;
-
-}
 
 .page-header {
   background: rgba(white, 0.6);
@@ -239,9 +245,12 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
   .page-header-wrap {
 
     min-height: 100vh;
-    z-index: 3;
+    z-index: 1;
     color: white;
     font-family: 'microsquare', sans-serif;
+  }
+  a {
+    color: white;
   }
   .logo-img {
 
@@ -322,6 +331,8 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
 }
 
 .page-footer {
+  position: relative;
+z-index: 0;
 
   @media (max-width: $layout-breakpoint-xs) {
     .md-margin {
@@ -342,13 +353,14 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
       width: 300px;
     }
 
-
   }
-  .city{    font-size: 30px;
+  .city {
+    font-size: 30px;
     text-transform: uppercase;
     padding-top: 16px;
     padding-bottom: 8px;
-    margin-bottom: 0;}
+    margin-bottom: 0;
+  }
   .social-container {
     width: 600px;
     padding-left: 1px;
@@ -400,15 +412,15 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
   }
 
   .page-header-wrap {
-    min-height: 100vh;
-    z-index: 108;
+
+    z-index: 2;
     color: black;
     font-weight: 600;
     font-family: 'microsquare', sans-serif;
-    padding: 100px 0px 20px 0px;
-
+    margin-top: 120px;
+    margin-bottom: 20px;
     @media (max-width: $layout-breakpoint-xs) {
-      padding: 80px 0px 20px 0px;
+
       .md-display-1 {
         font-size: 28px;
       }
@@ -450,11 +462,18 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
       background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_963_642.jpg");
     }
 
-    @media (max-height: 400px) and (max-width: 723px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/footter/IMG_6844_723_482.jpg");
-    }
+
 
   }
+
+}
+.page-header, .page-footer {
+
+  text-align: center;
+  a {
+    text-decoration: none;
+  }
+  color: white;
 
 }
 

@@ -13,10 +13,10 @@
     <form name="commentForm" class="md-padding pop-form" flex novalidate ng-submit="::vm.submitComment(commentForm)">
         <md-dialog-content flex>
             <md-dialog-content-body layout="column" layout-align="center stretch" flex>
-                <md-input-container flex="40">
+                <md-input-container class="md-block" >
                     <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
                     <label class="md-headline" for="nameС">Ім`я </label>
-                    <input class="md-headline" id="nameС" ng-model="vm.newComment.name" name="name" required />
+                    <input class="md-headline md-padding" id="name" ng-model="vm.newComment.name" name="name" required />
                     <div ng-messages="commentForm.name.$error" role="alert"
                          ng-show="commentForm.$submitted && commentForm.name.$invalid ">
                         <div class="md-headline" ng-message="required">
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                 </md-input-container>
-                <md-input-container flex>
+                <md-input-container class="md-block">
                     <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
                     <label class="md-headline" for="textС">Відгук</label>
                     <textarea class="md-headline" id="textС" ng-model="vm.newComment.text" name="text" required></textarea>

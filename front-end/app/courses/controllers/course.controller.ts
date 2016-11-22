@@ -49,7 +49,7 @@ export class CourseController {
             course.historyPhotos = this.orderByFilter(course.historyPhotos, "order");
             document.title = this.$rootScope.seoBase + "Академія " + course.name + " від " + course.author.name;
             this.$rootScope.seo.description = "Ціна курсу:" + course.price + "грн. ";
-                this.$rootScope.seo.description =this.$rootScope.seo.description + course.description;
+            this.$rootScope.seo.description = this.$rootScope.seo.description + course.description;
             this.markerReadySEO = "dynamic-content";
 
         }).catch((err)=> {
@@ -63,6 +63,19 @@ export class CourseController {
 
         this.newModel = this.getBlankModel();
 
+    }
+
+
+    scrollToOrderName() {
+        var options = {
+            duration: 50,
+            easing: 'easeInQuad',
+            offset: 0,
+
+        }
+
+        var element = document.getElementById('orderName');
+        this.smoothScroll(element, options);
     }
 
     scrollToMain() {
@@ -89,7 +102,7 @@ export class CourseController {
         this.$rootScope.socialParams.target = this.constants.host + "/academy/course/" + course._id;
         this.$rootScope.socialParams.image = this.constants.host + course.avatar;
         this.$rootScope.socialParams.title = 'Запрошуємо на ' + course.name;
-            this.$rootScope.socialParams.description = course.description;
+        this.$rootScope.socialParams.description = course.description;
 
         this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
     }
@@ -114,8 +127,8 @@ export class CourseController {
             bindToController: true,
             controller: CourseController.componentName,
             controllerAs: 'vm',
-            parent: angular.element(document.body),
-            targetEvent: $event
+            parent: angular.element(document.querySelector('#mainContent')),
+            fullscreen: this.$mdMedia('(max-width: 1000px)'),
         });
     }
 
@@ -159,6 +172,18 @@ export class CourseController {
         }
     }
 
+
+    scrollToName() {
+        var options = {
+            duration: 50,
+            easing: 'easeInQuad',
+            offset: 0,
+
+        }
+        var element = document.getElementById('modelName');
+        this.smoothScroll(element, options);
+    }
+
     showModelConfirm(): void {
 
         this.mdDialog.show(
@@ -180,8 +205,8 @@ export class CourseController {
             bindToController: true,
             controller: CourseController.componentName,
             controllerAs: 'vm',
-            parent: angular.element(document.body),
-            targetEvent: $event,
+            parent: angular.element(document.querySelector('#mainContent')),
+            fullscreen: this.$mdMedia('(max-width: 1000px)'),
         });
 
     }
@@ -219,6 +244,8 @@ export class CourseController {
                     this.order = new this.OrderResource();
                     this.$rootScope.loading = false;
                 });
+        }else {
+            this.$location.hash("orderName");
         }
     }
 
@@ -233,8 +260,9 @@ export class CourseController {
             bindToController: true,
             controller: CourseController.componentName,
             controllerAs: 'vm',
-            parent: angular.element(document.body),
-            targetEvent: $event,
+            parent: angular.element(document.querySelector('#mainContent')),
+            fullscreen: this.$mdMedia('(max-width: 1000px)')
+
         });
 
     }

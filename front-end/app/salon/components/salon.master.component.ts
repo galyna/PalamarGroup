@@ -10,7 +10,7 @@ import {IRootScope} from "../../../typings";
 import {SchedulerServiceName, ISchedulerService} from "../../ui/scheduler.service";
 import ISeoPage = pg.models.ISeoPage;
 
-const template = `<div class=" description-container" ng-attr-id="{{ $ctrl.markerReadySEO }}"  >
+const template = `<div class=" description-container" ng-attr-id="{{ $ctrl.markerReadySEO }}">
     <div class=" courses" layout-align="center center" layout="column"
     >
         <div hide hide-xs="true" show-gt-xs="true" layout="row" layout-align="center center">
@@ -34,14 +34,16 @@ const template = `<div class=" description-container" ng-attr-id="{{ $ctrl.marke
                             {{::$ctrl.master.rate.text}}
                         </div>
                         <div layout="row" layout-align="center center" class="md-padding md-margin ">
-                            <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">{{::$ctrl.master.name}}</div>
+                            <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">
+                                {{::$ctrl.master.name}}
+                            </div>
                             <div hide show-sm="true" flex="90" class="md-display-1">{{::$ctrl.master.name}}
                             </div>
                         </div>
                         <div hide show-gt-sm="true" class="md-title">
                             Вибери послугу та запишись
                         </div>
-                        <div flex="40"  hide show-gt-sm="true" layout="row" class=" program-block-master  ">
+                        <div flex="40" hide show-gt-sm="true" layout="row" class=" program-block-master  ">
                             <div layout="column"
                                  ng-repeat="service in $ctrl.master.services.slice(0,18) track by $index"
                                  layout-align=" start center">
@@ -124,14 +126,24 @@ const template = `<div class=" description-container" ng-attr-id="{{ $ctrl.marke
             </md-card>
 
         </div>
+        
     </div>
+    
     <div flex layout-align="center center" layout="row">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap">
-                <div class=" header" layout="column" layout-align="center center">
+                <div hide-gt-sm="true" class="invers header" layout="column" layout-align="center center">
                     <div class="md-display-1"> ГРАФІК РОБОТИ</div>
                     <div class="md-title md-padding"> ВИБЕРИ ЧАС ТА ЗАПИШИСЬ</div>
+
                 </div>
+                
+                   <div hide show-gt-sm="true" class=" header" layout="column" layout-align="center center">
+                    <div class="md-display-1"> ГРАФІК РОБОТИ</div>
+                    <div class="md-title md-padding"> ВИБЕРИ ЧАС ТА ЗАПИШИСЬ</div>
+
+                </div>
+                
                 <div class="master-scheduler" layout="row" flex layout-align="center center">
                     <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
                         <div layout="row" layout-xs="column" class='master-calendar'>
@@ -154,74 +166,85 @@ const template = `<div class=" description-container" ng-attr-id="{{ $ctrl.marke
                     </div>
 
                 </div>
-                
-                 <div layout="row" layout-align="center center">
-                    <div   hide-xs="true" flex="60" flex-gt-sm="50"
+
+                <div hide show-gt-sm="true" layout="row" layout-align="center center">
+                    <div flex="60" flex-gt-sm="50"
                          class="md-display-1 md-margin md-padding">
                         {{::$ctrl.master.description}}
-                    </div>
-                    <div    hide-gt-xs="true"  flex="70"
-                         class="md-headline ">{{::$ctrl.master.description}}
                     </div>
 
                 </div>
             </div>
-            <div class="overlay-description">
+            <div hide show-gt-sm="true" class="overlay-description">
             </div>
 
         </div>
     </div>
-    <div flex layout-align="center center" layout="row"
-         ng-if="$ctrl.master.videos.length>0 || $ctrl.master.works.length>0">
-        <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap  invers header">
-                <div class="md-display-2"> РОБОТИ МАЙСТРА</div>
-            </div>
 
+    <div hide-gt-sm="true" layout="row" flex ng-if="$ctrl.master.description" >
+        <div class="page-delimiter" flex>
+            <div class="fit-screen-wrap  flex  header-super" >
+             <div  layout="row" layout-align="center center">
+                    <div flex="70" 
+                         class="md-title md-margin md-padding">
+                         {{::$ctrl.master.description}}</div>                  
+                </div>              
+            </div>
+             <div class="overlay-trans ">
         </div>
+        </div>
+       
     </div>
     
-     <div class="courses-details" layout="row" flex layout-align="center center" ng-if="salon.videos.length>0">
-        <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
-            <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
-                <md-card md-whiteframe="6" class="  courses-videos"
-                         ng-repeat="video in $ctrl.master.videos | orderBy:'order' track by $index"
-                         flex>
-                    <div flex class="embed-responsive embed-responsive-16by9">
-                        <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
-                                       video-id="::video.url"></youtube-video>
-                    </div>
-                    <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                        <span class="  md-margin">{{::video.name}}</span>
-                    </md-card-content>
-                </md-card>
+        <div flex layout-align="center center" layout="row"
+             ng-if="$ctrl.master.videos.length>0 || $ctrl.master.works.length>0">
+            <div class="page-delimiter" flex>
+                <div class="fit-screen-wrap  invers header">
+                    <div class="md-display-2"> РОБОТИ МАЙСТРА</div>
+                </div>
+                
+            </div>
+            
+        </div>
+
+        <div class="courses-details" layout="row" flex layout-align="center center" ng-if="salon.videos.length>0">
+            <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
+                <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
+                    <md-card md-whiteframe="6" class="  courses-videos"
+                             ng-repeat="video in $ctrl.master.videos | orderBy:'order' track by $index"
+                             flex>
+                        <div flex class="embed-responsive embed-responsive-16by9">
+                            <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
+                                           video-id="::video.url"></youtube-video>
+                        </div>
+                        <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
+                            <span class="  md-margin">{{::video.name}}</span>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </div>
+
+        </div>
+
+        <div flex="100" class="courses-details" layout="row" layout-align="center center"
+        >
+            <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
+                <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+                    <md-card md-whiteframe="6" ng-repeat="photo in $ctrl.master.works | orderBy:'order' track by $index"
+                             class="md-margin "
+                             ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
+                             flex-gt-xs="46" flex-xs="80"
+                             ng-click="::$ctrl.showMediaObserver($ctrl.master.works | orderBy:'order', $index)">
+                        <img ng-src="{{::photo.url}}" class="md-card-image">
+                        <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
+                            <span class="  md-margin">{{::photo.name}}</span>
+                        </md-card-content>
+                </div>
             </div>
         </div>
 
+
     </div>
-
-    <div flex="100" class="courses-details" layout="row" layout-align="center center"
-    >
-        <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
-            <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" ng-repeat="photo in $ctrl.master.works | orderBy:'order' track by $index"
-                         class="md-margin "
-                         ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
-                         flex-gt-xs="46" flex-xs="80"
-                         ng-click="::$ctrl.showMediaObserver($ctrl.master.works | orderBy:'order', $index)">
-                    <img ng-src="{{::photo.url}}" class="md-card-image">
-                    <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                        <span class="  md-margin">{{::photo.name}}</span>
-                    </md-card-content>
-            </div>
-        </div>
-    </div>
-
-
-
-   
-
-</div>
 
 
 `;
@@ -231,7 +254,7 @@ export class MasterComponentController {
     static $inject = ["$log", "$routeParams", MasterResourceName,
         AppointmentServiceName, AppointmentResourceName,
         MediaObserverFactoryName, 'constants',
-        '$mdDialog', '$rootScope', SchedulerServiceName,'$location','smoothScroll'];
+        '$mdDialog', '$rootScope', SchedulerServiceName, '$location', 'smoothScroll'];
 
     master: IMaster;
     events: IScheduler[];
@@ -248,7 +271,7 @@ export class MasterComponentController {
                 private constants: IConstants,
                 private $mdDialog: ng.material.IDialogService,
                 private $rootScope: IRootScope, private SchedulerService: ISchedulerService,
-                private $location: ng.ILocationService,private smoothScroll) {
+                private $location: ng.ILocationService, private smoothScroll) {
     }
 
     $onInit() {
@@ -260,8 +283,8 @@ export class MasterComponentController {
             this.MasterResource.get({id: this.$routeParams["id"], populate: 'services.favor'}).$promise
                 .then((master) => {
                     this.master = master;
-                    document.title = this.$rootScope.seoBase + master.name +" "+master.subtitle ;
-                    this.$rootScope.seo.description=master.description;
+                    document.title = this.$rootScope.seoBase + master.name + " " + master.subtitle;
+                    this.$rootScope.seo.description = master.description;
                     this.scrollToMain();
                     this.markerReadySEO = "dynamic-content";
                 }).catch((err)=> {

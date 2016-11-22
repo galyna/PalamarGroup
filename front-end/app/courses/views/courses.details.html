@@ -110,8 +110,11 @@
                     <div ng-repeat="day in ::vm.course.days track by $index">
                         <div class="date-block md-margin "   layout="column"
                              layout-align=" center center">
-                            <div class=" md-display-2">{{ ::day.date| date:'dd.MM'}}</div>
-                            <div class="md-subhead  ">{{::day.program}}</div>
+                            <div hide show-gt-sx='true' class=" md-display-2">{{ ::day.date| date:'dd.MM'}}</div>
+                            <div show-sx='true' class="md-title  ">{{::day.date| date:'dd.MM'}}</div>
+                            <div hide show-gt-sx='true' class="md-subhead  ">{{::day.program}}</div>
+
+
                         </div>
                     </div>
                 </div>

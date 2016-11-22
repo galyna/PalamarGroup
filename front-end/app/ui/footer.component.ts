@@ -2,9 +2,9 @@ import {IContactResource, ContactResourceName, IContact} from "../resources/cont
 import {IConstants} from "../core/core.config";
 import {IRootScope} from "../../typings";
 import {ISalonResource, SalonResourceName, ISalon} from "../resources/salon.resource";
-const template = `<div class="page-footer " ng-if="::!$root.isAdminZone()" class="md-whiteframe-z4" flex>
+const template = `
 
-    <div class="fit-screen-wrap">
+ 
         <div class="page-header-wrap" layout="column" layout-align="center center">
             <div layout="row" flex layout-align="start center">
                 <div layout="column" flex>
@@ -62,9 +62,9 @@ const template = `<div class="page-footer " ng-if="::!$root.isAdminZone()" class
         <md-icon class=""
                  md-svg-src="navigation:ic_arrow_downward_24px"></md-icon>
     </md-button>
-</div>
 
-</div>`;
+
+`;
 
 export class FooterComponentController {
 

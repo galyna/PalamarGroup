@@ -16,16 +16,16 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
 
     <!--author-->
     <div layout="column" layout-align="center center" ng-repeat="salon in $ctrl.salons">
-        <div layout="row" flex >
+        <div layout="row" flex>
             <div class="page-delimiter" flex>
-                <div class="fit-screen-wrap invers header">                  
+                <div class="fit-screen-wrap invers header">
                     <div class="md-display-1"> Адреса салону {{::salon.address}}</div>
-                     <div class="md-title md-padding"> {{::salon.description}}</div>
+                    <div class="md-title md-padding"> {{::salon.description}}</div>
                 </div>
 
             </div>
         </div>
-       
+
         <div class="course-bg " layout-align="center center" flex
              ng-repeat="contact in ::salon.contacts track by $index">
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
@@ -33,10 +33,10 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
                 <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
                 >
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media " 
+                        <div class="card-media "
                              flex="50"><img ng-src="{{::contact.photo.url}}" class="md-card-image "/>
                         </div>
-                        <div class="card-desc " 
+                        <div class="card-desc "
                              flex layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text layout-align="space-around center">
@@ -51,9 +51,9 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
                         </div>
                     </md-card-content>
                 </md-card>
-                <md-card id="trigger-right" ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
+                <md-card ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-desc " 
+                        <div class="card-desc "
                              flex layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text layout-align="space-around center">
@@ -66,16 +66,16 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
                             </md-card-title>
 
                         </div>
-                        <div class="card-media " 
+                        <div class="card-media "
                              flex="50"><img ng-src="{{::contact.photo.url}}" class="md-card-image"/></div>
                     </md-card-content>
                 </md-card>
                 <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media " 
+                        <div class="card-media "
                              flex="50"><img ng-src="{{::contact.photo.url}}" class="md-card-image "/>
                         </div>
-                        <div class="card-desc " 
+                        <div class="card-desc "
                              flex layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text layout-align="space-around center">
@@ -93,7 +93,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
             </div>
 
             <div hide-gt-xs="true" layout="row" layout-align="center center">
-                <div class="overlay-bg trigger-right"></div>
+
                 <md-card md-whiteframe="8">
                     <md-card-content layout="column">
                         <div class="card-media "><img ng-src="{{::contact.photo.url}}" class="md-card-image"/></div>
@@ -110,79 +110,87 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
 
                 </md-card>
             </div>
-            
-            
+
+
         </div>
-         <ui-gmap-google-map ng-if="$ctrl.showMap && salon.latitude && salon.longitude" id="map"
-                            center='{ latitude: salon.latitude, longitude: salon.longitude}' zoom='$ctrl.map.zoom'>
-            <ui-gmap-marker coords="{ latitude: salon.latitude, longitude: salon.longitude}" idkey="$index">
-              
-            </ui-gmap-marker>
-            </ui-gmap-markers>
-        </ui-gmap-google-map>
-         <div flex="100" class="courses-details" layout="row" layout-align="center center"
-         >
-        <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
-            <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6"  ng-repeat="photo in ::salon.photos track by $index"
-                         class="md-margin "
-                         flex-gt-sm="22"
-                         flex-gt-xs="46" flex-xs="80"
-                         ng-click="::$ctrl.showMediaObserver(salon.photos, $index)">                   
-                        <img ng-src="{{::photo.url}}" class="md-card-image">                 
-                    <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                        <span class="  md-margin">{{::photo.name}}</span>
-                    </md-card-content>
-            </div>
+
+        <div layout="row" layout-align="center center">
+
+            <ui-gmap-google-map ng-if="$ctrl.showMap && salon.latitude && salon.longitude" id="map"
+                                center='{ latitude: salon.latitude, longitude: salon.longitude}'
+                                zoom='$ctrl.map.zoom'>
+                <ui-gmap-marker coords="{ latitude: salon.latitude, longitude: salon.longitude}" idkey="$index">
+
+                </ui-gmap-marker>
+                </ui-gmap-markers>
+            </ui-gmap-google-map>
         </div>
-    </div>
-    <div class="courses-details" layout="row" flex layout-align="center center" ng-if="salon.videos.length>0">
-        <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
-            <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
-                <md-card md-whiteframe="6" class="  courses-videos"
-                         ng-repeat="video in ::salon.videos track by $index"
-                         flex>
-                    <div flex class="embed-responsive embed-responsive-16by9">
-                        <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
-                                       video-id="::video.url"></youtube-video>
-                    </div>
-                    <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                        <span class="  md-margin">{{::video.name}}</span>
-                    </md-card-content>
-                </md-card>
+
+
+        <div class="courses-details" layout="row" layout-align="center center">
+            <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
+                <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+                    <md-card md-whiteframe="6" ng-repeat="photo in ::salon.photos track by $index"
+                             class="md-margin "
+                             flex-gt-sm="22"
+                             flex-gt-xs="46" flex-xs="80"
+                             ng-click="::$ctrl.showMediaObserver(salon.photos, $index)">
+                        <img ng-src="{{::photo.url}}" class="md-card-image">
+                        <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
+                            <span class="  md-margin">{{::photo.name}}</span>
+                        </md-card-content>
+                    </md-card>
+                </div>
             </div>
         </div>
 
-    </div>
+        <div class="courses-details" layout="row" flex layout-align="center center" ng-if="salon.videos.length>0">
+            <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
+                <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
+                    <md-card md-whiteframe="6" class="  courses-videos"
+                             ng-repeat="video in ::salon.videos track by $index"
+                             flex>
+                        <div flex class="embed-responsive embed-responsive-16by9">
+                            <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
+                                           video-id="::video.url"></youtube-video>
+                        </div>
+                        <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
+                            <span class="  md-margin">{{::video.name}}</span>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>`;
 
 export class SalonContactsComponentController {
 
     static $inject = [ContactResourceName, '$rootScope', SalonResourceName, "$scope",
-        MediaObserverFactoryName, 'constants', 'smoothScroll',SeoPageResourceName,"$q"];
+        MediaObserverFactoryName, 'constants', 'smoothScroll', SeoPageResourceName, "$q"];
 
     showAnimation: boolean;
     showMap: boolean;
     contacts: IContact[];
     salons: ISalon[];
     map: any;
-    socialParams:any;
+    socialParams: any;
     markerReadySEO: string;
-    seo:any;
+    seo: any;
 
     constructor(private contactResource: IContactResource,
                 private $rootScope: IRootScope,
                 private salonResource: ISalonResource, private $scope: ISchedulerScope,
                 private mediaObserver: IMediaObserverFactory,
-                private constants: IConstants, private smoothScroll,private SeoPageResource:ISeoPageResource, private $q) {
+                private constants: IConstants, private smoothScroll, private SeoPageResource: ISeoPageResource, private $q) {
 
 
     }
 
     setSocialParams(photo) {
         this.$rootScope.socialParams.host = this.constants.host;
-        this.$rootScope.socialParams.target = this.constants.host  +SalonContactsComponentUrl;
+        this.$rootScope.socialParams.target = this.constants.host + SalonContactsComponentUrl;
         this.$rootScope.socialParams.image = this.constants.host + photo.url;
         this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
     }

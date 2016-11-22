@@ -49,8 +49,11 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                         <div class="date-block md-margin " ng-class="{'date-block-disabled':day.program=='зачинено'}"
                               layout="column"
                              layout-align=" center center">
-                            <div class=" md-headline">{{ ::day.name}}</div>
-                            <div class="md-subhead  ">{{::day.program}}</div>
+                            <div hide show-gt-sm='true' class=" md-headline">{{ ::day.name}}</div>
+                             <div show-sm='true' class=" md-title">{{ ::day.short}}</div>
+                             
+                            <div hide show-gt-sm='true' class="md-subhead  ">{{::day.program}}</div>
+                            <div show-sm='true' class="md-caption  ">{{::day.program}}</div>
                         </div>
                     </div>
                 </div>
@@ -228,25 +231,32 @@ export class SalonHomeComponentController {
     days = [
         {
             name: "ПОНЕДІЛОК",
+            short:"ПН",
             program: '10:00 - 19:00',
         },
         {
             name: "ВІВТОРОК",
+            short:"ВТ",
             program: '10:00 - 19:00',
         }, {
             name: "СЕРЕДА",
+            short:"СР",
             program: '10:00 - 19:00',
         }, {
             name: "ЧЕТВЕР",
+            short:"ЧТ",
             program: '10:00 - 19:00',
         }, {
             name: "П`ЯТНИЦЯ",
+            short:"ПТ",
             program: '10:00 - 19:00',
         }, {
             name: "СУБОТА",
+            short:"СБ",
             program: 'зачинено',
         }, {
             name: "НЕДІЛЯ",
+            short:"НД",
             program: 'зачинено',
         }];
     categories: any;

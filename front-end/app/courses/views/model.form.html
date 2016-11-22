@@ -12,7 +12,7 @@
     <form name="orderForm" class="md-padding  pop-form" novalidate flex layout="column" ng-submit="::vm.submitModel(orderForm)">
         <md-dialog-content>
             <md-dialog-content-body>
-                <md-input-container class="md-block">
+                <md-input-container id="modelName" class="md-block">
                     <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
                     <label for="name">Як до вас звертатися?</label>
                     <input id="name" ng-model="vm.newModel.name" type="text" name="name"required>

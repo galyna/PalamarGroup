@@ -12,7 +12,7 @@
     <form name="orderForm" class="md-padding pop-form" novalidate flex ng-submit="::vm.submitOrder(orderForm)">
         <md-dialog-content>
             <md-dialog-content-body>
-                <md-input-container class="md-block">
+                <md-input-container id="orderName" class="md-block">
                     <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
                     <label for="name">Як до вас звертатися?</label>
                     <input id="name" ng-model="vm.order.name" type="text" name="name" required>
@@ -38,7 +38,7 @@
                     <label for="comment">Додаткова інформація</label>
                     <textarea  id="comment" ng-model="vm.order.comment"  name="comment"></textarea>
                 </md-input-container>
-                    <p class=" md-headline">Після запису на модуль з Вами звяжеться координатор для узгодження деталей</p>
+                <p class=" md-headline">Після запису на модуль з Вами звяжеться координатор для узгодження деталей</p>
             </md-dialog-content-body>
         </md-dialog-content>
         <md-dialog-actions class="md-padding" layout="row" layout-align-xs="center center" >

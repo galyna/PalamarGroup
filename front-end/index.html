@@ -14,7 +14,7 @@
     <meta name="keywords" lang="ru" content="{{$root.seo.keywords_ru}}t">
 
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta name="MobileOptimized" content="320"/>
     <meta name="HandheldFriendly" content="true"/>
     <meta name="fragment" content="!" />
@@ -34,24 +34,21 @@
     </script>
 </head>
 
-<body ng-cloak layout="column">
+<body ng-cloak >
 <div id="loading" ng-if="$root.loading" layout="row" layout-align="center center">
     <img class="logo-img md-padding" src="../content/images/logo/palamar_logo.png"/>
 </div>
 <pg-menu></pg-menu>
 
 <!--header-->
-<pg-header ng-if="::!$root.isAdminZone()" ></pg-header>
+<pg-header class="page-header" ng-if="::!$root.isAdminZone()" ></pg-header>
 
 
-<div class="page-container description-container">
-    <div class="fit-screen-wrap">
+<div class="page-container">
         <ng-view id="mainContent" flex ng-if="::!$root.isAdminZone();"></ng-view>
-    </div>
-
 </div>
 <!--footer-->
-<pg-footer ng-if="::!$root.isAdminZone()" ></pg-footer>
+<pg-footer class="page-footer " ng-if="::!$root.isAdminZone()" ></pg-footer>
 
 </body>
 </html>

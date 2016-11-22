@@ -129,12 +129,12 @@ export class MenuComponentController {
                 targetEvent: $event,
                 fullscreen: true
             });
-            menuBtn.css('z-index', 81);
+          menuBtn.css('z-index', 81);
             menuBtn.toggleClass('open');
         } else {
-
-            this.mdDialog.hide();
             menuBtn.css('z-index', 80);
+            this.mdDialog.hide();
+
             menuBtn.toggleClass('open');
         }
 

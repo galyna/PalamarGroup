@@ -147,18 +147,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
     <form name="orderForm" class="md-padding pop-form" novalidate flex ng-submit="::vm.save(orderForm)">
         <md-dialog-content>
             <md-dialog-content-body>
-                <div class=" md-block" layout="row" layout-align="center">
-                    <div class="card-media-product" layout="column" layout-align="center center">
-                        <img ng-src="{{::vm.product.photo.url}}"/>
-                        <div class="card-desc md-padding" layout="column" layout-align="center center">
-                            <div flex class="md-headline">{{::vm.product.name}}</div>
-                            <div class="md-subhead">Ціна {{::vm.product.price}} грн.</div>
-                            <div flex class="md-subhead" layout="row" layout-align="center center">
-                                {{::vm.product.description}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
                 <md-input-container class="md-block">
                     <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
                     <label for="name">Як до вас звертатися?</label>
@@ -175,12 +164,24 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                     <label for="phone">Телефон</label>
                     <input id="phone" ng-model="vm.productsOrder.phone" type="text" name="phone">
                 </md-input-container>
-                <md-input-container class="md-block">
+                <md-input-container >
                     <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
                     <label for="comment">Додаткова інформація</label>
                     <textarea id="comment" ng-model="vm.productsOrder.comment" name="comment"></textarea>
+                     <div class=" md-block" layout="row" layout-align="center">
+                    <div class="card-media-product md-margin" layout="column" layout-align="center center">
+                        <img ng-src="{{::vm.product.photo.url}}"/>
+                        <div class="card-desc md-padding" layout="column" layout-align="center center">
+                            <div flex class="md-headline">{{::vm.product.name}}</div>
+                            <div class="md-subhead">Ціна {{::vm.product.price}} грн.</div>
+                            <div flex class="md-subhead" layout="row" layout-align="center center">
+                                {{::vm.product.description}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </md-input-container>
-                <p class=" md-headline">Після замовлення з Вами зв'яжеться адміністратор для узгодження деталей</p>
+              
             </md-dialog-content-body>
         </md-dialog-content>
         <md-dialog-actions class="md-padding" layout="row" layout-align-xs="center center">
@@ -216,7 +217,8 @@ class ProductOrderDialogController {
 
 export class ProductsComponentController {
 
-    static $inject = ["$log", '$rootScope', '$mdDialog', ProductOrderResourceName, ProductResourceName, 'smoothScroll',SeoPageResourceName,"$q"];
+    static $inject = ["$log", '$rootScope', '$mdDialog', ProductOrderResourceName, ProductResourceName,
+        'smoothScroll',SeoPageResourceName,"$q",'$mdMedia'];
 
     products: IProduct[];
     productsOrder: IProductOrder;
@@ -227,7 +229,8 @@ export class ProductsComponentController {
     constructor(private $log: ng.ILogService, private $rootScope: IRootScope,
                 private $mdDialog: ng.material.IDialogService,
                 private ProductOrderResource: IProductOrderResource,
-                private ProductResource: IProductResource, private smoothScroll,private SeoPageResource:ISeoPageResource, private $q) {
+                private ProductResource: IProductResource, private smoothScroll,
+                private SeoPageResource:ISeoPageResource, private $q,private $mdMedia) {
 
         this.showAnimation = $rootScope.isBigSize;
         this.productsOrder = new this.ProductOrderResource();
@@ -259,7 +262,8 @@ export class ProductsComponentController {
             bindToController: true,
             controller: ProductOrderDialogController,
             controllerAs: 'vm',
-            parent: angular.element(document.body),
+            parent: angular.element(document.querySelector('#mainContent')),
+            fullscreen: this.$mdMedia('(max-width: 1000px)'),
             locals: {
                 productsOrder: this.productsOrder,
                 product: product

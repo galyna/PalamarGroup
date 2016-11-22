@@ -108,6 +108,16 @@
       width: 170px;
       text-align: center;
 
+      @media (max-width: $layout-breakpoint-xs) {
+        height: 90px;
+        width: 90px;
+      }
+
+      @media (max-width: $layout-breakpoint-sm) {
+        height: 110px;
+        width: 110px;
+      }
+
       .date-text {
         left: 20%;
         position: absolute;
