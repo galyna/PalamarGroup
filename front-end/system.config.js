@@ -10,8 +10,8 @@ System.config({
 
     },
     paths: {
-        "systemjs": "system.js",
-        'system-polyfills': 'system-polyfills.js',
+        "systemjs": "node_modules/systemjs/dist/system.js",
+        'system-polyfills': 'node_modules/systemjs/dist/system-polyfills.js',
         'angular': 'node_modules/angular/angular.js',
         'angular-sanitize': 'node_modules/angular-sanitize/angular-sanitize.js',
         'angular-route': 'node_modules/angular-route/angular-route.js',
@@ -36,7 +36,8 @@ System.config({
     },
 
     map: {
-        'youtube-iframe-api': 'https://www.youtube.com/iframe_api'
+        'youtube-iframe-api': 'https://www.youtube.com/iframe_api',
+        format: "global"
     },
     meta: {
         'uiGmapgoogle-maps': {

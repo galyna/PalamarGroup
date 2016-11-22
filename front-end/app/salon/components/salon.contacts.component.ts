@@ -14,9 +14,9 @@ import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.re
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-contacts description-container" layout="column">
 
-    <!--author-->
     <div layout="column" layout-align="center center" ng-repeat="salon in $ctrl.salons">
-        <div layout="row" flex>
+        
+        <div layout="row"  >
             <div class="page-delimiter" flex>
                 <div class="fit-screen-wrap invers header">
                     <div class="md-display-1"> Адреса салону {{::salon.address}}</div>
@@ -26,12 +26,10 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
             </div>
         </div>
 
-        <div class="course-bg " layout-align="center center" flex
-             ng-repeat="contact in ::salon.contacts track by $index">
+        <div ng-repeat="contact in ::salon.contacts track by $index">
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
-                <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
-                >
+                <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-media "
                              flex="50"><img ng-src="{{::contact.photo.url}}" class="md-card-image "/>
@@ -114,7 +112,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
 
         </div>
 
-        <div layout="row" layout-align="center center">
+        <div layout="row" class=" md-padding">
 
             <ui-gmap-google-map ng-if="$ctrl.showMap && salon.latitude && salon.longitude" id="map"
                                 center='{ latitude: salon.latitude, longitude: salon.longitude}'
@@ -126,8 +124,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
             </ui-gmap-google-map>
         </div>
 
-
-        <div class="courses-details" layout="row" layout-align="center center">
+        <div class="courses-details" layout="row" layout-align="center center" flex>
             <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
                 <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                     <md-card md-whiteframe="6" ng-repeat="photo in ::salon.photos track by $index"
@@ -144,9 +141,9 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
             </div>
         </div>
 
-        <div class="courses-details" layout="row" flex layout-align="center center" ng-if="salon.videos.length>0">
-            <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
-                <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
+        <div class=" md-padding"  >
+            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
+                <div layout="column" layout-margin  layout-align="center center" class="embed-responsive-container" >
                     <md-card md-whiteframe="6" class="  courses-videos"
                              ng-repeat="video in ::salon.videos track by $index"
                              flex>
@@ -162,6 +159,9 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
             </div>
 
         </div>
+        
+        
+        
     </div>
 </div>`;
 

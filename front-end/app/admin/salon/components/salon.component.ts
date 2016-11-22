@@ -136,7 +136,7 @@ const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveFor
                                     <input id="ord" ng-model="item.order" type="number"/>
                                 </md-input-container>
                                 <md-button class="  md-raised"
-                                           ng-click="$ctrl.deleteFromList($ctrl.master.videos,item)">
+                                           ng-click="$ctrl.deleteFromList($ctrl.salon.videos,item)">
                                     Видалити
                                 </md-button>
                             </div>
