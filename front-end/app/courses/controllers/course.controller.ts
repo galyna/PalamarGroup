@@ -128,7 +128,7 @@ export class CourseController {
             controller: CourseController.componentName,
             controllerAs: 'vm',
             parent: angular.element(document.querySelector('#mainContent')),
-            fullscreen: this.$mdMedia('(max-width: 1000px)'),
+            fullscreen: this.$mdMedia('(max-width: 1360px)'),
         });
     }
 
@@ -206,7 +206,7 @@ export class CourseController {
             controller: CourseController.componentName,
             controllerAs: 'vm',
             parent: angular.element(document.querySelector('#mainContent')),
-            fullscreen: this.$mdMedia('(max-width: 600px)'),
+            fullscreen: this.$mdMedia('(max-width: 1000px)'),
         });
 
     }

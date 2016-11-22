@@ -402,9 +402,7 @@ md-card.md-default-theme, md-card {
   position: relative;
   height: 60px;
 
-  @media (min-width: 1200px) and (max-height: 800px) {
-    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_1200.jpg");
-  }
+
   .order-date-picker {
     position: absolute;
     height: 100%;
@@ -619,8 +617,8 @@ md-card.md-default-theme, md-card {
   }
 
  md-datepicker .md-datepicker-input-container {
-  border: none;
-  width: 230px;
+
+   width: calc(100% - 22px);
   left: -35px;
 }
 
