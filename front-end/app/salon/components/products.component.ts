@@ -147,7 +147,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
     <form name="orderForm" class="md-padding pop-form" novalidate flex ng-submit="::vm.save(orderForm)">
         <md-dialog-content>
             <md-dialog-content-body>
-               
+
                 <md-input-container class="md-block">
                     <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
                     <label for="name">Як до вас звертатися?</label>
@@ -164,24 +164,26 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                     <label for="phone">Телефон</label>
                     <input id="phone" ng-model="vm.productsOrder.phone" type="text" name="phone">
                 </md-input-container>
-                <md-input-container >
+                <md-input-container class="md-block" >
                     <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
                     <label for="comment">Додаткова інформація</label>
                     <textarea id="comment" ng-model="vm.productsOrder.comment" name="comment"></textarea>
-                     <div class=" md-block" layout="row" layout-align="center">
-                    <div class="card-media-product md-margin" layout="column" layout-align="center center">
-                        <img ng-src="{{::vm.product.photo.url}}"/>
-                        <div class="card-desc md-padding" layout="column" layout-align="center center">
-                            <div flex class="md-headline">{{::vm.product.name}}</div>
-                            <div class="md-subhead">Ціна {{::vm.product.price}} грн.</div>
-                            <div flex class="md-subhead" layout="row" layout-align="center center">
-                                {{::vm.product.description}}
+                     </md-input-container>
+                     
+                    <div class=" md-block" layout="row" layout-align="center">
+                        <div class="card-media-product md-margin" layout="column" layout-align="center center">
+                            <img ng-src="{{::vm.product.photo.url}}"/>
+                            <div class="card-desc md-padding" layout="column" layout-align="center center">
+                                <div flex class="md-headline">{{::vm.product.name}}</div>
+                                <div class="md-subhead">Ціна {{::vm.product.price}} грн.</div>
+                                <div flex class="md-subhead" layout="row" layout-align="center center">
+                                    {{::vm.product.description}}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                </md-input-container>
-              
+               
+
             </md-dialog-content-body>
         </md-dialog-content>
         <md-dialog-actions class="md-padding" layout="row" layout-align-xs="center center">
