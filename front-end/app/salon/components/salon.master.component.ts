@@ -60,7 +60,7 @@ const template = `<div class=" description-container" ng-attr-id="{{ $ctrl.marke
                             </div>
                         </div>
 
-                        <div flex="20" hide show-sm="true"
+                        <div flex="20"  show-sm="true"
                              layout="row" layout-align="center center">
                             <md-button class=" md-margin near-master xs-selected md-display-1 md-raised "
                                        aria-label="Details"
