@@ -608,3 +608,27 @@ md-card.md-default-theme, md-card {
 .capitalize {
   text-transform: uppercase;
 }
+
+.xs-master-calendar{
+
+
+  ._md-datepicker-floating-label._md-datepicker-has-calendar-icon > label:not(.md-no-float):not(.md-container-ignore) {
+    right: 18px;
+    left: 38px;
+    width: calc(100% - 84px);
+  }
+
+ md-datepicker .md-datepicker-input-container {
+  border: none;
+  width: 230px;
+  left: -35px;
+}
+
+ md-datepicker {
+  overflow: visible;
+}
+ md-datepicker .md-datepicker-button {
+  float: left;
+  left: -23px;
+  margin-top: -2.5px;
+}}

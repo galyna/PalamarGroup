@@ -114,8 +114,8 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                         <input id="phone" ng-model="vm.appointment.phone" type="text" name="phone">
                     </md-input-container>
 
-                    <md-input-container layout="row" flex layout-align="center center" style="padding0;margin: 0px;">
-                        <label for="time">Дата</label>
+                    <md-input-container layout="row" class="xs-master-calendar" flex layout-align="center center" style="padding0;margin: 0px;">
+                        <label style='left:38px' for="time">Дата</label>
                        <md-datepicker md-open-on-focus class="order-date-picker" md-min-date="vm.startDate"
                                            placeholder="Дата" flex ng-model="vm.appointment.date"
                                            ng-change="vm.onCalendarChanged()"
