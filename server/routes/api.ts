@@ -36,7 +36,6 @@ import {salonClientApi, salonClientOptions} from "./salon.client.endpoint";
 import {tasksOptions, tasksApi} from './tasks.endpoint';
 import {appointmentOptions} from './appointment.options';
 
-import {botHandler} from '../services/snapshots.service';
 import {SeoPage} from "../models/seo.page";
 
 let api = express.Router();
@@ -105,7 +104,98 @@ api.use('/email', emailEndpoint);
 api.use('/stubs', (req: any, res, next) => {
 
     try {
-        botHandler.getpages().forEach((p)=> {
+        var pages = [
+            {
+                url: "/",
+                description: "",
+                name: "home",
+                text: "Головна",
+                title: "PALAMAR GROUP beauty parlour & academy Головна сторінка"
+            },
+            {
+                url: "/beauty-parlour/services",
+                description: "",
+                name: "services",
+                text: "Послуги",
+                title: "PALAMAR GROUP beauty parlour & academy Послуги"
+            },
+            {
+                url: "/beauty-parlour/masters",
+                description: "",
+                name: "masters",
+                text: "Майстри",
+                title: "PALAMAR GROUP beauty parlour & academy Майстри"
+            },
+            {
+                url: "/beauty-parlour/transformations",
+                description: "",
+                name: "transforms",
+                text: "Перевтіленні",
+                title: "PALAMAR GROUP beauty parlour & academy Перевтілення"
+            },
+            {
+                url: "/beauty-parlour/products",
+                description: "",
+                name: "products",
+                text: "Продікція",
+                title: "PALAMAR GROUP beauty parlour & academy Продікція"
+            },
+            {
+                url: "/beauty-parlour/contacts",
+                description: "",
+                name: "salon.contacts",
+                text: "Контакти салону",
+                title: "PALAMAR GROUP beauty parlour & academy Контакти салону"
+            },
+            {
+                url: "/services/hairdressing",
+                description: "",
+                name: "hairdressing",
+                text: "Перукарські послуги",
+                title: "PALAMAR GROUP beauty parlour & academy Перукарські послуги"
+            },
+            {
+                url: "/services/nail-aesthetics",
+                description: "",
+                name: "nail-aesthetics",
+                text: "Нігтьва естетика",
+                title: "PALAMAR GROUP beauty parlour & academy Нігтьва естетика"
+            },
+            {
+                url: "/services/makeup",
+                description: "",
+                name: "makeup",
+                text: "Візаж",
+                title: "PALAMAR GROUP beauty parlour & academy Візаж"
+            },
+            {
+                url: "/academy",
+                description: "",
+                name: "academy",
+                text: "Академія курси",
+                title: "PALAMAR GROUP beauty parlour & academy Програма навчання"
+            },
+            {
+                url: "/academy/calendar",
+                description: "",
+                name: "calendar",
+                text: "Академія календар",
+                title: "PALAMAR GROUP beauty parlour & academy Календар навчання"
+            },
+            {
+                url: "/academy/videos",
+                description: "",
+                name: "video",
+                text: "Академія відео",
+                title: "PALAMAR GROUP beauty parlour & academy Академія Відео"
+            },
+            {
+                url: "/academy/contacts",
+                description: "",
+                name: "academy.contacts",
+                text: "Академія контакти",
+                title: "PALAMAR GROUP beauty parlour & academy Академія контакти"
+            }].forEach((p)=> {
             p.description = "Студія краси та навчальний центр для працівників салонів краси. м. Львів"
             SeoPage.create(p);
         })
@@ -116,17 +206,6 @@ api.use('/stubs', (req: any, res, next) => {
     }
 
 });
-api.use('/snapshots', (req: any, res, next) => {
-    try {
-        botHandler.saveSitemap( res, next);
-    } catch (err) {
-        return next(err);
-    }
-
-});
-
-
-
 
 api.post('/authenticate', (req, res, next) => {
 

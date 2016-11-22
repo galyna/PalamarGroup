@@ -5,12 +5,12 @@ import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
 import * as slash from 'express-slash';
 let multipart = require('connect-multiparty');
-import {botHandler} from './services/snapshots.service';
+
 import {config} from "./config";
 import "./models/user";
 import "./auth/passport";
 import {setupRouter} from './routes/setup.endpoint';
-
+let isBot = require('isbot');
 import api from './routes/api';
 
 
@@ -68,7 +68,11 @@ app.use('/sitemap.xml', function (req, res, next) {
 });
 
 app.use('/', function (req, res, next) {
-    botHandler.handleBots(req, res, next);
+    if (isBot(req.headers['user-agent'])) {
+        res.sendFile(path.resolve('./snapshots', req.url.replace(/^\/|\/$/g, ''), 'index.html'));
+    } else {
+        next();
+    }
 }, express.static(pathes.all));
 
 app.get('/*', function (req, res) {
@@ -125,7 +129,6 @@ app.listen(port, 'localhost', ()=> {
     console.log(`environment: ${env}`);
 });
 
-//start schrduleed making of smapshots
-botHandler.startMakeSnapshots()
+
 
 export default app;

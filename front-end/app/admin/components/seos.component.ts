@@ -1,8 +1,5 @@
 import {ISeoPageResource, SeoPageResourceName, ISeoPage} from "../../resources/seo.page.resource";
-const template = `<md-button  ng-click="$ctrl.generateSnapshots()"
-           class="md-primary "  aria-label="new">
-    Генерувати seo
-</md-button>
+const template = `
 <md-toolbar md-scroll-shrink ng-if="true">
     <div class="md-toolbar-tools">
         <h1>Сторінки</h1>
@@ -126,41 +123,7 @@ export class SeosComponentController {
 
     }
 
-    showRunedDialog() {
-        let confirm = this.$mdDialog.alert()
-            .title("Запущено генерацію сторінок ")
-            .textContent(`Будь ласка зачекайте кілька хвилин, щоб процес завершився.`)
-            .ariaLabel("дочекайтесь")
-            .ok('OK')
-        return this.$mdDialog.show(confirm);
 
-    }
-
-    showResultDialog(count) {
-        let confirm = this.$mdDialog.alert()
-            .title("Запущено генерацію сторінок ")
-            .textContent(`Генерація закінчилась успішно Згенеровано ` + count.length + ` сторінок`)
-            .ariaLabel("дочекайтесь")
-            .ok('OK')
-        return this.$mdDialog.show(confirm);
-
-    }
-
-    generateSnapshots() {
-        if (!this.ganerationRuned) {
-            this.ganerationRuned = true;
-
-            this.SeoPageResource.getSnapshots().$promise.then((pages)=> {
-                this.ganerationRuned = false;
-                this.showResultDialog(pages)
-            }).catch(()=> {
-                this.ganerationRuned = false;
-
-            });;
-        } else {
-            this.showRunedDialog()
-        }
-    }
 
 }
 
