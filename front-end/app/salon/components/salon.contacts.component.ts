@@ -124,7 +124,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
             </ui-gmap-google-map>
         </div>
 
-        <div class="courses-details" layout="row" layout-align="center center" flex>
+        <div class="courses-details" layout="row" layout-align="center center" flex ng-if="salon.photos.length>0">
             <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
                 <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                     <md-card md-whiteframe="6" ng-repeat="photo in ::salon.photos track by $index"
@@ -141,7 +141,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
             </div>
         </div>
 
-        <div class=" md-padding"  >
+        <div class=" md-padding" ng-if="salon.videos.length>0" >
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
                 <div layout="column" layout-margin  layout-align="center center" class="embed-responsive-container" >
                     <md-card md-whiteframe="6" class="  courses-videos"
