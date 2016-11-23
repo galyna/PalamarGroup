@@ -109,7 +109,8 @@ export class MenuComponentController {
             if(url==SalonHomeComponentUrl){
             this.scrollToMain();}
         });
-        ;
+        var menuBtn = angular.element(document.getElementById('menu-container'));
+        menuBtn.css('z-index', 80);
         angular.element(document.querySelector(menuBtnSelector)).toggleClass('open');
 
     }
