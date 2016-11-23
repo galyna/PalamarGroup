@@ -96,7 +96,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap    header-super">
             <div show-xs hide-gt-xs='true' class="md-display-1"> ПЕРЕВТІЛЕННЯ</div>
-                <div hide-xs class="md-display-2"> ПЕРЕВТІЛЕННЯ</div>
+                <div show-xs="true" class="md-headline"> ПЕРЕВТІЛЕННЯ</div>
             </div>
             
             <div class="overlay-trans ">
@@ -151,7 +151,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap  header-super">
              <div show-xs hide-gt-xs='true' class="md-display-1"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
-                <div hide-xs class="md-display-2"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
+                <div hide-xs class="md-headline""> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
                 
             </div>
             <div class="overlay-days">

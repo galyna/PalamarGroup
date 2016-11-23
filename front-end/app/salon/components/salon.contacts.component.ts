@@ -112,7 +112,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
 
         </div>
 
-        <div layout="row" class=" md-padding">
+        <div layout="row" >
 
             <ui-gmap-google-map ng-if="$ctrl.showMap && salon.latitude && salon.longitude" id="map"
                                 center='{ latitude: salon.latitude, longitude: salon.longitude}'
@@ -141,9 +141,9 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
             </div>
         </div>
 
-        <div class=" md-padding" ng-if="salon.videos.length>0" >
-            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
-                <div layout="column" layout-margin  layout-align="center center" class="embed-responsive-container" >
+        <div ng-if="salon.videos.length>0" flex  >
+            <div flex="100" flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
+                <div layout="column"   layout-align="center center" class="embed-responsive-container" >
                     <md-card md-whiteframe="6" class="  courses-videos"
                              ng-repeat="video in ::salon.videos track by $index"
                              flex>

@@ -9,7 +9,8 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
     <div layout="row" flex>
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
-                <div class="md-display-2"> ПЕРЕВТІЛЕННЯ</div>
+                 <div show-xs hide-gt-xs='true' class="md-display-1"> ПЕРЕВТІЛЕННЯ</div>
+                <div show-xs="true" class="md-headline"> ПЕРЕВТІЛЕННЯ</div>
             </div>
 
         </div>
