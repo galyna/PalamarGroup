@@ -18,7 +18,7 @@ body {
   font-size: 14px;
   font-family: sans-serif;
   font-weight: lighter;
-height: 100%;
+  height: 100%;
   @media (min-width: $layout-breakpoint-md) {
     font-size: 13px;
 
@@ -44,8 +44,6 @@ html {
 * {
   box-sizing: border-box;
 }
-
-
 
 .overlay {
   position: absolute;
@@ -84,9 +82,6 @@ html {
   -o-background-attachment: scroll;
 
 }
-
-
-
 
 ///common card
 md-card.md-default-theme, md-card {
@@ -138,19 +133,18 @@ md-card.md-default-theme, md-card {
   display: none !important;
 }
 
-.embed-responsive-container{
-  min-height:400px;;
+.embed-responsive-container {
+  min-height: 400px;;
   min-width: 300px;
 
-
   @media (max-width: $layout-breakpoint-xs) {
-    min-height:400px;
-   // padding: 8px;
+    min-height: 400px;
+    // padding: 8px;
     width: calc(100vw - 16px);
   }
 
   @media (min-width: $layout-breakpoint-sm) {
-    min-height:500px;;
+    min-height: 500px;;
     min-width: 600px;
     width: 80vw;
   }
@@ -222,157 +216,152 @@ md-card.md-default-theme, md-card {
 
   }
 }
-  .overlay-days {
-    @extend .overlay;
 
+.overlay-days {
+  @extend .overlay;
 
-    @media (min-height: 300px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_full.jpg");
-    }
-
-    @media (max-height: 1286px) and (max-width: 1923px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1923_1282.jpg");
-    }
-
-    @media (max-height: 1026px) and (max-width: 1539px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1539_1026.jpg");
-    }
-    @media (max-height: 802px) and (max-width: 1203px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1203_802.jpg") ;
-    }
-    @media (max-height: 642px) and (max-width: 963px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_963_642.jpg");
-    }
-
-    @media (max-height: 400px) and (max-width: 723px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_723_482.jpg");
-    }
-
+  @media (min-height: 300px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_full.jpg");
   }
 
-  .overlay-comments {
-    @extend .overlay;
-
-    @media (min-height: 300px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_full.jpg");
-    }
-
-    @media (max-height: 1286px) and (max-width: 1923px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1923_1282.jpg");
-    }
-
-    @media (max-height: 1024px) and (max-width: 1536px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1536_1024.jpg");
-    }
-
-    @media (max-height: 800px) and (max-width: 1200px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1200_800.jpg");
-    }
-
-    @media (max-height: 640px) and (max-width: 960px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_960_640.jpg");
-    }
-    @media (max-height: 400px) and (max-width: 720px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_720_480.jpg") ;
-    }
-
+  @media (max-height: 1286px) and (max-width: 1923px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1923_1282.jpg");
   }
 
-  .overlay-description {
-    @extend .overlay;
-
-
-    @media (min-width: 623px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_full.jpg");
-    }
-
-    @media (min-height: 1286px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_full.jpg") ;
-    }
-
-    @media (max-height: 1286px) and (max-width: 1923px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1923_1282.jpg") ;
-    }
-
-    @media (max-height: 1024px) and (max-width: 1536px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1539_1026.jpg");
-    }
-
-    @media (max-height: 800px) and (max-width: 1200px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1203_802.jpg");
-    }
-
-    @media (max-height: 640px) and (max-width: 960px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_963_642.jpg");
-    }
-    @media (max-height: 400px) and (max-width: 720px) {
-      background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_723_482.jpg");
-    }
-
+  @media (max-height: 1026px) and (max-width: 1539px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1539_1026.jpg");
+  }
+  @media (max-height: 802px) and (max-width: 1203px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1203_802.jpg");
+  }
+  @media (max-height: 642px) and (max-width: 963px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_963_642.jpg");
   }
 
-  .overlay-masters {
-    @extend .overlay;
-
-
-    @media (min-height: 686px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_full.jpg") ;
-    }
-    @media (max-height: 1667px) and (max-width: 2500px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_2500.jpg");
-    }
-    @media (max-height: 1333px) and (max-width: 2000px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_2000.jpg") ;
-    }
-
-    @media (max-height: 1026px) and (max-width: 1500px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618.jpg");
-    }
-
-    @media (max-height: 802px) and (max-width: 1200px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_1200.jpg") ;
-    }
-
-    @media (max-height: 642px) and (max-width: 963px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_963.jpg");
-    }
-
-    @media (max-height: 400px) and (max-width: 723px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_723_482.jpg");
-    }
-
+  @media (max-height: 400px) and (max-width: 723px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_723_482.jpg");
   }
 
-  .overlay-trans {
-    @extend .overlay;
+}
 
+.overlay-comments {
+  @extend .overlay;
 
-    @media (min-height: 100px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_full.jpg") ;
-    }
-    @media (max-height: 1667px) and (max-width: 2500px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_2500.jpg") ;
-    }
-
-    @media (max-height: 1280px) and (max-width: 1920px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_h.jpg");
-    }
-
-    @media (max-height: 1000px) and (max-width: 1500px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924.jpg");
-    }
-
-    @media (max-height: 802px) and (max-width: 1200px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_1200.jpg") ;
-    }
-
-    @media (max-height: 642px) and (max-width: 963px) {
-      background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_963.jpg");
-    }
-
+  @media (min-height: 300px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_full.jpg");
   }
 
+  @media (max-height: 1286px) and (max-width: 1923px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1923_1282.jpg");
+  }
 
+  @media (max-height: 1024px) and (max-width: 1536px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1536_1024.jpg");
+  }
+
+  @media (max-height: 800px) and (max-width: 1200px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1200_800.jpg");
+  }
+
+  @media (max-height: 640px) and (max-width: 960px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_960_640.jpg");
+  }
+  @media (max-height: 400px) and (max-width: 720px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_720_480.jpg");
+  }
+
+}
+
+.overlay-description {
+  @extend .overlay;
+
+  @media (min-width: 623px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_full.jpg");
+  }
+
+  @media (min-height: 1286px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_full.jpg");
+  }
+
+  @media (max-height: 1286px) and (max-width: 1923px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1923_1282.jpg");
+  }
+
+  @media (max-height: 1024px) and (max-width: 1536px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1539_1026.jpg");
+  }
+
+  @media (max-height: 800px) and (max-width: 1200px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1203_802.jpg");
+  }
+
+  @media (max-height: 640px) and (max-width: 960px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_963_642.jpg");
+  }
+  @media (max-height: 400px) and (max-width: 720px) {
+    background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_723_482.jpg");
+  }
+
+}
+
+.overlay-masters {
+  @extend .overlay;
+
+  @media (min-height: 686px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_full.jpg");
+  }
+  @media (max-height: 1667px) and (max-width: 2500px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_2500.jpg");
+  }
+  @media (max-height: 1333px) and (max-width: 2000px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_2000.jpg");
+  }
+
+  @media (max-height: 1026px) and (max-width: 1500px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618.jpg");
+  }
+
+  @media (max-height: 802px) and (max-width: 1200px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_1200.jpg");
+  }
+
+  @media (max-height: 642px) and (max-width: 963px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_963.jpg");
+  }
+
+  @media (max-height: 400px) and (max-width: 723px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_723_482.jpg");
+  }
+
+}
+
+.overlay-trans {
+  @extend .overlay;
+
+  @media (min-height: 100px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_full.jpg");
+  }
+  @media (max-height: 1667px) and (max-width: 2500px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_2500.jpg");
+  }
+
+  @media (max-height: 1280px) and (max-width: 1920px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_h.jpg");
+  }
+
+  @media (max-height: 1000px) and (max-width: 1500px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924.jpg");
+  }
+
+  @media (max-height: 802px) and (max-width: 1200px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_1200.jpg");
+  }
+
+  @media (max-height: 642px) and (max-width: 963px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_963.jpg");
+  }
+
+}
 
 .time-container {
   position: relative;
@@ -391,7 +380,6 @@ md-card.md-default-theme, md-card {
 .order-picker-container {
   position: relative;
   height: 60px;
-
 
   .order-date-picker {
     position: absolute;
@@ -441,7 +429,7 @@ md-card.md-default-theme, md-card {
     padding-right: 15px;
   }
   .add-left-margin {
-    margin-left:10px !important;
+    margin-left: 10px !important;
   }
 }
 
@@ -451,7 +439,7 @@ md-card.md-default-theme, md-card {
 
 @media (min-width: $layout-breakpoint-md) {
 
-  .md-card-image{
+  .md-card-image {
     transition: transform 0.3s;
     &:hover {
       transform: scale(1.1, 1.1);
@@ -597,8 +585,8 @@ md-card.md-default-theme, md-card {
   text-transform: uppercase;
 }
 
-.xs-master-calendar{
-overflow: hidden;
+.xs-master-calendar {
+  overflow: hidden;
 
   ._md-datepicker-floating-label._md-datepicker-has-calendar-icon > label:not(.md-no-float):not(.md-container-ignore) {
     right: 18px;
@@ -606,20 +594,21 @@ overflow: hidden;
     width: calc(100% - 84px);
   }
 
- md-datepicker .md-datepicker-input-container {
+  md-datepicker .md-datepicker-input-container {
 
-   width: calc(100% - 22px);
-  left: -35px;
-}
+    width: calc(100% - 22px);
+    left: -35px;
+  }
 
- md-datepicker {
-  overflow: visible;
+  md-datepicker {
+    overflow: visible;
+  }
+  md-datepicker .md-datepicker-button {
+    float: left;
+    left: -23px;
+    margin-top: -2.5px;
+  }
 }
- md-datepicker .md-datepicker-button {
-  float: left;
-  left: -23px;
-  margin-top: -2.5px;
-}}
 
 .md-datepicker-input-mask {
   display: none;

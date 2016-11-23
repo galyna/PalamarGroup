@@ -141,7 +141,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
             </div>
         </div>
 
-        <div ng-if="salon.videos.length>0" flex  >
+        <div ng-if="salon.videos.length>0" flex style="padding-bottom:16px;" >
             <div flex="100" flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
                 <div layout="column"   layout-align="center center" class="embed-responsive-container" >
                     <md-card md-whiteframe="6" class="  courses-videos"

@@ -8,7 +8,7 @@ button.md-button.md-fab.down-btn {
     margin: auto;
   }
   @extend .md-whiteframe-8dp;
-  @media (max-width: $layout-breakpoint-sm) {
+  @media (max-width: $layout-breakpoint-xs) {
     height: 30px;
     width: 37px;
     bottom: 10px;
