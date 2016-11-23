@@ -7,10 +7,10 @@ import {ISeoPageResource, SeoPageResourceName} from "../../resources/seo.page.re
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
     <div layout="row" flex>
-        <div class="page-delimiter" flex>
+        <div class="page-delimiter md-padding" flex>
             <div class="fit-screen-wrap invers header">
-                 <div show-xs hide-gt-xs='true' class="md-display-1"> ПЕРЕВТІЛЕННЯ</div>
-                <div show-xs="true" class="md-headline"> ПЕРЕВТІЛЕННЯ</div>
+                  <div hide show-gt-xs='true' class="md-display-1"> ПЕРЕВТІЛЕННЯ</div>
+                <div hide show-xs="true" class="md-headline"> ПЕРЕВТІЛЕННЯ</div>
             </div>
 
         </div>

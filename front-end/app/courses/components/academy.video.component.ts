@@ -7,9 +7,10 @@ import {SalonResourceName} from "../../resources/salon.resource";
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
     <div layout="row" flex>
-        <div class="page-delimiter" flex>
+        <div class="page-delimiter md-padding" flex>
             <div class="fit-screen-wrap invers header">
-                <div class="md-display-2"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
+                <div hide show-gt-xs='true' class="md-display-1"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
+                <div hide show-xs="true" class="md-headline""> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
             </div>
 
         </div>

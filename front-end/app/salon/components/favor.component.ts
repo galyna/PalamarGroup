@@ -89,8 +89,7 @@ const template = `<div class="courses description-container" ng-attr-id="{{ $ctr
                     </div>
                     <div layout="row" layout-align="center center" class="md-padding md-margin">
                         <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">{{::master.name}}</div>
-                        <div hide show-sm="true" flex="90" class="md-display-1">{{::master.name}}
-                        </div>
+                        <div hide show-sm="true" flex="90" class="md-headline capitalize">{{::master.name}}</div>
                     </div>
                     <md-button class="  md-display-1 md-raised  " aria-label="Details"
                                ng-click="::$ctrl.showMaster(master._id)">
@@ -117,7 +116,7 @@ const template = `<div class="courses description-container" ng-attr-id="{{ $ctr
                      layout-align=" space-around center" >
                     <md-card-title>
                         <md-card-title-text flex layout="column" layout-align=" space-around center">
-                            <div class="md-headline">{{::master.level.text}}</div>
+                            <div class="md-headline capitalize">{{::master.level.text}}</div>
                         </md-card-title-text>
                     </md-card-title>
                 </div>

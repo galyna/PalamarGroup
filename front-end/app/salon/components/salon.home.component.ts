@@ -93,10 +93,10 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
     </div>
 
     <div layout="row" flex ng-if="$ctrl.transforms.length>0 ">
-        <div class="page-delimiter" flex>
+        <div class="page-delimiter md-padding" flex>
             <div class="fit-screen-wrap    header-super">
-            <div show-xs hide-gt-xs='true' class="md-display-1"> ПЕРЕВТІЛЕННЯ</div>
-                <div show-xs="true" class="md-headline"> ПЕРЕВТІЛЕННЯ</div>
+            <div hide show-gt-xs='true' class="md-display-1"> ПЕРЕВТІЛЕННЯ</div>
+                <div hide show-xs="true" class="md-headline"> ПЕРЕВТІЛЕННЯ</div>
             </div>
             
             <div class="overlay-trans ">
@@ -148,10 +148,10 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
         </md-button>
     </div>
      <div layout="row" ng-if="$ctrl.videos.length>0 " flex>
-        <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap  header-super">
-             <div show-xs hide-gt-xs='true' class="md-display-1"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
-                <div hide-xs class="md-headline""> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
+        <div class="page-delimiter " flex>
+            <div class="fit-screen-wrap md-padding header-super">
+             <div hide show-gt-xs='true' class="md-display-1"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
+                <div hide show-xs="true" class="md-headline""> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
                 
             </div>
             <div class="overlay-days">
