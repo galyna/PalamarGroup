@@ -608,7 +608,7 @@ md-card.md-default-theme, md-card {
 }
 
 .xs-master-calendar{
-
+overflow: hidden;
 
   ._md-datepicker-floating-label._md-datepicker-has-calendar-icon > label:not(.md-no-float):not(.md-container-ignore) {
     right: 18px;

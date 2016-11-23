@@ -125,8 +125,7 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                     <md-input-container class="md-block md-padding">
                         <md-icon md-svg-icon="action:ic_schedule_24px"></md-icon>
                         <label for="time">Час</label>
-                        <md-select name="time" id="time" ng-model="vm.dayHour"
-                                   ng-model-options="{trackBy: '$value.id'}">
+                        <md-select name="time" id="time" ng-model="vm.dayHour">
                             <md-option ng-repeat="hour in vm.dayHours" ng-value="hour">
                                 {{ hour.value }}
                             </md-option>
@@ -172,13 +171,14 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
 
 export class AppointmentFormComponentController {
 
-    static $inject = ['$mdDialog',  'appointment'];
+    static $inject = ['$mdDialog', 'appointment'];
     private appointment: IAppointment;
     private originalAppointment: IAppointment;
     invalivTime: boolean;
     datePattern = "/^(((0[1-9]|[12]\d|3[01])-(0[13578]|1[02])-((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)-(0[13456789]|1[012])-((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])-02-((19|[2-9]\d)\d{2}))|(29-02-((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/";
     startDate = new Date();
     dayHour: any;
+    reservhouers: any;
     dayHours = [{id: 1, value: '10:00'}, {id: 2, value: '10:30'}, {id: 3, value: '11:00'}, {id: 4, value: '11:30'},
         {id: 5, value: '12:00'}, {id: 6, value: '12:30'}, {id: 7, value: '13:00'}, {id: 8, value: '13:30'}, {
             id: 9,
@@ -193,18 +193,36 @@ export class AppointmentFormComponentController {
     constructor(private $mdDialog: ng.material.IDialogService, appointment: IAppointment) {
         this.appointment = angular.copy(appointment);
         this.originalAppointment = appointment;
+        this.reservhouers = angular.copy(this.dayHours);
         this.setTime();
+
     }
 
     onCalendarChanged() {
-        var current=new Date()
-        if (this.appointment.date.getDay()==current.getDay() && this.appointment.date.getMonth()==current.getMonth() && this.appointment.date.getFullYear()==current.getFullYear()) {
-           console.log("today");
-          var currentHouer=  current.getHours();
-           // this.dayHours=  this.dayHours.filter(()=>{})
+        var current = new Date()
+        if (this.appointment.date && this.appointment.date instanceof Date &&
+            this.appointment.date.getDay() == current.getDay() &&
+            this.appointment.date.getMonth() == current.getMonth() &&
+            this.appointment.date.getFullYear() == current.getFullYear()) {
+            console.log("today");
+            var currentHouer = current.getHours();
+            var tmp = angular.copy(this.reservhouers);
+            this.reservhouers.forEach((hour)=> {
+                var time = hour.value.split(':')[0];
+                if (parseInt(time) <= currentHouer) {
+                    tmp.shift();
+                }
+            })
+            this.dayHours = [];
+            this.dayHours = tmp;
+            console.log( this.dayHours.length);
+        } else {
+            this.dayHours =angular.copy(this.reservhouers);
         }
     }
+
     setTime() {
+
         if (this.appointment.date) {
             var minutes = this.appointment.date.getUTCMinutes();
             var hourValue = this.appointment.date.getUTCHours() + ':' + (  (minutes < 10) ? minutes + '0' : minutes);
@@ -214,10 +232,10 @@ export class AppointmentFormComponentController {
                 }
             })
         }
+
     }
 
     save(orderForm) {
-
 
 
         if (this.appointment.name || this.appointment.comment || this.appointment.phone) {
@@ -247,11 +265,11 @@ export interface IAppointmentService {
 export let AppointmentServiceName = 'appointmentService'
 export class AppointmentService implements IAppointmentService {
 
-    static $inject = ['$mdDialog', '$rootScope', "$log",'$mdMedia'];
+    static $inject = ['$mdDialog', '$rootScope', "$log", '$mdMedia'];
     private appointment: IAppointment;
 
     constructor(private $mdDialog: ng.material.IDialogService,
-                private $rootScope: IRootScope, private $log: ng.ILogService,private $mdMedia) {
+                private $rootScope: IRootScope, private $log: ng.ILogService, private $mdMedia) {
 
     }
 
@@ -280,7 +298,9 @@ export class AppointmentService implements IAppointmentService {
             result.favors.push(result.service);
         }
         result.creationDate = new Date().toJSON();
-        if(result.date){ result.date = new Date(result.date).toJSON();}
+        if (result.date) {
+            result.date = new Date(result.date).toJSON();
+        }
 
         result.$save()
             .then(() => {
