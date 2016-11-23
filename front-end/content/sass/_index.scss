@@ -269,7 +269,7 @@ background-color: white;
     }
 
   }
- .featured-area-subtitle {
+  h.featured-area-subtitle {
     font-size: 1em;
     line-height: 1em;
 
@@ -285,21 +285,21 @@ background-color: white;
 
   }
 
-  .featured-area-title {
+  h1.featured-area-title {
 
     width: auto;
-    //font-size: 6.1428em;
+    font-size: 6.1428em;
     font-weight: 900;
     line-height: 1em;
     text-transform: uppercase;
     margin: 0;
 
     @media (max-width: $layout-breakpoint-xs) {
-      font-size: 20px;
+      font-size: 28px;
 
     }
-    @media (min-width: $layout-breakpoint-sm) and (max-width: $layout-breakpoint-md) {
-      font-size: 56px;
+    @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-md) {
+      font-size: 66px;
     }
 
     @media (min-width: $layout-breakpoint-md) {

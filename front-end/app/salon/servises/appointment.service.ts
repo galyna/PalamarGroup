@@ -12,7 +12,7 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                 {{::vm.appointment.master.name}}</h2>
             <h2 hide-gt-sm='true' class=" md-padding ">Записатись до {{::vm.appointment.master.name}}</h2>
             <span flex></span>
-            <md-button class="md-icon-button" ng-click="::vm.cancel()">
+            <md-button class="md-icon-button dialog-close-btn" ng-click="::vm.cancel()">
                 <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>
             </md-button>
         </div>
@@ -292,12 +292,11 @@ export class AppointmentService implements IAppointmentService {
 
         this.$mdDialog.show({
             template: template,
-            clickOutsideToClose: true,
             bindToController: true,
             controller: AppointmentFormComponentController,
             controllerAs: 'vm',
             parent: angular.element(document.querySelector('#mainContent')),
-            fullscreen: this.$mdMedia('(max-width: 1000px)'),
+            fullscreen: this.$mdMedia('(max-width: 1360px)'),
             locals: {
                 appointment: appointment,
             },

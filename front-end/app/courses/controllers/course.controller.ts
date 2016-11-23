@@ -123,7 +123,6 @@ export class CourseController {
 
         this.mdDialog.show({
             template: this.$templateCache.get("app/courses/views/model.form.html").toString(),
-            clickOutsideToClose: true,
             bindToController: true,
             controller: CourseController.componentName,
             controllerAs: 'vm',
@@ -201,12 +200,11 @@ export class CourseController {
 
         this.mdDialog.show({
             template: this.$templateCache.get("app/courses/views/order.html").toString(),
-            clickOutsideToClose: true,
             bindToController: true,
             controller: CourseController.componentName,
             controllerAs: 'vm',
             parent: angular.element(document.querySelector('#mainContent')),
-            fullscreen: this.$mdMedia('(max-width: 1000px)'),
+            fullscreen: this.$mdMedia('(max-width: 1360px)'),
         });
 
     }
@@ -256,12 +254,11 @@ export class CourseController {
     showCommentDialog($event): void {
         this.mdDialog.show({
             template: this.$templateCache.get("app/courses/views/comment.form.html").toString(),
-            clickOutsideToClose: true,
             bindToController: true,
             controller: CourseController.componentName,
             controllerAs: 'vm',
             parent: angular.element(document.querySelector('#mainContent')),
-            fullscreen: this.$mdMedia('(max-width: 600px)')
+            fullscreen: this.$mdMedia('(max-width: 800px)')
 
         });
 
