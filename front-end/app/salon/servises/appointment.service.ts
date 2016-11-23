@@ -42,7 +42,7 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                         </md-input-container>
                     </div>
 
-                    <div flex="100" layout="row">
+                    <div  flex="100" layout="row">
                         <div flex="50" class="order-picker-container " layout="row">
                             <md-datepicker md-open-on-focus class="order-date-picker" md-min-date="vm.startDate"
                                            placeholder="Дата" flex ng-model="vm.appointment.date"
@@ -113,8 +113,28 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                         <label for="phone">Телефон</label>
                         <input id="phone" ng-model="vm.appointment.phone" type="text" name="phone">
                     </md-input-container>
+                    <div ng-if="vm.$mdMedia('(min-width: 400px)')" flex="100" layout="row">
+                        <div flex="50" class="order-picker-container " layout="row">
+                            <md-datepicker md-open-on-focus class="order-date-picker" md-min-date="vm.startDate"
+                                           placeholder="Дата" flex ng-model="vm.appointment.date"
+                                           ng-change="vm.onCalendarChanged()"
+                                           name="dateField"></md-datepicker>
 
-                    <md-input-container layout="row" class="xs-master-calendar" flex layout-align="center center" style="padding0;margin: 0px;">
+                        </div>
+                        <div flex="50" class="time-container " layout="row">
+                            <md-input-container flex>
+                                <md-icon md-svg-icon="action:ic_schedule_24px"></md-icon>
+                                <label for="time">Час</label>
+                                <md-select name="time" id="time" ng-model="vm.dayHour"
+                                           ng-model-options="{trackBy: '$value.id'}">
+                                    <md-option ng-repeat="hour in vm.dayHours" ng-value="hour">
+                                        {{ hour.value }}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                    </div>
+                    <md-input-container ng-if="vm.$mdMedia('(max-width: 400px)')" layout="row" class="xs-master-calendar" flex layout-align="center center" style="padding0;margin: 0px;">
                         <label style='left:38px' for="time">Дата</label>
                        <md-datepicker md-open-on-focus class="order-date-picker" md-min-date="vm.startDate"
                                            placeholder="Дата" flex ng-model="vm.appointment.date"
@@ -122,7 +142,7 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                                            name="dateField"></md-datepicker>
                     </md-input-container>
 
-                    <md-input-container class="md-block md-padding">
+                    <md-input-container ng-if="vm.$mdMedia('(max-width: 400px)')" class="md-block md-padding">
                         <md-icon md-svg-icon="action:ic_schedule_24px"></md-icon>
                         <label for="time">Час</label>
                         <md-select name="time" id="time" ng-model="vm.dayHour">
@@ -171,11 +191,8 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
 
 export class AppointmentFormComponentController {
 
-    static $inject = ['$mdDialog', 'appointment'];
+    static $inject = ['$mdDialog', '$mdMedia'];
     private appointment: IAppointment;
-    private originalAppointment: IAppointment;
-    invalivTime: boolean;
-    datePattern = "/^(((0[1-9]|[12]\d|3[01])-(0[13578]|1[02])-((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)-(0[13456789]|1[012])-((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])-02-((19|[2-9]\d)\d{2}))|(29-02-((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/";
     startDate = new Date();
     dayHour: any;
     reservhouers: any;
@@ -190,9 +207,8 @@ export class AppointmentFormComponentController {
         },
         {id: 15, value: '17:00'}, {id: 16, value: '17:30'}, {id: 17, value: '18:00'}, {id: 18, value: '18:30'}];
 
-    constructor(private $mdDialog: ng.material.IDialogService, appointment: IAppointment) {
-        this.appointment = angular.copy(appointment);
-        this.originalAppointment = appointment;
+    constructor(private $mdDialog: ng.material.IDialogService, private $mdMedia) {
+
         this.reservhouers = angular.copy(this.dayHours);
         this.setTime();
 
@@ -215,9 +231,9 @@ export class AppointmentFormComponentController {
             })
             this.dayHours = [];
             this.dayHours = tmp;
-            console.log( this.dayHours.length);
+            console.log(this.dayHours.length);
         } else {
-            this.dayHours =angular.copy(this.reservhouers);
+            this.dayHours = angular.copy(this.reservhouers);
         }
     }
 
@@ -237,7 +253,6 @@ export class AppointmentFormComponentController {
 
     save(orderForm) {
 
-
         if (this.appointment.name || this.appointment.comment || this.appointment.phone) {
             if (this.dayHour && this.appointment.date) {
                 var time = this.dayHour.value.split(':');
@@ -245,10 +260,7 @@ export class AppointmentFormComponentController {
                 this.appointment.date.setMinutes(time[1]);
                 this.dayHour = null;
             }
-            angular.extend(this.originalAppointment, this.appointment);
-            this.$mdDialog.hide(this.originalAppointment);
-        } else {
-
+            this.$mdDialog.hide(this.appointment);
         }
     }
 
@@ -266,7 +278,6 @@ export let AppointmentServiceName = 'appointmentService'
 export class AppointmentService implements IAppointmentService {
 
     static $inject = ['$mdDialog', '$rootScope', "$log", '$mdMedia'];
-    private appointment: IAppointment;
 
     constructor(private $mdDialog: ng.material.IDialogService,
                 private $rootScope: IRootScope, private $log: ng.ILogService, private $mdMedia) {
