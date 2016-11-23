@@ -1,14 +1,20 @@
 
 button.md-button.md-fab.down-btn {
   position: absolute;
-  left: calc(50% - 34px);
+  left: calc(50% - 32px);
   z-index: 3;
-  bottom: 40px;
+  bottom: 45px;
   md-icon {
     margin: auto;
   }
   @extend .md-whiteframe-8dp;
+  @media (max-width: $layout-breakpoint-sm) {
+    height: 30px;
+    width: 37px;
+    bottom: 10px;
+    left: calc(50% - 26px);
 
+  }
 
 }
 
@@ -22,12 +28,17 @@ button.md-button.md-fab.down-btn {
 
 button.md-button.md-fab.up-btn {
   position: absolute;
-  left: calc(50% - 34px);
+  left: calc(50% - 32px);
   z-index: 62;
   top: 20px;
 
   @extend .md-whiteframe-8dp;
-
+  @media (max-width: $layout-breakpoint-xs) {
+    height: 25px;
+    width: 37px;
+    top: 10px;
+    left: calc(50% - 26px);
+  }
   md-icon {
     margin: auto;
     -ms-transform: rotate(180deg); /* IE 9 */

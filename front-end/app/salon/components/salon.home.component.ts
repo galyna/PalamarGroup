@@ -49,11 +49,10 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                         <div class="date-block md-margin " ng-class="{'date-block-disabled':day.program=='зачинено'}"
                               layout="column"
                              layout-align=" center center">
-                            <div hide show-gt-sm='true' class=" md-headline">{{ ::day.name}}</div>
-                             <div show-sm='true' class=" md-title">{{ ::day.short}}</div>
-                             
+                            <div hide show-gt-sm='true' class=" md-headline">{{ ::day.name}}</div>                                                  
                             <div hide show-gt-sm='true' class="md-subhead  ">{{::day.program}}</div>
-                            <div show-sm='true' class="md-caption  ">{{::day.program}}</div>
+                            <div hide show-sm='true' class=" md-title">{{ ::day.short}}</div>
+                            <div hide show-sm='true' class="md-caption  ">{{::day.program}}</div>                              
                         </div>
                     </div>
                 </div>

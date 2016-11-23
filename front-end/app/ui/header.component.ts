@@ -15,15 +15,16 @@ const template = `<div ng-click="$ctrl.handleVideoRuning()" class="stop-video-co
 <div id="video-container">
 </div>
 <div class="page-header-wrap " layout="row" layout-align="center center">  
-        <a href="/beauty-parlour" layout="row" layout-align="center center">
+        <a href="/beauty-parlour" layout="column" layout-align="center center">
             <img class="logo-img"  src="../content/images/logo/palamar_logo.png" />
-            <div>
-                <h1 lang="en" class="featured-area-title"> PALAMAR GROUP</h1>
-                <div lang="en" class="featured-area-subtitle">
+            <div class="mp-padding md-margin">
+                <h1  lang="en" class="featured-area-title"> PALAMAR GROUP</h1> 
+                
+                <h2 lang="en" class="featured-area-subtitle">
                     beauty parlour & academy
-                </div>
+                </h2>
             </div>
-            <img class="logo-img " src="../content/images/logo/palamar_logo.png"/>
+           
         </a>  
 </div>
 

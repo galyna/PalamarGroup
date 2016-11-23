@@ -223,10 +223,14 @@ export class AppointmentFormComponentController {
             console.log("today");
             var currentHouer = current.getHours();
             var tmp = angular.copy(this.reservhouers);
+
             this.reservhouers.forEach((hour)=> {
                 var time = hour.value.split(':')[0];
                 if (parseInt(time) <= currentHouer) {
                     tmp.shift();
+                }
+                if (this.dayHour && parseInt(time) <= currentHouer && hour.id==this.dayHour.id) {
+                    this.dayHour=null;
                 }
             })
             this.dayHours = [];

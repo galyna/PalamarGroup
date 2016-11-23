@@ -17,12 +17,12 @@
     height: 100%;
     opacity: 0;
     /*animation*/
-    //@media (min-width: 963px) {
-    //  animation: slideShow 30s linear infinite 0s;
-    //  -o-animation: slideShow 30s linear infinite 0s;
-    //  -moz-animation: slideShow 30s linear infinite 0s;
-    //  -webkit-animation: slideShow 30s linear infinite 0s;
-    //}
+    @media (min-width: 964px) {
+      animation: slideShow 30s linear infinite 0s;
+      -o-animation: slideShow 30s linear infinite 0s;
+      -moz-animation: slideShow 30s linear infinite 0s;
+      -webkit-animation: slideShow 30s linear infinite 0s;
+    }
 
   }
 
