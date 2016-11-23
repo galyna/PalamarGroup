@@ -303,8 +303,7 @@ export class SalonHomeComponentController {
             videos.splice(2, videos.length-2);
         });
 
-        this.$q.all([this.masters.$promise, this.brends.$promise,
-            this.transforms.$promise,this.seo.$promise]).then((result) => {
+        this.$q.all([this.masters.$promise]).then((result) => {
             this.markerReadySEO = "dynamic-content";
         });
 
