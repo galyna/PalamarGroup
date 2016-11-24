@@ -66,14 +66,14 @@ app.use('/robots.txt', function (req, res, next) {
 app.use('/sitemap.xml', function (req, res, next) {
     res.sendFile(path.resolve(pathes.sitemap));
 });
-
-app.use('/', function (req, res, next) {
-    // if (isBot(req.headers['user-agent'])) {
-    //     res.sendFile(path.resolve('./snapshots', req.url.replace(/^\/|\/$/g, ''), 'index.html'));
-    // } else {
-    //     next();
-    // }
-}, express.static(pathes.all));
+app.use('/',  express.static(pathes.all));
+// app.use('/', function (req, res, next) {
+//     if (isBot(req.headers['user-agent'])) {
+//         res.sendFile(path.resolve('./snapshots', req.url.replace(/^\/|\/$/g, ''), 'index.html'));
+//     } else {
+//         next();
+//     }
+// }, express.static(pathes.all));
 
 app.get('/*', function (req, res) {
     res.sendFile(path.resolve(pathes.index));
