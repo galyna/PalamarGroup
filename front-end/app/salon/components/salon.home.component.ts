@@ -299,7 +299,7 @@ export class SalonHomeComponentController {
             if (seo.length > 0) {
                 this.$rootScope.seo = seo[0];
                 document.title = this.$rootScope.seo.title;
-                this.seoJson.description = this.$rootScope.seo.description;
+                this.seoJson.description = seo[0].description ? seo[0].description : this.seoJson.description;
             }
 
         });
