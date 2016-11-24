@@ -289,9 +289,7 @@ export class SalonHomeComponentController {
         this.transforms.$promise.then((transforms) => {
             this.showMoreTransforms = transforms.length > 2;
             transforms.splice(2, transforms.length -2);
-        }).finally(() => {
-            this.$rootScope.loading = false;
-        });;
+        })
 
 
         var favorPromise= this.favorResource.query({sort: "order"}).$promise;
