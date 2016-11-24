@@ -9,6 +9,7 @@
     "angular-animate": "^1.5.6",
     "angular-aria": "^1.5.6",
     "angular-google-maps": "^2.4.0",
+    "angular-jsonld": "^0.2.0",
     "angular-material": "^1.1.0-rc.5",
     "angular-messages": "^1.5.6",
     "angular-resource": "^1.5.6",

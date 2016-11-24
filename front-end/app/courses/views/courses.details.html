@@ -1,5 +1,5 @@
-
-
+<sb-jsonld json="{{::vm.course.seoJson}}}"></sb-jsonld>
+<sb-jsonld json="{{::vm.seoJson}}}"></sb-jsonld>
 <div ng-attr-id="{{ vm.markerReadySEO }}" class="courses-details description-container" layout="column">
 
     <!--author-->
@@ -139,14 +139,21 @@
 
         <div  flex flex-gt-md="60" flex-md="80"  flex-gt-xs="60">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6"  ng-repeat="course in vm.course.hearFormsPhotos"
+                <md-card md-whiteframe="6"  ng-repeat="course in vm.course.hearFormsPhotos" temprop="workPerformed" itemscope=""
+                         itemtype="http://schema.org/CreativeWork"
                          class="md-margin " ng-attr-flex-gt-sm="{{::vm.getPictureFlex($index,vm.course.hearFormsPhotos.length)}}"   flex-gt-xs="46" flex-xs="80"
                          ng-click="::vm.showMediaObserver(vm.course.hearFormsPhotos, $index)">
+                    <div itemprop="funder" itemscope itemtype="http://schema.org/BeautySalon">
+                        <meta itemprop="name" content="PALAMAR GROUP ACADEMY"/>
+                    </div>
+                    <div itemprop="author" itemscope itemtype="http://schema.org/Organization">
+                        <meta itemprop="name" content="{{vm.course.author.name}}"/>
+                    </div>
+                        <img itemprop="contentUrl" itemscope="" itemtype="http://schema.org/ImageObject" ng-src="{{::course.url}}" class="md-card-image">
 
-                        <img ng-src="{{::course.url}}" class="md-card-image">
 
                     <md-card-content ng-if="::course.name" layout="column" flex="100" layout-align="center center">
-                        <span class="  md-margin">{{::course.name}}</span>
+                        <span itemprop="caption" class="  md-margin">{{::course.name}}</span>
                     </md-card-content>
                 </md-card>
             </div>
@@ -158,14 +165,22 @@
         <div flex flex-gt-md="60" flex-md="80" >
             <div layout="column" layout-margin layout layout-wrap layout-align="center center" class="embed-responsive-container" >
                 <md-card md-whiteframe="6" class="  courses-videos"
-                         ng-repeat="video in ::vm.course.videos track by $index"
+                         ng-repeat="video in ::vm.course.videos track by $index" temprop="workPerformed" itemscope=""
+                         itemtype="http://schema.org/CreativeWork"
                          flex>
-                    <div flex class="embed-responsive embed-responsive-16by9">
+                    <div itemprop="funder" itemscope itemtype="http://schema.org/BeautySalon">
+                        <meta itemprop="name" content="PALAMAR GROUP ACADEMY"/>
+                    </div>
+                    <div itemprop="author" itemscope itemtype="http://schema.org/Organization">
+                        <meta itemprop="name" content="{{vm.course.author.name}}"/>
+                    </div>
+                    <div flex class="embed-responsive embed-responsive-16by9" itemscope
+                         itemtype="http://schema.org/VideoObject">
                         <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                        video-id="video.url"></youtube-video>
                     </div>
                     <md-card-content ng-if="::video.name" layout="column" flex="100" layout-align="center center">
-                        <span class="  md-margin">{{::video.name}}</span>
+                        <span itemprop="caption" class="  md-margin">{{::video.name}}</span>
                     </md-card-content>
                 </md-card>
             </div>
@@ -206,13 +221,14 @@
 
             <div class="courses-history" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6"  ng-repeat="course in ::vm.course.historyPhotos"
-                         class="md-margin " flex-gt-xs="46" flex-xs="80"
+                         class="md-margin " flex-gt-xs="46" flex-xs="80" itemscope="" itemtype="http://schema.org/ImageObject"
                          ng-click="::vm.showMediaObserver(vm.course.historyPhotos, $index)">
-
-                        <img ng-src="{{::course.url}}" class="md-card-image">
-
+                    <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                        <meta itemprop="name" content="PALAMAR GROUP ACADEMY"/>
+                    </div>
+                        <img itemprop="contentUrl"  ng-src="{{::course.url}}" class="md-card-image">
                     <md-card-content ng-if="::course.name" layout="column"  layout-align="center center">
-                        <span class="  md-margin">{{::course.name}}</span>
+                        <span itemprop="caption" class="  md-margin">{{::course.name}}</span>
                     </md-card-content>
                 </md-card>
 

@@ -29,6 +29,7 @@ export class CourseController {
     socialParams: any;
     showAnimation: boolean;
     markerReadySEO: string;
+    seoJson: any;
 
     constructor(private $log: ng.ILogService, $routeParams: IRouteParams,
                 private $location: ng.ILocationService, private CourseResource: ICourseResource,
@@ -45,11 +46,12 @@ export class CourseController {
         this.course.$promise.then((course)=> {
             this.scrollToMain();
             this.setSocialParams(course);
-            course.hearFormsPhotos = this.orderByFilter(course.hearFormsPhotos, "order");
-            course.historyPhotos = this.orderByFilter(course.historyPhotos, "order");
-            document.title = this.$rootScope.seoBase + "Академія " + course.name + " від " + course.author.name;
+            this.course.seoJson = this.createSeoJson(course);
+            this.course.hearFormsPhotos = this.orderByFilter(course.hearFormsPhotos, "order");
+            this.course.historyPhotos = this.orderByFilter(course.historyPhotos, "order");
+            document.title = "Навчальний курс " + course.name + " " + "Львів";
             this.$rootScope.seo.description = "Ціна курсу:" + course.price + "грн. ";
-            this.$rootScope.seo.description = this.$rootScope.seo.description + course.description;
+            this.$rootScope.seo.description = course.description;
             this.markerReadySEO = "dynamic-content";
 
         }).catch((err)=> {
@@ -62,10 +64,75 @@ export class CourseController {
         this.newComment = this.getBlankComment();
 
         this.newModel = this.getBlankModel();
-
+        this.initSeo();
     }
 
+    createSeoJson(course) {
+        return {
+            "@context": "http://www.schema.org",
+            "@type": "EducationEvent",
+            "name": course.name,
+            "url": "http://www.palamar.com.ua/academy/course/" + course._id,
+            "recordedIn": {
+                "@type": "CreativeWork",
+                "about": course.name,
+                "author": {
+                    "@type": "Person",
+                    "name": course.author.name
+                }
+            },
+            "image":"http://www.palamar.com.ua"+ course.avatar,
+            "description": course.description,
+            "funder": {
+                "@type": "Organization",
+                "name": "Palamar Group Academy"
+            },
+            'composer': {
+                "@type": "Person",
+                "name": course.author.name
+            },
 
+            "location": {
+                "name":"Palamar Group Academy",
+                "@type": "PostalAddress",
+                "streetAddress": "вул.Щирецька 36",
+                "addressLocality": "Львів",
+                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                "addressCountry": "Україна"
+            },
+            "startDate":course.isVisible && course.days.length >0  ?  course.days[0].date:"",
+            "endDate": course.isVisible && course.days.length > 0  ? course.days[course.days.length - 1].date : ""
+
+        }
+    }
+    initSeo() {
+        this.seoJson = {
+            "@context": "http://www.schema.org",
+            "@type": "EducationalOrganization",
+            "name": "Palamar Group Academy",
+            "url": "http://www.palamar.com.ua/academy",
+            "founder": {
+                "@type": "Person",
+                "name": "YULIA PALAMAR"
+            },
+            "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+            "description": "Навчання для працівників солонів краси, Теми: чоловічі та жіночі стрижки, fassion-style, колористика ",
+            "serviceArea": {
+                "@type": "AdministrativeArea",
+                "name": "Львів"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "вул.Щирецька 36",
+                "addressLocality": "Львів",
+                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                "addressCountry": "Україна"
+            },
+
+            "telephone": "+38 068 9898806"
+        }
+    }
     scrollToOrderName() {
         var options = {
             duration: 50,
@@ -242,7 +309,7 @@ export class CourseController {
                     this.order = new this.OrderResource();
                     this.$rootScope.loading = false;
                 });
-        }else {
+        } else {
             this.$location.hash("orderName");
         }
     }

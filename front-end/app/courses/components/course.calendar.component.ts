@@ -5,7 +5,43 @@ import {IRootScope} from "../../../typings";
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
 
 
-const template = ` <div layout="row" flex>
+const template = ` 
+ <script type='application/ld+json'>
+{
+            "@context": "http://www.schema.org",
+            "@type": "EducationalOrganization",
+            "name": "PALAMAR GROUP ACADEMY",
+            "url": "http://www.palamar.com.ua/academy",
+            "founder": {
+                "@type": "Person",
+                "name": "YULIA PALAMAR"
+            },
+            "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+            "description": "Навчання для працівників салонів краси, Теми: чоловічі та жіночі стрижки, fassion-style, колористика ",
+            "areaServed": {
+                "@type": "AdministrativeArea",
+                "name": "Львів"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "вул.Щирецька 36",
+                "addressLocality": "Львів",
+                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                "addressCountry": "Україна"
+            },
+            "brand": {
+                "@context": "http://schema.org/",
+                "@type": "Brand",
+                "url": "http:/palamar.com.ua/",
+                "alternateName": "PALAMAR",
+                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+                "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                "name": "PALAMAR GROUP"
+            }
+        } </script>
+ <div layout="row" flex>
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers md-padding md-margin">
                 <div class="md-display-1"> КАЛЕНДАР НАВЧАЛЬНИХ ЗАХОДІВ АКАДЕМІЇ</div>

@@ -12,22 +12,29 @@ import {IMediaObserverFactory, MediaObserverFactoryName} from "../../ui/mediaObs
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
 
 
-const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-contacts description-container" layout="column">
+const template = `
+ <sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
+<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-contacts description-container" layout="column"
+ itemscope itemtype="http://schema.org/BeautySalon">
 
     <div layout="column" layout-align="center center" ng-repeat="salon in $ctrl.salons">
-        
+        <div itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
+                    <meta itemprop="latitude" content="{{salon.latitude}}"/>
+                    <meta itemprop="longitude" content="{{salon.longitude}}"/>
+                     <meta itemprop="addressLocality" content="{{salon.description}}"/>
+                </div>
         <div layout="row"  >
             <div class="page-delimiter" flex>
                 <div class="fit-screen-wrap invers header">
-                    <div class="md-display-1"> Адреса салону {{::salon.address}}</div>
-                    <div class="md-title md-padding"> {{::salon.description}}</div>
+                    <div itemprop="address" class="md-display-1"> Адреса салону {{::salon.address}}</div>
+                    <div itemprop="address" class="md-title md-padding"> {{::salon.description}}</div>
                 </div>
 
             </div>
         </div>
 
         <div ng-repeat="contact in ::salon.contacts track by $index">
-            <div hide show-gt-xs="true" layout="row" layout-align="center center">
+            <div hide show-gt-xs="true" layout="row" layout-align="center center" >
 
                 <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                     <md-card-content layout="row" layout-align="start none">
@@ -58,7 +65,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
                                     <div class="md-title">Адміністратор</div>
                                     <div class="md-display-1">{{::contact.name}}</div>
                                     <div class="descr-container">
-                                        <div class="md-display-1">{{::contact.phone}}</div>
+                                        <div itemprop="telephone" class="md-display-1">{{::contact.phone}}</div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
@@ -79,7 +86,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
                                 <md-card-title-text layout-align="space-around center">
                                     <div class="md-title">Адміністратор</div>
                                     <div class="md-display-1">{{::contact.name}}</div>
-                                    <div class="descr-container">
+                                    <div  itemprop="telephone" class="descr-container">
                                         <div class="md-display-1">{{::contact.phone}}</div>
                                     </div>
                                 </md-card-title-text>
@@ -90,17 +97,17 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
                 </md-card>
             </div>
 
-            <div hide-gt-xs="true" layout="row" layout-align="center center">
+            <div hide-gt-xs="true" layout="row" layout-align="center center" itemscope itemtype="http://schema.org/ContactPoint">
 
                 <md-card md-whiteframe="8">
-                    <md-card-content layout="column">
-                        <div class="card-media "><img ng-src="{{::contact.photo.url}}" class="md-card-image"/></div>
+                    <md-card-content layout="column" itemscope itemtype="http://schema.org/Person">
+                        <div  itemprop="image" class="card-media "><img ng-src="{{::contact.photo.url}}" class="md-card-image"/></div>
                         <div class="card-desc "
                              layout="column" layout-align="space-around center">
                             <md-card-title>
                                 <md-card-title-text>
-                                    <div class="md-headline">{{::contact.name}}</div>
-                                    <div class="md-headline">{{::contact.phone}}</div>
+                                    <div  itemprop="name" class="md-headline">{{::contact.name}}</div>
+                                    <div itemprop="telephone" class="md-headline">{{::contact.phone}}</div>
                                 </md-card-title-text>
                             </md-card-title>
                         </div>
@@ -127,14 +134,14 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
         <div class="courses-details" layout="row" layout-align="center center" flex ng-if="salon.photos.length>0">
             <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
                 <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                    <md-card md-whiteframe="6" ng-repeat="photo in ::salon.photos track by $index"
+                    <md-card md-whiteframe="6" ng-repeat="photo in ::salon.photos track by $index" itemscope itemtype="http://schema.org/ImageObject"
                              class="md-margin "
                              flex-gt-sm="22"
                              flex-gt-xs="46" flex-xs="80"
                              ng-click="::$ctrl.showMediaObserver(salon.photos, $index)">
-                        <img ng-src="{{::photo.url}}" class="md-card-image">
+                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="contentUrl" >
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                            <span class="  md-margin">{{::photo.name}}</span>
+                            <span itemprop="caption" class="  md-margin">{{::photo.name}}</span>
                         </md-card-content>
                     </md-card>
                 </div>
@@ -147,12 +154,12 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-cont
                     <md-card md-whiteframe="6" class="  courses-videos"
                              ng-repeat="video in ::salon.videos track by $index"
                              flex>
-                        <div flex class="embed-responsive embed-responsive-16by9">
+                        <div flex class="embed-responsive embed-responsive-16by9" itemscope itemtype="http://schema.org/VideoObject">
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
                         </div>
                         <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                            <span class="  md-margin">{{::video.name}}</span>
+                            <span itemprop="name" class="  md-margin">{{::video.name}}</span>
                         </md-card-content>
                     </md-card>
                 </div>
@@ -178,6 +185,7 @@ export class SalonContactsComponentController {
     socialParams: any;
     markerReadySEO: string;
     seo: any;
+    seoJson: any;
 
     constructor(private contactResource: IContactResource,
                 private $rootScope: IRootScope,
@@ -220,10 +228,12 @@ export class SalonContactsComponentController {
     }
 
     $onInit() {
+        this.initSeo();
         this.seo = this.SeoPageResource.query({query: {"name": "academy.contacts"}}).$promise.then((seo)=> {
             if (seo.length > 0) {
                 this.$rootScope.seo = seo[0];
                 document.title = this.$rootScope.seo.title;
+                this.seoJson.description = seo[0].description ? seo[0].description : this.seoJson.description;
             }
 
         });
@@ -244,11 +254,17 @@ export class SalonContactsComponentController {
                         this.map.center.latitude = salon.latitude;
                         this.map.center.longitude = salon.longitude;
                     }
+                    this.seoJson.contactPoinst = [];
                     contacts.forEach((contact)=> {
                         if (contact.salon === salon._id) {
                             salon.contacts.push(contact);
                         }
-
+                        this.seoJson.contactPoinst.push({
+                            "@type": "ContactPoint",
+                            "telephone": contact.phone,
+                            "contactType": "customer service",
+                            "image": "http://www.palamar.com.ua" + contact.photo.url
+                        });
                     })
                 })
 
@@ -260,6 +276,15 @@ export class SalonContactsComponentController {
         });
     }
 
+    initSeo() {
+        this.seoJson = {
+            "@context": "http://www.schema.org",
+            "@type": "BeautySalon",
+            "name": "PALAMAR GROUP",
+            "url": "http://palamar.com.ua/"
+           
+        }
+    }
 
 }
 

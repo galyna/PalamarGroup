@@ -10,7 +10,8 @@ import {IRootScope} from "../../../typings";
 import {SchedulerServiceName, ISchedulerService} from "../../ui/scheduler.service";
 import ISeoPage = pg.models.ISeoPage;
 
-const template = `<div class=" description-container" ng-attr-id="{{ $ctrl.markerReadySEO }}">
+const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
+<div class=" description-container" ng-attr-id="{{ $ctrl.markerReadySEO }}">
     <div class=" courses" layout-align="center center" layout="column"
     >
         <div hide hide-xs="true" show-gt-xs="true" layout="row" layout-align="center center">
@@ -60,7 +61,7 @@ const template = `<div class=" description-container" ng-attr-id="{{ $ctrl.marke
                             </div>
                         </div>
 
-                        <div flex="20"  show-sm="true"
+                        <div flex="20" show-sm="true"
                              layout="row" layout-align="center center">
                             <md-button class=" md-margin near-master xs-selected md-display-1 md-raised "
                                        aria-label="Details"
@@ -126,9 +127,9 @@ const template = `<div class=" description-container" ng-attr-id="{{ $ctrl.marke
             </md-card>
 
         </div>
-        
+
     </div>
-    
+
     <div flex layout-align="center center" layout="row">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap">
@@ -137,13 +138,13 @@ const template = `<div class=" description-container" ng-attr-id="{{ $ctrl.marke
                     <div class="md-title md-padding"> ВИБЕРИ ЧАС ТА ЗАПИШИСЬ</div>
 
                 </div>
-                
-                   <div hide show-gt-sm="true" class=" header" layout="column" layout-align="center center">
+
+                <div hide show-gt-sm="true" class=" header" layout="column" layout-align="center center">
                     <div class="md-display-1"> ГРАФІК РОБОТИ</div>
                     <div class="md-title md-padding"> ВИБЕРИ ЧАС ТА ЗАПИШИСЬ</div>
 
                 </div>
-                
+
                 <div class="master-scheduler" layout="row" flex layout-align="center center">
                     <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
                         <div layout="row" layout-xs="column" class='master-calendar'>
@@ -181,70 +182,88 @@ const template = `<div class=" description-container" ng-attr-id="{{ $ctrl.marke
         </div>
     </div>
 
-    <div hide-gt-sm="true" layout="row" flex ng-if="$ctrl.master.description" >
+    <div hide-gt-sm="true" layout="row" flex ng-if="$ctrl.master.description">
         <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap  flex  header-super" >
-             <div  layout="row" layout-align="center center">
-                    <div flex="70" 
+            <div class="fit-screen-wrap  flex  header-super">
+                <div layout="row" layout-align="center center">
+                    <div flex="70"
                          class="md-title md-margin md-padding">
-                         {{::$ctrl.master.description}}</div>                  
-                </div>              
-            </div>
-             <div class="overlay-trans ">
-        </div>
-        </div>
-       
-    </div>
-    
-        <div flex layout-align="center center" layout="row"
-             ng-if="$ctrl.master.videos.length>0 || $ctrl.master.works.length>0">
-            <div class="page-delimiter" flex>
-                <div class="fit-screen-wrap  invers header">
-                    <div class="md-display-2"> РОБОТИ МАЙСТРА</div>
+                        {{::$ctrl.master.description}}
+                    </div>
                 </div>
-                
             </div>
-            
+            <div class="overlay-trans ">
+            </div>
         </div>
 
-        <div class="courses-details" layout="row" flex layout-align="center center" ng-if="salon.videos.length>0">
-            <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
-                <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
-                    <md-card md-whiteframe="6" class="  courses-videos"
-                             ng-repeat="video in $ctrl.master.videos | orderBy:'order' track by $index"
-                             flex>
-                        <div flex class="embed-responsive embed-responsive-16by9">
-                            <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
-                                           video-id="::video.url"></youtube-video>
+    </div>
+
+    <div flex layout-align="center center" layout="row"
+         ng-if="$ctrl.master.videos.length>0 || $ctrl.master.works.length>0">
+        <div class="page-delimiter" flex>
+            <div class="fit-screen-wrap  invers header">
+                <div class="md-display-2"> РОБОТИ МАЙСТРА</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="courses-details" layout="row" flex layout-align="center center" ng-if="salon.videos.length>0">
+        <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
+            <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
+                <md-card md-whiteframe="6" class="  courses-videos" temprop="workPerformed" itemscope=""
+                         itemtype="http://schema.org/CreativeWork"
+                         ng-repeat="video in $ctrl.master.videos | orderBy:'order' track by $index"
+                         flex>
+                    <div itemprop="funder" itemscope itemtype="http://schema.org/BeautySalon">
+                            <meta itemprop="name" content="PALAMAR GROUP"/>
                         </div>
-                        <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                            <span class="  md-margin">{{::video.name}}</span>
-                        </md-card-content>
-                    </md-card>
-                </div>
-            </div>
-
-        </div>
-
-        <div flex="100" class="courses-details" layout="row" layout-align="center center"
-        >
-            <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
-                <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                    <md-card md-whiteframe="6" ng-repeat="photo in $ctrl.master.works | orderBy:'order' track by $index"
-                             class="md-margin "
-                             ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
-                             flex-gt-xs="46" flex-xs="80"
-                             ng-click="::$ctrl.showMediaObserver($ctrl.master.works | orderBy:'order', $index)">
-                        <img ng-src="{{::photo.url}}" class="md-card-image">
-                        <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                            <span class="  md-margin">{{::photo.name}}</span>
-                        </md-card-content>
-                </div>
+                    <div itemprop="author" itemscope itemtype="http://schema.org/Organization">
+                            <meta itemprop="name" content="{{$ctrl.master.name}}"/>
+                        </div>
+                    <div flex class="embed-responsive embed-responsive-16by9" itemscope
+                         itemtype="http://schema.org/VideoObject">
+                        <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
+                                       video-id="::video.url"></youtube-video>
+                    </div>
+                    <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
+                        <span itemprop="caption" class="  md-margin">{{::video.name}}</span>
+                    </md-card-content>
+                </md-card>
             </div>
         </div>
-
 
     </div>
+
+    <div flex="100" class="courses-details" layout="row" layout-align="center center"
+    >
+        <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
+            <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+                <md-card md-whiteframe="6" ng-repeat="photo in $ctrl.master.works | orderBy:'order' track by $index"
+                         class="md-margin "
+                         ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
+                         flex-gt-xs="46" flex-xs="80" temprop="workPerformed" itemscope=""
+                         itemtype="http://schema.org/CreativeWork"
+                         ng-click="::$ctrl.showMediaObserver($ctrl.master.works | orderBy:'order', $index)">
+                    <img itemprop="contentUrl" itemscope="" itemtype="http://schema.org/ImageObject"
+                         ng-src="{{::photo.url}}" class="md-card-image">
+                    <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
+                        <div itemprop="funder" itemscope itemtype="http://schema.org/BeautySalon">
+                            <meta itemprop="name" content="PALAMAR GROUP"/>
+                        </div>
+                        <div itemprop="author" itemscope itemtype="http://schema.org/Organization">
+                            <meta itemprop="name" content="{{$ctrl.master.name}}"/>
+                        </div>
+                        
+                        <span itemprop="caption" class="  md-margin">{{::photo.name}}</span>
+                    </md-card-content>
+            </div>
+        </div>
+    </div>
+
+
+</div>
 
 
 `;
@@ -263,6 +282,7 @@ export class MasterComponentController {
     navigatorSmallConfig: any;
     socialParams: any;
     markerReadySEO: string;
+    seoJson: any;
 
     constructor(private $log: ng.ILogService, private $routeParams: ng.route.IRouteParamsService,
                 private MasterResource: IMasterResource, private AppointmentService: IAppointmentService,
@@ -283,9 +303,10 @@ export class MasterComponentController {
             this.MasterResource.get({id: this.$routeParams["id"], populate: 'services.favor'}).$promise
                 .then((master) => {
                     this.master = master;
-                    document.title = this.$rootScope.seoBase + master.name + " " + master.subtitle;
+                    document.title =  master.subtitle + " Львів "+ master.name
                     this.$rootScope.seo.description = master.description;
                     this.scrollToMain();
+                    this.seoMaster(master);
                     this.markerReadySEO = "dynamic-content";
                 }).catch((err)=> {
                 this.$log.error(err);
@@ -294,6 +315,34 @@ export class MasterComponentController {
             this.loadEvents(new Date(), this.$routeParams["id"]);
             ;
         }
+    }
+    seoMaster(master) {
+        this.seoJson =
+        {
+            "@type": "Person",
+            "jobTitle": master.subtitle,
+            "url": "http://www.palamar.com.ua" + "/beauty-parlour/master/" + master._id,
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "вул.Щирецька 36",
+                "addressLocality": "Львів",
+                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                "addressCountry": "Україна"
+            },
+            "name": master.name,
+            "description": master.description,
+            "image": "http://www.palamar.com.ua" + master.photo.url,
+            "brand": {
+                "@context": "http://schema.org/",
+                "@type": "Brand",
+                "url": "http:/palamar.com.ua/",
+                "alternateName": "PALAMAR",
+                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+                "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                "name": "PALAMAR GROUP"
+            }
+        };
     }
 
     scrollToMain() {

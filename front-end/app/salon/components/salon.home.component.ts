@@ -13,7 +13,9 @@ import {
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
 
 
-const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
+const template = `
+ <sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
+<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
     <div layout="row" flex>
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
@@ -26,15 +28,19 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
         <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="70">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6"  ng-repeat="category in $ctrl.categories track by $index "
-                         class="md-margin "
+                         class="md-margin " itemscope itemtype="http://schema.org/Service"
                          ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.categories.length)}}" flex-gt-xs="46"
                          flex-xs="80"
+                          <meta itemprop="category" content="Салон Краси Львів"/>
+                           <meta itemprop="description" content="Перукарня у Львові"/>
                          ng-click="::$ctrl.showFavors(category.url)">
-
-                    <img ng-src="{{'/content/images/services/'+ category._id+'.jpg'}}" class="md-card-image">
-
+                          <div itemprop="creator" itemscope itemtype="http://schema.org/Brand">
+                            <meta itemprop="name" content="PALAMAR GROUP"/>
+                             <meta itemprop="url" content="http://palamar.com.ua/"/>
+                        </div>
+                    <img ng-src="{{'/content/images/services/'+ category._id+'.jpg'}}" class="md-card-image" itemprop="contentUrl" itemscope="" itemtype="http://schema.org/ImageObject">
                     <md-card-content  layout="column"  layout-align="center center">
-                        <span class="  md-margin">{{::category.name}}</span>                       
+                        <span itemprop="name" class="  md-margin">{{::category.name}}</span>                       
                     </md-card-content>
                 </md-card>
 
@@ -79,7 +85,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                            ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"                       
                          flex-gt-xs="46" flex-xs="80"
                          ng-click="::$ctrl.showMaster(master._id)">
-                   
+                    <sb-jsonld json="{{::master.seoJson}}}"></sb-jsonld>
                     <img ng-src="{{::master.photo.url}}" class=" ">
                     <md-card-content layout="column" class="  show-description" layout-align="center center">
                         <span class="  md-margin">{{::master.name}}</span>
@@ -109,15 +115,20 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
             <div flex-xs="90" flex-gt-md="60" flex-md="80" flex-gt-xs="70">
                 <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
                     <md-card md-whiteframe="6" class="  courses-videos"
-                             
+                             temprop="workPerformed" itemscope=""
+                             itemtype="http://schema.org/CreativeWork"
                              ng-repeat="video in ::transform.videos track by $index"
                              flex>
-                        <div flex class="embed-responsive embed-responsive-16by9">
+                             <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                            <meta itemprop="name" content="PALAMAR GROUP"/>
+                        </div>
+                        <div flex class="embed-responsive embed-responsive-16by9"  itemscope
+                             itemtype="http://schema.org/VideoObject">
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
                         </div>
                         <md-card-content ng-if="video.name" layout="column" layout-align="center center">
-                            <span class="  md-margin">{{::video.name}}</span>
+                            <span itemprop="caption" class="  md-margin">{{::video.name}}</span>
                         </md-card-content>
                     </md-card>
                 </div>
@@ -131,12 +142,15 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                     <md-card md-whiteframe="6"  ng-repeat="photo in ::transform.photos  | orderBy:'order' track by $index"
                              class="md-margin "
                                ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
-                       
+                              temprop="workPerformed" itemscope="" itemtype="http://schema.org/CreativeWork"
                              flex-gt-xs="46" flex-xs="80"
                               ng-click="::$ctrl.showMediaObserver(transform.photos  | orderBy:'order', $index)">
-                        <img ng-src="{{::photo.url}}" class="md-card-image">
+                               <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                            <meta itemprop="name" content="PALAMAR GROUP"/>
+                        </div>
+                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="contentUrl" itemscope="" itemtype="http://schema.org/ImageObject" >
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                            <span class="  md-margin">{{::photo.name}}</span>
+                            <span itemprop="caption" class="  md-margin">{{::photo.name}}</span>
                         </md-card-content>
                     </md-card>
                 </div>
@@ -164,14 +178,18 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
         <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
             <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
                 <md-card md-whiteframe="6" class="  courses-videos" 
-                         ng-repeat="video in ::group.videos track by $index"
+                         ng-repeat="video in ::group.videos track by $index" emprop="workPerformed" itemscope="" itemtype="http://schema.org/CreativeWork"
                          flex>
-                    <div flex class="embed-responsive embed-responsive-16by9">
+                         <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                            <meta itemprop="name" content="PALAMAR GROUP"/>
+                        </div>
+                    <div flex class="embed-responsive embed-responsive-16by9" class="embed-responsive embed-responsive-16by9" itemscope
+                             itemtype="http://schema.org/VideoObject">
                         <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                        video-id="::video.url"></youtube-video>
                     </div>
                     <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                        <span class="  md-margin">{{::video.name}}</span>
+                        <span itemprop="caption" class="  md-margin">{{::video.name}}</span>
                     </md-card-content>
                 </md-card>
             </div>
@@ -203,7 +221,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
              <a href="{{::bren.url}}"  class="md-margin brend " layout="row"  layout-align="center center"
               flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
                              flex-gt-xs="46" flex-xs="80" ng-repeat="bren in $ctrl.brends track by $index">
-                                              
+                   <sb-jsonld json="{{::bren.seoJson}}}"></sb-jsonld>                            
                     <img ng-src="{{::bren.photo.url}}"  
                          class=""/>    </a>               
             </div>
@@ -220,7 +238,7 @@ export class SalonHomeComponentController {
 
     static $inject = [MasterResourceName, "$location", 'constants',
         TransformResourceName, BrendResourceName, "$rootScope", MediaObserverFactoryName,
-        '$q',FavorResourceName,AcademyVideosResourceName,SeoPageResourceName];
+        '$q', FavorResourceName, AcademyVideosResourceName, SeoPageResourceName];
 
     favors: IFavor[];
     masters: IMaster[];
@@ -230,81 +248,132 @@ export class SalonHomeComponentController {
     days = [
         {
             name: "ПОНЕДІЛОК",
-            short:"ПН",
+            short: "ПН",
             program: '10:00 - 19:00',
         },
         {
             name: "ВІВТОРОК",
-            short:"ВТ",
+            short: "ВТ",
             program: '10:00 - 19:00',
         }, {
             name: "СЕРЕДА",
-            short:"СР",
+            short: "СР",
             program: '10:00 - 19:00',
         }, {
             name: "ЧЕТВЕР",
-            short:"ЧТ",
+            short: "ЧТ",
             program: '10:00 - 19:00',
         }, {
             name: "П`ЯТНИЦЯ",
-            short:"ПТ",
+            short: "ПТ",
             program: '10:00 - 19:00',
         }, {
             name: "СУБОТА",
-            short:"СБ",
+            short: "СБ",
             program: 'зачинено',
         }, {
             name: "НЕДІЛЯ",
-            short:"НД",
+            short: "НД",
             program: 'зачинено',
         }];
     categories: any;
     showMoreTransforms: boolean;
     socialParams: any;
     videos: IAcademyVideos[];
-    showMoreVideos:boolean;
-    seo:any;
+    showMoreVideos: boolean;
+    seo: any;
+    seoJson: any;
+
     constructor(private masterResource: IMasterResource,
-                 private $location: ng.ILocationService,
+                private $location: ng.ILocationService,
                 private constants: IConstants, private TransformResource: ITransformResource,
                 private BrendResource: IBrendResource, private $rootScope: IRootScope,
-                private mediaObserver: IMediaObserverFactory, private $q,private favorResource: IFavorResource,
-                private AcademyVideosResource: IAcademyVideosResource,private SeoPageResource:ISeoPageResource) {
+                private mediaObserver: IMediaObserverFactory, private $q, private favorResource: IFavorResource,
+                private AcademyVideosResource: IAcademyVideosResource, private SeoPageResource: ISeoPageResource) {
         this.categories = this.constants.favorCategories;
     }
 
     $onInit() {
+        this.initSeo();
         this.seo = this.SeoPageResource.query({query: {"name": "home"}}).$promise.then((seo)=> {
             if (seo.length > 0) {
                 this.$rootScope.seo = seo[0];
                 document.title = this.$rootScope.seo.title;
+                this.seoJson.description = this.$rootScope.seo.description;
             }
 
         });
         this.masters = this.masterResource.query({sort: "order"})
-
+        this.masters.$promise.then((masters) => {
+            masters.forEach((master)=> {
+                this.seoJson.employees = [];
+                this.seoJson.employees.push(
+                    {
+                        "@type": "Person",
+                        "jobTitle": master.subtitle,
+                        "url": "http://www.palamar.com.ua" + "/beauty-parlour/master/" + master._id,
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "вул.Щирецька 36",
+                            "addressLocality": "Львів",
+                            "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                            "addressCountry": "Україна"
+                        },
+                        "name": master.name,
+                        "description": master.description,
+                        "image": "http://www.palamar.com.ua" + master.photo.url
+                    });
+            })
+        })
         this.brends = this.BrendResource.query({sort: "order"});
+        this.brends.$promise.then((brends) => {
+            this.brends.forEach((brend)=> {
+                this.seoBrend(brend);
+
+            })
+        })
         this.transforms = this.TransformResource.query({sort: "order", page: 1, perPage: 3});
 
         this.transforms.$promise.then((transforms) => {
             this.showMoreTransforms = transforms.length > 2;
-            transforms.splice(2, transforms.length -2);
+            transforms.splice(2, transforms.length - 2);
         })
 
 
-        var favorPromise= this.favorResource.query({sort: "order"}).$promise;
+        var favorPromise = this.favorResource.query({sort: "order"}).$promise;
         this.initFavors(favorPromise);
 
-        this.videos= this.AcademyVideosResource.query({sort: 'order', page: 1, perPage: 3});
+        this.videos = this.AcademyVideosResource.query({sort: 'order', page: 1, perPage: 3});
         this.videos.$promise.then((videos) => {
             this.showMoreVideos = videos.length > 2;
-            videos.splice(2, videos.length-2);
+            videos.splice(2, videos.length - 2);
         });
 
         this.$q.all([this.masters.$promise]).then((result) => {
             this.markerReadySEO = "dynamic-content";
         });
 
+    }
+
+    seoBrend(brend) {
+        brend.seoJson=
+            {
+                "@context": "http://schema.org/",
+                "@type": "Brand",
+                "url": brend.url,
+                "logo": "http://palamar.com.ua/"+brend.photo.url,
+                "name": brend.name
+        };
+    }
+
+    initSeo() {
+        this.seoJson = {
+            "@context": "http://www.schema.org",
+            "@type": "BeautySalon",
+            "name": "PALAMAR GROUP",
+            "url": "http://palamar.com.ua/"
+
+        }
     }
 
     initFavors(favorPromise) {

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="uk" itemscope itemtype="http://schema.org/Event">
+<html lang="uk" itemscope itemtype="http://schema.org/BeautySalon">
 <head>
-    <title >PALAMAR GROUP </title>
+    <title>PALAMAR салон краси Львів</title>
     <link rel="shortcut icon" href="content/images/palamar_logo.ico">
     <meta charset="utf-8">
     <meta http-equiv="Content-Language" content="uk-UA,en,ru">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="canonical" hreflang="uk-UA" href="http://palamar.com.ua" />
-    <meta name="description" lang="uk-UA" lang="" content="{{$root.seo.description}}">
+    <link rel="canonical" hreflang="uk-UA" href="http://palamar.com.ua"/>
+    <meta itemprop="description" name="description" lang="uk-UA"  content="{{$root.seo.description}}">
     <meta name="description" lang="ru" content="{{$root.seo.description_ru}}">
     <meta name="keywords" lang="uk-UA" content="{{$root.seo.keywords}}">
     <meta name="keywords" lang="ru" content="{{$root.seo.keywords_ru}}t">
@@ -17,13 +17,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta name="MobileOptimized" content="320"/>
     <meta name="HandheldFriendly" content="true"/>
-    <meta name="fragment" content="!" />
-    <base href="/" />
+    <meta name="fragment" content="!"/>
+    <base href="/"/>
 
     <!--build:prod-->
     <script src="node_modules/systemjs/dist/system.js"></script>
     <script src="system.config.js"></script>
-    <link rel="stylesheet"  href="content/css/app.css"/>
+    <link rel="stylesheet" href="content/css/app.css"/>
     <!--endbuild-->
 
     <script>
@@ -32,23 +32,24 @@
         System.import('app');
 
     </script>
+
 </head>
 
-<body ng-cloak >
+<body ng-cloak>
 <div id="loading" ng-if="$root.loading" layout="row" layout-align="center center">
     <img class="logo-img md-padding" src="../content/images/logo/palamar_logo.png"/>
 </div>
 <pg-menu></pg-menu>
 
 <!--header-->
-<pg-header class="page-header" ng-if="::!$root.isAdminZone()" ></pg-header>
+<pg-header class="page-header" ng-if="::!$root.isAdminZone()"></pg-header>
 
 
 <div class="page-container">
-        <ng-view id="mainContent" flex ng-if="::!$root.isAdminZone();"></ng-view>
+    <ng-view id="mainContent" flex ng-if="::!$root.isAdminZone();"></ng-view>
 </div>
 <!--footer-->
-<pg-footer class="page-footer " ng-if="::!$root.isAdminZone()" ></pg-footer>
+<pg-footer class="page-footer " ng-if="::!$root.isAdminZone()"></pg-footer>
 
 </body>
 </html>

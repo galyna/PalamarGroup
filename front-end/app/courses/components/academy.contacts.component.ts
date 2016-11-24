@@ -7,7 +7,9 @@ import {SalonResourceName, ISalonResource} from "../../resources/salon.resource"
 import {ISeoPageResource, SeoPageResourceName} from "../../resources/seo.page.resource";
 
 
-const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-contacts description-container" layout="column">
+const template = `
+<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
+<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-contacts description-container" layout="column">
    <div layout="row" flex >
             <div class="page-delimiter" flex>
                 <div class="fit-screen-wrap invers header">                  
@@ -131,6 +133,7 @@ export class AcademyContactComponentController {
     markerReadySEO: string;
     seo: any;
     salon: any;
+    seoJson: any;
 
     constructor(private contactResource: IContactResource,
                 private salonResource: ISalonResource, private $q, private smoothScroll,
@@ -139,6 +142,7 @@ export class AcademyContactComponentController {
     }
 
     $onInit() {
+        this.initSeo();
         this.seo = this.SeoPageResource.query({query: {"name": "academy.contacts"}}).$promise.then((seo)=> {
             if (seo.length > 0) {
                 this.$rootScope.seo = seo[0];
@@ -160,11 +164,57 @@ export class AcademyContactComponentController {
                 this.marker.longitude = this.salon.longitude;
             }
         });
+        this.seoJson.contactPoint=[];
         this.contacts = this.contactResource.query({query: {'isAcademy': 'true'}});
+        this.contacts.$promise.then((contacts) => {
+            contacts.forEach((contact)=> {
 
+                this.seoJson.contactPoint.push({ "@type" : "ContactPoint",
+                    "telephone" : contact.phone,
+                    "contactType" : "customer service",
+                    "image":"http://www.palamar.com.ua"+contact.photo.url
+                }) ;
+            })
+        });
         this.$q.all([mainPromise, this.contacts.$promise, this.seo.$promise]).then((result) => {
             this.markerReadySEO = "dynamic-content";
         });
+    }
+    initSeo() {
+        this.seoJson = {
+            "@context": "http://www.schema.org",
+            "@type": "EducationalOrganization",
+            "name": "PALAMAR GROUP ACADEMY",
+            "url": "http://www.palamar.com.ua/academy",
+            "founder": {
+                "@type": "Person",
+                "name": "YULIA PALAMAR"
+            },
+            "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+            "description": "Навчання для працівників салонів краси, Теми: чоловічі та жіночі стрижки, fassion-style, колористика ",
+            "areaServed": {
+                "@type": "AdministrativeArea",
+                "name": "Львів"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "вул.Щирецька 36",
+                "addressLocality": "Львів",
+                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                "addressCountry": "Україна"
+            },
+            "brand": {
+                "@context": "http://schema.org/",
+                "@type": "Brand",
+                "url": "http:/palamar.com.ua/",
+                "alternateName": "PALAMAR",
+                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+                "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                "name": "PALAMAR GROUP"
+            }
+        }
     }
 
     scrollToMain() {

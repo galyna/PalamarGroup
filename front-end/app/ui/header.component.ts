@@ -1,21 +1,21 @@
-const template = `<div ng-click="$ctrl.handleVideoRuning()" class="stop-video-container" layout="row"
+const template = `<div itemscope itemtype="http://schema.org/Brand" ng-click="$ctrl.handleVideoRuning()" class="stop-video-container" layout="row"
      layout-align="center center ">
     <div ng-if="$ctrl.runVideo" class="stop-label">ЗУПИНТИ ВІДЕО</div>
     <div ng-if="!$ctrl.runVideo" class="stop-label">ЗAПУСПИТИ ВІДЕО</div>
 </div>
 <div class="pic-wrapper">
-    <figure class="pic-1"></figure>
+    <figure itemprop="photo" class="pic-1"></figure>
 
 </div>
 <div id="video-container">
 </div>
 <div class="page-header-wrap " layout="row" layout-align="center center">  
-        <a href="/beauty-parlour" layout="column" layout-align="center center">
-            <img class="logo-img"  src="../content/images/logo/palamar_logo.png" />
+        <a href="/beauty-parlour" layout="column" layout-align="center center" itemprop="url" >
+            <img itemprop="logo" class="logo-img"  src="../content/images/logo/palamar_logo.png" />
             <div class="mp-padding md-margin">
-                <h1  lang="en" class="featured-area-title"> PALAMAR GROUP</h1> 
+                <h1 itemprop="name" lang="en" class="featured-area-title"> PALAMAR GROUP</h1> 
                 
-                <h2 lang="en" class="featured-area-subtitle">
+                <h2 itemprop="description" lang="en" class="featured-area-subtitle">
                     beauty parlour & academy
                 </h2>
             </div>

@@ -6,58 +6,59 @@ import {MediaObserverFactoryName, IMediaObserverFactory} from "../../ui/mediaObs
 import {IConstants} from "../../core/core.config";
 import {IRootScope} from "../../../typings";
 
-const template = `<div class="courses description-container" ng-attr-id="{{ $ctrl.markerReadySEO }}"  >
- 
+const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
+<div class="courses description-container" ng-attr-id="{{ $ctrl.markerReadySEO }}">
 
-        <div class="course-bg " layout-align="center center" flex layout="column" >
-            <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
-                <md-card flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
-                >
-                    <md-card-content layout="row" layout-align="start none">
+    <div class="course-bg " layout-align="center center" flex layout="column">
+        <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
-                        <div class="card-desc "
-                             flex="50" layout="column" layout-align="center center">
-                            <md-card-title flex>
-                                <md-card-title-text flex layout-align="space-around center">
-                                    <div hide show-md="true" class="md-display-2 capitalize">{{::$ctrl.favor.name}}
-                                    </div>
-                                    <div hide-md="true" class="md-display-1">{{::$ctrl.favor.name}}</div>
-                                    <div class="favor-container ">
-                                        <div class="md-title">{{::$ctrl.favor.description}}</div>
+            <md-card flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
+            >
+                <md-card-content layout="row" layout-align="start none">
 
-                                    </div>
-                                </md-card-title-text>
-                            </md-card-title>
-
-                        </div>
-                        <div class="card-media "
-                             flex="50"><img ng-src="{{::$ctrl.favor.photo.url}}" class="md-card-image "/>
-                        </div>
-                    </md-card-content>
-                </md-card>
-
-            </div>
-
-            <div hide-gt-xs="true" layout="row" layout-align="center center">
-               
-                <md-card md-whiteframe="8">
-                    <md-card-content layout="column">
-                        <div class="card-media "><img ng-src="{{::$ctrl.favor.photo.url}}" class="md-card-image"/></div>
-                        <div class="card-desc "
-                             layout="column" layout-align="space-around center">
-                            <md-card-title>
-                                <md-card-title-text>
-                                    <div class="md-headline capitalize md-margin">{{::$ctrl.favor.name}}</div>
+                    <div class="card-desc "
+                         flex="50" layout="column" layout-align="center center">
+                        <md-card-title flex>
+                            <md-card-title-text flex layout-align="space-around center">
+                                <div hide show-md="true" class="md-display-2 capitalize">{{::$ctrl.favor.name}}
+                                </div>
+                                <div hide-md="true" class="md-display-1">{{::$ctrl.favor.name}}</div>
+                                <div class="favor-container ">
                                     <div class="md-title">{{::$ctrl.favor.description}}</div>
-                                </md-card-title-text>
-                            </md-card-title>
-                        </div>
-                    </md-card-content>
-                </md-card>
-            </div>
+
+                                </div>
+                            </md-card-title-text>
+                        </md-card-title>
+
+                    </div>
+                    <div class="card-media "
+                         flex="50"><img ng-src="{{::$ctrl.favor.photo.url}}" class="md-card-image "/>
+                    </div>
+                </md-card-content>
+            </md-card>
+
         </div>
-    
+
+        <div hide-gt-xs="true" layout="row" layout-align="center center">
+
+            <md-card md-whiteframe="8">
+                <md-card-content layout="column">
+                    <div class="card-media "><img ng-src="{{::$ctrl.favor.photo.url}}" class="md-card-image"/></div>
+                    <div class="card-desc "
+                         layout="column" layout-align="space-around center">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <div class="md-headline capitalize md-margin">{{::$ctrl.favor.name}}</div>
+                                <div class="md-title">{{::$ctrl.favor.description}}</div>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
+
     <div layout="row" ng-if="$ctrl.masters.length>0" flex>
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap  header-super">
@@ -69,87 +70,89 @@ const template = `<div class="courses description-container" ng-attr-id="{{ $ctr
     </div>
 
     <div class="course-bg " layout="column" flex
-         ng-repeat="master in $ctrl.masters | orderBy:['-level._id','order'] track by $index" layout-align="center center"  >
-    <div hide show-gt-xs="true" layout="row" layout-align="center center">
-
-        <md-card flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
-            <md-card-content layout="row" layout-align="start none">
-                <div class="card-media "
-                     flex="50"><img ng-src="{{::master.photo.url}}" class="md-card-image clickable-element "
-                                    ng-click="::$ctrl.showMaster(master._id)"/>
-                </div>
-                <div class="card-desc box" flex="50" layout="column" layout-align="space-around center">
-                    <div ng-if="master.level" hide show-md="true" class="corner-ribbon top-right white"
-                    >
-                        {{::master.level.text}}
+         ng-repeat="master in $ctrl.masters | orderBy:['-level._id','order'] track by $index"
+         layout-align="center center">
+        <div hide show-gt-xs="true" layout="row" layout-align="center center">
+            <sb-jsonld json="{{::master.seoJson}}}"></sb-jsonld>
+            <md-card flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
+                <md-card-content layout="row" layout-align="start none">
+                    <div class="card-media "
+                         flex="50"><img ng-src="{{::master.photo.url}}" class="md-card-image clickable-element "
+                                        ng-click="::$ctrl.showMaster(master._id)"/>
                     </div>
-                    <div ng-if="master.level" hide-md="true" class="corner-ribbon-min top-right white"
-                    >
-                        {{::master.level.text}}
-                    </div>
-                    <div layout="row" layout-align="center center" class="md-padding md-margin">
-                        <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">{{::master.name}}</div>
-                        <div hide show-sm="true" flex="90" class="md-headline capitalize">{{::master.name}}</div>
-                    </div>
-                    <md-button class="  md-display-1 md-raised  " aria-label="Details"
-                               ng-click="::$ctrl.showMaster(master._id)">
-                        Про майстра
-                    </md-button>
-                    <md-button class=" near-master xs-selected md-display-1 md-raised " aria-label="Details"
-                               ng-click="::$ctrl.showAppointmentDialog(master)">
-                        Записатись
-                    </md-button>
+                    <div class="card-desc box" flex="50" layout="column" layout-align="space-around center">
+                        <div ng-if="master.level" hide show-md="true" class="corner-ribbon top-right white"
+                        >
+                            {{::master.level.text}}
+                        </div>
+                        <div ng-if="master.level" hide-md="true" class="corner-ribbon-min top-right white"
+                        >
+                            {{::master.level.text}}
+                        </div>
+                        <div layout="row" layout-align="center center" class="md-padding md-margin">
+                            <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">{{::master.name}}
+                            </div>
+                            <div hide show-sm="true" flex="90" class="md-headline capitalize">{{::master.name}}</div>
+                        </div>
+                        <md-button class="  md-display-1 md-raised  " aria-label="Details"
+                                   ng-click="::$ctrl.showMaster(master._id)">
+                            Про майстра
+                        </md-button>
+                        <md-button class=" near-master xs-selected md-display-1 md-raised " aria-label="Details"
+                                   ng-click="::$ctrl.showAppointmentDialog(master)">
+                            Записатись
+                        </md-button>
 
-                </div>
-            </md-card-content>
-        </md-card>
+                    </div>
+                </md-card-content>
+            </md-card>
 
+        </div>
+
+        <div hide-gt-xs="true" layout="row" layout-align="center center">
+
+            <md-card md-whiteframe="8">
+                <md-card-content layout="column">
+                    <div ng-if="master.level" class="card-desc-top-master"
+                         ng-class="{'grey': master.level._id==='1','white': master.level._id==='0'}" flex
+                         layout="column"
+                         layout-align=" space-around center">
+                        <md-card-title>
+                            <md-card-title-text flex layout="column" layout-align=" space-around center">
+                                <div class="md-headline capitalize">{{::master.level.text}}</div>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </div>
+                    <div class="card-media "><img ng-src="{{master.photo.url}}" class="md-card-image"
+                                                  ng-click="::$ctrl.showMaster(master._id)"/></div>
+                    <div class="card-desc "
+                         layout="column" layout-align="center center">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <div class="md-headline capitalize md-padding">{{::master.name}}</div>
+                                <div class="md-title">{{::master.description}}</div>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-button class=" md-display-1 md-raised " aria-label="Details"
+                                   ng-click="::$ctrl.showMaster(master._id)">
+                            Про майстра
+                        </md-button>
+                        <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
+                                   ng-click="::$ctrl.showAppointmentDialog(master)">
+                            Записатись
+                        </md-button>
+                    </div>
+                </md-card-content>
+
+            </md-card>
+
+        </div>
     </div>
 
-    <div hide-gt-xs="true" layout="row" layout-align="center center">
-        
-        <md-card md-whiteframe="8">
-            <md-card-content layout="column">
-                <div ng-if="master.level" class="card-desc-top-master"
-                     ng-class="{'grey': master.level._id==='1','white': master.level._id==='0'}" flex
-                     layout="column"
-                     layout-align=" space-around center" >
-                    <md-card-title>
-                        <md-card-title-text flex layout="column" layout-align=" space-around center">
-                            <div class="md-headline capitalize">{{::master.level.text}}</div>
-                        </md-card-title-text>
-                    </md-card-title>
-                </div>
-                <div class="card-media "><img ng-src="{{master.photo.url}}" class="md-card-image"
-                                              ng-click="::$ctrl.showMaster(master._id)"/></div>
-                <div class="card-desc "
-                     layout="column" layout-align="center center">
-                    <md-card-title>
-                        <md-card-title-text>
-                            <div class="md-headline capitalize md-padding">{{::master.name}}</div>
-                            <div class="md-title">{{::master.description}}</div>
-                        </md-card-title-text>
-                    </md-card-title>
-                    <md-button class=" md-display-1 md-raised " aria-label="Details"
-                               ng-click="::$ctrl.showMaster(master._id)">
-                        Про майстра
-                    </md-button>
-                    <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
-                               ng-click="::$ctrl.showAppointmentDialog(master)">
-                        Записатись
-                    </md-button>
-                </div>
-            </md-card-content>
 
-        </md-card>
-
-    </div>
-   </div> 
-   
-    
 </div>
-    
-    <div class="courses-details description-container" layout="column">
+
+<div class="courses-details description-container" layout="column">
     <div layout="row" ng-if="$ctrl.favor.videos.length>0 || $ctrl.favor.photos.length>0" flex>
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap  header-super">
@@ -160,43 +163,57 @@ const template = `<div class="courses description-container" ng-attr-id="{{ $ctr
         </div>
     </div>
 
- <div >
-    <div layout="row" layout-align="center center" >
-        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
-            <div layout="column" layout-margin  layout-align="center center" class="embed-responsive-container" ng-if="$ctrl.favor.videos.length>0">
-                <md-card md-whiteframe="6" class="  courses-videos" 
-                         ng-repeat="video in $ctrl.favor.videos | orderBy:'order' track by $index"
-                         flex>
-                    <div flex class="embed-responsive embed-responsive-16by9">
-                        <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
-                                       video-id="::video.url"></youtube-video>
-                    </div>
-                    <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                        <span class="  md-margin">{{::video.name}}</span>
-                    </md-card-content>
-                </md-card>
+    <div>
+        <div layout="row" layout-align="center center">
+            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85">
+                <div layout="column" layout-margin layout-align="center center" class="embed-responsive-container"
+                     ng-if="$ctrl.favor.videos.length>0">
+                    <md-card md-whiteframe="6" class="  courses-videos" temprop="workPerformed" itemscope=""
+                             itemtype="http://schema.org/CreativeWork"
+                             ng-repeat="video in $ctrl.favor.videos | orderBy:'order' track by $index"
+                             flex>
+                        <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                            <meta itemprop="name" content="PALAMAR GROUP"/>
+                        </div>
+                        <div flex class="embed-responsive embed-responsive-16by9" itemscope
+                             itemtype="http://schema.org/VideoObject">
+                            <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
+                                           video-id="::video.url"></youtube-video>
+                        </div>
+                        <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
+                            <span itemprop="caption" class="  md-margin">{{::video.name}}</span>
+                        </md-card-content>
+                    </md-card>
+                </div>
             </div>
+
         </div>
 
-    </div>
+        <div layout="row" layout-align="center center">
+            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
+                <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+                    <md-card md-whiteframe="6" ng-repeat="photo in $ctrl.favor.photos | orderBy:'order' track by $index"
+                             temprop="workPerformed" itemscope=""
+                             itemtype="http://schema.org/CreativeWork"
+                             class="md-margin "
+                             ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.favor.photos.length)}}"
+                             flex-gt-xs="46" flex-xs="80"
+                             ng-click="::$ctrl.showMediaObserver($ctrl.favor.photos | orderBy:'order', $index)">
+                        <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                            <meta itemprop="name" content="PALAMAR GROUP"/>
+                        </div>
+                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="contentUrl" itemscope=""
+                             itemtype="http://schema.org/ImageObject">
+                        <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
+                            <span itemprop="caption" class="  md-margin">{{::photo.name}}</span>
+                        </md-card-content>
+                    </md-card>
+                </div>
 
-     <div layout="row" layout-align="center center" >
-        <div  flex flex-gt-md="60" flex-md="80"  flex-gt-xs="60">
-         <div  class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6"  ng-repeat="photo in $ctrl.favor.photos | orderBy:'order' track by $index"
-                         class="md-margin " ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.favor.photos.length)}}"  flex-gt-xs="46" flex-xs="80"
-                         ng-click="::$ctrl.showMediaObserver($ctrl.favor.photos | orderBy:'order', $index)">                  
-                        <img ng-src="{{::photo.url}}" class="md-card-image">
-                    <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                        <span class="  md-margin">{{::photo.name}}</span>
-                    </md-card-content>
-</md-card>
             </div>
-            
+
         </div>
-         
     </div>
- </div>   
 </div>
 
 
@@ -214,6 +231,8 @@ export class FavorComponentController {
     masters: IMaster[];
     socialParams: any;
     markerReadySEO: string;
+    seoJson: any;
+
 
     constructor(private $routeParams: ng.route.IRouteParamsService, private $location: ng.ILocationService,
                 private favorResource: IFavorResource, private masterResource: IMasterResource,
@@ -231,8 +250,9 @@ export class FavorComponentController {
             this.favor.$promise
                 .then((favor) => {
                     this.favor = favor;
-                    document.title = this.$rootScope.seoBase + favor.name  ;
+                    document.title =  favor.name + " " +"Львів";
                     this.$rootScope.seo.description=favor.description;
+                    this.initSeo(favor);
                     this.scrollToMain();
                 }).catch((err)=> {
                 this.$location.path(`/beauty-parlour/services`);
@@ -247,6 +267,7 @@ export class FavorComponentController {
                         return master.services.some((s)=> {
                             if (s.favor._id == this.$routeParams["id"]) {
                                 master.level = s.level;
+                                this.seoMaster(master);
                                 return true;
                             } else {
                                 return false;
@@ -262,6 +283,79 @@ export class FavorComponentController {
         }
     }
 
+    seoMaster(master) {
+        master.seoJson=
+        {
+            "@type": "Person",
+            "jobTitle": master.subtitle,
+            "url": "http://www.palamar.com.ua" + "/beauty-parlour/master/" + master._id,
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "вул.Щирецька 36",
+                "addressLocality": "Львів",
+                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                "addressCountry": "Україна"
+            },
+            "name": master.name,
+            "description": master.description,
+            "image": "http://www.palamar.com.ua" + master.photo.url,
+            "brand": {
+                "@context": "http://schema.org/",
+                "@type": "Brand",
+                "url": "http:/palamar.com.ua/",
+                "alternateName": "PALAMAR",
+                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+                "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                "name": "PALAMAR GROUP"
+            }
+        };
+    }
+
+    initSeo(favor:IFavor) {
+        this.seoJson =
+        {
+            "@context": "http://schema.org/",
+            "@type": "Service",
+            "areaServed": {
+                "@type": "Place",
+                "geo": {
+                    "@type": "GeoCircle",
+                    "geoMidpoint": {
+                        "@type": "GeoCoordinates",
+                        "latitude": "49.8110769",
+                        "longitude": "23.9737773"
+                    },
+                    "geoRadius": "50",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "вул.Щирецька 36",
+                        "addressLocality": "Львів",
+                        "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                        "addressCountry": "Україна"
+                    }
+                },
+                "map": "https://www.google.ru/maps/place/%D0%A1%D1%82%D1%83%D0%B4%D1%96%D1%8F+%D0%BA%D1%80%D0%B0%D1%81%D0%B8+%D0%AE%D0%BB%D1%96%D1%97+%D0%9F%D0%B0%D0%BB%D0%B0%D0%BC%D0%B0%D1%80/@49.8110803,23.9715886,17z/data=!3m1!4b1!4m5!3m4!1s0x473ae70c7a4a754b:0x96d5b6a9de35eaa0!8m2!3d49.8110769!4d23.9737773"
+            },
+            "image":"http://www.palamar.com.ua" + favor.photo.url,
+            "category": favor.category.name,
+            "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+            "serviceType": "сфера послуг",
+            "description":"Ціна"+favor.defPrice+" "+ favor.description,
+            "name": favor.name,
+            "brand": {
+                "@context": "http://schema.org/",
+                "@type": "Brand",
+                "url": "http:/palamar.com.ua/",
+                "alternateName": "PALAMAR",
+                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+                "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                "name": "PALAMAR GROUP"
+            }
+        }
+
+    }
 
     scrollToMain() {
         var options = {

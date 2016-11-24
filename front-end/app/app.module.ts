@@ -18,7 +18,7 @@ import 'uiGmapgoogle-maps';
 import 'daypilot-common';
 import 'daypilot-calendar';
 import 'daypilot-navigator';
-
+import 'angular-jsonld';
 import {uiModule} from './ui/ui.module';
 import {coursesModule} from './courses/courses.module';
 import {salonModule} from './salon/salon.module';
@@ -44,7 +44,7 @@ let app = angular.module('yuliaPalamarApp', [
     'youtube-embed',
     'uiGmapgoogle-maps',
     'daypilot',
-
+    'sb-jsonld',
     coreModule.name,
     resourcesModule.name,
     uiModule.name,

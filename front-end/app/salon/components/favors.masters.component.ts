@@ -1,5 +1,5 @@
 import {MasterResourceName, IMasterResource, IMaster} from "../../resources/master.resource";
-import {FavorResourceName, IFavorResource} from "../../resources/favor.resource";
+import {FavorResourceName, IFavorResource, IFavor} from "../../resources/favor.resource";
 import {IConstants} from "../../core/core.config";
 import {IAppointmentResource, AppointmentResourceName} from "../../resources/appointment.resource";
 import {AppointmentServiceName, IAppointmentService} from "../servises/appointment.service";
@@ -26,7 +26,9 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                          ng-attr-flex-gt-sm="46"
                          flex-gt-xs="46" flex-xs="80"
                          ng-click="::$ctrl.showFavor(favor._id)">
+                          <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
                     <img ng-src="{{::favor.photo.url}}">
+                     <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
                     <md-card-content layout="column" class="  show-description-favor" layout-align="center center">
                         <span class="  md-margin">{{::favor.name}}</span>
                         <div class=" md-margin show-description-content">{{::favor.description}}</div>
@@ -54,6 +56,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
     <div layout="column" layout-align="center center">
 
         <div class="course-bg " ng-repeat="master in $ctrl.masters track by $index" layout-align="center center" flex>
+        <sb-jsonld json="{{::master.seoJson}}}"></sb-jsonld>
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
                 <md-card flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
@@ -199,15 +202,18 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85">
                 <div layout="column" layout-margin class="embed-responsive-container" ng-if="$ctrl.videos.length>0"
                      layout-align="center center">
-                    <md-card md-whiteframe="6" class="  courses-videos"
-                             ng-repeat="video in $ctrl.videos  track by $index"
+                    <md-card md-whiteframe="6" class="  courses-videos" temprop="workPerformed" itemscope="" itemtype="http://schema.org/CreativeWork"
+                             ng-repeat="video in $ctrl.videos  track by $index" 
                              flex>
-                        <div flex class="embed-responsive embed-responsive-16by9">
+                             <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                            <meta itemprop="name" content="PALAMAR GROUP"/>
+                        </div>
+                        <div flex class="embed-responsive embed-responsive-16by9" itemscope itemtype="http://schema.org/VideoObject">
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
                         </div>
                         <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                            <span class="  md-margin">{{::video.name}}</span>
+                            <span itemprop="caption" class="  md-margin">{{::video.name}}</span>
                         </md-card-content>
                     </md-card>
                 </div>
@@ -217,15 +223,18 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
 
         <div layout="row" layout-align="center center">
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
-                <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                    <md-card md-whiteframe="6" ng-repeat="photo in $ctrl.photos  track by $index"
+                <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center" >
+                    <md-card md-whiteframe="6" ng-repeat="photo in $ctrl.photos  track by $index" temprop="workPerformed" itemscope="" itemtype="http://schema.org/CreativeWork"
                              class="md-margin "
                              ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.photos.length)}}" flex-gt-xs="46"
-                             flex-xs="80"
+                             flex-xs="80" 
                              ng-click="::$ctrl.showMediaObserver($ctrl.photos, $index)">
-                        <img ng-src="{{::photo.url}}" class="md-card-image">
+                             <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                            <meta itemprop="name" content="PALAMAR GROUP"/>
+                        </div>
+                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="contentUrl" itemscope="" itemtype="http://schema.org/ImageObject">
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                            <span class="  md-margin">{{::photo.name}}</span>
+                            <span itemprop="caption" class="  md-margin">{{::photo.name}}</span>
                         </md-card-content>
                     </md-card>
                 </div>
@@ -242,8 +251,8 @@ export class FavorsMastersComponentController {
 
 
     static $inject = [FavorResourceName, 'constants', "$routeParams", "$location", MasterResourceName,
-        AppointmentServiceName, AppointmentResourceName, '$q', 'orderByFilter',  MediaObserverFactoryName,
-        '$rootScope', 'smoothScroll',SeoPageResourceName];
+        AppointmentServiceName, AppointmentResourceName, '$q', 'orderByFilter', MediaObserverFactoryName,
+        '$rootScope', 'smoothScroll', SeoPageResourceName];
 
     favors: any;
     masters: IMaster[];
@@ -251,15 +260,15 @@ export class FavorsMastersComponentController {
     markerReadySEO: string;
     photos: any;
     videos: any;
-    socialParams:any;
-    seo:any;
+    socialParams: any;
+    seo: any;
 
     constructor(private favorResource: IFavorResource, private constants: IConstants,
                 private $routeParams: ng.route.IRouteParamsService, private $location: ng.ILocationService,
                 private MasterResource: IMasterResource, private AppointmentService: IAppointmentService,
                 private AppointmentResource: IAppointmentResource, private $q, private orderByFilter: ng.IFilterOrderBy,
                 private mediaObserver: IMediaObserverFactory,
-                private $rootScope: IRootScope,private smoothScroll,private SeoPageResource:ISeoPageResource) {
+                private $rootScope: IRootScope, private smoothScroll, private SeoPageResource: ISeoPageResource) {
 
 
     }
@@ -290,7 +299,7 @@ export class FavorsMastersComponentController {
             var masterPromise = this.MasterResource.query({populate: 'services.favor', sort: "order"}).$promise;
             this.setMasters(masterPromise, this.category._id);
 
-            this.$q.all([masterPromise, favorsPromise,this.seo.$promise]).then((tt) => {
+            this.$q.all([masterPromise, favorsPromise, this.seo.$promise]).then((tt) => {
                 this.markerReadySEO = "dynamic-content";
             });
         }
@@ -308,7 +317,7 @@ export class FavorsMastersComponentController {
                 if (fav.videos && fav.videos.length > 0) {
                     this.videos = this.videos.concat(fav.videos);
                 }
-
+                this.initSeo(fav);
 
             })
             this.photos = this.orderByFilter(this.photos, "order");
@@ -324,9 +333,41 @@ export class FavorsMastersComponentController {
                 master.services = master.services.filter((s)=> {
                     return s.favor.category._id == categoryId;
                 });
+                if (master.services.length > 0) {
+                    this.seoMaster(master);
+                }
                 return master.services.length > 0;
             })
         });
+    }
+
+    seoMaster(master) {
+        master.seoJson =
+        {
+            "@type": "Person",
+            "jobTitle": master.subtitle,
+            "url": "http://www.palamar.com.ua" + "/beauty-parlour/master/" + master._id,
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "вул.Щирецька 36",
+                "addressLocality": "Львів",
+                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                "addressCountry": "Україна"
+            },
+            "name": master.name,
+            "description": master.description,
+            "image": "http://www.palamar.com.ua" + master.photo.url,
+            "brand": {
+                "@context": "http://schema.org/",
+                "@type": "Brand",
+                "url": "http:/palamar.com.ua/",
+                "alternateName": "PALAMAR",
+                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+                "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                "name": "PALAMAR GROUP"
+            }
+        };
     }
 
     showFavor(id) {
@@ -364,11 +405,12 @@ export class FavorsMastersComponentController {
             return 22;
         }
     }
+
     setSocialParams(photo) {
         this.$rootScope.socialParams.host = this.constants.host;
         this.$rootScope.socialParams.target = this.constants.host + "/beauty-parlour/services/" + this.category.url;
         this.$rootScope.socialParams.image = this.constants.host + photo.url;
-        this.$rootScope.socialParams.title =  this.category.name;
+        this.$rootScope.socialParams.title = this.category.name;
         this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
     }
 
@@ -377,6 +419,50 @@ export class FavorsMastersComponentController {
         this.mediaObserver.observe(items, index, this.socialParams);
     }
 
+    initSeo(favor: IFavor) {
+        favor.seoJson =
+        {
+            "@context": "http://schema.org/",
+            "@type": "Service",
+            "areaServed": {
+                "@type": "Place",
+                "geo": {
+                    "@type": "GeoCircle",
+                    "geoMidpoint": {
+                        "@type": "GeoCoordinates",
+                        "latitude": "49.8110769",
+                        "longitude": "23.9737773"
+                    },
+                    "geoRadius": "50",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "вул.Щирецька 36",
+                        "addressLocality": "Львів",
+                        "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                        "addressCountry": "Україна"
+                    }
+                },
+                "map": "https://www.google.ru/maps/place/%D0%A1%D1%82%D1%83%D0%B4%D1%96%D1%8F+%D0%BA%D1%80%D0%B0%D1%81%D0%B8+%D0%AE%D0%BB%D1%96%D1%97+%D0%9F%D0%B0%D0%BB%D0%B0%D0%BC%D0%B0%D1%80/@49.8110803,23.9715886,17z/data=!3m1!4b1!4m5!3m4!1s0x473ae70c7a4a754b:0x96d5b6a9de35eaa0!8m2!3d49.8110769!4d23.9737773"
+            },
+            "image": "http://www.palamar.com.ua" + favor.photo.url,
+            "category": favor.category.name,
+            "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+            "serviceType": "сфера послуг",
+            "description": "Ціна" + favor.defPrice + " " + favor.description,
+            "name": favor.name,
+            "brand": {
+                "@context": "http://schema.org/",
+                "@type": "Brand",
+                "url": "http:/palamar.com.ua/",
+                "alternateName": "PALAMAR",
+                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+                "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                "name": "PALAMAR GROUP"
+            }
+        }
+
+    }
 }
 
 export let FavorsMastersComponentUrl = "/beauty-parlour/services/:category";

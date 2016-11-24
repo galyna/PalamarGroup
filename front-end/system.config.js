@@ -12,8 +12,8 @@ System.config({
     paths: {
         "systemjs": "system.js",
         'system-polyfills': 'system-polyfills.js',
-        // "systemjs": "node_modules/systemjs/dist/system.js",
-        // 'system-polyfills': 'node_modules/systemjs/dist/system-polyfills.js',
+        //  "systemjs": "node_modules/systemjs/dist/system.js",
+        //  'system-polyfills': 'node_modules/systemjs/dist/system-polyfills.js',
         'angular': 'node_modules/angular/angular.js',
         'angular-sanitize': 'node_modules/angular-sanitize/angular-sanitize.js',
         'angular-route': 'node_modules/angular-route/angular-route.js',
@@ -34,7 +34,8 @@ System.config({
         'lodash': 'node_modules/lodash/lodash.js',
         'angular-simple-logger': 'node_modules/angular-simple-logger/dist/angular-simple-logger.min.js',
         'uiGmapgoogle-maps': 'node_modules/angular-google-maps/dist/angular-google-maps.js',
-        'googleapis': '//maps.googleapis.com/maps/api/js?sensor=false'
+        'googleapis': '//maps.googleapis.com/maps/api/js?sensor=false',
+        "angular-jsonld":"node_modules/angular-jsonld/angular-jsonld.min.js"
     },
 
     map: {

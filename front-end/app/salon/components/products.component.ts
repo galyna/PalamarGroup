@@ -8,6 +8,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses de
 
         <div class="course-bg " layout-align="center center" flex
              ng-repeat="product in $ctrl.products track by $index">
+              <sb-jsonld json="{{::product.seoJson}}}"></sb-jsonld>
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
                 <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
@@ -220,19 +221,19 @@ class ProductOrderDialogController {
 export class ProductsComponentController {
 
     static $inject = ["$log", '$rootScope', '$mdDialog', ProductOrderResourceName, ProductResourceName,
-        'smoothScroll',SeoPageResourceName,"$q",'$mdMedia'];
+        'smoothScroll', SeoPageResourceName, "$q", '$mdMedia'];
 
     products: IProduct[];
     productsOrder: IProductOrder;
     showAnimation: boolean;
     markerReadySEO: string;
-    seo:any;
+    seo: any;
 
     constructor(private $log: ng.ILogService, private $rootScope: IRootScope,
                 private $mdDialog: ng.material.IDialogService,
                 private ProductOrderResource: IProductOrderResource,
                 private ProductResource: IProductResource, private smoothScroll,
-                private SeoPageResource:ISeoPageResource, private $q,private $mdMedia) {
+                private SeoPageResource: ISeoPageResource, private $q, private $mdMedia) {
 
         this.showAnimation = $rootScope.isBigSize;
         this.productsOrder = new this.ProductOrderResource();
@@ -248,11 +249,33 @@ export class ProductsComponentController {
 
         });
         this.products = this.ProductResource.query({sort: "order"});
-        this.products.$promise.then(() => {
+        this.products.$promise.then((products) => {
                 this.scrollToMain();
+                this.products.forEach((product)=> {
+
+                    product.seoJson =
+                    {
+                        "@context": "http://www.schema.org",
+                        "@type": "product",
+                        "brand": {
+                            "@context": "http://schema.org/",
+                            "@type": "Brand",
+                            "url": "http:/palamar.com.ua/",
+                            "alternateName": "PALAMAR",
+                            "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+                            "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                            "name": "PALAMAR GROUP"
+                        },
+                        "name": product.name,
+                        "image": "http://www.palamar.com.ua" + product.photo.url,
+                        "description":"Ціна "+product.price+" грн. " +product.description
+
+                    };
+                })
             }
         );
-        this.$q.all([this.products.$promise,this.seo.$promise]).then((tt) => {
+        this.$q.all([this.products.$promise, this.seo.$promise]).then((tt) => {
             this.markerReadySEO = "dynamic-content";
         });
     }

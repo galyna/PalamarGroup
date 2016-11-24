@@ -4,7 +4,7 @@ import {AppointmentServiceName, IAppointmentService} from "../servises/appointme
 import {ISeoPageResource, SeoPageResourceName} from "../../resources/seo.page.resource";
 import {IRootScope} from "../../../typings";
 
-const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses description-container" layout="row"
+const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses description-container" layout="row"
      layout-align="center center">
     <div layout="column" layout-align="center center">
 
@@ -18,7 +18,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses de
         </div>
 
         <div class="course-bg " ng-repeat="master in $ctrl.masters track by $index" layout-align="center center" flex>
-
+            <sb-jsonld json="{{::master.seoJson}}}"></sb-jsonld>
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
                 <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
@@ -41,7 +41,8 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses de
                                 <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">
                                     {{::master.name}}
                                 </div>
-                                <div hide show-sm="true" flex="90" class="md-headline capitalize">{{::master.name}}</div>
+                                <div hide show-sm="true" flex="90" class="md-headline capitalize">{{::master.name}}
+                                </div>
                             </div>
                             <div hide show-gt-sm="true" class="md-title">
                                 Вибери послугу та запишись
@@ -100,7 +101,8 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses de
                                 <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">
                                     {{::master.name}}
                                 </div>
-                                <div hide show-sm="true" flex="90" class="md-headline capitalize">{{::master.name}}</div>
+                                <div hide show-sm="true" flex="90" class="md-headline capitalize">{{::master.name}}
+                                </div>
                             </div>
 
                             <div hide show-gt-sm="true" class="md-title">
@@ -166,7 +168,8 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses de
                                 <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">
                                     {{::master.name}}
                                 </div>
-                                <div hide show-sm="true" flex="90" class="md-headline capitalize">{{::master.name}}</div>
+                                <div hide show-sm="true" flex="90" class="md-headline capitalize">{{::master.name}}
+                                </div>
                             </div>
                             <div hide show-gt-sm="true" class="md-title">
                                 Вибери послугу та запишись
@@ -300,8 +303,12 @@ export class MastersComponentController {
 
         });
         this.masters = this.masterResource.query({sort: {"isTop": 1, "order": 1}, populate: 'services.favor'})
-        this.masters.$promise.then((result) => {
+        this.masters.$promise.then((masters) => {
             this.scrollToMain();
+            this.masters.forEach((master)=> {
+                this.seoMaster(master);
+
+            })
 
         });
 
@@ -309,7 +316,34 @@ export class MastersComponentController {
             this.markerReadySEO = "dynamic-content";
         });
     }
-
+    seoMaster(master) {
+        master.seoJson=
+        {
+            "@type": "Person",
+            "jobTitle": master.subtitle,
+            "url": "http://www.palamar.com.ua" + "/beauty-parlour/master/" + master._id,
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "вул.Щирецька 36",
+                "addressLocality": "Львів",
+                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                "addressCountry": "Україна"
+            },
+            "name": master.name,
+            "description": master.description,
+            "image": "http://www.palamar.com.ua" + master.photo.url,
+            "brand": {
+                "@context": "http://schema.org/",
+                "@type": "Brand",
+                "url": "http:/palamar.com.ua/",
+                "alternateName": "PALAMAR",
+                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+                "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                "name": "PALAMAR GROUP"
+            }
+        };
+    }
     showMaster(id) {
         this.$location.path(`/beauty-parlour/master/${id}`);
     }
