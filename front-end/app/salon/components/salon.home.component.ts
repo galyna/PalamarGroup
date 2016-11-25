@@ -13,8 +13,7 @@ import {
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
 
 
-const template = `
- <sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
+const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
 <div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
     <div layout="row" flex>
         <div class="page-delimiter" flex>
@@ -25,22 +24,29 @@ const template = `
         </div>
     </div>
     <div layout="row" layout-align="center center">
-        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="70">
-            <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6"  ng-repeat="category in $ctrl.categories track by $index "
+        <div flex flex-gt-md="90" flex-md="90">
+
+            <div class="home-category-btn" layout="row" layout-xs="column" layout-align="center center">
+                <md-card md-whiteframe="6" ng-repeat="category in $ctrl.categories track by $index "
                          class="md-margin " itemscope itemtype="http://schema.org/Service"
-                         ng-attr-flex-gt-sm="{{$ctrl.getPictureFlex($index,$ctrl.categories.length)}}" flex-gt-xs="46"
-                         flex-xs="80"
-                          <meta itemprop="category" content="Салон Краси Львів"/>
-                           <meta itemprop="description" content="Перукарня у Львові"/>
                          ng-click="::$ctrl.showFavors(category.url)">
-                          <div itemprop="creator" itemscope itemtype="http://schema.org/Brand">
-                            <meta itemprop="name" content="PALAMAR GROUP"/>
-                             <meta itemprop="url" content="http://palamar.com.ua/"/>
+                    <meta itemprop="category" content="Салон Краси Львів"/>
+                    <meta itemprop="description" content="Перукарня у Львові"/>
+
+                    <div itemprop="creator" itemscope itemtype="http://schema.org/Brand">
+                        <meta itemprop="name" content="PALAMAR GROUP"/>
+                        <meta itemprop="url" content="http://palamar.com.ua/"/>
+                    </div>
+                    <img ng-src="{{'/content/images/services/'+ category._id+'.jpg'}}" 
+                         itemprop="contentUrl" itemscope="" itemtype="http://schema.org/ImageObject">
+                    <md-card-content layout="column" layout-align="center center" class=" md-padding  show-description-favor">
+                        <span itemprop="name" class=" md-padding  ">{{::category.name}}</span>
+                        <div  layout="column" layout-align="center center" class="hiden-favors"
+                             ng-repeat="favor in ::category.favors track by $index ">
+                            <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
+                            <div layout="column"  >{{::favor.name}}
+                            </div>
                         </div>
-                    <img ng-src="{{'/content/images/services/'+ category._id+'.jpg'}}" class="md-card-image" itemprop="contentUrl" itemscope="" itemtype="http://schema.org/ImageObject">
-                    <md-card-content  layout="column"  layout-align="center center">
-                        <span itemprop="name" class="  md-margin">{{::category.name}}</span>                       
                     </md-card-content>
                 </md-card>
 
@@ -53,19 +59,19 @@ const template = `
                 <div flex="none" layout="row" class="md-padding program-block  " layout-align=" center center">
                     <div ng-repeat="day in ::$ctrl.days track by $index">
                         <div class="date-block md-margin " ng-class="{'date-block-disabled':day.program=='зачинено'}"
-                              layout="column"
+                             layout="column"
                              layout-align=" center center">
-                            <div hide show-gt-sm='true' class=" md-headline">{{ ::day.name}}</div>                                                  
+                            <div hide show-gt-sm='true' class=" md-headline">{{ ::day.name}}</div>
                             <div hide show-gt-sm='true' class="md-subhead  ">{{::day.program}}</div>
-                            <div  show-sm='true' class=" md-title">{{ ::day.short}}</div>
-                            <div  show-sm='true' class="md-caption  ">{{::day.program}}</div>                              
+                            <div show-sm='true' class=" md-title">{{ ::day.short}}</div>
+                            <div show-sm='true' class="md-caption  ">{{::day.program}}</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class=" overlay-description">
             </div>
-           
+
         </div>
     </div>
     <div layout="row" flex>
@@ -73,24 +79,24 @@ const template = `
             <div class="fit-screen-wrap invers header">
                 <div class="md-display-2"> МАЙСТРИ</div>
             </div>
-           
+
         </div>
     </div>
     <div layout="row" layout-align="center center">
 
-        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="70">
-            <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6"  ng-repeat="master in $ctrl.masters track by $index"
+        <div flex flex-gt-md="80" flex-md="90" flex-gt-xs="80">
+            <div class="home-master-btn" layout-margin layout layout-wrap layout-align="center center">
+                <md-card md-whiteframe="6" ng-repeat="master in $ctrl.masters track by $index"
                          class="md-margin box "
-                           ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"                       
+                         ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
                          flex-gt-xs="46" flex-xs="80"
                          ng-click="::$ctrl.showMaster(master._id)">
                     <sb-jsonld json="{{::master.seoJson}}}"></sb-jsonld>
                     <img ng-src="{{::master.photo.url}}" class=" ">
                     <md-card-content layout="column" class="  show-description" layout-align="center center">
                         <span class="  md-margin">{{::master.name}}</span>
-                         <div class=" md-margin show-description-content">{{::master.rate.text}}</div>
-                         <div class=" md-margin  subtitle">{{::master.subtitle}}</div>
+                        <div class=" md-margin show-description-content">{{::master.rate.text}}</div>
+                        <div class=" md-margin  subtitle">{{::master.subtitle}}</div>
                     </md-card-content>
 
             </div>
@@ -101,15 +107,15 @@ const template = `
     <div layout="row" flex ng-if="$ctrl.transforms.length>0 ">
         <div class="page-delimiter md-padding" flex>
             <div class="fit-screen-wrap    header-super">
-            <div hide show-gt-xs='true' class="md-display-1"> ПЕРЕВТІЛЕННЯ</div>
+                <div hide show-gt-xs='true' class="md-display-1"> ПЕРЕВТІЛЕННЯ</div>
                 <div hide show-xs="true" class="md-headline"> ПЕРЕВТІЛЕННЯ</div>
             </div>
-            
+
             <div class="overlay-trans ">
             </div>
         </div>
     </div>
- 
+
     <div ng-repeat="transform in $ctrl.transforms track by $index">
         <div layout="row" layout-align="center center" ng-if="transform.videos.length>0">
             <div flex-xs="90" flex-gt-md="60" flex-md="80" flex-gt-xs="70">
@@ -119,10 +125,10 @@ const template = `
                              itemtype="http://schema.org/CreativeWork"
                              ng-repeat="video in ::transform.videos track by $index"
                              flex>
-                             <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                        <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
                         </div>
-                        <div flex class="embed-responsive embed-responsive-16by9"  itemscope
+                        <div flex class="embed-responsive embed-responsive-16by9" itemscope
                              itemtype="http://schema.org/VideoObject">
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
@@ -136,19 +142,22 @@ const template = `
 
         </div>
 
-        <div layout="row" layout-align="center center" >
+        <div layout="row" layout-align="center center">
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="70">
-                <div class="courses-hear-forms " layout layout-wrap layout-align="center center" style="padding-top:8px;padding-bottom:0;margin-bottom:0;">
-                    <md-card md-whiteframe="6"  ng-repeat="photo in ::transform.photos  | orderBy:'order' track by $index"
+                <div class="courses-hear-forms " layout layout-wrap layout-align="center center"
+                     style="padding-top:8px;padding-bottom:0;margin-bottom:0;">
+                    <md-card md-whiteframe="6"
+                             ng-repeat="photo in ::transform.photos  | orderBy:'order' track by $index"
                              class="md-margin "
-                               ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
-                              temprop="workPerformed" itemscope="" itemtype="http://schema.org/CreativeWork"
+                             ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
+                             temprop="workPerformed" itemscope="" itemtype="http://schema.org/CreativeWork"
                              flex-gt-xs="46" flex-xs="80"
-                              ng-click="::$ctrl.showMediaObserver(transform.photos  | orderBy:'order', $index)">
-                               <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                             ng-click="::$ctrl.showMediaObserver(transform.photos  | orderBy:'order', $index)">
+                        <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
                         </div>
-                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="contentUrl" itemscope="" itemtype="http://schema.org/ImageObject" >
+                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="contentUrl" itemscope=""
+                             itemtype="http://schema.org/ImageObject">
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                             <span itemprop="caption" class="  md-margin">{{::photo.name}}</span>
                         </md-card-content>
@@ -157,34 +166,39 @@ const template = `
             </div>
         </div>
     </div>
-    <div ng-if="$ctrl.showMoreTransforms" class="md-padding"  layout="row" layout-align=" center center" layout-align-xs="  center">
+    <div ng-if="$ctrl.showMoreTransforms" class="md-padding" layout="row" layout-align=" center center"
+         layout-align-xs="  center">
         <md-button ng-click="::$ctrl.showTransforms()" class="comment-btn xs-selected md-raised ">Всі перевтіління
         </md-button>
     </div>
-     <div layout="row" ng-if="$ctrl.videos.length>0 " flex>
+    <div layout="row" ng-if="$ctrl.videos.length>0 " flex>
         <div class="page-delimiter " flex>
             <div class="fit-screen-wrap md-padding header-super">
-             <div hide show-gt-xs='true' class="md-display-1"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
-                <div hide show-xs="true" class="md-headline""> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
-                
+                <div hide show-gt-xs='true' class="md-display-1"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
+                <div hide show-xs="true" class="md-headline"
+                "> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ
             </div>
-            <div class="overlay-days">
-            </div>
+
+        </div>
+        <div class="overlay-days">
         </div>
     </div>
-    <div ng-repeat="group in $ctrl.videos">
- 
-    <div layout="row" layout-align="center center" >
-        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
+</div>
+<div ng-repeat="group in $ctrl.videos">
+
+    <div layout="row" layout-align="center center">
+        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85">
             <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
-                <md-card md-whiteframe="6" class="  courses-videos" 
-                         ng-repeat="video in ::group.videos track by $index" emprop="workPerformed" itemscope="" itemtype="http://schema.org/CreativeWork"
+                <md-card md-whiteframe="6" class="  courses-videos"
+                         ng-repeat="video in ::group.videos track by $index" emprop="workPerformed" itemscope=""
+                         itemtype="http://schema.org/CreativeWork"
                          flex>
-                         <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
-                            <meta itemprop="name" content="PALAMAR GROUP"/>
-                        </div>
-                    <div flex class="embed-responsive embed-responsive-16by9" class="embed-responsive embed-responsive-16by9" itemscope
-                             itemtype="http://schema.org/VideoObject">
+                    <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                        <meta itemprop="name" content="PALAMAR GROUP"/>
+                    </div>
+                    <div flex class="embed-responsive embed-responsive-16by9"
+                         class="embed-responsive embed-responsive-16by9" itemscope
+                         itemtype="http://schema.org/VideoObject">
                         <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                        video-id="::video.url"></youtube-video>
                     </div>
@@ -197,37 +211,37 @@ const template = `
 
     </div>
 
-    
- </div> 
-   <div ng-if="$ctrl.showMoreVideos" layout="row" layout-align=" center center" layout-align-xs="  center">
-        <md-button ng-click="::$ctrl.showVideos()" class="comment-btn xs-selected md-raised ">Всі відео
-        </md-button>
-    </div>
-     <div layout="row" flex ng-if="$ctrl.brends.length>0 " class="md-padding">
-        <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap header-super">
-                <div class="md-display-2"> БРЕНДИ</div>
-            </div>
-            <div class="overlay-comments">
-            </div>
-       
-        </div>
-    </div>
-    
-     <div layout="row" layout-align="center center">
 
-        <div flex  flex-gt-md="60" flex-gt-lg="40" flex-md="80" flex-gt-xs="70">
-            <div flex class="brends-container" layout-margin layout layout-wrap layout-align="center center">
-             <a href="{{::bren.url}}"  class="md-margin brend " layout="row"  layout-align="center center"
-              flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
-                             flex-gt-xs="46" flex-xs="80" ng-repeat="bren in $ctrl.brends track by $index">
-                   <sb-jsonld json="{{::bren.seoJson}}}"></sb-jsonld>                            
-                    <img ng-src="{{::bren.photo.url}}"  
-                         class=""/>    </a>               
-            </div>
+</div>
+<div ng-if="$ctrl.showMoreVideos" layout="row" layout-align=" center center" layout-align-xs="  center">
+    <md-button ng-click="::$ctrl.showVideos()" class="comment-btn xs-selected md-raised ">Всі відео
+    </md-button>
+</div>
+<div layout="row" flex ng-if="$ctrl.brends.length>0 " class="md-padding">
+    <div class="page-delimiter" flex>
+        <div class="fit-screen-wrap header-super">
+            <div class="md-display-2"> БРЕНДИ</div>
+        </div>
+        <div class="overlay-comments">
         </div>
 
     </div>
+</div>
+
+<div layout="row" layout-align="center center">
+
+    <div flex flex-gt-md="60" flex-gt-lg="40" flex-md="80" flex-gt-xs="70">
+        <div flex class="brends-container" layout-margin layout layout-wrap layout-align="center center">
+            <a href="{{::bren.url}}" class="md-margin brend " layout="row" layout-align="center center"
+               flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
+               flex-gt-xs="46" flex-xs="80" ng-repeat="bren in $ctrl.brends track by $index">
+                <sb-jsonld json="{{::bren.seoJson}}}"></sb-jsonld>
+                <img ng-src="{{::bren.photo.url}}"
+                     class=""/> </a>
+        </div>
+    </div>
+
+</div>
 </div>
 
 
@@ -304,27 +318,8 @@ export class SalonHomeComponentController {
 
         });
         this.masters = this.masterResource.query({sort: "order"})
-        this.masters.$promise.then((masters) => {
-            masters.forEach((master)=> {
-                this.seoJson.employees = [];
-                this.seoJson.employees.push(
-                    {
-                        "@type": "Person",
-                        "jobTitle": master.subtitle,
-                        "url": "http://www.palamar.com.ua" + "/beauty-parlour/master/" + master._id,
-                        "address": {
-                            "@type": "PostalAddress",
-                            "streetAddress": "вул.Щирецька 36",
-                            "addressLocality": "Львів",
-                            "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
-                            "addressCountry": "Україна"
-                        },
-                        "name": master.name,
-                        "description": master.description,
-                        "image": "http://www.palamar.com.ua" + master.photo.url
-                    });
-            })
-        })
+        this.initMasters();
+
         this.brends = this.BrendResource.query({sort: "order"});
         this.brends.$promise.then((brends) => {
             this.brends.forEach((brend)=> {
@@ -349,9 +344,94 @@ export class SalonHomeComponentController {
             videos.splice(2, videos.length - 2);
         });
 
+        var favors= this.favorResource.query({sort: "order"});
+        this.initFavor(favors);
+
         this.$q.all([this.masters.$promise]).then((result) => {
             this.markerReadySEO = "dynamic-content";
         });
+
+    }
+
+    initMasters() {
+        this.masters.$promise.then((masters) => {
+            masters.forEach((master)=> {
+                this.seoJson.employees = [];
+                this.seoJson.employees.push(
+                    {
+                        "@type": "Person",
+                        "jobTitle": master.subtitle,
+                        "url": "http://www.palamar.com.ua" + "/beauty-parlour/master/" + master._id,
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "вул.Щирецька 36",
+                            "addressLocality": "Львів",
+                            "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                            "addressCountry": "Україна"
+                        },
+                        "name": master.name,
+                        "description": master.description,
+                        "image": "http://www.palamar.com.ua" + master.photo.url
+                    });
+            })
+        });
+    }
+    initFavor(favors) {
+        favors.$promise.then((favors) => {
+            if (this.favors.length > 0) {
+                this.categories.forEach((category)=> {
+                    category.favors = favors.filter((favor)=> {
+                        this.initFavorSeo(favor);
+                        return category.name == favor.category.name;
+                    });
+                })
+
+            }
+        });
+    }
+
+    initFavorSeo(favor:IFavor) {
+        favor.seoJson =
+        {
+            "@context": "http://schema.org/",
+            "@type": "Service",
+            "areaServed": {
+                "@type": "Place",
+                "geo": {
+                    "@type": "GeoCircle",
+                    "geoMidpoint": {
+                        "@type": "GeoCoordinates",
+                        "latitude": "49.8110769",
+                        "longitude": "23.9737773"
+                    },
+                    "geoRadius": "50",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "вул.Щирецька 36",
+                        "addressLocality": "Львів",
+                        "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                        "addressCountry": "Україна"
+                    }
+                },
+                "map": "https://www.google.ru/maps/place/%D0%A1%D1%82%D1%83%D0%B4%D1%96%D1%8F+%D0%BA%D1%80%D0%B0%D1%81%D0%B8+%D0%AE%D0%BB%D1%96%D1%97+%D0%9F%D0%B0%D0%BB%D0%B0%D0%BC%D0%B0%D1%80/@49.8110803,23.9715886,17z/data=!3m1!4b1!4m5!3m4!1s0x473ae70c7a4a754b:0x96d5b6a9de35eaa0!8m2!3d49.8110769!4d23.9737773"
+            },
+            "image":"http://www.palamar.com.ua" + favor.photo.url,
+            "category": favor.category.name,
+            "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+            "serviceType": "сфера послуг",
+            "description":"Ціна"+favor.defPrice+" "+ favor.description,
+            "name": favor.name,
+            "brand": {
+                "@context": "http://schema.org/",
+                "@type": "Brand",
+                "url": "http:/palamar.com.ua/",
+                "alternateName": "PALAMAR",
+                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+                "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                "name": "PALAMAR GROUP"
+            }
+        }
 
     }
 
