@@ -39,8 +39,8 @@ declare module pg {
             order: number,
             videos: IVideo[],
             photos: IPhoto[],
-            seoJson:any,
-            seoJsonProduct:any
+            seoJson?:any,
+
         }
 
         export interface IMasterFavor {
@@ -64,7 +64,7 @@ declare module pg {
             isTop: boolean,
             level: { _id: string, name: string, text: string},
             rate: { _id: string, name: string, text: string},
-            seoJson:any
+            seoJson?:any
         }
 
         export interface IAppointment {
@@ -145,7 +145,7 @@ declare module pg {
             name: string,
             url: string,
             order: number,
-            seoJson:any
+            seoJson?:any
         }
 
         export interface ICourse {
@@ -165,7 +165,7 @@ declare module pg {
             days: IDay[],
             isVisible: boolean,
             comments: IComment[],
-            seoJson:any
+            seoJson?:any
         }
 
         export interface IOrder {
@@ -235,7 +235,7 @@ declare module pg {
             price: number,
             photo: IPhoto,
             order: number,
-            seoJson:any,
+            seoJson?:any,
         }
 
         export interface IBrend {
@@ -243,7 +243,7 @@ declare module pg {
             name: string,
             url: string,
             photo: IPhoto,
-            seoJson:any
+            seoJson?:any
         }
 
         export interface IProductOrder {
