@@ -1,3 +1,14 @@
+.appoint-container {
+  font-size: 16px;
+  line-height: 16px;
+  height: 180px;
+  overflow: hidden;
+}
+
+.appoint-show {
+  overflow: visible;
+  height: auto;
+}
 
 .favor-app-btn {
 
@@ -29,7 +40,7 @@
 
     }
 
-    md-card-content.show-description-favor  {
+    md-card-content.show-description-favor {
       position: absolute;
       text-transform: uppercase;
       bottom: 40px;
@@ -64,14 +75,16 @@
       white-space: nowrap;
     }
 
-
-
-
-
     @media (max-width: $layout-breakpoint-xs) {
+      md-card-content.card-appoint {
+        //display: none;
+        padding-bottom: 16px;
+        height: auto;
+        border: none;
+      }
       md-card-content.show-description-favor {
         padding-top: 10px;
-        padding-bottom:  10px;
+        padding-bottom: 10px;
         max-height: 100%;
         height: 100%;
         color: #2b2b2b;
@@ -88,7 +101,6 @@
           text-align: center;
           display: block;
           text-transform: uppercase;
-
 
         }
 
@@ -115,8 +127,6 @@
 
       }
 
-
-
       &:hover md-card-content.show-description-favor {
         max-height: 100%;
         height: 100%;
@@ -134,8 +144,6 @@
           display: block;
           text-transform: uppercase;
           //font-size: 20px;
-
-
 
         }
       }
@@ -212,7 +220,7 @@
     display: block;
     transition: top 0.3s linear;
     top: 0px;
-   // border-radius: 50%;
+    // border-radius: 50%;
     overflow: hidden;
     @media (max-width: $layout-breakpoint-sm) {
       border-radius: 0;
@@ -253,9 +261,11 @@
       -o-transition: all 0.5s ease-in-out;
       transition: all 0.5s ease-in-out;
       .show-description-content {
+        padding: 14px;
         display: none;
       }
       .subtitle {
+        padding: 8px;
         display: none;
       }
     }
@@ -270,16 +280,19 @@
       overflow: hidden;
       white-space: nowrap;
 
-
     }
 
-
-
-
     @media (max-width: $layout-breakpoint-xs) {
+      md-card-content.card-appoint {
+        //display: none;
+        padding-bottom: 16px;
+          height: auto;
+        border: none;
+      }
       md-card-content.show-description {
         padding-top: 10px;
-        padding-bottom:  10px;
+        padding-bottom: 10px;
+        bottom: 0px;
         max-height: 100%;
         height: 100%;
         color: #2b2b2b;
@@ -297,7 +310,6 @@
           display: block;
           text-transform: uppercase;
 
-
         }
         span {
           text-transform: uppercase;
@@ -310,7 +322,7 @@
     @media (min-width: $layout-breakpoint-sm) {
       md-card-content.show-description {
         background-color: rgba($primary, 0.7);
-       // position: absolute;
+        // position: absolute;
       }
 
       &:hover md-card-content.show-description {
@@ -331,8 +343,6 @@
           text-transform: uppercase;
           //font-size: 20px;
 
-
-
         }
       }
 
@@ -347,7 +357,6 @@
       }
 
     }
-
 
     @media (min-width: $layout-breakpoint-md) {
 
@@ -415,15 +424,13 @@
     overflow: hidden;
     max-width: 400px;
     max-height: 400px;
+
     &:hover {
       cursor: pointer;
       @extend .md-whiteframe-12dp;
       // transition: top 0.3s linear;
       top: -3px;
     }
-
-
-
 
     img {
 
@@ -449,7 +456,9 @@
       background-color: rgba($primary, 0.7);
       overflow: hidden;
 
-     span{width: 60%}
+      span {
+        width: 60%
+      }
       -webkit-transition: all 0.5s ease-in-out;
       -moz-transition: all 0.5s ease-in-out;
       -o-transition: all 0.5s ease-in-out;
@@ -461,13 +470,16 @@
 
     @media (max-width: $layout-breakpoint-xs) {
       border-radius: 0%;
-      md-card-content{
+      md-card-content {
         border-radius: 0%;
       }
       md-card-content.show-description-favor {
-        span{width: 60%; margin-bottom:  10px;}
+        span {
+          width: 60%;
+          margin-bottom: 10px;
+        }
         padding-top: 10px;
-        padding-bottom:  10px;
+        padding-bottom: 10px;
         max-height: 100%;
         height: 100%;
         color: white;
@@ -520,7 +532,6 @@
       }
 
     }
-
 
   }
 }

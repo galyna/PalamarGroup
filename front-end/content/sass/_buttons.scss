@@ -12,10 +12,9 @@ button.md-button.md-fab.down-btn {
 
     bottom: 35px;
 
-
   }
   @media (max-width: $layout-breakpoint-xs) {
-    bottom:70px;
+    bottom: 70px;
   }
 
 }
@@ -36,15 +35,18 @@ button.md-button.md-fab.up-btn {
 
   @extend .md-whiteframe-8dp;
   @media (max-width: $layout-breakpoint-xs) {
-    top:30px;
+    top: 30px;
   }
+
+}
+
+.hide-form-btn {
   md-icon {
-    margin: auto;
+
     -ms-transform: rotate(180deg); /* IE 9 */
     -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
     transform: rotate(180deg);
   }
-
 }
 
 button.md-button.md-fab.side-up-btn {
@@ -74,7 +76,9 @@ button.md-button.md-fab.side-up-btn {
   margin: 5px;
   height: 30px;
   transition: transform 0.5s;
-  svg{fill:white ;}
+  svg {
+    fill: white;
+  }
 
   &:hover {
     transform: scale(1.5, 1.5);
@@ -104,7 +108,6 @@ button.md-button.md-fab.side-up-btn {
   @media (max-width: 600px) {
     width: 65px;
   }
-
 
   .stop-label {
 
@@ -143,7 +146,6 @@ button.md-button.md-fab.side-up-btn {
 
   }
 }
-
 
 #menu-container {
   z-index: 70;

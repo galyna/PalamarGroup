@@ -27,9 +27,10 @@ export class CourseController {
     newModel: IModel;
     newComment: any;
     socialParams: any;
-    showAnimation: boolean;
+    showDetails: boolean;
     markerReadySEO: string;
     seoJson: any;
+
 
     constructor(private $log: ng.ILogService, $routeParams: IRouteParams,
                 private $location: ng.ILocationService, private CourseResource: ICourseResource,

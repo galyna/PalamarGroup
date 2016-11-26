@@ -15,14 +15,13 @@ const template = `<div ng-click="$ctrl.consultShow()" class="consult-container"
 
 </div>
 `;
-const dialogtemplate = `
-<md-dialog class="appointment-dialog" aria-label="ЗАПИСАТИСЬ НА БЛОК" flex-sm="85" flex-xs="95" flex-gt-sm="65"
+const dialogtemplate = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСАТИСЬ НА БЛОК" flex-sm="85" flex-xs="95" flex-gt-sm="65"
            layout="column">
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools md-padding ">
-            <h2  class=" md-padding ">Записатись на консультацію
+            <h2 class=" md-padding ">Записатись на консультацію
                 {{::vm.appointment.master.name}}</h2>
-           
+
             <span flex></span>
             <md-button class="md-icon-button dialog-close-btn" ng-click="::vm.cancel()">
                 <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>
@@ -32,41 +31,49 @@ const dialogtemplate = `
     <form name="orderForm" class="md-padding pop-form" novalidate flex ng-submit="::vm.save(orderForm)">
         <md-dialog-content>
             <md-dialog-content-body>
-                 <md-input-container  class="md-block" flex>
-                            <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
-                            <label for="phone">Телефон</label>
-                            <input id="phone" ng-model="vm.appointment.phone" type="text" required name="phone">
-                            <div ng-messages="orderForm.phone.$error" role="alert"
-                                 ng-show="orderForm.$submitted && orderForm.phone.$invalid">
-                                <div class="md-headline" ng-message="required">
-                                    Залиште хоч якусь інформацію про себе, бажано номер телефону
-                                </div>
-                            </div>
+                <md-input-container class="md-block" flex>
+                    <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
+                    <label for="phone">Телефон</label>
+                    <input id="phone" ng-model="vm.appointment.phone" type="text" required name="phone">
+                    <div ng-messages="orderForm.phone.$error" role="alert"
+                         ng-show="orderForm.$submitted && orderForm.phone.$invalid">
+                        <div class="md-headline" ng-message="required">
+                            Залиште хоч якусь інформацію про себе, бажано номер телефону
+                        </div>
+                    </div>
 
-                        </md-input-container>
-                       
-                    
-                        <md-input-container class="md-block" id="orderName" flex>
-                            <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
-                            <label for="name">Як до вас звертатись?</label>
-                            <input id="name" ng-model="vm.appointment.name" type="text" name="name" >
-                           
-                        </md-input-container>
-                         <md-input-container class="md-block" >
+                </md-input-container>
+
+                <div ng-if="vm.showDetails">
+                    <md-input-container class="md-block" id="orderName" flex>
+                        <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
+                        <label for="name">Як до вас звертатись?</label>
+                        <input id="name" ng-model="vm.appointment.name" type="text" name="name">
+
+                    </md-input-container>
+                    <md-input-container class="md-block">
                         <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
                         <label for="comment">Додаткова інформація</label>
                         <textarea id="comment" ng-model="vm.appointment.comment" name="comment"></textarea>
                     </md-input-container>
-  
-                    
-
-                  
-                
-
+                </div>
+                <div flex layout="row" ng-if="!vm.showDetails" class="" ng-click="vm.showDetails=true">
+                    Показати більще
+                    <md-button class=" md-icon-button"  style="margin-top: -15px; padding: 10px">
+                        <md-icon  md-svg-icon="navigation:ic_arrow_drop_down_circle_24px"></md-icon>
+                    </md-button>
+                </div>
+                    <div flex layout="row" ng-if="vm.showDetails"  ng-click="vm.showDetails=false">
+                        Згорнути
+                        <md-button class=" md-icon-button hide-form-btn" style="margin-top: -15px; padding: 10px" >
+                            <md-icon   md-svg-icon="navigation:ic_arrow_drop_down_circle_24px"></md-icon>
+                        </md-button>
+                </div>
             </md-dialog-content-body>
         </md-dialog-content>
-
         <md-dialog-actions class="md-padding" layout="row" layout-align-xs="center center">
+            
+
             <md-button type="submit" class=" xs-selected md-raised md-headline">ЗАПИСАТИСЬ</md-button>
         </md-dialog-actions>
     </form>
@@ -77,7 +84,7 @@ export class ConsultFormComponentController {
 
     static $inject = ['$mdDialog'];
     private appointment: IAppointment;
-
+showDetails:boolean;
     constructor(private $mdDialog: ng.material.IDialogService) {
 
     }

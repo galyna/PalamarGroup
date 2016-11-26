@@ -22,6 +22,8 @@
                         </div>
                     </div>
                 </md-input-container>
+                <div ng-if="vm.showDetails">
+
                 <md-input-container class="md-block">
                     <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
                     <label for="name">Як до вас звертатись?</label>
@@ -42,6 +44,19 @@
                 <md-input-container class="md-block">
                     <span class="md-headline">Завантажте свої фото у різних ракурсах як на прикладі нижче.</span>
                 </md-input-container>
+                </div>
+                <div flex layout="row" ng-if="!vm.showDetails" class="" ng-click="vm.showDetails=true">
+                    Показати більще
+                    <md-button class=" md-icon-button" style="margin-top: -15px; padding: 10px">
+                        <md-icon md-svg-icon="navigation:ic_arrow_drop_down_circle_24px"></md-icon>
+                    </md-button>
+                </div>
+                <div flex layout="row" ng-if="vm.showDetails" ng-click="vm.showDetails=false">
+                    Згорнути
+                    <md-button class=" md-icon-button hide-form-btn" style="margin-top: -15px; padding: 10px">
+                        <md-icon md-svg-icon="navigation:ic_arrow_drop_down_circle_24px"></md-icon>
+                    </md-button>
+                </div>
 
                 <div class=" model-card " layout="row" layout-wrap layout-align="center ">
                     <md-card class="md-margin" flex-gt-md="22" flex-md="46"

@@ -24,7 +24,21 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
         <md-dialog-content>
             <md-dialog-content-body>
                 <div hide show-gt-xs="true">
-                    <div layout="row">
+                    <md-input-container ng-if="!vm.showDetails" id="orderName" class="md-block">
+
+                        <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
+                        <label for="phone">Телефон</label>
+                        <input id="phone" ng-model="vm.appointment.phone" type="text" required name="phone">
+                        <div ng-messages="orderForm.phone.$error" role="alert"
+                             ng-show="orderForm.$submitted && orderForm.phone.$invalid">
+                            <div class="md-headline" ng-message="required">
+                                Залиште хоч якусь інформацію про себе, бажано номер телефону
+                            </div>
+                        </div>
+
+                    </md-input-container>
+
+                    <div layout="row" ng-if="vm.showDetails" >
                         <md-input-container id="orderName" flex="50">
                             <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
                             <label for="phone">Телефон</label>
@@ -38,13 +52,14 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
 
                         </md-input-container>
                         <md-input-container flex="50">
-                              <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
-                        <label for="name">Як до вас звертатись?</label>
-                        <input id="name" ng-model="vm.appointment.name" type="text" name="name" >
-                        
+                            <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
+                            <label for="name">Як до вас звертатись?</label>
+                            <input id="name" ng-model="vm.appointment.name" type="text" name="name">
+
                         </md-input-container>
                     </div>
-
+                    <div ng-if="vm.showDetails">
+                   
                     <div  flex="100" layout="row">
                         <div flex="50" class="order-picker-container " layout="row">
                             <md-datepicker md-open-on-focus class="order-date-picker" md-min-date="vm.startDate"
@@ -78,7 +93,7 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                                          alt="{{master.name}}"/>
                                     <span>  {{ master.name }}  </span></div>
                             </md-option>
-                            </md-option>
+                            
                         </md-select>
                     
                         </md-input-container>
@@ -97,7 +112,19 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                         <textarea id="comment" ng-model="vm.appointment.comment" name="comment"></textarea>
                     </md-input-container>
                 </div>
-
+                    <div flex layout="row" ng-if="!vm.showDetails" class="" ng-click="vm.showDetails=true">
+                        Показати більще
+                        <md-button class=" md-icon-button" style="margin-top: -15px; padding: 10px">
+                            <md-icon md-svg-icon="navigation:ic_arrow_drop_down_circle_24px"></md-icon>
+                        </md-button>
+                    </div>
+                    <div flex layout="row" ng-if="vm.showDetails" ng-click="vm.showDetails=false">
+                        Згорнути
+                        <md-button class=" md-icon-button hide-form-btn" style="margin-top: -15px; padding: 10px">
+                            <md-icon md-svg-icon="navigation:ic_arrow_drop_down_circle_24px"></md-icon>
+                        </md-button>
+                    </div>
+                </div>
                 <div hide-gt-xs="true">
 
                     <md-input-container id="orderName" class="md-block">
@@ -111,7 +138,7 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                             </div>
 
                     </md-input-container>
-
+<div ng-if="vm.showDetails">
                     <md-input-container class="md-block">
                        <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
                         <label for="name">Як до вас звертатись?</label>
@@ -139,7 +166,7 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                             </md-input-container>
                         </div>
                     </div>
-                    <md-input-container ng-if="vm.$mdMedia('(max-width: 400px)')" layout="row" class="xs-master-calendar" flex layout-align="center center" style="padding0;margin: 0px;">
+                    <md-input-container ng-if="vm.$mdMedia('(max-width: 400px)')" layout="row" class="xs-master-calendar" flex layout-align="center center" >
                         <label style='left:38px' for="time">Дата</label>
                        <md-datepicker md-open-on-focus class="order-date-picker" md-min-date="vm.startDate"
                                            placeholder="Дата" flex ng-model="vm.appointment.date"
@@ -167,7 +194,7 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                                          alt="{{master.name}}"/>
                                     <span>  {{ master.name }}  </span></div>
                             </md-option>
-                            </md-option>
+                            
                         </md-select>
                     </md-input-container>
 
@@ -182,8 +209,22 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                         <label for="comment">Додаткова інформація</label>
                         <textarea id="comment" ng-model="vm.appointment.comment" name="comment"></textarea>
                     </md-input-container>
+                 </div>
+                    <div flex layout="row" ng-if="!vm.showDetails" class="" ng-click="vm.showDetails=true">
+                        Показати більще
+                        <md-button class=" md-icon-button" style="margin-top: -15px; padding: 10px">
+                            <md-icon md-svg-icon="navigation:ic_arrow_drop_down_circle_24px"></md-icon>
+                        </md-button>
+                    </div>
+                    <div flex layout="row" ng-if="vm.showDetails" ng-click="vm.showDetails=false">
+                        Згорнути
+                        <md-button class=" md-icon-button hide-form-btn" style="margin-top: -15px; padding: 10px">
+                            <md-icon md-svg-icon="navigation:ic_arrow_drop_down_circle_24px"></md-icon>
+                        </md-button>
+                    </div>
                 </div>
-            </md-dialog-content-body>
+
+                </md-dialog-content-body>
         </md-dialog-content>
 
         <md-dialog-actions class="md-padding" layout="row" layout-align-xs="center center">

@@ -38,8 +38,15 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                     </md-card-content>
                      <md-card-content layout="column" class="  card-appoint" layout-align="center center"  
                     ng-click="::$ctrl.showFavorAppointmentDialog(favor)">
-                         <div>
-                    Записатись </div>
+                        <md-button hide-gt-xs="true" 
+                                   class=" md-margin  xs-selected md-display-1 md-raised "
+                                   aria-label="Details">
+                            Записатись
+                        </md-button>
+
+                        <div hide show-gt-xs='true'>
+                            Записатись
+                        </div>
                     </md-card-content> 
                     </md-card>
                 </div>
