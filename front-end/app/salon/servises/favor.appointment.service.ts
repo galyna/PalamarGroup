@@ -26,11 +26,11 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                 <div hide show-gt-xs="true">
                     <div layout="row">
                         <md-input-container id="orderName" flex="50">
-                            <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
-                            <label for="name">Як до вас звертатись?</label>
-                            <input id="name" ng-model="vm.appointment.name" type="text" name="name" required>
-                            <div ng-messages="orderForm.name.$error" role="alert"
-                                 ng-show="orderForm.$submitted && orderForm.name.$invalid">
+                            <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
+                            <label for="phone">Телефон</label>
+                            <input id="phone" ng-model="vm.appointment.phone" type="text" required name="phone">
+                            <div ng-messages="orderForm.phone.$error" role="alert"
+                                 ng-show="orderForm.$submitted && orderForm.phone.$invalid">
                                 <div class="md-headline" ng-message="required">
                                     Залиште хоч якусь інформацію про себе, бажано номер телефону
                                 </div>
@@ -38,10 +38,10 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
 
                         </md-input-container>
                         <md-input-container flex="50">
-                            <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
-                            <label for="phone">Телефон</label>
-                            <input id="phone" ng-model="vm.appointment.phone" type="text" name="phone">
-
+                              <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
+                        <label for="name">Як до вас звертатись?</label>
+                        <input id="name" ng-model="vm.appointment.name" type="text" name="name" >
+                        
                         </md-input-container>
                     </div>
 
@@ -101,21 +101,22 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                 <div hide-gt-xs="true">
 
                     <md-input-container id="orderName" class="md-block">
-                        <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
-                        <label for="name">Як до вас звертатись?</label>
-                        <input id="name" ng-model="vm.appointment.name" type="text" name="name" required>
-                        <div ng-messages="orderForm.name.$error" role="alert"
-                             ng-show="orderForm.$submitted && orderForm.name.$invalid">
-                            <div class="md-headline" ng-message="required">
-                                Залиште хоч якусь інформацію про себе, бажано номер телефону
+                       <label for="phone">Телефон</label>
+                            <input id="phone" ng-model="vm.appointment.phone" type="text" required name="phone">
+                            <div ng-messages="orderForm.phone.$error" role="alert"
+                                 ng-show="orderForm.$submitted && orderForm.phone.$invalid">
+                                <div class="md-headline" ng-message="required">
+                                    Залиште хоч якусь інформацію про себе, бажано номер телефону
+                                </div>
                             </div>
-                        </div>
+
                     </md-input-container>
 
                     <md-input-container class="md-block">
-                        <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
-                        <label for="phone">Телефон</label>
-                        <input id="phone" ng-model="vm.appointment.phone" type="text" name="phone">
+                       <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
+                        <label for="name">Як до вас звертатись?</label>
+                        <input id="name" ng-model="vm.appointment.name" type="text" name="name" >
+                        
                     </md-input-container>
                     <div ng-if="vm.$mdMedia('(min-width: 400px)')" flex="100" layout="row">
                         <div flex="50" class="order-picker-container " layout="row">
