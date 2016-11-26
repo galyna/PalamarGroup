@@ -71,14 +71,14 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
                              layout-align=" center center">
                             <div hide show-gt-sm='true' class=" md-headline">{{ ::day.name}}</div>
                             <div hide show-gt-sm='true' class="md-subhead  ">{{::day.program}}</div>
-                            <div show-sm='true' class=" md-title">{{ ::day.short}}</div>
-                            <div show-sm='true' class="md-caption  ">{{::day.program}}</div>
+                            <div hide-gt-sm='true' class=" md-title">{{ ::day.short}}</div>
+                            <div hide-gt-sm='true' class="md-caption  ">{{::day.program}}</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <figure class=" overlay-description">
-            </figure>
+            <div class=" overlay-description">
+            </div>
 
         </div>
     </div>
@@ -92,11 +92,11 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
     </div>
     <div layout="row" layout-align="center center">
 
-        <div flex flex-gt-md="80" flex-md="90" flex-gt-xs="80">
+        <div flex flex-gt-md="60" flex-md="90" flex-gt-xs="80">
             <div class="home-master-btn" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" ng-repeat="master in $ctrl.masters track by $index"
                          class="md-margin box "
-                         ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
+                         ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.length)}}"
                          flex-gt-xs="46" flex-xs="80"
                 >
                     <sb-jsonld json="{{::master.seoJson}}}"></sb-jsonld>

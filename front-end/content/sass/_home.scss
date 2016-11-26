@@ -614,7 +614,7 @@
 }
 
 .overlay-days {
-  @extend .pic-base;
+  @extend .overlay;
 
   @media (min-height: 300px) {
     background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_full.jpg");
