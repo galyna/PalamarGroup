@@ -11,6 +11,8 @@ import {
     AcademyVideosResourceName
 } from "../../resources/academy.video.resource";
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
+import {AppointmentServiceName, IAppointmentService} from "../servises/appointment.service";
+import {IAppointmentResource, AppointmentResourceName} from "../../resources/appointment.resource";
 
 
 const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
@@ -90,15 +92,21 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
                          class="md-margin box "
                          ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
                          flex-gt-xs="46" flex-xs="80"
-                         ng-click="::$ctrl.showMaster(master._id)">
+                        >
                     <sb-jsonld json="{{::master.seoJson}}}"></sb-jsonld>
-                    <img ng-src="{{::master.photo.url}}" class=" ">
-                    <md-card-content layout="column" class="  show-description" layout-align="center center">
-                        <span class="  md-margin">{{::master.name}}</span>
-                        <div class=" md-margin show-description-content">{{::master.rate.text}}</div>
-                        <div class=" md-margin  subtitle">{{::master.subtitle}}</div>
+                    <img ng-src="{{::master.photo.url}}"  ng-click="::$ctrl.showMaster(master._id)">
+                    <md-card-content layout="column" class="  show-description" 
+                      ng-click="::$ctrl.showMaster(master._id)" layout-align="center center">
+                        <span class=" ">{{::master.name}}</span>
+                        <div class="  show-description-content">{{::master.rate.text}}</div>
+                        <div class="   subtitle">{{::master.subtitle}}</div>                      
                     </md-card-content>
-
+                   <md-card-content layout="column" class="  card-appoint" layout-align="center center"  
+                    ng-click="::$ctrl.showAppointmentDialog(master)">
+                         <div>
+                    Записатись </div>
+                    </md-card-content>                   
+               </md-card>                 
             </div>
         </div>
 
@@ -176,7 +184,7 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
             <div class="fit-screen-wrap md-padding header-super">
                 <div hide show-gt-xs='true' class="md-display-1"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
                 <div hide show-xs="true" class="md-headline"
-                "> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ
+                > ВЧИМОСЬ У ПРОФЕСІОНАЛІВ
             </div>
 
         </div>
@@ -252,7 +260,7 @@ export class SalonHomeComponentController {
 
     static $inject = [MasterResourceName, "$location", 'constants',
         TransformResourceName, BrendResourceName, "$rootScope", MediaObserverFactoryName,
-        '$q', FavorResourceName, AcademyVideosResourceName, SeoPageResourceName];
+        '$q', FavorResourceName, AcademyVideosResourceName, SeoPageResourceName,AppointmentServiceName,AppointmentResourceName];
 
     favors: IFavor[];
     masters: IMaster[];
@@ -303,7 +311,8 @@ export class SalonHomeComponentController {
                 private constants: IConstants, private TransformResource: ITransformResource,
                 private BrendResource: IBrendResource, private $rootScope: IRootScope,
                 private mediaObserver: IMediaObserverFactory, private $q, private favorResource: IFavorResource,
-                private AcademyVideosResource: IAcademyVideosResource, private SeoPageResource: ISeoPageResource) {
+                private AcademyVideosResource: IAcademyVideosResource, private SeoPageResource: ISeoPageResource,
+                private AppointmentService: IAppointmentService,private AppointmentResource: IAppointmentResource) {
         this.categories = this.constants.favorCategories;
     }
 
@@ -350,6 +359,13 @@ export class SalonHomeComponentController {
         this.$q.all([this.masters.$promise]).then((result) => {
             this.markerReadySEO = "dynamic-content";
         });
+
+    }
+
+    showAppointmentDialog(master) {
+        var appointment = new this.AppointmentResource();
+        appointment.master = master;
+        this.AppointmentService.onShowDialog(appointment);
 
     }
 

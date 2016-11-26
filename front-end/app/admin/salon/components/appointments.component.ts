@@ -111,6 +111,24 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                             <input ng-disabled="true" type="text"
                                    ng-model="$ctrl.dayHour"/>
                         </md-input-container>
+                          <md-input-container class="md-block" ng-if="$ctrl.appointment.favor">
+                                <md-subheader class="md-no-sticky">Послуга</md-subheader>
+                                
+
+                                    <div layout="row" layout-align="start center  ">
+                                        <img ng-src="{{$ctrl.appointment.favor.photo.url}}" class="avatar"
+                                             alt="{{$ctrl.appointment.favor.name}}"/>
+                                        <div flex layout="column" layout="center">
+
+                                            <div id="prokgram" name="program">
+                                                {{::$ctrl.appointment.favor.name}}
+                                            </div>
+                                            <div id="program" name="program">
+                                                {{$ctrl.appointment.favor.defPrice}} грн.
+                                            </div>
+                  </div>
+                                          </div>
+                            </md-input-container>
                         <md-input-container class="md-block">
                             <md-checkbox ng-disabled="::!$root.it.can('modifySalon')"
                                          ng-model="$ctrl.appointment.isConsultation">Записатись на консультацію
@@ -240,50 +258,50 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 `;
 class EditDialogController {
 
-    static $inject = ['$mdDialog', "$mdToast", 'constants','appointment'];
-    private masters:IMaster[];
-    private favors:any[];
-    private newService:IMasterFavor;
-    private appointment:IAppointment;
-    private originalAppointment:IAppointment;
-    dayHour:any;
-    private orderStatuses:any;
+    static $inject = ['$mdDialog', "$mdToast", 'constants', 'appointment'];
+    private masters: IMaster[];
+    private favors: any[];
+    private newService: IMasterFavor;
+    private appointment: IAppointment;
+    private originalAppointment: IAppointment;
+    dayHour: any;
+    private orderStatuses: any;
 
-    constructor(private $mdDialog:ng.material.IDialogService, private $mdToast:ng.material.IToastService,
-                private constants:IConstants, appointment:IAppointment) {
-        this.appointment = angular.copy( appointment );
+    constructor(private $mdDialog: ng.material.IDialogService, private $mdToast: ng.material.IToastService,
+                private constants: IConstants, appointment: IAppointment) {
+        this.appointment = angular.copy(appointment);
         this.originalAppointment = appointment;
-        this.masters.forEach( (m)=> {
+        this.masters.forEach((m) => {
             if (m._id === this.appointment.master) {
                 this.favors = m.services;
             }
-        } )
+        })
         this.setTime();
         this.orderStatuses = constants.orderStatuses;
     }
 
     setTime() {
         if (this.appointment.date) {
-            this.appointment.date=new Date(this.appointment.date);
+            this.appointment.date = new Date(this.appointment.date);
             var minutes = this.appointment.date.getMinutes();
-            this.dayHour= this.appointment.date.getHours() + ':' + (  (minutes < 10) ? minutes + '0' : minutes);
+            this.dayHour = this.appointment.date.getHours() + ':' + (  (minutes < 10) ? minutes + '0' : minutes);
 
         }
     }
 
     deleteService(favor) {
-        this.appointment.favors.splice( this.appointment.favors.indexOf( favor ), 1 )
+        this.appointment.favors.splice(this.appointment.favors.indexOf(favor), 1)
     }
 
-    addService(favor:IMasterFavor) {
+    addService(favor: IMasterFavor) {
 
-        if (!this.appointment.favors.some( (f)=> {
+        if (!this.appointment.favors.some((f) => {
                 return this.newService._id === f._id;
-            } )) {
-            this.appointment.favors.push( this.newService );
+            })) {
+            this.appointment.favors.push(this.newService);
             this.newService = null;
         } else {
-            this.$mdToast.showSimple( `Така послуга вже існує` );
+            this.$mdToast.showSimple(`Така послуга вже існує`);
         }
     }
 
@@ -291,19 +309,19 @@ class EditDialogController {
     changeMaster(master) {
         if (master != this.appointment.master) {
             this.appointment.favors = [];
-            this.masters.forEach( (m)=> {
+            this.masters.forEach((m) => {
                 if (m._id === this.appointment.master) {
                     this.favors = m.services;
                     return;
                 }
-            } )
+            })
         }
     }
 
-    save($form:ng.IFormController) {
+    save($form: ng.IFormController) {
         if ($form.$valid) {
-            angular.extend( this.originalAppointment, this.appointment );
-            this.$mdDialog.hide( this.originalAppointment );
+            angular.extend(this.originalAppointment, this.appointment);
+            this.$mdDialog.hide(this.originalAppointment);
         }
     }
 
@@ -316,65 +334,66 @@ export class AppointmentsComponentController {
 
     static $inject = [AppointmentResourceName, PagingServiceName, "$filter", "$mdDialog",
         "$mdToast", MasterResourceName, "$location"];
-    masters:IMaster[];
-    appointments:IAppointment[];
-    paging:any;
-    private start:Date;
-    private end:Date;
+    masters: IMaster[];
+    appointments: IAppointment[];
+    paging: any;
+    private start: Date;
+    private end: Date;
 
-    constructor(private AppointmentResource:IAppointmentResource, private pagingService:PagingService,
-                private $filter:ng.IFilterService, private $mdDialog:ng.material.IDialogService,
-                private $mdToast:ng.material.IToastService, private MasterResource:IMasterResource,
-                private $location:ng.ILocationService) {
+    constructor(private AppointmentResource: IAppointmentResource, private pagingService: PagingService,
+                private $filter: ng.IFilterService, private $mdDialog: ng.material.IDialogService,
+                private $mdToast: ng.material.IToastService, private MasterResource: IMasterResource,
+                private $location: ng.ILocationService) {
         this.setDefaultDates();
     }
 
     setDefaultDates() {
-        this.end= new Date();
-        this.start= new Date();
+        this.end = new Date();
+        this.start = new Date();
         this.start.setMonth(this.start.getMonth() - 1);
-        this.start.setHours(0,0,0)
+        this.start.setHours(0, 0, 0)
     }
 
     Search() {
         this.showPage();
     }
 
-    openTask(masterId:string) {
-        this.$location.url( '/salon/master/' + masterId );
+    openTask(masterId: string) {
+        this.$location.url('/salon/master/' + masterId);
     }
 
     $onInit() {
-        this.masters = this.MasterResource.query( {populate: 'services.favor'} );
+        this.masters = this.MasterResource.query({populate: 'services.favor'});
         this.showPage();
     }
 
     prev() {
-        this.showPage( this.pagingService.prevPage() );
+        this.showPage(this.pagingService.prevPage());
     }
 
     next() {
-        this.showPage( this.pagingService.nextPage() );
+        this.showPage(this.pagingService.nextPage());
     }
 
     private showPage(page = 1) {
-        this.appointments = this.AppointmentResource.query( {
+        this.appointments = this.AppointmentResource.query({
                 page: page,
                 perPage: 10,
                 sort: {"status": 1, "creationDate": -1},
-                query:{'creationDate': {"$lte":this.end.toJSON(),"$gte":this.start.toJSON()}},
-                populate: 'favors.favor'
+                query: {'creationDate': {"$lte": this.end.toJSON(), "$gte": this.start.toJSON()}},
+                populate: '[{"path":"favor"}, {"path":"favors.favor"}]'
+               // populate: [{"path":"favors.favor"},{"path":"favor"}]
             },
             (res, headers) => {
-                let {total, page, perPage} = this.pagingService.parseHeaders( headers );
-                this.pagingService.update( {page: page, perPage: perPage, total: total} );
-                this.paging = angular.copy( this.pagingService.params() );
-            } );
+                let {total, page, perPage} = this.pagingService.parseHeaders(headers);
+                this.pagingService.update({page: page, perPage: perPage, total: total});
+                this.paging = angular.copy(this.pagingService.params());
+            });
     }
 
-    showEditOrderDialog(ev:MouseEvent, appointment:IAppointment) {
+    showEditOrderDialog(ev: MouseEvent, appointment: IAppointment) {
 
-        this.$mdDialog.show( {
+        this.$mdDialog.show({
             template: editOrderDialogTemplate,
             controller: EditDialogController,
             controllerAs: '$ctrl',
@@ -383,60 +402,59 @@ export class AppointmentsComponentController {
                 appointment: appointment,
                 masters: this.masters
             },
-            parent: angular.element( document.body ),
+            parent: angular.element(document.body),
             targetEvent: ev
 
-        } ).then( (appointment) => this.saveAppointment( appointment ) );
+        }).then((appointment) => this.saveAppointment(appointment));
     }
 
-   
 
-    saveAppointment(appointment:IAppointment) {
+    saveAppointment(appointment: IAppointment) {
 
-        appointment.$save().then( () => {
-            this.$mdToast.showSimple( `Запис збережено` );
-        } ).catch( (err)=> {
+        appointment.$save().then(() => {
+            this.$mdToast.showSimple(`Запис збережено`);
+        }).catch((err) => {
             this.showErrorDialog();
-        } ).finally( ()=> {
-            this.showPage( this.pagingService.currentPage() );
-        } );
+        }).finally(() => {
+            this.showPage(this.pagingService.currentPage());
+        });
         ;
     }
 
-    showDeleteDialog(ev, appointment:IAppointment) {
+    showDeleteDialog(ev, appointment: IAppointment) {
         let confirm = this.$mdDialog.confirm()
-            .title( "Підтвердження дії" )
-            .textContent( `Ви дійсно бажаєте видалити Запис ${appointment.name || ''}?` )
-            .ariaLabel( "Підтвердження дії" )
-            .targetEvent( ev )
-            .ok( 'Так' )
-            .cancel( 'Ні' );
+            .title("Підтвердження дії")
+            .textContent(`Ви дійсно бажаєте видалити Запис ${appointment.name || ''}?`)
+            .ariaLabel("Підтвердження дії")
+            .targetEvent(ev)
+            .ok('Так')
+            .cancel('Ні');
 
-        return this.$mdDialog.show( confirm )
-            .then( () => {
-                return this.deleteOrder( appointment );
-            } );
+        return this.$mdDialog.show(confirm)
+            .then(() => {
+                return this.deleteOrder(appointment);
+            });
     }
 
     showErrorDialog() {
         let confirm = this.$mdDialog.alert()
-            .title( "Помилка" )
-            .textContent( `Спробуйте будь ласка пізніше` )
-            .ariaLabel( "Помилка" )
-            .ok( 'OK' )
-        return this.$mdDialog.show( confirm );
+            .title("Помилка")
+            .textContent(`Спробуйте будь ласка пізніше`)
+            .ariaLabel("Помилка")
+            .ok('OK')
+        return this.$mdDialog.show(confirm);
 
     }
 
-    deleteOrder(appointment:IAppointment) {
+    deleteOrder(appointment: IAppointment) {
 
-        appointment.$delete().then( () => {
-            this.$mdToast.showSimple( `Замовлення видалено` );
-        } ).catch( (err) => {
-            this.$mdToast.showSimple( err.message );
-        } ).finally( ()=> {
-            this.showPage( this.pagingService.currentPage() );
-        } );
+        appointment.$delete().then(() => {
+            this.$mdToast.showSimple(`Замовлення видалено`);
+        }).catch((err) => {
+            this.$mdToast.showSimple(err.message);
+        }).finally(() => {
+            this.showPage(this.pagingService.currentPage());
+        });
         ;
     }
 

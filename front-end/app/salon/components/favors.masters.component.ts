@@ -6,6 +6,7 @@ import {AppointmentServiceName, IAppointmentService} from "../servises/appointme
 import {MediaObserverFactoryName, IMediaObserverFactory} from "../../ui/mediaObserver.service";
 import {IRootScope} from "../../../typings";
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
+import {FavorAppointmentServiceName} from "../servises/favor.appointment.service";
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
 
@@ -20,19 +21,23 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
 
     <div layout="row" layout-align="center center">
         <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
-            <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+            <div class="favor-app-btn" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" ng-repeat="favor in $ctrl.favors track by $index"
                          class="md-margin "
                          ng-attr-flex-gt-sm="46"
                          flex-gt-xs="46" flex-xs="80"
-                         ng-click="::$ctrl.showFavor(favor._id)">
+                        >
                           <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
-                    <img ng-src="{{::favor.photo.url}}">
+                    <img ng-src="{{::favor.photo.url}}"  ng-click="::$ctrl.showFavor(favor._id)">
                      <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
-                    <md-card-content layout="column" class="  show-description-favor" layout-align="center center">
+                    <md-card-content  ng-click="::$ctrl.showFavor(favor._id)" layout="column" class="  show-description-favor" layout-align="center center">
                         <span class="  md-margin">{{::favor.name}}</span>
                         <div class=" md-margin show-description-content">{{::favor.description}}</div>
-
+                    </md-card-content>
+                    <md-card-content layout="column" class="  card-appoint" layout-align="center center"  
+                    ng-click="::$ctrl.showFavorAppointmentDialog(favor)">
+                         <div>
+                    Записатись </div>
                     </md-card-content>
                 </md-card>
             </div>
@@ -252,7 +257,7 @@ export class FavorsMastersComponentController {
 
     static $inject = [FavorResourceName, 'constants', "$routeParams", "$location", MasterResourceName,
         AppointmentServiceName, AppointmentResourceName, '$q', 'orderByFilter', MediaObserverFactoryName,
-        '$rootScope', 'smoothScroll', SeoPageResourceName];
+        '$rootScope', 'smoothScroll', SeoPageResourceName,FavorAppointmentServiceName];
 
     favors: any;
     masters: IMaster[];
@@ -268,7 +273,8 @@ export class FavorsMastersComponentController {
                 private MasterResource: IMasterResource, private AppointmentService: IAppointmentService,
                 private AppointmentResource: IAppointmentResource, private $q, private orderByFilter: ng.IFilterOrderBy,
                 private mediaObserver: IMediaObserverFactory,
-                private $rootScope: IRootScope, private smoothScroll, private SeoPageResource: ISeoPageResource) {
+                private $rootScope: IRootScope, private smoothScroll,
+                private SeoPageResource: ISeoPageResource,private FavorAppointmentService) {
 
 
     }
@@ -305,6 +311,14 @@ export class FavorsMastersComponentController {
         }
 
     }
+
+    showFavorAppointmentDialog(favor) {
+        var appointment = new this.AppointmentResource();
+        appointment.masters = this.masters;
+        appointment.favor = favor;
+        this.FavorAppointmentService.onShowDialog(appointment);
+    }
+
 
     setFavors(favorsPromise) {
         favorsPromise.then((favors) => {

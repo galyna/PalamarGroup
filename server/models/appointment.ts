@@ -19,6 +19,7 @@ let AppointmentSchema = new Schema( {
     comment: String,
     admin_comment: String,
     master: {type: Schema.Types.ObjectId, ref: 'Master'},
+    favor: {type: Schema.Types.ObjectId, ref: 'Favor'},
     service: {
         favor: {type: Schema.Types.ObjectId, ref: 'Favor'},
         price: Number
