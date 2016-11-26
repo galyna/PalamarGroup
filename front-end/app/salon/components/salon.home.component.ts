@@ -257,7 +257,7 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
 
         <div flex flex-gt-md="60" flex-gt-lg="40" flex-md="80" flex-gt-xs="70">
             <div flex class="brends-container" layout-margin layout layout-wrap layout-align="center center">
-                <a href="{{::bren.url}}" class="md-margin brend " layout="row" layout-align="center center"
+                <a href="{{::bren.url}}" class="md-margin brend " layout="row" layout-align="center center" target="_blank"
                    flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
                    flex-gt-xs="46" flex-xs="80" ng-repeat="bren in $ctrl.brends track by $index">
                     <sb-jsonld json="{{::bren.seoJson}}}"></sb-jsonld>

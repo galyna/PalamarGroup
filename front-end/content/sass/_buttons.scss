@@ -91,9 +91,9 @@ button.md-button.md-fab.side-up-btn {
   display: flex;
   z-index: 80;
   position: fixed;
-  top: 10px;
-  right: 0px;
-  width: 120px;
+  top: 75px;
+  left: 10px;
+  width: 125px;
   height: 55px;
   border: 1px solid $primary;
   color: $primary;
@@ -110,10 +110,7 @@ button.md-button.md-fab.side-up-btn {
   }
 
   .stop-label {
-
     font-weight: 400;
-    //width: 85px;
-
   }
 }
 
@@ -123,7 +120,7 @@ button.md-button.md-fab.side-up-btn {
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 120px;
+  width: 125px;
   height: 55px;
   border: 1px solid $primary;
   color: $primary;
