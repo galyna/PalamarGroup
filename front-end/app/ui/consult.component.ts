@@ -1,30 +1,28 @@
-
-
 /**
  * Created by Galyna on 12.11.2016.
  */
 import {IAppointmentResource, AppointmentResourceName, IAppointment} from "../resources/appointment.resource";
 import {IRootScope} from "../../typings";
 
-const template = `<div ng-click="$ctrl.consult()" class="consult-container"
+const template = `<div ng-click="$ctrl.consultShow()" class="consult-container"
      layout="row"
      layout-align="center center ">
-    <div  class="stop-label">КОНСУЛЬТАЦІЯ</div>
+    <div hide-gt-xs="true" class="stop-label">
+        <md-icon md-svg-icon="communication:ic_chat_bubble_24px"></md-icon>
+    </div>
     
+    <div hide show-gt-xs="true" class="stop-label">КОНСУЛЬТАЦІЯ</div>
+
 </div>
 `;
-const dialogtemplate = `<div ng-click="$ctrl.consult()" class="consult-container"
-     layout="row"
-     layout-align="center center ">
-    <div  class="stop-label">КОНСУЛЬТАЦІЯ</div>
-    
-</div><md-dialog class="appointment-dialog" aria-label="ЗАПИСАТИСЬ НА БЛОК" flex-sm="85" flex-xs="95" flex-gt-sm="65"
+const dialogtemplate = `
+<md-dialog class="appointment-dialog" aria-label="ЗАПИСАТИСЬ НА БЛОК" flex-sm="85" flex-xs="95" flex-gt-sm="65"
            layout="column">
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools md-padding ">
-            <h2 hide show-gt-sm='true' class=" md-padding ">Записатись на прйом до майстра
+            <h2  class=" md-padding ">Записатись на консультацію
                 {{::vm.appointment.master.name}}</h2>
-            <h2 hide-gt-sm='true' class=" md-padding ">Записатись до {{::vm.appointment.master.name}}</h2>
+           
             <span flex></span>
             <md-button class="md-icon-button dialog-close-btn" ng-click="::vm.cancel()">
                 <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>
@@ -34,25 +32,25 @@ const dialogtemplate = `<div ng-click="$ctrl.consult()" class="consult-container
     <form name="orderForm" class="md-padding pop-form" novalidate flex ng-submit="::vm.save(orderForm)">
         <md-dialog-content>
             <md-dialog-content-body>
-                <div >
-                    <div layout="column" layout-align="center center">
-                        <md-input-container id="orderName" flex="50">
-                            <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
-                            <label for="name">Як до вас звертатись?</label>
-                            <input id="name" ng-model="vm.appointment.name" type="text" name="name" required>
-                            <div ng-messages="orderForm.name.$error" role="alert"
-                                 ng-show="orderForm.$submitted && orderForm.name.$invalid">
+                 <md-input-container  class="md-block" flex>
+                            <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
+                            <label for="phone">Телефон</label>
+                            <input id="phone" ng-model="vm.appointment.phone" type="text" required name="phone">
+                            <div ng-messages="orderForm.phone.$error" role="alert"
+                                 ng-show="orderForm.$submitted && orderForm.phone.$invalid">
                                 <div class="md-headline" ng-message="required">
                                     Залиште хоч якусь інформацію про себе, бажано номер телефону
                                 </div>
                             </div>
 
                         </md-input-container>
-                        <md-input-container flex="50">
-                            <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
-                            <label for="phone">Телефон</label>
-                            <input id="phone" ng-model="vm.appointment.phone" type="text" name="phone">
-
+                       
+                    
+                        <md-input-container class="md-block" id="orderName" flex>
+                            <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
+                            <label for="name">Як до вас звертатись?</label>
+                            <input id="name" ng-model="vm.appointment.name" type="text" name="name" >
+                           
                         </md-input-container>
                          <md-input-container class="md-block" >
                         <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
@@ -60,10 +58,10 @@ const dialogtemplate = `<div ng-click="$ctrl.consult()" class="consult-container
                         <textarea id="comment" ng-model="vm.appointment.comment" name="comment"></textarea>
                     </md-input-container>
   
-                    </div>
+                    
 
                   
-                </div>
+                
 
             </md-dialog-content-body>
         </md-dialog-content>
@@ -75,10 +73,11 @@ const dialogtemplate = `<div ng-click="$ctrl.consult()" class="consult-container
 </md-dialog>
 
 `;
-export class AppointmentFormComponentController {
+export class ConsultFormComponentController {
 
     static $inject = ['$mdDialog'];
     private appointment: IAppointment;
+
     constructor(private $mdDialog: ng.material.IDialogService) {
 
     }
@@ -102,23 +101,25 @@ export class AppointmentFormComponentController {
 export class ConsultComponentController {
 
 
-    static $inject = ['$mdDialog', '$rootScope', "$log", '$mdMedia',AppointmentResourceName];
+    static $inject = ['$mdDialog', '$rootScope', "$log", '$mdMedia', AppointmentResourceName];
 
     constructor(private $mdDialog: ng.material.IDialogService,
                 private $rootScope: IRootScope, private $log: ng.ILogService,
-                private $mdMedia,private AppointmentResource:IAppointmentResource) {
+                private $mdMedia, private AppointmentResource: IAppointmentResource) {
 
     }
 
-    consult() {
+    consultShow() {
         var appointment = new this.AppointmentResource();
-        appointment.isConsultation=true;
+        appointment.isConsultation = true;
         this.$mdDialog.show({
             template: dialogtemplate,
             bindToController: true,
-            controller: AppointmentFormComponentController,
+            controller: ConsultFormComponentController,
             controllerAs: 'vm',
-            parent: angular.element(document.querySelector('#pageContainer')),
+            parent: angular.element(document.body),
+
+          //  parent: angular.element(document.querySelector('#pageContainer')),
             fullscreen: this.$mdMedia('(max-width: 360px)'),
             locals: {
                 appointment: appointment,
@@ -165,7 +166,6 @@ export class ConsultComponentController {
     }
 
 
-
 }
 
 
@@ -173,6 +173,7 @@ export let ConsultComponentName = 'pgConsult';
 export let ConsultComponentOptions = {
     template: template,
     controller: ConsultComponentController
-};/**
+};
+/**
  * Created by ostap on 26.11.16.
  */

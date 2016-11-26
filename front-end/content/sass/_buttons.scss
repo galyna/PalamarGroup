@@ -101,6 +101,9 @@ button.md-button.md-fab.side-up-btn {
   }
 ;
 
+  @media (max-width: 600px) {
+    width: 65px;
+  }
 
 
   .stop-label {
