@@ -77,8 +77,8 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
                     </div>
                 </div>
             </div>
-            <div class=" overlay-description">
-            </div>
+            <figure class=" overlay-description">
+            </figure>
 
         </div>
     </div>
