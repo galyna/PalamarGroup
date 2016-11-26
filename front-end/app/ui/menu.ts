@@ -122,8 +122,7 @@ export class MenuComponentController {
         if (!menuBtn.hasClass('open')) {
             this.mdDialog.show({
                 template: dialogTemplate,
-                clickOutsideToClose: true,
-                bindToController: true,
+                              bindToController: true,
                 controller: MenuComponentOptions.controller,
                 controllerAs: 'vm',
                 parent: angular.element(document.body),

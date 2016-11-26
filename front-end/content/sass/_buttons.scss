@@ -83,6 +83,34 @@ button.md-button.md-fab.side-up-btn {
 
 }
 
+.consult-container {
+  display: flex;
+  z-index: 80;
+  position: fixed;
+  top: 10px;
+  right: 0px;
+  width: 120px;
+  height: 55px;
+  border: 1px solid $primary;
+  color: $primary;
+  align-items: center;
+  background: rgba(white, 0.6);
+
+  &:hover {
+    cursor: pointer;
+  }
+;
+
+
+
+  .stop-label {
+
+    font-weight: 400;
+    //width: 85px;
+
+  }
+}
+
 .stop-video-container {
   display: flex;
   z-index: 70;

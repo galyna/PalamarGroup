@@ -17,6 +17,7 @@ import {MenuComponentName, MenuComponentOptions} from "./menu";
 import {FooterComponentName, FooterComponentOptions} from "./footer.component";
 import {SchedulerServiceName, SchedulerService} from "./scheduler.service";
 import {SalonHeaderComponentName, SalonHeaderComponentOptions} from "./header.component";
+import {ConsultComponentName, ConsultComponentOptions} from "./consult.component";
 
 export let uiModule = angular.module('ui', [
     'youtube-embed',
@@ -30,5 +31,6 @@ export let uiModule = angular.module('ui', [
     .directive(chooseFileButtonDirectiveName, chooseFileButtonDirectiveFactory)
     .component(MenuComponentName, MenuComponentOptions)
     .component(FooterComponentName, FooterComponentOptions)
+    .component(ConsultComponentName, ConsultComponentOptions)
     .component(SalonHeaderComponentName, SalonHeaderComponentOptions)
     .directive(ImageInputDirectiveName, imageInputDirectiveFactory);

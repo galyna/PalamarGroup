@@ -45,7 +45,9 @@
 <pg-header class="page-header" ng-if="::!$root.isAdminZone()"></pg-header>
 
 
-<div class="page-container">
+<div class="page-container" id="pageContainer">
+    <pg-consult></pg-consult>
+
     <ng-view id="mainContent" flex ng-if="::!$root.isAdminZone();"></ng-view>
 </div>
 <!--footer-->
