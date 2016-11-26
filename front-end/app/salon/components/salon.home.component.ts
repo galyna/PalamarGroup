@@ -56,6 +56,11 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
             </div>
         </div>
     </div>
+     <div ng-if="$ctrl.showMoreTransforms" class="md-padding" layout="row" layout-align=" center center"
+         layout-align-xs="  center">
+        <md-button ng-click="::$ctrl.showServices()" class="comment-btn xs-selected md-raised ">Всі послуги
+        </md-button>
+    </div>
     <div layout="row" flex>
         <div class="page-delimiter content-block" id="trigger-right" flex>
             <div class="fit-screen-wrap header-long " layout="column">
@@ -497,6 +502,10 @@ export class SalonHomeComponentController {
 
     showFavors(id: String) {
         this.$location.path(`/beauty-parlour/services/${id}`);
+    }
+
+    showServices(){
+        this.$location.path(`/beauty-parlour/services`);
     }
 
     showMaster(masterId: String) {

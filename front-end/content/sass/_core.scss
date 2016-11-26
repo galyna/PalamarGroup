@@ -51,17 +51,14 @@ html {
   bottom: 0;
   right: 0;
   left: 0;
+  width:100%;
   z-index: 1;
   -webkit-filter: blur(1px);
   -moz-filter: blur(1px);
   -o-filter: blur(1px);
   -ms-filter: blur(1px);
   filter: blur(1px);
-  -moz-background-size: cover;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+
 
   background-position: center;
   -moz-background-position: center;
