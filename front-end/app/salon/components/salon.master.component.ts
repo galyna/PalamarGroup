@@ -139,6 +139,11 @@ const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
                     <div class="md-display-1"> ГРАФІК РОБОТИ</div>
                     <div class="md-title md-padding"> ВИБЕРИ, ТИЖДЕНЬ, ДЕНЬ ЧАС ТА ЗАПИШИСЬ</div>
 
+<md-button easing="easeInOutCubic" scroll-to="week-front" style="background-color: white !Important"
+           duration="100" class=" md-fab  down-btn md-padding" aria-label="down">
+    <md-icon class=""
+             md-svg-src="navigation:ic_arrow_downward_24px"></md-icon>
+</md-button>
 
                 </div>
             </div>
