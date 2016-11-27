@@ -83,69 +83,78 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 
         </md-toolbar>
         <md-dialog-content>
-            <div class="md-dialog-content md-paddimg" layout="column">
-                <div layout-gt-sm="row" layout="column">
-                    <div flex="100" flex-gt-sm="30" layout="column" class="md-margin">
-                        <md-subheader class="md-no-sticky">Інформація від замовника
-                        </md-subheader>
-                        <md-input-container class="md-block">
-                            <label>Замовник</label>
-                            <input ng-disabled="::!$root.it.can('modifySalon')" type="text"
-                                   ng-model="$ctrl.appointment.name">
-                        </md-input-container>
-                        <md-input-container class="md-block">
+            <md-tabs md-stretch-tabs="always" md-dynamic-height>
+                <md-tab flex label="Клієнт">
+                    <div  layout="column" class="md-margin">
+                        <div layout="row"  layout="start start" >
+                            <md-input-container class="md-block">
                             <label>Телфон</label>
                             <input ng-disabled="::!$root.it.can('modifySalon')" type="text"
                                    ng-model="$ctrl.appointment.phone">
                         </md-input-container>
-                        <md-input-container class="md-block" layout="column" style="margin-left:-20px;" layout="start start" flex>
-                            <label>Дата прийому</label>
-                            <md-datepicker ng-disabled='true'  placeholder="Дата" flex
-                                           ng-model="$ctrl.appointment.date"
-                                           name="dateField"></md-datepicker>
-                        </md-input-container>
 
-                        <md-input-container class="md-block">
-                            <md-icon md-svg-icon="action:ic_schedule_24px"></md-icon>
-                            <label>Час прийому</label>
-                            <input ng-disabled="true" type="text"
-                                   ng-model="$ctrl.dayHour"/>
-                        </md-input-container>
-                          <md-input-container class="md-block" ng-if="$ctrl.appointment.favor">
-                                <md-subheader class="md-no-sticky">Послуга</md-subheader>
-                                
-
-                                    <div layout="row" layout-align="start center  ">
-                                        <img ng-src="{{$ctrl.appointment.favor.photo.url}}" class="avatar"
-                                             alt="{{$ctrl.appointment.favor.name}}"/>
-                                        <div flex layout="column" layout="center">
-
-                                            <div id="prokgram" name="program">
-                                                {{::$ctrl.appointment.favor.name}}
-                                            </div>
-                                            <div id="program" name="program">
-                                                {{$ctrl.appointment.favor.defPrice}} грн.
-                                            </div>
-                  </div>
-                                          </div>
+                            <md-input-container class="md-block">
+                                <label>Замовник</label>
+                                <input ng-disabled="::!$root.it.can('modifySalon')" type="text"
+                                       ng-model="$ctrl.appointment.name">
                             </md-input-container>
-                        <md-input-container class="md-block">
-                            <md-checkbox ng-disabled="::!$root.it.can('modifySalon')"
-                                         ng-model="$ctrl.appointment.isConsultation">Записатись на консультацію
-                            </md-checkbox>
-                        </md-input-container>
+                        </div>
+                        <div layout="row"  layout="start start" >
+                            <md-input-container class="md-block" layout="column"  layout="start start" >
+                                <label>Дата прийому</label>
+                                <md-datepicker ng-disabled='true'  placeholder="Дата" flex
+                                               ng-model="$ctrl.appointment.date"
+                                               name="dateField"></md-datepicker>
+                            </md-input-container>
 
-                        <md-input-container class="md-block">
+                            <md-input-container class="md-block">
+                                <md-icon md-svg-icon="action:ic_schedule_24px"></md-icon>
+                                <label>Час прийому</label>
+                                <input ng-disabled="true" type="text"
+                                       ng-model="$ctrl.dayHour"/>
+                            </md-input-container>
+
+                        </div>
+                        <div layout="row"  layout="start start" >
+                            <md-input-container class="md-block" ng-if="$ctrl.appointment.favor">
+                                <md-subheader class="md-no-sticky">Послуга</md-subheader>
+
+
+                                <div layout="row" layout-align="start center  ">
+                                    <img ng-src="{{$ctrl.appointment.favor.photo.url}}" class="avatar"
+                                         alt="{{$ctrl.appointment.favor.name}}"/>
+                                    <div flex layout="column" layout="center">
+
+                                        <div id="prokgram" name="program">
+                                            {{::$ctrl.appointment.favor.name}}
+                                        </div>
+                                        <div id="program" name="program">
+                                            {{$ctrl.appointment.favor.defPrice}} грн.
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <md-checkbox ng-disabled="::!$root.it.can('modifySalon')"
+                                             ng-model="$ctrl.appointment.isConsultation">Записатись на консультацію
+                                </md-checkbox>
+                            </md-input-container>
+
+                        </div>
+                        
+                        <md-input-container >
                             <label>Коментар замовника</label>
                             <input ng-disabled="::!$root.it.can('modifySalon')" type="text"
                                    ng-model="$ctrl.appointment.comment"/>
                         </md-input-container>
                     </div>
-                    <div flex="100" flex-gt-sm="30" layout="column" class="md-margin">
-                        <md-subheader class="md-no-sticky">Майстер
-                        </md-subheader>
 
-                        <md-input-container class="md-block">
+                </md-tab>
+
+                <md-tab flex label="Майстер">
+                    <div flex="100"  layout="row" class="md-margin">
+                        <div layout="column"  layout="start stretch" flex> 
+                            <md-input-container class="md-block">
                             <label>Майстер</label>
                             <md-select ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.appointment.master"
                                        ng-change="$ctrl.changeMaster(id)">
@@ -156,7 +165,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                                 </md-option>
                             </md-select>
                         </md-input-container>
-                        <div ng-if="!$ctrl.appointment.isConsultation">
+                        
                             <md-input-container class="md-block">
                                 <md-subheader class="md-no-sticky">Послуги</md-subheader>
                                 <div ng-repeat="service in $ctrl.appointment.favors">
@@ -184,8 +193,9 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                                 </div>
                             </md-input-container>
 
-
-                            <md-subheader class="md-no-sticky" ng-if=" ::$root.it.can('modifySalon') ">Додати послугу
+                        </div>
+                         <div layout="column"  flex="50" layout="start start" ng-if=" ::$root.it.can('modifySalon') ">
+                            <md-subheader class="md-no-sticky" >Додати послугу
                             </md-subheader>
 
                             <md-select ng-if=" ::$root.it.can('modifySalon') " ng-model="$ctrl.newService"
@@ -209,7 +219,11 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                             </md-button>
                         </div>
                     </div>
-                    <div flex="100" flex-gt-sm="30" layout="column" class="md-margin">
+                    
+                </md-tab>
+
+                <md-tab flex label="Адмінітратор">
+                    <div flex="100"  layout="column" class="md-margin">
 
                         <md-subheader class="md-no-sticky">Адміністративна частина
                         </md-subheader>
@@ -222,34 +236,34 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                                 </md-option>
                             </md-select>
                         </md-input-container>
-
-                        <md-input-container>
-                            <label>Коментар адміністратора</label>
-                            <textarea ng-disabled="::!$root.it.can('modifySalon')"
-                                      ng-model="$ctrl.appointment.admin_comment"></textarea>
-                        </md-input-container>
                         <md-input-container class="md-block">
                             <md-checkbox ng-disabled="::!$root.it.can('modifySalon')"
                                          ng-model="$ctrl.appointment.isPreOrder">Попереднє замовлення
                             </md-checkbox>
                         </md-input-container>
+                        <md-input-container>
+                            <label>Коментар адміністратора</label>
+                            <textarea ng-disabled="::!$root.it.can('modifySalon')"
+                                      ng-model="$ctrl.appointment.admin_comment"></textarea>
+                        </md-input-container>
+                      
                     </div>
-                </div>
-                <div flex layout="row" ng-if="::$root.it.can('modifySalon') && $ctrl.appointment.master">
-                    <pg-appointment-scheduler appointment="$ctrl.appointment"
+                </md-tab>
+
+                <md-tab flex label="Графік" ng-if="::$root.it.can('modifySalon') && $ctrl.appointment.master">
+                    <pg-appointment-scheduler appointment="$ctrl.appointment" 
                                               master="$ctrl.appointment.master"></pg-appointment-scheduler>
-                </div>
-
-            </div>
-
+                </md-tab>
+            </md-tabs>
+                
         </md-dialog-content>
         <md-dialog-actions layout="row" ng-if="::$root.it.can('modifySalon')">
             <span flex></span>
 
-            <md-button ng-click="$ctrl.cancel()" aria-label="cancel">
+            <md-button ng-click="$ctrl.cancel()" aria-label="cancel" class="md-raised  md-primary">
                 Відмінити
             </md-button>
-            <md-button type="submit" aria-label="save">
+            <md-button type="submit" aria-label="save" class="md-raised md-primary md-accent">
                 Зберегти
             </md-button>
         </md-dialog-actions>
@@ -333,7 +347,7 @@ class EditDialogController {
 export class AppointmentsComponentController {
 
     static $inject = [AppointmentResourceName, PagingServiceName, "$filter", "$mdDialog",
-        "$mdToast", MasterResourceName, "$location"];
+        "$mdToast", MasterResourceName, "$location",'$mdMedia'];
     masters: IMaster[];
     appointments: IAppointment[];
     paging: any;
@@ -343,7 +357,7 @@ export class AppointmentsComponentController {
     constructor(private AppointmentResource: IAppointmentResource, private pagingService: PagingService,
                 private $filter: ng.IFilterService, private $mdDialog: ng.material.IDialogService,
                 private $mdToast: ng.material.IToastService, private MasterResource: IMasterResource,
-                private $location: ng.ILocationService) {
+                private $location: ng.ILocationService,private $mdMedia) {
         this.setDefaultDates();
     }
 
@@ -402,6 +416,7 @@ export class AppointmentsComponentController {
                 appointment: appointment,
                 masters: this.masters
             },
+            fullscreen: this.$mdMedia('(max-width: 1360px)'),
             parent: angular.element(document.body),
             targetEvent: ev
 

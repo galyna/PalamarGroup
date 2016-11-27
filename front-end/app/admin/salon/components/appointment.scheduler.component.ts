@@ -8,6 +8,7 @@ import {ISchedulerScope} from "./master.scheduler";
 import {SchedulerServiceName, ISchedulerService} from "../../../ui/scheduler.service";
 
 const template = `
+
  <div layout="row" class="master-scheduler" layout-xs="column">
                 <div hide show-gt-xs="true"  layout="row" layout-align="center center">
                     <daypilot-navigator  style=" width: 280px" id="navi"
