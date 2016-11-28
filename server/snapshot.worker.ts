@@ -21,6 +21,13 @@ var pages = [
         title: "PALAMAR GROUP beauty parlour & academy Головна сторінка"
     },
     {
+        url: "/beauty-parlour",
+        description: "",
+        name: "home2",
+        text: "Головна",
+        title: "PALAMAR GROUP beauty parlour & academy Головна сторінка"
+    },
+    {
         url: "/beauty-parlour/services",
         description: "",
         name: "services",
@@ -111,16 +118,16 @@ function saveSnapshots() {
 
         var result = htmlSnapshots.run({
             input: "sitemap",
-            port: "8080",
             source: path.resolve('../front-end/dist/sitemap.xml'),
             phantomjsOptions: ["--ignore-ssl-errors=true"],
             outputDir: './snapshots',
             selector: "#dynamic-content",
             processLimit: 1,
+            outputDirClean: true,
             snapshotScript: {
                 script: "removeScripts"
             },
-            timeout: { "http://localhost:8080/": 20000, "__default": 10000 }
+            timeout: { "http://palamar.com.ua/": 20000, "__default": 10000 }
         }, function (err, snapshotsCompleted) {
             console.log("snapshots generution finished at" + new Date().toTimeString())
             console.log(snapshotsCompleted.join(','));

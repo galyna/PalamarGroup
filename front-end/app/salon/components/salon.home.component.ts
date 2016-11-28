@@ -373,9 +373,9 @@ export class SalonHomeComponentController {
 
 
         this.$q.all([this.masters.$promise,
-
-            this.transforms.$promise
-
+            this.videos.$promise,favorPromise,
+            this.transforms.$promise,this.brends,
+            this.seo.$promise
         ]).then((result) => {
             this.markerReadySEO = "dynamic-content";
         });
