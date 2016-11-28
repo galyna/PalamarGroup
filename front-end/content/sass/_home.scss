@@ -110,13 +110,6 @@
           font-size: 30px;
         }
       }
-      //md-card-content.card-appoint {
-      //  height: 40px;
-      //  border: none;
-      //  color: white;
-      //  background-color: black;
-      //}
-
     }
 
     @media (min-width: $layout-breakpoint-sm) {
@@ -418,7 +411,7 @@
   md-card.md-default-theme, md-card {
     position: relative;
     display: flex;
-    transition: top 0.3s linear;
+
     top: 0px;
     border-radius: 50%;
     overflow: hidden;
@@ -428,8 +421,7 @@
     &:hover {
       cursor: pointer;
       @extend .md-whiteframe-12dp;
-      // transition: top 0.3s linear;
-      top: -3px;
+
     }
 
     img {
