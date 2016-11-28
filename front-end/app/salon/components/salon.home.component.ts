@@ -35,12 +35,9 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
                     <meta itemprop="category" content="Салон Краси Львів"/>
                     <meta itemprop="description" content="Перукарня у Львові"/>
 
-                    <div itemprop="creator" itemscope itemtype="http://schema.org/Brand">
-                        <meta itemprop="name" content="PALAMAR GROUP"/>
-                        <meta itemprop="url" content="http://palamar.com.ua/"/>
-                    </div>
+                    
                     <img ng-src="{{'/content/images/services/'+ category._id+'.jpg'}}"
-                         itemprop="contentUrl" itemscope="" itemtype="http://schema.org/ImageObject">
+                         itemprop="image" >
                     <md-card-content layout="column" layout-align="center center"
                                      class=" md-padding  show-description-favor">
                         <span itemprop="name" class=" md-padding  ">{{::category.name}}</span>

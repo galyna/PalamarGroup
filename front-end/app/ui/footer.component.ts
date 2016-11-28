@@ -6,17 +6,13 @@ const template = `
  <sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
 <div class="page-header-wrap" layout="column" layout-align="center center">
     <div layout="row" flex layout-align="start center"  >
-        <div layout="column" flex itemprop="validIn" itemscope itemtype="http://schema.org/AdministrativeArea">
+        <div layout="column" flex  >
             <div iitemprop="name" class="md-subhead social-header city">Львів
 
             </div>
             <div layout="column" ng-repeat="salon in $ctrl.salons track by $index" >
-                <div itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
-                    <meta itemprop="latitude" content="{{salon.latitude}}"/>
-                    <meta itemprop="longitude" content="{{salon.longitude}}"/>
-                     <meta itemprop="addressLocality" content="{{salon.description}}"/>
-                </div>
-                <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress" itemprop="streetAddress"
+               
+                <div 
                  ng-if="salon._id!='isAcademy' && salon.contacts.length>0"
                      ng-click=" $ctrl.showContacts()"
                      class="md-subhead social-header md-padding">Адреса салону
@@ -204,7 +200,7 @@ export class FooterComponentController {
 
                         this.seoJson.contactPoint.push({ "@type" : "ContactPoint",
                             "telephone" : contact.phone,
-                            "contactType" : "customer service",
+                            "contactType": "customer service",
                             "image":"http://www.palamar.com.ua"+contact.photo.url
                         }) ;
                     })

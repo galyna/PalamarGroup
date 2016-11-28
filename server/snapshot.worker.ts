@@ -123,11 +123,8 @@ function saveSnapshots() {
             outputDir: './snapshots',
             selector: "#dynamic-content",
             processLimit: 1,
-            outputDirClean: true,
-            snapshotScript: {
-                script: "removeScripts"
-            },
-            timeout: { "http://palamar.com.ua/": 20000, "__default": 10000 }
+            outputDirClean: true
+           // timeout: { "http://palamar.com.ua/": 20000, "__default": 10000 }
         }, function (err, snapshotsCompleted) {
             console.log("snapshots generution finished at" + new Date().toTimeString())
             console.log(snapshotsCompleted.join(','));
