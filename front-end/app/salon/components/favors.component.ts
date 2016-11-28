@@ -4,6 +4,8 @@ import {IConstants} from "../../core/core.config";
 import {IMediaObserverFactory, MediaObserverFactoryName} from "../../ui/mediaObserver.service";
 import {IRootScope} from "../../../typings";
 import {ISeoPageResource, SeoPageResourceName} from "../../resources/seo.page.resource";
+import {FavorAppointmentServiceName} from "../servises/favor.appointment.service";
+import {IAppointmentResource, AppointmentResourceName} from "../../resources/appointment.resource";
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
 
@@ -21,19 +23,31 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
 
         <div layout="row" layout-align="center center" ng-if="category.favors.length>0 ">
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
-                <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+                <div class="favor-app-btn" layout-margin layout layout-wrap layout-align="center center">
                     <md-card md-whiteframe="6" ng-repeat="favor in category.favors track by $index"
                              class="md-margin "
                              ng-attr-flex-gt-sm="46"
                              flex-gt-xs="46" flex-xs="80"
-                             ng-click="::$ctrl.showFavor(favor._id)">
- <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
-                        <img ng-src="{{::favor.photo.url}}" >                                 
-                    <md-card-content layout="column" class="  show-description-favor" layout-align="center center">
+                             >
+                       <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
+                        <img ng-src="{{::favor.photo.url}}"  ng-click="::$ctrl.showFavor(favor._id)" >                                 
+                    <md-card-content  ng-click="::$ctrl.showFavor(favor._id)" layout="column" class="  show-description-favor" layout-align="center center">
                         <span class="  md-margin">{{::favor.name}}</span>
                          <div class=" md-margin show-description-content">{{::favor.description}}</div>
                        
                     </md-card-content>
+                     <md-card-content layout="column" class="  card-appoint" layout-align="center center"  
+                    ng-click="::$ctrl.showFavorAppointmentDialog(favor)">
+                        <md-button hide-gt-xs="true" 
+                                   class=" md-margin  xs-selected md-display-1 md-raised "
+                                   aria-label="Details">
+                            Записатись
+                        </md-button>
+
+                        <div hide show-gt-xs='true'>
+                            Записатись
+                        </div>
+                    </md-card-content> 
                     </md-card>
                 </div>
             </div>
@@ -102,7 +116,8 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
 export class FavorsComponentController {
 
     static $inject = [FavorResourceName, MediaObserverFactoryName,
-        '$rootScope','constants', "$routeParams", "$location", 'orderByFilter','smoothScroll',SeoPageResourceName,"$q"];
+        '$rootScope','constants', "$routeParams", "$location",
+        'orderByFilter','smoothScroll',SeoPageResourceName,"$q",FavorAppointmentServiceName,AppointmentResourceName];
 
     favors: any;
     masters: IMaster[];
@@ -117,7 +132,8 @@ export class FavorsComponentController {
                 private $rootScope: IRootScope,private constants: IConstants,
                 private $routeParams: ng.route.IRouteParamsService,
                 private $location: ng.ILocationService, private orderByFilter: ng.IFilterOrderBy,
-                private smoothScroll,private SeoPageResource:ISeoPageResource, private $q) {
+                private smoothScroll,private SeoPageResource:ISeoPageResource, private $q,
+                private FavorAppointmentService,private AppointmentResource: IAppointmentResource) {
 
 
     }
@@ -164,6 +180,13 @@ export class FavorsComponentController {
         this.$q.all([this.favors.$promise, this.seo.$promise]).then((result) => {
             this.markerReadySEO = "dynamic-content";
         });
+    }
+
+    showFavorAppointmentDialog(favor) {
+        var appointment = new this.AppointmentResource();
+        appointment.masters = this.masters;
+        appointment.favor = favor;
+        this.FavorAppointmentService.onShowDialog(appointment);
     }
 
     scrollToMain() {

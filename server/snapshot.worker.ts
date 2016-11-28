@@ -160,9 +160,8 @@ async function saveSitemap() {
 }
 
 
-
 schedule.scheduleJob({
-    hour: 0
+    hour: 20
 }, ()=> {
     mongoose.connect(config.mongoUrl, ()=>{
         console.log('saveSitemap started');

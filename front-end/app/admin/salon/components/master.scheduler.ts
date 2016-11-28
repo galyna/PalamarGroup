@@ -21,6 +21,10 @@ const template = `
                     <daypilot-calendar id="week" daypilot-config="$ctrl.weekConfig"
                                        daypilot-events="$ctrl.events"></daypilot-calendar>
                 </div>
+              <md-button   ng-click="$ctrl.sum()"
+                       class="md-raised">Сума за тиждень
+            </md-button>
+             <span class="md-margin">{{$ctrl.weekSum}} грн.</span>
 
             </div>`;
 
@@ -185,7 +189,7 @@ class EditDialogController {
     }
 
     addService() {
-        if (!this.appointment.favors.some((f)=> {
+        if (!this.appointment.favors.some((f) => {
                 return this.newService._id === f.id;
             })) {
             this.appointment.favors.push({
@@ -204,7 +208,7 @@ class EditDialogController {
 
     setServices() {
         this.showAddFavors = false;
-        this.masters.forEach((m)=> {
+        this.masters.forEach((m) => {
             if (m._id === this.appointment.master) {
                 this.services = m.services;
                 this.masterPhoto = m.photo.url;
@@ -233,7 +237,9 @@ class EditDialogController {
 }
 export class MasterSchedulerComponentController {
 
-    static $inject = ["$log", '$timeout', "$mdDialog", "$scope", MasterResourceName, "$routeParams", ItServiceName, SchedulerServiceName];
+    static $inject = ["$log", '$timeout', "$mdDialog", "$scope",
+        MasterResourceName, "$routeParams", ItServiceName, SchedulerServiceName,
+        '$mdMedia'];
 
     masterId: string;
     masters: IMaster[];
@@ -244,11 +250,12 @@ export class MasterSchedulerComponentController {
     tasks: ITask[];
     photo: string;
     mode: string;
+    weekSum: any;
 
 
     constructor(private $log: ng.ILogService, private $timeout: ng.ITimeoutService, private $mdDialog: ng.material.IDialogService,
                 private $scope: ISchedulerScope, private MasterResource: IMasterResource, private $routeParams: ng.route.IRouteParamsService,
-                private ItService: ItService, private SchedulerService: ISchedulerService) {
+                private ItService: ItService, private SchedulerService: ISchedulerService,private $mdMedia) {
         this.events = [];
         this.tasks = [];
 
@@ -266,6 +273,21 @@ export class MasterSchedulerComponentController {
         this.loadEvents(new Date());
     }
 
+    sum() {
+        var tmpSums = this.tasks.map((task) => {
+            var a = task.appointment.favors.map((fav) => {
+                return fav.price
+            })
+            var sum = a.reduce(function (a, b) {
+                return a + b;
+            }, 0);
+
+            return sum;
+        });
+        this.weekSum = tmpSums.reduce(function (a, b) {
+            return a + b;
+        }, 0);
+    }
 
     loadEvents(start) {
         if (this.masterId) {
@@ -277,11 +299,12 @@ export class MasterSchedulerComponentController {
             }
             this.MasterResource.getTasks(params).$promise.then((tasks) => {
                 this.tasks = tasks;
-                this.events = this.tasks.map((task)=> {
+                this.events = this.tasks.map((task) => {
                     return angular.copy(task.scheduler);
                 });
+                this.sum();
 
-            }).catch((err)=> {
+            }).catch((err) => {
                 this.$log.error(err);
                 this.showErrorDialog();
             });
@@ -290,8 +313,8 @@ export class MasterSchedulerComponentController {
 
     initWeekConfig() {
         this.weekConfig = this.SchedulerService.getWeekConfig();
-        this.weekConfig.onEventClick = (args)=> {
-            var tasks = this.tasks.filter((task)=> {
+        this.weekConfig.onEventClick = (args) => {
+            var tasks = this.tasks.filter((task) => {
                 return task != null && task.scheduler.id === args.e.id();
             });
             if (tasks.length > 0) {
@@ -308,22 +331,22 @@ export class MasterSchedulerComponentController {
 
     initNavigatorSmallConfig() {
         this.navigatorSmallConfig = this.SchedulerService.getNavigatorSmallConfig()
-        this.navigatorSmallConfig.onTimeRangeSelected= (args)=> {
-                this.weekConfig.startDate = args.day;
-                this.loadEvents(args.day);
+        this.navigatorSmallConfig.onTimeRangeSelected = (args) => {
+            this.weekConfig.startDate = args.day;
+            this.loadEvents(args.day);
         };
     }
 
     initNavigatorConfig() {
         this.navigatorConfig = this.SchedulerService.getNavigatorConfig()
-        this.navigatorConfig.onTimeRangeSelected= (args)=> {
+        this.navigatorConfig.onTimeRangeSelected = (args) => {
             this.weekConfig.startDate = args.day;
             this.loadEvents(args.day);
         };
     }
 
     iniOnEventResize() {
-        this.weekConfig.onEventResize = (args)=> {
+        this.weekConfig.onEventResize = (args) => {
             var event = {
                 id: args.e.id(),
                 start: args.newStart.toString(),
@@ -334,7 +357,7 @@ export class MasterSchedulerComponentController {
             };
             var originalTask;
 
-            var tasks = this.tasks.filter((task)=> {
+            var tasks = this.tasks.filter((task) => {
                 return task != null && task.scheduler.id === event.id;
             });
             if (tasks.length > 0 && event) {
@@ -343,7 +366,7 @@ export class MasterSchedulerComponentController {
                 task.scheduler = event;
                 this.MasterResource.updateTask({id: this.masterId}, task).$promise.then((newTask) => {
                     this.tasks.splice(this.tasks.indexOf(task), 1, newTask);
-                }) .catch((err)=> {
+                }) .catch((err) => {
                     this.revertResize(originalTask);
                     this.$scope.week.update();
                     this.$log.error(err);
@@ -354,7 +377,7 @@ export class MasterSchedulerComponentController {
     }
 
     iniOnTimeRangeSelect() {
-        this.weekConfig.onTimeRangeSelect = (args)=> {
+        this.weekConfig.onTimeRangeSelect = (args) => {
             var params = {
                 appointment: {
                     date: new Date(),
@@ -390,6 +413,7 @@ export class MasterSchedulerComponentController {
                 task: task,
                 masters: this.masters
             },
+            fullscreen: this.$mdMedia('(max-width: 1360px)'),
             parent: angular.element(document.body),
 
         }).then((result) => {
@@ -418,7 +442,7 @@ export class MasterSchedulerComponentController {
 
         this.MasterResource.updateTask({id: this.masterId}, task).$promise.then((newTask) => {
             this.tasks.splice(this.tasks.indexOf(task), 1, newTask);
-            var tempEvents = this.events.filter((e)=> {
+            var tempEvents = this.events.filter((e) => {
                 return e.id == newTask.scheduler.id;
             })
 
@@ -426,7 +450,7 @@ export class MasterSchedulerComponentController {
 
                 this.events.splice(this.events.indexOf(tempEvents[0]), 1, newTask.scheduler);
             }
-        }).catch((err)=> {
+        }).catch((err) => {
             this.$log.error(err);
             this.showErrorDialog();
         });
@@ -436,7 +460,7 @@ export class MasterSchedulerComponentController {
 
     updateMasterOnResize(event) {
         var originalTask;
-        var tasks = this.tasks.filter((task)=> {
+        var tasks = this.tasks.filter((task) => {
             return task != null && task.scheduler.id === event.id;
         });
         if (tasks.length > 0 && event) {
@@ -445,7 +469,7 @@ export class MasterSchedulerComponentController {
             task.scheduler = event;
             this.MasterResource.updateTask({id: this.masterId}, task).$promise.then((newTask) => {
                 this.tasks.splice(this.tasks.indexOf(task), 1, newTask);
-            }) .catch((err)=> {
+            }) .catch((err) => {
                 this.revertResize(originalTask);
                 this.$log.error(err);
                 this.showErrorDialog();
@@ -455,7 +479,7 @@ export class MasterSchedulerComponentController {
 
     revertResize(originalTask) {
 
-        var events = this.events.filter((e)=> {
+        var events = this.events.filter((e) => {
             return e.id == originalTask.scheduler.id;
         })
         if (events.length > 0) {
@@ -469,13 +493,13 @@ export class MasterSchedulerComponentController {
 
         this.MasterResource.deleteTask({id: this.masterId, taskId: deleteTask._id}).$promise.then((master) => {
             this.tasks.splice(this.tasks.indexOf(deleteTask), 1);
-            var events = this.events.filter((e)=> {
+            var events = this.events.filter((e) => {
                 return e.id == deleteTask.scheduler.id;
             })
             if (events.length > 0 && event) {
                 this.events.splice(this.events.indexOf(events[0]), 1);
             }
-        }).catch((err)=> {
+        }).catch((err) => {
             this.$log.error(err);
             this.showErrorDialog();
 

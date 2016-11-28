@@ -1,3 +1,215 @@
+.appoint-container {
+  font-size: 16px;
+  line-height: 16px;
+  height: 180px;
+  overflow: hidden;
+}
+
+.appoint-show {
+  overflow: visible;
+  height: auto;
+}
+
+.favor-app-btn {
+
+  padding: 0;
+  margin: 0 0 20px 0;
+
+  md-card.md-default-theme, md-card {
+    position: relative;
+    display: block;
+    transition: top 0.3s linear;
+    top: 0px;
+    overflow: hidden;
+
+    &:hover {
+      cursor: pointer;
+      @extend .md-whiteframe-12dp;
+      // transition: top 0.3s linear;
+      top: -3px;
+    }
+
+    .show-description-content {
+      display: none;
+    }
+
+    img {
+
+      max-width: 100%;
+      overflow: hidden;
+
+    }
+
+    md-card-content.show-description-favor {
+      position: absolute;
+      text-transform: uppercase;
+      bottom: 40px;
+      right: 0;
+      left: 0;
+      height: 35%;
+      max-height: 40px;
+      color: white;
+      background-color: rgba($primary, 0.7);
+      overflow: hidden;
+      white-space: nowrap;
+
+      -webkit-transition: all 0.5s ease-in-out;
+      -moz-transition: all 0.5s ease-in-out;
+      -o-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+      .show-description-content {
+        display: none;
+      }
+      .subtitle {
+        display: none;
+      }
+    }
+    md-card-content.card-appoint {
+      position: relative;
+      text-transform: uppercase;
+      height: 40px;
+      border: 1px solid black;
+      color: black;
+      background-color: white;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    @media (max-width: $layout-breakpoint-xs) {
+      md-card-content.card-appoint {
+        //display: none;
+        padding-bottom: 16px;
+        height: auto;
+        border: none;
+      }
+      md-card-content.show-description-favor {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        max-height: 100%;
+        height: 100%;
+        color: #2b2b2b;
+        background-color: white;
+        position: relative;
+        text-transform: none;
+        white-space: pre-wrap;
+        .show-description-content {
+          display: block;
+          font-size: 16px;
+          text-align: center;
+        }
+        .subtitle {
+          text-align: center;
+          display: block;
+          text-transform: uppercase;
+
+        }
+
+        span {
+          text-transform: uppercase;
+          text-align: center;
+          font-size: 30px;
+        }
+      }
+      //md-card-content.card-appoint {
+      //  height: 40px;
+      //  border: none;
+      //  color: white;
+      //  background-color: black;
+      //}
+
+    }
+
+    @media (min-width: $layout-breakpoint-sm) {
+      md-card-content.show-description-favor {
+
+        background-color: rgba($primary, 0.7);
+        position: absolute;
+
+      }
+
+      &:hover md-card-content.show-description-favor {
+        max-height: 100%;
+        height: 100%;
+        background-color: rgba($primary, 0.7);
+        position: absolute;
+        text-transform: none;
+        white-space: pre-wrap;
+        .show-description-content {
+          display: block;
+          font-size: 16px;
+          text-align: center;
+        }
+        .subtitle {
+          text-align: center;
+          display: block;
+          text-transform: uppercase;
+          //font-size: 20px;
+
+        }
+      }
+      &:hover md-card-content.show-description-favor span {
+        text-transform: uppercase;
+        text-align: center;
+        @media (min-width: $layout-breakpoint-md) {
+          font-size: 36px;
+
+        }
+      }
+
+    }
+
+    @media (min-width: $layout-breakpoint-md) {
+
+      &.flex-gt-md-22 {
+
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 1 25%;
+      }
+
+    }
+
+    @media (min-width: $layout-breakpoint-sm) {
+
+      &.flex-gt-sm-22 {
+
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 1 25%;
+      }
+
+      &.flex-gt-sm-46 {
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 1 43%;
+      }
+
+    }
+
+    @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm) {
+
+      &.flex-gt-xs-46 {
+        max-height: 100%;
+        box-sizing: border-box;
+        flex: 1 43%;
+      }
+      &:first-child, &:nth-child(2) {
+        flex: 1 43%;
+      }
+    }
+
+    @media (max-width: $layout-breakpoint-xs) {
+      &.flex-xs-80 {
+        flex: 1 80%;
+        // Special override for the 1st & 2nd child default resizing
+        &:first-child, &:nth-child(2) {
+          flex: 1 80%;
+        }
+      }
+    }
+  }
+}
+
 .home-master-btn {
 
   padding: 0;
@@ -8,7 +220,7 @@
     display: block;
     transition: top 0.3s linear;
     top: 0px;
-   // border-radius: 50%;
+    // border-radius: 50%;
     overflow: hidden;
     @media (max-width: $layout-breakpoint-sm) {
       border-radius: 0;
@@ -31,16 +243,16 @@
 
     }
 
-    md-card-content {
+    md-card-content.show-description {
       position: absolute;
       text-transform: uppercase;
-      bottom: 0px;
+      bottom: 40px;
       right: 0;
       left: 0;
       height: 35%;
-      max-height: 60px;
+      max-height: 40px;
       color: white;
-      background-color: rgba($primary, 0.7);
+      background-color: rgba($primary, 0.8);
       overflow: hidden;
       white-space: nowrap;
 
@@ -49,19 +261,38 @@
       -o-transition: all 0.5s ease-in-out;
       transition: all 0.5s ease-in-out;
       .show-description-content {
+        padding: 14px;
         display: none;
       }
       .subtitle {
+        padding: 8px;
         display: none;
       }
     }
+    md-card-content.card-appoint {
+      position: relative;
+      text-transform: uppercase;
 
+      height: 40px;
+      border: 1px solid black;
+      color: black;
+      background-color: white;
+      overflow: hidden;
+      white-space: nowrap;
 
+    }
 
     @media (max-width: $layout-breakpoint-xs) {
+      md-card-content.card-appoint {
+        //display: none;
+        padding-bottom: 16px;
+          height: auto;
+        border: none;
+      }
       md-card-content.show-description {
         padding-top: 10px;
-        padding-bottom:  10px;
+        padding-bottom: 10px;
+        bottom: 0px;
         max-height: 100%;
         height: 100%;
         color: #2b2b2b;
@@ -79,7 +310,6 @@
           display: block;
           text-transform: uppercase;
 
-
         }
         span {
           text-transform: uppercase;
@@ -92,7 +322,7 @@
     @media (min-width: $layout-breakpoint-sm) {
       md-card-content.show-description {
         background-color: rgba($primary, 0.7);
-        position: absolute;
+        // position: absolute;
       }
 
       &:hover md-card-content.show-description {
@@ -113,8 +343,6 @@
           text-transform: uppercase;
           //font-size: 20px;
 
-
-
         }
       }
 
@@ -126,81 +354,6 @@
         text-transform: uppercase;
         text-align: center;
         font-size: 30px;
-      }
-
-    }
-
-    @media (max-width: $layout-breakpoint-xs) {
-      md-card-content.show-description-favor {
-        padding-top: 10px;
-        padding-bottom:  10px;
-        max-height: 100%;
-        height: 100%;
-        color: #2b2b2b;
-        background-color: white;
-        position: relative;
-        text-transform: none;
-        white-space: pre-wrap;
-        .show-description-content {
-          display: block;
-          font-size: 16px;
-          text-align: center;
-        }
-        .subtitle {
-          text-align: center;
-          display: block;
-          text-transform: uppercase;
-
-
-        }
-
-        span {
-          text-transform: uppercase;
-          text-align: center;
-          font-size: 30px;
-        }
-      }
-    }
-
-    @media (min-width: $layout-breakpoint-sm) {
-      md-card-content.show-description-favor {
-
-        background-color: rgba($primary, 0.7);
-        position: absolute;
-
-      }
-
-
-
-      &:hover md-card-content.show-description-favor {
-        max-height: 100%;
-        height: 100%;
-        background-color: rgba($primary, 0.7);
-        position: absolute;
-        text-transform: none;
-        white-space: pre-wrap;
-        .show-description-content {
-          display: block;
-          font-size: 16px;
-          text-align: center;
-        }
-        .subtitle {
-          text-align: center;
-          display: block;
-          text-transform: uppercase;
-          //font-size: 20px;
-
-
-
-        }
-      }
-      &:hover md-card-content.show-description-favor span {
-        text-transform: uppercase;
-        text-align: center;
-        @media (min-width: $layout-breakpoint-md) {
-          font-size: 36px;
-
-        }
       }
 
     }
@@ -271,15 +424,13 @@
     overflow: hidden;
     max-width: 400px;
     max-height: 400px;
+
     &:hover {
       cursor: pointer;
       @extend .md-whiteframe-12dp;
       // transition: top 0.3s linear;
       top: -3px;
     }
-
-
-
 
     img {
 
@@ -305,7 +456,9 @@
       background-color: rgba($primary, 0.7);
       overflow: hidden;
 
-     span{width: 60%}
+      span {
+        width: 60%
+      }
       -webkit-transition: all 0.5s ease-in-out;
       -moz-transition: all 0.5s ease-in-out;
       -o-transition: all 0.5s ease-in-out;
@@ -317,13 +470,16 @@
 
     @media (max-width: $layout-breakpoint-xs) {
       border-radius: 0%;
-      md-card-content{
+      md-card-content {
         border-radius: 0%;
       }
       md-card-content.show-description-favor {
-        span{width: 60%; margin-bottom:  10px;}
+        span {
+          width: 60%;
+          margin-bottom: 10px;
+        }
         padding-top: 10px;
-        padding-bottom:  10px;
+        padding-bottom: 10px;
         max-height: 100%;
         height: 100%;
         color: white;
@@ -377,7 +533,6 @@
 
     }
 
-
   }
 }
 
@@ -409,12 +564,6 @@
 
   }
 
-  figurecaption {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    color: #fff;
-  }
 
   .pic-base {
     opacity: 1;
@@ -463,6 +612,159 @@
 
   }
 }
+
+.overlay{
+  background-position: 10%, 50%;
+  -moz-background-position: 10%, 50%;;
+  -webkit-background-position: 10%, 50%;
+  -moz-background-position: 10%, 50%;
+  -o-background-position: 10%, 50%;
+}
+
+.overlay-days {
+
+  @extend .overlay;
+  @media (min-height: 300px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_full.jpg");
+  }
+
+  @media (max-height: 1286px) and (max-width: 1923px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1923_1282.jpg");
+  }
+
+  @media (max-height: 1026px) and (max-width: 1539px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1539_1026.jpg");
+  }
+  @media (max-height: 802px) and (max-width: 1203px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_1203_802.jpg");
+  }
+  @media (max-height: 642px) and (max-width: 963px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_963_642.jpg");
+  }
+
+  @media (max-height: 400px) and (max-width: 723px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/dates/IMG_7095_723_482.jpg");
+  }
+
+}
+
+.overlay-comments {
+  @extend .overlay;
+
+  @media (min-height: 300px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_full.jpg");
+  }
+
+  @media (max-height: 1286px) and (max-width: 1923px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1923_1282.jpg");
+  }
+
+  @media (max-height: 1024px) and (max-width: 1536px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1536_1024.jpg");
+  }
+
+  @media (max-height: 800px) and (max-width: 1200px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_1200_800.jpg");
+  }
+
+  @media (max-height: 640px) and (max-width: 960px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_960_640.jpg");
+  }
+  @media (max-height: 400px) and (max-width: 720px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/comments/IMG_6790_720_480.jpg");
+  }
+
+}
+
+.overlay-description {@extend .overlay;
+  @media (min-width: 623px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_full.jpg");
+  }
+
+  @media (min-height: 1286px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_full.jpg");
+  }
+
+  @media (max-height: 1286px) and (max-width: 1923px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1923_1282.jpg");
+  }
+
+  @media (max-height: 1024px) and (max-width: 1536px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1539_1026.jpg");
+  }
+
+  @media (max-height: 800px) and (max-width: 1200px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_1203_802.jpg");
+  }
+
+  @media (max-height: 640px) and (max-width: 960px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_963_642.jpg");
+  }
+  @media (max-height: 400px) and (max-width: 720px) {
+    background: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_723_482.jpg");
+  }
+
+}
+
+.overlay-masters {
+  @extend .overlay;
+
+  @media (min-height: 686px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_full.jpg");
+  }
+  @media (max-height: 1667px) and (max-width: 2500px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_2500.jpg");
+  }
+  @media (max-height: 1333px) and (max-width: 2000px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_2000.jpg");
+  }
+
+  @media (max-height: 1026px) and (max-width: 1500px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618.jpg");
+  }
+
+  @media (max-height: 802px) and (max-width: 1200px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_1200.jpg");
+  }
+
+  @media (max-height: 642px) and (max-width: 963px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6618_963.jpg");
+  }
+
+  @media (max-height: 400px) and (max-width: 723px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/courses/description/IMG_6914_723_482.jpg");
+  }
+
+}
+
+.overlay-trans {
+  @extend .overlay;
+
+  @media (min-height: 100px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_full.jpg");
+  }
+  @media (max-height: 1667px) and (max-width: 2500px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_2500.jpg");
+  }
+
+  @media (max-height: 1280px) and (max-width: 1920px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_h.jpg");
+  }
+
+  @media (max-height: 1000px) and (max-width: 1500px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924.jpg");
+  }
+
+  @media (max-height: 802px) and (max-width: 1200px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_1200.jpg");
+  }
+
+  @media (max-height: 642px) and (max-width: 963px) {
+    background-image: linear-gradient(rgba(black, 0.6), rgba(black, 0.6)), url("../images/bg/slider/IMG_6924_963.jpg");
+  }
+
+}
+
 
 .brends-container {
 

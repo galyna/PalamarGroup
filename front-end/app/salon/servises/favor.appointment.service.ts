@@ -6,11 +6,14 @@ import {IRootScope} from "../../../typings";
 
 const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСАТИСЬ НА БЛОК" flex-sm="85" flex-xs="95" flex-gt-sm="65"
            layout="column">
-    <md-toolbar class="md-hue-2">
+    <md-toolbar class="md-hue-2 ">
+    
         <div class="md-toolbar-tools md-padding ">
-            <h2 hide show-gt-sm='true' class=" md-padding ">Записатись на прйом до майстра
-                {{::vm.appointment.master.name}}</h2>
-            <h2 hide-gt-sm='true' class=" md-padding ">Записатись до {{::vm.appointment.master.name}}</h2>
+          <img ng-src="{{::vm.appointment.favor.photo.url}}" class="avatar"/>
+                  
+            <span class=" md-padding  md-body-2">Записатись на послугу
+                {{::vm.appointment.favor.name}}</span>
+          
             <span flex></span>
             <md-button class="md-icon-button dialog-close-btn" ng-click="::vm.cancel()">
                 <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>
@@ -56,57 +59,59 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                         </md-input-container>
                     </div>
                     <div ng-if="vm.showDetails">
-                        <div flex="100" layout="row">
-                            <div flex="50" class="order-picker-container " layout="row">
-                                <md-datepicker md-open-on-focus class="order-date-picker" md-min-date="vm.startDate"
-                                               placeholder="Дата" flex ng-model="vm.appointment.date"
-                                               ng-change="vm.onCalendarChanged()"
-                                               name="dateField"></md-datepicker>
+                   
+                    <div  flex="100" layout="row">
+                        <div flex="50" class="order-picker-container " layout="row">
+                            <md-datepicker md-open-on-focus class="order-date-picker" md-min-date="vm.startDate"
+                                           placeholder="Дата" flex ng-model="vm.appointment.date"
+                                           ng-change="vm.onCalendarChanged()"
+                                           name="dateField"></md-datepicker>
 
-                            </div>
-                            <div flex="50" class="time-container " layout="row">
-                                <md-input-container flex>
-                                    <md-icon md-svg-icon="action:ic_schedule_24px"></md-icon>
-                                    <label for="time">Час</label>
-                                    <md-select name="time" id="time" ng-model="vm.dayHour"
-                                               ng-model-options="{trackBy: '$value.id'}">
-                                        <md-option ng-repeat="hour in vm.dayHours" ng-value="hour">
-                                            {{ hour.value }}
-                                        </md-option>
-                                    </md-select>
-                                </md-input-container>
-                            </div>
                         </div>
-
-                        <div flex layout="row">
-                            <md-input-container flex="50" ng-if="!vm.appointment.isConsultation">
-                                <label for="service">Послуга</label>
-                                <md-select ng-model="vm.appointment.service" id="service"
-                                           ng-model-options="{trackBy: '$value._id'}">
-                                    <md-option ng-repeat="service in vm.appointment.master.services" ng-value="service">
-                                        <div layout="row" layout-align=" start center  ">
-                                            <img ng-src="{{service.favor.photo.url}}" class="avatar"
-                                                 alt="{{service.favor.name}}"/>
-                                            <span>  {{ service.favor.name }}  </span></div>
-
+                        <div flex="50" class="time-container " layout="row">
+                            <md-input-container flex>
+                                <md-icon md-svg-icon="action:ic_schedule_24px"></md-icon>
+                                <label for="time">Час</label>
+                                <md-select name="time" id="time" ng-model="vm.dayHour"
+                                           ng-model-options="{trackBy: '$value.id'}">
+                                    <md-option ng-repeat="hour in vm.dayHours" ng-value="hour">
+                                        {{ hour.value }}
                                     </md-option>
                                 </md-select>
                             </md-input-container>
-                            <md-input-container style="padding-bottom:0;padding-left: 5px;" class='md-padding' flex="50"
-
-                                                class=" reduce-bottom-margin">
-                                <md-checkbox ng-model="vm.appointment.isConsultation">Записатись на консультацію
-                                </md-checkbox>
-
-                            </md-input-container>
                         </div>
+                    </div>
 
-                        <md-input-container class="md-block" class='md-margin'>
-                            <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
-                            <label for="comment">Додаткова інформація</label>
-                            <textarea id="comment" ng-model="vm.appointment.comment" name="comment"></textarea>
+                    <div flex layout="row">
+                        <md-input-container flex="50" ng-if="!vm.appointment.isConsultation">
+                             <label for="service">Майстер</label>
+                        <md-select ng-model="vm.appointment.master" id="service"
+                                  >
+                            <md-option ng-repeat="master in vm.appointment.masters" ng-value="master">
+                                <div layout="row" layout-align=" start center  ">
+                                    <img ng-src="{{master.photo.url}}" class="avatar"
+                                         alt="{{master.name}}"/>
+                                    <span>  {{ master.name }}  </span></div>
+                            </md-option>
+                            
+                        </md-select>
+                    
+                        </md-input-container>
+                        <md-input-container style="padding-bottom:0;padding-left: 5px;" class='md-padding' flex="50"
+
+                                            class=" reduce-bottom-margin">
+                            <md-checkbox ng-model="vm.appointment.isConsultation">Записатись на консультацію
+                            </md-checkbox>
+
                         </md-input-container>
                     </div>
+
+                    <md-input-container class="md-block" class='md-margin'>
+                        <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
+                        <label for="comment">Додаткова інформація</label>
+                        <textarea id="comment" ng-model="vm.appointment.comment" name="comment"></textarea>
+                    </md-input-container>
+                </div>
                     <div flex layout="row" ng-if="!vm.showDetails" class="" ng-click="vm.showDetails=true">
                         Показати більще
                         <md-button class=" md-icon-button" style="margin-top: -15px; padding: 10px">
@@ -120,28 +125,25 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                         </md-button>
                     </div>
                 </div>
-
                 <div hide-gt-xs="true">
 
                     <md-input-container id="orderName" class="md-block">
-
-                        <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
-                        <label for="phone">Телефон</label>
-                        <input id="phone" ng-model="vm.appointment.phone" type="text" required name="phone">
-                        <div ng-messages="orderForm.phone.$error" role="alert"
-                             ng-show="orderForm.$submitted && orderForm.phone.$invalid">
-                            <div class="md-headline" ng-message="required">
-                                Залиште хоч якусь інформацію про себе, бажано номер телефону
+                       <label for="phone">Телефон</label>
+                            <input id="phone" ng-model="vm.appointment.phone" type="text" required name="phone">
+                            <div ng-messages="orderForm.phone.$error" role="alert"
+                                 ng-show="orderForm.$submitted && orderForm.phone.$invalid">
+                                <div class="md-headline" ng-message="required">
+                                    Залиште хоч якусь інформацію про себе, бажано номер телефону
+                                </div>
                             </div>
-                        </div>
 
                     </md-input-container>
-                    <div ng-if="vm.showDetails">
+<div ng-if="vm.showDetails">
                     <md-input-container class="md-block">
-                        <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
+                       <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
                         <label for="name">Як до вас звертатись?</label>
-                        <input id="name" ng-model="vm.appointment.name" type="text" name="name">
-
+                        <input id="name" ng-model="vm.appointment.name" type="text" name="name" >
+                        
                     </md-input-container>
                     <div ng-if="vm.$mdMedia('(min-width: 400px)')" flex="100" layout="row">
                         <div flex="50" class="order-picker-container " layout="row">
@@ -164,14 +166,12 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                             </md-input-container>
                         </div>
                     </div>
-                    <md-input-container ng-if="vm.$mdMedia('(max-width: 400px)')" layout="row"
-                                        class="xs-master-calendar" flex layout-align="center center"
-                                        style="padding:0;margin: 0px;">
+                    <md-input-container ng-if="vm.$mdMedia('(max-width: 400px)')" layout="row" class="xs-master-calendar" flex layout-align="center center" >
                         <label style='left:38px' for="time">Дата</label>
-                        <md-datepicker md-open-on-focus class="order-date-picker" md-min-date="vm.startDate"
-                                       placeholder="Дата" flex ng-model="vm.appointment.date"
-                                       ng-change="vm.onCalendarChanged()"
-                                       name="dateField"></md-datepicker>
+                       <md-datepicker md-open-on-focus class="order-date-picker" md-min-date="vm.startDate"
+                                           placeholder="Дата" flex ng-model="vm.appointment.date"
+                                           ng-change="vm.onCalendarChanged()"
+                                           name="dateField"></md-datepicker>
                     </md-input-container>
 
                     <md-input-container ng-if="vm.$mdMedia('(max-width: 400px)')" class="md-block md-padding">
@@ -183,33 +183,33 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                             </md-option>
                         </md-select>
                     </md-input-container>
-
-                    <md-input-container class="md-block" ng-if="!vm.appointment.isConsultation">
-                        <label for="service">Послуга</label>
-                        <md-select ng-model="vm.appointment.service" id="service"
-                                   ng-model-options="{trackBy: '$value._id'}">
-                            <md-option ng-repeat="service in vm.appointment.master.services" ng-value="service">
+                    
+                    <md-input-container class="md-block" >
+                        <label for="service">Майстер</label>
+                        <md-select ng-model="vm.appointment.master" id="service"
+                                  >
+                            <md-option ng-repeat="master in vm.appointment.masters" ng-value="master">
                                 <div layout="row" layout-align=" start center  ">
-                                    <img ng-src="{{service.favor.photo.url}}" class="avatar"
-                                         alt="{{service.favor.name}}"/>
-                                    <span>  {{ service.favor.name }}  </span></div>
+                                    <img ng-src="{{master.photo.url}}" class="avatar"
+                                         alt="{{master.name}}"/>
+                                    <span>  {{ master.name }}  </span></div>
                             </md-option>
                             
                         </md-select>
                     </md-input-container>
 
-                    <md-input-container style="padding-bottom:0;padding-left: 5px;" class="md-block ">
-                        <md-checkbox ng-model="vm.appointment.isConsultation">Записатись на консультацію
-                        </md-checkbox>
+                    <md-input-container style="padding-bottom:0;padding-left: 5px;" class="md-block " >
+                            <md-checkbox ng-model="vm.appointment.isConsultation">Записатись на консультацію
+                            </md-checkbox>
 
-                    </md-input-container>
-
-                    <md-input-container class="md-block">
+                        </md-input-container>
+                    
+                    <md-input-container class="md-block" >
                         <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
                         <label for="comment">Додаткова інформація</label>
                         <textarea id="comment" ng-model="vm.appointment.comment" name="comment"></textarea>
                     </md-input-container>
-                    </div>
+                 </div>
                     <div flex layout="row" ng-if="!vm.showDetails" class="" ng-click="vm.showDetails=true">
                         Показати більще
                         <md-button class=" md-icon-button" style="margin-top: -15px; padding: 10px">
@@ -224,8 +224,7 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
                     </div>
                 </div>
 
-                
-            </md-dialog-content-body>
+                </md-dialog-content-body>
         </md-dialog-content>
 
         <md-dialog-actions class="md-padding" layout="row" layout-align-xs="center center">
@@ -236,7 +235,7 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
 
 `;
 
-export class AppointmentFormComponentController {
+export class FavorAppointmentFormComponentController {
 
     static $inject = ['$mdDialog', '$mdMedia'];
     private appointment: IAppointment;
@@ -271,13 +270,13 @@ export class AppointmentFormComponentController {
             var currentHouer = current.getHours();
             var tmp = angular.copy(this.reservhouers);
 
-            this.reservhouers.forEach((hour)=> {
+            this.reservhouers.forEach((hour) => {
                 var time = hour.value.split(':')[0];
                 if (parseInt(time) <= currentHouer) {
                     tmp.shift();
                 }
-                if (this.dayHour && parseInt(time) <= currentHouer && hour.id==this.dayHour.id) {
-                    this.dayHour=null;
+                if (this.dayHour && parseInt(time) <= currentHouer && hour.id == this.dayHour.id) {
+                    this.dayHour = null;
                 }
             })
             this.dayHours = [];
@@ -293,7 +292,7 @@ export class AppointmentFormComponentController {
         if (this.appointment.date) {
             var minutes = this.appointment.date.getUTCMinutes();
             var hourValue = this.appointment.date.getUTCHours() + ':' + (  (minutes < 10) ? minutes + '0' : minutes);
-            this.dayHours.forEach((hour)=> {
+            this.dayHours.forEach((hour) => {
                 if (hour.value === hourValue) {
                     this.dayHour = hour
                 }
@@ -311,6 +310,14 @@ export class AppointmentFormComponentController {
                 this.appointment.date.setMinutes(time[1]);
                 this.dayHour = null;
             }
+            if (this.appointment.master) {
+                var services = this.appointment.master.services.filter((fav) => {
+                   return fav.favor._id == this.appointment.favor._id;
+                })
+                if (services.length > 0) {
+                    this.appointment.service = services[0];
+                }
+            }
             this.$mdDialog.hide(this.appointment);
         }
     }
@@ -325,8 +332,8 @@ export class AppointmentFormComponentController {
 export interface IAppointmentService {
     onShowDialog(appointment: IAppointment): void;
 }
-export let AppointmentServiceName = 'appointmentService'
-export class AppointmentService implements IAppointmentService {
+export let FavorAppointmentServiceName = 'favorAppointmentService'
+export class FavorAppointmentService implements IAppointmentService {
 
     static $inject = ['$mdDialog', '$rootScope', "$log", '$mdMedia'];
 
@@ -340,7 +347,7 @@ export class AppointmentService implements IAppointmentService {
         this.$mdDialog.show({
             template: template,
             bindToController: true,
-            controller: AppointmentFormComponentController,
+            controller: FavorAppointmentFormComponentController,
             controllerAs: 'vm',
             parent: angular.element(document.querySelector('#mainContent')),
             fullscreen: this.$mdMedia('(max-width: 1360px)'),

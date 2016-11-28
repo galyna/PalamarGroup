@@ -78,8 +78,10 @@ declare module pg {
             comment: string,
             admin_comment: string,
             master?: IMaster,
+            masters?: IMaster[],
             service: IMasterFavor,
             favors?: IMasterFavor[],
+            favor?: IFavor,
             isConsultation: boolean
         }
 

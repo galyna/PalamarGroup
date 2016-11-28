@@ -1,4 +1,10 @@
-const template = `<div itemscope itemtype="http://schema.org/Brand" ng-click="$ctrl.handleVideoRuning()" class="stop-video-container" layout="row"
+import {ConsultServiceName} from "../salon/servises/consult.service";
+const template = `
+
+
+<div itemscope itemtype="http://schema.org/Brand"
+ ng-click="$ctrl.handleVideoRuning()" class="stop-video-container"
+     layout="row"
      layout-align="center center ">
     <div ng-if="$ctrl.runVideo" class="stop-label">ЗУПИНТИ ВІДЕО</div>
     <div ng-if="!$ctrl.runVideo" class="stop-label">ЗAПУСПИТИ ВІДЕО</div>
@@ -9,18 +15,18 @@ const template = `<div itemscope itemtype="http://schema.org/Brand" ng-click="$c
 </div>
 <div id="video-container">
 </div>
-<div class="page-header-wrap " layout="row" layout-align="center center">  
-        <a href="/beauty-parlour" layout="column" layout-align="center center" itemprop="url" >
-            <img itemprop="logo" class="logo-img"  src="../content/images/logo/palamar_logo.png" />
-            <div class="mp-padding md-margin">
-                <h1 itemprop="name" lang="en" class="featured-area-title"> PALAMAR GROUP</h1> 
-                
-                <h2 itemprop="description" lang="en" class="featured-area-subtitle">
-                    beauty parlour & academy
-                </h2>
-            </div>
-           
-        </a>  
+<div class="page-header-wrap " layout="row" layout-align="center center">
+    <a href="/beauty-parlour" layout="column" layout-align="center center" itemprop="url">
+        <img itemprop="logo" class="logo-img" src="../content/images/logo/palamar_logo.png"/>
+        <div class="mp-padding md-margin">
+            <h1 itemprop="name" lang="en" class="featured-area-title"> PALAMAR GROUP</h1>
+
+            <h2 itemprop="description" lang="en" class="featured-area-subtitle">
+                beauty parlour & academy
+            </h2>
+        </div>
+
+    </a>
 </div>
 
 <md-button easing="easeInOutCubic" scroll-to="mainContent"
@@ -34,14 +40,14 @@ const template = `<div itemscope itemtype="http://schema.org/Brand" ng-click="$c
 export class SalonHeaderComponentController {
 
 
-    static $inject = ['$mdMedia', '$window'];
+    static $inject = ['$mdMedia', '$window',ConsultServiceName];
 
     runVideo: boolean;
     isVideoLoaded: boolean;
     videoElement: any;
 
 
-    constructor(private $mdMedia, private  $window) {
+    constructor(private $mdMedia, private  $window,private ConsultService) {
 
     }
 
@@ -55,6 +61,10 @@ export class SalonHeaderComponentController {
 
     $onDestroy() {
         angular.element(this.$window).off('resize', this.onResize);
+    }
+
+    consult() {
+        this.ConsultService.onShowDialog();
     }
 
 

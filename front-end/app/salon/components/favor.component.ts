@@ -5,6 +5,7 @@ import {AppointmentServiceName, IAppointmentService} from "../servises/appointme
 import {MediaObserverFactoryName, IMediaObserverFactory} from "../../ui/mediaObserver.service";
 import {IConstants} from "../../core/core.config";
 import {IRootScope} from "../../../typings";
+import {FavorAppointmentServiceName} from "../servises/favor.appointment.service";
 
 const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
 <div class="courses description-container" ng-attr-id="{{ $ctrl.markerReadySEO }}">
@@ -30,7 +31,15 @@ const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
                                 </div>
                             </md-card-title-text>
                         </md-card-title>
-
+                        <div flex="20" show-sm="true"
+                             layout="row" layout-align="center center">
+                            <md-button class=" md-margin near-master xs-selected md-display-1 md-raised "
+                                       aria-label="Details"
+                                       ng-click="::$ctrl.showFavorAppointmentDialog()">
+                                Записатись
+                            </md-button>
+                        </div>
+                    
                     </div>
                     <div class="card-media "
                          flex="50"><img ng-src="{{::$ctrl.favor.photo.url}}" class="md-card-image "/>
@@ -42,7 +51,7 @@ const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
 
         <div hide-gt-xs="true" layout="row" layout-align="center center">
 
-            <md-card md-whiteframe="8">
+            <md-card md-whiteframe="8" ng-click="::$ctrl.showFavorAppointmentDialog()">
                 <md-card-content layout="column">
                     <div class="card-media "><img ng-src="{{::$ctrl.favor.photo.url}}" class="md-card-image"/></div>
                     <div class="card-desc "
@@ -53,6 +62,12 @@ const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
                                 <div class="md-title">{{::$ctrl.favor.description}}</div>
                             </md-card-title-text>
                         </md-card-title>
+                          <md-button class=" md-margin near-master xs-selected md-display-1 md-raised "
+                                       aria-label="Details"
+                                       >
+                                Записатись
+                            </md-button>
+                        
                     </div>
                 </md-card-content>
             </md-card>
@@ -225,7 +240,7 @@ export class FavorComponentController {
     static $inject = ["$routeParams", "$location",
         FavorResourceName, MasterResourceName,
         AppointmentResourceName, AppointmentServiceName, MediaObserverFactoryName,
-        'constants', '$rootScope', 'smoothScroll','$q'];
+        'constants', '$rootScope', 'smoothScroll','$q',FavorAppointmentServiceName];
 
     favor: IFavor;
     masters: IMaster[];
@@ -239,7 +254,8 @@ export class FavorComponentController {
                 private AppointmentResource: IAppointmentResource,
                 private AppointmentService: IAppointmentService, private mediaObserver: IMediaObserverFactory,
                 private constants: IConstants,
-                private $rootScope: IRootScope,private smoothScroll,private  $q) {
+                private $rootScope: IRootScope,private smoothScroll,
+                private  $q,private FavorAppointmentService) {
 
     }
 
@@ -282,6 +298,14 @@ export class FavorComponentController {
             });
         }
     }
+
+    showFavorAppointmentDialog() {
+        var appointment = new this.AppointmentResource();
+        appointment.masters = this.masters;
+        appointment.favor = this.favor;
+        this.FavorAppointmentService.onShowDialog(appointment);
+    }
+
 
     seoMaster(master) {
         master.seoJson=
@@ -384,7 +408,6 @@ export class FavorComponentController {
         }
 
         this.AppointmentService.onShowDialog(appointment);
-
 
     }
 

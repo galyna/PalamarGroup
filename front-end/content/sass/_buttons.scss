@@ -12,10 +12,9 @@ button.md-button.md-fab.down-btn {
 
     bottom: 35px;
 
-
   }
   @media (max-width: $layout-breakpoint-xs) {
-    bottom:70px;
+    bottom: 70px;
   }
 
 }
@@ -36,15 +35,18 @@ button.md-button.md-fab.up-btn {
 
   @extend .md-whiteframe-8dp;
   @media (max-width: $layout-breakpoint-xs) {
-    top:30px;
+    top: 30px;
   }
+
+}
+
+.hide-form-btn {
   md-icon {
-    margin: auto;
+
     -ms-transform: rotate(180deg); /* IE 9 */
     -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
     transform: rotate(180deg);
   }
-
 }
 
 button.md-button.md-fab.side-up-btn {
@@ -74,7 +76,9 @@ button.md-button.md-fab.side-up-btn {
   margin: 5px;
   height: 30px;
   transition: transform 0.5s;
-  svg{fill:white ;}
+  svg {
+    fill: white;
+  }
 
   &:hover {
     transform: scale(1.5, 1.5);
@@ -83,13 +87,40 @@ button.md-button.md-fab.side-up-btn {
 
 }
 
+.consult-container {
+  display: flex;
+  z-index: 80;
+  position: fixed;
+  top: 75px;
+  left: 10px;
+  width: 125px;
+  height: 55px;
+  border: 1px solid $primary;
+  color: $primary;
+  align-items: center;
+  background: rgba(white, 0.6);
+
+  &:hover {
+    cursor: pointer;
+  }
+;
+
+  @media (max-width: 600px) {
+    width: 65px;
+  }
+
+  .stop-label {
+    font-weight: 400;
+  }
+}
+
 .stop-video-container {
   display: flex;
   z-index: 70;
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 120px;
+  width: 125px;
   height: 55px;
   border: 1px solid $primary;
   color: $primary;
@@ -112,7 +143,6 @@ button.md-button.md-fab.side-up-btn {
 
   }
 }
-
 
 #menu-container {
   z-index: 70;

@@ -11,6 +11,8 @@ import {
     AcademyVideosResourceName
 } from "../../resources/academy.video.resource";
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
+import {AppointmentServiceName, IAppointmentService} from "../servises/appointment.service";
+import {IAppointmentResource, AppointmentResourceName} from "../../resources/appointment.resource";
 
 
 const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
@@ -37,14 +39,15 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
                         <meta itemprop="name" content="PALAMAR GROUP"/>
                         <meta itemprop="url" content="http://palamar.com.ua/"/>
                     </div>
-                    <img ng-src="{{'/content/images/services/'+ category._id+'.jpg'}}" 
+                    <img ng-src="{{'/content/images/services/'+ category._id+'.jpg'}}"
                          itemprop="contentUrl" itemscope="" itemtype="http://schema.org/ImageObject">
-                    <md-card-content layout="column" layout-align="center center" class=" md-padding  show-description-favor">
+                    <md-card-content layout="column" layout-align="center center"
+                                     class=" md-padding  show-description-favor">
                         <span itemprop="name" class=" md-padding  ">{{::category.name}}</span>
-                        <div  layout="column" layout-align="center center" class="hiden-favors"
+                        <div layout="column" layout-align="center center" class="hiden-favors"
                              ng-repeat="favor in ::category.favors track by $index ">
                             <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
-                            <div layout="column"  >{{::favor.name}}
+                            <div layout="column">{{::favor.name}}
                             </div>
                         </div>
                     </md-card-content>
@@ -52,6 +55,11 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
 
             </div>
         </div>
+    </div>
+     <div ng-if="$ctrl.showMoreTransforms" class="md-padding" layout="row" layout-align=" center center"
+         layout-align-xs="  center">
+        <md-button ng-click="::$ctrl.showServices()" class="comment-btn xs-selected md-raised ">Всі послуги
+        </md-button>
     </div>
     <div layout="row" flex>
         <div class="page-delimiter content-block" id="trigger-right" flex>
@@ -63,8 +71,8 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
                              layout-align=" center center">
                             <div hide show-gt-sm='true' class=" md-headline">{{ ::day.name}}</div>
                             <div hide show-gt-sm='true' class="md-subhead  ">{{::day.program}}</div>
-                            <div show-sm='true' class=" md-title">{{ ::day.short}}</div>
-                            <div show-sm='true' class="md-caption  ">{{::day.program}}</div>
+                            <div hide-gt-sm='true' class=" md-title">{{ ::day.short}}</div>
+                            <div hide-gt-sm='true' class="md-caption  ">{{::day.program}}</div>
                         </div>
                     </div>
                 </div>
@@ -84,21 +92,38 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
     </div>
     <div layout="row" layout-align="center center">
 
-        <div flex flex-gt-md="80" flex-md="90" flex-gt-xs="80">
+        <div flex flex-gt-md="60" flex-md="90" flex-gt-xs="80">
             <div class="home-master-btn" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" ng-repeat="master in $ctrl.masters track by $index"
                          class="md-margin box "
-                         ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
+                         ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.length)}}"
                          flex-gt-xs="46" flex-xs="80"
-                         ng-click="::$ctrl.showMaster(master._id)">
+                >
                     <sb-jsonld json="{{::master.seoJson}}}"></sb-jsonld>
-                    <img ng-src="{{::master.photo.url}}" class=" ">
-                    <md-card-content layout="column" class="  show-description" layout-align="center center">
-                        <span class="  md-margin">{{::master.name}}</span>
-                        <div class=" md-margin show-description-content">{{::master.rate.text}}</div>
-                        <div class=" md-margin  subtitle">{{::master.subtitle}}</div>
+                    <img ng-src="{{::master.photo.url}}" ng-click="::$ctrl.showMaster(master._id)">
+                    <md-card-content layout="column" class="  show-description"
+                                     ng-click="::$ctrl.showMaster(master._id)" layout-align="center center">
+                        <span class=" ">{{::master.name}}</span>
+                        <div class="  show-description-content">{{::master.rate.text}}</div>
+                        <div class="   subtitle">{{::master.subtitle}}</div>
+                       
                     </md-card-content>
+                    
+                    <md-card-content  layout="column" class="  card-appoint"
+                                     layout-align="center center"
+                                     ng-click="::$ctrl.showAppointmentDialog(master)">
+                        
+                        <md-button hide-gt-xs="true" 
+                                   class=" md-margin  xs-selected md-display-1 md-raised "
+                                   aria-label="Details">
+                            Записатись
+                        </md-button>
 
+                        <div hide show-gt-xs='true'>
+                            Записатись
+                        </div>
+                    </md-card-content>
+                </md-card>
             </div>
         </div>
 
@@ -176,72 +201,72 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
             <div class="fit-screen-wrap md-padding header-super">
                 <div hide show-gt-xs='true' class="md-display-1"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
                 <div hide show-xs="true" class="md-headline"
-                "> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ
+                > ВЧИМОСЬ У ПРОФЕСІОНАЛІВ
+                </div>
+
+            </div>
+            <div class="overlay-days">
+            </div>
+        </div>
+    </div>
+    <div ng-repeat="group in $ctrl.videos">
+
+        <div layout="row" layout-align="center center">
+            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85">
+                <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
+                    <md-card md-whiteframe="6" class="  courses-videos"
+                             ng-repeat="video in ::group.videos track by $index" emprop="workPerformed" itemscope=""
+                             itemtype="http://schema.org/CreativeWork"
+                             flex>
+                        <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                            <meta itemprop="name" content="PALAMAR GROUP"/>
+                        </div>
+                        <div flex class="embed-responsive embed-responsive-16by9"
+                             class="embed-responsive embed-responsive-16by9" itemscope
+                             itemtype="http://schema.org/VideoObject">
+                            <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
+                                           video-id="::video.url"></youtube-video>
+                        </div>
+                        <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
+                            <span itemprop="caption" class="  md-margin">{{::video.name}}</span>
+                        </md-card-content>
+                    </md-card>
+                </div>
             </div>
 
         </div>
-        <div class="overlay-days">
+
+
+    </div>
+    <div ng-if="$ctrl.showMoreVideos" layout="row" layout-align=" center center" layout-align-xs="  center">
+        <md-button ng-click="::$ctrl.showVideos()" class="comment-btn xs-selected md-raised ">Всі відео
+        </md-button>
+    </div>
+    <div layout="row" flex ng-if="$ctrl.brends.length>0 " class="md-padding">
+        <div class="page-delimiter" flex>
+            <div class="fit-screen-wrap header-super">
+                <div class="md-display-2"> БРЕНДИ</div>
+            </div>
+            <div class="overlay-comments">
+            </div>
+
         </div>
     </div>
-</div>
-<div ng-repeat="group in $ctrl.videos">
 
     <div layout="row" layout-align="center center">
-        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85">
-            <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
-                <md-card md-whiteframe="6" class="  courses-videos"
-                         ng-repeat="video in ::group.videos track by $index" emprop="workPerformed" itemscope=""
-                         itemtype="http://schema.org/CreativeWork"
-                         flex>
-                    <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
-                        <meta itemprop="name" content="PALAMAR GROUP"/>
-                    </div>
-                    <div flex class="embed-responsive embed-responsive-16by9"
-                         class="embed-responsive embed-responsive-16by9" itemscope
-                         itemtype="http://schema.org/VideoObject">
-                        <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
-                                       video-id="::video.url"></youtube-video>
-                    </div>
-                    <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                        <span itemprop="caption" class="  md-margin">{{::video.name}}</span>
-                    </md-card-content>
-                </md-card>
+
+        <div flex flex-gt-md="60" flex-gt-lg="40" flex-md="80" flex-gt-xs="70">
+            <div flex class="brends-container" layout-margin layout layout-wrap layout-align="center center">
+                <a href="{{::bren.url}}" class="md-margin brend " layout="row" layout-align="center center" target="_blank"
+                   flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
+                   flex-gt-xs="46" flex-xs="80" ng-repeat="bren in $ctrl.brends track by $index">
+                    <sb-jsonld json="{{::bren.seoJson}}}"></sb-jsonld>
+                    <img ng-src="{{::bren.photo.url}}"
+                         class=""/> </a>
             </div>
         </div>
 
     </div>
-
-
-</div>
-<div ng-if="$ctrl.showMoreVideos" layout="row" layout-align=" center center" layout-align-xs="  center">
-    <md-button ng-click="::$ctrl.showVideos()" class="comment-btn xs-selected md-raised ">Всі відео
-    </md-button>
-</div>
-<div layout="row" flex ng-if="$ctrl.brends.length>0 " class="md-padding">
-    <div class="page-delimiter" flex>
-        <div class="fit-screen-wrap header-super">
-            <div class="md-display-2"> БРЕНДИ</div>
-        </div>
-        <div class="overlay-comments">
-        </div>
-
-    </div>
-</div>
-
-<div layout="row" layout-align="center center">
-
-    <div flex flex-gt-md="60" flex-gt-lg="40" flex-md="80" flex-gt-xs="70">
-        <div flex class="brends-container" layout-margin layout layout-wrap layout-align="center center">
-            <a href="{{::bren.url}}" class="md-margin brend " layout="row" layout-align="center center"
-               flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
-               flex-gt-xs="46" flex-xs="80" ng-repeat="bren in $ctrl.brends track by $index">
-                <sb-jsonld json="{{::bren.seoJson}}}"></sb-jsonld>
-                <img ng-src="{{::bren.photo.url}}"
-                     class=""/> </a>
-        </div>
-    </div>
-
-</div>
 </div>
 
 
@@ -252,7 +277,7 @@ export class SalonHomeComponentController {
 
     static $inject = [MasterResourceName, "$location", 'constants',
         TransformResourceName, BrendResourceName, "$rootScope", MediaObserverFactoryName,
-        '$q', FavorResourceName, AcademyVideosResourceName, SeoPageResourceName];
+        '$q', FavorResourceName, AcademyVideosResourceName, SeoPageResourceName,AppointmentServiceName,AppointmentResourceName];
 
     favors: IFavor[];
     masters: IMaster[];
@@ -303,7 +328,8 @@ export class SalonHomeComponentController {
                 private constants: IConstants, private TransformResource: ITransformResource,
                 private BrendResource: IBrendResource, private $rootScope: IRootScope,
                 private mediaObserver: IMediaObserverFactory, private $q, private favorResource: IFavorResource,
-                private AcademyVideosResource: IAcademyVideosResource, private SeoPageResource: ISeoPageResource) {
+                private AcademyVideosResource: IAcademyVideosResource, private SeoPageResource: ISeoPageResource,
+                private AppointmentService: IAppointmentService,private AppointmentResource: IAppointmentResource) {
         this.categories = this.constants.favorCategories;
     }
 
@@ -344,12 +370,17 @@ export class SalonHomeComponentController {
             videos.splice(2, videos.length - 2);
         });
 
-        var favors= this.favorResource.query({sort: "order"});
-        this.initFavor(favors);
 
         this.$q.all([this.masters.$promise]).then((result) => {
             this.markerReadySEO = "dynamic-content";
         });
+
+    }
+
+    showAppointmentDialog(master) {
+        var appointment = new this.AppointmentResource();
+        appointment.master = master;
+        this.AppointmentService.onShowDialog(appointment);
 
     }
 
@@ -374,19 +405,6 @@ export class SalonHomeComponentController {
                         "image": "http://www.palamar.com.ua" + master.photo.url
                     });
             })
-        });
-    }
-    initFavor(favors) {
-        favors.$promise.then((favors) => {
-            if (this.favors.length > 0) {
-                this.categories.forEach((category)=> {
-                    category.favors = favors.filter((favor)=> {
-                        this.initFavorSeo(favor);
-                        return category.name == favor.category.name;
-                    });
-                })
-
-            }
         });
     }
 
@@ -463,6 +481,7 @@ export class SalonHomeComponentController {
 
                 this.categories.forEach((category)=> {
                     category.favors = favors.filter((favor)=> {
+                        this.initFavorSeo(favor);
                         return category.name == favor.category.name;
                     });
                 })
@@ -483,6 +502,10 @@ export class SalonHomeComponentController {
 
     showFavors(id: String) {
         this.$location.path(`/beauty-parlour/services/${id}`);
+    }
+
+    showServices(){
+        this.$location.path(`/beauty-parlour/services`);
     }
 
     showMaster(masterId: String) {

@@ -29,6 +29,7 @@ const template = `<div flex layout="column">
         <md-tab flex label="Графік">
             <pg-master-scheduler mode='master' appointment="$ctrl.appointment" masterid="$ctrl.master._id"
                                  mname="$ctrl.master.name" photo="$ctrl.master.photo.url"></pg-master-scheduler>
+                                
         </md-tab>
         <md-tab flex label="Інфо">
             <md-card>
@@ -104,7 +105,7 @@ const template = `<div flex layout="column">
                                         {{ favor.name }}
                                     </md-option>
                                 </md-select>
-                                </md-select>
+                                
                                 <md-input-container layout="row" class="md-block">
                                     <label for="level">Рівень</label>
                                     <md-select name="level" ng-model="$ctrl.newService.level"

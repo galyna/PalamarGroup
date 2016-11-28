@@ -128,61 +128,61 @@ const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
 
         </div>
 
+
     </div>
 
-    <div flex layout-align="center center" layout="row">
+    <div layout="row" flex >
         <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap">
-                <div hide-gt-sm="true" class="invers header" layout="column" layout-align="center center">
+            <div class="fit-screen-wrap    header-super">
+                <div layout="column" layout-align="center center">
+
                     <div class="md-display-1"> ГРАФІК РОБОТИ</div>
-                    <div class="md-title md-padding"> ВИБЕРИ ЧАС ТА ЗАПИШИСЬ</div>
+                    <div class="md-title md-padding"> ВИБЕРИ, ТИЖДЕНЬ, ДЕНЬ ЧАС ТА ЗАПИШИСЬ</div>
 
-                </div>
-
-                <div hide show-gt-sm="true" class=" header" layout="column" layout-align="center center">
-                    <div class="md-display-1"> ГРАФІК РОБОТИ</div>
-                    <div class="md-title md-padding"> ВИБЕРИ ЧАС ТА ЗАПИШИСЬ</div>
-
-                </div>
-
-                <div class="master-scheduler" layout="row" flex layout-align="center center">
-                    <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
-                        <div layout="row" layout-xs="column" class='master-calendar'>
-                            <div hide show-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
-                                <daypilot-navigator style=" width: 280px" id="navi-front" ng-if='$ctrl.navigatorConfig'
-                                                    daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>
-
-                            </div>
-                            <div hide-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
-
-                                <daypilot-navigator style=" width: 280px" id="navis" ng-if='$ctrl.navigatorSmallConfig'
-                                                    daypilot-config="$ctrl.navigatorSmallConfig"></daypilot-navigator>
-                            </div>
-                            <div flex class="md-padding " ng-if='$ctrl.weekConfig'>
-                                <daypilot-calendar id="week-front" daypilot-config="$ctrl.weekConfig"
-                                                   daypilot-events="$ctrl.events"></daypilot-calendar>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div hide show-gt-sm="true" layout="row" layout-align="center center">
-                    <div flex="60" flex-gt-sm="50"
-                         class="md-display-1 md-margin md-padding">
-                        {{::$ctrl.master.description}}
-                    </div>
+<md-button easing="easeInOutCubic" scroll-to="week-front" style="background-color: white !Important"
+           duration="100" class=" md-fab  down-btn md-padding" aria-label="down">
+    <md-icon class=""
+             md-svg-src="navigation:ic_arrow_downward_24px"></md-icon>
+</md-button>
 
                 </div>
             </div>
-            <div hide show-gt-sm="true" class="overlay-description">
+            <div class="overlay-description ">
             </div>
 
         </div>
+
     </div>
 
-    <div hide-gt-sm="true" layout="row" flex ng-if="$ctrl.master.description">
+
+    <div flex layout-align="center center" layout="row">
+
+        <div class="master-scheduler" layout="row" flex layout-align="center center">
+            <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
+                <div layout="row" layout-xs="column" class='master-calendar'>
+                    <div hide show-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
+                        <daypilot-navigator style=" width: 280px" id="navi-front" ng-if='$ctrl.navigatorConfig'
+                                            daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>
+
+                    </div>
+                    <div hide-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
+
+                        <daypilot-navigator style=" width: 280px" id="navis" ng-if='$ctrl.navigatorSmallConfig'
+                                            daypilot-config="$ctrl.navigatorSmallConfig"></daypilot-navigator>
+                    </div>
+                    <div flex class="md-padding " ng-if='$ctrl.weekConfig'>
+                        <daypilot-calendar id="week-front" daypilot-config="$ctrl.weekConfig"
+                                           daypilot-events="$ctrl.events"></daypilot-calendar>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div layout="row" flex ng-if="$ctrl.master.description">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap  flex  header-super">
                 <div layout="row" layout-align="center center">
@@ -217,11 +217,11 @@ const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
                          ng-repeat="video in $ctrl.master.videos | orderBy:'order' track by $index"
                          flex>
                     <div itemprop="funder" itemscope itemtype="http://schema.org/BeautySalon">
-                            <meta itemprop="name" content="PALAMAR GROUP"/>
-                        </div>
+                        <meta itemprop="name" content="PALAMAR GROUP"/>
+                    </div>
                     <div itemprop="author" itemscope itemtype="http://schema.org/Organization">
-                            <meta itemprop="name" content="{{$ctrl.master.name}}"/>
-                        </div>
+                        <meta itemprop="name" content="{{$ctrl.master.name}}"/>
+                    </div>
                     <div flex class="embed-responsive embed-responsive-16by9" itemscope
                          itemtype="http://schema.org/VideoObject">
                         <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
@@ -255,9 +255,10 @@ const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
                         <div itemprop="author" itemscope itemtype="http://schema.org/Organization">
                             <meta itemprop="name" content="{{$ctrl.master.name}}"/>
                         </div>
-                        
+
                         <span itemprop="caption" class="  md-margin">{{::photo.name}}</span>
                     </md-card-content>
+                </md-card>
             </div>
         </div>
     </div>
