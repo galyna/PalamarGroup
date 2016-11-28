@@ -9,13 +9,11 @@
     position: relative;
     display: block;
     overflow: hidden;
-    transition: top 0.3s linear;
-    top: 0px;
 
     &:hover {
       cursor: pointer;
       @extend .md-whiteframe-20dp;
-      top: -2px;
+
     }
 
     .show-description-content {
