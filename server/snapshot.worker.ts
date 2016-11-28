@@ -117,7 +117,9 @@ function saveSnapshots() {
             outputDir: './snapshots',
             selector: "#dynamic-content",
             processLimit: 1,
-
+            snapshotScript: {
+                script: "removeScripts"
+            }
         }, function (err, snapshotsCompleted) {
             console.log("snapshots generution finished at" + new Date().toTimeString())
             console.log(snapshotsCompleted.join(','));

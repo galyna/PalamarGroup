@@ -66,6 +66,8 @@ app.use('/robots.txt', function (req, res, next) {
 app.use('/sitemap.xml', function (req, res, next) {
     res.sendFile(path.resolve(pathes.sitemap));
 });
+
+
 //app.use('/',  express.static(pathes.all));
 app.use('/', function (req, res, next) {
     if (isBot(req.headers['user-agent'])) {
