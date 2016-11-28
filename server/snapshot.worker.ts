@@ -162,17 +162,24 @@ async function saveSitemap() {
     return await saveSnapshots();
 }
 
-mongoose.connect(config.mongoUrl, ()=>{
-    console.log('saveSitemap started');
-    saveSitemap().then(()=>{
-        console.log('complete');
-    }).catch(err=>{
-        console.error(err);
+// mongoose.connect(config.mongoUrl, ()=>{
+//     console.log('saveSitemap started');
+//     saveSitemap().then(()=>{
+//         console.log('complete');
+//     }).catch(err=>{
+//         console.error(err);
+//     });
+// });
+
+schedule.scheduleJob({
+    hour: 0
+}, ()=> {
+    mongoose.connect(config.mongoUrl, ()=>{
+        console.log('saveSitemap started');
+        saveSitemap().then(()=>{
+            console.log('complete');
+        }).catch(err=>{
+            console.error(err);
+        });
     });
 });
-
-// schedule.scheduleJob({
-//     hour: 20
-// }, ()=> {
-//
-// });
