@@ -119,7 +119,8 @@ function saveSnapshots() {
             processLimit: 1,
             snapshotScript: {
                 script: "removeScripts"
-            }
+            },
+            timeout: { "http://localhost:8080/": 20000, "__default": 10000 }
         }, function (err, snapshotsCompleted) {
             console.log("snapshots generution finished at" + new Date().toTimeString())
             console.log(snapshotsCompleted.join(','));
@@ -161,16 +162,17 @@ async function saveSitemap() {
     return await saveSnapshots();
 }
 
-
-schedule.scheduleJob({
-    hour: 20
-}, ()=> {
-    mongoose.connect(config.mongoUrl, ()=>{
-        console.log('saveSitemap started');
-        saveSitemap().then(()=>{
-            console.log('complete');
-        }).catch(err=>{
-            console.error(err);
-        });
+mongoose.connect(config.mongoUrl, ()=>{
+    console.log('saveSitemap started');
+    saveSitemap().then(()=>{
+        console.log('complete');
+    }).catch(err=>{
+        console.error(err);
     });
 });
+
+// schedule.scheduleJob({
+//     hour: 20
+// }, ()=> {
+//
+// });
