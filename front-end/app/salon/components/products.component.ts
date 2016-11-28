@@ -3,16 +3,17 @@ import {IRootScope} from "../../../typings";
 import {IProductOrder, ProductOrderResourceName, IProductOrderResource} from "../../resources/product.order.resource";
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
 
-const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses description-container products" layout="row" layout-align="center center">
+const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses description-container products" layout="row"
+     layout-align="center center">
     <div layout="column" layout-align="center center">
 
         <div class="course-bg " layout-align="center center" flex
              ng-repeat="product in $ctrl.products track by $index">
-              <sb-jsonld json="{{::product.seoJson}}}"></sb-jsonld>
+            <sb-jsonld json="{{::product.seoJson}}}"></sb-jsonld>
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
                 <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
-                ng-click="::$ctrl.showAppointmentDialog(product)">
+                         ng-click="::$ctrl.showAppointmentDialog(product)">
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-media "
                              flex="50"><img ng-src="{{::product.photo.url}}" class="md-card-image "/>
@@ -20,47 +21,48 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses de
                         <div class="card-desc "
                              flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
-                                <md-card-title-text  layout-align="space-around center">
-                                    <div   hide show-gt-sm="true" class="md-display-2 ">{{::product.name}}</div>
+                                <md-card-title-text layout-align="space-around center">
+                                    <div hide show-gt-sm="true" class="md-display-2 ">{{::product.name}}</div>
                                     <div hide-gt-sm="true" class="md-headline">{{::product.name}}</div>
-                                    
+
                                     <div hide show-gt-sm="true" class="md-title">Ціна {{::product.price}} грн.</div>
-                                     <div hide-gt-sm="true" class="md-subhead">Ціна {{::product.price}} грн.</div>
-                                    <div  class="descr-container">
-                                        <div  hide show-gt-sm="true" class="md-title md-padding">{{::product.description}}</div>
+                                    <div hide-gt-sm="true" class="md-subhead">Ціна {{::product.price}} грн.</div>
+                                    <div class="descr-container">
+                                        <div hide show-gt-sm="true" class="md-title md-padding">{{::product.description}}</div>
                                         <div hide-gt-sm="true" class="md-subhead">{{::product.description}}</div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-actions flex="25">
                                 <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
-                                           >
+                                >
                                     Замовити
                                 </md-button>
                             </md-card-actions>
                         </div>
                     </md-card-content>
                 </md-card>
-                <md-card  ng-if="$odd "  flex-md="90" flex-sm="70" flex="100" md-whiteframe="5" ng-click="::$ctrl.showAppointmentDialog(product)">
-                     <md-card-content layout="row" layout-align="start none">                        
+                <md-card ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
+                         ng-click="::$ctrl.showAppointmentDialog(product)">
+                    <md-card-content layout="row" layout-align="start none">
                         <div class="card-desc "
                              flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
-                                <md-card-title-text  layout-align="space-around center">
-                                    <div   hide show-gt-sm="true" class="md-display-2 ">{{::product.name}}</div>
+                                <md-card-title-text layout-align="space-around center">
+                                    <div hide show-gt-sm="true" class="md-display-2 ">{{::product.name}}</div>
                                     <div hide-gt-sm="true" class="md-headline">{{::product.name}}</div>
-                                    
-                                   <div hide show-gt-sm="true" class="md-title">Ціна {{::product.price}} грн.</div>
-                                     <div hide-gt-sm="true" class="md-subhead">Ціна {{::product.price}} грн.</div>
-                                    <div  class="descr-container">
-                                        <div  hide show-gt-sm="true" class="md-title md-padding">{{::product.description}}</div>
+
+                                    <div hide show-gt-sm="true" class="md-title">Ціна {{::product.price}} грн.</div>
+                                    <div hide-gt-sm="true" class="md-subhead">Ціна {{::product.price}} грн.</div>
+                                    <div class="descr-container">
+                                        <div hide show-gt-sm="true" class="md-title md-padding">{{::product.description}}</div>
                                         <div hide-gt-sm="true" class="md-subhead">{{::product.description}}</div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-actions flex="25">
                                 <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
-                                           >
+                                >
                                     Замовити
                                 </md-button>
                             </md-card-actions>
@@ -70,7 +72,8 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses de
                         </div>
                     </md-card-content>
                 </md-card>
-                <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5" ng-click="::$ctrl.showAppointmentDialog(product)">
+                <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
+                         ng-click="::$ctrl.showAppointmentDialog(product)">
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-media "
                              flex="50"><img ng-src="{{::product.photo.url}}" class="md-card-image "/>
@@ -78,21 +81,21 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses de
                         <div class="card-desc "
                              flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
-                                <md-card-title-text  layout-align="space-around center">
-                                    <div   hide show-gt-sm="true" class="md-display-2 ">{{::product.name}}</div>
+                                <md-card-title-text layout-align="space-around center">
+                                    <div hide show-gt-sm="true" class="md-display-2 ">{{::product.name}}</div>
                                     <div hide-gt-sm="true" class="md-headline">{{::product.name}}</div>
-                                    
+
                                     <div hide show-gt-sm="true" class="md-title">Ціна {{::product.price}} грн.</div>
-                                     <div hide-gt-sm="true" class="md-subhead">Ціна {{::product.price}} грн.</div>
-                                    <div  class="descr-container">
-                                        <div  hide show-gt-sm="true" class="md-title md-padding">{{::product.description}}</div>
+                                    <div hide-gt-sm="true" class="md-subhead">Ціна {{::product.price}} грн.</div>
+                                    <div class="descr-container">
+                                        <div hide show-gt-sm="true" class="md-title md-padding">{{::product.description}}</div>
                                         <div hide-gt-sm="true" class="md-subhead">{{::product.description}}</div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-actions flex="25">
                                 <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
-                                          >
+                                >
                                     Замовити
                                 </md-button>
                             </md-card-actions>
@@ -118,7 +121,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses de
                                 </md-card-title-text>
                             </md-card-title>
                             <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
-                                       >
+                            >
                                 Замовити
                             </md-button>
                         </div>

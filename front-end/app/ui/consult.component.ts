@@ -73,13 +73,11 @@ const dialogtemplate = `<md-dialog class="appointment-dialog" aria-label="ЗАП
         </md-dialog-content>
         <md-dialog-actions class="md-padding" layout="row" layout-align-xs="center center">
             
-
             <md-button type="submit" class=" xs-selected md-raised md-headline">ЗАПИСАТИСЬ</md-button>
         </md-dialog-actions>
     </form>
-</md-dialog>
+</md-dialog>`;
 
-`;
 export class ConsultFormComponentController {
 
     static $inject = ['$mdDialog'];

@@ -127,7 +127,7 @@ const template = `
                 <ui-gmap-marker coords="{ latitude: salon.latitude, longitude: salon.longitude}" idkey="$index">
 
                 </ui-gmap-marker>
-                </ui-gmap-markers>
+               
             </ui-gmap-google-map>
         </div>
 

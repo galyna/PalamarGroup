@@ -66,9 +66,6 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
         </div>
     </div>
 </div>
-
-
-
 `;
 
 export class SalonTransformsComponentController {

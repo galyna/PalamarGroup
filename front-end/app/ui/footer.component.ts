@@ -74,7 +74,7 @@ const template = `
     </div>
 </div>
 
-</div>
+
 <div class="overlay "></div>
 <md-button scroll-to="mainContent" easing="easeInOutCubic"
            duration="700" class=" md-fab  up-btn" aria-label="down">

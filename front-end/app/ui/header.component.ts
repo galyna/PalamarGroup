@@ -1,8 +1,5 @@
 import {ConsultServiceName} from "../salon/servises/consult.service";
-const template = `
-
-
-<div itemscope itemtype="http://schema.org/Brand"
+const template = `<div itemscope itemtype="http://schema.org/Brand"
  ng-click="$ctrl.handleVideoRuning()" class="stop-video-container"
      layout="row"
      layout-align="center center ">
@@ -11,7 +8,6 @@ const template = `
 </div>
 <div class="pic-wrapper">
     <figure itemprop="photo" class="pic-1"></figure>
-
 </div>
 <div id="video-container">
 </div>
@@ -33,9 +29,7 @@ const template = `
            duration="100" class=" md-fab  down-btn" aria-label="down">
     <md-icon class=""
              md-svg-src="navigation:ic_arrow_downward_24px"></md-icon>
-</md-button>
-   
-`;
+</md-button>`;
 
 export class SalonHeaderComponentController {
 

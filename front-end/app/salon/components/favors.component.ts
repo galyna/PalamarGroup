@@ -28,34 +28,35 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                              class="md-margin "
                              ng-attr-flex-gt-sm="46"
                              flex-gt-xs="46" flex-xs="80"
-                             >
-                       <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
-                        <img ng-src="{{::favor.photo.url}}"  ng-click="::$ctrl.showFavor(favor._id)" >                                 
-                    <md-card-content  ng-click="::$ctrl.showFavor(favor._id)" layout="column" class="  show-description-favor" layout-align="center center">
-                        <span class="  md-margin">{{::favor.name}}</span>
-                         <div class=" md-margin show-description-content">{{::favor.description}}</div>
-                       
-                    </md-card-content>
-                     <md-card-content layout="column" class="  card-appoint" layout-align="center center"  
-                    ng-click="::$ctrl.showFavorAppointmentDialog(favor)">
-                        <md-button hide-gt-xs="true" 
-                                   class=" md-margin  xs-selected md-display-1 md-raised "
-                                   aria-label="Details">
-                            Записатись
-                        </md-button>
+                    >
+                        <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
+                        <img ng-src="{{::favor.photo.url}}" ng-click="::$ctrl.showFavor(favor._id)">
+                        <md-card-content ng-click="::$ctrl.showFavor(favor._id)" layout="column"
+                                         class="  show-description-favor" layout-align="center center">
+                            <span class="  md-margin">{{::favor.name}}</span>
+                            <div class=" md-margin show-description-content">{{::favor.description}}</div>
 
-                        <div hide show-gt-xs='true'>
-                            Записатись
-                        </div>
-                    </md-card-content> 
+                        </md-card-content>
+                        <md-card-content layout="column" class="  card-appoint" layout-align="center center"
+                                         ng-click="::$ctrl.showFavorAppointmentDialog(favor)">
+                            <md-button hide-gt-xs="true"
+                                       class=" md-margin  xs-selected md-display-1 md-raised "
+                                       aria-label="Details">
+                                Записатись
+                            </md-button>
+
+                            <div hide show-gt-xs='true'>
+                                Записатись
+                            </div>
+                        </md-card-content>
                     </md-card>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div> 
-  <div class="courses-details description-container" layout="column">
+
+<div class="courses-details description-container" layout="column">
     <div layout="row" ng-if="$ctrl.videos.length>0 || $ctrl.photos.length>0" flex>
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap  header-super">
@@ -66,49 +67,55 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
         </div>
     </div>
 
- <div >
-    <div layout="row" layout-align="center center" ng-if="$ctrl.videos.length>0">
-        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
-            <div layout="column" layout-margin layout-align="center center" class="embed-responsive-container">
-                <md-card md-whiteframe="6" class="  courses-videos" 
-                         ng-repeat="video in $ctrl.videos  track by $index" temprop="workPerformed" itemscope="" itemtype="http://schema.org/CreativeWork"
-                         flex>
-                          <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+    <div>
+        <div layout="row" layout-align="center center" ng-if="$ctrl.videos.length>0">
+            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85">
+                <div layout="column" layout-margin layout-align="center center" class="embed-responsive-container">
+                    <md-card md-whiteframe="6" class="  courses-videos"
+                             ng-repeat="video in $ctrl.videos  track by $index" temprop="workPerformed" itemscope=""
+                             itemtype="http://schema.org/CreativeWork"
+                             flex>
+                        <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
                         </div>
-                    <div flex class="embed-responsive embed-responsive-16by9" itemscope itemtype="http://schema.org/VideoObject">
-                        <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
-                                       video-id="::video.url"></youtube-video>
-                    </div>
-                    <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                        <span itemprop="caption" class="  md-margin">{{::video.name}}</span>
-                    </md-card-content>
-                </md-card>
+                        <div flex class="embed-responsive embed-responsive-16by9" itemscope
+                             itemtype="http://schema.org/VideoObject">
+                            <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
+                                           video-id="::video.url"></youtube-video>
+                        </div>
+                        <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
+                            <span itemprop="caption" class="  md-margin">{{::video.name}}</span>
+                        </md-card-content>
+                    </md-card>
+                </div>
             </div>
+
         </div>
 
-    </div>
-
-     <div layout="row" layout-align="center center" >
-        <div  flex flex-gt-md="60" flex-md="80"  flex-gt-xs="60">
-         <div  class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6"  ng-repeat="photo in $ctrl.photos  track by $index" temprop="workPerformed" itemscope="" itemtype="http://schema.org/CreativeWork"
-                         class="md-margin " ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.photos.length)}}"  flex-gt-xs="46" flex-xs="80"
-                         ng-click="::$ctrl.showMediaObserver($ctrl.photos, $index)">  
-                                              <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+        <div layout="row" layout-align="center center">
+            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
+                <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+                    <md-card md-whiteframe="6" ng-repeat="photo in $ctrl.photos  track by $index"
+                             temprop="workPerformed" itemscope="" itemtype="http://schema.org/CreativeWork"
+                             class="md-margin "
+                             ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.photos.length)}}" flex-gt-xs="46"
+                             flex-xs="80"
+                             ng-click="::$ctrl.showMediaObserver($ctrl.photos, $index)">
+                        <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
                         </div>
-                        <img itemprop="contentUrl" itemscope="" itemtype="http://schema.org/ImageObject" ng-src="{{::photo.url}}" class="md-card-image">
-                    <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                        <span itemprop="caption" class="  md-margin">{{::photo.name}}</span>
-                    </md-card-content>
-</md-card>
+                        <img itemprop="contentUrl" itemscope="" itemtype="http://schema.org/ImageObject"
+                             ng-src="{{::photo.url}}" class="md-card-image">
+                        <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
+                            <span itemprop="caption" class="  md-margin">{{::photo.name}}</span>
+                        </md-card-content>
+                    </md-card>
+                </div>
+
             </div>
-            
+
         </div>
-         
     </div>
- </div>   
 </div>
 `;
 

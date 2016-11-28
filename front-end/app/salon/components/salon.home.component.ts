@@ -56,7 +56,7 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
             </div>
         </div>
     </div>
-     <div ng-if="$ctrl.showMoreTransforms" class="md-padding" layout="row" layout-align=" center center"
+    <div ng-if="$ctrl.showMoreTransforms" class="md-padding" layout="row" layout-align=" center center"
          layout-align-xs="  center">
         <md-button ng-click="::$ctrl.showServices()" class="comment-btn xs-selected md-raised ">Всі послуги
         </md-button>
@@ -106,14 +106,14 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
                         <span class=" ">{{::master.name}}</span>
                         <div class="  show-description-content">{{::master.rate.text}}</div>
                         <div class="   subtitle">{{::master.subtitle}}</div>
-                       
+
                     </md-card-content>
-                    
-                    <md-card-content  layout="column" class="  card-appoint"
+
+                    <md-card-content layout="column" class="  card-appoint"
                                      layout-align="center center"
                                      ng-click="::$ctrl.showAppointmentDialog(master)">
-                        
-                        <md-button hide-gt-xs="true" 
+
+                        <md-button hide-gt-xs="true"
                                    class=" md-margin  xs-selected md-display-1 md-raised "
                                    aria-label="Details">
                             Записатись
@@ -257,7 +257,8 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
 
         <div flex flex-gt-md="60" flex-gt-lg="40" flex-md="80" flex-gt-xs="70">
             <div flex class="brends-container" layout-margin layout layout-wrap layout-align="center center">
-                <a href="{{::bren.url}}" class="md-margin brend " layout="row" layout-align="center center" target="_blank"
+                <a href="{{::bren.url}}" class="md-margin brend " layout="row" layout-align="center center"
+                   target="_blank"
                    flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
                    flex-gt-xs="46" flex-xs="80" ng-repeat="bren in $ctrl.brends track by $index">
                     <sb-jsonld json="{{::bren.seoJson}}}"></sb-jsonld>

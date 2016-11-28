@@ -26,17 +26,18 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                          class="md-margin "
                          ng-attr-flex-gt-sm="46"
                          flex-gt-xs="46" flex-xs="80"
-                        >
-                          <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
-                    <img ng-src="{{::favor.photo.url}}"  ng-click="::$ctrl.showFavor(favor._id)">
-                     <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
-                    <md-card-content  ng-click="::$ctrl.showFavor(favor._id)" layout="column" class="  show-description-favor" layout-align="center center">
+                >
+                    <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
+                    <img ng-src="{{::favor.photo.url}}" ng-click="::$ctrl.showFavor(favor._id)">
+                    <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
+                    <md-card-content ng-click="::$ctrl.showFavor(favor._id)" layout="column"
+                                     class="  show-description-favor" layout-align="center center">
                         <span class="  md-margin">{{::favor.name}}</span>
                         <div class=" md-margin show-description-content">{{::favor.description}}</div>
                     </md-card-content>
-                    <md-card-content layout="column" class="  card-appoint" layout-align="center center"  
-                    ng-click="::$ctrl.showFavorAppointmentDialog(favor)">
-                         <md-button hide-gt-xs="true" 
+                    <md-card-content layout="column" class="  card-appoint" layout-align="center center"
+                                     ng-click="::$ctrl.showFavorAppointmentDialog(favor)">
+                        <md-button hide-gt-xs="true"
                                    class=" md-margin  xs-selected md-display-1 md-raised "
                                    aria-label="Details">
                             Записатись
@@ -45,7 +46,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                         <div hide show-gt-xs='true'>
                             Записатись
                         </div>
- 
+
                     </md-card-content>
                 </md-card>
             </div>
@@ -69,7 +70,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
     <div layout="column" layout-align="center center">
 
         <div class="course-bg " ng-repeat="master in $ctrl.masters track by $index" layout-align="center center" flex>
-        <sb-jsonld json="{{::master.seoJson}}}"></sb-jsonld>
+            <sb-jsonld json="{{::master.seoJson}}}"></sb-jsonld>
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
                 <md-card flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
@@ -92,113 +93,115 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                                 {{::master.rate.text}}
                             </div>
                             <div layout="row" layout-align="center center" class="md-padding ">
-                                <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">{{::master.name}}</div>
-                                <div hide show-sm="true" flex="90" class="md-headline capitalize">{{::master.name}}</div>
-                        </div>
-                        <div hide show-gt-sm="true" class="md-title">
-                            Вибери послугу та запишись
-                        </div>
-                        <div hide show-gt-sm="true" layout="row" class=" program-block-master  ">
-                            <div layout="column"
-                                 ng-repeat="service in ::master.services.slice(0,12) track by $index"
-                                 layout-align=" start center">
-
-                                <div class="date-block md-margin "
-                                     ng-click="::$ctrl.showAppointmentDialog(master, service)"
-                                     ng-style="{'background-image':'url({{::service.favor.photo.url}})'}"
-                                     layout="column"
-                                     layout-align=" center center">
+                                <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">
+                                    {{::master.name}}
                                 </div>
-                                <div class="  md-title date-text capitalize">
-                                    {{ ::service.favor.name}}
+                                <div hide show-sm="true" flex="90" class="md-headline capitalize">{{::master.name}}
                                 </div>
                             </div>
+                            <div hide show-gt-sm="true" class="md-title">
+                                Вибери послугу та запишись
+                            </div>
+                            <div hide show-gt-sm="true" layout="row" class=" program-block-master  ">
+                                <div layout="column"
+                                     ng-repeat="service in ::master.services.slice(0,12) track by $index"
+                                     layout-align=" start center">
+
+                                    <div class="date-block md-margin "
+                                         ng-click="::$ctrl.showAppointmentDialog(master, service)"
+                                         ng-style="{'background-image':'url({{::service.favor.photo.url}})'}"
+                                         layout="column"
+                                         layout-align=" center center">
+                                    </div>
+                                    <div class="  md-title date-text capitalize">
+                                        {{ ::service.favor.name}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <md-button hide show-sm="true" class="  md-display-1 md-raised  " aria-label="Details"
+                                       ng-click="::$ctrl.showMaster(master._id)">
+                                Про майстра
+                            </md-button>
+                            <md-button hide show-gt-sm="true" class=" xs-selected md-display-1 md-raised  "
+                                       aria-label="Details"
+                                       ng-click="::$ctrl.showMaster(master._id)">
+                                Про майстра
+                            </md-button>
+
+                            <md-button hide show-sm="true" class=" near-master xs-selected md-display-1 md-raised "
+                                       aria-label="Details"
+                                       ng-click="::$ctrl.showAppointmentDialog(master)">
+                                Записатись
+                            </md-button>
+
                         </div>
-
-                        <md-button hide show-sm="true" class="  md-display-1 md-raised  " aria-label="Details"
-                                   ng-click="::$ctrl.showMaster(master._id)">
-                            Про майстра
-                        </md-button>
-                        <md-button hide show-gt-sm="true" class=" xs-selected md-display-1 md-raised  "
-                                   aria-label="Details"
-                                   ng-click="::$ctrl.showMaster(master._id)">
-                            Про майстра
-                        </md-button>
-
-                        <md-button hide show-sm="true" class=" near-master xs-selected md-display-1 md-raised "
-                                   aria-label="Details"
-                                   ng-click="::$ctrl.showAppointmentDialog(master)">
-                            Записатись
-                        </md-button>
+                    </md-card-content>
+                </md-card>
 
             </div>
-            </md-card-content>
-            </md-card>
 
-        </div>
-
-        <div hide-gt-xs="true" layout="row" layout-align="center center">
-            <div class="overlay-bg trigger-right"></div>
-            <md-card md-whiteframe="8">
-                <md-card-content layout="column">
-                    <div ng-if="master.rate && master.rate._id!=='0'" class="card-desc-top-master white"
-                         flex
-                         layout="column"
-                         layout-align=" space-around center">
-                        <md-card-title>
-                            <md-card-title-text flex layout="column" layout-align=" space-around center">
-                                <div class="md-headline"> {{::master.rate.text}}</div>
-                            </md-card-title-text>
-                        </md-card-title>
-                    </div>
-                    <div class="card-media " ng-click="::$ctrl.showMaster(master._id)"><img
-                            ng-src="{{master.photo.url}}" ng-if="!!master.photo.url"
-                            class="md-card-image"/></div>
-                    <div class="card-desc "
-                         layout="column" layout-align="center center">
-                        <md-card-title>
-                            <md-card-title-text>
-                                <div class="md-headline capitalize">{{::master.name}}</div>
-
-                            </md-card-title-text>
-                        </md-card-title>
-                        <div class="md-title">
-                            Вибери послугу та запишись
+            <div hide-gt-xs="true" layout="row" layout-align="center center">
+                <div class="overlay-bg trigger-right"></div>
+                <md-card md-whiteframe="8">
+                    <md-card-content layout="column">
+                        <div ng-if="master.rate && master.rate._id!=='0'" class="card-desc-top-master white"
+                             flex
+                             layout="column"
+                             layout-align=" space-around center">
+                            <md-card-title>
+                                <md-card-title-text flex layout="column" layout-align=" space-around center">
+                                    <div class="md-headline"> {{::master.rate.text}}</div>
+                                </md-card-title-text>
+                            </md-card-title>
                         </div>
-                        <div layout="row" class=" program-block-master  ">
-                            <div layout="column"
-                                 ng-repeat="service in ::master.services track by $index"
-                                 layout-align=" start center">
+                        <div class="card-media " ng-click="::$ctrl.showMaster(master._id)"><img
+                                ng-src="{{master.photo.url}}" ng-if="!!master.photo.url"
+                                class="md-card-image"/></div>
+                        <div class="card-desc "
+                             layout="column" layout-align="center center">
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <div class="md-headline capitalize">{{::master.name}}</div>
 
-                                <div class="date-block md-margin "
-                                     ng-click="::$ctrl.showAppointmentDialog(master, service)"
-                                     ng-style="{'background-image':'url({{::service.favor.photo.url}})'}"
-                                     layout="column"
-                                     layout-align=" center center">
-                                </div>
-
+                                </md-card-title-text>
+                            </md-card-title>
+                            <div class="md-title">
+                                Вибери послугу та запишись
                             </div>
+                            <div layout="row" class=" program-block-master  ">
+                                <div layout="column"
+                                     ng-repeat="service in ::master.services track by $index"
+                                     layout-align=" start center">
+
+                                    <div class="date-block md-margin "
+                                         ng-click="::$ctrl.showAppointmentDialog(master, service)"
+                                         ng-style="{'background-image':'url({{::service.favor.photo.url}})'}"
+                                         layout="column"
+                                         layout-align=" center center">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <md-button class=" md-display-1 md-raised " aria-label="Details"
+                                       ng-click="::$ctrl.showMaster(master._id)">
+                                Про майстра
+                            </md-button>
+                            <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
+                                       ng-click="::$ctrl.showAppointmentDialog(master)">
+                                Записатись
+                            </md-button>
                         </div>
-                        <md-button class=" md-display-1 md-raised " aria-label="Details"
-                                   ng-click="::$ctrl.showMaster(master._id)">
-                            Про майстра
-                        </md-button>
-                        <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
-                                   ng-click="::$ctrl.showAppointmentDialog(master)">
-                            Записатись
-                        </md-button>
-                    </div>
-                </md-card-content>
+                    </md-card-content>
 
-            </md-card>
+                </md-card>
 
+            </div>
         </div>
     </div>
+    
 </div>
 
-
-</div>
-</div>
 <div class="courses-details description-container" layout="column">
     <div layout="row" ng-if="$ctrl.videos.length>0 || $ctrl.photos.length>0" flex>
         <div class="page-delimiter" flex>
@@ -215,13 +218,15 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85">
                 <div layout="column" layout-margin class="embed-responsive-container" ng-if="$ctrl.videos.length>0"
                      layout-align="center center">
-                    <md-card md-whiteframe="6" class="  courses-videos" temprop="workPerformed" itemscope="" itemtype="http://schema.org/CreativeWork"
-                             ng-repeat="video in $ctrl.videos  track by $index" 
+                    <md-card md-whiteframe="6" class="  courses-videos" temprop="workPerformed" itemscope=""
+                             itemtype="http://schema.org/CreativeWork"
+                             ng-repeat="video in $ctrl.videos  track by $index"
                              flex>
-                             <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                        <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
                         </div>
-                        <div flex class="embed-responsive embed-responsive-16by9" itemscope itemtype="http://schema.org/VideoObject">
+                        <div flex class="embed-responsive embed-responsive-16by9" itemscope
+                             itemtype="http://schema.org/VideoObject">
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
                         </div>
@@ -236,16 +241,18 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
 
         <div layout="row" layout-align="center center">
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
-                <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center" >
-                    <md-card md-whiteframe="6" ng-repeat="photo in $ctrl.photos  track by $index" temprop="workPerformed" itemscope="" itemtype="http://schema.org/CreativeWork"
+                <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+                    <md-card md-whiteframe="6" ng-repeat="photo in $ctrl.photos  track by $index"
+                             temprop="workPerformed" itemscope="" itemtype="http://schema.org/CreativeWork"
                              class="md-margin "
                              ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.photos.length)}}" flex-gt-xs="46"
-                             flex-xs="80" 
+                             flex-xs="80"
                              ng-click="::$ctrl.showMediaObserver($ctrl.photos, $index)">
-                             <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                        <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
                         </div>
-                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="contentUrl" itemscope="" itemtype="http://schema.org/ImageObject">
+                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="contentUrl" itemscope=""
+                             itemtype="http://schema.org/ImageObject">
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                             <span itemprop="caption" class="  md-margin">{{::photo.name}}</span>
                         </md-card-content>
