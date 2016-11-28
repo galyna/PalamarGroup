@@ -1,14 +1,4 @@
-.appoint-container {
-  font-size: 16px;
-  line-height: 16px;
-  height: 180px;
-  overflow: hidden;
-}
 
-.appoint-show {
-  overflow: visible;
-  height: auto;
-}
 
 .favor-app-btn {
 
@@ -18,15 +8,14 @@
   md-card.md-default-theme, md-card {
     position: relative;
     display: block;
+    overflow: hidden;
     transition: top 0.3s linear;
     top: 0px;
-    overflow: hidden;
 
     &:hover {
       cursor: pointer;
-      @extend .md-whiteframe-12dp;
-      // transition: top 0.3s linear;
-      top: -3px;
+      @extend .md-whiteframe-20dp;
+      top: -2px;
     }
 
     .show-description-content {
@@ -211,20 +200,18 @@
   md-card.md-default-theme, md-card {
     position: relative;
     display: block;
+    overflow: hidden;
     transition: top 0.3s linear;
     top: 0px;
-    // border-radius: 50%;
-    overflow: hidden;
+
+    &:hover {
+      cursor: pointer;
+      @extend .md-whiteframe-20dp;
+      top: -2px;
+    }
     @media (max-width: $layout-breakpoint-sm) {
       border-radius: 0;
     }
-    &:hover {
-      cursor: pointer;
-      @extend .md-whiteframe-12dp;
-      // transition: top 0.3s linear;
-      top: -3px;
-    }
-
     .show-description-content {
       display: none;
     }
@@ -265,7 +252,6 @@
     md-card-content.card-appoint {
       position: relative;
       text-transform: uppercase;
-
       height: 40px;
       border: 1px solid black;
       color: black;
@@ -277,7 +263,7 @@
 
     @media (max-width: $layout-breakpoint-xs) {
       md-card-content.card-appoint {
-        //display: none;
+
         padding-bottom: 16px;
           height: auto;
         border: none;
@@ -411,17 +397,17 @@
   md-card.md-default-theme, md-card {
     position: relative;
     display: flex;
-
-    top: 0px;
     border-radius: 50%;
     overflow: hidden;
     max-width: 400px;
     max-height: 400px;
+    transition: top 0.3s linear;
+    top: 0px;
 
     &:hover {
       cursor: pointer;
-      @extend .md-whiteframe-12dp;
-
+      @extend .md-whiteframe-20dp;
+      top: -2px;
     }
 
     img {
