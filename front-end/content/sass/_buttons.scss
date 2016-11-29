@@ -287,6 +287,7 @@ button.md-button.md-fab.side-up-btn {
 
   .md-button.md-default-theme.md-fab, .md-button.md-fab, .md-button.md-fab, .md-focused {
     background: white;
+    text-align: center;
   }
 
   a.md-button.md-default-theme.md-fab:not([disabled]):hover, a.md-button.md-fab:not([disabled]):hover, .md-button.md-default-theme.md-fab:not([disabled]):hover, .md-button.md-fab:not([disabled]):hover {
@@ -310,7 +311,7 @@ button.md-button.md-fab.side-up-btn {
   }
 
   .md-button.md-default-theme.md-raised.xs-selected:not([disabled]), .md-button.md-raised.xs-selected:not([disabled]) {
-
+    text-align: center;
     color: white;
     border: white;
     background-color: black;
@@ -318,7 +319,7 @@ button.md-button.md-fab.side-up-btn {
   }
 
   .md-raised.xs-selected {
-
+    text-align: center;
     color: white;
     border: white;
     background-color: black;
@@ -326,7 +327,7 @@ button.md-button.md-fab.side-up-btn {
   }
 
   .md-raised {
-    display: block;
+
     border-style: solid;
     border-color: black;
     border-width: 3px;
@@ -340,10 +341,11 @@ button.md-button.md-fab.side-up-btn {
     font-size: 26px;
     border-radius: 0px;
     transition: background-color 0.3s;
+    text-align: center;
     @extend .md-whiteframe-3dp;
 
     @media (max-width: $layout-breakpoint-xs) {
-      width: 90%;
+     width: 90%;
       margin-left: 0;
       margin-right: 0;
       font-size: 18px;
@@ -377,7 +379,8 @@ md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-ico
 }
 
 .md-button.md-default-theme.md-primary, .md-button.md-primary {
-  display: block;
+
+  text-align: center;
   border-style: solid;
   border-color: black;
   border-width: 3px;

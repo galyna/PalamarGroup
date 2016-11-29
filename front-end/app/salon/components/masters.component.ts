@@ -24,9 +24,13 @@ const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="co
                 <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
                 >
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media " ng-click="::$ctrl.showMaster(master._id)"
-                             flex="50"><img ng-src="{{::master.photo.url}}" class="md-card-image clickable-element"/>
+
+                        <div class="card-media " flex="50"><a ng-href="/beauty-parlour/master/{{master._id}}">
+                            <img ng-src="{{master.photo.url}}"
+                                 class="md-card-image clickable-element "/>
+                        </a>
                         </div>
+
                         <div class="card-desc "
                              flex="50" layout="column" layout-align="space-around center">
                             <div ng-if="master.rate && master.rate._id!=='0'" hide show-md="true"
@@ -64,15 +68,16 @@ const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="co
                                 </div>
                             </div>
 
-                            <md-button hide show-sm="true" class="  md-display-1 md-raised  " aria-label="Details"
-                                       ng-click="::$ctrl.showMaster(master._id)">
-                                Про майстра
-                            </md-button>
-                            <md-button hide show-gt-sm="true" class=" xs-selected md-display-1 md-raised  "
-                                       aria-label="Details"
-                                       ng-click="::$ctrl.showMaster(master._id)">
-                                Про майстра
-                            </md-button>
+                            <a hide show-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                               class="md-button md-display-1 md-raised "
+                               layout="row" layout-align=" center center"><span> Про майстра</span>
+                            </a>
+
+                            <a hide show-gt-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                               class="md-button xs-selected md-display-1 md-raised  "
+                               layout="row" layout-align=" center center"><span> Про майстра</span>
+                            </a>
+
 
                             <md-button hide show-sm="true" class=" near-master xs-selected md-display-1 md-raised "
                                        aria-label="Details"
@@ -83,7 +88,7 @@ const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="co
                         </div>
                     </md-card-content>
                 </md-card>
-                <md-card id="trigger-right" ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
+                <md-card ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-desc  box"
                              flex="50" layout="column" layout-align="space-around center">
@@ -125,15 +130,16 @@ const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="co
                                 </div>
                             </div>
 
-                            <md-button hide show-sm="true" class="  md-display-1 md-raised  " aria-label="Details"
-                                       ng-click="::$ctrl.showMaster(master._id)">
-                                Про майстра
-                            </md-button>
-                            <md-button hide show-gt-sm="true" class=" xs-selected md-display-1 md-raised  "
-                                       aria-label="Details"
-                                       ng-click="::$ctrl.showMaster(master._id)">
-                                Про майстра
-                            </md-button>
+                            <a hide show-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                               class="md-button md-display-1 md-raised "
+                               layout="row" layout-align=" center center"><span> Про майстра</span>
+                            </a>
+
+                            <a hide show-gt-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                               class="md-button xs-selected md-display-1 md-raised  "
+                               layout="row" layout-align=" center center"><span> Про майстра</span>
+                            </a>
+
 
                             <md-button hide show-sm="true" class=" near-master xs-selected md-display-1 md-raised "
                                        aria-label="Details"
@@ -142,15 +148,22 @@ const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="co
                             </md-button>
 
                         </div>
-                        <div class="card-media " ng-click="::$ctrl.showMaster(master._id)"
-                             flex="50"><img ng-src="{{::master.photo.url}}" class="md-card-image clickable-element"/>
+                        <div class="card-media "
+                             flex="50"><a ng-href="/beauty-parlour/master/{{master._id}}">
+                            <img ng-src="{{master.photo.url}}"
+                                 class="md-card-image clickable-element "/>
+                        </a>
                         </div>
                     </md-card-content>
                 </md-card>
                 <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                     <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media " ng-click="::$ctrl.showMaster(master._id)"
-                             flex="50"><img ng-src="{{::master.photo.url}}" class="md-card-image clickable-element"/>
+
+                        <div class="card-media "
+                             flex="50"><a ng-href="/beauty-parlour/master/{{master._id}}">
+                            <img ng-src="{{master.photo.url}}"
+                                 class="md-card-image clickable-element "/>
+                        </a>
                         </div>
                         <div class="card-desc box" flex="50"
                              flex="50" layout="column" layout-align="space-around center">
@@ -192,15 +205,16 @@ const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="co
                             </div>
 
 
-                            <md-button hide show-sm="true" class="  md-display-1 md-raised  " aria-label="Details"
-                                       ng-click="::$ctrl.showMaster(master._id)">
-                                Про майстра
-                            </md-button>
-                            <md-button hide show-gt-sm="true" class=" xs-selected md-display-1 md-raised  "
-                                       aria-label="Details"
-                                       ng-click="::$ctrl.showMaster(master._id)">
-                                Про майстра
-                            </md-button>
+                            <a hide show-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                               class="md-button md-display-1 md-raised "
+                               layout="row" layout-align=" center center"><span> Про майстра</span>
+                            </a>
+
+                            <a hide show-gt-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                               class="md-button xs-selected md-display-1 md-raised  "
+                               layout="row" layout-align=" center center"><span> Про майстра</span>
+                            </a>
+
 
                             <md-button hide show-sm="true" class=" near-master xs-selected md-display-1 md-raised "
                                        aria-label="Details"
@@ -219,17 +233,19 @@ const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="co
                 <div class="overlay-bg trigger-right"></div>
                 <md-card md-whiteframe="8">
                     <md-card-content layout="column">
-                        <div ng-if="master.rate && master.rate._id!=='0'" class="card-desc-top-master white"
-                             flex layout=" column " layout-align=" space-around center">
-                            <md-card-title>
-                                <md-card-title-text flex layout="column" layout-align=" space-around center">
-                                    <div class="md-headline capitalize"> {{::master.rate.text}}</div>
-                                </md-card-title-text>
-                            </md-card-title>
-                        </div>
-                        <div class="card-media " ng-click="::$ctrl.showMaster(master._id)"><img
-                                ng-src="{{::master.photo.url}}"
-                                class="md-card-image"/></div>
+                        <a ng-href="/beauty-parlour/master/{{master._id}}">
+                            <div ng-if="master.rate && master.rate._id!=='0'" class="card-desc-top-master white"
+                                 flex layout=" column " layout-align=" space-around center">
+                                <md-card-title>
+                                    <md-card-title-text flex layout="column" layout-align=" space-around center">
+                                        <div class="md-headline capitalize"> {{::master.rate.text}}</div>
+                                    </md-card-title-text>
+                                </md-card-title>
+                            </div>
+                            <div class="card-media " ><img
+                                    ng-src="{{::master.photo.url}}"
+                                    class="md-card-image"/></div>
+                        </a>
                         <div class="card-desc "
                              layout="column" layout-align="center center">
                             <md-card-title>
@@ -255,10 +271,10 @@ const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="co
 
                                 </div>
                             </div>
-                            <md-button class=" md-display-1 md-raised " aria-label="Details"
-                                       ng-click="::$ctrl.showMaster(master._id)">
-                                Про майстра
-                            </md-button>
+                            <a ng-href="/beauty-parlour/master/{{master._id}}"
+                               class="md-button md-display-1 md-raised "
+                               layout="row" layout-align=" center center"><span> Про майстра</span>
+                            </a>
                             <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
                                        ng-click="::$ctrl.showAppointmentDialog(master)">
                                 Записатись
@@ -344,9 +360,7 @@ export class MastersComponentController {
             }
         };
     }
-    showMaster(id) {
-        this.$location.path(`/beauty-parlour/master/${id}`);
-    }
+
 
     showAppointmentDialog(master, service = null) {
         var appointment = new this.AppointmentResource();

@@ -9,7 +9,6 @@ import {IAppointmentResource, AppointmentResourceName} from "../../resources/app
 
 const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
 
-
     <div ng-repeat="category in  $ctrl.categories track by $index">
 
         <div layout="row" flex ng-if="category.favors.length>0">
@@ -22,7 +21,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
         </div>
 
         <div layout="row" layout-align="center center" ng-if="category.favors.length>0 ">
-            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
+            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="90">
                 <div class="favor-app-btn" layout-margin layout layout-wrap layout-align="center center">
                     <md-card md-whiteframe="6" ng-repeat="favor in category.favors track by $index"
                              class="md-margin "
@@ -30,13 +29,14 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                              flex-gt-xs="46" flex-xs="80"
                     >
                         <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
-                        <img ng-src="{{::favor.photo.url}}" ng-click="::$ctrl.showFavor(favor._id)">
-                        <md-card-content ng-click="::$ctrl.showFavor(favor._id)" layout="column"
+                         <a ng-href="/beauty-parlour/service/{{favor._id}}">
+                        <img ng-src="{{::favor.photo.url}}" >
+                        <md-card-content  layout="column"
                                          class="  show-description-favor" layout-align="center center">
                             <span class="  md-margin">{{::favor.name}}</span>
                             <div class=" md-margin show-description-content">{{::favor.description}}</div>
-
                         </md-card-content>
+                          </a>
                         <md-card-content layout="column" class="  card-appoint" layout-align="center center"
                                          ng-click="::$ctrl.showFavorAppointmentDialog(favor)">
                             <md-button hide-gt-xs="true"
@@ -223,12 +223,6 @@ export class FavorsComponentController {
         }
         return temp
 
-    }
-
-
-
-    showFavor(id) {
-        this.$location.path(`/beauty-parlour/service/${id}`);
     }
 
 

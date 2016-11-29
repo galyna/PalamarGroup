@@ -23,14 +23,14 @@ const template = `
                 </div>
                 <div layout="column" ng-repeat="contact in salon.contacts" class="footer-contacts" flex
                      ng-click="salon._id!='isAcademy' && $ctrl.showContacts()">
-                    <div layout="row" layout-align="start center" itemscope itemtype="http://schema.org/ContactPoint"
+                    <div layout="row" layout-align="start center" 
                          ng-click="salon._id=='isAcademy' && $ctrl.showAcademyContacts()">
                         <img ng-src="{{::contact.photo.url}}"
                              class="avatar md-padding"
                              alt="{{::contact.name}}"/>
-                        <div hide-xs="true" layout="row" layout-align="start center" flex itemscope itemtype="http://schema.org/Person" >
-                            <div itemprop="name" class="md-subhead md-padding"> {{::contact.name}}</div>
-                            <div itemprop="telephone" class="md-title md-padding "> {{::contact.phone}}</div>
+                        <div hide-xs="true" layout="row" layout-align="start center" flex  >
+                            <div class="md-subhead md-padding"> {{::contact.name}}</div>
+                            <div  class="md-title md-padding "> {{::contact.phone}}</div>
                         </div>
 
 

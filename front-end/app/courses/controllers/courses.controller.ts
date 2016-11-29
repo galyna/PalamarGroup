@@ -34,7 +34,7 @@ export class CoursesController {
 
         $scope.$on("$destroy", () => {
             this.courses = null;
-            this.showDetails = null;
+
         })
         this.initSeo();
         this.getCourses();
@@ -140,10 +140,7 @@ export class CoursesController {
         this.smoothScroll(element, options);
     }
 
-    showDetails(id: string) {
 
-        this.$location.url('/academy/course/' + id);
-    }
 }
 
 

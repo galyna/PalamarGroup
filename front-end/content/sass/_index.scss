@@ -136,7 +136,11 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     width: 100%;
     display: table;
     min-height: 20px;
+    a {
 
+      text-align: center;
+      text-decoration: none;
+    }
     .pg-menu-section-title {
 
       cursor: pointer;
@@ -184,6 +188,13 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
   overflow-y: auto;
   position: relative;
   background-color: white;
+
+  a {
+
+    text-align: center;
+    text-decoration: none;
+  }
+
 }
 
 .page-header {

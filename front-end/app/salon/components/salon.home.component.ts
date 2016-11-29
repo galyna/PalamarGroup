@@ -31,13 +31,13 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
             <div class="home-category-btn" layout="row" layout-xs="column" layout-align="center center">
                 <md-card md-whiteframe="6" ng-repeat="category in $ctrl.categories track by $index "
                          class="md-margin " itemscope itemtype="http://schema.org/Service"
-                         ng-click="::$ctrl.showFavors(category.url)">
+                         >
                     <meta itemprop="category" content="Салон Краси Львів"/>
                     <meta itemprop="description" content="Перукарня у Львові"/>
-
-                    
+                     <a ng-href="/beauty-parlour/services/{{category.url}}">
                     <img ng-src="{{'/content/images/services/'+ category._id+'.jpg'}}"
-                         itemprop="image" >
+                         itemprop="image">
+                        
                     <md-card-content layout="column" layout-align="center center"
                                      class=" md-padding  show-description-favor">
                         <span itemprop="name" class=" md-padding  ">{{::category.name}}</span>
@@ -48,15 +48,17 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
                             </div>
                         </div>
                     </md-card-content>
+                    </a>
                 </md-card>
 
             </div>
         </div>
     </div>
-    <div ng-if="$ctrl.showMoreTransforms" class="md-padding" layout="row" layout-align=" center center"
+    <div class="md-padding" layout="row" layout-align=" center center"
          layout-align-xs="  center">
-        <md-button ng-click="::$ctrl.showServices()" class="comment-btn xs-selected md-raised ">Всі послуги
-        </md-button>
+        <a ng-href="/beauty-parlour/services" class="md-button md-primary comment-btn xs-selected md-raised "
+         layout="row" layout-align=" center center"><span>Всі послуги</span>
+        </a>
     </div>
     <div layout="row" flex>
         <div class="page-delimiter content-block" id="trigger-right" flex>
@@ -97,15 +99,16 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
                          flex-gt-xs="46" flex-xs="80"
                 >
                     <sb-jsonld json="{{::master.seoJson}}}"></sb-jsonld>
-                    <img ng-src="{{::master.photo.url}}" ng-click="::$ctrl.showMaster(master._id)">
-                    <md-card-content layout="column" class="  show-description"
-                                     ng-click="::$ctrl.showMaster(master._id)" layout-align="center center">
+                    
+                      <a ng-href="/beauty-parlour/master/{{master._id}}">
+                    <img ng-src="{{::master.photo.url}}" >
+                    <md-card-content layout="column" class="  show-description" layout-align="center center">
                         <span class=" ">{{::master.name}}</span>
                         <div class="  show-description-content">{{::master.rate.text}}</div>
                         <div class="   subtitle">{{::master.subtitle}}</div>
 
                     </md-card-content>
-
+                          </a>
                     <md-card-content layout="column" class="  card-appoint"
                                      layout-align="center center"
                                      ng-click="::$ctrl.showAppointmentDialog(master)">
@@ -120,6 +123,7 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
                             Записатись
                         </div>
                     </md-card-content>
+                   
                 </md-card>
             </div>
         </div>
@@ -190,8 +194,10 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
     </div>
     <div ng-if="$ctrl.showMoreTransforms" class="md-padding" layout="row" layout-align=" center center"
          layout-align-xs="  center">
-        <md-button ng-click="::$ctrl.showTransforms()" class="comment-btn xs-selected md-raised ">Всі перевтіління
-        </md-button>
+          <a ng-href="/beauty-parlour/transformations" class="md-button md-primary comment-btn xs-selected md-raised "
+         layout="row" layout-align=" center center"><span>Всі перевтіління</span>
+        </a>
+      
     </div>
     <div layout="row" ng-if="$ctrl.videos.length>0 " flex>
         <div class="page-delimiter " flex>
@@ -236,8 +242,9 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
 
     </div>
     <div ng-if="$ctrl.showMoreVideos" layout="row" layout-align=" center center" layout-align-xs="  center">
-        <md-button ng-click="::$ctrl.showVideos()" class="comment-btn xs-selected md-raised ">Всі відео
-        </md-button>
+     <a ng-href="/academy/videos" class="md-button md-primary comment-btn xs-selected md-raised "
+         layout="row" layout-align=" center center"><span>Всі відео</span>
+        </a>       
     </div>
     <div layout="row" flex ng-if="$ctrl.brends.length>0 " class="md-padding">
         <div class="page-delimiter" flex>
@@ -254,7 +261,7 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
 
         <div flex flex-gt-md="60" flex-gt-lg="40" flex-md="80" flex-gt-xs="70">
             <div flex class="brends-container" layout-margin layout layout-wrap layout-align="center center">
-                <a href="{{::bren.url}}" class="md-margin brend " layout="row" layout-align="center center"
+                <a ng-href="{{::bren.url}}" class="md-margin brend " layout="row" layout-align="center center"
                    target="_blank"
                    flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
                    flex-gt-xs="46" flex-xs="80" ng-repeat="bren in $ctrl.brends track by $index">
@@ -492,28 +499,6 @@ export class SalonHomeComponentController {
         });
 
     }
-
-
-    showTransforms() {
-        this.$location.path(`/beauty-parlour/transformations`);
-    }
-
-    showVideos() {
-        this.$location.path(`/academy/videos`);
-    }
-
-    showFavors(id: String) {
-        this.$location.path(`/beauty-parlour/services/${id}`);
-    }
-
-    showServices(){
-        this.$location.path(`/beauty-parlour/services`);
-    }
-
-    showMaster(masterId: String) {
-        this.$location.path(`/beauty-parlour/master/${masterId}`);
-    }
-
 
     setSocialParams(photo) {
         this.$rootScope.socialParams.host = this.constants.host;

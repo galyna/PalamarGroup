@@ -21,8 +21,8 @@
     }
 
     img {
-
-      max-width: 100%;
+      margin-bottom: -5px;
+     width: 100%;
       overflow: hidden;
 
     }
@@ -215,8 +215,8 @@
     }
 
     img {
-
-      max-width: 100%;
+      margin-bottom: -5px;
+      width: 100%;
       overflow: hidden;
 
     }
@@ -351,13 +351,13 @@
       &.flex-gt-sm-22 {
 
         max-height: 100%;
-        box-sizing: border-box;
+
         flex: 1 25%;
       }
 
       &.flex-gt-sm-46 {
         max-height: 100%;
-        box-sizing: border-box;
+
         flex: 1 43%;
       }
 
@@ -367,21 +367,16 @@
 
       &.flex-gt-xs-46 {
         max-height: 100%;
-        box-sizing: border-box;
+
         flex: 1 43%;
       }
-      &:first-child, &:nth-child(2) {
-        flex: 1 43%;
-      }
+
     }
 
     @media (max-width: $layout-breakpoint-xs) {
       &.flex-xs-80 {
         flex: 1 80%;
-        // Special override for the 1st & 2nd child default resizing
-        &:first-child, &:nth-child(2) {
-          flex: 1 80%;
-        }
+
       }
     }
   }
@@ -391,7 +386,10 @@
 
   padding: 0;
   margin: 0 0 20px 0;
-
+  a {
+    margin-bottom: -5px;
+    text-decoration: none;
+  }
   md-card.md-default-theme, md-card {
     position: relative;
     display: flex;
@@ -410,7 +408,7 @@
 
     img {
 
-      max-width: 100%;
+      width: 100%;
       overflow: hidden;
 
     }

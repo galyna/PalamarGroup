@@ -14,6 +14,7 @@
         <div class="course-bg " layout-align="center center" flex
              ng-repeat="course in vm.courses track by $index" ng-if="::course.isVisible">
             <sb-jsonld json="{{::course.seoJson}}}"></sb-jsonld>
+            <a ng-href="/academy/course/{{course._id}}">
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
                 <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
@@ -36,7 +37,7 @@
                             </md-card-title>
                             <md-card-actions flex="25">
                                 <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
-                                           ng-click="::vm.showDetails(course._id)">
+                                       >
                                     Деталі
                                 </md-button>
                             </md-card-actions>
@@ -59,7 +60,7 @@
                             </md-card-title>
                             <md-card-actions flex="25">
                                 <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
-                                           ng-click="::vm.showDetails(course._id)">
+                                           >
                                     Деталі
                                 </md-button>
                             </md-card-actions>
@@ -86,7 +87,7 @@
                             </md-card-title>
                             <md-card-actions flex="25">
                                 <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
-                                           ng-click="::vm.showDetails(course._id)">
+                                           >
                                     Деталі
                                 </md-button>
                             </md-card-actions>
@@ -100,7 +101,7 @@
 
             <div hide-gt-xs="true" layout="row" layout-align="center center">
                 <div class="overlay-bg trigger-right"></div>
-                <md-card md-whiteframe="8" ng-click="::vm.showDetails(course._id)">
+                <md-card md-whiteframe="8" >
                     <md-card-content layout="column">
                         <div class="card-media "><img ng-src="{{::course.avatar}}" class="md-card-image"/></div>
                         <div class="card-desc "
@@ -119,6 +120,7 @@
                 </md-card>
 
             </div>
+            </a>
         </div>
     </div>
 </div>

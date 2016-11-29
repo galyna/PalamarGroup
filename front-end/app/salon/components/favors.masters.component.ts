@@ -20,7 +20,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
     </div>
 
     <div layout="row" layout-align="center center">
-        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
+        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="90">
             <div class="favor-app-btn" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" ng-repeat="favor in $ctrl.favors track by $index"
                          class="md-margin "
@@ -28,13 +28,15 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                          flex-gt-xs="46" flex-xs="80"
                 >
                     <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
-                    <img ng-src="{{::favor.photo.url}}" ng-click="::$ctrl.showFavor(favor._id)">
-                    <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
-                    <md-card-content ng-click="::$ctrl.showFavor(favor._id)" layout="column"
-                                     class="  show-description-favor" layout-align="center center">
-                        <span class="  md-margin">{{::favor.name}}</span>
-                        <div class=" md-margin show-description-content">{{::favor.description}}</div>
-                    </md-card-content>
+                    <a ng-href="/beauty-parlour/service/{{favor._id}}">
+                        <img ng-src="{{::favor.photo.url}}">
+                        <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
+                        <md-card-content layout="column"
+                                         class="  show-description-favor" layout-align="center center">
+                            <span class="  md-margin">{{::favor.name}}</span>
+                            <div class=" md-margin show-description-content">{{::favor.description}}</div>
+                        </md-card-content>
+                    </a>
                     <md-card-content layout="column" class="  card-appoint" layout-align="center center"
                                      ng-click="::$ctrl.showFavorAppointmentDialog(favor)">
                         <md-button hide-gt-xs="true"
@@ -77,8 +79,11 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                 >
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-media "
-                             flex="50"><img ng-src="{{master.photo.url}}" ng-click="::$ctrl.showMaster(master._id)"
-                                            class="md-card-image clickable-element "/>
+                             flex="50">
+                            <a ng-href="/beauty-parlour/master/{{master._id}}">
+                                <img ng-src="{{master.photo.url}}" 
+                                     class="md-card-image clickable-element "/>
+                            </a>
                         </div>
                         <div class="card-desc box "
                              flex="50" layout="column" layout-align="space-around center">
@@ -118,16 +123,16 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                                     </div>
                                 </div>
                             </div>
+                            <a hide show-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                               class="md-button md-display-1 md-raised "
+                               layout="row" layout-align=" center center"><span> Про майстра</span>
+                            </a>
 
-                            <md-button hide show-sm="true" class="  md-display-1 md-raised  " aria-label="Details"
-                                       ng-click="::$ctrl.showMaster(master._id)">
-                                Про майстра
-                            </md-button>
-                            <md-button hide show-gt-sm="true" class=" xs-selected md-display-1 md-raised  "
-                                       aria-label="Details"
-                                       ng-click="::$ctrl.showMaster(master._id)">
-                                Про майстра
-                            </md-button>
+                            <a hide show-gt-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                               class="md-button xs-selected md-display-1 md-raised  "
+                               layout="row" layout-align=" center center"><span> Про майстра</span>
+                            </a>
+
 
                             <md-button hide show-sm="true" class=" near-master xs-selected md-display-1 md-raised "
                                        aria-label="Details"
@@ -145,6 +150,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                 <div class="overlay-bg trigger-right"></div>
                 <md-card md-whiteframe="8">
                     <md-card-content layout="column">
+                     <a ng-href="/beauty-parlour/master/{{master._id}}">
                         <div ng-if="master.rate && master.rate._id!=='0'" class="card-desc-top-master white"
                              flex
                              layout="column"
@@ -155,17 +161,21 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                                 </md-card-title-text>
                             </md-card-title>
                         </div>
-                        <div class="card-media " ng-click="::$ctrl.showMaster(master._id)"><img
-                                ng-src="{{master.photo.url}}" ng-if="!!master.photo.url"
-                                class="md-card-image"/></div>
+                       
+                            <div class="card-media "><img
+                                    ng-src="{{master.photo.url}}" ng-if="!!master.photo.url"
+                                    class="md-card-image"/></div>
+                        </a>
                         <div class="card-desc "
                              layout="column" layout-align="center center">
+                              <a ng-href="/beauty-parlour/master/{{master._id}}">
                             <md-card-title>
                                 <md-card-title-text>
                                     <div class="md-headline capitalize">{{::master.name}}</div>
 
                                 </md-card-title-text>
                             </md-card-title>
+                            </a>
                             <div class="md-title">
                                 Вибери послугу та запишись
                             </div>
@@ -183,10 +193,10 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
 
                                 </div>
                             </div>
-                            <md-button class=" md-display-1 md-raised " aria-label="Details"
-                                       ng-click="::$ctrl.showMaster(master._id)">
-                                Про майстра
-                            </md-button>
+                            <a ng-href="/beauty-parlour/master/{{master._id}}"
+                               class="md-button md-display-1 md-raised "
+                               layout="row" layout-align=" center center"><span> Про майстра</span>
+                            </a>
                             <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
                                        ng-click="::$ctrl.showAppointmentDialog(master)">
                                 Записатись
@@ -199,7 +209,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <div class="courses-details description-container" layout="column">
@@ -399,13 +409,6 @@ export class FavorsMastersComponentController {
         };
     }
 
-    showFavor(id) {
-        this.$location.path(`/beauty-parlour/service/${id}`);
-    }
-
-    showMaster(id) {
-        this.$location.path(`/beauty-parlour/master/${id}`);
-    }
 
 
     showAppointmentDialog(master, service = null) {

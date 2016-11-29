@@ -91,10 +91,12 @@ const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
             <sb-jsonld json="{{::master.seoJson}}}"></sb-jsonld>
             <md-card flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                 <md-card-content layout="row" layout-align="start none">
+                <a ng-href="/beauty-parlour/master/{{master._id}}">
                     <div class="card-media "
                          flex="50"><img ng-src="{{::master.photo.url}}" class="md-card-image clickable-element "
-                                        ng-click="::$ctrl.showMaster(master._id)"/>
+                                      />
                     </div>
+                      </a>
                     <div class="card-desc box" flex="50" layout="column" layout-align="space-around center">
                         <div ng-if="master.level" hide show-md="true" class="corner-ribbon top-right white"
                         >
@@ -109,10 +111,15 @@ const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
                             </div>
                             <div hide show-sm="true" flex="90" class="md-headline capitalize">{{::master.name}}</div>
                         </div>
-                        <md-button class="  md-display-1 md-raised  " aria-label="Details"
-                                   ng-click="::$ctrl.showMaster(master._id)">
-                            Про майстра
-                        </md-button>
+                         <a hide show-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                               class="md-button md-display-1 md-raised "
+                               layout="row" layout-align=" center center"><span> Про майстра</span>
+                            </a>
+
+                            <a hide show-gt-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                               class="md-button xs-selected md-display-1 md-raised  "
+                               layout="row" layout-align=" center center"><span> Про майстра</span>
+                            </a>
                         <md-button class=" near-master xs-selected md-display-1 md-raised " aria-label="Details"
                                    ng-click="::$ctrl.showAppointmentDialog(master)">
                             Записатись
@@ -128,6 +135,7 @@ const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
 
             <md-card md-whiteframe="8">
                 <md-card-content layout="column">
+                 <a ng-href="/beauty-parlour/master/{{master._id}}">
                     <div ng-if="master.level" class="card-desc-top-master"
                          ng-class="{'grey': master.level._id==='1','white': master.level._id==='0'}" flex
                          layout="column"
@@ -138,20 +146,24 @@ const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
                             </md-card-title-text>
                         </md-card-title>
                     </div>
+                   
                     <div class="card-media "><img ng-src="{{master.photo.url}}" class="md-card-image"
-                                                  ng-click="::$ctrl.showMaster(master._id)"/></div>
+                                                /></div>
+                                                    </a>
                     <div class="card-desc "
                          layout="column" layout-align="center center">
+                         <a ng-href="/beauty-parlour/master/{{master._id}}">
                         <md-card-title>
                             <md-card-title-text>
                                 <div class="md-headline capitalize md-padding">{{::master.name}}</div>
                                 <div class="md-title">{{::master.description}}</div>
                             </md-card-title-text>
                         </md-card-title>
-                        <md-button class=" md-display-1 md-raised " aria-label="Details"
-                                   ng-click="::$ctrl.showMaster(master._id)">
-                            Про майстра
-                        </md-button>
+                       </a>
+                         <a hide show-gt-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                               class="md-button  md-display-1 md-raised  "
+                               layout="row" layout-align=" center center"><span> Про майстра</span>
+                            </a>
                         <md-button class="xs-selected md-display-1 md-raised  " aria-label="Details"
                                    ng-click="::$ctrl.showAppointmentDialog(master)">
                             Записатись
@@ -392,9 +404,7 @@ export class FavorComponentController {
         this.smoothScroll(element, options);
     }
 
-    showMaster(id) {
-        this.$location.path(`/beauty-parlour/master/${id}`);
-    }
+
 
     showAppointmentDialog(master) {
         var appointment = new this.AppointmentResource();
