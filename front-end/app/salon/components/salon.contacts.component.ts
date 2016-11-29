@@ -38,19 +38,15 @@ const template = `
 </script>
  <sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
 <div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-contacts description-container" layout="column"
- itemscope itemtype="http://schema.org/BeautySalon">
+ >
 
     <div layout="column" layout-align="center center" ng-repeat="salon in $ctrl.salons">
-        <div itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
-                    <meta itemprop="latitude" content="{{salon.latitude}}"/>
-                    <meta itemprop="longitude" content="{{salon.longitude}}"/>
-                     <meta itemprop="addressLocality" content="{{salon.description}}"/>
-                </div>
+      
         <div layout="row"  >
             <div class="page-delimiter" flex>
                 <div class="fit-screen-wrap invers header">
-                    <div itemprop="address" class="md-display-1"> Адреса салону {{::salon.address}}</div>
-                    <div itemprop="address" class="md-title md-padding"> {{::salon.description}}</div>
+                    <div  class="md-display-1"> Адреса салону {{::salon.address}}</div>
+                    <div class="md-title md-padding"> {{::salon.description}}</div>
                 </div>
 
             </div>
@@ -88,7 +84,7 @@ const template = `
                                     <div class="md-title">Адміністратор</div>
                                     <div class="md-display-1">{{::contact.name}}</div>
                                     <div class="descr-container">
-                                        <div itemprop="telephone" class="md-display-1">{{::contact.phone}}</div>
+                                        <div  class="md-display-1">{{::contact.phone}}</div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
@@ -109,7 +105,7 @@ const template = `
                                 <md-card-title-text layout-align="space-around center">
                                     <div class="md-title">Адміністратор</div>
                                     <div class="md-display-1">{{::contact.name}}</div>
-                                    <div  itemprop="telephone" class="descr-container">
+                                    <div   class="descr-container">
                                         <div class="md-display-1">{{::contact.phone}}</div>
                                     </div>
                                 </md-card-title-text>
@@ -120,17 +116,17 @@ const template = `
                 </md-card>
             </div>
 
-            <div hide-gt-xs="true" layout="row" layout-align="center center" itemscope itemtype="http://schema.org/ContactPoint">
+            <div hide-gt-xs="true" layout="row" layout-align="center center" >
 
                 <md-card md-whiteframe="8">
-                    <md-card-content layout="column" itemscope itemtype="http://schema.org/Person">
-                        <div  itemprop="image" class="card-media "><img ng-src="{{::contact.photo.url}}" class="md-card-image"/></div>
+                    <md-card-content layout="column" >
+                        <div   class="card-media "><img ng-src="{{::contact.photo.url}}" class="md-card-image"/></div>
                         <div class="card-desc "
                              layout="column" layout-align="space-around center">
                             <md-card-title>
                                 <md-card-title-text>
-                                    <div  itemprop="name" class="md-headline">{{::contact.name}}</div>
-                                    <div itemprop="telephone" class="md-headline">{{::contact.phone}}</div>
+                                    <div   class="md-headline">{{::contact.name}}</div>
+                                    <div  class="md-headline">{{::contact.phone}}</div>
                                 </md-card-title-text>
                             </md-card-title>
                         </div>
@@ -162,9 +158,9 @@ const template = `
                              flex-gt-sm="22"
                              flex-gt-xs="46" flex-xs="80"
                              ng-click="::$ctrl.showMediaObserver(salon.photos, $index)">
-                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="contentUrl" >
+                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}Фото салону PALAMAR GROUP " >
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="caption" class="  md-margin">{{::photo.name}}</span>
+                            <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
                         </md-card-content>
                     </md-card>
                 </div>
@@ -300,7 +296,7 @@ export class SalonContactsComponentController {
                             "@type": "ContactPoint",
                             "telephone": contact.phone,
                             "contactType": "customer service",
-                            "image": "http://www.palamar.com.ua" + contact.photo.url
+                            "image": "http://palamar.com.ua" + contact.photo.url
                         });
                     })
                 })

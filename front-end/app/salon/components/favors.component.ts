@@ -99,16 +99,28 @@ const template = `
                              ng-repeat="video in $ctrl.videos  track by $index" temprop="workPerformed" itemscope=""
                              itemtype="http://schema.org/CreativeWork"
                              flex>
-                        <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                         <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
+                            <meta itemprop="image"
+                                  content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
+                            <meta itemprop="address" content="Львів, Україна"/>
+                        <meta itemprop="telephone" content="+38 067 264 6216"/>
                         </div>
-                        <div flex class="embed-responsive embed-responsive-16by9" itemscope
+                       
+                        <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
+                        <div flex class="embed-responsive embed-responsive-16by9"
+                             class="embed-responsive embed-responsive-16by9" itemscope
                              itemtype="http://schema.org/VideoObject">
+                            <meta itemprop="description" content="{{::video.name}}"/>
+                            <meta itemprop="name" content="{{::video.name}}"/>
+                            <meta itemprop="thumbnailUrl"
+                                  content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
+                            <meta itemprop="embedUrl" content="https://www.youtube.com/embed/{{video.url}}"/>
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
                         </div>
                         <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="caption" class="  md-margin">{{::video.name}}</span>
+                            <span itemprop="name" class="  md-margin">{{::video.name}}</span>
                         </md-card-content>
                     </md-card>
                 </div>
@@ -125,13 +137,16 @@ const template = `
                              ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.photos.length)}}" flex-gt-xs="46"
                              flex-xs="80"
                              ng-click="::$ctrl.showMediaObserver($ctrl.photos, $index)">
-                        <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                         <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
+                            <meta itemprop="image"
+                                  content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
+                            <meta itemprop="address" content="Львів, Україна"/>
+                        <meta itemprop="telephone" content="+38 067 264 6216"/>
                         </div>
-                        <img itemprop="contentUrl" itemscope="" itemtype="http://schema.org/ImageObject"
-                             ng-src="{{::photo.url}}" class="md-card-image">
+                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}">
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="caption" class="  md-margin">{{::photo.name}}</span>
+                            <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
                         </md-card-content>
                     </md-card>
                 </div>
@@ -272,46 +287,72 @@ export class FavorsComponentController {
 
     initSeo(favor:IFavor) {
         favor.seoJson =
-        {
-            "@context": "http://schema.org/",
-            "@type": "Service",
-            "areaServed": {
-                "@type": "Place",
-                "geo": {
-                    "@type": "GeoCircle",
-                    "geoMidpoint": {
-                        "@type": "GeoCoordinates",
-                        "latitude": "49.8110769",
-                        "longitude": "23.9737773"
+            {
+                "@context": "http://schema.org/",
+                "@type": "Service",
+                "areaServed": {
+                    "@type": "Place",
+                    "geo": {
+                        "@type": "GeoCircle",
+                        "geoMidpoint": {
+                            "@type": "GeoCoordinates",
+                            "latitude": "49.8110769",
+                            "longitude": "23.9737773"
+                        },
+                        "geoRadius": "50",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                            "addressLocality": "Львів, Україна",
+                            "addressCountry": "Україна"
+                        }
                     },
-                    "geoRadius": "50",
-                    "address": {
-                        "@type": "PostalAddress",
-                        "streetAddress": "вул.Щирецька 36",
-                        "addressLocality": "Львів",
-                        "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
-                        "addressCountry": "Україна"
+                    "map": "https://www.google.ru/maps/place/%D0%A1%D1%82%D1%83%D0%B4%D1%96%D1%8F+%D0%BA%D1%80%D0%B0%D1%81%D0%B8+%D0%AE%D0%BB%D1%96%D1%97+%D0%9F%D0%B0%D0%BB%D0%B0%D0%BC%D0%B0%D1%80/@49.8110803,23.9715886,17z/data=!3m1!4b1!4m5!3m4!1s0x473ae70c7a4a754b:0x96d5b6a9de35eaa0!8m2!3d49.8110769!4d23.9737773"
+                },
+                "image":"http://palamar.com.ua" + favor.photo.url,
+                "category": favor.category.name,
+                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                "serviceType": "сфера послуг",
+                "description": favor.description,
+                "offers": {
+                    "@type": "Offer",
+                    "priceCurrency": "UAH",
+                    "price": favor.defPrice,
+                    "seller": {
+                        "@type": "BeautySalon",
+                        "name": "PALAMAR GROUP",
+                        "url": "http:/palamar.com.ua/",
+                        "alternateName": "PALAMAR",
+                        "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                        "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
+                        "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                        "sameAs": [
+                            "https://www.facebook.com/hashtag/palamar_group",
+                            "https://www.instagram.com/palamar_group/",
+                            "https://vk.com/id202584528"
+                        ],
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                            "addressLocality": "Львів, Україна",
+                            "addressCountry": "Україна"
+                        },
+                        "telephone":"+38 067 264 6216",
+                        "priceRange": "від 300 грн",
                     }
                 },
-                "map": "https://www.google.ru/maps/place/%D0%A1%D1%82%D1%83%D0%B4%D1%96%D1%8F+%D0%BA%D1%80%D0%B0%D1%81%D0%B8+%D0%AE%D0%BB%D1%96%D1%97+%D0%9F%D0%B0%D0%BB%D0%B0%D0%BC%D0%B0%D1%80/@49.8110803,23.9715886,17z/data=!3m1!4b1!4m5!3m4!1s0x473ae70c7a4a754b:0x96d5b6a9de35eaa0!8m2!3d49.8110769!4d23.9737773"
-            },
-            "image":"http://www.palamar.com.ua" + favor.photo.url,
-            "category": favor.category.name,
-            "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-            "serviceType": "сфера послуг",
-            "description":"Ціна"+favor.defPrice+" "+ favor.description,
-            "name": favor.name,
-            "brand": {
-                "@context": "http://schema.org/",
-                "@type": "Brand",
-                "url": "http:/palamar.com.ua/",
-                "alternateName": "PALAMAR",
-                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
-                "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
-                "name": "PALAMAR GROUP"
+                "name": favor.name,
+                "brand": {
+                    "@context": "http://schema.org/",
+                    "@type": "Brand",
+                    "url": "http:/palamar.com.ua/",
+                    "alternateName": "PALAMAR",
+                    "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                    "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
+                    "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                    "name": "PALAMAR GROUP"
+                }
             }
-        }
 
     }
 }

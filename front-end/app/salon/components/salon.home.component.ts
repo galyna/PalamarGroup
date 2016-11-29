@@ -170,9 +170,10 @@ const template = `
                             <meta itemprop="name" content="PALAMAR GROUP"/>
                             <meta itemprop="image"
                                   content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
-                            <meta itemprop="address" content="Львів"/>
+                             <meta itemprop="address" content="Львів, Україна"/>
+                        <meta itemprop="telephone" content="+38 067 264 6216"/>
                         </div>
-
+                       
                         <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
                         <div flex class="embed-responsive embed-responsive-16by9" itemscope
                              itemtype="http://schema.org/VideoObject">
@@ -208,8 +209,10 @@ const template = `
                             <meta itemprop="name" content="PALAMAR GROUP"/>
                             <meta itemprop="image"
                                   content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
-                            <meta itemprop="address" content="Львів"/>
+                             <meta itemprop="address" content="Львів, Україна"/>
+                        <meta itemprop="telephone" content="+38 067 264 6216"/>
                         </div>
+             
                         <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}">
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                             <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
@@ -252,7 +255,8 @@ const template = `
                             <meta itemprop="name" content="PALAMAR GROUP"/>
                             <meta itemprop="image"
                                   content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
-                            <meta itemprop="address" content="Львів"/>
+                            <meta itemprop="address" content="Львів, Україна"/>
+                        <meta itemprop="telephone" content="+38 067 264 6216"/>
                         </div>
                         <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
                         <div flex class="embed-responsive embed-responsive-16by9"
@@ -435,19 +439,19 @@ export class SalonHomeComponentController {
                 this.seoJson.employees = [];
                 this.seoJson.employees.push(
                     {
+                        "@context": "http://schema.org/",
                         "@type": "Person",
                         "jobTitle": master.subtitle,
-                        "url": "http://www.palamar.com.ua" + "/beauty-salon/master/" + master._id,
+                        "url": "http://palamar.com.ua" + "/beauty-salon/master/" + master._id,
                         "address": {
                             "@type": "PostalAddress",
-                            "streetAddress": "вул.Щирецька 36",
-                            "addressLocality": "Львів",
-                            "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                            "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                            "addressLocality": "Львів, Україна",
                             "addressCountry": "Україна"
                         },
                         "name": master.name,
                         "description": master.description,
-                        "image": "http://www.palamar.com.ua" + master.photo.url
+                        "image": "http://palamar.com.ua" + master.photo.url
                     });
             })
         });
@@ -470,19 +474,45 @@ export class SalonHomeComponentController {
                     "geoRadius": "50",
                     "address": {
                         "@type": "PostalAddress",
-                        "streetAddress": "вул.Щирецька 36",
-                        "addressLocality": "Львів",
-                        "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                        "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                        "addressLocality": "Львів, Україна",
                         "addressCountry": "Україна"
                     }
                 },
                 "map": "https://www.google.ru/maps/place/%D0%A1%D1%82%D1%83%D0%B4%D1%96%D1%8F+%D0%BA%D1%80%D0%B0%D1%81%D0%B8+%D0%AE%D0%BB%D1%96%D1%97+%D0%9F%D0%B0%D0%BB%D0%B0%D0%BC%D0%B0%D1%80/@49.8110803,23.9715886,17z/data=!3m1!4b1!4m5!3m4!1s0x473ae70c7a4a754b:0x96d5b6a9de35eaa0!8m2!3d49.8110769!4d23.9737773"
             },
-            "image":"http://www.palamar.com.ua" + favor.photo.url,
+            "image":"http://palamar.com.ua" + favor.photo.url,
             "category": favor.category.name,
             "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
             "serviceType": "сфера послуг",
-            "description":"Ціна"+favor.defPrice+" "+ favor.description,
+            "description": favor.description,
+            "offers": {
+                "@type": "Offer",
+                "priceCurrency": "UAH",
+                "price": favor.defPrice,
+                "seller": {
+                    "@type": "BeautySalon",
+                    "name": "PALAMAR GROUP",
+                    "url": "http:/palamar.com.ua/",
+                    "alternateName": "PALAMAR",
+                    "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                    "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
+                    "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                    "sameAs": [
+                        "https://www.facebook.com/hashtag/palamar_group",
+                        "https://www.instagram.com/palamar_group/",
+                        "https://vk.com/id202584528"
+                    ],
+                    "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                        "addressLocality": "Львів, Україна",
+                        "addressCountry": "Україна"
+                    },
+                    "telephone":"+38 067 264 6216",
+                    "priceRange": "від 300 грн",
+                }
+            },
             "name": favor.name,
             "brand": {
                 "@context": "http://schema.org/",

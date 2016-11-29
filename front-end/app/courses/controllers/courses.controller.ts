@@ -71,18 +71,20 @@ export class CoursesController {
             "provider": {
                 "@type": "Organization",
                 "name": "Palamar Group Academy",
-                "sameAs": "http://www.palamar.com.ua/academy",
+                "sameAs": [
+                    "https://www.facebook.com/hashtag/palamar_group",
+                    "https://www.instagram.com/palamar_group/"
+                ],
                 "location": {
                     "name":"Palamar Group Academy",
                     "@type": "PostalAddress",
-                    "streetAddress": "вул.Щирецька 36",
-                    "addressLocality": "Львів",
-                    "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                    "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                    "addressLocality": "Львів, Україна",
                     "addressCountry": "Україна"
                 },
             },
-            "previewUrl": "http://www.palamar.com.ua/academy/course/" + course._id,
-            "image":"http://www.palamar.com.ua"+ course.avatar,
+            "previewUrl": "http://palamar.com.ua/academy/course/" + course._id,
+            "image":"http://palamar.com.ua"+ course.avatar,
             "creator": {
                     "@type": "Person",
                     "name": course.author.name
@@ -110,7 +112,7 @@ export class CoursesController {
             "@context": "http://www.schema.org",
             "@type": "EducationalOrganization",
             "name": "Palamar Group Academy",
-            "url": "http://www.palamar.com.ua/academy",
+            "url": "http://palamar.com.ua/academy",
             "founder": {
                 "@type": "Person",
                 "name": "YULIA PALAMAR"
@@ -129,9 +131,8 @@ export class CoursesController {
             },
             "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "вул.Щирецька 36",
-                "addressLocality": "Львів",
-                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                "addressLocality": "Львів, Україна",
                 "addressCountry": "Україна"
             },
 

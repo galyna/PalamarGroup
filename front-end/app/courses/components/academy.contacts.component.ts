@@ -143,7 +143,7 @@ export class AcademyContactComponentController {
 
     $onInit() {
         this.initSeo();
-        this.seo = this.SeoPageResource.query({query: {"name": "academy.contacts"}}).$promise.then((seo)=> {
+        this.seo = this.SeoPageResource.query({query: {"name": "academy.contacts"}}).$promise.then((seo) => {
             if (seo.length > 0) {
                 this.$rootScope.seo = seo[0];
                 document.title = this.$rootScope.seo.title;
@@ -165,29 +165,32 @@ export class AcademyContactComponentController {
                 this.marker.longitude = this.salon.longitude;
             }
         });
-        this.seoJson.contactPoint=[];
+        this.seoJson.contactPoint = [];
         this.contacts = this.contactResource.query({query: {'isAcademy': 'true'}});
         this.contacts.$promise.then((contacts) => {
-            contacts.forEach((contact)=> {
-
-                this.seoJson.contactPoint.push({ "@type" : "ContactPoint",
-                    "telephone" : contact.phone,
-                    "contactType" : "customer service",
-                    "image":"http://www.palamar.com.ua"+contact.photo.url
-                }) ;
+            contacts.forEach((contact) => {
+                this.seoJson.telephone = contact.phone;
+                this.seoJson.contactPoint.push({
+                    "@type": "ContactPoint",
+                    "telephone": contact.phone,
+                    "contactType": "customer service",
+                    "image": "http://palamar.com.ua" + contact.photo.url
+                });
             })
         });
         this.$q.all([mainPromise, this.contacts.$promise, this.seo.$promise]).then((result) => {
             this.markerReadySEO = "dynamic-content";
         });
     }
+
     initSeo() {
         this.seoJson = {
             "@context": "http://www.schema.org",
             "@type": "EducationalOrganization",
             "name": "PALAMAR GROUP ACADEMY",
-            "url": "http://www.palamar.com.ua/academy",
+            "url": "http://palamar.com.ua/academy",
             "founder": {
+                "@context": "http://schema.org/",
                 "@type": "Person",
                 "name": "YULIA PALAMAR"
             },
@@ -195,14 +198,14 @@ export class AcademyContactComponentController {
             "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
             "description": "Навчання для працівників салонів краси, Теми: чоловічі та жіночі стрижки, fassion-style, колористика ",
             "areaServed": {
+                "@context": "http://schema.org/",
                 "@type": "AdministrativeArea",
                 "name": "Львів"
             },
             "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "вул.Щирецька 36",
-                "addressLocality": "Львів",
-                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                "addressLocality": "Львів, Україна",
                 "addressCountry": "Україна"
             },
             "brand": {

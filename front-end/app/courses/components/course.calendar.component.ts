@@ -5,14 +5,14 @@ import {IRootScope} from "../../../typings";
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
 
 
-const template = ` 
- <script type='application/ld+json'>
+const template = `<script type='application/ld+json'>
 {
             "@context": "http://www.schema.org",
             "@type": "EducationalOrganization",
             "name": "PALAMAR GROUP ACADEMY",
-            "url": "http://www.palamar.com.ua/academy",
+            "url": "http://palamar.com.ua/academy",
             "founder": {
+                "@context": "http://schema.org/",
                 "@type": "Person",
                 "name": "YULIA PALAMAR"
             },
@@ -25,10 +25,9 @@ const template = `
             },
             "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "вул.Щирецька 36",
-                "addressLocality": "Львів",
-                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
-                "addressCountry": "Україна"
+               "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                            "addressLocality": "Львів, Україна",
+                            "addressCountry": "Україна"
             },
             "brand": {
                 "@context": "http://schema.org/",
@@ -40,28 +39,32 @@ const template = `
                 "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
                 "name": "PALAMAR GROUP"
             }
-        } </script>
- <div layout="row" flex>
-        <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap invers md-padding md-margin">
-                <div class="md-display-1"> КАЛЕНДАР НАВЧАЛЬНИХ ЗАХОДІВ АКАДЕМІЇ</div>
-            </div>
-
+        } 
+</script>
+<div layout="row" flex>
+    <div class="page-delimiter" flex>
+        <div class="fit-screen-wrap invers md-padding md-margin">
+            <div class="md-display-1"> КАЛЕНДАР НАВЧАЛЬНИХ ЗАХОДІВ АКАДЕМІЇ</div>
         </div>
-    </div><div ng-attr-id="{{ $ctrl.markerReadySEO }}" layout="row" flex layout-align="center stretch"> <pg-calendar 
-                             calendar-direction="$ctrl.calendarDirection"
-                             on-prev-month="prevMonth"
-                             on-next-month="nextMonth"
-                             on-day-click="$ctrl.dayClick(date)"
-                             title-format="'MMMM y'"
-                             ng-model='selectedDate'
-                             day-format="'d'"
-                             day-label-format="'EEE'"
-                             day-label-tooltip-format="'EEEE'"
-                             day-tooltip-format="'fullDate'"
-                             week-starts-on="firstDayOfWeek"
-                             day-content="setDayContent"
-                             template-url="'app/calendar/calendar.html'"></pg-calendar> </div>`;
+
+    </div>
+</div>
+<div ng-attr-id="{{ $ctrl.markerReadySEO }}" layout="row" flex layout-align="center stretch">
+    <pg-calendar
+            calendar-direction="$ctrl.calendarDirection"
+            on-prev-month="prevMonth"
+            on-next-month="nextMonth"
+            on-day-click="$ctrl.dayClick(date)"
+            title-format="'MMMM y'"
+            ng-model='selectedDate'
+            day-format="'d'"
+            day-label-format="'EEE'"
+            day-label-tooltip-format="'EEEE'"
+            day-tooltip-format="'fullDate'"
+            week-starts-on="firstDayOfWeek"
+            day-content="setDayContent"
+            template-url="'app/calendar/calendar.html'"></pg-calendar>
+</div>`;
 
 
 export interface ICourseDates {

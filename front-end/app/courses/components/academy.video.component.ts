@@ -11,8 +11,9 @@ const template = `
             "@context": "http://www.schema.org",
             "@type": "EducationalOrganization",
             "name": "PALAMAR GROUP ACADEMY",
-            "url": "http://www.palamar.com.ua/academy",
+            "url": "http://palamar.com.ua/academy",
             "founder": {
+                "@context": "http://schema.org/",
                 "@type": "Person",
                 "name": "YULIA PALAMAR"
             },
@@ -25,10 +26,9 @@ const template = `
             },
             "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "вул.Щирецька 36",
-                "addressLocality": "Львів",
-                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
-                "addressCountry": "Україна"
+               "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                            "addressLocality": "Львів, Україна",
+                            "addressCountry": "Україна"
             },
             "brand": {
                 "@context": "http://schema.org/",
@@ -72,8 +72,10 @@ const template = `
                             <meta itemprop="name" content="PALAMAR GROUP"/>
                             <meta itemprop="image"
                                   content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
-                            <meta itemprop="address" content="Львів"/>
+                            <meta itemprop="address" content="Львів,Україна"/>
+                            <meta itemprop="telephone" content="+38 067 264 6216"/>
                         </div>
+                        
                         <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
                         <div flex class="embed-responsive embed-responsive-16by9"
                              class="embed-responsive embed-responsive-16by9" itemscope

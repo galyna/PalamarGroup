@@ -30,6 +30,7 @@ export class CourseController {
     showDetails: boolean;
     markerReadySEO: string;
     seoJson: any;
+    breadcrumbList:any;
 
 
     constructor(private $log: ng.ILogService, $routeParams: IRouteParams,
@@ -48,6 +49,7 @@ export class CourseController {
             this.scrollToMain();
             this.setSocialParams(course);
             this.course.seoJson = this.createSeoJson(course);
+            this.initBreadcrumbList(course);
             this.course.hearFormsPhotos = this.orderByFilter(course.hearFormsPhotos, "order");
             this.course.historyPhotos = this.orderByFilter(course.historyPhotos, "order");
             document.title = "Навчальний курс " + course.name + " " + "Львів";
@@ -92,9 +94,10 @@ export class CourseController {
                     "addressCountry": "Україна"
                 },
             },
-            "previewUrl": "http://www.palamar.com.ua/academy/course/" + course._id,
-            "image":"http://www.palamar.com.ua"+ course.avatar,
+            "previewUrl": "http://palamar.com.ua/academy/course/" + course._id,
+            "image":"http://palamar.com.ua"+ course.avatar,
             "creator": {
+                "@context": "http://schema.org/",
                 "@type": "Person",
                 "name": course.author.name
             },
@@ -105,10 +108,34 @@ export class CourseController {
                 "seller": {
                     "@type": "Organization",
                     "name": "Palamar Group Academy",
-                    "sameAs": "http://www.palamar.com.ua/academy",
+                    "sameAs": "http://palamar.com.ua/academy",
                 }
             }
 
+        }
+    }
+
+    initBreadcrumbList(course) {
+        this.breadcrumbList={
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                    "@id": "http://palamar.com.ua/academy",
+                    "name": "Академія",
+                    "image": "http://palamar.com.ua/content/images/bg/courses/dates/IMG_7095_1539_1026.jpg"
+                }
+            },{
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                    "@id": "http://palamar.com.ua/academy/{{vm.course._id}}",
+                    "name": course.name,
+                    "image": "http://palamar.com.ua/{{vm.course.avatar}}"
+                }
+            }]
         }
     }
 
@@ -117,7 +144,7 @@ export class CourseController {
             "@context": "http://www.schema.org",
             "@type": "EducationalOrganization",
             "name": "Palamar Group Academy",
-            "url": "http://www.palamar.com.ua/academy",
+            "url": "http://palamar.com.ua/academy",
             "founder": {
                 "@type": "Person",
                 "name": "YULIA PALAMAR"
@@ -143,8 +170,9 @@ export class CourseController {
             },
 
             "telephone": "+38 068 9898806"
-        }
+        };
     }
+
     scrollToOrderName() {
         var options = {
             duration: 50,

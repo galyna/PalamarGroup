@@ -13,10 +13,10 @@ const template = `<script type='application/ld+json'>
     "https://www.facebook.com/hashtag/palamar_group",
     "https://www.instagram.com/palamar_group/",
     "https://vk.com/id202584528"
-  ]
+    ]
     }
 </script>
-        
+
 <sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
 <div class="page-header-wrap" layout="column" layout-align="center center">
     <div layout="row" flex layout-align="start center">
@@ -97,7 +97,7 @@ const template = `<script type='application/ld+json'>
 
 export class FooterComponentController {
 
-    static $inject = [ContactResourceName, 'constants', '$rootScope', SalonResourceName,'$location'];
+    static $inject = [ContactResourceName, 'constants', '$rootScope', SalonResourceName, '$location'];
 
     showAnimation: boolean;
     showMap: boolean;
@@ -108,7 +108,7 @@ export class FooterComponentController {
 
     constructor(private contactResource: IContactResource,
                 private constants: IConstants, private $rootScope: IRootScope,
-                private salonResource: ISalonResource,private $location) {
+                private salonResource: ISalonResource, private $location) {
         this.initSeo();
     }
 
@@ -121,6 +121,7 @@ export class FooterComponentController {
             "paymentAccepted": "Cash, credit card",
             "url": "http://palamar.com.ua/",
             "founder": {
+                "@context": "http://schema.org/",
                 "@type": "Person",
                 "name": "YULIA PALAMAR"
             },
@@ -138,9 +139,8 @@ export class FooterComponentController {
             },
             "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "вул.Щирецька 36",
-                "addressLocality": "Львів",
-                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                "addressLocality": "Львів, Україна",
                 "addressCountry": "Україна"
             },
             "location": {
@@ -156,12 +156,12 @@ export class FooterComponentController {
                 },
                 "address": {
                     "@type": "PostalAddress",
-                    "streetAddress": "вул.Щирецька 36",
-                    "addressLocality": "Львів",
-                    "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                    "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                    "addressLocality": "Львів, Україна",
                     "addressCountry": "Україна"
                 }
             },
+            "telephone":"+38 067 264 6216",
             "hasMap": "https://www.google.ru/maps/place/%D0%A1%D1%82%D1%83%D0%B4%D1%96%D1%8F+%D0%BA%D1%80%D0%B0%D1%81%D0%B8+%D0%AE%D0%BB%D1%96%D1%97+%D0%9F%D0%B0%D0%BB%D0%B0%D0%BC%D0%B0%D1%80/@49.8110803,23.9715886,17z/data=!3m1!4b1!4m5!3m4!1s0x473ae70c7a4a754b:0x96d5b6a9de35eaa0!8m2!3d49.8110769!4d23.9737773",
             "openingHours": "Mo, Tu, We, Th, Fr 10:00-19:00",
             "priceRange": "від 300 грн",
@@ -199,12 +199,15 @@ export class FooterComponentController {
                 academysalon._id = "isAcademy";
                 salons.push(academysalon);
                 this.salons = salons;
-                salons.forEach((salon)=> {
+                salons.forEach((salon) => {
                     if (!salon.contacts) {
                         salon.contacts = [];
                     }
-                    this.seoJson.contactPoint=[];
-                    contacts.forEach((contact)=> {
+                    if (salon.isMain && salon.contacts.length > 0) {
+                        this.seoJson.telephone = salon.contacts[0].phone
+                    }
+                    this.seoJson.contactPoint = [];
+                    contacts.forEach((contact) => {
                         if (!contact.isAcademy && contact.salon === salon._id) {
                             salon.contacts.push(contact);
                         }
@@ -212,11 +215,12 @@ export class FooterComponentController {
                             salon.contacts.push(contact);
                         }
 
-                        this.seoJson.contactPoint.push({ "@type" : "ContactPoint",
-                            "telephone" : contact.phone,
+                        this.seoJson.contactPoint.push({
+                            "@type": "ContactPoint",
+                            "telephone": contact.phone,
                             "contactType": "customer service",
-                            "image":"http://www.palamar.com.ua"+contact.photo.url
-                        }) ;
+                            "image": "http://palamar.com.ua" + contact.photo.url
+                        });
                     })
                 })
 

@@ -1,30 +1,8 @@
 
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
-    "@type": "ListItem",
-    "position": 1,
-    "item": {
-     "@id": "http://palamar.com.ua/academy",
-      "name": "Академія",
-      "image": "http://palamar.com.ua/content/images/bg/courses/dates/IMG_7095_1539_1026.jpg"
-    }
-  },{
-    "@type": "ListItem",
-    "position": 2,
-    "item": {
-      "@id": "http://palamar.com.ua/academy/{{vm.course._id}}",
-      "name": vm.course.name,
-      "image": "http://palamar.com.ua/{{vm.course.avatar}}"
-    }
-  }]
-}
-</script>
-
 <sb-jsonld json="{{::vm.course.seoJson}}"></sb-jsonld>
+<sb-jsonld json="{{::vm.breadcrumbList}}"></sb-jsonld>
 <sb-jsonld json="{{::vm.seoJson}}"></sb-jsonld>
+
 <div ng-attr-id="{{ vm.markerReadySEO }}" class="courses-details description-container" layout="column">
 
     <!--author-->
@@ -172,8 +150,10 @@
                         <meta itemprop="name" content="PALAMAR GROUP"/>
                         <meta itemprop="image"
                               content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
-                        <meta itemprop="address" content="Львів"/>
+                        <meta itemprop="address" content="Львів,Україна"/>
+                        <meta itemprop="telephone" content="+38 067 264 6216"/>
                     </div>
+
                     <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}">
                     <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                         <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
@@ -191,11 +171,13 @@
                          ng-repeat="video in ::vm.course.videos track by $index" temprop="workPerformed" itemscope=""
                          itemtype="http://schema.org/CreativeWork"
                          flex>
+
                     <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                         <meta itemprop="name" content="PALAMAR GROUP"/>
                         <meta itemprop="image"
                               content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
-                        <meta itemprop="address" content="Львів"/>
+                        <meta itemprop="address" content="Львів, Україна"/>
+                        <meta itemprop="telephone" content="+38 067 264 6216"/>
                     </div>
                     <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
                     <div flex class="embed-responsive embed-responsive-16by9"

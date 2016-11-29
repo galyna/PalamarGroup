@@ -360,19 +360,19 @@ export class MastersComponentController {
     seoMaster(master) {
         master.seoJson=
         {
+            "@context": "http://schema.org/",
             "@type": "Person",
             "jobTitle": master.subtitle,
-            "url": "http://www.palamar.com.ua" + "/beauty-salon/master/" + master._id,
+            "url": "http://palamar.com.ua" + "/beauty-salon/master/" + master._id,
             "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "вул.Щирецька 36",
-                "addressLocality": "Львів",
-                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                "addressLocality": "Львів, Україна",
                 "addressCountry": "Україна"
             },
             "name": master.name,
             "description": master.description,
-            "image": "http://www.palamar.com.ua" + master.photo.url,
+            "image": "http://palamar.com.ua" + master.photo.url,
             "brand": {
                 "@context": "http://schema.org/",
                 "@type": "Brand",

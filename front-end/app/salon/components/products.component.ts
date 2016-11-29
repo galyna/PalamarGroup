@@ -312,7 +312,7 @@ export class ProductsComponentController {
                             "name": "PALAMAR GROUP"
                         },
                         "name": product.name,
-                        "image": "http://www.palamar.com.ua" + product.photo.url,
+                        "image": "http://palamar.com.ua" + product.photo.url,
                         "description":"Ціна "+product.price+" грн. " +product.description,
 
                         "offers": {
@@ -322,7 +322,11 @@ export class ProductsComponentController {
                             "seller": {
                                 "@type": "Organization",
                                 "name": "PALAMAR GROUP",
-                                "sameAs": "http://www.palamar.com.ua",
+                                "sameAs": [
+                                    "https://www.facebook.com/hashtag/palamar_group",
+                                    "https://www.instagram.com/palamar_group/",
+                                    "https://vk.com/id202584528"
+                                ]
                             }
                         }
                     };

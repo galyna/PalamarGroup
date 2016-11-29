@@ -11,51 +11,7 @@ import {SchedulerServiceName, ISchedulerService} from "../../ui/scheduler.servic
 import ISeoPage = pg.models.ISeoPage;
 
 const template = `
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
-    "@type": "ListItem",
-    "position": 1,
-    "item": {
-      "@id": "http://palamar.com.ua/beauty-salon/master",
-      "name": $ctrl.master.name,     
-    }
-  }]
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
-    "@type": "ListItem",
-    "position": 1,
-    "item": {
-      "@id": "http://palamar.com.ua/beauty-salon",
-      "name": "Салон",
-      "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
-    }
-  },{
-    "@type": "ListItem",
-    "position": 2,
-    "item": {
-      "@id": "http://palamar.com.ua/beauty-salon/masters",
-      "name": "Майстри"     
-    }
-  },{
-    "@type": "ListItem",
-    "position": 3,
-    "item": {
-      "@id": "http://palamar.com.ua/beauty-salon/master/{{$ctrl.master._id}}",
-      "name": {{$ctrl.master.name }}    
-    }
-  }]
-}
-</script>
-
+<sb-jsonld json="{{::$ctrl.breadcrumbList}}"></sb-jsonld>
 <sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
 <div class=" description-container" ng-attr-id="{{ $ctrl.markerReadySEO }}">
     <div class=" courses" layout-align="center center" layout="column"
@@ -266,7 +222,8 @@ const template = `
                             <meta itemprop="name" content="PALAMAR GROUP"/>
                             <meta itemprop="image"
                                   content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
-                            <meta itemprop="address" content="Львів"/>
+                             <meta itemprop="address" content="Львів, Україна"/>
+                        <meta itemprop="telephone" content="+38 067 264 6216"/>
                         </div>
                          
                         <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
@@ -304,8 +261,10 @@ const template = `
                             <meta itemprop="name" content="PALAMAR GROUP"/>
                             <meta itemprop="image"
                                   content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
-                            <meta itemprop="address" content="Львів"/>
+                           <meta itemprop="address" content="Львів, Україна"/>
+                        <meta itemprop="telephone" content="+38 067 264 6216"/>
                         </div>
+                       
                         <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}">
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                             <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
@@ -336,6 +295,7 @@ export class MasterComponentController {
     socialParams: any;
     markerReadySEO: string;
     seoJson: any;
+    breadcrumbList: any;
 
     constructor(private $log: ng.ILogService, private $routeParams: ng.route.IRouteParamsService,
                 private MasterResource: IMasterResource, private AppointmentService: IAppointmentService,
@@ -356,12 +316,13 @@ export class MasterComponentController {
             this.MasterResource.get({id: this.$routeParams["id"], populate: 'services.favor'}).$promise
                 .then((master) => {
                     this.master = master;
-                    document.title =  master.subtitle + " Львів "+ master.name
+                    document.title = master.subtitle + " Львів " + master.name
                     this.$rootScope.seo.description = master.description;
                     this.scrollToMain();
                     this.seoMaster(master);
+                    this.initBreadcrumbList(master);
                     this.markerReadySEO = "dynamic-content";
-                }).catch((err)=> {
+                }).catch((err) => {
                 this.$log.error(err);
                 this.$location.path(`/beauty-salon/masters`);
             });
@@ -369,33 +330,34 @@ export class MasterComponentController {
             ;
         }
     }
+
     seoMaster(master) {
         this.seoJson =
-        {
-            "@type": "Person",
-            "jobTitle": master.subtitle,
-            "url": "http://www.palamar.com.ua" + "/beauty-salon/master/" + master._id,
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "вул.Щирецька 36",
-                "addressLocality": "Львів",
-                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
-                "addressCountry": "Україна"
-            },
-            "name": master.name,
-            "description": master.description,
-            "image": "http://www.palamar.com.ua" + master.photo.url,
-            "brand": {
-                "@context": "http://schema.org/",
-                "@type": "Brand",
-                "url": "http:/palamar.com.ua/",
-                "alternateName": "PALAMAR",
-                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
-                "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
-                "name": "PALAMAR GROUP"
-            }
-        };
+            {   "@context": "http://schema.org/",
+                "@type": "Person",
+                "jobTitle": master.subtitle,
+                "url": "http://palamar.com.ua" + "/beauty-salon/master/" + master._id,
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "вул.Щирецька 36",
+                    "addressLocality": "Львів",
+                    "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                    "addressCountry": "Україна"
+                },
+                "name": master.name,
+                "description": master.description,
+                "image": "http://palamar.com.ua" + master.photo.url,
+                "brand": {
+                    "@context": "http://schema.org/",
+                    "@type": "Brand",
+                    "url": "http:/palamar.com.ua/",
+                    "alternateName": "PALAMAR",
+                    "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                    "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
+                    "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                    "name": "PALAMAR GROUP"
+                }
+            };
     }
 
     scrollToMain() {
@@ -419,7 +381,7 @@ export class MasterComponentController {
         }
         this.MasterResource.getTasks(params).$promise.then((tasks) => {
             this.initTasks(tasks);
-        }).catch((err)=> {
+        }).catch((err) => {
             this.$log.error(err);
 
         });
@@ -430,10 +392,10 @@ export class MasterComponentController {
         this.initNavigatorConfig();
         this.initNavigatorSmallConfig();
         this.iniOnTimeRangeSelect();
-        tasks = tasks.filter((task)=> {
+        tasks = tasks.filter((task) => {
             return task.appointment.isPreOrder == false;
         })
-        this.events = tasks.map((task)=> {
+        this.events = tasks.map((task) => {
             task.scheduler.borderColor = "gray";
             task.scheduler.barColor = "gray";
             task.scheduler.text = `<div><span>Запис</span></div>`;
@@ -443,7 +405,7 @@ export class MasterComponentController {
 
     initNavigatorSmallConfig() {
         this.navigatorSmallConfig = this.SchedulerService.getNavigatorSmallConfig();
-        this.navigatorSmallConfig.onTimeRangeSelected = (args)=> {
+        this.navigatorSmallConfig.onTimeRangeSelected = (args) => {
             this.weekConfig.startDate = args.day;
             this.loadEvents(args.day, this.master._id);
         };
@@ -451,14 +413,14 @@ export class MasterComponentController {
 
     initNavigatorConfig() {
         this.navigatorConfig = this.SchedulerService.getNavigatorConfig();
-        this.navigatorConfig.onTimeRangeSelected = (args)=> {
+        this.navigatorConfig.onTimeRangeSelected = (args) => {
             this.weekConfig.startDate = args.day;
             this.loadEvents(args.day, this.master._id);
         };
     }
 
     iniOnTimeRangeSelect() {
-        this.weekConfig.onTimeRangeSelected = (args)=> {
+        this.weekConfig.onTimeRangeSelected = (args) => {
             var date = new Date(args.start.toString());
 
             if (date > new Date()) {
@@ -513,6 +475,35 @@ export class MasterComponentController {
 
     }
 
+    initBreadcrumbList(master) {
+        this.breadcrumbList = {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                    "@id": "http://palamar.com.ua/beauty-salon",
+                    "name": "Салон",
+                    "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
+                }
+            }, {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                    "@id": "http://palamar.com.ua/beauty-salon/masters",
+                    "name": "Майстри"
+                }
+            }, {
+                "@type": "ListItem",
+                "position": 3,
+                "item": {
+                    "@id": "http://palamar.com.ua/beauty-salon/master/" + master._id,
+                    "name": master.name
+                }
+            }]
+        }
+    }
 }
 
 export let MasterComponentUrl = "/beauty-salon/master/:id";
