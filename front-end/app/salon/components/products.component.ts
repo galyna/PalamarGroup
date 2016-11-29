@@ -178,28 +178,30 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
         <md-dialog-content>
             <md-dialog-content-body>
 
-                <md-input-container class="md-block">
-                    <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
-                    <label for="name">Як до вас звертатися?</label>
-                    <input id="name" ng-model="vm.productsOrder.name" type="text" name="name" required>
-                    <div ng-messages="orderForm.name.$error" role="alert"
-                         ng-show="orderForm.$submitted && orderForm.name.$invalid">
+                <md-input-container id="orderName" class="md-block">
+                    <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
+                    <label for="phone">Телефон</label>
+                    <input id="phone" ng-model="vm.appointment.phone" type="text" required name="phone">
+                    <div ng-messages="orderForm.phone.$error" role="alert"
+                         ng-show="orderForm.$submitted && orderForm.phone.$invalid">
                         <div class="md-headline" ng-message="required">
                             Залиште хоч якусь інформацію про себе, бажано номер телефону
                         </div>
                     </div>
                 </md-input-container>
-                <md-input-container class="md-block">
-                    <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
-                    <label for="phone">Телефон</label>
-                    <input id="phone" ng-model="vm.productsOrder.phone" type="text" name="phone">
-                </md-input-container>
-                <md-input-container class="md-block" >
-                    <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
-                    <label for="comment">Додаткова інформація</label>
-                    <textarea id="comment" ng-model="vm.productsOrder.comment" name="comment"></textarea>
-                     </md-input-container>
-                     
+                <div ng-if="vm.showDetails">
+
+                    <md-input-container class="md-block">
+                        <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
+                        <label for="name">Як до вас звертатись?</label>
+                        <input id="name" ng-model="vm.appointment.name" type="text" name="name">
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
+                        <label for="comment">Додаткова інформація</label>
+                        <textarea id="comment" ng-model="vm.productsOrder.comment" name="comment"></textarea>
+                    </md-input-container>
+
                     <div class=" md-block" layout="row" layout-align="center">
                         <div class="card-media-product md-margin" layout="column" layout-align="center center">
                             <img ng-src="{{::vm.product.photo.url}}"/>
@@ -212,8 +214,20 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                             </div>
                         </div>
                     </div>
-               
 
+                </div>
+                <div flex layout="row" ng-if="!vm.showDetails" class="" ng-click="vm.showDetails=true">
+                    Показати більще
+                    <md-button class=" md-icon-button" style="margin-top: -15px; padding: 10px">
+                        <md-icon md-svg-icon="navigation:ic_arrow_drop_down_circle_24px"></md-icon>
+                    </md-button>
+                </div>
+                <div flex layout="row" ng-if="vm.showDetails" ng-click="vm.showDetails=false">
+                    Згорнути
+                    <md-button class=" md-icon-button hide-form-btn" style="margin-top: -15px; padding: 10px">
+                        <md-icon md-svg-icon="navigation:ic_arrow_drop_down_circle_24px"></md-icon>
+                    </md-button>
+                </div>
             </md-dialog-content-body>
         </md-dialog-content>
         <md-dialog-actions class="md-padding" layout="row" layout-align-xs="center center">
@@ -228,6 +242,7 @@ class ProductOrderDialogController {
     private product: IProduct
     private productsOrder: IProductOrder;
     private originalProductsOrder: IProductOrder;
+    showDetails:boolean;
 
     constructor(private $mdDialog: ng.material.IDialogService, productsOrder: IProductOrder, product: IProduct) {
         this.product = product;

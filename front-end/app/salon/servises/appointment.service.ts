@@ -22,7 +22,6 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
             <md-dialog-content-body>
                 <div hide show-gt-xs="true">
                     <md-input-container ng-if="!vm.showDetails" id="orderName" class="md-block">
-
                         <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
                         <label for="phone">Телефон</label>
                         <input id="phone" ng-model="vm.appointment.phone" type="text" required name="phone">

@@ -25,8 +25,8 @@ const template = `
     "@type": "ListItem",
     "position": 2,
     "item": {
-      "@id": "http://palamar.com.ua/beauty-salon/services/"+$ctrl.category.url,
-      "name": $ctrl.category.name          
+      "@id": "http://palamar.com.ua/beauty-salon/services/{{$ctrl.category.url}}",
+      "name": {{$ctrl.category.name  }}        
     }
   }]
 }

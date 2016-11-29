@@ -56,8 +56,8 @@ const template = `
  
    <div layout="row" flex  >
         <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap invers " itemscope itemtype="http://schema.org/Event">
-                <div itemprop="name" class="md-display-1"> {{::group.name}}</div>
+            <div class="fit-screen-wrap invers " >
+                <div  class="md-display-1"> {{::group.name}}</div>
             </div>
 
         </div>

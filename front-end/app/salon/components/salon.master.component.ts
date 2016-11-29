@@ -49,8 +49,8 @@ const template = `
     "@type": "ListItem",
     "position": 3,
     "item": {
-      "@id": "http://palamar.com.ua/beauty-salon/master/"+$ctrl.master._id,
-      "name": $ctrl.master.name     
+      "@id": "http://palamar.com.ua/beauty-salon/master/{{$ctrl.master._id}}",
+      "name": {{$ctrl.master.name }}    
     }
   }]
 }
