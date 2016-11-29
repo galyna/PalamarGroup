@@ -31,7 +31,7 @@ const template = `
     "position": 2,
     "item": {
       "@id": "http://palamar.com.ua/beauty-salon/contacts",
-      "name": "Контакти",
+      "name": "Контакти"
     }
   }]
 }

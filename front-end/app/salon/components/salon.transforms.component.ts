@@ -24,7 +24,7 @@ const template = `
     "position": 2,
     "item": {
       "@id": "http://palamar.com.ua/beauty-salon/transformations",
-      "name": "Перевтілення",    
+      "name": "Перевтілення"   
     }
   }]
 }

@@ -29,7 +29,7 @@
 
         <div class="course-bg " layout-align="center center" flex
              ng-repeat="course in vm.courses track by $index" ng-if="::course.isVisible">
-            <sb-jsonld json="{{::course.seoJson}}}"></sb-jsonld>
+            <sb-jsonld json="{{::course.seoJson}}"></sb-jsonld>
             <a ng-href="/academy/course/{{course._id}}">
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
 

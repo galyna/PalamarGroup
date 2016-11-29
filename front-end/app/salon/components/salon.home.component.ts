@@ -26,7 +26,7 @@ const template = `
     "position": 1,
     "item": {
       "@id": "http://palamar.com.ua/",
-      "name": "Головна",     
+      "name": "Головна"    
     }
   }]
 }
@@ -58,7 +58,7 @@ const template = `
                             <span itemprop="name" class=" md-padding  ">{{::category.name}}</span>
                             <div layout="column" layout-align="center center" class="hiden-favors"
                                  ng-repeat="favor in ::category.favors track by $index ">
-                                <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
+                                <sb-jsonld json="{{::favor.seoJson}}"></sb-jsonld>
                                 <div layout="column">{{::favor.name}}
                                 </div>
                             </div>
@@ -301,7 +301,7 @@ const template = `
                    target="_blank"
                    flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
                    flex-gt-xs="46" flex-xs="80" ng-repeat="bren in $ctrl.brends track by $index">
-                    <sb-jsonld json="{{::bren.seoJson}}}"></sb-jsonld>
+                    <sb-jsonld json="{{::bren.seoJson}}"></sb-jsonld>
                     <img ng-src="{{::bren.photo.url}}"
                          class=""/> </a>
             </div>

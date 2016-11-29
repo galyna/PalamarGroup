@@ -26,7 +26,7 @@ const template = `
     "position": 2,
     "item": {
       "@id": "http://palamar.com.ua/beauty-salon/services/"+$ctrl.category.url,
-      "name": $ctrl.category.name,          
+      "name": $ctrl.category.name          
     }
   }]
 }
@@ -52,10 +52,10 @@ const template = `
                          ng-attr-flex-gt-sm="46"
                          flex-gt-xs="46" flex-xs="80"
                 >
-                    <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
+                    <sb-jsonld json="{{::favor.seoJson}}"></sb-jsonld>
                     <a ng-href="/beauty-salon/service/{{favor._id}}">
                         <img ng-src="{{::favor.photo.url}}" alt="{{::favor.name}} від PALAMAR GROUP Львів " >
-                        <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
+                        <sb-jsonld json="{{::favor.seoJson}}"></sb-jsonld>
                         <md-card-content layout="column"
                                          class="  show-description-favor" layout-align="center center">
                             <span class="  md-margin">{{::favor.name}}</span>
@@ -97,7 +97,7 @@ const template = `
     <div layout="column" layout-align="center center">
 
         <div class="course-bg " ng-repeat="master in $ctrl.masters track by $index" layout-align="center center" flex>
-            <sb-jsonld json="{{::master.seoJson}}}"></sb-jsonld>
+            <sb-jsonld json="{{::master.seoJson}}"></sb-jsonld>
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
                 <md-card flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"

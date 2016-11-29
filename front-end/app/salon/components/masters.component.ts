@@ -23,7 +23,7 @@ const template: string = `
     "position": 2,
     "item": {
       "@id": "http://palamar.com.ua/beauty-salon/masters",
-      "name": "Майстри", 
+      "name": "Майстри"
     }
   }]
 }
@@ -43,7 +43,7 @@ const template: string = `
         </div>
 
         <div class="course-bg " ng-repeat="master in $ctrl.masters track by $index" layout-align="center center" flex>
-            <sb-jsonld json="{{::master.seoJson}}}"></sb-jsonld>
+            <sb-jsonld json="{{::master.seoJson}}"></sb-jsonld>
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
                 <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"

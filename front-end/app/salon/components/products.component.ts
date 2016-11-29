@@ -23,7 +23,7 @@ const template = `
     "position": 2,
     "item": {
       "@id": "http://palamar.com.ua/beauty-salon/products",
-      "name": "Продукція",
+      "name": "Продукція"
     }
   }]
 }
@@ -35,7 +35,7 @@ const template = `
 
         <div class="course-bg " layout-align="center center" flex
              ng-repeat="product in $ctrl.products track by $index">
-            <sb-jsonld json="{{::product.seoJson}}}"></sb-jsonld>
+            <sb-jsonld json="{{::product.seoJson}}"></sb-jsonld>
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
                 <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"

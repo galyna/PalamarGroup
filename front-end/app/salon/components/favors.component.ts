@@ -52,7 +52,7 @@ const template = `
                              ng-attr-flex-gt-sm="46"
                              flex-gt-xs="46" flex-xs="80"
                     >
-                        <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
+                        <sb-jsonld json="{{::favor.seoJson}}"></sb-jsonld>
                          <a ng-href="/beauty-salon/service/{{favor._id}}">
                         <img ng-src="{{::favor.photo.url}}" alt="{{::favor.name}} від PALAMAR GROUP Львів " >
                         <md-card-content  layout="column"
