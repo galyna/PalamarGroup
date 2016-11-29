@@ -313,7 +313,7 @@ export class ProductsComponentController {
                         },
                         "name": product.name,
                         "image": "http://palamar.com.ua" + product.photo.url,
-                        "description":"Ціна "+product.price+" грн. " +product.description,
+                        "description":product.description,
 
                         "offers": {
                             "@type": "Offer",
