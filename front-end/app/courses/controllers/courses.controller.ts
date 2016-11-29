@@ -63,39 +63,44 @@ export class CoursesController {
 
     createSeoJson(course) {
         return {
-            "@context": "http://www.schema.org",
-            "@type": "EducationEvent",
+
+            "@context": "http://schema.org",
+            "@type": "Course",
             "name": course.name,
-            "url": "http://www.palamar.com.ua/academy/course/" + course._id,
-            "recordedIn": {
-                "@type": "CreativeWork",
-                "about": course.name,
-                "author": {
+            "description": course.description,
+            "provider": {
+                "@type": "Organization",
+                "name": "Palamar Group Academy",
+                "sameAs": "http://www.palamar.com.ua/academy",
+                "location": {
+                    "name":"Palamar Group Academy",
+                    "@type": "PostalAddress",
+                    "streetAddress": "вул.Щирецька 36",
+                    "addressLocality": "Львів",
+                    "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                    "addressCountry": "Україна"
+                },
+            },
+            "previewUrl": "http://www.palamar.com.ua/academy/course/" + course._id,
+            "image":"http://www.palamar.com.ua"+ course.avatar,
+            "creator": {
                     "@type": "Person",
                     "name": course.author.name
+            },
+            "offers": {
+                "@type": "Offer",
+                "priceCurrency": "UAH",
+                "price": course.price,
+                "seller": {
+                    "@type": "Organization",
+                    "name": "Palamar Group Academy",
+                    "sameAs": [
+                        "https://www.facebook.com/hashtag/palamar_group",
+                        "https://www.instagram.com/palamar_group/",
+                        "https://vk.com/id202584528"
+                    ],
                 }
-            },
-            "image":"http://www.palamar.com.ua"+ course.avatar,
-            "description": course.description,
-            "funder": {
-                "@type": "Organization",
-                "name": "Palamar Group Academy"
-            },
-            'composer': {
-                "@type": "Person",
-                "name": course.author.name
-            },
-
-            "location": {
-                "name":"Palamar Group Academy",
-                "@type": "PostalAddress",
-                "streetAddress": "вул.Щирецька 36",
-                "addressLocality": "Львів",
-                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
-                "addressCountry": "Україна"
-            },
-            "startDate":course.isVisible && course.days.length >0  ?  course.days[0].date:"",
-            "endDate": course.isVisible && course.days.length > 0  ? course.days[course.days.length - 1].date : ""
+            }
 
         }
     }
@@ -110,8 +115,13 @@ export class CoursesController {
                 "@type": "Person",
                 "name": "YULIA PALAMAR"
             },
+            "sameAs": [
+                "https://www.facebook.com/hashtag/palamar_group",
+                "https://www.instagram.com/palamar_group/",
+                "https://vk.com/id202584528"
+            ],
             "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
             "description": "Навчання для працівників солонів краси, Теми: чоловічі та жіночі стрижки, fassion-style, колористика ",
             "serviceArea": {
                 "@type": "AdministrativeArea",

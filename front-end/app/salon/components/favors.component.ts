@@ -7,7 +7,31 @@ import {ISeoPageResource, SeoPageResourceName} from "../../resources/seo.page.re
 import {FavorAppointmentServiceName} from "../servises/favor.appointment.service";
 import {IAppointmentResource, AppointmentResourceName} from "../../resources/appointment.resource";
 
-const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
+const template = `
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "http://palamar.com.ua/beauty-salon",
+      "name": "Салон",
+      "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "http://palamar.com.ua/beauty-salon/services",
+      "name": "Послуги",
+      "image": "http://palamar.com.ua/content/images/services/hear.jpg"
+    }
+  }]
+}
+</script>
+<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
 
     <div ng-repeat="category in  $ctrl.categories track by $index">
 
@@ -29,8 +53,8 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                              flex-gt-xs="46" flex-xs="80"
                     >
                         <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
-                         <a ng-href="/beauty-parlour/service/{{favor._id}}">
-                        <img ng-src="{{::favor.photo.url}}" >
+                         <a ng-href="/beauty-salon/service/{{favor._id}}">
+                        <img ng-src="{{::favor.photo.url}}" alt="{{::favor.name}} від PALAMAR GROUP Львів " >
                         <md-card-content  layout="column"
                                          class="  show-description-favor" layout-align="center center">
                             <span class="  md-margin">{{::favor.name}}</span>
@@ -235,7 +259,7 @@ export class FavorsComponentController {
     }
     setSocialParams(photo) {
         this.$rootScope.socialParams.host = this.constants.host;
-        this.$rootScope.socialParams.target = this.constants.host + "/beauty-parlour/services/" ;
+        this.$rootScope.socialParams.target = this.constants.host + "/beauty-salon/services" ;
         this.$rootScope.socialParams.image = this.constants.host + photo.url;
         this.$rootScope.socialParams.title =  "Послуги салону";
         this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
@@ -292,7 +316,7 @@ export class FavorsComponentController {
     }
 }
 
-export let FavorsComponentUrl = "/beauty-parlour/services";
+export let FavorsComponentUrl = "/beauty-salon/services";
 export let FavorsComponentName = 'pgFavors';
 export let FavorsComponentOptions = {
     template: template,

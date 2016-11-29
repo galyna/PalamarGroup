@@ -4,7 +4,32 @@ import {AppointmentServiceName, IAppointmentService} from "../servises/appointme
 import {ISeoPageResource, SeoPageResourceName} from "../../resources/seo.page.resource";
 import {IRootScope} from "../../../typings";
 
-const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses description-container" layout="row"
+const template: string = `
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "http://palamar.com.ua/beauty-salon",
+      "name": "Салон",
+      "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "http://palamar.com.ua/beauty-salon/masters",
+      "name": "Майстри", 
+    }
+  }]
+}
+</script>     
+
+<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses description-container" layout="row"
      layout-align="center center">
     <div layout="column" layout-align="center center">
 
@@ -25,8 +50,8 @@ const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="co
                 >
                     <md-card-content layout="row" layout-align="start none">
 
-                        <div class="card-media " flex="50"><a ng-href="/beauty-parlour/master/{{master._id}}">
-                            <img ng-src="{{master.photo.url}}"
+                        <div class="card-media " flex="50"><a ng-href="/beauty-salon/master/{{master._id}}">
+                            <img ng-src="{{master.photo.url}}" alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів"
                                  class="md-card-image clickable-element "/>
                         </a>
                         </div>
@@ -68,12 +93,12 @@ const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="co
                                 </div>
                             </div>
 
-                            <a hide show-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                            <a hide show-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button md-display-1 md-raised "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>
 
-                            <a hide show-gt-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                            <a hide show-gt-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button xs-selected md-display-1 md-raised  "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>
@@ -130,12 +155,12 @@ const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="co
                                 </div>
                             </div>
 
-                            <a hide show-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                            <a hide show-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button md-display-1 md-raised "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>
 
-                            <a hide show-gt-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                            <a hide show-gt-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button xs-selected md-display-1 md-raised  "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>
@@ -149,8 +174,8 @@ const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="co
 
                         </div>
                         <div class="card-media "
-                             flex="50"><a ng-href="/beauty-parlour/master/{{master._id}}">
-                            <img ng-src="{{master.photo.url}}"
+                             flex="50"><a ng-href="/beauty-salon/master/{{master._id}}">
+                            <img ng-src="{{master.photo.url}}" alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів"
                                  class="md-card-image clickable-element "/>
                         </a>
                         </div>
@@ -160,8 +185,8 @@ const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="co
                     <md-card-content layout="row" layout-align="start none">
 
                         <div class="card-media "
-                             flex="50"><a ng-href="/beauty-parlour/master/{{master._id}}">
-                            <img ng-src="{{master.photo.url}}"
+                             flex="50"><a ng-href="/beauty-salon/master/{{master._id}}">
+                            <img ng-src="{{master.photo.url}}" alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів"
                                  class="md-card-image clickable-element "/>
                         </a>
                         </div>
@@ -205,12 +230,12 @@ const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="co
                             </div>
 
 
-                            <a hide show-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                            <a hide show-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button md-display-1 md-raised "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>
 
-                            <a hide show-gt-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                            <a hide show-gt-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button xs-selected md-display-1 md-raised  "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>
@@ -233,7 +258,7 @@ const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="co
                 <div class="overlay-bg trigger-right"></div>
                 <md-card md-whiteframe="8">
                     <md-card-content layout="column">
-                        <a ng-href="/beauty-parlour/master/{{master._id}}">
+                        <a ng-href="/beauty-salon/master/{{master._id}}">
                             <div ng-if="master.rate && master.rate._id!=='0'" class="card-desc-top-master white"
                                  flex layout=" column " layout-align=" space-around center">
                                 <md-card-title>
@@ -242,7 +267,7 @@ const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="co
                                     </md-card-title-text>
                                 </md-card-title>
                             </div>
-                            <div class="card-media " ><img
+                            <div class="card-media " ><img alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів"
                                     ng-src="{{::master.photo.url}}"
                                     class="md-card-image"/></div>
                         </a>
@@ -271,7 +296,7 @@ const template: string = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="co
 
                                 </div>
                             </div>
-                            <a ng-href="/beauty-parlour/master/{{master._id}}"
+                            <a ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button md-display-1 md-raised "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>
@@ -337,7 +362,7 @@ export class MastersComponentController {
         {
             "@type": "Person",
             "jobTitle": master.subtitle,
-            "url": "http://www.palamar.com.ua" + "/beauty-parlour/master/" + master._id,
+            "url": "http://www.palamar.com.ua" + "/beauty-salon/master/" + master._id,
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "вул.Щирецька 36",
@@ -382,7 +407,7 @@ export class MastersComponentController {
 
 }
 
-export let MastersComponentUrl = "/beauty-parlour/masters";
+export let MastersComponentUrl = "/beauty-salon/masters";
 export let MastersComponentName = 'pgMasters';
 export let MastersComponentOptions = {
     template: template,

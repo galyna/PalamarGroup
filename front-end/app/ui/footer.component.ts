@@ -2,20 +2,34 @@ import {IContactResource, ContactResourceName, IContact} from "../resources/cont
 import {IConstants} from "../core/core.config";
 import {IRootScope} from "../../typings";
 import {ISalonResource, SalonResourceName, ISalon} from "../resources/salon.resource";
-const template = `
- <sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
+const template = `<script type='application/ld+json'>
+    {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "PALAMAR GROUP",
+    "alternateName": "Студія краси PALAMAR ",
+    "url": "http://palamar.com.ua/",
+    "sameAs": [
+    "https://www.facebook.com/hashtag/palamar_group",
+    "https://www.instagram.com/palamar_group/",
+    "https://vk.com/id202584528"
+  ]
+    }
+</script>
+        
+<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
 <div class="page-header-wrap" layout="column" layout-align="center center">
-    <div layout="row" flex layout-align="start center"  >
-        <div layout="column" flex  >
+    <div layout="row" flex layout-align="start center">
+        <div layout="column" flex>
             <div iitemprop="name" class="md-subhead social-header city">Львів
 
             </div>
-            <div layout="column" ng-repeat="salon in $ctrl.salons track by $index" >
-               
-                <div 
-                 ng-if="salon._id!='isAcademy' && salon.contacts.length>0"
-                     ng-click=" $ctrl.showContacts()"
-                     class="md-subhead social-header md-padding">Адреса салону
+            <div layout="column" ng-repeat="salon in $ctrl.salons track by $index">
+
+                <div
+                        ng-if="salon._id!='isAcademy' && salon.contacts.length>0"
+                        ng-click=" $ctrl.showContacts()"
+                        class="md-subhead social-header md-padding">Адреса салону
                     {{::salon.address}}
                 </div>
                 <div ng-if="::salon._id=='isAcademy'" class="md-subhead social-header md-padding"
@@ -23,14 +37,14 @@ const template = `
                 </div>
                 <div layout="column" ng-repeat="contact in salon.contacts" class="footer-contacts" flex
                      ng-click="salon._id!='isAcademy' && $ctrl.showContacts()">
-                    <div layout="row" layout-align="start center" 
+                    <div layout="row" layout-align="start center"
                          ng-click="salon._id=='isAcademy' && $ctrl.showAcademyContacts()">
                         <img ng-src="{{::contact.photo.url}}"
                              class="avatar md-padding"
                              alt="{{::contact.name}}"/>
-                        <div hide-xs="true" layout="row" layout-align="start center" flex  >
+                        <div hide-xs="true" layout="row" layout-align="start center" flex>
                             <div class="md-subhead md-padding"> {{::contact.name}}</div>
-                            <div  class="md-title md-padding "> {{::contact.phone}}</div>
+                            <div class="md-title md-padding "> {{::contact.phone}}</div>
                         </div>
 
 
@@ -56,14 +70,14 @@ const template = `
                 </a>
 
             </div>
-             <div layout="row" class="social-header" layout-align="center center">
+            <div layout="row" class="social-header" layout-align="center center">
                 <div class="md-subhead "> Ми на карті</div>
                 <a href="https://www.google.ru/maps/place/%D0%A1%D1%82%D1%83%D0%B4%D1%96%D1%8F+%D0%BA%D1%80%D0%B0%D1%81%D0%B8+%D0%AE%D0%BB%D1%96%D1%97+%D0%9F%D0%B0%D0%BB%D0%B0%D0%BC%D0%B0%D1%80/@49.8110803,23.9715886,17z/data=!3m1!4b1!4m5!3m4!1s0x473ae70c7a4a754b:0x96d5b6a9de35eaa0!8m2!3d49.8110769!4d23.9737773"
-                 target="_blank">
-                    <md-icon  class="md-social-image" md-svg-icon="communication:ic_location_on_24px"
-                             ></md-icon>
+                   target="_blank">
+                    <md-icon class="md-social-image" md-svg-icon="communication:ic_location_on_24px"
+                    ></md-icon>
                 </a>
-              
+
 
             </div>
         </div>
@@ -111,12 +125,12 @@ export class FooterComponentController {
                 "name": "YULIA PALAMAR"
             },
             "sameAs": [
-                "http://palamar.com.ua/academy",
-                "http://palamar.com.ua/beauty-parlour",
-                "http://www.palamar.com.ua"
+                "https://www.facebook.com/hashtag/palamar_group",
+                "https://www.instagram.com/palamar_group/",
+                "https://vk.com/id202584528"
             ],
             "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
             "description": "Салон краси Львів стрижка, фарбування, манікюр, педікур, мейкап, догляд за шкірою голови ",
             "serviceArea": {
                 "@type": "AdministrativeArea",
@@ -169,7 +183,7 @@ export class FooterComponentController {
     }
 
     showContacts(masterId: String) {
-        this.$location.path(`/beauty-parlour/contacts`);
+        this.$location.path(`/beauty-salon/contacts`);
     }
 
     $onInit() {

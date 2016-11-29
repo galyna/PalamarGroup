@@ -1,3 +1,19 @@
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "http://palamar.com.ua/academy",
+      "name": "Академія",
+      "image": "http://palamar.com.ua/content/images/bg/courses/dates/IMG_7095_1539_1026.jpg"
+    }
+  }]
+}
+</script>
+
 <sb-jsonld json="{{vm.seoJson}}"></sb-jsonld>
 
 <div layout="row" flex>
@@ -21,7 +37,7 @@
                 >
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-media "
-                             flex="50"><img ng-src="{{::course.avatar}}" class="md-card-image "/>
+                             flex="50"><img ng-src="{{::course.avatar}}" class="md-card-image " alt="Курс {{::course.name}} від PALAMAR GROUP Львів "/>
                         </div>
                         <div  class="card-desc "
                               flex="50" layout="column" layout-align="center center">
@@ -66,13 +82,13 @@
                             </md-card-actions>
                         </div>
                         <div class="card-media "
-                             flex="50"><img ng-src="{{::course.avatar}}" class="md-card-image"/></div>
+                             flex="50"><img ng-src="{{::course.avatar}}" class="md-card-image" alt="Курс {{::course.name}} від PALAMAR GROUP Львів "/></div>
                     </md-card-content>
                 </md-card>
                 <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-media "
-                             flex="50"><img ng-src="{{::course.avatar}}" class="md-card-image "/>
+                             flex="50"><img ng-src="{{::course.avatar}}" class="md-card-image " alt="Курс {{::course.name}} від PALAMAR GROUP Львів " />
                         </div>
                         <div class="card-desc " flex="50"
                              layout="column" layout-align="center center">
@@ -103,7 +119,7 @@
                 <div class="overlay-bg trigger-right"></div>
                 <md-card md-whiteframe="8" >
                     <md-card-content layout="column">
-                        <div class="card-media "><img ng-src="{{::course.avatar}}" class="md-card-image"/></div>
+                        <div class="card-media "><img ng-src="{{::course.avatar}}" class="md-card-image" alt="Курс {{::course.name}} від PALAMAR GROUP Львів "/></div>
                         <div class="card-desc "
                              layout="column" layout-align="space-around center">
                             <md-card-title>

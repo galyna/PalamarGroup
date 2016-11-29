@@ -10,7 +10,53 @@ import {IRootScope} from "../../../typings";
 import {SchedulerServiceName, ISchedulerService} from "../../ui/scheduler.service";
 import ISeoPage = pg.models.ISeoPage;
 
-const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
+const template = `
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "http://palamar.com.ua/beauty-salon/master",
+      "name": $ctrl.master.name,     
+    }
+  }]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "http://palamar.com.ua/beauty-salon",
+      "name": "Салон",
+      "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "http://palamar.com.ua/beauty-salon/masters",
+      "name": "Майстри",     
+    }
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "item": {
+      "@id": "http://palamar.com.ua/beauty-salon/master/"+$ctrl.master._id,
+      "name": $ctrl.master.name,     
+    }
+  }]
+}
+</script>
+
+<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
 <div class=" description-container" ng-attr-id="{{ $ctrl.markerReadySEO }}">
     <div class=" courses" layout-align="center center" layout="column"
     >
@@ -20,7 +66,7 @@ const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
             >
                 <md-card-content flex layout="row" layout-align="start none">
                     <div class="card-media "
-                         flex="50"><img ng-src="{{::$ctrl.master.photo.url}}" class="md-card-image "/>
+                         flex="50"><img ng-src="{{::$ctrl.master.photo.url}}" alt="{{::$ctrl.master.name}} {{::$ctrl.master.subtitle}} у PALAMAR GROUP Львів" class="md-card-image "/>
                     </div>
                     <div class="card-desc  "
                          flex="50" layout="column" layout-align="space-around center">
@@ -89,7 +135,7 @@ const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
                         </md-card-title>
                     </div>
                     <div class="card-media ">
-                        <img
+                        <img alt="{{::$ctrl.master.name}} {{::$ctrl.master.subtitle}} у PALAMAR GROUP Львів"
                                 src="{{::$ctrl.master.photo.url}}"
                                 class="md-card-image"/></div>
                     <div class="card-desc "
@@ -216,20 +262,28 @@ const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
                          itemtype="http://schema.org/CreativeWork"
                          ng-repeat="video in $ctrl.master.videos | orderBy:'order' track by $index"
                          flex>
-                    <div itemprop="funder" itemscope itemtype="http://schema.org/BeautySalon">
-                        <meta itemprop="name" content="PALAMAR GROUP"/>
-                    </div>
-                    <div itemprop="author" itemscope itemtype="http://schema.org/Organization">
-                        <meta itemprop="name" content="{{$ctrl.master.name}}"/>
-                    </div>
-                    <div flex class="embed-responsive embed-responsive-16by9" itemscope
-                         itemtype="http://schema.org/VideoObject">
-                        <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
-                                       video-id="::video.url"></youtube-video>
-                    </div>
-                    <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                        <span itemprop="caption" class="  md-margin">{{::video.name}}</span>
-                    </md-card-content>
+                     <div itemprop="funder" itemscope itemtype="http://schema.org/BeautySalon">
+                            <meta itemprop="name" content="PALAMAR GROUP"/>
+                            <meta itemprop="image"
+                                  content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
+                            <meta itemprop="address" content="Львів"/>
+                        </div>
+                         
+                        <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
+                        <div flex class="embed-responsive embed-responsive-16by9"
+                             class="embed-responsive embed-responsive-16by9" itemscope
+                             itemtype="http://schema.org/VideoObject">
+                            <meta itemprop="description" content="{{::video.name}}"/>
+                            <meta itemprop="name" content="{{::video.name}}"/>
+                            <meta itemprop="thumbnailUrl"
+                                  content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
+                            <meta itemprop="embedUrl" content="https://www.youtube.com/embed/{{video.url}}"/>
+                            <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
+                                           video-id="::video.url"></youtube-video>
+                        </div>
+                        <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
+                            <span itemprop="name" class="  md-margin">{{::video.name}}</span>
+                        </md-card-content>
                 </md-card>
             </div>
         </div>
@@ -246,18 +300,16 @@ const template = `<sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
                          flex-gt-xs="46" flex-xs="80" temprop="workPerformed" itemscope=""
                          itemtype="http://schema.org/CreativeWork"
                          ng-click="::$ctrl.showMediaObserver($ctrl.master.works | orderBy:'order', $index)">
-                    <img itemprop="contentUrl" itemscope="" itemtype="http://schema.org/ImageObject"
-                         ng-src="{{::photo.url}}" class="md-card-image">
-                    <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                        <div itemprop="funder" itemscope itemtype="http://schema.org/BeautySalon">
+                   <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
+                            <meta itemprop="image"
+                                  content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
+                            <meta itemprop="address" content="Львів"/>
                         </div>
-                        <div itemprop="author" itemscope itemtype="http://schema.org/Organization">
-                            <meta itemprop="name" content="{{$ctrl.master.name}}"/>
-                        </div>
-
-                        <span itemprop="caption" class="  md-margin">{{::photo.name}}</span>
-                    </md-card-content>
+                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}">
+                        <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
+                            <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
+                        </md-card-content>
                 </md-card>
             </div>
         </div>
@@ -311,7 +363,7 @@ export class MasterComponentController {
                     this.markerReadySEO = "dynamic-content";
                 }).catch((err)=> {
                 this.$log.error(err);
-                this.$location.path(`/beauty-parlour/masters`);
+                this.$location.path(`/beauty-salon/masters`);
             });
             this.loadEvents(new Date(), this.$routeParams["id"]);
             ;
@@ -322,7 +374,7 @@ export class MasterComponentController {
         {
             "@type": "Person",
             "jobTitle": master.subtitle,
-            "url": "http://www.palamar.com.ua" + "/beauty-parlour/master/" + master._id,
+            "url": "http://www.palamar.com.ua" + "/beauty-salon/master/" + master._id,
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "вул.Щирецька 36",
@@ -339,7 +391,7 @@ export class MasterComponentController {
                 "url": "http:/palamar.com.ua/",
                 "alternateName": "PALAMAR",
                 "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
                 "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
                 "name": "PALAMAR GROUP"
             }
@@ -423,7 +475,7 @@ export class MasterComponentController {
 
     setSocialParams(photo) {
         this.$rootScope.socialParams.host = this.constants.host;
-        this.$rootScope.socialParams.target = this.constants.host + "/beauty-parlour/master/" + this.master._id;
+        this.$rootScope.socialParams.target = this.constants.host + "/beauty-salon/master/" + this.master._id;
         this.$rootScope.socialParams.image = this.constants.host + photo.url;
         this.$rootScope.socialParams.title = "Робота майстра " + this.master.name;
         this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
@@ -463,7 +515,7 @@ export class MasterComponentController {
 
 }
 
-export let MasterComponentUrl = "/beauty-parlour/master/:id";
+export let MasterComponentUrl = "/beauty-salon/master/:id";
 export let MasterComponentName = 'pgMaster';
 export let MasterComponentOptions = {
     template: template,

@@ -192,7 +192,7 @@ export class AcademyContactComponentController {
                 "name": "YULIA PALAMAR"
             },
             "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
             "description": "Навчання для працівників салонів краси, Теми: чоловічі та жіночі стрижки, fassion-style, колористика ",
             "areaServed": {
                 "@type": "AdministrativeArea",

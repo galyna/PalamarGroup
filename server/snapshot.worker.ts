@@ -21,42 +21,42 @@ var pages = [
         title: "PALAMAR GROUP beauty parlour & academy Головна сторінка"
     },
     {
-        url: "/beauty-parlour",
+        url: "/beauty-salon",
         description: "",
         name: "home2",
         text: "Головна",
         title: "PALAMAR GROUP beauty parlour & academy Головна сторінка"
     },
     {
-        url: "/beauty-parlour/services",
+        url: "/beauty-salon/services",
         description: "",
         name: "services",
         text: "Послуги",
         title: "PALAMAR GROUP beauty parlour & academy Послуги"
     },
     {
-        url: "/beauty-parlour/masters",
+        url: "/beauty-salon/masters",
         description: "",
         name: "masters",
         text: "Майстри",
         title: "PALAMAR GROUP beauty parlour & academy Майстри"
     },
     {
-        url: "/beauty-parlour/transformations",
+        url: "/beauty-salon/transformations",
         description: "",
         name: "transforms",
         text: "Перевтіленні",
         title: "PALAMAR GROUP beauty parlour & academy Перевтілення"
     },
     {
-        url: "/beauty-parlour/products",
+        url: "/beauty-salon/products",
         description: "",
         name: "products",
         text: "Продікція",
         title: "PALAMAR GROUP beauty parlour & academy Продікція"
     },
     {
-        url: "/beauty-parlour/contacts",
+        url: "/beauty-salon/contacts",
         description: "",
         name: "salon.contacts",
         text: "Контакти салону",
@@ -151,10 +151,10 @@ async function saveSitemap() {
 
     let masters = await  Master.find().exec();
 
-    addCollection(masters, urls, "/beauty-parlour/master/");
+    addCollection(masters, urls, "/beauty-salon/master/");
     let favors = await  Favor.find().exec();
 
-    addCollection(favors, urls, "/beauty-parlour/service/");
+    addCollection(favors, urls, "/beauty-salon/service/");
 
     var sitemap = sm.createSitemap({
         hostname: config.origin,

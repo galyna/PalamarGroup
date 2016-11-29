@@ -5,7 +5,31 @@ import {IConstants} from "../../core/core.config";
 import {ISeoPageResource, SeoPageResourceName} from "../../resources/seo.page.resource";
 
 
-const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
+const template = `
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "http://palamar.com.ua/beauty-salon",
+      "name": "Салон",
+      "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "http://palamar.com.ua/beauty-salon/transformations",
+      "name": "Перевтілення",    
+    }
+  }]
+}
+</script>
+<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
     <div layout="row" flex>
         <div class="page-delimiter md-padding" flex>
             <div class="fit-screen-wrap invers header">
@@ -26,14 +50,24 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                              flex>
                         <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
+                            <meta itemprop="image"
+                                  content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
+                            <meta itemprop="address" content="Львів"/>
                         </div>
-                        <div flex class="embed-responsive embed-responsive-16by9" itemscope
+                        <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
+                        <div flex class="embed-responsive embed-responsive-16by9"
+                             class="embed-responsive embed-responsive-16by9" itemscope
                              itemtype="http://schema.org/VideoObject">
+                            <meta itemprop="description" content="{{::video.name}}"/>
+                            <meta itemprop="name" content="{{::video.name}}"/>
+                            <meta itemprop="thumbnailUrl"
+                                  content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
+                            <meta itemprop="embedUrl" content="https://www.youtube.com/embed/{{video.url}}"/>
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
                         </div>
                         <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="caption" class="  md-margin">{{::video.name}}</span>
+                            <span itemprop="name" class="  md-margin">{{::video.name}}</span>
                         </md-card-content>
                     </md-card>
                 </div>
@@ -50,13 +84,15 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                              flex-gt-xs="46" flex-xs="80"
                              ng-click="::$ctrl.showMediaObserver(transform.photos  | orderBy:'order' , $index)"
                              temprop="workPerformed" itemscope="" itemtype="http://schema.org/CreativeWork">
-                        <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                       <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
+                            <meta itemprop="image"
+                                  content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
+                            <meta itemprop="address" content="Львів"/>
                         </div>
-                        <img itemprop="contentUrl" itemscope="" itemtype="http://schema.org/ImageObject"
-                             ng-src="{{::photo.url}}" class="md-card-image">
+                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}">
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="caption" class="  md-margin">{{::photo.name}}</span>
+                            <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
                         </md-card-content>
                     </md-card>
                 </div>
@@ -139,7 +175,7 @@ export class SalonTransformsComponentController {
 
 }
 
-export let SalonTransformsComponentUrl = "/beauty-parlour/transformations";
+export let SalonTransformsComponentUrl = "/beauty-salon/transformations";
 export let SalonTransformsComponentName = 'pgSalonTransforms';
 export let SalonTransformsComponentOptions = {
     template: template,

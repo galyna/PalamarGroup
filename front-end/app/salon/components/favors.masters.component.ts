@@ -8,7 +8,32 @@ import {IRootScope} from "../../../typings";
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
 import {FavorAppointmentServiceName} from "../servises/favor.appointment.service";
 
-const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
+const template = `
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "http://palamar.com.ua/beauty-salon",
+      "name": "Салон",
+      "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "http://palamar.com.ua/beauty-salon/services/"+$ctrl.category.url,
+      "name": $ctrl.category.name,          
+    }
+  }]
+}
+</script>
+
+
+<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
 
     <div layout="row" flex>
         <div class="page-delimiter" flex>
@@ -28,8 +53,8 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                          flex-gt-xs="46" flex-xs="80"
                 >
                     <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
-                    <a ng-href="/beauty-parlour/service/{{favor._id}}">
-                        <img ng-src="{{::favor.photo.url}}">
+                    <a ng-href="/beauty-salon/service/{{favor._id}}">
+                        <img ng-src="{{::favor.photo.url}}" alt="{{::favor.name}} від PALAMAR GROUP Львів " >
                         <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
                         <md-card-content layout="column"
                                          class="  show-description-favor" layout-align="center center">
@@ -80,8 +105,8 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-media "
                              flex="50">
-                            <a ng-href="/beauty-parlour/master/{{master._id}}">
-                                <img ng-src="{{master.photo.url}}" 
+                            <a ng-href="/beauty-salon/master/{{master._id}}">
+                                <img ng-src="{{master.photo.url}}" alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів"
                                      class="md-card-image clickable-element "/>
                             </a>
                         </div>
@@ -123,12 +148,12 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                                     </div>
                                 </div>
                             </div>
-                            <a hide show-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                            <a hide show-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button md-display-1 md-raised "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>
 
-                            <a hide show-gt-sm="true" ng-href="/beauty-parlour/master/{{master._id}}"
+                            <a hide show-gt-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button xs-selected md-display-1 md-raised  "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>
@@ -150,7 +175,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                 <div class="overlay-bg trigger-right"></div>
                 <md-card md-whiteframe="8">
                     <md-card-content layout="column">
-                     <a ng-href="/beauty-parlour/master/{{master._id}}">
+                     <a ng-href="/beauty-salon/master/{{master._id}}">
                         <div ng-if="master.rate && master.rate._id!=='0'" class="card-desc-top-master white"
                              flex
                              layout="column"
@@ -162,13 +187,13 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                             </md-card-title>
                         </div>
                        
-                            <div class="card-media "><img
-                                    ng-src="{{master.photo.url}}" ng-if="!!master.photo.url"
+                            <div class="card-media "><img alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів"
+                                    ng-src="{{master.photo.url}}" 
                                     class="md-card-image"/></div>
                         </a>
                         <div class="card-desc "
                              layout="column" layout-align="center center">
-                              <a ng-href="/beauty-parlour/master/{{master._id}}">
+                              <a ng-href="/beauty-salon/master/{{master._id}}">
                             <md-card-title>
                                 <md-card-title-text>
                                     <div class="md-headline capitalize">{{::master.name}}</div>
@@ -193,7 +218,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
 
                                 </div>
                             </div>
-                            <a ng-href="/beauty-parlour/master/{{master._id}}"
+                            <a ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button md-display-1 md-raised "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>
@@ -232,16 +257,26 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                              itemtype="http://schema.org/CreativeWork"
                              ng-repeat="video in $ctrl.videos  track by $index"
                              flex>
-                        <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                         <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
+                            <meta itemprop="image"
+                                  content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
+                            <meta itemprop="address" content="Львів"/>
                         </div>
-                        <div flex class="embed-responsive embed-responsive-16by9" itemscope
+                        <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
+                        <div flex class="embed-responsive embed-responsive-16by9"
+                             class="embed-responsive embed-responsive-16by9" itemscope
                              itemtype="http://schema.org/VideoObject">
+                            <meta itemprop="description" content="{{::video.name}}"/>
+                            <meta itemprop="name" content="{{::video.name}}"/>
+                            <meta itemprop="thumbnailUrl"
+                                  content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
+                            <meta itemprop="embedUrl" content="https://www.youtube.com/embed/{{video.url}}"/>
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
                         </div>
                         <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="caption" class="  md-margin">{{::video.name}}</span>
+                            <span itemprop="name" class="  md-margin">{{::video.name}}</span>
                         </md-card-content>
                     </md-card>
                 </div>
@@ -260,11 +295,13 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-de
                              ng-click="::$ctrl.showMediaObserver($ctrl.photos, $index)">
                         <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
+                            <meta itemprop="image"
+                                  content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
+                            <meta itemprop="address" content="Львів"/>
                         </div>
-                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="contentUrl" itemscope=""
-                             itemtype="http://schema.org/ImageObject">
+                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}">
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="caption" class="  md-margin">{{::photo.name}}</span>
+                            <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
                         </md-card-content>
                     </md-card>
                 </div>
@@ -385,7 +422,7 @@ export class FavorsMastersComponentController {
         {
             "@type": "Person",
             "jobTitle": master.subtitle,
-            "url": "http://www.palamar.com.ua" + "/beauty-parlour/master/" + master._id,
+            "url": "http://www.palamar.com.ua" + "/beauty-salon/master/" + master._id,
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "вул.Щирецька 36",
@@ -440,7 +477,7 @@ export class FavorsMastersComponentController {
 
     setSocialParams(photo) {
         this.$rootScope.socialParams.host = this.constants.host;
-        this.$rootScope.socialParams.target = this.constants.host + "/beauty-parlour/services/" + this.category.url;
+        this.$rootScope.socialParams.target = this.constants.host + "/beauty-salon/services/" + this.category.url;
         this.$rootScope.socialParams.image = this.constants.host + photo.url;
         this.$rootScope.socialParams.title = this.category.name;
         this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
@@ -497,7 +534,7 @@ export class FavorsMastersComponentController {
     }
 }
 
-export let FavorsMastersComponentUrl = "/beauty-parlour/services/:category";
+export let FavorsMastersComponentUrl = "/beauty-salon/services/:category";
 export let FavorsMastersComponentName = 'pgFavorsMasters';
 export let FavorsMastersComponentOptions = {
     template: template,

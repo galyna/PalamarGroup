@@ -15,7 +15,22 @@ import {AppointmentServiceName, IAppointmentService} from "../servises/appointme
 import {IAppointmentResource, AppointmentResourceName} from "../../resources/appointment.resource";
 
 
-const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
+const template = `
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "http://palamar.com.ua/",
+      "name": "Головна",     
+    }
+  }]
+}
+</script>
 <div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
     <div layout="row" flex>
         <div class="page-delimiter" flex>
@@ -30,24 +45,24 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
 
             <div class="home-category-btn" layout="row" layout-xs="column" layout-align="center center">
                 <md-card md-whiteframe="6" ng-repeat="category in $ctrl.categories track by $index "
-                         class="md-margin " itemscope itemtype="http://schema.org/Service"
-                         >
+                         class="md-margin "
+                >
                     <meta itemprop="category" content="Салон Краси Львів"/>
                     <meta itemprop="description" content="Перукарня у Львові"/>
-                     <a ng-href="/beauty-parlour/services/{{category.url}}">
-                    <img ng-src="{{'/content/images/services/'+ category._id+'.jpg'}}"
-                         itemprop="image">
-                        
-                    <md-card-content layout="column" layout-align="center center"
-                                     class=" md-padding  show-description-favor">
-                        <span itemprop="name" class=" md-padding  ">{{::category.name}}</span>
-                        <div layout="column" layout-align="center center" class="hiden-favors"
-                             ng-repeat="favor in ::category.favors track by $index ">
-                            <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
-                            <div layout="column">{{::favor.name}}
+                    <a ng-href="/beauty-salon/services/{{category.url}}">
+                        <img ng-src="{{'/content/images/services/'+ category._id+'.jpg'}}"
+                             itemprop="image" alt="{{::category.name}} Львів від PALAMAR GROUP">
+
+                        <md-card-content layout="column" layout-align="center center"
+                                         class=" md-padding  show-description-favor">
+                            <span itemprop="name" class=" md-padding  ">{{::category.name}}</span>
+                            <div layout="column" layout-align="center center" class="hiden-favors"
+                                 ng-repeat="favor in ::category.favors track by $index ">
+                                <sb-jsonld json="{{::favor.seoJson}}}"></sb-jsonld>
+                                <div layout="column">{{::favor.name}}
+                                </div>
                             </div>
-                        </div>
-                    </md-card-content>
+                        </md-card-content>
                     </a>
                 </md-card>
 
@@ -56,8 +71,8 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
     </div>
     <div class="md-padding" layout="row" layout-align=" center center"
          layout-align-xs="  center">
-        <a ng-href="/beauty-parlour/services" class="md-button md-primary comment-btn xs-selected md-raised "
-         layout="row" layout-align=" center center"><span>Всі послуги</span>
+        <a ng-href="/beauty-salon/services" class="md-button md-primary comment-btn xs-selected md-raised "
+           layout="row" layout-align=" center center"><span>Всі послуги</span>
         </a>
     </div>
     <div layout="row" flex>
@@ -98,17 +113,17 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
                          ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.length)}}"
                          flex-gt-xs="46" flex-xs="80"
                 >
-                    <sb-jsonld json="{{::master.seoJson}}}"></sb-jsonld>
-                    
-                      <a ng-href="/beauty-parlour/master/{{master._id}}">
-                    <img ng-src="{{::master.photo.url}}" >
-                    <md-card-content layout="column" class="  show-description" layout-align="center center">
-                        <span class=" ">{{::master.name}}</span>
-                        <div class="  show-description-content">{{::master.rate.text}}</div>
-                        <div class="   subtitle">{{::master.subtitle}}</div>
+                    <sb-jsonld json="{{::master.seoJson}}"></sb-jsonld>
 
-                    </md-card-content>
-                          </a>
+                    <a ng-href="/beauty-salon/master/{{master._id}}">
+                        <img ng-src="{{::master.photo.url}}" alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів">
+                        <md-card-content layout="column" class="  show-description" layout-align="center center">
+                            <span class=" ">{{::master.name}}</span>
+                            <div class="  show-description-content">{{::master.rate.text}}</div>
+                            <div class="   subtitle">{{::master.subtitle}}</div>
+
+                        </md-card-content>
+                    </a>
                     <md-card-content layout="column" class="  card-appoint"
                                      layout-align="center center"
                                      ng-click="::$ctrl.showAppointmentDialog(master)">
@@ -123,7 +138,7 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
                             Записатись
                         </div>
                     </md-card-content>
-                   
+
                 </md-card>
             </div>
         </div>
@@ -153,14 +168,24 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
                              flex>
                         <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
+                            <meta itemprop="image"
+                                  content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
+                            <meta itemprop="address" content="Львів"/>
                         </div>
+
+                        <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
                         <div flex class="embed-responsive embed-responsive-16by9" itemscope
                              itemtype="http://schema.org/VideoObject">
+                            <meta itemprop="description" content="{{::video.name}}"/>
+                            <meta itemprop="name" content="{{::video.name}}"/>
+                            <meta itemprop="thumbnailUrl"
+                                  content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
+                            <meta itemprop="embedUrl" content="https://www.youtube.com/embed/{{video.url}}"/>
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
                         </div>
                         <md-card-content ng-if="video.name" layout="column" layout-align="center center">
-                            <span itemprop="caption" class="  md-margin">{{::video.name}}</span>
+                            <span itemprop="name" class="  md-margin">{{::video.name}}</span>
                         </md-card-content>
                     </md-card>
                 </div>
@@ -181,11 +206,13 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
                              ng-click="::$ctrl.showMediaObserver(transform.photos  | orderBy:'order', $index)">
                         <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
+                            <meta itemprop="image"
+                                  content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
+                            <meta itemprop="address" content="Львів"/>
                         </div>
-                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="contentUrl" itemscope=""
-                             itemtype="http://schema.org/ImageObject">
+                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}">
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="caption" class="  md-margin">{{::photo.name}}</span>
+                            <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
                         </md-card-content>
                     </md-card>
                 </div>
@@ -194,10 +221,10 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
     </div>
     <div ng-if="$ctrl.showMoreTransforms" class="md-padding" layout="row" layout-align=" center center"
          layout-align-xs="  center">
-          <a ng-href="/beauty-parlour/transformations" class="md-button md-primary comment-btn xs-selected md-raised "
-         layout="row" layout-align=" center center"><span>Всі перевтіління</span>
+        <a ng-href="/beauty-salon/transformations" class="md-button md-primary comment-btn xs-selected md-raised "
+           layout="row" layout-align=" center center"><span>Всі перевтіління</span>
         </a>
-      
+
     </div>
     <div layout="row" ng-if="$ctrl.videos.length>0 " flex>
         <div class="page-delimiter " flex>
@@ -223,15 +250,24 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
                              flex>
                         <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
+                            <meta itemprop="image"
+                                  content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
+                            <meta itemprop="address" content="Львів"/>
                         </div>
+                        <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
                         <div flex class="embed-responsive embed-responsive-16by9"
                              class="embed-responsive embed-responsive-16by9" itemscope
                              itemtype="http://schema.org/VideoObject">
+                            <meta itemprop="description" content="{{::video.name}}"/>
+                            <meta itemprop="name" content="{{::video.name}}"/>
+                            <meta itemprop="thumbnailUrl"
+                                  content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
+                            <meta itemprop="embedUrl" content="https://www.youtube.com/embed/{{video.url}}"/>
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
                         </div>
                         <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="caption" class="  md-margin">{{::video.name}}</span>
+                            <span itemprop="name" class="  md-margin">{{::video.name}}</span>
                         </md-card-content>
                     </md-card>
                 </div>
@@ -242,9 +278,9 @@ const template = `<sb-jsonld json="{{$ctrl.seoJson}}"></sb-jsonld>
 
     </div>
     <div ng-if="$ctrl.showMoreVideos" layout="row" layout-align=" center center" layout-align-xs="  center">
-     <a ng-href="/academy/videos" class="md-button md-primary comment-btn xs-selected md-raised "
-         layout="row" layout-align=" center center"><span>Всі відео</span>
-        </a>       
+        <a ng-href="/academy/videos" class="md-button md-primary comment-btn xs-selected md-raised "
+           layout="row" layout-align=" center center"><span>Всі відео</span>
+        </a>
     </div>
     <div layout="row" flex ng-if="$ctrl.brends.length>0 " class="md-padding">
         <div class="page-delimiter" flex>
@@ -401,7 +437,7 @@ export class SalonHomeComponentController {
                     {
                         "@type": "Person",
                         "jobTitle": master.subtitle,
-                        "url": "http://www.palamar.com.ua" + "/beauty-parlour/master/" + master._id,
+                        "url": "http://www.palamar.com.ua" + "/beauty-salon/master/" + master._id,
                         "address": {
                             "@type": "PostalAddress",
                             "streetAddress": "вул.Щирецька 36",
@@ -454,7 +490,7 @@ export class SalonHomeComponentController {
                 "url": "http:/palamar.com.ua/",
                 "alternateName": "PALAMAR",
                 "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
                 "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
                 "name": "PALAMAR GROUP"
             }
@@ -522,7 +558,7 @@ export class SalonHomeComponentController {
     }
 }
 
-export let SalonHomeComponentUrl = "/beauty-parlour";
+export let SalonHomeComponentUrl = "/beauty-salon";
 export let SalonHomeComponentName = 'pgSalonHome';
 export let SalonHomeComponentOptions = {
     template: template,

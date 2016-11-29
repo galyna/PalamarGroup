@@ -1,3 +1,28 @@
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+     "@id": "http://palamar.com.ua/academy",
+      "name": "Академія",
+      "image": "http://palamar.com.ua/content/images/bg/courses/dates/IMG_7095_1539_1026.jpg"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "http://palamar.com.ua/academy/"+vm.course._id,
+      "name": vm.course.name,
+      "image": "http://palamar.com.ua/" + vm.course.avatar
+    }
+  }]
+}
+</script>
+
 <sb-jsonld json="{{::vm.course.seoJson}}}"></sb-jsonld>
 <sb-jsonld json="{{::vm.seoJson}}}"></sb-jsonld>
 <div ng-attr-id="{{ vm.markerReadySEO }}" class="courses-details description-container" layout="column">
@@ -16,7 +41,7 @@
                 </div>
                 <div class=" card-media" layout="column"
                      flex-gt-sm="50" layout-align="center center">
-                    <img ng-src="{{::vm.course.author.photoUrl}}"/>
+                    <img ng-src="{{::vm.course.author.photoUrl}}" alt="Курс {{::vm.course.name}} від PALAMAR GROUP Львів "/>
                     <div class="md-padding author-name" layout="column" layout-align="space-around center">
                         <div class="md-headline">Автор</div>
                         <div class="md-headline">{{ ::vm.course.author.name}}</div>
@@ -139,21 +164,19 @@
 
         <div  flex flex-gt-md="60" flex-md="80"  flex-gt-xs="60">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6"  ng-repeat="course in vm.course.hearFormsPhotos" temprop="workPerformed" itemscope=""
+                <md-card md-whiteframe="6"  ng-repeat="photo in vm.course.hearFormsPhotos" temprop="workPerformed" itemscope=""
                          itemtype="http://schema.org/CreativeWork"
                          class="md-margin " ng-attr-flex-gt-sm="{{::vm.getPictureFlex($index,vm.course.hearFormsPhotos.length)}}"   flex-gt-xs="46" flex-xs="80"
                          ng-click="::vm.showMediaObserver(vm.course.hearFormsPhotos, $index)">
-                    <div itemprop="funder" itemscope itemtype="http://schema.org/BeautySalon">
-                        <meta itemprop="name" content="PALAMAR GROUP ACADEMY"/>
+                    <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                        <meta itemprop="name" content="PALAMAR GROUP"/>
+                        <meta itemprop="image"
+                              content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
+                        <meta itemprop="address" content="Львів"/>
                     </div>
-                    <div itemprop="author" itemscope itemtype="http://schema.org/Organization">
-                        <meta itemprop="name" content="{{vm.course.author.name}}"/>
-                    </div>
-                        <img itemprop="contentUrl" itemscope="" itemtype="http://schema.org/ImageObject" ng-src="{{::course.url}}" class="md-card-image">
-
-
-                    <md-card-content ng-if="::course.name" layout="column" flex="100" layout-align="center center">
-                        <span itemprop="caption" class="  md-margin">{{::course.name}}</span>
+                    <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}">
+                    <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
+                        <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
                     </md-card-content>
                 </md-card>
             </div>
@@ -168,19 +191,26 @@
                          ng-repeat="video in ::vm.course.videos track by $index" temprop="workPerformed" itemscope=""
                          itemtype="http://schema.org/CreativeWork"
                          flex>
-                    <div itemprop="funder" itemscope itemtype="http://schema.org/BeautySalon">
-                        <meta itemprop="name" content="PALAMAR GROUP ACADEMY"/>
+                    <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                        <meta itemprop="name" content="PALAMAR GROUP"/>
+                        <meta itemprop="image"
+                              content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
+                        <meta itemprop="address" content="Львів"/>
                     </div>
-                    <div itemprop="author" itemscope itemtype="http://schema.org/Organization">
-                        <meta itemprop="name" content="{{vm.course.author.name}}"/>
-                    </div>
-                    <div flex class="embed-responsive embed-responsive-16by9" itemscope
+                    <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
+                    <div flex class="embed-responsive embed-responsive-16by9"
+                         class="embed-responsive embed-responsive-16by9" itemscope
                          itemtype="http://schema.org/VideoObject">
+                        <meta itemprop="description" content="{{::video.name}}"/>
+                        <meta itemprop="name" content="{{::video.name}}"/>
+                        <meta itemprop="thumbnailUrl"
+                              content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
+                        <meta itemprop="embedUrl" content="https://www.youtube.com/embed/{{video.url}}"/>
                         <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
-                                       video-id="video.url"></youtube-video>
+                                       video-id="::video.url"></youtube-video>
                     </div>
-                    <md-card-content ng-if="::video.name" layout="column" flex="100" layout-align="center center">
-                        <span itemprop="caption" class="  md-margin">{{::video.name}}</span>
+                    <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
+                        <span itemprop="name" class="  md-margin">{{::video.name}}</span>
                     </md-card-content>
                 </md-card>
             </div>
@@ -220,15 +250,18 @@
         <div  flex-gt-md="60" flex-md="80"  flex-gt-xs="60" >
 
             <div class="courses-history" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6"  ng-repeat="course in ::vm.course.historyPhotos"
+                <md-card md-whiteframe="6"  ng-repeat="photo in ::vm.course.historyPhotos"
                          class="md-margin " flex-gt-xs="46" flex-xs="80" itemscope="" itemtype="http://schema.org/ImageObject"
                          ng-click="::vm.showMediaObserver(vm.course.historyPhotos, $index)">
                     <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
-                        <meta itemprop="name" content="PALAMAR GROUP ACADEMY"/>
+                        <meta itemprop="name" content="PALAMAR GROUP"/>
+                        <meta itemprop="image"
+                              content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
+                        <meta itemprop="address" content="Львів"/>
                     </div>
-                        <img itemprop="contentUrl"  ng-src="{{::course.url}}" class="md-card-image">
-                    <md-card-content ng-if="::course.name" layout="column"  layout-align="center center">
-                        <span itemprop="caption" class="  md-margin">{{::course.name}}</span>
+                    <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}">
+                    <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
+                        <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
                     </md-card-content>
                 </md-card>
 

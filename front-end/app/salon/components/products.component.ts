@@ -3,7 +3,33 @@ import {IRootScope} from "../../../typings";
 import {IProductOrder, ProductOrderResourceName, IProductOrderResource} from "../../resources/product.order.resource";
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
 
-const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses description-container products" layout="row"
+const template = `
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "http://palamar.com.ua/beauty-salon",
+      "name": "Салон",
+      "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "http://palamar.com.ua/beauty-salon/products",
+      "name": "Продукція",
+    }
+  }]
+}
+</script> 
+
+<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses description-container products" layout="row"
      layout-align="center center">
     <div layout="column" layout-align="center center">
 
@@ -16,7 +42,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses de
                          ng-click="::$ctrl.showAppointmentDialog(product)">
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-media "
-                             flex="50"><img ng-src="{{::product.photo.url}}" class="md-card-image "/>
+                             flex="50"><img ng-src="{{::product.photo.url}}" class="md-card-image " alt="{{::product.name}} від PALAMAR GROUP Львів " />
                         </div>
                         <div class="card-desc "
                              flex="50" layout="column" layout-align="center center">
@@ -68,7 +94,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses de
                             </md-card-actions>
                         </div>
                         <div class="card-media "
-                             flex="50"><img ng-src="{{::product.photo.url}}" class="md-card-image "/>
+                             flex="50"><img ng-src="{{::product.photo.url}}" class="md-card-image " alt="{{::product.name}} від PALAMAR GROUP Львів "/>
                         </div>
                     </md-card-content>
                 </md-card>
@@ -76,7 +102,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses de
                          ng-click="::$ctrl.showAppointmentDialog(product)">
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-media "
-                             flex="50"><img ng-src="{{::product.photo.url}}" class="md-card-image "/>
+                             flex="50"><img ng-src="{{::product.photo.url}}" class="md-card-image " alt="{{::product.name}} від PALAMAR GROUP Львів "/>
                         </div>
                         <div class="card-desc "
                              flex="50" layout="column" layout-align="center center">
@@ -110,7 +136,7 @@ const template = `<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses de
                 <div class="overlay-bg trigger-right"></div>
                 <md-card md-whiteframe="8" ng-click="::$ctrl.showAppointmentDialog(product)">
                     <md-card-content layout="column">
-                        <div class="card-media "><img ng-src="{{::product.photo.url}}" class="md-card-image"/></div>
+                        <div class="card-media "><img ng-src="{{::product.photo.url}}" class="md-card-image" alt="{{::product.name}} від PALAMAR GROUP Львів "/></div>
                         <div class="card-desc "
                              layout="column" layout-align="space-around center">
                             <md-card-title>
@@ -266,14 +292,24 @@ export class ProductsComponentController {
                             "url": "http:/palamar.com.ua/",
                             "alternateName": "PALAMAR",
                             "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-                            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+                            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
                             "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
                             "name": "PALAMAR GROUP"
                         },
                         "name": product.name,
                         "image": "http://www.palamar.com.ua" + product.photo.url,
-                        "description":"Ціна "+product.price+" грн. " +product.description
+                        "description":"Ціна "+product.price+" грн. " +product.description,
 
+                        "offers": {
+                            "@type": "Offer",
+                            "priceCurrency": "UAH",
+                            "price": product.price,
+                            "seller": {
+                                "@type": "Organization",
+                                "name": "PALAMAR GROUP",
+                                "sameAs": "http://www.palamar.com.ua",
+                            }
+                        }
                     };
                 })
             }
@@ -346,7 +382,7 @@ export class ProductsComponentController {
     }
 }
 
-export let ProductsComponentUrl = "/beauty-parlour/products";
+export let ProductsComponentUrl = "/beauty-salon/products";
 export let ProductsComponentName = 'pgProducts';
 export let ProductsComponentOptions = {
     template: template,

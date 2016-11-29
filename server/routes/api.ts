@@ -113,35 +113,35 @@ api.use('/stubs', (req: any, res, next) => {
                 title: "PALAMAR GROUP beauty parlour & academy Головна сторінка"
             },
             {
-                url: "/beauty-parlour/services",
+                url: "/beauty-salon/services",
                 description: "",
                 name: "services",
                 text: "Послуги",
                 title: "PALAMAR GROUP beauty parlour & academy Послуги"
             },
             {
-                url: "/beauty-parlour/masters",
+                url: "/beauty-salon/masters",
                 description: "",
                 name: "masters",
                 text: "Майстри",
                 title: "PALAMAR GROUP beauty parlour & academy Майстри"
             },
             {
-                url: "/beauty-parlour/transformations",
+                url: "/beauty-salon/transformations",
                 description: "",
                 name: "transforms",
                 text: "Перевтіленні",
                 title: "PALAMAR GROUP beauty parlour & academy Перевтілення"
             },
             {
-                url: "/beauty-parlour/products",
+                url: "/beauty-salon/products",
                 description: "",
                 name: "products",
                 text: "Продікція",
                 title: "PALAMAR GROUP beauty parlour & academy Продікція"
             },
             {
-                url: "/beauty-parlour/contacts",
+                url: "/beauty-salon/contacts",
                 description: "",
                 name: "salon.contacts",
                 text: "Контакти салону",

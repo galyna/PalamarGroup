@@ -11,7 +11,7 @@ const template = `<div ng-click="$ctrl.handleVideoRuning()" class="stop-video-co
 <div id="video-container">
 </div>
 <div class="page-header-wrap " layout="row" layout-align="center center">
-    <a href="/beauty-parlour" layout="column" layout-align="center center" >
+    <a href="/beauty-salon" layout="column" layout-align="center center" >
         <img  class="logo-img" src="../content/images/logo/palamar_logo.png"/>
         <div class="mp-padding md-margin">
             <h1  lang="en" class="featured-area-title"> PALAMAR GROUP</h1>
