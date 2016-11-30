@@ -15,21 +15,19 @@ import {AppointmentServiceName, IAppointmentService} from "../servises/appointme
 import {IAppointmentResource, AppointmentResourceName} from "../../resources/appointment.resource";
 
 
-const template = `
-
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
+const template = `<script type="application/ld+json">
+    {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
     "@type": "ListItem",
     "position": 1,
     "item": {
-      "@id": "http://palamar.com.ua/",
-      "name": "Головна"    
+    "@id": "http://palamar.com.ua/",
+    "name": "Головна"
     }
-  }]
-}
+    }]
+    }
 </script>
 <div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
     <div layout="row" flex>
@@ -51,8 +49,9 @@ const template = `
                     <meta itemprop="description" content="Перукарня у Львові"/>
                     <a ng-href="/beauty-salon/services/{{category.url}}">
                         <img ng-src="{{'/content/images/services/'+ category._id+'.jpg'}}"
-                             itemprop="image" alt="{{::category.name}} Львів від PALAMAR GROUP">
-
+                             alt="{{::category.name}} Львів від PALAMAR GROUP">
+                        <meta itemprop="image"
+                              content="http://palamar.com.ua/content/images/services/{{::category._id}}.jpg"/>
                         <md-card-content layout="column" layout-align="center center"
                                          class=" md-padding  show-description-favor">
                             <span itemprop="name" class=" md-padding  ">{{::category.name}}</span>
@@ -69,12 +68,7 @@ const template = `
             </div>
         </div>
     </div>
-    <div class="md-padding" layout="row" layout-align=" center center"
-         layout-align-xs="  center">
-        <a ng-href="/beauty-salon/services" class="md-button md-primary comment-btn xs-selected md-raised "
-           layout="row" layout-align=" center center"><span>Всі послуги</span>
-        </a>
-    </div>
+  
     <div layout="row" flex>
         <div class="page-delimiter content-block" id="trigger-right" flex>
             <div class="fit-screen-wrap header-long " layout="column">
@@ -116,7 +110,8 @@ const template = `
                     <sb-jsonld json="{{::master.seoJson}}"></sb-jsonld>
 
                     <a ng-href="/beauty-salon/master/{{master._id}}">
-                        <img ng-src="{{::master.photo.url}}" alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів">
+                        <img ng-src="{{::master.photo.url}}"
+                             alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів">
                         <md-card-content layout="column" class="  show-description" layout-align="center center">
                             <span class=" ">{{::master.name}}</span>
                             <div class="  show-description-content">{{::master.rate.text}}</div>
@@ -170,10 +165,10 @@ const template = `
                             <meta itemprop="name" content="PALAMAR GROUP"/>
                             <meta itemprop="image"
                                   content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
-                             <meta itemprop="address" content="Львів, Україна"/>
-                        <meta itemprop="telephone" content="+38 067 264 6216"/>
+                            <meta itemprop="address" content="Львів, Україна"/>
+                            <meta itemprop="telephone" content="+38 067 264 6216"/>
                         </div>
-                       
+
                         <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
                         <div flex class="embed-responsive embed-responsive-16by9" itemscope
                              itemtype="http://schema.org/VideoObject">
@@ -185,9 +180,7 @@ const template = `
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
                         </div>
-                        <md-card-content ng-if="video.name" layout="column" layout-align="center center">
-                            <span itemprop="name" class="  md-margin">{{::video.name}}</span>
-                        </md-card-content>
+                       
                     </md-card>
                 </div>
             </div>
@@ -209,11 +202,11 @@ const template = `
                             <meta itemprop="name" content="PALAMAR GROUP"/>
                             <meta itemprop="image"
                                   content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
-                             <meta itemprop="address" content="Львів, Україна"/>
-                        <meta itemprop="telephone" content="+38 067 264 6216"/>
+                            <meta itemprop="address" content="Львів, Україна"/>
+                            <meta itemprop="telephone" content="+38 067 264 6216"/>
                         </div>
-             
-                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}">
+                        <meta itemprop="image" content="http://palamar.com.ua{{::photo.url}}"/>
+                        <img ng-src="{{::photo.url}}" class="md-card-image" alt="{{::photo.name}}">
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                             <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
                         </md-card-content>
@@ -256,23 +249,21 @@ const template = `
                             <meta itemprop="image"
                                   content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
                             <meta itemprop="address" content="Львів, Україна"/>
-                        <meta itemprop="telephone" content="+38 067 264 6216"/>
+                            <meta itemprop="telephone" content="+38 067 264 6216"/>
                         </div>
                         <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
                         <div flex class="embed-responsive embed-responsive-16by9"
                              class="embed-responsive embed-responsive-16by9" itemscope
                              itemtype="http://schema.org/VideoObject">
                             <meta itemprop="description" content="{{::video.name}}"/>
-                            <meta itemprop="name" content="{{::video.name}}"/>
+                           
                             <meta itemprop="thumbnailUrl"
                                   content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
                             <meta itemprop="embedUrl" content="https://www.youtube.com/embed/{{video.url}}"/>
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
-                        </div>
-                        <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="name" class="  md-margin">{{::video.name}}</span>
-                        </md-card-content>
+                        </div>                                                
+                       
                     </md-card>
                 </div>
             </div>
@@ -366,7 +357,7 @@ export class SalonHomeComponentController {
     videos: IAcademyVideos[];
     showMoreVideos: boolean;
     seo: any;
-    seoJson: any;
+
 
     constructor(private masterResource: IMasterResource,
                 private $location: ng.ILocationService,
@@ -379,12 +370,12 @@ export class SalonHomeComponentController {
     }
 
     $onInit() {
-        this.initSeo();
+
         this.seo = this.SeoPageResource.query({query: {"name": "home"}}).$promise.then((seo)=> {
             if (seo.length > 0) {
                 this.$rootScope.seo = seo[0];
                 document.title = this.$rootScope.seo.title;
-                this.seoJson.description = seo[0].description ? seo[0].description : this.seoJson.description;
+
             }
 
         });
@@ -436,25 +427,37 @@ export class SalonHomeComponentController {
     initMasters() {
         this.masters.$promise.then((masters) => {
             masters.forEach((master)=> {
-                this.seoJson.employees = [];
-                this.seoJson.employees.push(
-                    {
-                        "@context": "http://schema.org/",
-                        "@type": "Person",
-                        "jobTitle": master.subtitle,
-                        "url": "http://palamar.com.ua" + "/beauty-salon/master/" + master._id,
-                        "address": {
-                            "@type": "PostalAddress",
-                            "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
-                            "addressLocality": "Львів, Україна",
-                            "addressCountry": "Україна"
-                        },
-                        "name": master.name,
-                        "description": master.description,
-                        "image": "http://palamar.com.ua" + master.photo.url
-                    });
+                this.seoMaster(master);
             })
         });
+    }
+    seoMaster(master) {
+        master.seoJson=
+            {
+                "@context": "http://schema.org/",
+                "@type": "Person",
+                "jobTitle": master.subtitle,
+                "url": "http://palamar.com.ua" + "/beauty-salon/master/" + master._id,
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                    "addressLocality": "Львів, Україна",
+                    "addressCountry": "Україна"
+                },
+                "name": master.name,
+                "description": master.description,
+                "image": "http://palamar.com.ua" + master.photo.url,
+                "brand": {
+                    "@context": "http://schema.org/",
+                    "@type": "Brand",
+                    "url": "http:/palamar.com.ua/",
+                    "alternateName": "PALAMAR",
+                    "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                    "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+                    "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                    "name": "PALAMAR GROUP"
+                }
+            };
     }
 
     initFavorSeo(favor:IFavor) {
@@ -534,20 +537,12 @@ export class SalonHomeComponentController {
                 "@context": "http://schema.org/",
                 "@type": "Brand",
                 "url": brend.url,
-                "logo": "http://palamar.com.ua/"+brend.photo.url,
+                "logo": "http://palamar.com.ua"+brend.photo.url,
                 "name": brend.name
         };
     }
 
-    initSeo() {
-        this.seoJson = {
-            "@context": "http://www.schema.org",
-            "@type": "BeautySalon",
-            "name": "PALAMAR GROUP",
-            "url": "http://palamar.com.ua/"
 
-        }
-    }
 
     initFavors(favorPromise) {
         favorPromise.then((favors) => {

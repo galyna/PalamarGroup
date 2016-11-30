@@ -9,6 +9,8 @@ const template = `<script type='application/ld+json'>
     "name": "PALAMAR GROUP",
     "alternateName": "Студія краси PALAMAR ",
     "url": "http://palamar.com.ua/",
+    "about":"Офіційний сайт студії краси та навчильного центру для працівників салонів краси у Львові PALAMAR GROUP",
+    "keywords":"стрижка львів, салон краси Львів, перукарня у Львові, навчання для перукурів, навчитись стригти, перукарське мистецтво курси",
     "sameAs": [
     "https://www.facebook.com/hashtag/palamar_group",
     "https://www.instagram.com/palamar_group/",

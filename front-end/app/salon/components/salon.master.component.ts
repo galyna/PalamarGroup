@@ -11,9 +11,11 @@ import {SchedulerServiceName, ISchedulerService} from "../../ui/scheduler.servic
 import ISeoPage = pg.models.ISeoPage;
 
 const template = `
-<sb-jsonld json="{{::$ctrl.breadcrumbList}}"></sb-jsonld>
+
 <sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
 <div class=" description-container" ng-attr-id="{{ $ctrl.markerReadySEO }}">
+
+
     <div class=" courses" layout-align="center center" layout="column"
     >
         <div hide hide-xs="true" show-gt-xs="true" layout="row" layout-align="center center">
@@ -46,7 +48,7 @@ const template = `
                         <div hide show-gt-sm="true" class="md-title">
                             Вибери послугу та запишись
                         </div>
-                        <div flex="40" hide show-gt-sm="true" layout="row" class=" program-block-master  ">
+                        <div  hide show-gt-sm="true" layout="row" class=" program-block-master  ">
                             <div layout="column"
                                  ng-repeat="service in $ctrl.master.services.slice(0,18) track by $index"
                                  layout-align=" start center">
@@ -238,17 +240,14 @@ const template = `
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
                         </div>
-                        <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="name" class="  md-margin">{{::video.name}}</span>
-                        </md-card-content>
+                       
                 </md-card>
             </div>
         </div>
 
     </div>
 
-    <div flex="100" class="courses-details" layout="row" layout-align="center center"
-    >
+    <div flex="100" class="courses-details" layout="row" layout-align="center center">
         <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" ng-repeat="photo in $ctrl.master.works | orderBy:'order' track by $index"
@@ -264,8 +263,8 @@ const template = `
                            <meta itemprop="address" content="Львів, Україна"/>
                         <meta itemprop="telephone" content="+38 067 264 6216"/>
                         </div>
-                       
-                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}">
+                       <meta itemprop="image" content="http://palamar.com.ua{{::photo.url}}"/>
+                        <img ng-src="{{::photo.url}}" class="md-card-image"  alt="{{::photo.name}}">
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                             <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
                         </md-card-content>
@@ -295,7 +294,7 @@ export class MasterComponentController {
     socialParams: any;
     markerReadySEO: string;
     seoJson: any;
-    breadcrumbList: any;
+
 
     constructor(private $log: ng.ILogService, private $routeParams: ng.route.IRouteParamsService,
                 private MasterResource: IMasterResource, private AppointmentService: IAppointmentService,
@@ -315,33 +314,34 @@ export class MasterComponentController {
 
             this.MasterResource.get({id: this.$routeParams["id"], populate: 'services.favor'}).$promise
                 .then((master) => {
+                    this.seoMaster(master);
                     this.master = master;
                     document.title = master.subtitle + " Львів " + master.name
                     this.$rootScope.seo.description = master.description;
                     this.scrollToMain();
-                    this.seoMaster(master);
-                    this.initBreadcrumbList(master);
-                    this.markerReadySEO = "dynamic-content";
                 }).catch((err) => {
                 this.$log.error(err);
                 this.$location.path(`/beauty-salon/masters`);
+            }).finally(() => {
+                this.markerReadySEO = "dynamic-content";
             });
             this.loadEvents(new Date(), this.$routeParams["id"]);
             ;
         }
     }
 
+
     seoMaster(master) {
         this.seoJson =
-            {   "@context": "http://schema.org/",
+            [{
+                "@context": "http://schema.org/",
                 "@type": "Person",
                 "jobTitle": master.subtitle,
                 "url": "http://palamar.com.ua" + "/beauty-salon/master/" + master._id,
                 "address": {
                     "@type": "PostalAddress",
-                    "streetAddress": "вул.Щирецька 36",
-                    "addressLocality": "Львів",
-                    "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                    "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                    "addressLocality": "Львів, Україна",
                     "addressCountry": "Україна"
                 },
                 "name": master.name,
@@ -353,11 +353,38 @@ export class MasterComponentController {
                     "url": "http:/palamar.com.ua/",
                     "alternateName": "PALAMAR",
                     "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-                    "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
+                    "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
                     "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
                     "name": "PALAMAR GROUP"
                 }
-            };
+            }, {
+                "@context": "http://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [{
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@id": "http://palamar.com.ua/beauty-salon",
+                        "name": "Салон",
+                        "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
+                    }
+                }, {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "@id": "http://palamar.com.ua/beauty-salon/masters",
+                        "name": "Майстри"
+                    }
+                }, {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item": {
+                        "@id": "http://palamar.com.ua/beauty-salon/master/" + master._id,
+                        "name": master.name,
+                        "image": "http://palamar.com.ua" + master.photo.url
+                    }
+                }]
+            }];
     }
 
     scrollToMain() {
@@ -475,35 +502,7 @@ export class MasterComponentController {
 
     }
 
-    initBreadcrumbList(master) {
-        this.breadcrumbList = {
-            "@context": "http://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [{
-                "@type": "ListItem",
-                "position": 1,
-                "item": {
-                    "@id": "http://palamar.com.ua/beauty-salon",
-                    "name": "Салон",
-                    "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
-                }
-            }, {
-                "@type": "ListItem",
-                "position": 2,
-                "item": {
-                    "@id": "http://palamar.com.ua/beauty-salon/masters",
-                    "name": "Майстри"
-                }
-            }, {
-                "@type": "ListItem",
-                "position": 3,
-                "item": {
-                    "@id": "http://palamar.com.ua/beauty-salon/master/" + master._id,
-                    "name": master.name
-                }
-            }]
-        }
-    }
+
 }
 
 export let MasterComponentUrl = "/beauty-salon/master/:id";

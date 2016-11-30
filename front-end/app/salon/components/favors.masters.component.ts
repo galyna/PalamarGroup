@@ -9,7 +9,7 @@ import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.re
 import {FavorAppointmentServiceName} from "../servises/favor.appointment.service";
 
 const template = `
-<sb-jsonld json="{{::$ctrl.breadcrumbList}}"></sb-jsonld>
+<sb-jsonld json="{{$ctrl.breadcrumbList}}"></sb-jsonld>
 
 <div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses-details description-container" layout="column">
 
@@ -255,9 +255,7 @@ const template = `
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
                         </div>
-                        <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="name" class="  md-margin">{{::video.name}}</span>
-                        </md-card-content>
+                       
                     </md-card>
                 </div>
             </div>
@@ -280,8 +278,8 @@ const template = `
                              <meta itemprop="address" content="Львів, Україна"/>
                         <meta itemprop="telephone" content="+38 067 264 6216"/>
                         </div>
-                 
-                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}">
+                        <meta itemprop="image" content="http://palamar.com.ua{{::photo.url}}"/>
+                        <img ng-src="{{::photo.url}}" class="md-card-image"  alt="{{::photo.name}}">
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                             <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
                         </md-card-content>

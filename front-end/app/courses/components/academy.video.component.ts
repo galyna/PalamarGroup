@@ -111,9 +111,7 @@ const template = `
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
                         </div>
-                        <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="name" class="  md-margin">{{::video.name}}</span>
-                        </md-card-content>
+                       
                 </md-card>
             </div>
         </div>

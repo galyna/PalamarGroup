@@ -1,5 +1,5 @@
 <script type="application/ld+json">
-{
+[{
   "@context": "http://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [{
@@ -11,10 +11,39 @@
       "image": "http://palamar.com.ua/content/images/bg/courses/dates/IMG_7095_1539_1026.jpg"
     }
   }]
-}
+},{
+            "@context": "http://www.schema.org",
+            "@type": "EducationalOrganization",
+            "name": "Palamar Group Academy",
+            "url": "http://palamar.com.ua/academy",
+            "founder": {
+                "@type": "Person",
+                "name": "YULIA PALAMAR"
+            },
+            "sameAs": [
+                "https://www.facebook.com/hashtag/palamar_group",
+                "https://www.instagram.com/palamar_group/",
+                "https://vk.com/id202584528"
+            ],
+            "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
+            "description": "Навчання для працівників солонів краси, Теми: чоловічі та жіночі стрижки, fassion-style, колористика ",
+            "serviceArea": {
+                "@type": "AdministrativeArea",
+                "name": "Львів"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                "addressLocality": "Львів, Україна",
+                "addressCountry": "Україна"
+            },
+
+            "telephone": "+38 068 9898806"
+        }]
 </script>
 
-<sb-jsonld json="{{vm.seoJson}}"></sb-jsonld>
+
 
 <div layout="row" flex>
     <div class="page-delimiter" flex>
@@ -29,7 +58,7 @@
 
         <div class="course-bg " layout-align="center center" flex
              ng-repeat="course in vm.courses track by $index" ng-if="::course.isVisible">
-            <sb-jsonld json="{{::course.seoJson}}"></sb-jsonld>
+            <sb-jsonld json="{{course.seoJson}}"></sb-jsonld>
             <a ng-href="/academy/course/{{course._id}}">
             <div hide show-gt-xs="true" layout="row" layout-align="center center">
 

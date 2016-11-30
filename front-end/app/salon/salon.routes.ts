@@ -21,9 +21,6 @@ export function salonRoutes($routeProvider:ng.route.IRouteProvider, constants:IC
             .when( SalonHomeComponentUrl, {
                 template: '<pg-salon-home></pg-salon-home>',
             } )
-            .when( FavorsComponentUrl, {
-                template: '<pg-favors></pg-favors>',
-            } )
             .when( FavorsMastersComponentUrl, {
                 template: '<pg-favors-masters></pg-favors-masters>',
             } )

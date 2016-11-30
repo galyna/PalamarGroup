@@ -30,7 +30,7 @@ export class CourseController {
     showDetails: boolean;
     markerReadySEO: string;
     seoJson: any;
-    breadcrumbList:any;
+    breadcrumbList: any;
 
 
     constructor(private $log: ng.ILogService, $routeParams: IRouteParams,
@@ -45,11 +45,11 @@ export class CourseController {
 
 
         this.course = CourseResource.get({id: $routeParams.id});
-        this.course.$promise.then((course)=> {
+        this.course.$promise.then((course) => {
             this.scrollToMain();
             this.setSocialParams(course);
             this.course.seoJson = this.createSeoJson(course);
-            this.initBreadcrumbList(course);
+
             this.course.hearFormsPhotos = this.orderByFilter(course.hearFormsPhotos, "order");
             this.course.historyPhotos = this.orderByFilter(course.historyPhotos, "order");
             document.title = "Навчальний курс " + course.name + " " + "Львів";
@@ -57,7 +57,7 @@ export class CourseController {
             this.$rootScope.seo.description = course.description;
             this.markerReadySEO = "dynamic-content";
 
-        }).catch((err)=> {
+        }).catch((err) => {
             this.$log.error(err);
             this.$location.path(`/academy`);
         });
@@ -67,12 +67,12 @@ export class CourseController {
         this.newComment = this.getBlankComment();
 
         this.newModel = this.getBlankModel();
-        this.initSeo();
+
     }
 
     createSeoJson(course) {
-        return {
-
+        return [
+        {
             "@context": "http://schema.org",
             "@type": "Course",
             "name": course.name,
@@ -86,7 +86,7 @@ export class CourseController {
                     "https://vk.com/id202584528"
                 ],
                 "location": {
-                    "name":"Palamar Group Academy",
+                    "name": "Palamar Group Academy",
                     "@type": "PostalAddress",
                     "streetAddress": "вул.Щирецька 36",
                     "addressLocality": "Львів",
@@ -95,7 +95,7 @@ export class CourseController {
                 },
             },
             "previewUrl": "http://palamar.com.ua/academy/course/" + course._id,
-            "image":"http://palamar.com.ua"+ course.avatar,
+            "image": "http://palamar.com.ua" + course.avatar,
             "creator": {
                 "@context": "http://schema.org/",
                 "@type": "Person",
@@ -112,14 +112,10 @@ export class CourseController {
                 }
             }
 
-        }
-    }
-
-    initBreadcrumbList(course) {
-        this.breadcrumbList={
+        },{
             "@context": "http://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [{
+                "@type": "BreadcrumbList",
+                "itemListElement": [{
                 "@type": "ListItem",
                 "position": 1,
                 "item": {
@@ -127,63 +123,18 @@ export class CourseController {
                     "name": "Академія",
                     "image": "http://palamar.com.ua/content/images/bg/courses/dates/IMG_7095_1539_1026.jpg"
                 }
-            },{
+            }, {
                 "@type": "ListItem",
                 "position": 2,
                 "item": {
-                    "@id": "http://palamar.com.ua/academy/{{vm.course._id}}",
+                    "@id": "http://palamar.com.ua/academy/course/" + course._id,
                     "name": course.name,
-                    "image": "http://palamar.com.ua/{{vm.course.avatar}}"
+                    "image": "http://palamar.com.ua" + course.avatar
                 }
             }]
-        }
+        }]
     }
 
-    initSeo() {
-        this.seoJson = {
-            "@context": "http://www.schema.org",
-            "@type": "EducationalOrganization",
-            "name": "Palamar Group Academy",
-            "url": "http://palamar.com.ua/academy",
-            "founder": {
-                "@type": "Person",
-                "name": "YULIA PALAMAR"
-            },
-            "sameAs": [
-                "https://www.facebook.com/hashtag/palamar_group",
-                "https://www.instagram.com/palamar_group/",
-                "https://vk.com/id202584528"
-            ],
-            "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
-            "description": "Навчання для працівників солонів краси, Теми: чоловічі та жіночі стрижки, fassion-style, колористика ",
-            "serviceArea": {
-                "@type": "AdministrativeArea",
-                "name": "Львів"
-            },
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "вул.Щирецька 36",
-                "addressLocality": "Львів",
-                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
-                "addressCountry": "Україна"
-            },
-
-            "telephone": "+38 068 9898806"
-        };
-    }
-
-    scrollToOrderName() {
-        var options = {
-            duration: 50,
-            easing: 'easeInQuad',
-            offset: 0,
-
-        }
-
-        var element = document.getElementById('orderName');
-        this.smoothScroll(element, options);
-    }
 
     scrollToMain() {
         var options = {
@@ -243,11 +194,11 @@ export class CourseController {
         if (!file) return;
 
         this.$rootScope.loading = true;
-        this.fileUpload(file).then((response)=> {
+        this.fileUpload(file).then((response) => {
             this.newModel[photoName] = response.data.url;
-        }).catch((err)=> {
+        }).catch((err) => {
             this.$log.debug("fail upload file..." + err);
-        }) .finally(()=> {
+        }) .finally(() => {
             this.$rootScope.loading = false;
         });
     }
@@ -272,7 +223,7 @@ export class CourseController {
                 .catch((err) => {
                         this.$log.error(err);
                     }
-                ).finally(()=> {
+                ).finally(() => {
                 this.$rootScope.loading = false;
             });
         }
@@ -364,9 +315,8 @@ export class CourseController {
             bindToController: true,
             controller: CourseController.componentName,
             controllerAs: 'vm',
-            parent: angular.element(document.querySelector('#mainContent')),
-            fullscreen: this.$mdMedia('(max-width: 800px)')
-
+            parent: angular.element(document.body),
+            fullscreen: this.$mdMedia('(max-width: 1360px)')
         });
 
     }
@@ -383,8 +333,8 @@ export class CourseController {
                 .catch((err) => {
                         this.$log.error(err);
                     }
-                ).finally(()=> {
-                this.$timeout(()=> {
+                ).finally(() => {
+                this.$timeout(() => {
                     this.$rootScope.loading = false;
                     this.newComment = this.getBlankComment();
                 });

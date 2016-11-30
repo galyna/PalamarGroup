@@ -320,7 +320,7 @@ export class ProductsComponentController {
                             "priceCurrency": "UAH",
                             "price": product.price,
                             "seller": {
-                                "@type": "Organization",
+                                "@type": "BeautySalon",
                                 "name": "PALAMAR GROUP",
                                 "sameAs": [
                                     "https://www.facebook.com/hashtag/palamar_group",

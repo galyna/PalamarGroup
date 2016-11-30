@@ -4,46 +4,7 @@
 
 .salon-contacts {
 
-  .page-delimiter {
-    position: relative;
-    display: table;
-    width: 100%;
-    color: white;
-    overflow: hidden;
-    overflow-y: auto;
-    text-align: center;
 
-    .fit-screen-wrap {
-      position: relative;
-      display: table-cell;
-      vertical-align: middle;
-      z-index: 2;
-    }
-    .header {
-      height: 150px;
-
-    }
-    .header-super {
-      height: 350px;
-
-    }
-    .header-long {
-      height: 500px;
-
-    }
-    .invers {
-      background-color: white;
-      color: black;
-    }
-
-    .overlay {
-      z-index: 1;
-
-    }
-
-
-
-  }
   md-card.md-default-theme, md-card {
     margin-left: 0px;
     margin-right: 0px;

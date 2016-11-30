@@ -121,7 +121,7 @@ export class CalendarComponentController {
     setCoursesCalendarTemplate(picture, name) {
 
             return ` <div class="course-marker"> 
-                       <img  src="${picture}" alt="">                                  
+                       <img  src="${picture}" alt="Курс від PALAMAR GROUP">                                  
                       <div class="it-name">${name}</div></div>`
 
     }

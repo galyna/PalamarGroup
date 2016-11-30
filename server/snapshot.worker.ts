@@ -28,13 +28,6 @@ var pages = [
         title: "PALAMAR GROUP beauty parlour & academy Головна сторінка"
     },
     {
-        url: "/beauty-salon/services",
-        description: "",
-        name: "services",
-        text: "Послуги",
-        title: "PALAMAR GROUP beauty parlour & academy Послуги"
-    },
-    {
         url: "/beauty-salon/masters",
         description: "",
         name: "masters",
@@ -165,6 +158,7 @@ async function saveSitemap() {
     fs.writeFileSync(path.resolve('../front-end/dist/sitemap.xml'), sitemap.toString());
     return await saveSnapshots();
 }
+
 
 schedule.scheduleJob({
     hour: 0

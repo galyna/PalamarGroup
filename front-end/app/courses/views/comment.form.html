@@ -1,4 +1,5 @@
-<md-dialog class=" appointment-dialog" aria-label="ДОДАТИ ВІДГУК" layout="column" flex-sm="85" flex-md="65" flex-xs="95" flex-gt-sm="35"
+<md-dialog class=" appointment-dialog" aria-label="ДОДАТИ ВІДГУК"
+           layout="column" flex-sm="85" flex-md="65" flex-xs="95" flex-gt-sm="35"
            flex>
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools md-padding ">
@@ -10,13 +11,13 @@
             </md-button>
         </div>
     </md-toolbar>
-    <form name="commentForm" class="md-padding  pop-form" flex novalidate ng-submit="::vm.submitComment(commentForm)">
+    <form name="commentForm" class="md-padding  pop-form"  novalidate ng-submit="::vm.submitComment(commentForm)">
         <md-dialog-content flex>
-            <md-dialog-content-body layout="column" layout-align="center stretch" flex>
-                <md-input-container class="md-block" >
+            <md-dialog-content-body  >
+                <md-input-container class="md-block">
                     <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
-                    <label class="md-headline" for="nameС">Ім`я </label>
-                    <input class="md-headline md-padding" id="name" ng-model="vm.newComment.name" name="name" required />
+                    <label class="md-headline" for="name">Ім`я </label>
+                    <input class="md-headline md-padding" id="name" ng-model="vm.newComment.name" name="name" required/>
                     <div ng-messages="commentForm.name.$error" role="alert"
                          ng-show="commentForm.$submitted && commentForm.name.$invalid ">
                         <div class="md-headline" ng-message="required">
@@ -27,7 +28,8 @@
                 <md-input-container class="md-block">
                     <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
                     <label class="md-headline" for="textС">Відгук</label>
-                    <textarea class="md-headline" id="textС" ng-model="vm.newComment.text" name="text" required></textarea>
+                    <textarea class="md-headline" id="textС" ng-model="vm.newComment.text" name="text"
+                              required></textarea>
                     <div ng-messages="commentForm.text.$error" role="alert"
                          ng-show="commentForm.$submitted && commentForm.text.$invalid ">
                         <div class="md-headline" ng-message="required">
@@ -37,13 +39,10 @@
                 </md-input-container>
             </md-dialog-content-body>
         </md-dialog-content>
-        <md-dialog-actions   layout-align-xs="center-center"  >
+        <md-dialog-actions layout-align-xs="center-center">
             <md-button type="submit" class=" xs-selected md-raised md-headline">ДОДАТИ
             </md-button>
         </md-dialog-actions>
 
     </form>
 </md-dialog>
-
-
-

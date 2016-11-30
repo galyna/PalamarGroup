@@ -9,7 +9,6 @@ import {FavorAppointmentServiceName} from "../servises/favor.appointment.service
 
 const template = `
 
-<sb-jsonld json="{{::$ctrl.breadcrumbList}}"></sb-jsonld>
 <sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
 <div class="courses description-container" ng-attr-id="{{ $ctrl.markerReadySEO }}">
 
@@ -45,7 +44,8 @@ const template = `
                     
                     </div>
                     <div class="card-media "
-                         flex="50"><img ng-src="{{::$ctrl.favor.photo.url}}" alt="{{::$ctrl.favor.name}} від PALAMAR GROUP Львів "
+                         flex="50">
+                         <img ng-src="{{::$ctrl.favor.photo.url}}" alt="{{::$ctrl.favor.name}} від PALAMAR GROUP Львів "
                           class="md-card-image "/>
                     </div>
                 </md-card-content>
@@ -84,6 +84,7 @@ const template = `
                 <div flex class="md-display-2"> Майстри</div>
             </div>
             <div class="overlay-masters">
+            
             </div>
         </div>
     </div>
@@ -91,6 +92,7 @@ const template = `
     <div class="course-bg " layout="column" flex
          ng-repeat="master in $ctrl.masters | orderBy:['-level._id','order'] track by $index"
          layout-align="center center">
+         <sb-jsonld json="{{::master.seoJson}}"></sb-jsonld>
           <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
                 <md-card flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
@@ -219,6 +221,7 @@ const template = `
                 <div flex class="md-display-2"> Роботи та навчання</div>
             </div>
             <div class="overlay-days">
+          
             </div>
         </div>
     </div>
@@ -252,9 +255,7 @@ const template = `
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
                         </div>
-                        <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="name" class="  md-margin">{{::video.name}}</span>
-                        </md-card-content>
+                       
                     </md-card>
                 </div>
             </div>
@@ -278,8 +279,8 @@ const template = `
                             <meta itemprop="address" content="Львів, Україна"/>
                         <meta itemprop="telephone" content="+38 067 264 6216"/>
                         </div>
-                        
-                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}">
+                        <meta itemprop="image" content="http://palamar.com.ua{{::photo.url}}"/>
+                        <img ng-src="{{::photo.url}}" class="md-card-image"  alt="{{::photo.name}}">
                         <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                             <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
                         </md-card-content>
@@ -308,7 +309,6 @@ export class FavorComponentController {
     socialParams: any;
     markerReadySEO: string;
     seoJson: any;
-    breadcrumbList: any;
 
 
     constructor(private $routeParams: ng.route.IRouteParamsService, private $location: ng.ILocationService,
@@ -331,11 +331,13 @@ export class FavorComponentController {
                     document.title = favor.name + " " + "Львів";
                     this.$rootScope.seo.description = favor.description;
                     this.initSeo(favor);
-                    this.initBreadcrumbList(favor);
                     this.scrollToMain();
                 }).catch((err) => {
                 this.$location.path(`/beauty-salon/services`);
+            }).finally(() => {
+                this.markerReadySEO = "dynamic-content";
             });
+
 
             this.masters = this.masterResource.query({
                 populate: 'services.favor'
@@ -357,6 +359,7 @@ export class FavorComponentController {
                 });
 
             this.$q.all([this.favor.$promise, this.masters.$promise]).then((result) => {
+                // $timeout(function() {  }, 100);
                 this.markerReadySEO = "dynamic-content";
             });
         }
@@ -369,41 +372,12 @@ export class FavorComponentController {
         this.FavorAppointmentService.onShowDialog(appointment);
     }
 
-    initBreadcrumbList(favor) {
-        this.breadcrumbList = {
-            "@context": "http://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [{
-                "@type": "ListItem",
-                "position": 1,
-                "item": {
-                    "@id": "http://palamar.com.ua/beauty-salon",
-                    "name": "Салон",
-                    "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
-                }
-            }, {
-                "@type": "ListItem",
-                "position": 2,
-                "item": {
-                    "@id": "http://palamar.com.ua/beauty-salon/services",
-                    "name": "Послуги",
-                    "image": "http://palamar.com.ua/content/images/services/hear.jpg"
-                }
-            }, {
-                "@type": "ListItem",
-                "position": 3,
-                "item": {
-                    "@id": "http://palamar.com.ua/beauty-salon/service/" + favor._id,
-                    "name": favor.name,
-                    "image": "http://palamar.com.ua" + favor.photo.url
-                }
-            }]
-        }
-    }
+
 
     seoMaster(master) {
         master.seoJson =
-            {  "@context": "http://schema.org/",
+            {
+                "@context": "http://schema.org/",
                 "@type": "Person",
                 "jobTitle": master.subtitle,
                 "url": "http://palamar.com.ua" + "/beauty-salon/master/" + master._id,
@@ -431,7 +405,7 @@ export class FavorComponentController {
 
     initSeo(favor: IFavor) {
         this.seoJson =
-            {
+            [{
                 "@context": "http://schema.org/",
                 "@type": "Service",
                 "areaServed": {
@@ -496,7 +470,35 @@ export class FavorComponentController {
                     "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
                     "name": "PALAMAR GROUP"
                 }
-            }
+            }, {
+                "@context": "http://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [{
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@id": "http://palamar.com.ua/beauty-salon",
+                        "name": "Салон",
+                        "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
+                    }
+                }, {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "@id": "http://palamar.com.ua/beauty-salon/services",
+                        "name": "Послуги",
+                        "image": "http://palamar.com.ua/content/images/services/hear.jpg"
+                    }
+                }, {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item": {
+                        "@id": "http://palamar.com.ua/beauty-salon/service/" + favor._id,
+                        "name": favor.name,
+                        "image": "http://palamar.com.ua" + favor.photo.url
+                    }
+                }]
+            }]
 
     }
 

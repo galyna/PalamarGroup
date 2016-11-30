@@ -1,12 +1,46 @@
 
-<sb-jsonld json="{{::vm.course.seoJson}}"></sb-jsonld>
-<sb-jsonld json="{{::vm.breadcrumbList}}"></sb-jsonld>
-<sb-jsonld json="{{::vm.seoJson}}"></sb-jsonld>
 
-<div ng-attr-id="{{ vm.markerReadySEO }}" class="courses-details description-container" layout="column">
+<script type="application/ld+json">
+{
+            "@context": "http://www.schema.org",
+            "@type": "EducationalOrganization",
+            "name": "Palamar Group Academy",
+            "url": "http://palamar.com.ua/academy",
+            "founder": {
+                "@type": "Person",
+                "name": "YULIA PALAMAR"
+            },
+            "sameAs": [
+                "https://www.facebook.com/hashtag/palamar_group",
+                "https://www.instagram.com/palamar_group/",
+                "https://vk.com/id202584528"
+            ],
+            "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
+            "description": "Навчання для працівників солонів краси, Теми: чоловічі та жіночі стрижки, fassion-style, колористика ",
+            "serviceArea": {
+                "@type": "AdministrativeArea",
+                "name": "Львів"
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "вул.Щирецька 36",
+                "addressLocality": "Львів",
+                "addressRegion": "ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ",
+                "addressCountry": "Україна"
+            },
+
+            "telephone": "+38 068 9898806"
+        }
+</script>
+
+
+<sb-jsonld json="{{::vm.course.seoJson}}"></sb-jsonld>
+<div ng-attr-id="{{vm.markerReadySEO }}" class="courses-details description-container" layout="column">
 
     <!--author-->
     <div layout="row" class="top-info" flex layout-align="center center">
+
         <md-card flex-md="90"  flex-gt-md="60"  flex-xs="none" flex md-whiteframe="5">
             <md-card-content layuot="column" layout-gt-sm="row">
                 <div class="card-desc-top " flex hide-gt-sm="true" layout="column" layout-align=" space-around center">
@@ -153,8 +187,9 @@
                         <meta itemprop="address" content="Львів,Україна"/>
                         <meta itemprop="telephone" content="+38 067 264 6216"/>
                     </div>
-
-                    <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}">
+                    <meta itemprop="image"
+                          content="http://palamar.com.ua{{::photo.url}}"/>
+                    <img ng-src="{{::photo.url}}" class="md-card-image"  alt="{{::photo.name}}">
                     <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                         <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
                     </md-card-content>
@@ -191,9 +226,7 @@
                         <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                        video-id="::video.url"></youtube-video>
                     </div>
-                    <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                        <span itemprop="name" class="  md-margin">{{::video.name}}</span>
-                    </md-card-content>
+
                 </md-card>
             </div>
         </div>
@@ -241,7 +274,8 @@
                               content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
                         <meta itemprop="address" content="Львів"/>
                     </div>
-                    <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}">
+                    <meta itemprop="image" content="http://palamar.com.ua{{::photo.url}}"/>
+                    <img ng-src="{{::photo.url}}" class="md-card-image"  alt="{{::photo.name}}">
                     <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                         <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
                     </md-card-content>
@@ -293,5 +327,7 @@
     </div>
 
 </div>
+
+
 
 

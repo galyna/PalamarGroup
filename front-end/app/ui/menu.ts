@@ -31,46 +31,48 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
 >
     <div class="pg-menu-section" ng-if="::vm.showSalon">
         <div class="pg-menu-section-title" ng-click="::vm.goToURL(vm.SalonHomeComponentUrl)">САЛОН</div>
-         <div layout="column" >
+        <div layout="column">
             <div layout="row" layout-xs="column">
-            <div flex ng-click="::vm.goToURL(vm.SalonHomeComponentUrl)" class=" pg-menu-item ">ГОЛОВНА
-            </div>
-            <div flex ng-click="::vm.goToURL(vm.FavorsComponentUrl)" class=" pg-menu-item ">ПОСЛУГИ
-            </div>
-            <div flex ng-click="::vm.goToURL(vm.MastersComponentUrl)" class=" pg-menu-item ">МАЙСТРИ
-            </div>
-           
-        </div>
-             <div layout="row" layout-xs="column">
+                <div flex ng-click="::vm.goToURL(vm.SalonHomeComponentUrl)" class=" pg-menu-item ">ГОЛОВНА
+                </div>
 
-                 <div flex ng-click="::vm.goToURL('/beauty-salon/services/hairdressing')"  class=" pg-menu-item ">ПЕРУКАРСЬКІ ПОСЛУГИ
-                 </div>
-                 <div flex ng-click="::vm.goToURL('/beauty-salon/services/nail-aesthetics')" class=" pg-menu-item ">НІГТЬОВА ЕСТЕТИКА
-                 </div>
-                 <div flex ng-click="::vm.goToURL('/beauty-salon/services/makeup')"  class=" pg-menu-item ">ВІЗАЖ
-                 </div>
+                <div flex ng-click="::vm.goToURL(vm.MastersComponentUrl)" class=" pg-menu-item ">МАЙСТРИ
+                </div>
 
-             </div>
+                <div flex ng-click="::vm.goToURL(vm.ProductsComponentUrl)" class=" pg-menu-item ">ПРОДУКЦІЯ
+                </div>
+            </div>
             <div layout="row" layout-xs="column">
-           
-            <div flex ng-click="::vm.goToURL(vm.SalonTransformsComponentUrl)" class=" pg-menu-item ">ПЕРЕВТІЛЕННЯ
+                <div flex ng-click="::vm.goToURL('/beauty-salon/services/nail-aesthetics')"
+                     class=" pg-menu-item ">НІГТЬОВА ЕСТЕТИКА
+                </div>
+                <div flex ng-click="::vm.goToURL('/beauty-salon/services/hairdressing')"
+                     class=" pg-menu-item ">ПЕРУКАРСЬКІ ПОСЛУГИ
+                </div>
+
+                <div flex ng-click="::vm.goToURL('/beauty-salon/services/makeup')" class=" pg-menu-item ">ВІЗАЖ
+                </div>
+
             </div>
-            <div flex ng-click="::vm.goToURL(vm.ProductsComponentUrl)" class=" pg-menu-item ">ПРОДУКЦІЯ
-            </div>
-            <div flex ng-click="::vm.goToURL(vm.SalonContactsComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
+            <div layout="row" layout-xs="column">
+
+                <div flex ng-click="::vm.goToURL(vm.SalonTransformsComponentUrl)" class=" pg-menu-item ">ПЕРЕВТІЛЕННЯ
+                </div>
+
+                <div flex ng-click="::vm.goToURL(vm.SalonContactsComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
+                </div>
             </div>
         </div>
-        </div>
-       
+
     </div>
     <div class=" pg-menu-section">
         <div class="pg-menu-section-title" ng-click="::vm.goToURL('/academy')">АКАДЕМІЯ</div>
         <div layout="column" layout-gt-sm="row">
-            <div flex ng-click="::vm.goToURL('/academy')" class=" pg-menu-item ">НАВЧАЛЬННЯ
+            <div flex ng-click="::vm.goToURL('/academy')" class=" pg-menu-item ">ПРОГРАМА
             </div>
-            <div flex ng-click="::vm.goToURL(vm.CourseCalendarComponentUrl)" class=" pg-menu-item ">КАЛАЕНДАР
+            <div flex ng-click="::vm.goToURL(vm.CourseCalendarComponentUrl)" class=" pg-menu-item ">КАЛЕНДАР
             </div>
-             <div flex ng-click="::vm.goToURL(vm.AcademyVideoComponentUrl)" class=" pg-menu-item ">ВІДЕО
+            <div flex ng-click="::vm.goToURL(vm.AcademyVideoComponentUrl)" class=" pg-menu-item ">ВІДЕО
             </div>
             <div flex ng-click="::vm.goToURL(vm.AcademyContactComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
             </div>

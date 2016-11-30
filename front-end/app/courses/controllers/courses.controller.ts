@@ -36,7 +36,7 @@ export class CoursesController {
             this.courses = null;
 
         })
-        this.initSeo();
+
         this.getCourses();
     }
 
@@ -62,6 +62,7 @@ export class CoursesController {
     }
 
     createSeoJson(course) {
+        if(!course.isVisible){return;}
         return {
 
             "@context": "http://schema.org",
@@ -107,38 +108,7 @@ export class CoursesController {
         }
     }
 
-    initSeo() {
-        this.seoJson = {
-            "@context": "http://www.schema.org",
-            "@type": "EducationalOrganization",
-            "name": "Palamar Group Academy",
-            "url": "http://palamar.com.ua/academy",
-            "founder": {
-                "@type": "Person",
-                "name": "YULIA PALAMAR"
-            },
-            "sameAs": [
-                "https://www.facebook.com/hashtag/palamar_group",
-                "https://www.instagram.com/palamar_group/",
-                "https://vk.com/id202584528"
-            ],
-            "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
-            "description": "Навчання для працівників солонів краси, Теми: чоловічі та жіночі стрижки, fassion-style, колористика ",
-            "serviceArea": {
-                "@type": "AdministrativeArea",
-                "name": "Львів"
-            },
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
-                "addressLocality": "Львів, Україна",
-                "addressCountry": "Україна"
-            },
 
-            "telephone": "+38 068 9898806"
-        }
-    }
 
     scrollToMain() {
         var options = {

@@ -12,48 +12,46 @@ import {IMediaObserverFactory, MediaObserverFactoryName} from "../../ui/mediaObs
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
 
 
-const template = `
-
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
+const template = `<script type="application/ld+json">
+    {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
     "@type": "ListItem",
     "position": 1,
     "item": {
-      "@id": "http://palamar.com.ua/beauty-salon",
-      "name": "Салон",
-      "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
+    "@id": "http://palamar.com.ua/beauty-salon",
+    "name": "Салон",
+    "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
     }
-  },{
+    },{
     "@type": "ListItem",
     "position": 2,
     "item": {
-      "@id": "http://palamar.com.ua/beauty-salon/contacts",
-      "name": "Контакти"
+    "@id": "http://palamar.com.ua/beauty-salon/contacts",
+    "name": "Контакти"
     }
-  }]
-}
+    }]
+    }
 </script>
 
-<div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-contacts description-container" layout="column"
- >
+<div ng-attr-id="{{ $ctrl.markerReadySEO }}" layout="column"
+>
 
     <div layout="column" layout-align="center center" ng-repeat="salon in $ctrl.salons">
-      
-        <div layout="row"  >
+
+        <div layout="row">
             <div class="page-delimiter" flex>
                 <div class="fit-screen-wrap invers header">
-                    <div  class="md-display-1"> Адреса салону {{::salon.address}}</div>
+                    <div class="md-display-1"> Адреса салону {{::salon.address}}</div>
                     <div class="md-title md-padding"> {{::salon.description}}</div>
                 </div>
 
             </div>
         </div>
 
-        <div ng-repeat="contact in ::salon.contacts track by $index">
-            <div hide show-gt-xs="true" layout="row" layout-align="center center" >
+        <div ng-repeat="contact in ::salon.contacts track by $index" class="salon-contacts description-container">
+            <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
                 <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
                     <md-card-content layout="row" layout-align="start none">
@@ -84,7 +82,7 @@ const template = `
                                     <div class="md-title">Адміністратор</div>
                                     <div class="md-display-1">{{::contact.name}}</div>
                                     <div class="descr-container">
-                                        <div  class="md-display-1">{{::contact.phone}}</div>
+                                        <div class="md-display-1">{{::contact.phone}}</div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
@@ -105,7 +103,7 @@ const template = `
                                 <md-card-title-text layout-align="space-around center">
                                     <div class="md-title">Адміністратор</div>
                                     <div class="md-display-1">{{::contact.name}}</div>
-                                    <div   class="descr-container">
+                                    <div class="descr-container">
                                         <div class="md-display-1">{{::contact.phone}}</div>
                                     </div>
                                 </md-card-title-text>
@@ -116,17 +114,17 @@ const template = `
                 </md-card>
             </div>
 
-            <div hide-gt-xs="true" layout="row" layout-align="center center" >
+            <div hide-gt-xs="true" layout="row" layout-align="center center">
 
                 <md-card md-whiteframe="8">
-                    <md-card-content layout="column" >
-                        <div   class="card-media "><img ng-src="{{::contact.photo.url}}" class="md-card-image"/></div>
+                    <md-card-content layout="column">
+                        <div class="card-media "><img ng-src="{{::contact.photo.url}}" class="md-card-image"/></div>
                         <div class="card-desc "
                              layout="column" layout-align="space-around center">
                             <md-card-title>
                                 <md-card-title-text>
-                                    <div   class="md-headline">{{::contact.name}}</div>
-                                    <div  class="md-headline">{{::contact.phone}}</div>
+                                    <div class="md-headline">{{::contact.name}}</div>
+                                    <div class="md-headline">{{::contact.phone}}</div>
                                 </md-card-title-text>
                             </md-card-title>
                         </div>
@@ -138,47 +136,34 @@ const template = `
 
         </div>
 
-        <div layout="row" >
+        <div layout="row" layout-margin>
 
-            <ui-gmap-google-map ng-if="$ctrl.showMap && salon.latitude && salon.longitude" id="map"
+            <ui-gmap-google-map ng-if="$ctrl.showMap && salon.latitude && salon.longitude" id="map" flex
                                 center='{ latitude: salon.latitude, longitude: salon.longitude}'
                                 zoom='$ctrl.map.zoom'>
                 <ui-gmap-marker coords="{ latitude: salon.latitude, longitude: salon.longitude}" idkey="$index">
 
                 </ui-gmap-marker>
-               
+
             </ui-gmap-google-map>
         </div>
 
-        <div class="courses-details" layout="row" layout-align="center center" flex ng-if="salon.photos.length>0">
-            <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
-                <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                    <md-card md-whiteframe="6" ng-repeat="photo in ::salon.photos track by $index" itemscope itemtype="http://schema.org/ImageObject"
-                             class="md-margin "
-                             flex-gt-sm="22"
-                             flex-gt-xs="46" flex-xs="80"
-                             ng-click="::$ctrl.showMediaObserver(salon.photos, $index)">
-                        <img ng-src="{{::photo.url}}" class="md-card-image" itemprop="image" alt="{{::photo.name}}Фото салону PALAMAR GROUP " >
-                        <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
-                        </md-card-content>
-                    </md-card>
-                </div>
-            </div>
-        </div>
 
-        <div ng-if="salon.videos.length>0" flex style="padding-bottom:16px;" >
-            <div flex="100" flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
-                <div layout="column"   layout-align="center center" class="embed-responsive-container" >
-                    <md-card md-whiteframe="6" class="  courses-videos"
+        <div layout="row" layout-align="center center" style="padding-bottom:16px;">
+            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85">
+                <div layout="column" layout-align="center center" class="embed-responsive-container">
+                    <md-card md-whiteframe="6" class="  courses-videos" temprop="workPerformed" itemscope=""
+                             itemtype="http://schema.org/CreativeWork"
                              ng-repeat="video in ::salon.videos track by $index"
                              flex>
-                         <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                        <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
                             <meta itemprop="image"
                                   content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
-                            <meta itemprop="address" content="Львів"/>
+                            <meta itemprop="address" content="Львів,Україна"/>
+                            <meta itemprop="telephone" content="+38 067 264 6216"/>
                         </div>
+
                         <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
                         <div flex class="embed-responsive embed-responsive-16by9"
                              class="embed-responsive embed-responsive-16by9" itemscope
@@ -191,17 +176,35 @@ const template = `
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
                         </div>
-                        <md-card-content ng-if="video.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="name" class="  md-margin">{{::video.name}}</span>
-                        </md-card-content>
+
                     </md-card>
                 </div>
             </div>
 
         </div>
-        
-        
-        
+
+
+        <div flex="100" class="courses-details" layout="row" layout-align="center center">
+            <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
+                <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+                    <md-card md-whiteframe="6" ng-repeat="photo in ::salon.photos track by $index"
+                             class="md-margin "
+                             flex-gt-sm="22"
+                             flex-gt-xs="46" flex-xs="80" temprop="workPerformed" itemscope=""
+                             itemscope itemtype="http://schema.org/ImageObject"
+                             ng-click="::$ctrl.showMediaObserver(salon.photos, $index)">
+
+                        <meta itemprop="image" content="http://palamar.com.ua{{::photo.url}}"/>
+                        <img ng-src="{{::photo.url}}" class="md-card-image"
+                             alt="{{::photo.name}}Фото салону PALAMAR GROUP ">
+                        <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
+                            <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>`;
 
@@ -233,6 +236,7 @@ export class SalonContactsComponentController {
         this.$rootScope.socialParams.host = this.constants.host;
         this.$rootScope.socialParams.target = this.constants.host + SalonContactsComponentUrl;
         this.$rootScope.socialParams.image = this.constants.host + photo.url;
+        this.$rootScope.socialParams.title = "" ;
         this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
     }
 
@@ -262,7 +266,7 @@ export class SalonContactsComponentController {
 
     $onInit() {
 
-        this.seo = this.SeoPageResource.query({query: {"name": "academy.contacts"}}).$promise.then((seo)=> {
+        this.seo = this.SeoPageResource.query({query: {"name": "academy.contacts"}}).$promise.then((seo) => {
             if (seo.length > 0) {
                 this.$rootScope.seo = seo[0];
                 document.title = this.$rootScope.seo.title;
@@ -278,7 +282,7 @@ export class SalonContactsComponentController {
 
             this.salons.$promise.then((salons) => {
                 this.showMap = true;
-                salons.forEach((salon)=> {
+                salons.forEach((salon) => {
                     if (!salon.contacts) {
                         salon.contacts = [];
                     }
@@ -287,7 +291,7 @@ export class SalonContactsComponentController {
                         this.map.center.longitude = salon.longitude;
                     }
 
-                    contacts.forEach((contact)=> {
+                    contacts.forEach((contact) => {
                         if (contact.salon === salon._id) {
                             salon.contacts.push(contact);
                         }
@@ -302,7 +306,6 @@ export class SalonContactsComponentController {
             this.markerReadySEO = "dynamic-content";
         });
     }
-
 
 
 }

@@ -32,7 +32,12 @@ button.md-button.md-fab.up-btn {
   left: calc(50% - 32px);
   z-index: 62;
   top: 20px;
+  md-icon {
 
+    -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
+  }
   @extend .md-whiteframe-8dp;
   @media (max-width: $layout-breakpoint-xs) {
     top: 30px;
