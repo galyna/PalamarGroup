@@ -63,21 +63,21 @@ var pages = [
         title: "PALAMAR GROUP beauty parlour & academy Контакти салону"
     },
     {
-        url: "/services/hairdressing",
+        url: "/beauty-salon/services/hairdressing",
         description: "",
         name: "hairdressing",
         text: "Перукарські послуги",
         title: "PALAMAR GROUP beauty parlour & academy Перукарські послуги"
     },
     {
-        url: "/services/nail-aesthetics",
+        url: "/beauty-salon/services/nail-aesthetics",
         description: "",
         name: "nail-aesthetics",
         text: "Нігтьва естетика",
         title: "PALAMAR GROUP beauty parlour & academy Нігтьва естетика"
     },
     {
-        url: "/services/makeup",
+        url: "/beauty-salon/services/makeup",
         description: "",
         name: "makeup",
         text: "Візаж",
@@ -165,15 +165,6 @@ async function saveSitemap() {
     fs.writeFileSync(path.resolve('../front-end/dist/sitemap.xml'), sitemap.toString());
     return await saveSnapshots();
 }
-
-// mongoose.connect(config.mongoUrl, ()=>{
-//     console.log('saveSitemap started');
-//     saveSitemap().then(()=>{
-//         console.log('complete');
-//     }).catch(err=>{
-//         console.error(err);
-//     });
-// });
 
 schedule.scheduleJob({
     hour: 0
