@@ -36,7 +36,7 @@ const template = `
   }]
 }
 </script>
- <sb-jsonld json="{{::$ctrl.seoJson}}"></sb-jsonld>
+
 <div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="salon-contacts description-container" layout="column"
  >
 
@@ -218,7 +218,7 @@ export class SalonContactsComponentController {
     socialParams: any;
     markerReadySEO: string;
     seo: any;
-    seoJson: any;
+
 
     constructor(private contactResource: IContactResource,
                 private $rootScope: IRootScope,
@@ -261,12 +261,11 @@ export class SalonContactsComponentController {
     }
 
     $onInit() {
-        this.initSeo();
+
         this.seo = this.SeoPageResource.query({query: {"name": "academy.contacts"}}).$promise.then((seo)=> {
             if (seo.length > 0) {
                 this.$rootScope.seo = seo[0];
                 document.title = this.$rootScope.seo.title;
-                this.seoJson.description = seo[0].description ? seo[0].description : this.seoJson.description;
             }
 
         });
@@ -287,17 +286,12 @@ export class SalonContactsComponentController {
                         this.map.center.latitude = salon.latitude;
                         this.map.center.longitude = salon.longitude;
                     }
-                    this.seoJson.contactPoinst = [];
+
                     contacts.forEach((contact)=> {
                         if (contact.salon === salon._id) {
                             salon.contacts.push(contact);
                         }
-                        this.seoJson.contactPoinst.push({
-                            "@type": "ContactPoint",
-                            "telephone": contact.phone,
-                            "contactType": "customer service",
-                            "image": "http://palamar.com.ua" + contact.photo.url
-                        });
+
                     })
                 })
 
@@ -309,18 +303,7 @@ export class SalonContactsComponentController {
         });
     }
 
-    initSeo() {
-        this.seoJson = {
-            "@context": "http://www.schema.org",
-            "@type": "BeautySalon",
-            "name": "PALAMAR GROUP",
-            "alternateName": "PALAMAR",
-            "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
-            "url": "http://palamar.com.ua/"
-           
-        }
-    }
+
 
 }
 

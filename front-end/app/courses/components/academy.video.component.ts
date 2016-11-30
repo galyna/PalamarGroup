@@ -6,6 +6,29 @@ import {ISeoPageResource, SeoPageResourceName} from "../../resources/seo.page.re
 import {SalonResourceName} from "../../resources/salon.resource";
 
 const template = `
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "http://palamar.com.ua/academy",
+      "name": "Академія",
+      "image": "http://palamar.com.ua/content/images/bg/courses/dates/IMG_7095_1539_1026.jpg"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "http://palamar.com.ua/academy/videos",
+      "name": "Відео"
+      
+    }
+  }]
+}
+</script>
  <script type='application/ld+json'>
 {
             "@context": "http://www.schema.org",

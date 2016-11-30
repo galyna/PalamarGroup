@@ -5,7 +5,32 @@ import {IRootScope} from "../../../typings";
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
 
 
-const template = `<script type='application/ld+json'>
+const template = `
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item": {
+      "@id": "http://palamar.com.ua/academy",
+      "name": "Академія",
+      "image": "http://palamar.com.ua/content/images/bg/courses/dates/IMG_7095_1539_1026.jpg"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item": {
+      "@id": "http://palamar.com.ua/academy/calendar",
+      "name": "Календар Навчання"
+      
+    }
+  }]
+}
+</script>
+
+<script type='application/ld+json'>
 {
             "@context": "http://www.schema.org",
             "@type": "EducationalOrganization",
@@ -44,7 +69,7 @@ const template = `<script type='application/ld+json'>
 <div layout="row" flex>
     <div class="page-delimiter" flex>
         <div class="fit-screen-wrap invers md-padding md-margin">
-            <div class="md-display-1"> КАЛЕНДАР НАВЧАЛЬНИХ ЗАХОДІВ АКАДЕМІЇ</div>
+            <div class="md-display-1"> КАЛЕНДАР НАВЧАЛЬНЯ</div>
         </div>
 
     </div>
