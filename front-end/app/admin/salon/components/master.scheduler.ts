@@ -4,29 +4,36 @@ import IMasterFavor = pg.models.IMasterFavor;
 import {SchedulerServiceName, ISchedulerService} from "../../../ui/scheduler.service";
 
 
-const template = `
+const template = `<div layout="column">
+    <div layout="row">
+        <div class="md-margin" layout="column" layout-align="center center">
+            <div>Сума вартості послуг за тиждень</div>
+            <div >{{$ctrl.weekSum}} грн.</div>
+        </div>
+        <md-button ng-click="$ctrl.sum()"
+                   class="md-raised"> Оновити суму
+        </md-button>
+    </div>
 
- <div layout="row" class="master-scheduler" layout-xs="column">
-                <div hide show-gt-xs="true" class="md-padding " layout="row" layout-align="start start">
-                    <daypilot-navigator  style=" width: 270px;top:0;" id="navi"
-                                        daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>
-                   
-                </div>
-                <div hide-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
-                   
-                    <daypilot-navigator  style=" width: 280px" id="navis"
-                                        daypilot-config="$ctrl.navigatorSmallConfig"></daypilot-navigator>
-                </div>
-                <div flex class="md-padding ">
-                    <daypilot-calendar id="week" daypilot-config="$ctrl.weekConfig"
-                                       daypilot-events="$ctrl.events"></daypilot-calendar>
-                </div>
-              <md-button   ng-click="$ctrl.sum()"
-                       class="md-raised">Сума за тиждень
-            </md-button>
-             <span class="md-margin">{{$ctrl.weekSum}} грн.</span>
+    <div layout="row" class="master-scheduler" layout-xs="column">
+        <div hide show-gt-xs="true" class="md-padding " layout="row" layout-align="start start">
+            <daypilot-navigator style=" width: 270px;top:0;" id="navi"
+                                daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>
 
-            </div>`;
+        </div>
+        <div hide-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
+
+            <daypilot-navigator style=" width: 280px" id="navis"
+                                daypilot-config="$ctrl.navigatorSmallConfig"></daypilot-navigator>
+        </div>
+        <div flex class="md-padding ">
+            <daypilot-calendar id="week" daypilot-config="$ctrl.weekConfig"
+                               daypilot-events="$ctrl.events"></daypilot-calendar>
+        </div>
+    </div>
+
+
+</div>`;
 
 let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
 
@@ -70,7 +77,7 @@ let editOrderDialogTemplate = `<md-dialog aria-label="Order edit" ng-cloak>
                     </md-input-container>
                 </div>
                 <div flex="100" flex-gt-sm="30" layout="column"
-                     ng-if="!$ctrl.appointment.isDayOff && !$ctrl.appointment.isConsultation "
+                     ng-if="!$ctrl.appointment.isDayOff "
                      class="md-margin md-whiteframe-z8">
                     <md-subheader ng-if="$ctrl.appointment.favors.length>0" class="md-no-sticky">Послуги</md-subheader>
                     <md-input-container ng-if="$ctrl.appointment.favors.length>0" class="md-block">

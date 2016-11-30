@@ -76,11 +76,11 @@ export class AppointmentSchedulerComponentController {
             }
             this.MasterResource.getTasks(params).$promise.then((tasks) => {
                 this.tasks = tasks;
-                this.events = this.tasks.map((task)=> {
+                this.events = this.tasks.map((task) => {
                     return angular.copy(task.scheduler);
                 });
 
-            }).catch((err)=> {
+            }).catch((err) => {
                 this.$log.error(err);
                 this.showErrorDialog();
             });
@@ -90,77 +90,80 @@ export class AppointmentSchedulerComponentController {
     initWeekConfig() {
         this.weekConfig = this.SchedulerService.getWeekConfig();
 
-        this.weekConfig.onTimeRangeSelect= (args)=> {
-                var params = {
-                    appointment: angular.copy(this.appointment),
-                    scheduler: {
-                        start: args.start.toString(),
-                        end: args.end.toString(),
-                        id: DayPilot.guid()
-                    }
-                };
-                if (!params.appointment.isConsultation) {
-                    params.appointment.favors = this.getFavors();
+        this.weekConfig.eventResizeHandling = 'Update';
+
+        this.weekConfig.onTimeRangeSelect = (args) => {
+            var params = {
+                appointment: angular.copy(this.appointment),
+                scheduler: {
+                    start: args.start.toString(),
+                    end: args.end.toString(),
+                    id: DayPilot.guid()
                 }
+            };
+
+            params.appointment.favors = this.getFavors();
+
             this.SchedulerService.updateTaskText(params);
-                this.MasterResource.addTask({id: this.masterId}, params).$promise.then((task) => {
-                    this.tasks.push(task);
-                    this.events.push(task.scheduler);
+            this.MasterResource.addTask({id: this.masterId}, params).$promise.then((task) => {
+                this.tasks.push(task);
+                this.events.push(task.scheduler);
+                this.$scope.week.update();
+            });
+
+        };
+
+        this.weekConfig.onEventResize = (args) => {
+            var event = {
+                id: args.e.id(),
+                start: args.newStart.toString(),
+                end: args.newEnd.toString(),
+                text: args.e.text(),
+                borderColor: args.e.borderColor,
+                barColor: args.e.barColor,
+            };
+            var originalTask;
+
+            var tasks = this.tasks.filter((task) => {
+                return task != null && task.scheduler.id === event.id;
+            });
+            if (tasks.length > 0 && event) {
+                var task = tasks[0];
+                originalTask = angular.copy(task);
+                task.scheduler = event;
+                this.MasterResource.updateTask({id: this.masterId}, task).$promise.then((newTask) => {
+                    this.tasks.splice(this.tasks.indexOf(task), 1, newTask);
+                }) .catch((err) => {
+                    this.revertResize(originalTask);
                     this.$scope.week.update();
+                    this.$log.error(err);
+                    this.showErrorDialog();
                 });
-
-            };
-
-        this.weekConfig.onEventResize= (args)=> {
-                var event = {
-                    id: args.e.id(),
-                    start: args.newStart.toString(),
-                    end: args.newEnd.toString(),
-                    text: args.e.text(),
-                    borderColor: args.e.borderColor,
-                    barColor: args.e.barColor,
-                };
-                var originalTask;
-
-                var tasks = this.tasks.filter((task)=> {
-                    return task != null && task.scheduler.id === event.id;
-                });
-                if (tasks.length > 0 && event) {
-                    var task = tasks[0];
-                    originalTask = angular.copy(task);
-                    task.scheduler = event;
-                    this.MasterResource.updateTask({id: this.masterId}, task).$promise.then((newTask) => {
-                        this.tasks.splice(this.tasks.indexOf(task), 1, newTask);
-                    }) .catch((err)=> {
-                        this.revertResize(originalTask);
-                        this.$scope.week.update();
-                        this.$log.error(err);
-                        this.showErrorDialog();
-                    });
-                }
-            };
+            }
+        };
 
 
     }
 
+
     initNavigatorSmallConfig() {
         this.navigatorSmallConfig = this.SchedulerService.getNavigatorSmallConfig();
-        this.navigatorSmallConfig.onTimeRangeSelected= (args)=> {
-                this.weekConfig.startDate = args.day;
-                this.loadEvents(args.day);
-            };
+        this.navigatorSmallConfig.onTimeRangeSelected = (args) => {
+            this.weekConfig.startDate = args.day;
+            this.loadEvents(args.day);
+        };
     }
 
     initNavigatorConfig() {
         this.navigatorConfig = this.SchedulerService.getNavigatorConfig();
-        this.navigatorConfig.onTimeRangeSelected = (args)=> {
-                this.weekConfig.startDate = args.day;
-                this.loadEvents(args.day)
+        this.navigatorConfig.onTimeRangeSelected = (args) => {
+            this.weekConfig.startDate = args.day;
+            this.loadEvents(args.day)
         };
     }
 
     getFavors() {
-        return this.appointment.favors.map((mf)=> {
+        return this.appointment.favors.map((mf) => {
             return {
                 name: mf.favor.name,
                 id: mf._id,
@@ -176,7 +179,7 @@ export class AppointmentSchedulerComponentController {
 
         this.MasterResource.updateTask({id: this.masterId}, task).$promise.then((newTask) => {
             this.tasks.splice(this.tasks.indexOf(task), 1, newTask);
-            var tempEvents = this.events.filter((e)=> {
+            var tempEvents = this.events.filter((e) => {
                 return e.id == newTask.scheduler.id;
             })
 
@@ -184,7 +187,7 @@ export class AppointmentSchedulerComponentController {
 
                 this.events.splice(this.events.indexOf(tempEvents[0]), 1, newTask.scheduler);
             }
-        }).catch((err)=> {
+        }).catch((err) => {
             this.$log.error(err);
             this.showErrorDialog();
         });
@@ -194,7 +197,7 @@ export class AppointmentSchedulerComponentController {
 
     updateMasterOnResize(event) {
         var originalTask;
-        var tasks = this.tasks.filter((task)=> {
+        var tasks = this.tasks.filter((task) => {
             return task != null && task.scheduler.id === event.id;
         });
         if (tasks.length > 0 && event) {
@@ -203,7 +206,7 @@ export class AppointmentSchedulerComponentController {
             task.scheduler = event;
             this.MasterResource.updateTask({id: this.masterId}, task).$promise.then((newTask) => {
                 this.tasks.splice(this.tasks.indexOf(task), 1, newTask);
-            }) .catch((err)=> {
+            }) .catch((err) => {
                 this.revertResize(originalTask);
                 this.$log.error(err);
                 this.showErrorDialog();
@@ -213,7 +216,7 @@ export class AppointmentSchedulerComponentController {
 
     revertResize(originalTask) {
 
-        var events = this.events.filter((e)=> {
+        var events = this.events.filter((e) => {
             return e.id == originalTask.scheduler.id;
         })
         if (events.length > 0) {

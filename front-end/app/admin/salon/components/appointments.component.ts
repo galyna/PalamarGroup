@@ -416,7 +416,7 @@ export class AppointmentsComponentController {
                 appointment: appointment,
                 masters: this.masters
             },
-            fullscreen: this.$mdMedia('(max-width: 1360px)'),
+            fullscreen: true,
             parent: angular.element(document.body),
             targetEvent: ev
 
