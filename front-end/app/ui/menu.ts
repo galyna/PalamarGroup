@@ -4,7 +4,7 @@ import {ProductsComponentUrl} from "../salon/components/products.component";
 import {AcademyContactComponentUrl} from "../courses/components/academy.contacts.component";
 import {SalonContactsComponentUrl} from "../salon/components/salon.contacts.component";
 import {SalonTransformsComponentUrl} from "../salon/components/salon.transforms.component";
-import {FavorsComponentUrl} from "../salon/components/favors.component";
+
 import {MastersComponentUrl} from "../salon/components/masters.component";
 import {AcademyVideoComponentUrl} from "../courses/components/academy.video.component";
 
@@ -94,7 +94,6 @@ export class MenuComponentController {
     ProductsComponentUrl = ProductsComponentUrl;
     SalonContactsComponentUrl = SalonContactsComponentUrl;
     SalonTransformsComponentUrl = SalonTransformsComponentUrl;
-    FavorsComponentUrl = FavorsComponentUrl;
     MastersComponentUrl = MastersComponentUrl;
     AcademyVideoComponentUrl = AcademyVideoComponentUrl;
 

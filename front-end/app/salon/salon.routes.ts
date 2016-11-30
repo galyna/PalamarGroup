@@ -3,7 +3,6 @@
  */
 
 import {SalonHomeComponentUrl} from "./components/salon.home.component";
-import {FavorsComponentUrl} from "./components/favors.component";
 import {IConstants} from "../core/core.config";
 import {MasterComponentUrl} from "./components/salon.master.component";
 import {ProductsComponentUrl} from "./components/products.component";

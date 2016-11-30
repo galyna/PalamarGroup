@@ -10,7 +10,7 @@ import {resourcesModule} from "../resources/resources.module";
 //components
 import {salonRoutes} from './salon.routes';
 import {SalonHomeComponentName, SalonHomeComponentOptions} from "./components/salon.home.component";
-import {FavorsComponentName, FavorsComponentOptions} from "./components/favors.component";
+
 import {MasterComponentName, MasterComponentOptions} from "./components/salon.master.component";
 import {ProductsComponentOptions, ProductsComponentName} from "./components/products.component";
 import {SalonContactsComponentOptions, SalonContactsComponentName} from "./components/salon.contacts.component";
