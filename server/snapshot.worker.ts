@@ -112,7 +112,7 @@ function saveSnapshots() {
         var result = htmlSnapshots.run({
             input: "sitemap",
             source: path.resolve('../front-end/dist/sitemap.xml'),
-            phantomjsOptions: ["--ignore-ssl-errors=true"],
+            phantomjsOptions: ["--ignore-ssl-errors=true","--output-encoding=utf8"],
             outputDir: './snapshots',
             selector: "#dynamic-content",
             processLimit: 1,
@@ -158,8 +158,15 @@ async function saveSitemap() {
     fs.writeFileSync(path.resolve('../front-end/dist/sitemap.xml'), sitemap.toString());
     return await saveSnapshots();
 }
-
-
+// mongoose.connect(config.mongoUrl, ()=>{
+//     console.log('saveSitemap started');
+//     saveSitemap().then(()=>{
+//         console.log('complete');
+//     }).catch(err=>{
+//         console.error(err);
+//     });
+// });
+//
 schedule.scheduleJob({
     hour: 0
 }, ()=> {

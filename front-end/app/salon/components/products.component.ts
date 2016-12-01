@@ -322,6 +322,8 @@ export class ProductsComponentController {
                             "seller": {
                                 "@type": "BeautySalon",
                                 "name": "PALAMAR GROUP",
+                                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
                                 "sameAs": [
                                     "https://www.facebook.com/hashtag/palamar_group",
                                     "https://www.instagram.com/palamar_group/",
