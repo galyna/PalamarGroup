@@ -15,7 +15,7 @@ const template = `<div ng-click="$ctrl.consultShow()" class="consult-container"
 
 </div>
 `;
-const dialogtemplate = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСАТИСЬ НА БЛОК" flex-sm="85" flex-xs="95" flex-gt-sm="65"
+const dialogtemplate = `<md-dialog  aria-label="ЗАПИСАТИСЬ НА Консультацію" flex-sm="85" flex-xs="95" flex-gt-sm="65"
            layout="column">
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools md-padding ">
@@ -82,7 +82,7 @@ export class ConsultFormComponentController {
 
     static $inject = ['$mdDialog'];
     private appointment: IAppointment;
-showDetails:boolean;
+    showDetails:boolean;
     constructor(private $mdDialog: ng.material.IDialogService) {
 
     }
@@ -125,7 +125,7 @@ export class ConsultComponentController {
             parent: angular.element(document.body),
 
           //  parent: angular.element(document.querySelector('#pageContainer')),
-            fullscreen: this.$mdMedia('(max-width: 360px)'),
+            fullscreen: this.$mdMedia('(max-width: 1300px)'),
             locals: {
                 appointment: appointment,
             },

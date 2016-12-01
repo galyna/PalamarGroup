@@ -405,7 +405,9 @@
         box-sizing: border-box;
         flex: 1 25%;
       }
-
+      &:first-child, &:nth-child(2) {
+        flex: 1 22%;
+      }
     }
 
     @media (min-width: $layout-breakpoint-sm) {

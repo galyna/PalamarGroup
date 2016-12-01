@@ -136,9 +136,10 @@ export class CourseController {
     }
 
 
+
     scrollToMain() {
         var options = {
-            duration: 100,
+            duration: 1,
             easing: 'easeInQuad',
             offset: 0,
 
@@ -184,7 +185,7 @@ export class CourseController {
             bindToController: true,
             controller: CourseController.componentName,
             controllerAs: 'vm',
-            parent: angular.element(document.querySelector('#mainContent')),
+            parent: angular.element(document.body),
             fullscreen: this.$mdMedia('(max-width: 1360px)'),
         });
     }
@@ -261,7 +262,7 @@ export class CourseController {
             bindToController: true,
             controller: CourseController.componentName,
             controllerAs: 'vm',
-            parent: angular.element(document.querySelector('#mainContent')),
+            parent: angular.element(document.body),
             fullscreen: this.$mdMedia('(max-width: 1360px)'),
         });
 
@@ -300,8 +301,6 @@ export class CourseController {
                     this.order = new this.OrderResource();
                     this.$rootScope.loading = false;
                 });
-        } else {
-            this.$location.hash("orderName");
         }
     }
 

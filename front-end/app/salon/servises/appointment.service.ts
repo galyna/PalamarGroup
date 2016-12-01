@@ -8,6 +8,7 @@ const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСА
            layout="column">
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools md-padding ">
+         <img ng-src="{{::vm.appointment.master.photo.url}}" class="avatar"/>
             <h2 hide show-gt-sm='true' class=" md-padding ">Записатись на прйом до майстра
                 {{::vm.appointment.master.name}}</h2>
             <h2 hide-gt-sm='true' class=" md-padding ">Записатись до {{::vm.appointment.master.name}}</h2>
@@ -270,13 +271,13 @@ export class AppointmentFormComponentController {
             var currentHouer = current.getHours();
             var tmp = angular.copy(this.reservhouers);
 
-            this.reservhouers.forEach((hour)=> {
+            this.reservhouers.forEach((hour) => {
                 var time = hour.value.split(':')[0];
                 if (parseInt(time) <= currentHouer) {
                     tmp.shift();
                 }
-                if (this.dayHour && parseInt(time) <= currentHouer && hour.id==this.dayHour.id) {
-                    this.dayHour=null;
+                if (this.dayHour && parseInt(time) <= currentHouer && hour.id == this.dayHour.id) {
+                    this.dayHour = null;
                 }
             })
             this.dayHours = [];
@@ -292,7 +293,7 @@ export class AppointmentFormComponentController {
         if (this.appointment.date) {
             var minutes = this.appointment.date.getUTCMinutes();
             var hourValue = this.appointment.date.getUTCHours() + ':' + (  (minutes < 10) ? minutes + '0' : minutes);
-            this.dayHours.forEach((hour)=> {
+            this.dayHours.forEach((hour) => {
                 if (hour.value === hourValue) {
                     this.dayHour = hour
                 }
@@ -313,6 +314,7 @@ export class AppointmentFormComponentController {
             this.$mdDialog.hide(this.appointment);
         }
     }
+
 
     cancel() {
         this.$mdDialog.cancel();
@@ -341,7 +343,7 @@ export class AppointmentService implements IAppointmentService {
             bindToController: true,
             controller: AppointmentFormComponentController,
             controllerAs: 'vm',
-            parent: angular.element(document.querySelector('#mainContent')),
+            parent: angular.element(document.body),
             fullscreen: this.$mdMedia('(max-width: 1360px)'),
             locals: {
                 appointment: appointment,

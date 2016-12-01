@@ -18,10 +18,12 @@
 
     @media (min-width: $layout-breakpoint-xs) {
       min-height: 300px;
-      min-width: 600px;
+      width: 600px;
+      max-width: 600px;
       margin-left: 0px;
       margin-right: 0px;
     }
+
 
     .card-desc {
       background: white;
@@ -39,7 +41,7 @@
       overflow: hidden;
       padding: 0;
       height: 300px;
-      max-width: 300px;
+     width: 300px;
       img {
         height: 300px;
         width: 300px

@@ -35,123 +35,133 @@ const template = `<script type="application/ld+json">
     }
 </script>
 
-<div ng-attr-id="{{ $ctrl.markerReadySEO }}" layout="column"
->
 
-    <div layout="column" layout-align="center center" ng-repeat="salon in $ctrl.salons">
+<div flex ng-attr-id="{{ $ctrl.markerReadySEO }}" layout="column" class="courses-details description-container"
+     ng-repeat="salon in $ctrl.salons">
 
-        <div layout="row">
-            <div class="page-delimiter" flex>
-                <div class="fit-screen-wrap invers header">
-                    <div class="md-display-1"> Адреса салону {{::salon.address}}</div>
-                    <div class="md-title md-padding"> {{::salon.description}}</div>
-                </div>
-
+    <div layout="row">
+        <div class="page-delimiter" flex>
+            <div class="fit-screen-wrap invers header">
+                <div class="md-display-1"> Адреса салону {{::salon.address}}</div>
+                <div class="md-title md-padding"> {{::salon.description}}</div>
             </div>
-        </div>
-
-        <div ng-repeat="contact in ::salon.contacts track by $index" class="salon-contacts description-container">
-            <div hide show-gt-xs="true" layout="row" layout-align="center center">
-
-                <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
-                    <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media "
-                             flex="50"><img ng-src="{{::contact.photo.url}}" class="md-card-image "/>
-                        </div>
-                        <div class="card-desc "
-                             flex layout="column" layout-align="center center">
-                            <md-card-title flex>
-                                <md-card-title-text layout-align="space-around center">
-                                    <div class="md-title">Адміністратор</div>
-                                    <div class="md-display-1">{{::contact.name}}</div>
-                                    <div class="descr-container">
-                                        <div class="md-display-1">{{::contact.phone}}</div>
-                                    </div>
-                                </md-card-title-text>
-                            </md-card-title>
-
-                        </div>
-                    </md-card-content>
-                </md-card>
-                <md-card ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
-                    <md-card-content layout="row" layout-align="start none">
-                        <div class="card-desc "
-                             flex layout="column" layout-align="center center">
-                            <md-card-title flex>
-                                <md-card-title-text layout-align="space-around center">
-                                    <div class="md-title">Адміністратор</div>
-                                    <div class="md-display-1">{{::contact.name}}</div>
-                                    <div class="descr-container">
-                                        <div class="md-display-1">{{::contact.phone}}</div>
-                                    </div>
-                                </md-card-title-text>
-                            </md-card-title>
-
-                        </div>
-                        <div class="card-media "
-                             flex="50"><img ng-src="{{::contact.photo.url}}" class="md-card-image"/></div>
-                    </md-card-content>
-                </md-card>
-                <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
-                    <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media "
-                             flex="50"><img ng-src="{{::contact.photo.url}}" class="md-card-image "/>
-                        </div>
-                        <div class="card-desc "
-                             flex layout="column" layout-align="center center">
-                            <md-card-title flex>
-                                <md-card-title-text layout-align="space-around center">
-                                    <div class="md-title">Адміністратор</div>
-                                    <div class="md-display-1">{{::contact.name}}</div>
-                                    <div class="descr-container">
-                                        <div class="md-display-1">{{::contact.phone}}</div>
-                                    </div>
-                                </md-card-title-text>
-                            </md-card-title>
-
-                        </div>
-                    </md-card-content>
-                </md-card>
-            </div>
-
-            <div hide-gt-xs="true" layout="row" layout-align="center center">
-
-                <md-card md-whiteframe="8">
-                    <md-card-content layout="column">
-                        <div class="card-media "><img ng-src="{{::contact.photo.url}}" class="md-card-image"/></div>
-                        <div class="card-desc "
-                             layout="column" layout-align="space-around center">
-                            <md-card-title>
-                                <md-card-title-text>
-                                    <div class="md-headline">{{::contact.name}}</div>
-                                    <div class="md-headline">{{::contact.phone}}</div>
-                                </md-card-title-text>
-                            </md-card-title>
-                        </div>
-                    </md-card-content>
-
-                </md-card>
-            </div>
-
 
         </div>
+    </div>
 
-        <div layout="row" layout-margin>
+    <div ng-repeat="contact in ::salon.contacts track by $index" class="salon-contacts">
+        <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
-            <ui-gmap-google-map ng-if="$ctrl.showMap && salon.latitude && salon.longitude" id="map" flex
-                                center='{ latitude: salon.latitude, longitude: salon.longitude}'
-                                zoom='$ctrl.map.zoom'>
-                <ui-gmap-marker coords="{ latitude: salon.latitude, longitude: salon.longitude}" idkey="$index">
+            <md-card ng-if="$first && !$odd"   md-whiteframe="5">
+                <md-card-content layout="row" layout-align="start none">
+                    <div class="card-media "
+                         flex="50"><img ng-src="{{::contact.photo.url}}" class="md-card-image "/>
+                    </div>
+                    <div class="card-desc "
+                         flex layout="column" layout-align="center center">
+                        <md-card-title flex>
+                            <md-card-title-text layout-align="space-around center">
+                                <div class="md-title">Адміністратор</div>
+                                <div class="md-display-1">{{::contact.name}}</div>
+                                <div class="descr-container">
+                                    <div class="md-display-1">{{::contact.phone}}</div>
+                                </div>
+                            </md-card-title-text>
+                        </md-card-title>
 
-                </ui-gmap-marker>
+                    </div>
+                </md-card-content>
+            </md-card>
+            <md-card ng-if="$odd "   md-whiteframe="5">
+                <md-card-content layout="row" layout-align="start none">
+                    <div class="card-desc "
+                         flex layout="column" layout-align="center center">
+                        <md-card-title flex>
+                            <md-card-title-text layout-align="space-around center">
+                                <div class="md-title">Адміністратор</div>
+                                <div class="md-display-1">{{::contact.name}}</div>
+                                <div class="descr-container">
+                                    <div class="md-display-1">{{::contact.phone}}</div>
+                                </div>
+                            </md-card-title-text>
+                        </md-card-title>
 
-            </ui-gmap-google-map>
+                    </div>
+                    <div class="card-media "
+                         flex="50"><img ng-src="{{::contact.photo.url}}" class="md-card-image"/></div>
+                </md-card-content>
+            </md-card>
+            <md-card ng-if="!$first && !$odd"   md-whiteframe="5">
+                <md-card-content layout="row" layout-align="start none">
+                    <div class="card-media "
+                         flex="50"><img ng-src="{{::contact.photo.url}}" class="md-card-image "/>
+                    </div>
+                    <div class="card-desc "
+                         flex layout="column" layout-align="center center">
+                        <md-card-title flex>
+                            <md-card-title-text layout-align="space-around center">
+                                <div class="md-title">Адміністратор</div>
+                                <div class="md-display-1">{{::contact.name}}</div>
+                                <div class="descr-container">
+                                    <div class="md-display-1">{{::contact.phone}}</div>
+                                </div>
+                            </md-card-title-text>
+                        </md-card-title>
+
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+
+        <div hide-gt-xs="true" layout="row" layout-align="center center">
+
+            <md-card md-whiteframe="8">
+                <md-card-content layout="column">
+                    <div class="card-media "><img ng-src="{{::contact.photo.url}}" class="md-card-image"/></div>
+                    <div class="card-desc "
+                         layout="column" layout-align="space-around center">
+                        <md-card-title>
+                            <md-card-title-text>
+                              <div class="md-title">Адміністратор</div>
+                                <div class="md-headline">{{::contact.name}}</div>
+                                <div class="md-headline">{{::contact.phone}}</div>
+                            </md-card-title-text>
+                        </md-card-title>
+                    </div>
+                </md-card-content>
+
+            </md-card>
         </div>
 
 
-        <div layout="row" layout-align="center center" style="padding-bottom:16px;">
-            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85">
-                <div layout="column" layout-align="center center" class="embed-responsive-container">
+    </div>
+
+    <div layout="row" flex layout-align="center center">
+
+        <ui-gmap-google-map ng-if="$ctrl.showMap && salon.latitude && salon.longitude" id="map"
+                            center='{ latitude: salon.latitude, longitude: salon.longitude}'
+                            zoom='$ctrl.map.zoom'>
+            <ui-gmap-marker coords="{ latitude: salon.latitude, longitude: salon.longitude}" idkey="$index">
+
+            </ui-gmap-marker>
+
+        </ui-gmap-google-map>
+    </div>
+
+ <div layout="row" flex class="md-padding" ng-if="salon.videos.length>0 ||salon.photos.length>0 ">
+        <div class="page-delimiter" flex>
+            <div class="fit-screen-wrap header-super">
+               
+            </div>
+            <div class="overlay-comments">
+            </div>
+
+        </div>
+    </div>
+
+        <div layout="row" layout-align="center center">
+            <div flex="100" flex-gt-md="60" flex-md="80" flex-gt-xs="85">
+                <div layout="column" layout-margin layout-align="center center" class="embed-responsive-container">
                     <md-card md-whiteframe="6" class="  courses-videos" temprop="workPerformed" itemscope=""
                              itemtype="http://schema.org/CreativeWork"
                              ng-repeat="video in ::salon.videos track by $index"
@@ -180,33 +190,32 @@ const template = `<script type="application/ld+json">
                     </md-card>
                 </div>
             </div>
-
         </div>
 
 
-        <div flex="100" class="courses-details" layout="row" layout-align="center center">
-            <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
-                <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                    <md-card md-whiteframe="6" ng-repeat="photo in ::salon.photos track by $index"
-                             class="md-margin "
-                             flex-gt-sm="22"
-                             flex-gt-xs="46" flex-xs="80" temprop="workPerformed" itemscope=""
-                             itemscope itemtype="http://schema.org/ImageObject"
-                             ng-click="::$ctrl.showMediaObserver(salon.photos, $index)">
+    <div  layout="row" layout-align="center center">
+        <div flex="100" flex-gt-md="60" flex-md="80" flex-gt-xs="85" >
+            <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
+                <md-card md-whiteframe="6" ng-repeat="photo in ::salon.photos track by $index"
+                         class="md-margin "
+                         flex-gt-sm="22"
+                         flex-gt-xs="46" flex-xs="80" temprop="workPerformed" itemscope=""
+                         itemscope itemtype="http://schema.org/ImageObject"
+                         ng-click="::$ctrl.showMediaObserver(salon.photos, $index)">
 
-                        <meta itemprop="image" content="http://palamar.com.ua{{::photo.url}}"/>
-                        <img ng-src="{{::photo.url}}" class="md-card-image"
-                             alt="{{::photo.name}}Фото салону PALAMAR GROUP ">
-                        <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
-                        </md-card-content>
-                    </md-card>
-                </div>
+                    <meta itemprop="image" content="http://palamar.com.ua{{::photo.url}}"/>
+                    <img ng-src="{{::photo.url}}" class="md-card-image"
+                         alt="{{::photo.name}}Фото салону PALAMAR GROUP ">
+                    <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
+                        <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
+                    </md-card-content>
+                </md-card>
             </div>
         </div>
-
     </div>
-</div>`;
+
+</div>
+`;
 
 export class SalonContactsComponentController {
 
@@ -255,7 +264,7 @@ export class SalonContactsComponentController {
 
     scrollToMain() {
         var options = {
-            duration: 100,
+            duration: 1,
             easing: 'easeInQuad',
             offset: 0,
 
@@ -274,7 +283,7 @@ export class SalonContactsComponentController {
 
         });
 
-        this.map = {center: {latitude: 49.811210, longitude: 23.974013}, zoom: 18};
+        this.map = {center: {latitude: 49.811210, longitude: 23.974013}, zoom: 19};
         this.contacts = this.contactResource.query({query: {'isAcademy': 'false'}});
         this.contacts.$promise.then((contacts) => {
             this.scrollToMain();

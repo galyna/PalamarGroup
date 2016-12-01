@@ -39,19 +39,17 @@ const template = `<script type="application/ld+json">
         </div>
     </div>
     <div layout="row" layout-align="center center">
-        <div flex flex-gt-md="90" flex-md="90">
 
-            <div class="home-category-btn" layout="row" layout-xs="column" layout-align="center center">
+        <div flex flex-gt-md="60" flex-md="90" flex-gt-xs="100">
+            <div class="home-category-btn" layout-margin layout layout-wrap layout-align="center center">
                 <md-card md-whiteframe="6" ng-repeat="category in $ctrl.categories track by $index "
-                         class="md-margin "
-                >
-                    <meta itemprop="category" content="Салон Краси Львів"/>
-                    <meta itemprop="description" content="Перукарня у Львові"/>
+                         class="md-margin "  
+                         flex-gt-xs="22" flex-xs="80">
+                   
                     <a ng-href="/beauty-salon/services/{{category.url}}">
                         <img ng-src="{{'/content/images/services/'+ category._id+'.jpg'}}"
-                             alt="{{::category.name}} Львів від PALAMAR GROUP">
-                        <meta itemprop="image"
-                              content="http://palamar.com.ua/content/images/services/{{::category._id}}.jpg"/>
+                             alt="{{::category.name}} Львів від PALAMAR GROUP"/>
+                        
                         <md-card-content layout="column" layout-align="center center"
                                          class=" md-padding  show-description-favor">
                             <span itemprop="name" class=" md-padding  ">{{::category.name}}</span>
@@ -66,7 +64,7 @@ const template = `<script type="application/ld+json">
                 </md-card>
 
             </div>
-        </div>
+     </div>
     </div>
   
     <div layout="row" flex>

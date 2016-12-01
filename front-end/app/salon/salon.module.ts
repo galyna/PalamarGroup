@@ -20,13 +20,13 @@ import {MastersComponentName, MastersComponentOptions} from "./components/master
 import {AppointmentService, AppointmentServiceName} from "./servises/appointment.service";
 import {FavorsMastersComponentOptions, FavorsMastersComponentName} from "./components/favors.masters.component";
 import {FavorAppointmentServiceName, FavorAppointmentService} from "./servises/favor.appointment.service";
-import {ConsultServiceName, ConsultService} from "./servises/consult.service";
+
 
 
 let app = angular.module('salon', ['ngMaterial', resourcesModule.name])
     .config(salonRoutes)
     .service(AppointmentServiceName, AppointmentService)
-    .service(ConsultServiceName, ConsultService)
+
     .service(FavorAppointmentServiceName, FavorAppointmentService)
     .component(SalonHomeComponentName, SalonHomeComponentOptions)
     .component(FavorsMastersComponentName, FavorsMastersComponentOptions)

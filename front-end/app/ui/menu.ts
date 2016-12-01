@@ -105,7 +105,7 @@ export class MenuComponentController {
 
     scrollToMain() {
         var options = {
-            duration: 100,
+            duration: 1,
             easing: 'easeInQuad',
             offset: 0,
 

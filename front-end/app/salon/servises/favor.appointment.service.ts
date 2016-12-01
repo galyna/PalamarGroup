@@ -322,6 +322,8 @@ export class FavorAppointmentFormComponentController {
         }
     }
 
+
+
     cancel() {
         this.$mdDialog.cancel();
     }
@@ -349,7 +351,7 @@ export class FavorAppointmentService implements IAppointmentService {
             bindToController: true,
             controller: FavorAppointmentFormComponentController,
             controllerAs: 'vm',
-            parent: angular.element(document.querySelector('#mainContent')),
+            parent: angular.element(document.body),
             fullscreen: this.$mdMedia('(max-width: 1360px)'),
             locals: {
                 appointment: appointment,

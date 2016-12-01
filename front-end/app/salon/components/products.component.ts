@@ -167,7 +167,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
            layout="column">
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools md-padding ">
-            <h2 class=" md-padding ">Замовити</h2>
+            <h2 class=" md-padding ">Замовити {{::vm.product.name}}</h2>
             <span flex></span>
             <md-button class="md-icon-button" ng-click="vm.cancel()">
                 <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>
@@ -345,7 +345,7 @@ export class ProductsComponentController {
             bindToController: true,
             controller: ProductOrderDialogController,
             controllerAs: 'vm',
-            parent: angular.element(document.querySelector('#mainContent')),
+            parent: angular.element(document.body),
             fullscreen: this.$mdMedia('(max-width: 1000px)'),
             locals: {
                 productsOrder: this.productsOrder,
@@ -391,7 +391,7 @@ export class ProductsComponentController {
 
     scrollToMain() {
         var options = {
-            duration: 100,
+            duration: 1,
             easing: 'easeInQuad',
             offset: 0,
 

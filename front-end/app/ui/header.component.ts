@@ -1,4 +1,4 @@
-import {ConsultServiceName} from "../salon/servises/consult.service";
+
 const template = `<div ng-click="$ctrl.handleVideoRuning()" class="stop-video-container"
      layout="row"
      layout-align="center center ">
@@ -33,14 +33,14 @@ const template = `<div ng-click="$ctrl.handleVideoRuning()" class="stop-video-co
 export class SalonHeaderComponentController {
 
 
-    static $inject = ['$mdMedia', '$window',ConsultServiceName];
+    static $inject = ['$mdMedia', '$window'];
 
     runVideo: boolean;
     isVideoLoaded: boolean;
     videoElement: any;
 
 
-    constructor(private $mdMedia, private  $window,private ConsultService) {
+    constructor(private $mdMedia, private  $window) {
 
     }
 
@@ -56,9 +56,6 @@ export class SalonHeaderComponentController {
         angular.element(this.$window).off('resize', this.onResize);
     }
 
-    consult() {
-        this.ConsultService.onShowDialog();
-    }
 
 
     onResize() {

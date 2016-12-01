@@ -44,11 +44,11 @@ const template = `
         </div>
     <!--author-->
     <div layout="column" layout-align="center center" >
-    <div class="course-bg " layout-align="center center" flex
+    <div class="course-bg " layout-align="center center" flex class="salon-contacts"
          ng-repeat="contact in $ctrl.contacts track by $index">
         <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
-            <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
+            <md-card ng-if="$first && !$odd"  md-whiteframe="5"
             >
                 <md-card-content layout="row" layout-align="start none">
                     <div class="card-media " 
@@ -71,7 +71,7 @@ const template = `
                     </div>
                 </md-card-content>
             </md-card>
-            <md-card id="trigger-right" ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
+            <md-card id="trigger-right" ng-if="$odd "  md-whiteframe="5">
                 <md-card-content layout="row" layout-align="start none">
                     <div class="card-desc " 
                         
@@ -92,7 +92,7 @@ const template = `
                          flex="50"><img ng-src="{{::contact.photo.url}}" class="md-card-image"/></div>
                 </md-card-content>
             </md-card>
-            <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
+            <md-card ng-if="!$first && !$odd"  md-whiteframe="5">
                 <md-card-content layout="row" layout-align="start none">
                     <div class="card-media " 
                          flex="50"><img ng-src="{{::contact.photo.url}}" class="md-card-image "/>
@@ -174,7 +174,7 @@ export class AcademyContactComponentController {
             }
 
         });
-        this.map = {center: {latitude: 49.811077, longitude: 23.973777}, zoom: 18};
+        this.map = {center: {latitude: 49.811077, longitude: 23.973777}, zoom: 19};
         this.marker = {latitude: 49.811077, longitude: 23.973777};
 
         var mainPromise = this.salonResource.query({query: {'isAcademy': 'true'}}).$promise;
@@ -246,7 +246,7 @@ export class AcademyContactComponentController {
 
     scrollToMain() {
         var options = {
-            duration: 100,
+            duration: 1,
             easing: 'easeInQuad',
             offset: 0,
 
