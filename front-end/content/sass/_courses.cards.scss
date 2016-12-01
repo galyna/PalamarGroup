@@ -66,6 +66,7 @@
       }
       @media (min-width: $layout-breakpoint-xs) and (max-width: $layout-breakpoint-sm) {
         max-width: 300px;
+        height: 300px;
       }
     }
 
@@ -81,7 +82,7 @@
         max-width: 300px;
         min-width: 300px;
         img {
-          height: 300px;
+          min-height: 300px;
           width: 300px
         }
 
@@ -92,29 +93,25 @@
         min-width: 500px;
         max-width: 500px;
         img {
-          height: 500px;
+          min-height: 500px;
           width: 500px;
         }
 
-      }
-      @media (min-width: $layout-breakpoint-lg) {
-        height: 500px;
-        min-width: 500px;
       }
 
       @media (max-width: $layout-breakpoint-sm) {
         height: 300px;
         max-width: 300px;
         img {
-          height: 300px;
+          min-height: 300px;
           width: 300px
         }
       }
     }
 
     .descr-container {
-      max-height: 116px;
-
+      max-height: 316px;
+        padding: 15px;
       text-align: center;
       overflow: hidden;
       text-overflow: ellipsis;
