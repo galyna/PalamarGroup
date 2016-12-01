@@ -72,7 +72,7 @@ const phantomRegex = /(phantom)/i;
 app.use('/', function (req, res, next) {
     const userAgent = req.headers['user-agent'];
     if ( !phantomRegex.test(userAgent) && isBot(userAgent)) {
-        res.sendFile(path.resolve('./snapshots', req.url.replace(/^\/|\/$/g, ''), 'index.html'));
+        res.sendFile(path.resolve('./snapshots', req.url.replace(/(^\/{1,}|\/{1,}$|\/{0,}\?.*)/g, ''), 'index.html'));
     } else {
         next();
     }
