@@ -26,10 +26,10 @@
 
 <body ng-cloak layout="row">
 <md-progress-linear md-mode='indeterminate' class="header-loading" ng-show="$root.loading"></md-progress-linear>
-<pg-left-sidenav class="description-container"></pg-left-sidenav>
+<pg-left-sidenav ></pg-left-sidenav>
 <div layout="column" flex>
     <pg-admin-header></pg-admin-header>
-    <ng-view layout="column" class="page-container description-container" flex ></ng-view>
+    <ng-view layout="column"  flex ></ng-view>
 </div>
 </body>
 </html>

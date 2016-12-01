@@ -132,7 +132,7 @@ const template = `<div flex layout="column">
         <md-tab flex label="Аватар" flex>
             <md-card>
                 <md-card-content  >
-                    <div layout="column" >
+                    <div layout="row" >
                      <div >
                         <img ng-src="{{$ctrl.master.photo.url}}" />
                          </div>

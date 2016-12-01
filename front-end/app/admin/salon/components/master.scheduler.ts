@@ -5,7 +5,7 @@ import {SchedulerServiceName, ISchedulerService} from "../../../ui/scheduler.ser
 
 
 const template = `<div layout="column">
-    <div layout="row">
+    <div layout="row" ng-if="::$root.it.is('admin')">
         <div class="md-margin" layout="column" layout-align="center center">
             <div>Сума вартості послуг за тиждень</div>
             <div >{{$ctrl.weekSum}} грн.</div>

@@ -27,7 +27,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                         <label for="name">Назва</label>
                         <input id="name" ng-model="$ctrl.favor.name" name="name"/>
                     </md-input-container>
-                        <md-input-container class="md-block">
+                    <md-input-container class="md-block">
                         <label for="order1">Порядок відображення</label>
                         <input id="order1" ng-disabled="::!$root.it.can('modifySalon')"
                                ng-model="$ctrl.favor.order" name="order1" type="number"/>
@@ -35,9 +35,9 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                     <md-input-container class="md-block">
                         <label for="description">Опис</label>
                         <textarea ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.favor.description"
-                                  id="description" name="description" ></textarea>
+                                  id="description" name="description"></textarea>
                     </md-input-container>
-                      
+
                     <md-input-container>
                         <label>Категорія</label>
                         <md-select ng-model="$ctrl.favor.category" ng-model-options="{trackBy: '$value._id'}">
@@ -45,10 +45,10 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                                 {{ n.name }}
                             </md-option>
                         </md-select>
-                     
+
                     </md-input-container>
-                  
-                  
+
+
                     <md-input-container class="md-block">
                         <label for="defPrice">Ціна</label>
                         <input type="number" ng-model="$ctrl.favor.defPrice" id="defPrice" name="defPrice"/>
@@ -59,65 +59,65 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
         </md-tab>
         <md-tab label="Іконка" flex>
             <md-card>
-                <md-card-content >
-                    <div layout="column" >
-                    <div >
-                        <img ng-src="{{$ctrl.favor.photo.url}}" />
-</div>
-                        <div ng-if="::$root.it.can('modifySalon')" >
-                            <md-button ng-if="!$ctrl.showAuthorPhotoUpload" class="md-raised"
-                                       ng-click="$ctrl.showAuthorPhotoUpload=true">
-                                Змінити фото
+                <md-card-content layout="row">
+                    <div>
+                        <img ng-src="{{$ctrl.favor.photo.url}}"/>
+                    </div>
+                    <div ng-if="::$root.it.can('modifySalon')">
+                        <md-button ng-if="!$ctrl.showAuthorPhotoUpload" class="md-raised"
+                                   ng-click="$ctrl.showAuthorPhotoUpload=true">
+                            Змінити фото
+                        </md-button>
+                        <div ng-if="$ctrl.showAuthorPhotoUpload" class="md-padding md-margin">
+                            <md-button ngf-select ng-model="hearFormsPhotoFile" accept="image/*" class="md-raised">
+                                Вибрати файл
                             </md-button>
-                            <div ng-if="$ctrl.showAuthorPhotoUpload" class="md-padding md-margin">
-                                <md-button ngf-select ng-model="hearFormsPhotoFile" accept="image/*" class="md-raised">
-                                    Вибрати файл
-                                </md-button>
-                                <md-button class="md-primary"
-                                           ng-click="$ctrl.uploadPhoto(croppedhearFormsPhotoFile, hearFormsPhotoFile.name,$ctrl.favor)">
-                                    Завантажити
-                                </md-button>
-                                <div ngf-drop ng-model="hearFormsPhotoFile" ngf-pattern="image/*"
-                                     class="cropArea">
-                                    <img-crop area-type="rectangle" result-image-size="{w:500,h:560}" aspect-ratio="0.95"
-                                              init-max-area="true"
-                                              image="hearFormsPhotoFile  | ngfDataUrl"
-                                              result-image="croppedhearFormsPhotoFile"
-                                              ng-init="croppedhearFormsPhotoFile=''">
-                                    </img-crop>
-                                </div>
-
+                            <md-button class="md-primary"
+                                       ng-click="$ctrl.uploadPhoto(croppedhearFormsPhotoFile, hearFormsPhotoFile.name,$ctrl.favor)">
+                                Завантажити
+                            </md-button>
+                            <div ngf-drop ng-model="hearFormsPhotoFile" ngf-pattern="image/*"
+                                 class="cropArea">
+                                <img-crop area-type="rectangle" result-image-size="{w:500,h:560}" aspect-ratio="0.95"
+                                          init-max-area="true"
+                                          image="hearFormsPhotoFile  | ngfDataUrl"
+                                          result-image="croppedhearFormsPhotoFile"
+                                          ng-init="croppedhearFormsPhotoFile=''">
+                                </img-crop>
                             </div>
+
                         </div>
+                    </div>
+
                 </md-card-content>
             </md-card>
         </md-tab>
- <md-tab label="Фото" flex>
+        <md-tab label="Фото" flex>
             <md-card>
-                <md-card-content>
-                    <div flex>
-                        <div class="md-padding md-margin" layout="row"
-                             ng-repeat="item in $ctrl.favor.photos track by $index"
-                             ng-click="null">
-                            <img ng-src="{{item.url}}" class="module-history-img"/>
-                            <div layout="column" ng-if="::$root.it.can('modifySalon')">
-                                <md-input-container class="md-block  ">
-                                    <label for="historyNme">Назва </label>
-                                    <input id="historyNme" ng-model="item.name" name="historyNme"/>
-                                </md-input-container>
-                                <md-input-container class="md-block  ">
-                                    <label for="ord">Порядок відображення</label>
-                                    <input id="ord" ng-model="item.order" type="number"/>
-                                </md-input-container>
-                                <md-button class="  md-raised"
-                                           ng-click="$ctrl.deleteFromList($ctrl.favor.photos ,item)">
-                                    Видалити
-                                </md-button>
-                            </div>
+                <md-card-content layout="column">
+
+                    <div class="md-padding md-margin" layout="row"
+                         ng-repeat="item in $ctrl.favor.photos track by $index"
+                         ng-click="null">
+                        <img ng-src="{{item.url}}" class="module-history-img"/>
+                        <div layout="column" ng-if="::$root.it.can('modifySalon')">
+                            <md-input-container class="md-block  ">
+                                <label for="historyNme">Назва </label>
+                                <input id="historyNme" ng-model="item.name" name="historyNme"/>
+                            </md-input-container>
+                            <md-input-container class="md-block  ">
+                                <label for="ord">Порядок відображення</label>
+                                <input id="ord" ng-model="item.order" type="number"/>
+                            </md-input-container>
+                            <md-button class="  md-raised"
+                                       ng-click="$ctrl.deleteFromList($ctrl.favor.photos ,item)">
+                                Видалити
+                            </md-button>
                         </div>
                     </div>
+
                     <div ng-if="::$root.it.can('modifySalon')">
-                        <md-button  class="md-raised"
+                        <md-button class="md-raised"
                                    ng-click="$ctrl.showFormPhotoUpload=true">
                             Додати фото
                         </md-button>
@@ -161,7 +161,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                                     <label for="historyNme">Назва відео</label>
                                     <input id="historyNme" ng-model="item.name" name="historyNme"/>
                                 </md-input-container>
-                                 <md-input-container class="md-block  ">
+                                <md-input-container class="md-block  ">
                                     <label for="historyNme">ID</label>
                                     <input id="historyNme" ng-model="item.url" name="historyNme"/>
                                 </md-input-container>

@@ -56,8 +56,8 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                             <div ng-repeat="day in $ctrl.course.days">
                                 <md-divider></md-divider>
                                 <div layout="row">
-                                    <div class="md-margin md-padding " id="prokgram" name="program">{{day.date|
-                                        date:"dd.MM.yyyy"}}
+                                    <div class="md-margin md-padding " id="prokgram" name="program">{{day.date |
+                                    date:"dd.MM.yyyy"}}
                                     </div>
                                     <div class="md-margin md-padding " id="program" name="program">{{day.program}}</div>
                                     <md-button ng-if="::$root.it.can('modifyAcademy')" class="md-icon-button"
@@ -89,11 +89,11 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
         </md-tab>
         <md-tab label="Аватар">
             <md-card>
-                <md-card-content >
-                    <div layout="column" >
-                      <div >
-                        <img ng-src="{{$ctrl.course.avatar}}" />
-  </div>
+                <md-card-content layout="row">
+                    
+                        <div>
+                            <img ng-src="{{$ctrl.course.avatar}}"/>
+                        </div>
                         <div ng-if="::$root.it.can('modifyAcademy')">
                             <md-button ng-if="!$ctrl.showAuthorPhotoUpload" class="md-raised"
                                        ng-click="$ctrl.showAuthorPhotoUpload=true">
@@ -122,11 +122,11 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                 </md-card-content>
                 <md-tab label="Автор">
                     <md-card>
-                        <md-card-content layout-sm="row" >
+                        <md-card-content layout="row">
                             <div layout="column">
                                 <img ng-src="{{$ctrl.course.author.photoUrl}}" class="module-history-img"/>
                                 <md-input-container class="md-block  ">
-                                    <label>Ім’я автора</label>
+                                    <label>Ім'я автора</label>
                                     <input ng-model="$ctrl.course.author.name"
                                            ng-disabled="::!$root.it.can('modifyAcademy')"/>
                                 </md-input-container>
@@ -222,7 +222,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
 
                     <md-card>
                         <md-card-content layout="row">
-                            <div flex="60" >
+                            <div flex="60">
                                 <md-subheader class="md-no-sticky">Відео</md-subheader>
                                 <div class="md-padding md-margin" class="embed-responsive-container"
                                      ng-repeat="item in $ctrl.course.videos track by $index"
@@ -236,10 +236,10 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                                             <label for="historyNme">Назва відео</label>
                                             <input id="historyNme" ng-model="item.name" name="historyNme"/>
                                         </md-input-container>
-                                         <md-input-container class="md-block  ">
-                                    <label for="historyNme">ID</label>
-                                    <input id="historyNme" ng-model="item.url" name="historyNme"/>
-                                </md-input-container>
+                                        <md-input-container class="md-block  ">
+                                            <label for="historyNme">ID</label>
+                                            <input id="historyNme" ng-model="item.url" name="historyNme"/>
+                                        </md-input-container>
                                         <md-input-container class="md-block  ">
                                             <label for="ord">Порядок відображення</label>
                                             <input id="ord" ng-model="item.order" type="number"/>
