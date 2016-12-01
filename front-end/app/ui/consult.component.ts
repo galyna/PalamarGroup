@@ -125,7 +125,7 @@ export class ConsultComponentController {
             parent: angular.element(document.body),
 
           //  parent: angular.element(document.querySelector('#pageContainer')),
-            fullscreen: this.$mdMedia('(max-width: 1300px)'),
+            fullscreen: this.$mdMedia('(max-width: 1360px)'),
             locals: {
                 appointment: appointment,
             },
