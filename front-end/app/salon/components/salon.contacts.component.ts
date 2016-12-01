@@ -151,7 +151,7 @@ const template = `<script type="application/ld+json">
  <div layout="row" flex class="md-padding" ng-if="salon.videos.length>0 ||salon.photos.length>0 ">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap header-super">
-               
+                <div class="md-display-2"> ШУКАЙТЕ НАС ТУТ</div>
             </div>
             <div class="overlay-comments">
             </div>
@@ -159,7 +159,7 @@ const template = `<script type="application/ld+json">
         </div>
     </div>
 
-        <div layout="row" layout-align="center center">
+        <div layout="row" layout-align="center center"  ng-if="salon.videos.length>0 ">
             <div flex="100" flex-gt-md="60" flex-md="80" flex-gt-xs="85">
                 <div layout="column" layout-margin layout-align="center center" class="embed-responsive-container">
                     <md-card md-whiteframe="6" class="  courses-videos" temprop="workPerformed" itemscope=""
