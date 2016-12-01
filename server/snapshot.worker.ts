@@ -158,15 +158,7 @@ async function saveSitemap() {
     fs.writeFileSync(path.resolve('../front-end/dist/sitemap.xml'), sitemap.toString());
     return await saveSnapshots();
 }
-// mongoose.connect(config.mongoUrl, ()=>{
-//     console.log('saveSitemap started');
-//     saveSitemap().then(()=>{
-//         console.log('complete');
-//     }).catch(err=>{
-//         console.error(err);
-//     });
-// });
-//
+
 schedule.scheduleJob({
     hour: 0
 }, ()=> {
