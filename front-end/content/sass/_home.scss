@@ -434,8 +434,10 @@
       background-color: rgba($primary, 0.7);
       overflow: hidden;
 
-      span {
-        width: 80%
+      .cat-name {
+        text-align: center;
+        width:95px;
+
       }
       -webkit-transition: all 0.5s ease-in-out;
       -moz-transition: all 0.5s ease-in-out;
@@ -488,10 +490,7 @@
 
     }
 
-
-    @media (min-width: $layout-breakpoint-xs)  {
-
-
+    @media (min-width: $layout-breakpoint-xs) {
 
       &.flex-gt-xs-22 {
         flex: 1 22%;

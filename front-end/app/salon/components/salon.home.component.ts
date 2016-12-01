@@ -52,7 +52,7 @@ const template = `<script type="application/ld+json">
                         
                         <md-card-content layout="column" layout-align="center center"
                                          class=" md-padding  show-description-favor">
-                            <span itemprop="name" class=" md-padding  ">{{::category.name}}</span>
+                            <div  class=" cat-name ">{{::category.name}}</div>
                             <div layout="column" layout-align="center center" class="hiden-favors"
                                  ng-repeat="favor in ::category.favors track by $index ">
                                 <sb-jsonld json="{{::favor.seoJson}}"></sb-jsonld>
