@@ -4,30 +4,28 @@ import {AppointmentServiceName, IAppointmentService} from "../servises/appointme
 import {ISeoPageResource, SeoPageResourceName} from "../../resources/seo.page.resource";
 import {IRootScope} from "../../../typings";
 
-const template: string = `
-
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
+const template: string = `<script type="application/ld+json">
+    {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
     "@type": "ListItem",
     "position": 1,
     "item": {
-      "@id": "http://palamar.com.ua/beauty-salon",
-      "name": "Салон",
-      "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
+    "@id": "http://palamar.com.ua/beauty-salon",
+    "name": "Салон",
+    "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
     }
-  },{
+    },{
     "@type": "ListItem",
     "position": 2,
     "item": {
-      "@id": "http://palamar.com.ua/beauty-salon/masters",
-      "name": "Майстри"
+    "@id": "http://palamar.com.ua/beauty-salon/masters",
+    "name": "Майстри"
     }
-  }]
-}
-</script>     
+    }]
+    }
+</script>
 
 <div ng-attr-id="{{ $ctrl.markerReadySEO }}" class="courses description-container" layout="row"
      layout-align="center center">
@@ -50,10 +48,12 @@ const template: string = `
                 >
                     <md-card-content layout="row" layout-align="start none">
 
-                        <div class="card-media " flex="50"><a ng-href="/beauty-salon/master/{{master._id}}">
-                            <img ng-src="{{master.photo.url}}" alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів"
-                                 class="md-card-image clickable-element "/>
-                        </a>
+                        <div class="card-media " flex="50">
+                            <a hreflang="uk" ng-href="/beauty-salon/master/{{master._id}}">
+                                <img ng-src="{{master.photo.url}}"
+                                     alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів"
+                                     class="md-card-image clickable-element "/>
+                            </a>
                         </div>
 
                         <div class="card-desc "
@@ -93,12 +93,12 @@ const template: string = `
                                 </div>
                             </div>
 
-                            <a hide show-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
+                            <a hreflang="uk" hide show-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button md-display-1 md-raised "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>
 
-                            <a hide show-gt-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
+                            <a hreflang="uk" hide show-gt-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button xs-selected md-display-1 md-raised  "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>
@@ -155,12 +155,12 @@ const template: string = `
                                 </div>
                             </div>
 
-                            <a hide show-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
+                            <a hreflang="uk" hide show-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button md-display-1 md-raised "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>
 
-                            <a hide show-gt-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
+                            <a hreflang="uk" hide show-gt-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button xs-selected md-display-1 md-raised  "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>
@@ -174,8 +174,10 @@ const template: string = `
 
                         </div>
                         <div class="card-media "
-                             flex="50"><a ng-href="/beauty-salon/master/{{master._id}}">
-                            <img ng-src="{{master.photo.url}}" alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів"
+                             flex="50">
+                            <a hreflang="uk" ng-href="/beauty-salon/master/{{master._id}}">
+                            <img ng-src="{{master.photo.url}}"
+                                 alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів"
                                  class="md-card-image clickable-element "/>
                         </a>
                         </div>
@@ -185,8 +187,9 @@ const template: string = `
                     <md-card-content layout="row" layout-align="start none">
 
                         <div class="card-media "
-                             flex="50"><a ng-href="/beauty-salon/master/{{master._id}}">
-                            <img ng-src="{{master.photo.url}}" alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів"
+                             flex="50"><a hreflang="uk" ng-href="/beauty-salon/master/{{master._id}}">
+                            <img ng-src="{{master.photo.url}}"
+                                 alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів"
                                  class="md-card-image clickable-element "/>
                         </a>
                         </div>
@@ -230,12 +233,12 @@ const template: string = `
                             </div>
 
 
-                            <a hide show-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
+                            <a hreflang="uk" hide show-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button md-display-1 md-raised "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>
 
-                            <a hide show-gt-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
+                            <a hreflang="uk" hide show-gt-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button xs-selected md-display-1 md-raised  "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>
@@ -258,7 +261,7 @@ const template: string = `
                 <div class="overlay-bg trigger-right"></div>
                 <md-card md-whiteframe="8">
                     <md-card-content layout="column">
-                        <a ng-href="/beauty-salon/master/{{master._id}}">
+                        <a hreflang="uk" ng-href="/beauty-salon/master/{{master._id}}">
                             <div ng-if="master.rate && master.rate._id!=='0'" class="card-desc-top-master white"
                                  flex layout=" column " layout-align=" space-around center">
                                 <md-card-title>
@@ -267,7 +270,8 @@ const template: string = `
                                     </md-card-title-text>
                                 </md-card-title>
                             </div>
-                            <div class="card-media " ><img alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів"
+                            <div class="card-media "><img
+                                    alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів"
                                     ng-src="{{::master.photo.url}}"
                                     class="md-card-image"/></div>
                         </a>
@@ -296,7 +300,7 @@ const template: string = `
 
                                 </div>
                             </div>
-                            <a ng-href="/beauty-salon/master/{{master._id}}"
+                            <a hreflang="uk" ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button md-display-1 md-raised "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>

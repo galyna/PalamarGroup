@@ -46,7 +46,7 @@ const template = `<script type="application/ld+json">
                          class="md-margin "  
                          flex-gt-xs="22" flex-xs="80">
                    
-                    <a ng-href="/beauty-salon/services/{{category.url}}">
+                    <a hreflang="uk" ng-href="/beauty-salon/services/{{category.url}}">
                         <img ng-src="{{'/content/images/services/'+ category._id+'.jpg'}}"
                              alt="{{::category.name}} Львів від PALAMAR GROUP"/>
                         
@@ -107,7 +107,7 @@ const template = `<script type="application/ld+json">
                 >
                     <sb-jsonld json="{{::master.seoJson}}"></sb-jsonld>
 
-                    <a ng-href="/beauty-salon/master/{{master._id}}">
+                    <a hreflang="uk" ng-href="/beauty-salon/master/{{master._id}}">
                         <img ng-src="{{::master.photo.url}}"
                              alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів">
                         <md-card-content layout="column" class="  show-description" layout-align="center center">
@@ -215,7 +215,7 @@ const template = `<script type="application/ld+json">
     </div>
     <div ng-if="$ctrl.showMoreTransforms" class="md-padding" layout="row" layout-align=" center center"
          layout-align-xs="  center">
-        <a ng-href="/beauty-salon/transformations" class="md-button md-primary comment-btn xs-selected md-raised "
+        <a hreflang="uk" ng-href="/beauty-salon/transformations" class="md-button md-primary comment-btn xs-selected md-raised "
            layout="row" layout-align=" center center"><span>Всі перевтіління</span>
         </a>
 
@@ -271,7 +271,7 @@ const template = `<script type="application/ld+json">
 
     </div>
     <div ng-if="$ctrl.showMoreVideos" layout="row" layout-align=" center center" layout-align-xs="  center">
-        <a ng-href="/academy/videos" class="md-button md-primary comment-btn xs-selected md-raised "
+        <a hreflang="uk" ng-href="/academy/videos" class="md-button md-primary comment-btn xs-selected md-raised "
            layout="row" layout-align=" center center"><span>Всі відео</span>
         </a>
     </div>
@@ -290,7 +290,7 @@ const template = `<script type="application/ld+json">
 
         <div flex flex-gt-md="60" flex-gt-lg="40" flex-md="80" flex-gt-xs="70">
             <div flex class="brends-container" layout-margin layout layout-wrap layout-align="center center">
-                <a ng-href="{{::bren.url}}" class="md-margin brend " layout="row" layout-align="center center"
+                <a hreflang="uk" ng-href="{{::bren.url}}" class="md-margin brend " layout="row" layout-align="center center"
                    target="_blank"
                    flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
                    flex-gt-xs="46" flex-xs="80" ng-repeat="bren in $ctrl.brends track by $index">

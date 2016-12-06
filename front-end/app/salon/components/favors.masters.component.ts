@@ -31,7 +31,7 @@ const template = `
                          flex-gt-xs="46" flex-xs="80"
                 >
                     <sb-jsonld json="{{::favor.seoJson}}"></sb-jsonld>
-                    <a ng-href="/beauty-salon/service/{{favor._id}}">
+                    <a hreflang="uk" ng-href="/beauty-salon/service/{{favor._id}}">
                         <img ng-src="{{::favor.photo.url}}" alt="{{::favor.name}} від PALAMAR GROUP Львів " >
                         <sb-jsonld json="{{::favor.seoJson}}"></sb-jsonld>
                         <md-card-content layout="column"
@@ -83,7 +83,7 @@ const template = `
                     <md-card-content layout="row" layout-align="start none">
                         <div class="card-media "
                              flex="50">
-                            <a ng-href="/beauty-salon/master/{{master._id}}">
+                            <a hreflang="uk" ng-href="/beauty-salon/master/{{master._id}}">
                                 <img ng-src="{{master.photo.url}}" alt="{{::master.name}} {{::master.subtitle}} у PALAMAR GROUP Львів"
                                      class="md-card-image clickable-element "/>
                             </a>
@@ -126,12 +126,12 @@ const template = `
                                     </div>
                                 </div>
                             </div>
-                            <a hide show-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
+                            <a hreflang="uk" hide show-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button md-display-1 md-raised "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>
 
-                            <a hide show-gt-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
+                            <a hreflang="uk" hide show-gt-sm="true" ng-href="/beauty-salon/master/{{master._id}}"
                                class="md-button xs-selected md-display-1 md-raised  "
                                layout="row" layout-align=" center center"><span> Про майстра</span>
                             </a>

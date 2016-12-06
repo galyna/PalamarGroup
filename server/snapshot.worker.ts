@@ -106,18 +106,18 @@ var pages = [
     }];
 
 function saveSnapshots() {
-    return new Promise((resolve, reject)=> {
+    return new Promise((resolve, reject) => {
         console.log("saveSnapshots start " + new Date().toTimeString());
 
         var result = htmlSnapshots.run({
             input: "sitemap",
             source: path.resolve('../front-end/dist/sitemap.xml'),
-            phantomjsOptions: ["--ignore-ssl-errors=true","--output-encoding=utf8"],
+            phantomjsOptions: ["--ignore-ssl-errors=true", "--output-encoding=utf8"],
             outputDir: './snapshots',
             selector: "#dynamic-content",
             processLimit: 1,
             outputDirClean: true
-           // timeout: { "http://palamar.com.ua/": 20000, "__default": 10000 }
+            // timeout: { "http://palamar.com.ua/": 20000, "__default": 10000 }
         }, function (err, snapshotsCompleted) {
             console.log("snapshots generution finished at" + new Date().toTimeString())
             console.log(snapshotsCompleted.join(','));
@@ -128,26 +128,27 @@ function saveSnapshots() {
 
 }
 
-function addCollection(courses, urls, reletivePath) {
-    courses.forEach((p)=> {
-        urls.push({url: reletivePath + p._id, priority: 0.6})
+function addCollection(courses, urls, reletivePath,date) {
+    courses.forEach((p) => {
+        urls.push({url: reletivePath + p._id, priority: 0.6, lastmodISO: date, changefreq: 'weekly'})
     });
 }
 
 async function saveSitemap() {
-    var urls = pages.map((p)=> {
-        return {url: p.url, priority: 0.8};
+    var date = (new Date()).toISOString();
+    var urls = pages.map((p) => {
+        return {url: p.url, priority: 0.8, lastmodISO: date, changefreq: 'daily'};
     });
     console.log("startMakeSnapshots");
     let courses = await Course.find().exec();
-    addCollection(courses, urls, "/academy/course/");
+    addCollection(courses, urls, "/academy/course/",date);
 
     let masters = await  Master.find().exec();
 
-    addCollection(masters, urls, "/beauty-salon/master/");
+    addCollection(masters, urls, "/beauty-salon/master/",date);
     let favors = await  Favor.find().exec();
 
-    addCollection(favors, urls, "/beauty-salon/service/");
+    addCollection(favors, urls, "/beauty-salon/service/",date);
 
     var sitemap = sm.createSitemap({
         hostname: config.origin,
@@ -161,12 +162,12 @@ async function saveSitemap() {
 
 schedule.scheduleJob({
     hour: 0
-}, ()=> {
-    mongoose.connect(config.mongoUrl, ()=>{
+}, () => {
+    mongoose.connect(config.mongoUrl, () => {
         console.log('saveSitemap started');
-        saveSitemap().then(()=>{
+        saveSitemap().then(() => {
             console.log('complete');
-        }).catch(err=>{
+        }).catch(err => {
             console.error(err);
         });
     });

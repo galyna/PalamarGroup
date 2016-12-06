@@ -69,7 +69,7 @@ const template = `
         <div class="page-delimiter md-padding" flex>
             <div class="fit-screen-wrap invers header">
                 <div hide show-gt-xs='true' class="md-display-1"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
-                <div hide show-xs="true" class="md-headline""> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
+                <div hide show-xs="true" class="md-headline"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
             </div>
 
         </div>
@@ -80,7 +80,8 @@ const template = `
    <div layout="row" flex  >
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers " >
-                <div  class="md-display-1"> {{::group.name}}</div>
+                <div  class="md-headline"> {{::group.name}}</div>
+                 <div hide show-xs="true" class="md-title"> {{::group.name}}</div>
             </div>
 
         </div>
