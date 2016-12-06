@@ -311,7 +311,7 @@ export class SalonHomeComponentController {
 
     static $inject = [MasterResourceName, "$location", 'constants',
         TransformResourceName, BrendResourceName, "$rootScope", MediaObserverFactoryName,
-        '$q', FavorResourceName, AcademyVideosResourceName, SeoPageResourceName,AppointmentServiceName,AppointmentResourceName];
+        '$q', FavorResourceName, AcademyVideosResourceName, SeoPageResourceName, AppointmentServiceName, AppointmentResourceName];
 
     favors: IFavor[];
     masters: IMaster[];
@@ -363,13 +363,13 @@ export class SalonHomeComponentController {
                 private BrendResource: IBrendResource, private $rootScope: IRootScope,
                 private mediaObserver: IMediaObserverFactory, private $q, private favorResource: IFavorResource,
                 private AcademyVideosResource: IAcademyVideosResource, private SeoPageResource: ISeoPageResource,
-                private AppointmentService: IAppointmentService,private AppointmentResource: IAppointmentResource) {
+                private AppointmentService: IAppointmentService, private AppointmentResource: IAppointmentResource) {
         this.categories = this.constants.favorCategories;
     }
 
     $onInit() {
 
-        this.seo = this.SeoPageResource.query({query: {"name": "home"}}).$promise.then((seo)=> {
+        this.seo = this.SeoPageResource.query({query: {"name": "home"}}).$promise.then((seo) => {
             if (seo.length > 0) {
                 this.$rootScope.seo = seo[0];
                 document.title = this.$rootScope.seo.title;
@@ -382,7 +382,7 @@ export class SalonHomeComponentController {
 
         this.brends = this.BrendResource.query({sort: "order"});
         this.brends.$promise.then((brends) => {
-            this.brends.forEach((brend)=> {
+            this.brends.forEach((brend) => {
                 this.seoBrend(brend);
 
             })
@@ -406,8 +406,8 @@ export class SalonHomeComponentController {
 
 
         this.$q.all([this.masters.$promise,
-            this.videos.$promise,favorPromise,
-            this.transforms.$promise,this.brends,
+            this.videos.$promise, favorPromise,
+            this.transforms.$promise, this.brends,
             this.seo.$promise
         ]).then((result) => {
             this.markerReadySEO = "dynamic-content";
@@ -424,13 +424,14 @@ export class SalonHomeComponentController {
 
     initMasters() {
         this.masters.$promise.then((masters) => {
-            masters.forEach((master)=> {
+            masters.forEach((master) => {
                 this.seoMaster(master);
             })
         });
     }
+
     seoMaster(master) {
-        master.seoJson=
+        master.seoJson =
             {
                 "@context": "http://schema.org/",
                 "@type": "Person",
@@ -454,92 +455,109 @@ export class SalonHomeComponentController {
                     "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
                     "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
                     "name": "PALAMAR GROUP"
-                }
-            };
-    }
-
-    initFavorSeo(favor:IFavor) {
-        favor.seoJson =
-        {
-            "@context": "http://schema.org/",
-            "@type": "Service",
-            "areaServed": {
-                "@type": "Place",
-                "geo": {
-                    "@type": "GeoCircle",
-                    "geoMidpoint": {
-                        "@type": "GeoCoordinates",
-                        "latitude": "49.8110769",
-                        "longitude": "23.9737773"
+                },
+                "homeLocation": {
+                    "@type": "Place",
+                    "geo": {
+                        "@type": "GeoCircle",
+                        "geoMidpoint": {
+                            "@type": "GeoCoordinates",
+                            "latitude": "49.8110769",
+                            "longitude": "23.9737773"
+                        },
+                        "geoRadius": "50"
                     },
-                    "geoRadius": "50",
                     "address": {
                         "@type": "PostalAddress",
                         "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
                         "addressLocality": "Львів, Україна",
                         "addressCountry": "Україна"
                     }
+                }
+            };
+    }
+
+    initFavorSeo(favor: IFavor) {
+        favor.seoJson =
+            {
+                "@context": "http://schema.org/",
+                "@type": "Service",
+                "areaServed": {
+                    "@type": "Place",
+                    "geo": {
+                        "@type": "GeoCircle",
+                        "geoMidpoint": {
+                            "@type": "GeoCoordinates",
+                            "latitude": "49.8110769",
+                            "longitude": "23.9737773"
+                        },
+                        "geoRadius": "50",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                            "addressLocality": "Львів, Україна",
+                            "addressCountry": "Україна"
+                        }
+                    },
+                    "map": "https://www.google.ru/maps/place/%D0%A1%D1%82%D1%83%D0%B4%D1%96%D1%8F+%D0%BA%D1%80%D0%B0%D1%81%D0%B8+%D0%AE%D0%BB%D1%96%D1%97+%D0%9F%D0%B0%D0%BB%D0%B0%D0%BC%D0%B0%D1%80/@49.8110803,23.9715886,17z/data=!3m1!4b1!4m5!3m4!1s0x473ae70c7a4a754b:0x96d5b6a9de35eaa0!8m2!3d49.8110769!4d23.9737773"
                 },
-                "map": "https://www.google.ru/maps/place/%D0%A1%D1%82%D1%83%D0%B4%D1%96%D1%8F+%D0%BA%D1%80%D0%B0%D1%81%D0%B8+%D0%AE%D0%BB%D1%96%D1%97+%D0%9F%D0%B0%D0%BB%D0%B0%D0%BC%D0%B0%D1%80/@49.8110803,23.9715886,17z/data=!3m1!4b1!4m5!3m4!1s0x473ae70c7a4a754b:0x96d5b6a9de35eaa0!8m2!3d49.8110769!4d23.9737773"
-            },
-            "image":"http://palamar.com.ua" + favor.photo.url,
-            "category": favor.category.name,
-            "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-            "serviceType": "сфера послуг",
-            "description": favor.description,
-            "offers": {
-                "@type": "Offer",
-                "priceCurrency": "UAH",
-                "price": favor.defPrice,
-                "seller": {
-                    "@type": "BeautySalon",
-                    "name": "PALAMAR GROUP",
+                "image": "http://palamar.com.ua" + favor.photo.url,
+                "category": favor.category.name,
+                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                "serviceType": "сфера послуг",
+                "description": favor.description,
+                "offers": {
+                    "@type": "Offer",
+                    "priceCurrency": "UAH",
+                    "price": favor.defPrice,
+                    "seller": {
+                        "@type": "BeautySalon",
+                        "name": "PALAMAR GROUP",
+                        "url": "http:/palamar.com.ua/",
+                        "alternateName": "PALAMAR",
+                        "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                        "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
+                        "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                        "sameAs": [
+                            "https://www.facebook.com/hashtag/palamar_group",
+                            "https://www.instagram.com/palamar_group/",
+                            "https://vk.com/id202584528"
+                        ],
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                            "addressLocality": "Львів, Україна",
+                            "addressCountry": "Україна"
+                        },
+                        "telephone": "+38 067 264 6216",
+                        "priceRange": "від 300 грн",
+                    }
+                },
+                "name": favor.name,
+                "brand": {
+                    "@context": "http://schema.org/",
+                    "@type": "Brand",
                     "url": "http:/palamar.com.ua/",
                     "alternateName": "PALAMAR",
                     "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
                     "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
                     "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
-                    "sameAs": [
-                        "https://www.facebook.com/hashtag/palamar_group",
-                        "https://www.instagram.com/palamar_group/",
-                        "https://vk.com/id202584528"
-                    ],
-                    "address": {
-                        "@type": "PostalAddress",
-                        "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
-                        "addressLocality": "Львів, Україна",
-                        "addressCountry": "Україна"
-                    },
-                    "telephone":"+38 067 264 6216",
-                    "priceRange": "від 300 грн",
+                    "name": "PALAMAR GROUP"
                 }
-            },
-            "name": favor.name,
-            "brand": {
-                "@context": "http://schema.org/",
-                "@type": "Brand",
-                "url": "http:/palamar.com.ua/",
-                "alternateName": "PALAMAR",
-                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
-                "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
-                "name": "PALAMAR GROUP"
             }
-        }
 
     }
 
     seoBrend(brend) {
-        brend.seoJson=
+        brend.seoJson =
             {
                 "@context": "http://schema.org/",
                 "@type": "Brand",
                 "url": brend.url,
-                "logo": "http://palamar.com.ua"+brend.photo.url,
+                "logo": "http://palamar.com.ua" + brend.photo.url,
                 "name": brend.name
-        };
+            };
     }
-
 
 
     initFavors(favorPromise) {
@@ -547,8 +565,8 @@ export class SalonHomeComponentController {
             this.favors = favors;
             if (this.favors.length > 0) {
 
-                this.categories.forEach((category)=> {
-                    category.favors = favors.filter((favor)=> {
+                this.categories.forEach((category) => {
+                    category.favors = favors.filter((favor) => {
                         this.initFavorSeo(favor);
                         return category.name == favor.category.name;
                     });

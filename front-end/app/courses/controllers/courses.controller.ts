@@ -88,7 +88,25 @@ export class CoursesController {
             "image":"http://palamar.com.ua"+ course.avatar,
             "creator": {
                     "@type": "Person",
-                    "name": course.author.name
+                    "name": course.author.name,
+                "homeLocation":{
+                    "@type": "Place",
+                    "geo": {
+                        "@type": "GeoCircle",
+                        "geoMidpoint": {
+                            "@type": "GeoCoordinates",
+                            "latitude": "49.8110769",
+                            "longitude": "23.9737773"
+                        },
+                        "geoRadius": "50"
+                    },
+                    "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                        "addressLocality": "Львів, Україна",
+                        "addressCountry": "Україна"
+                    }
+                }
             },
             "offers": {
                 "@type": "Offer",

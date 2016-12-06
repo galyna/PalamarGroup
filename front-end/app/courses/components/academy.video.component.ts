@@ -38,7 +38,25 @@ const template = `
             "founder": {
                 "@context": "http://schema.org/",
                 "@type": "Person",
-                "name": "YULIA PALAMAR"
+                "name": "Юлія Паламар",
+                "homeLocation":{
+                    "@type": "Place",
+                    "geo": {
+                        "@type": "GeoCircle",
+                        "geoMidpoint": {
+                            "@type": "GeoCoordinates",
+                            "latitude": "49.8110769",
+                            "longitude": "23.9737773"
+                        },
+                        "geoRadius": "50"
+                    },
+                    "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                        "addressLocality": "Львів, Україна",
+                        "addressCountry": "Україна"
+                    }
+                }
             },
             "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
             "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
@@ -130,20 +148,20 @@ const template = `
 
 export class AcademyVideoComponentController {
 
-    static $inject = [AcademyVideosResourceName, 'smoothScroll',  SeoPageResourceName,'$q', '$rootScope'];
+    static $inject = [AcademyVideosResourceName, 'smoothScroll', SeoPageResourceName, '$q', '$rootScope'];
 
     videos: IAcademyVideos[];
     markerReadySEO: string;
-    seo:any;
+    seo: any;
 
-    constructor(private AcademyVideosResource: IAcademyVideosResource,private smoothScroll,private SeoPageResource:ISeoPageResource,private $q,
-    private $rootScope) {
+    constructor(private AcademyVideosResource: IAcademyVideosResource, private smoothScroll, private SeoPageResource: ISeoPageResource, private $q,
+                private $rootScope) {
 
     }
 
     $onInit() {
 
-        this.seo = this.SeoPageResource.query({query: {"name": "video"}}).$promise.then((seo)=> {
+        this.seo = this.SeoPageResource.query({query: {"name": "video"}}).$promise.then((seo) => {
             if (seo.length > 0) {
                 this.$rootScope.seo = seo[0];
                 document.title = this.$rootScope.seo.title;

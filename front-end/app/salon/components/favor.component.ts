@@ -373,12 +373,29 @@ export class FavorComponentController {
     }
 
 
-
     seoMaster(master) {
         master.seoJson =
             {
                 "@context": "http://schema.org/",
                 "@type": "Person",
+                "homeLocation": {
+                    "@type": "Place",
+                    "geo": {
+                        "@type": "GeoCircle",
+                        "geoMidpoint": {
+                            "@type": "GeoCoordinates",
+                            "latitude": "49.8110769",
+                            "longitude": "23.9737773"
+                        },
+                        "geoRadius": "50"
+                    },
+                    "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                        "addressLocality": "Львів, Україна",
+                        "addressCountry": "Україна"
+                    }
+                },
                 "jobTitle": master.subtitle,
                 "url": "http://palamar.com.ua" + "/beauty-salon/master/" + master._id,
                 "address": {
