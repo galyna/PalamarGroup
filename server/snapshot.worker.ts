@@ -52,14 +52,14 @@ function saveSnapshots() {
 
 function addCollection(courses, urls, reletivePath, date) {
     courses.forEach((p) => {
-        urls.push({url: reletivePath + p._id, priority: 0.6, lastmodISO: date, changefreq: 'weekly',mobile: true})
+        urls.push({url: reletivePath + p._id, priority: 0.6, lastmodISO: date, changefreq: 'daily',mobile: true})
     });
 }
 
 async function saveSitemap() {
     var date = (new Date()).toISOString();
     var urls = pages.map((url) => {
-        return {url: url, priority: 0.8, lastmodISO: date, changefreq: 'daily',mobile: true};
+        return {url: url, priority: 0.8, lastmodISO: date, changefreq: 'hourly',mobile: true};
     });
     console.log("startMakeSnapshots");
     let courses = await Course.find().exec();
