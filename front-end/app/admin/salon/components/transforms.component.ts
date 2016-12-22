@@ -3,7 +3,7 @@ import {PagingServiceName, PagingService} from "../../../ui/admin.paging";
 
 const template = `<md-toolbar>
     <div class="md-toolbar-tools">
-        <h3>Перевтілення</h3>
+        <h3>ЗМІНА ОБРАЗУ</h3>
         <span flex></span>
         <pg-admin-paging
                 params="$ctrl.paging"
@@ -16,7 +16,7 @@ const template = `<md-toolbar>
 <md-button ng-click="$ctrl.addTransform()" ng-if="::$root.it.can('modifySalon')"
            class="md-fab md-fab-fixed md-primary md-fab-bottom-right" aria-label="new">
     <md-icon md-svg-icon="content:ic_add_24px"></md-icon>
-    <md-tooltip>Додати перевтілення</md-tooltip>
+    <md-tooltip>Додати ЗМІНА ОБРАЗУ</md-tooltip>
 </md-button>
 
 <md-list flex>
@@ -80,7 +80,7 @@ export class TransformsComponentController {
     
     deleteTransform(transform:ITransform) {
         transform.$delete().then( () => {
-            this.$mdToast.showSimple( `Перевтілення видалено` );
+            this.$mdToast.showSimple( `ЗМІНА ОБРАЗУ видалено` );
         } ).catch( (err)=> {
 
             this.showErrorDialog();

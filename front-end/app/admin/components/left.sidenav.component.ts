@@ -140,7 +140,7 @@ export class LeftSidenavComponentController {
                         url: FavorsComponentUrl,
                     }
                     , {
-                        text: 'Перевтілення',
+                        text: 'Зміна образу',
                         visible: () => true,
                         url: TransformsComponentUrl,
                     },

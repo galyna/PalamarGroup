@@ -9,7 +9,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button" ng-href="#/salon/transforms">
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
-                <md-tooltip>Перевтілення</md-tooltip>
+                <md-tooltip>ЗМІНА ОБРАЗУ</md-tooltip>
             </md-button>
             <h3>Перевтілення</h3>
             <span flex></span>
@@ -212,7 +212,7 @@ export class TransformComponentController {
         } );
         this.transform.$save()
             .then( (course) => {
-                this.$mdToast.showSimple( `Перевтілення ${course.name} збережено` );
+                this.$mdToast.showSimple( `ЗМІНА ОБРАЗУ ${course.name} збережено` );
             } )
             .catch( (err)=> {
                 this.$log.error( err );
@@ -233,7 +233,7 @@ export class TransformComponentController {
         if (form.$invalid) return;
         this.transform.$save()
             .then( (favor) => {
-                this.$mdToast.showSimple( `Дані перевтілення збережено` );
+                this.$mdToast.showSimple( `Дані ЗМІНА ОБРАЗУ збережено` );
             } )
             .catch( (err)=> {
                 this.$log.error( err );

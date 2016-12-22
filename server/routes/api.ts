@@ -154,8 +154,8 @@ api.use('/stubs', (req: any, res, next) => {
                 url: "/beauty-salon/transformations",
                 description: "Фото до та після зміни образу наших клієнтів. Відео процесу перевтілення",
                 name: "transforms",
-                text: "Перевтілення",
-                title: "Перевтілення клієнтів у салоні краси Юлії Паламар PALAMAR GROUP",
+                text: "ЗМІНА ОБРАЗУ",
+                title: "Зміна образу клієнта у салоні краси Юлії Паламар PALAMAR GROUP",
                 description_ru:"Фото до и после изменения образа наших клиентов. Видео процесса перевоплощения"
             },
             {

@@ -134,57 +134,56 @@ const template = `
 
 
     </div>
+    <!--daypilot-calendar -->
+    <!--<div layout="row" flex >-->
+        <!--<div class="page-delimiter" flex>-->
+            <!--<div class="fit-screen-wrap    header-super">-->
+                <!--<div layout="column" layout-align="center center">-->
 
-    <div layout="row" flex >
-        <div class="page-delimiter" flex>
-            <div class="fit-screen-wrap    header-super">
-                <div layout="column" layout-align="center center">
+                    <!--<div class="md-display-1"> ГРАФІК РОБОТИ</div>-->
+                    <!--<div class="md-title md-padding"> ВИБЕРИ, ТИЖДЕНЬ, ДЕНЬ ЧАС ТА ЗАПИШИСЬ</div>-->
 
-                    <div class="md-display-1"> ГРАФІК РОБОТИ</div>
-                    <div class="md-title md-padding"> ВИБЕРИ, ТИЖДЕНЬ, ДЕНЬ ЧАС ТА ЗАПИШИСЬ</div>
+<!--<md-button easing="easeInOutCubic" scroll-to="week-front" style="background-color: white !Important"-->
+           <!--duration="100" class=" md-fab  down-btn md-padding" aria-label="down">-->
+    <!--<md-icon class=""-->
+             <!--md-svg-src="navigation:ic_arrow_downward_24px"></md-icon>-->
+<!--</md-button>-->
 
-<md-button easing="easeInOutCubic" scroll-to="week-front" style="background-color: white !Important"
-           duration="100" class=" md-fab  down-btn md-padding" aria-label="down">
-    <md-icon class=""
-             md-svg-src="navigation:ic_arrow_downward_24px"></md-icon>
-</md-button>
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="overlay-description ">-->
+            <!--</div>-->
 
-                </div>
-            </div>
-            <div class="overlay-description ">
-            </div>
+        <!--</div>-->
 
-        </div>
+    <!--</div>-->
+    <!---->
+    <!--<div flex layout-align="center center" layout="row">-->
 
-    </div>
+        <!--<div class="master-scheduler" layout="row" flex layout-align="center center">-->
+            <!--<div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">-->
+                <!--<div layout="row" layout-xs="column" class='master-calendar'>-->
+                    <!--<div hide show-gt-xs="true" class="md-padding " layout="row" layout-align="center center">-->
+                        <!--<daypilot-navigator style=" width: 280px" id="navi-front" ng-if='$ctrl.navigatorConfig'-->
+                                            <!--daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>-->
 
+                    <!--</div>-->
+                    <!--<div hide-gt-xs="true" class="md-padding " layout="row" layout-align="center center">-->
 
-    <div flex layout-align="center center" layout="row">
+                        <!--<daypilot-navigator style=" width: 280px" id="navis" ng-if='$ctrl.navigatorSmallConfig'-->
+                                            <!--daypilot-config="$ctrl.navigatorSmallConfig"></daypilot-navigator>-->
+                    <!--</div>-->
+                    <!--<div flex class="md-padding " ng-if='$ctrl.weekConfig'>-->
+                        <!--<daypilot-calendar id="week-front" daypilot-config="$ctrl.weekConfig"-->
+                                           <!--daypilot-events="$ctrl.events"></daypilot-calendar>-->
+                    <!--</div>-->
 
-        <div class="master-scheduler" layout="row" flex layout-align="center center">
-            <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
-                <div layout="row" layout-xs="column" class='master-calendar'>
-                    <div hide show-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
-                        <daypilot-navigator style=" width: 280px" id="navi-front" ng-if='$ctrl.navigatorConfig'
-                                            daypilot-config="$ctrl.navigatorConfig"></daypilot-navigator>
+                <!--</div>-->
+            <!--</div>-->
 
-                    </div>
-                    <div hide-gt-xs="true" class="md-padding " layout="row" layout-align="center center">
+        <!--</div>-->
 
-                        <daypilot-navigator style=" width: 280px" id="navis" ng-if='$ctrl.navigatorSmallConfig'
-                                            daypilot-config="$ctrl.navigatorSmallConfig"></daypilot-navigator>
-                    </div>
-                    <div flex class="md-padding " ng-if='$ctrl.weekConfig'>
-                        <daypilot-calendar id="week-front" daypilot-config="$ctrl.weekConfig"
-                                           daypilot-events="$ctrl.events"></daypilot-calendar>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
-    </div>
+    <!--</div>-->
 
     <div layout="row" flex ng-if="$ctrl.master.description">
         <div class="page-delimiter" flex>
@@ -424,12 +423,13 @@ export class MasterComponentController {
             start: days[0].toISOString(),
             end: days[1].toISOString(),
         }
-        this.MasterResource.getTasks(params).$promise.then((tasks) => {
-            this.initTasks(tasks);
-        }).catch((err) => {
-            this.$log.error(err);
-
-        });
+        //getTasks
+        // this.MasterResource.getTasks(params).$promise.then((tasks) => {
+        //     this.initTasks(tasks);
+        // }).catch((err) => {
+        //     this.$log.error(err);
+        //
+        // });
     }
 
     initTasks(tasks) {

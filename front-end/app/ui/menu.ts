@@ -56,7 +56,7 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
             </div>
             <div layout="row" layout-xs="column">
 
-                <div flex ng-click="::vm.goToURL(vm.SalonTransformsComponentUrl)" class=" pg-menu-item ">ПЕРЕВТІЛЕННЯ
+                <div flex ng-click="::vm.goToURL(vm.SalonTransformsComponentUrl)" class=" pg-menu-item ">ЗМІНА ОБРАЗУ
                 </div>
 
                 <div flex ng-click="::vm.goToURL(vm.SalonContactsComponentUrl)" class=" pg-menu-item ">КОНТАКТИ

@@ -24,7 +24,7 @@ const template = `
     "position": 2,
     "item": {
       "@id": "http://palamar.com.ua/beauty-salon/transformations",
-      "name": "Перевтілення"   
+      "name": "ЗМІНА ОБРАЗУ"   
     }
   }]
 }
@@ -33,8 +33,8 @@ const template = `
     <div layout="row" flex>
         <div class="page-delimiter md-padding" flex>
             <div class="fit-screen-wrap invers header">
-                <div hide show-gt-xs='true' class="md-display-1"> ПЕРЕВТІЛЕННЯ</div>
-                <div hide show-xs="true" class="md-headline"> ПЕРЕВТІЛЕННЯ</div>
+                <div hide show-gt-xs='true' class="md-display-1"> ЗМІНА ОБРАЗУ</div>
+                <div hide show-xs="true" class="md-headline"> ЗМІНА ОБРАЗУ</div>
             </div>
 
         </div>
@@ -159,7 +159,7 @@ export class SalonTransformsComponentController {
         this.$rootScope.socialParams.host = this.constants.host;
         this.$rootScope.socialParams.target = this.constants.host + SalonTransformsComponentUrl;
         this.$rootScope.socialParams.image = this.constants.host + photo.url;
-        this.$rootScope.socialParams.title = 'Перевтілення';
+        this.$rootScope.socialParams.title = 'ЗМІНА ОБРАЗУ';
         this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
     }
 

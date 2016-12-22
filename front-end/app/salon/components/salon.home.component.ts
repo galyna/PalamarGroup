@@ -141,8 +141,8 @@ const template = `<script type="application/ld+json">
     <div layout="row" flex ng-if="$ctrl.transforms.length>0 ">
         <div class="page-delimiter md-padding" flex>
             <div class="fit-screen-wrap    header-super">
-                <div hide show-gt-xs='true' class="md-display-1"> ПЕРЕВТІЛЕННЯ</div>
-                <div hide show-xs="true" class="md-headline"> ПЕРЕВТІЛЕННЯ</div>
+                <div hide show-gt-xs='true' class="md-display-1"> ЗМІНА ОБРАЗУ</div>
+                <div hide show-xs="true" class="md-headline"> ЗМІНА ОБРАЗУ</div>
             </div>
 
             <div class="overlay-trans ">
@@ -581,7 +581,7 @@ export class SalonHomeComponentController {
         this.$rootScope.socialParams.host = this.constants.host;
         this.$rootScope.socialParams.target = this.constants.host;
         this.$rootScope.socialParams.image = this.constants.host + photo.url;
-        this.$rootScope.socialParams.title = 'Перевтілення';
+        this.$rootScope.socialParams.title = 'ЗМІНА ОБРАЗУ';
         this.socialParams = angular.copy(this.$rootScope.socialParams, this.socialParams);
     }
 
