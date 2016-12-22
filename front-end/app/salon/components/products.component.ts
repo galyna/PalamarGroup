@@ -181,7 +181,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                 <md-input-container id="orderName" class="md-block">
                     <md-icon md-svg-icon="communication:ic_call_24px"></md-icon>
                     <label for="phone">Телефон</label>
-                    <input id="phone" ng-model="vm.appointment.phone" type="text" required name="phone">
+                    <input id="phone" ng-model="vm.productsOrder.phone" type="text" required name="phone">
                     <div ng-messages="orderForm.phone.$error" role="alert"
                          ng-show="orderForm.$submitted && orderForm.phone.$invalid">
                         <div class="md-headline" ng-message="required">
@@ -194,7 +194,7 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                     <md-input-container class="md-block">
                         <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
                         <label for="name">Як до вас звертатись?</label>
-                        <input id="name" ng-model="vm.appointment.name" type="text" name="name">
+                        <input id="name" ng-model="vm.productsOrder.name" type="text" name="name">
                     </md-input-container>
                     <md-input-container class="md-block">
                         <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>

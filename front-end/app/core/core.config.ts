@@ -5,7 +5,6 @@ export interface IConstants {
     uploadDir: string,
     photoUrl: string,
     favorCategories: any[],
-    favorLevels: any[],
     rates: any[],
     orderStatuses: any[],
     showSalon: boolean
@@ -26,11 +25,7 @@ export let constants: IConstants = {
         {_id: "hear", name: "ПЕРУКАРСЬКІ ПОСЛУГИ",url:"hairdressing"},
         {_id: "neils", name: "НІГТЬОВА ЕСТЕТИКА",url:"nail-aesthetics"},
         {_id: "makeup", name: "ВІЗАЖ",url:"makeup"}],
-    favorLevels: [
-        {_id: "0", name: "ПОЧАТКОВИЙ", text: "Junior Stylist"},
-        {_id: "1", name: "СЕРЕДНІЙ", text: "Middle Stylist"},
-        {_id: "2", name: "ТОП", text: "Top Stylist"}
-    ], rates: [
+     rates: [
         {_id: "0", name: "ВІДСУТНІЙ", text: ""},
         {_id: "1", name: "ПОЧАТКОВИЙ", text: "Junior Stylist"},
         {_id: "2", name: "СЕРЕДНІЙ", text: "Middle Stylist"},

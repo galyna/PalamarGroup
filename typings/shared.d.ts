@@ -46,8 +46,8 @@ declare module pg {
         export interface IMasterFavor {
             _id?: any,
             favor: IFavor,
-            price: number,
-            level: { _id: string, name: string, text: string}
+            price: number
+
         }
 
         export interface IMaster {

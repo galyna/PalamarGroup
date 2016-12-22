@@ -347,7 +347,7 @@ export class FavorComponentController {
                     this.masters = masters.filter((master) => {
                         return master.services.some((s) => {
                             if (s.favor._id == this.$routeParams["id"]) {
-                                master.level = s.level;
+
                                 this.seoMaster(master);
                                 return true;
                             } else {
@@ -359,7 +359,7 @@ export class FavorComponentController {
                 });
 
             this.$q.all([this.favor.$promise, this.masters.$promise]).then((result) => {
-                // $timeout(function() {  }, 100);
+
                 this.markerReadySEO = "dynamic-content";
             });
         }

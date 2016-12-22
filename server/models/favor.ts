@@ -20,7 +20,7 @@ export let FavorSchema = new Schema({
     name: String,
     description:String,
     category: { _id: String, name: String},
-    params:[{  name: String,level: { _id: String, name: String,text: String},}],
+    params:[{  name: String}],
     defPrice: Number,
     photo: PhotoSchema,
     order: Number,

@@ -79,10 +79,7 @@ const template = `<div flex layout="column">
                                         <div>Ціна</div>
                                         {{service.price}} грн.
                                     </div>
-                                    <div class="md-margin md-padding " layout="column">
-                                        <div>Рівень</div>
-                                        {{service.level.name}}
-                                    </div>
+                                   
                                     <div class="md-margin md-padding " layout="column">
 
                                         <md-button ng-if="::$root.it.can('modifySalon')" class="md-icon-button"
@@ -106,15 +103,7 @@ const template = `<div flex layout="column">
                                     </md-option>
                                 </md-select>
                                 
-                                <md-input-container layout="row" class="md-block">
-                                    <label for="level">Рівень</label>
-                                    <md-select name="level" ng-model="$ctrl.newService.level"
-                                               ng-model-options="{trackBy: '$value._id'}">
-                                        <md-option ng-repeat="level in $ctrl.levels" ng-value="level">
-                                            {{ level.name }}
-                                        </md-option>
-                                    </md-select>
-                                </md-input-container>
+                           
                                 <md-input-container layout="row" class="md-block">
                                     <label for="price">Ціна</label>
                                     <input name="price" type="number" ng-model="$ctrl.newService.price"/>
@@ -277,7 +266,7 @@ export class MasterComponentController {
     favors: IFavor[];
     newService: IMasterFavor;
     appointment: IAppointment;
-    levels: any[];
+
     rates: any[];
 
     constructor(private $log: ng.ILogService, private $routeParams: ng.route.IRouteParamsService,
@@ -289,7 +278,7 @@ export class MasterComponentController {
     }
 
     $onInit() {
-        this.levels = this.constants.favorLevels;
+
         this.rates = this.constants.rates;
         this.favors = this.favorResource.query();
         this.appointment = new this.AppointmentResource();
@@ -339,9 +328,7 @@ export class MasterComponentController {
             if (!this.newService.price) {
                 this.newService.price = this.newService.favor.defPrice;
             }
-            if (!this.newService.level) {
-                this.newService.level = this.levels[0];
-            }
+
             if (this.master.services.some((ser)=> {
                     return ser.favor._id == this.newService.favor._id
                 })) {
