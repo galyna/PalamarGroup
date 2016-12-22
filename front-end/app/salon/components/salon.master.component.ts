@@ -390,7 +390,7 @@ export class MasterComponentController {
                     "position": 2,
                     "item": {
                         "@id": "http://palamar.com.ua/beauty-salon/masters",
-                        "name": "Майстри"
+                        "name": "Команда"
                     }
                 }, {
                     "@type": "ListItem",

@@ -81,7 +81,7 @@ const template = `
     <div layout="row" ng-if="$ctrl.masters.length>0" flex>
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap  header-super">
-                <div flex class="md-display-2"> Майстри</div>
+                <div flex class="md-display-2"> КОМАНДА</div>
             </div>
             <div class="overlay-masters">
             

@@ -11,7 +11,7 @@ const template = `<div flex layout="column">
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button" ng-href="#/salon/masters">
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
-                <md-tooltip>Майстри</md-tooltip>
+                <md-tooltip>Команда</md-tooltip>
             </md-button>
              <div flex layout="row"  layout-align="  center center "> <img ng-if="$ctrl.master.photo.url" ng-src="{{$ctrl.master.photo.url}}" class="avatar " alt="{{master.name}}" />
                                    <h3 ng-if="$ctrl.master.name">{{$ctrl.master.name}}</h3> </div>

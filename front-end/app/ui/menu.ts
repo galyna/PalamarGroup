@@ -36,7 +36,7 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
                 <div flex ng-click="::vm.goToURL(vm.SalonHomeComponentUrl)" class=" pg-menu-item ">ГОЛОВНА
                 </div>
 
-                <div flex ng-click="::vm.goToURL(vm.MastersComponentUrl)" class=" pg-menu-item ">МАЙСТРИ
+                <div flex ng-click="::vm.goToURL(vm.MastersComponentUrl)" class=" pg-menu-item ">КОМАНДА
                 </div>
 
                 <div flex ng-click="::vm.goToURL(vm.ProductsComponentUrl)" class=" pg-menu-item ">ПРОДУКЦІЯ
@@ -44,13 +44,13 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
             </div>
             <div layout="row" layout-xs="column">
                 <div flex ng-click="::vm.goToURL('/beauty-salon/services/nail-aesthetics')"
-                     class=" pg-menu-item ">НІГТЬОВА ЕСТЕТИКА
+                     class=" pg-menu-item ">МАНІКЮР ТА ПЕДИКЮР
                 </div>
                 <div flex ng-click="::vm.goToURL('/beauty-salon/services/hairdressing')"
                      class=" pg-menu-item ">ПЕРУКАРСЬКІ ПОСЛУГИ
                 </div>
 
-                <div flex ng-click="::vm.goToURL('/beauty-salon/services/makeup')" class=" pg-menu-item ">ВІЗАЖ
+                <div flex ng-click="::vm.goToURL('/beauty-salon/services/makeup')" class=" pg-menu-item ">МАКІЯЖ
                 </div>
 
             </div>

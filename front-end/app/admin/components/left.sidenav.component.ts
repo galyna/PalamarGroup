@@ -130,7 +130,7 @@ export class LeftSidenavComponentController {
                         visible: () => true,
                         url: AppointmentsComponentUrl,
                     }, {
-                        text: 'Майстри',
+                        text: 'Команда',
                         visible: () => true,
                         url: MastersComponentUrl,
                     },

@@ -3,7 +3,7 @@ import {PagingServiceName, PagingService} from "../../../ui/admin.paging";
 
 const template = `<md-toolbar>
     <div class="md-toolbar-tools">
-        <h3>Майстри</h3>
+        <h3>Команда</h3>
         <span flex></span>
         <pg-admin-paging
                 params="$ctrl.paging"

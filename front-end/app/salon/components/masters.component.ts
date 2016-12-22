@@ -21,7 +21,7 @@ const template: string = `<script type="application/ld+json">
     "position": 2,
     "item": {
     "@id": "http://palamar.com.ua/beauty-salon/masters",
-    "name": "Майстри"
+    "name": "Команда"
     }
     }]
     }
@@ -34,7 +34,7 @@ const template: string = `<script type="application/ld+json">
         <div layout="row" flex>
             <div class="page-delimiter" flex>
                 <div class="fit-screen-wrap invers header">
-                    <div class="md-display-2"> Майстри</div>
+                    <div class="md-display-2"> КОМАНДА</div>
                 </div>
 
             </div>
@@ -347,7 +347,7 @@ export class MastersComponentController {
             }
 
         });
-        this.masters = this.masterResource.query({sort: {"isTop": 1, "order": 1}, populate: 'services.favor'})
+        this.masters = this.masterResource.query({sort: {"order": 1}, populate: 'services.favor'})
         this.masters.$promise.then((masters) => {
             this.scrollToMain();
             this.masters.forEach((master)=> {

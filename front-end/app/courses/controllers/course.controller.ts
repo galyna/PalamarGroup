@@ -291,7 +291,7 @@ export class CourseController {
             this.mdDialog.alert()
                 .clickOutsideToClose(true)
                 .title('Вашу заявку прийнято. ')
-                .textContent('На протязі дня з вами зв`яжеться координатор акодемії. Дякуємо.')
+                .textContent('На протязі дня з вами зв`яжеться координатор акодеміїля для підтвердження. Дякуємо.')
                 .ariaLabel('Вашу заявку прийнято. ')
                 .ok('Закрити')
         );

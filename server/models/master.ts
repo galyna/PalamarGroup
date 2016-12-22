@@ -21,7 +21,6 @@ let MasterSchema = new Schema( {
     subtitle:String,
     order: Number,
     photo: PhotoSchema,
-    isTop:Boolean,
     services: [{
         favor: {type: Schema.Types.ObjectId, ref: 'Favor'},
         price: Number,

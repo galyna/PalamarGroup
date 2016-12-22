@@ -4,14 +4,14 @@
 import {IAppointmentResource, AppointmentResourceName, IAppointment} from "../../resources/appointment.resource";
 import {IRootScope} from "../../../typings";
 
-const template = `<md-dialog class="appointment-dialog" aria-label="ЗАПИСАТИСЬ НА БЛОК" flex-sm="85" flex-xs="95" flex-gt-sm="65"
+const template = `<md-dialog class="appointment-dialog" aria-label="Записатись на обслуговування" flex-sm="85" flex-xs="95" flex-gt-sm="65"
            layout="column">
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools md-padding ">
          <img ng-src="{{::vm.appointment.master.photo.url}}" class="avatar"/>
-            <h2 hide show-gt-sm='true' class=" md-padding ">Записатись на прйом до майстра
+            <h2 hide show-gt-sm='true' class=" md-padding "> Записатись на обслуговування до майстра 
                 {{::vm.appointment.master.name}}</h2>
-            <h2 hide-gt-sm='true' class=" md-padding ">Записатись до {{::vm.appointment.master.name}}</h2>
+            <div hide-gt-sm='true' class=" md-padding md-caption"> Записатись на обслуговування до {{::vm.appointment.master.name}}</div>
             <span flex></span>
             <md-button class="md-icon-button dialog-close-btn" ng-click="::vm.cancel()">
                 <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>

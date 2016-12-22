@@ -61,7 +61,6 @@ declare module pg {
             services: IMasterFavor[],
             works: IPhoto[],
             tasks: ITask[],
-            isTop: boolean,
             level: { _id: string, name: string, text: string},
             rate: { _id: string, name: string, text: string},
             seoJson?:any
