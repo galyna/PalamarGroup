@@ -81,21 +81,21 @@
 
 md-dialog.md-dialog-fullscreen.menu-dialog {
   max-height: 100%;
-  background-color: rgba(white, 0.92);
+  background-color: white;
   text-align: center;
 
   .pg-menu-item {
-    @extend .md-whiteframe-8dp;
+    @extend .md-whiteframe-6dp;
+
     cursor: pointer;
     padding: 2% 0 2% 0;
-    margin: 3px;
+    border: 1px solid #000000;
+    margin: 15px;
     border-radius: 0px;
     vertical-align: middle;
     transition: background-color 0.3s;
     font-size: 30px;
-    color: white;
     height: 12%;
-    background-color: $primary;
     display: flex;
     align-items: center;
     align-content: center;
@@ -104,10 +104,9 @@ md-dialog.md-dialog-fullscreen.menu-dialog {
     min-height: 50px;
 
     &:hover {
-      color: black;
-      border-color: white;
-      background-color: white;
-      @extend .md-whiteframe-16dp;
+
+     // border: 1px solid #000000;
+      @extend .md-whiteframe-24dp;
       @media (min-width: $layout-breakpoint-md) {
 
       }
