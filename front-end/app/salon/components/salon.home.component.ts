@@ -216,7 +216,7 @@ const template = `<script type="application/ld+json">
     <div ng-if="$ctrl.showMoreTransforms" class="md-padding" layout="row" layout-align=" center center"
          layout-align-xs="  center">
         <a hreflang="uk" ng-href="/beauty-salon/transformations" class="md-button md-primary comment-btn xs-selected md-raised "
-           layout="row" layout-align=" center center"><span>Всі перевтіління</span>
+           layout="row" layout-align=" center center"><span>Показати більше</span>
         </a>
 
     </div>
