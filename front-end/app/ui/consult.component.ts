@@ -19,11 +19,11 @@ const dialogtemplate = `<md-dialog  aria-label="Відповіді на пита
            layout="column">
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools md-padding ">
-            <h2 class=" md-padding ">Залиште ваш телефон та ім'я. 
-            Ми перетелефонуємо щоб відповісти на питання чи домовитись про зустріч. 
-               </h2>
-
-            <span flex></span>
+         <h2 hide show-gt-sm='true' class=" md-padding "> Записатись на обслуговування до майстра Залиште ваш телефон та ім'я. 
+            Ми перетелефонуємо щоб відповісти на питання чи домовитись про зустріч.</h2>
+            <div hide-gt-sm='true' class=" md-padding md-caption"> Залиште ваші контакти. 
+            Ми перетелефонуємо щоб відповісти на питання чи домовитись про зустріч.</div>
+            <span flex></span>            
             <md-button class="md-icon-button dialog-close-btn" ng-click="::vm.cancel()">
                 <md-icon md-svg-src="navigation:ic_cancel_24px" aria-label="Close dialog"></md-icon>
             </md-button>
