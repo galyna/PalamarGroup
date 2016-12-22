@@ -33,7 +33,6 @@
   "scripts": {
     "postinstall": "npm run typings:install && npm run tsc",
     "start:prod": "  TYPE='prod' forever start server.js",
-
     "start:worker": "forever start snapshot.worker.js",
     "tsc": "tsc",
     "typings:install": "cd ../ && typings install"
