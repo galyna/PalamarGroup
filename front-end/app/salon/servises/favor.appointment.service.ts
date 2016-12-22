@@ -390,7 +390,7 @@ export class FavorAppointmentService implements IAppointmentService {
             this.$mdDialog.alert()
                 .clickOutsideToClose(true)
                 .title('Вашу запис прийнято. ')
-                .textContent('З вами зв`яжеться адміністратор для підтвердження. Дякуємо.')
+                .textContent('На протязі робочого дня з вами зв`яжеться адміністратор для підтвердження. Дякуємо.')
                 .ariaLabel('Вашу заявку прийнято. ')
                 .ok('Закрити')
         );

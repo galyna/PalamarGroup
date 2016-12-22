@@ -11,16 +11,17 @@ const template = `<div ng-click="$ctrl.consultShow()" class="consult-container"
         <md-icon md-svg-icon="communication:ic_chat_bubble_24px"></md-icon>
     </div>
     
-    <div hide show-gt-xs="true" class="stop-label">КОНСУЛЬТАЦІЯ</div>
+    <div hide show-gt-xs="true" class="stop-label">Відповіді на питання</div>
 
 </div>
 `;
-const dialogtemplate = `<md-dialog  aria-label="ЗАПИСАТИСЬ НА Консультацію" flex-sm="85" flex-xs="95" flex-gt-sm="65"
+const dialogtemplate = `<md-dialog  aria-label="Відповіді на питання" flex-sm="85" flex-xs="95" flex-gt-sm="65"
            layout="column">
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools md-padding ">
-            <h2 class=" md-padding ">Записатись на консультацію
-                {{::vm.appointment.master.name}}</h2>
+            <h2 class=" md-padding ">Залиште ваш телефон та ім'я. 
+            Ми перетелефонуємо щоб відповісти на питання чи домовитись про зустріч. 
+               </h2>
 
             <span flex></span>
             <md-button class="md-icon-button dialog-close-btn" ng-click="::vm.cancel()">
@@ -44,7 +45,7 @@ const dialogtemplate = `<md-dialog  aria-label="ЗАПИСАТИСЬ НА Кон
 
                 </md-input-container>
 
-                <div ng-if="vm.showDetails">
+              
                     <md-input-container class="md-block" id="orderName" flex>
                         <md-icon md-svg-icon="social:ic_person_24px"></md-icon>
                         <label for="name">Як до вас звертатись?</label>
@@ -53,16 +54,10 @@ const dialogtemplate = `<md-dialog  aria-label="ЗАПИСАТИСЬ НА Кон
                     </md-input-container>
                     <md-input-container class="md-block">
                         <md-icon md-svg-icon="communication:ic_chat_24px"></md-icon>
-                        <label for="comment">Додаткова інформація</label>
+                        <label for="comment">Опишіть ваше питання</label>
                         <textarea id="comment" ng-model="vm.appointment.comment" name="comment"></textarea>
                     </md-input-container>
-                </div>
-                <div flex layout="row" ng-if="!vm.showDetails" class="" ng-click="vm.showDetails=true">
-                    Показати більще
-                    <md-button class=" md-icon-button"  style="margin-top: -15px; padding: 10px">
-                        <md-icon  md-svg-icon="navigation:ic_arrow_drop_down_circle_24px"></md-icon>
-                    </md-button>
-                </div>
+                
                     <div flex layout="row" ng-if="vm.showDetails"  ng-click="vm.showDetails=false">
                         Згорнути
                         <md-button class=" md-icon-button hide-form-btn" style="margin-top: -15px; padding: 10px" >
@@ -163,7 +158,7 @@ export class ConsultComponentController {
             this.$mdDialog.alert()
                 .clickOutsideToClose(true)
                 .title('Вашу запис прийнято. ')
-                .textContent('З вами зв`яжеться адміністратор для підтвердження. Дякуємо.')
+                .textContent('На протязі робочого дня з вами зв`яжеться адміністратор для підтвердження. Дякуємо.')
                 .ariaLabel('Вашу заявку прийнято. ')
                 .ok('Закрити')
         );

@@ -384,7 +384,7 @@ export class ProductsComponentController {
             this.$mdDialog.alert()
                 .clickOutsideToClose(true)
                 .title('Ваше замовлення прийнято. ')
-                .textContent('На протязі дня з вами зв`яжеться адміністратор. Дякуємо.')
+                .textContent('На протязі робочого дня з вами зв`яжеться адміністратор для підтвердження замовлення. Дякуємо.')
                 .ariaLabel('Ваше замовлення прийнято. ')
                 .ok('Закрити')
         );
