@@ -61,7 +61,7 @@ const template = `<md-dialog class="appointment-dialog" aria-label="Записа
                                 <md-datepicker md-open-on-focus class="order-date-picker" md-min-date="vm.startDate"
                                                placeholder="Дата" flex ng-model="vm.appointment.date"
                                                ng-change="vm.onCalendarChanged()"
-                                               name="dateField"></md-datepicker>
+                                               name="dateField" id="dateField"></md-datepicker>
 
                             </div>
                             <div flex="50" class="time-container " layout="row">
@@ -146,9 +146,9 @@ const template = `<md-dialog class="appointment-dialog" aria-label="Записа
                     <div ng-if="vm.$mdMedia('(min-width: 400px)')" flex="100" layout="row">
                         <div flex="50" class="order-picker-container " layout="row">
                             <md-datepicker md-open-on-focus class="order-date-picker" md-min-date="vm.startDate"
-                                           placeholder="Дата" flex ng-model="vm.appointment.date"
-                                           ng-change="vm.onCalendarChanged()"
-                                           name="dateField"></md-datepicker>
+                                               placeholder="Дата" flex ng-model="vm.appointment.date"
+                                               ng-change="vm.onCalendarChanged()"
+                                               name="dateField1" id="dateField1"></md-datepicker>
 
                         </div>
                         <div flex="50" class="time-container " layout="row">
@@ -168,10 +168,10 @@ const template = `<md-dialog class="appointment-dialog" aria-label="Записа
                                         class="xs-master-calendar" flex layout-align="center center"
                                         style="padding:0;margin: 0px;">
                         <label style='left:38px' for="time">Дата</label>
-                        <md-datepicker md-open-on-focus class="order-date-picker" md-min-date="vm.startDate"
-                                       placeholder="Дата" flex ng-model="vm.appointment.date"
-                                       ng-change="vm.onCalendarChanged()"
-                                       name="dateField"></md-datepicker>
+                         <md-datepicker md-open-on-focus class="order-date-picker" md-min-date="vm.startDate"
+                                               placeholder="Дата" flex ng-model="vm.appointment.date"
+                                               ng-change="vm.onCalendarChanged()" id="dateField2"
+                                               name="dateField2"></md-datepicker>
                     </md-input-container>
 
                     <md-input-container ng-if="vm.$mdMedia('(max-width: 400px)')" class="md-block md-padding">
