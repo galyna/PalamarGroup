@@ -283,8 +283,6 @@ export class AppointmentFormComponentController {
             this.dayHours = [];
             this.dayHours = tmp;
             console.log(this.dayHours.length);
-        } else {
-            this.dayHours = angular.copy(this.reservhouers);
         }
     }
 
