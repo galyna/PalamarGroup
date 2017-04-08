@@ -27,15 +27,12 @@
     "xoauth2": "^1.1.0"
   },
   "devDependencies": {
-    "typescript": "^2.0.6",
+    "typescript": "2.0.6",
     "typings": "^1.5.0"
   },
   "scripts": {
-    "postinstall": "npm run typings:install && npm run tsc",
-    "start:prod": " npm run stop:prod && TYPE='prod' forever start server.js",
-    "stop:prod": "forever stop server.js",
-    "start:worker": "forever start snapshot.worker.js",
-    "tsc": "tsc",
-    "typings:install": "cd ../ && typings install"
+    "clean": "rm -rf ./dist/*",
+    "build": "npm run clean && npm run typings:install && tsc",
+    "start": "node ./dist/server.js"
   }
 }
