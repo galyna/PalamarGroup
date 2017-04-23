@@ -1,3 +1,5 @@
+/front-end/app/*.js
+/front-end/app/*.js.map
 /front-end/content/css/app.css
 /front-end/app/templates.js
 /front-end/dist
