@@ -5,6 +5,7 @@
   "description": "",
   "license": "MIT",
   "dependencies": {
+    "aws-sdk": "^2.48.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
     "connect-multiparty": "^2.0.0",
