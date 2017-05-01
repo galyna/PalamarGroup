@@ -18,12 +18,6 @@ let app = express();
 let port = parseInt(process.env['PORT']) || 8080;
 let env = process.env['TYPE'];
 
-//TODO: remove on production
-// if (env !== 'prod') {
-//     //mongoose.set('debug', true);
-//    // app.use('/setup', setupRouter);
-// }
-
 mongoose.connect(config.mongoUrl);
 
 app.use(bodyParser.json());
@@ -31,58 +25,51 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(multipart());
 
 //rest api routes
-
 app.use(passport.initialize());
+app.use('/', api);
 
-app.use('/api', api);
 //static content
-let pathes;
-if (env === 'prod') {
-    pathes = {
-        admin: '../front-end/dist/admin.html',
-        all: '../front-end/dist/',
-        content: '../front-end/dist/content/',
-        index: '../front-end/dist/index.html',
-        robots:'../front-end/dist/robots.txt',
-        sitemap:'../front-end/dist/sitemap.xml',
+// let pathes;
+// if (env === 'prod') {
+//     pathes = {
+//         admin: '../front-end/dist/admin.html',
+//         all: '../front-end/dist/',
+//         content: '../front-end/dist/content/',
+//         index: '../front-end/dist/index.html',
+//         robots:'../front-end/dist/robots.txt',
+//         sitemap:'../front-end/dist/sitemap.xml',
+//
+//     };
+// } else {
+//     pathes = {
+//         admin: '../front-end/admin.html',
+//         all: '../front-end/',
+//         sitemap:'../front-end/dist/sitemap.xml',
+//         content: '../front-end/content/',
+//         robots:'../front-end/dist/robots.txt',
+//         index: `..${path.sep}front-end${path.sep}index.html`
+//     };
+// }
+// app.use('/admin', express.static(pathes.admin));
+// app.use('/content', express.static(pathes.content));
 
-    };
-} else {
-    pathes = {
-        admin: '../front-end/admin.html',
-        all: '../front-end/',
-        sitemap:'../front-end/dist/sitemap.xml',
-        content: '../front-end/content/',
-        robots:'../front-end/dist/robots.txt',
-        index: `..${path.sep}front-end${path.sep}index.html`
-    };
-}
-app.use('/admin', express.static(pathes.admin));
-app.use('/content', express.static(pathes.content));
+// app.use('/robots.txt', function (req, res, next) {
+//     res.sendFile(path.resolve(pathes.robots));
+// });
+// app.use('/sitemap.xml', function (req, res, next) {
+//     res.sendFile(path.resolve(pathes.sitemap));
+// });
 
-app.use('/robots.txt', function (req, res, next) {
-    res.sendFile(path.resolve(pathes.robots));
-});
-app.use('/sitemap.xml', function (req, res, next) {
-    res.sendFile(path.resolve(pathes.sitemap));
-});
-
-const phantomRegex = /(phantom)/i;
-//app.use('/',  express.static(pathes.all));
-app.use('/', function (req, res, next) {
-    const userAgent = req.headers['user-agent'];
-    if ( !phantomRegex.test(userAgent) && isBot(userAgent)) {
-        res.sendFile(path.resolve('./snapshots', req.url.replace(/(^\/{1,}|\/{1,}$|\/{0,}\?.*|\/{0,}\%.*)/g, ''), 'index.html'));
-    } else {
-        next();
-    }
-}, express.static(pathes.all));
-
-app.get('/*', function (req, res) {
-    res.sendFile(path.resolve(pathes.index));
-});
-
-
+// const phantomRegex = /(phantom)/i;
+// //app.use('/',  express.static(pathes.all));
+// app.use('/', function (req, res, next) {
+//     const userAgent = req.headers['user-agent'];
+//     if ( !phantomRegex.test(userAgent) && isBot(userAgent)) {
+//         res.sendFile(path.resolve('./snapshots', req.url.replace(/(^\/{1,}|\/{1,}$|\/{0,}\?.*|\/{0,}\%.*)/g, ''), 'index.html'));
+//     } else {
+//         next();
+//     }
+// }, express.static(pathes.all));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
