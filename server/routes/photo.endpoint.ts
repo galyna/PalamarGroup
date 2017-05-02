@@ -1,4 +1,5 @@
 import {currentUser} from '../auth/current_user';
+import {Request} from 'connect-multiparty';
 import {Router} from 'express';
 import {photoService} from '../services/photo.service';
 import {auth} from "../auth/auth";
@@ -11,7 +12,7 @@ import {config} from '../config';
 
 
 photoApi.route('/')
-    .post(function (req, res, next) {
+    .post(function (req: Request, res, next) {
             if (!req.files || !req.files.file) {
                 res.status(400).json({error: {message: 'No files attached'}});
             }
@@ -27,7 +28,7 @@ photoApi.route('/')
                 next();
             }
         },
-        async function (req, res) {
+        async function (req: Request, res) {
             //TODO: add security handling!!
             let newName = await photoService.create(req.files.file.path);
             //TODO: remove hardcode

@@ -13,7 +13,7 @@ export interface IConstants {
 export let constants: IConstants = {
     host: 'http://palamar.com.ua',
     baseUrl: '/',
-    apiUrl: '/api',
+    apiUrl: 'http://localhost:9000',
     uploadDir: '/content/uploads',
     photoUrl: '/api/photo',
     orderStatuses: [

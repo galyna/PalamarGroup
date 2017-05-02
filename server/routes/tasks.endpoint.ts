@@ -35,7 +35,8 @@ tasksApi.route('/task')
         }
         try {
             var task = await Task.create(req.body);
-            master.tasks.push(task);
+            // TODO: check if task is really array
+            master.tasks.push(task[0]);
             await master.save();
             res.json(task);
 

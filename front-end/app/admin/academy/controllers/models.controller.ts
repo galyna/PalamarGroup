@@ -1,4 +1,3 @@
-///<reference path="../../../../../typings/globals/ng-file-upload/index.d.ts"/>
 import IPhoto = pg.models.IPhoto;
 import {IConstants} from "../../../core/core.config";
 import {IModel, IModelResource, ModelResourceName} from "../../../resources/model.resource";
