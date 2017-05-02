@@ -1,5 +1,4 @@
 import {IPgCalendarDataService, PgCalendarData} from "./calendar.data.service";
-import {IPgCalendarFactory} from "./calendar.factory";
 
 pgCalendarDirective.$inject = ["$compile", "$parse", "$http", "$q", "$templateCache", "pgCalendar", "pgCalendarData",'$mdDateLocale'];
 export function pgCalendarDirective($compile:ng.ICompileService, $parse:ng.IParseService,
@@ -242,10 +241,6 @@ export function pgCalendarDirective($compile:ng.ICompileService, $parse:ng.IPars
                     angular.forEach(week, getDayContent);
                 });
             };
-
-
-            //TODO: what is that???
-            // window.data = $scope.data;
 
             var bootstrap = function () {
                 init().then(function (contents) {

@@ -1,7 +1,3 @@
-export interface IPgCalendarFactory {
-    //TODO: implement
-}
-
 export function PgCalendarFactory() {
 
     function Calendar(year, month, options) {

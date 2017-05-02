@@ -49,7 +49,6 @@ emailEndpoint.route( '/adv/:courseId' )
                 if (!contact.email) return reject( {contact: contact, message: "Contact has no email"} );
 
                 let subject = req.course.name;
-                //   let body = 'TODO: make email template';
                 let template = `<!DOCTYPE html>
 <html lang="en">
 <head>
