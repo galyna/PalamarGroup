@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 REMOTE_USER='ubuntu'
-REMOTE_HOST='ec2-52-59-204-126.eu-central-1.compute.amazonaws.com'
+REMOTE_HOST='52.28.9.188'
 REMOTE_ROOT_FOLDER='/srv/palamar-group'
 REMOTE_DIST_FOLDER='/srv/palamar-group/dist'
 PACKAGE_JSON='./server/package.json'

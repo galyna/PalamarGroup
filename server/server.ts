@@ -15,7 +15,7 @@ import api from './routes/api';
 
 
 let app = express();
-let port = parseInt(process.env['PORT']) || 8080;
+let port = parseInt(process.env['PORT']) || 9000;
 let env = process.env['TYPE'];
 
 mongoose.connect(config.mongoUrl);

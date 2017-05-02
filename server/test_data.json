@@ -62,13 +62,13 @@
       "__v": 0,
       "order": 5,
       "price": 4000,
-      "avatar": "/api/photo/350c3900-7457-4ac0-ad10-cd59cbfbab03.jpg",
+      "avatar": "/photo/350c3900-7457-4ac0-ad10-cd59cbfbab03.jpg",
       "comments": [],
       "courseModulesDates": [],
       "days": [],
       "author": {
         "name": "Тетяна Єгунян",
-        "photoUrl": "/api/photo/7093819c-ed32-4704-8961-99461c8f9b2d.jpg"
+        "photoUrl": "/photo/7093819c-ed32-4704-8961-99461c8f9b2d.jpg"
       },
       "historyPhotos": [],
       "hearFormsPhotos": [],
@@ -80,7 +80,7 @@
       "name": "ТЕОРІЯ КОЛЬРУ",
       "description": "У програмі курсу детально розглядається теорія кольору на основі авторської системи розуміння квітів по Іоханессу Іттону і пропонується формула розрахунку колірного образу.\n\nЗавдяки цьому, після закінчення навчання випускник цілком може претендувати на популярну сьогодні в салонах посаду колірного консультанта, чиїм основним завданням є робота з колірними драпіровками і складання колірної астрології індивідуального стилю людини. Тим більше, що крім іншого, в рамках курсу також вивчаються правила вибору фактури і тканини, пропорції і силуетні лінії, класифікація фігур і фокусні точки людини.",
       "__v": 0,
-      "avatar": "/api/photo/5d326e4d-96d2-4487-a93d-f2f39d436cc4.jpg",
+      "avatar": "/photo/5d326e4d-96d2-4487-a93d-f2f39d436cc4.jpg",
       "order": 6,
       "price": 4000,
       "comments": [],
@@ -88,7 +88,7 @@
       "days": [],
       "author": {
         "name": "Тетяна Єгунян",
-        "photoUrl": "/api/photo/ffa49ada-3a3e-41ce-9e5f-d995f33117b2.jpg"
+        "photoUrl": "/photo/ffa49ada-3a3e-41ce-9e5f-d995f33117b2.jpg"
       },
       "historyPhotos": [],
       "hearFormsPhotos": [],
@@ -102,7 +102,7 @@
       "order": 5,
       "isVisible": true,
       "__v": 5,
-      "avatar": "/api/photo/7bea185a-16a9-4a29-8346-67a614145fde.jpg",
+      "avatar": "/photo/7bea185a-16a9-4a29-8346-67a614145fde.jpg",
       "comments": [
         {
           "_id": "57726f21c3460c1c06acb19d",
@@ -240,43 +240,43 @@
       ],
       "author": {
         "name": ".ЮЛІЯ ПАЛАМАР",
-        "photoUrl": "/api/photo/94d2e79d-a493-4700-91ca-7bf6e8ad5e94.jpg"
+        "photoUrl": "/photo/94d2e79d-a493-4700-91ca-7bf6e8ad5e94.jpg"
       },
       "historyPhotos": [],
       "hearFormsPhotos": [
         {
           "name": "",
-          "url": "/api/photo/f47f7ad5-1e8e-44b9-a6a5-58000f010ddb.jpg",
+          "url": "/photo/f47f7ad5-1e8e-44b9-a6a5-58000f010ddb.jpg",
           "order": 3,
           "_id": "57d28e597978ab1bd8078ff5"
         },
         {
           "name": "",
-          "url": "/api/photo/a540133a-ed47-4d04-99d3-d896f276dd99.jpg",
+          "url": "/photo/a540133a-ed47-4d04-99d3-d896f276dd99.jpg",
           "order": 1,
           "_id": "57d28e847978ab1bd8078ff6"
         },
         {
           "name": "",
-          "url": "/api/photo/26504942-a5e5-49bf-ae1d-feb94984ec7b.jpg",
+          "url": "/photo/26504942-a5e5-49bf-ae1d-feb94984ec7b.jpg",
           "order": 0,
           "_id": "57d290257978ab1bd8078ff9"
         },
         {
           "name": "",
-          "url": "/api/photo/eac66243-dea1-4068-a570-930bc013fddc.jpg",
+          "url": "/photo/eac66243-dea1-4068-a570-930bc013fddc.jpg",
           "order": 4,
           "_id": "57d290257978ab1bd8078ff8"
         },
         {
           "name": "",
-          "url": "/api/photo/53a4c8bc-afe8-48ea-86c3-99a8c7c61f93.jpg",
+          "url": "/photo/53a4c8bc-afe8-48ea-86c3-99a8c7c61f93.jpg",
           "order": 5,
           "_id": "57d290257978ab1bd8078ff7"
         },
         {
           "name": "",
-          "url": "/api/photo/4f09b597-8742-4449-9ac1-0471b0c5e06b.jpg",
+          "url": "/photo/4f09b597-8742-4449-9ac1-0471b0c5e06b.jpg",
           "order": 6,
           "_id": "57d291677978ab1bd8078ffa"
         }
@@ -291,7 +291,7 @@
       "order": 7,
       "isVisible": true,
       "__v": 15,
-      "avatar": "/api/photo/49d9d945-054d-4aeb-be74-502e5243a9fa.jpg",
+      "avatar": "/photo/49d9d945-054d-4aeb-be74-502e5243a9fa.jpg",
       "comments": [],
       "courseModulesDates": [
         "2016-05-23T21:00:00.000Z",
@@ -314,61 +314,61 @@
       ],
       "author": {
         "name": "ЮЛІЯ ПАЛАМАР",
-        "photoUrl": "/api/photo/96fadfe8-5a9a-4431-b325-e5d6969f4f79.jpg"
+        "photoUrl": "/photo/96fadfe8-5a9a-4431-b325-e5d6969f4f79.jpg"
       },
       "historyPhotos": [],
       "hearFormsPhotos": [
         {
           "name": "",
-          "url": "/api/photo/474d3f19-6159-4c3c-8250-8f9de62a97fe.jpg",
+          "url": "/photo/474d3f19-6159-4c3c-8250-8f9de62a97fe.jpg",
           "order": 5,
           "_id": "57d292b67978ab1bd8078ffd"
         },
         {
           "name": "",
-          "url": "/api/photo/51af558b-da04-4261-8901-22b700c17dd9.jpg",
+          "url": "/photo/51af558b-da04-4261-8901-22b700c17dd9.jpg",
           "order": 8,
           "_id": "57d295547978ab1bd8079000"
         },
         {
           "name": "",
-          "url": "/api/photo/46e80e91-c669-451e-8bfe-7eb99637a00e.jpg",
+          "url": "/photo/46e80e91-c669-451e-8bfe-7eb99637a00e.jpg",
           "order": 2,
           "_id": "57d2959e7978ab1bd8079001"
         },
         {
           "name": "",
-          "url": "/api/photo/42d0b6cd-620b-4425-a1f2-33bea101a80c.jpg",
+          "url": "/photo/42d0b6cd-620b-4425-a1f2-33bea101a80c.jpg",
           "order": 0,
           "_id": "57d295ca7978ab1bd8079002"
         },
         {
           "name": "",
-          "url": "/api/photo/76c15a5c-a30d-4bc1-8366-5c28678af7e1.jpg",
+          "url": "/photo/76c15a5c-a30d-4bc1-8366-5c28678af7e1.jpg",
           "order": 3,
           "_id": "57d296287978ab1bd8079003"
         },
         {
           "name": "",
-          "url": "/api/photo/84fbd98b-4187-4e26-b145-b6265ffe9674.jpg",
+          "url": "/photo/84fbd98b-4187-4e26-b145-b6265ffe9674.jpg",
           "order": 7,
           "_id": "57d2983c7978ab1bd8079005"
         },
         {
           "name": "",
-          "url": "/api/photo/a69b6a98-6fe0-47f6-a1e5-8a76e15eee12.jpg",
+          "url": "/photo/a69b6a98-6fe0-47f6-a1e5-8a76e15eee12.jpg",
           "order": 4,
           "_id": "57d298bf7978ab1bd8079006"
         },
         {
           "name": "",
-          "url": "/api/photo/4628526e-c5d6-42bd-8871-6aaf666baf8d.jpg",
+          "url": "/photo/4628526e-c5d6-42bd-8871-6aaf666baf8d.jpg",
           "order": 9,
           "_id": "57d298fe7978ab1bd8079007"
         },
         {
           "name": "",
-          "url": "/api/photo/0fb7f4a1-118f-433d-b2a4-602dd67e88b1.jpg",
+          "url": "/photo/0fb7f4a1-118f-433d-b2a4-602dd67e88b1.jpg",
           "order": 10,
           "_id": "57d29b2d7978ab1bd8079008"
         }
@@ -383,7 +383,7 @@
       "order": 2,
       "isVisible": true,
       "__v": 4,
-      "avatar": "/api/photo/767e3f46-477d-4b89-a91f-194820fcd51c.jpg",
+      "avatar": "/photo/767e3f46-477d-4b89-a91f-194820fcd51c.jpg",
       "comments": [],
       "courseModulesDates": [
         "2016-07-03T21:00:00.000Z",
@@ -424,43 +424,43 @@
       ],
       "author": {
         "name": "Тетяна Єгунян",
-        "photoUrl": "/api/photo/5bec224e-5dce-4049-8b54-93dd1673cb88.jpg"
+        "photoUrl": "/photo/5bec224e-5dce-4049-8b54-93dd1673cb88.jpg"
       },
       "historyPhotos": [],
       "hearFormsPhotos": [
         {
           "name": "",
-          "url": "/api/photo/7f2044d6-6390-499d-9f76-62db19354142.jpg",
+          "url": "/photo/7f2044d6-6390-499d-9f76-62db19354142.jpg",
           "order": 0,
           "_id": "57d29e4a7978ab1bd8079009"
         },
         {
           "name": "",
-          "url": "/api/photo/68512f11-9770-4fd5-9753-8a79bc8e4bab.jpg",
+          "url": "/photo/68512f11-9770-4fd5-9753-8a79bc8e4bab.jpg",
           "order": 2,
           "_id": "57d29e937978ab1bd807900a"
         },
         {
           "name": "",
-          "url": "/api/photo/d7fd01f2-bd99-4cfa-b31d-c820d13e4640.jpg",
+          "url": "/photo/d7fd01f2-bd99-4cfa-b31d-c820d13e4640.jpg",
           "order": 0,
           "_id": "57d29f047978ab1bd807900d"
         },
         {
           "name": "",
-          "url": "/api/photo/4d35a8a9-e8b6-418f-b5d7-c2a52b6035f0.jpg",
+          "url": "/photo/4d35a8a9-e8b6-418f-b5d7-c2a52b6035f0.jpg",
           "order": 0,
           "_id": "57d29f047978ab1bd807900c"
         },
         {
           "name": "",
-          "url": "/api/photo/e67780ea-cf74-4f45-a4a4-0a02e1379c6e.jpg",
+          "url": "/photo/e67780ea-cf74-4f45-a4a4-0a02e1379c6e.jpg",
           "order": 0,
           "_id": "57d29f047978ab1bd807900b"
         },
         {
           "name": "",
-          "url": "/api/photo/befd4fca-e878-45ec-a436-a86a8bb93094.jpg",
+          "url": "/photo/befd4fca-e878-45ec-a436-a86a8bb93094.jpg",
           "order": 0,
           "_id": "57d29f387978ab1bd807900e"
         }
@@ -473,7 +473,7 @@
       "isVisible": true,
       "description": "Теоретично - практичний семінар з відпрацюванням форм жіночі стрижок від SAYPLE EDUCATION.\n Проводитиметься з 24 жовтня по 28 жовтня 2016 року.",
       "__v": 0,
-      "avatar": "/api/photo/35ffb389-a764-433b-a5a0-ed830ad28614.png",
+      "avatar": "/photo/35ffb389-a764-433b-a5a0-ed830ad28614.png",
       "price": 5000,
       "order": 4,
       "comments": [],
@@ -511,25 +511,25 @@
       ],
       "author": {
         "name": "Павло Смірнов",
-        "photoUrl": "/api/photo/506badac-ce68-4581-9f5a-630ba0d42618.png"
+        "photoUrl": "/photo/506badac-ce68-4581-9f5a-630ba0d42618.png"
       },
       "historyPhotos": [],
       "hearFormsPhotos": [
         {
           "name": "",
-          "url": "/api/photo/079c45f6-fc02-4db3-b7bd-19a15617ff53.jpg",
+          "url": "/photo/079c45f6-fc02-4db3-b7bd-19a15617ff53.jpg",
           "order": 0,
           "_id": "57d0927c048e194703dd13af"
         },
         {
           "name": "",
-          "url": "/api/photo/59956919-3f21-4b71-88ce-a9c26deb949e.jpg",
+          "url": "/photo/59956919-3f21-4b71-88ce-a9c26deb949e.jpg",
           "order": 1,
           "_id": "57d092de048e194703dd13b0"
         },
         {
           "name": "",
-          "url": "/api/photo/33e7627e-b436-4140-a29b-e0e63cadc6fd.jpg",
+          "url": "/photo/33e7627e-b436-4140-a29b-e0e63cadc6fd.jpg",
           "order": 2,
           "_id": "57d09350048e194703dd13b1"
         }
@@ -544,7 +544,7 @@
       "order": 1,
       "isVisible": true,
       "__v": 1,
-      "avatar": "/api/photo/99808501-2aeb-4491-9dd4-353e5db89960.jpg",
+      "avatar": "/photo/99808501-2aeb-4491-9dd4-353e5db89960.jpg",
       "comments": [],
       "courseModulesDates": [
         "2016-04-20T21:00:00.000Z",
@@ -578,18 +578,18 @@
       ],
       "author": {
         "name": "Леонід Седюков",
-        "photoUrl": "/api/photo/7bc299e5-74de-4a07-a8b9-c28b392fd2c5.jpg"
+        "photoUrl": "/photo/7bc299e5-74de-4a07-a8b9-c28b392fd2c5.jpg"
       },
       "historyPhotos": [
         {
           "name": "Модуль у 2016 році",
-          "url": "/api/photo/adf9a30c-f397-46ca-89d9-d75ce5428800.jpg",
+          "url": "/photo/adf9a30c-f397-46ca-89d9-d75ce5428800.jpg",
           "order": 0,
           "_id": "578687bb459029d0004ea4a1"
         },
         {
           "name": "",
-          "url": "/api/photo/2faf93d7-0554-4b21-8464-2fff0eee331a.jpg",
+          "url": "/photo/2faf93d7-0554-4b21-8464-2fff0eee331a.jpg",
           "order": 0,
           "_id": "5786895e459029d0004ea4b2"
         }
@@ -602,7 +602,7 @@
       "name": "STEP 2",
       "isVisible": false,
       "description": "Теоретично - практичний семінар з відпрацюванням форм жіночі стрижок від SAYPLE EDUCATION.\n Проводитиметься з 6 жовтня до 10 жовтня 2017 року.",
-      "avatar": "/api/photo/35ffb389-a764-433b-a5a0-ed830ad28614.png",
+      "avatar": "/photo/35ffb389-a764-433b-a5a0-ed830ad28614.png",
       "price": 5000,
       "order": 8,
       "__v": 0,
@@ -649,25 +649,25 @@
       ],
       "author": {
         "name": "Павло Смірнов",
-        "photoUrl": "/api/photo/fcb51a20-3167-4fbf-8436-c8df306367bd.png"
+        "photoUrl": "/photo/fcb51a20-3167-4fbf-8436-c8df306367bd.png"
       },
       "historyPhotos": [],
       "hearFormsPhotos": [
         {
           "name": "",
-          "url": "/api/photo/079c45f6-fc02-4db3-b7bd-19a15617ff53.jpg",
+          "url": "/photo/079c45f6-fc02-4db3-b7bd-19a15617ff53.jpg",
           "order": 0,
           "_id": "57d0927c048e194703dd13af"
         },
         {
           "name": "",
-          "url": "/api/photo/59956919-3f21-4b71-88ce-a9c26deb949e.jpg",
+          "url": "/photo/59956919-3f21-4b71-88ce-a9c26deb949e.jpg",
           "order": 1,
           "_id": "57d092de048e194703dd13b0"
         },
         {
           "name": "",
-          "url": "/api/photo/33e7627e-b436-4140-a29b-e0e63cadc6fd.jpg",
+          "url": "/photo/33e7627e-b436-4140-a29b-e0e63cadc6fd.jpg",
           "order": 2,
           "_id": "57d09350048e194703dd13b1"
         }
@@ -679,7 +679,7 @@
       "name": "INSEPTION  Адаптивні форми",
       "isVisible": true,
       "description": "Теоретично - практичний семінар з відпрацюванням форм жіночі стрижок від SAYPLE EDUCATION.\n Проводитиметься з 6 жовтня до 10 жовтня 2017 року.",
-      "avatar": "/api/photo/35ffb389-a764-433b-a5a0-ed830ad28614.png",
+      "avatar": "/photo/35ffb389-a764-433b-a5a0-ed830ad28614.png",
       "price": 3000,
       "order": 6,
       "__v": 0,
@@ -719,25 +719,25 @@
       ],
       "author": {
         "name": "Антон Кочетков",
-        "photoUrl": "/api/photo/62125b34-74da-46cc-8025-def487ff768f.jpg"
+        "photoUrl": "/photo/62125b34-74da-46cc-8025-def487ff768f.jpg"
       },
       "historyPhotos": [],
       "hearFormsPhotos": [
         {
           "name": "",
-          "url": "/api/photo/079c45f6-fc02-4db3-b7bd-19a15617ff53.jpg",
+          "url": "/photo/079c45f6-fc02-4db3-b7bd-19a15617ff53.jpg",
           "order": 0,
           "_id": "57d0927c048e194703dd13af"
         },
         {
           "name": "",
-          "url": "/api/photo/59956919-3f21-4b71-88ce-a9c26deb949e.jpg",
+          "url": "/photo/59956919-3f21-4b71-88ce-a9c26deb949e.jpg",
           "order": 1,
           "_id": "57d092de048e194703dd13b0"
         },
         {
           "name": "",
-          "url": "/api/photo/33e7627e-b436-4140-a29b-e0e63cadc6fd.jpg",
+          "url": "/photo/33e7627e-b436-4140-a29b-e0e63cadc6fd.jpg",
           "order": 2,
           "_id": "57d09350048e194703dd13b1"
         }
@@ -1177,37 +1177,37 @@
       "works": [
         {
           "name": "",
-          "url": "/api/photo/f2ff50a3-aa9d-4a94-add1-67f5efef6861.jpg",
+          "url": "/photo/f2ff50a3-aa9d-4a94-add1-67f5efef6861.jpg",
           "order": 0,
           "_id": "581e1b87464cc5208e8159be"
         },
         {
           "name": "",
-          "url": "/api/photo/a2cb936e-75ad-412d-aca1-a7d6f386c298.jpg",
+          "url": "/photo/a2cb936e-75ad-412d-aca1-a7d6f386c298.jpg",
           "order": 0,
           "_id": "581e1bc7464cc5208e8159c9"
         },
         {
           "name": "",
-          "url": "/api/photo/0e118f31-b51f-46cb-921a-4c7f79ae276e.jpg",
+          "url": "/photo/0e118f31-b51f-46cb-921a-4c7f79ae276e.jpg",
           "order": 0,
           "_id": "581e1bc7464cc5208e8159c8"
         },
         {
           "name": "",
-          "url": "/api/photo/b1a08867-6b2f-4681-beb1-2cc9b80404a3.jpg",
+          "url": "/photo/b1a08867-6b2f-4681-beb1-2cc9b80404a3.jpg",
           "order": 0,
           "_id": "581e1bc7464cc5208e8159c7"
         },
         {
           "name": "",
-          "url": "/api/photo/a97dc345-bc73-47d9-b76e-8ec22e784cdb.jpg",
+          "url": "/photo/a97dc345-bc73-47d9-b76e-8ec22e784cdb.jpg",
           "order": 0,
           "_id": "581e1bf7464cc5208e8159d2"
         },
         {
           "name": "",
-          "url": "/api/photo/2170f34d-3eab-4354-8744-91116d4a9e6b.jpg",
+          "url": "/photo/2170f34d-3eab-4354-8744-91116d4a9e6b.jpg",
           "order": 0,
           "_id": "581e1bf7464cc5208e8159d1"
         }
@@ -1232,7 +1232,7 @@
             },
             "__v": 1,
             "photo": {
-              "url": "/api/photo/1ab2e973-aab4-491f-8b87-f45ac7b82bae.jpg"
+              "url": "/photo/1ab2e973-aab4-491f-8b87-f45ac7b82bae.jpg"
             },
             "params": []
           },
@@ -1257,7 +1257,7 @@
             "__v": 0,
             "description": "Ціна становить від 300 грн. На ціну впливає довжина та фактура волосся, а також складність форми стрижки та квалифікація майстра.",
             "photo": {
-              "url": "/api/photo/0042aa5f-f1a2-4caf-a32c-8460f969b912.jpg",
+              "url": "/photo/0042aa5f-f1a2-4caf-a32c-8460f969b912.jpg",
               "_id": "581c633271085d0b74bbd53b"
             }
           },
@@ -1281,7 +1281,7 @@
             },
             "__v": 0,
             "photo": {
-              "url": "/api/photo/666b83df-a99f-449e-9494-3199a17a60b9.jpg",
+              "url": "/photo/666b83df-a99f-449e-9494-3199a17a60b9.jpg",
               "_id": "581c63ab71085d0b74bbd53f"
             },
             "description": "Ціна становить від 400 грн. На ціну впливає довжина та фактура волосся, фарбники, а також складність роботи та квалифікація майстра."
@@ -1307,7 +1307,7 @@
             "defPrice": 300,
             "description": "Ціна становить від 300 грн. На ціну впливає довжина та фактура волосся, а також складність складність та квалифікація майстра.",
             "photo": {
-              "url": "/api/photo/2b8cfddb-a128-4714-971c-5fb08e8afd48.jpg",
+              "url": "/photo/2b8cfddb-a128-4714-971c-5fb08e8afd48.jpg",
               "_id": "581c666971085d0b74bbd548"
             }
           },
@@ -1332,7 +1332,7 @@
             },
             "__v": 0,
             "photo": {
-              "url": "/api/photo/82f5615f-e3e0-493d-becb-f87e0325a821.jpg",
+              "url": "/photo/82f5615f-e3e0-493d-becb-f87e0325a821.jpg",
               "_id": "581c636871085d0b74bbd53d"
             }
           },
@@ -1349,7 +1349,7 @@
             "_id": "581c677571085d0b74bbd54b",
             "name": "Плетіння",
             "photo": {
-              "url": "/api/photo/0af74e8a-4872-4516-b14e-c3699e814b35.jpg",
+              "url": "/photo/0af74e8a-4872-4516-b14e-c3699e814b35.jpg",
               "_id": "581c677571085d0b74bbd54c"
             },
             "params": [],
@@ -1372,7 +1372,7 @@
       ],
       "__v": 26,
       "photo": {
-        "url": "/api/photo/f28f131c-8fa3-48b9-9d3f-fc680c009608.jpg",
+        "url": "/photo/f28f131c-8fa3-48b9-9d3f-fc680c009608.jpg",
         "_id": "580f996be91976eb66a39fed"
       },
       "description": "Юлія - лідер колективу і засновниця студії скраси PALAMAR GROUP.  Її професійні навики привабили постійних клієнтів. А завдяки бажанню навчатись та розвиватись з'явилась команда однодумців, котрі горять улюбленою справою. Так і почалась історія PALAMAR GROUP.",
@@ -1408,7 +1408,7 @@
             },
             "__v": 1,
             "photo": {
-              "url": "/api/photo/1ab2e973-aab4-491f-8b87-f45ac7b82bae.jpg"
+              "url": "/photo/1ab2e973-aab4-491f-8b87-f45ac7b82bae.jpg"
             },
             "params": []
           },
@@ -1433,7 +1433,7 @@
             },
             "__v": 0,
             "photo": {
-              "url": "/api/photo/82f5615f-e3e0-493d-becb-f87e0325a821.jpg",
+              "url": "/photo/82f5615f-e3e0-493d-becb-f87e0325a821.jpg",
               "_id": "581c636871085d0b74bbd53d"
             }
           },
@@ -1448,7 +1448,7 @@
       ],
       "__v": 1,
       "photo": {
-        "url": "/api/photo/49ee1794-bf60-483f-95ca-966b2cca4efa.jpg",
+        "url": "/photo/49ee1794-bf60-483f-95ca-966b2cca4efa.jpg",
         "_id": "581e0b19b922051a2e9794b0"
       },
       "order": 2
@@ -1474,7 +1474,7 @@
             "defPrice": 150,
             "description": "Ціна становить від 150 грн. Європейський чи французький необрізний манікюр - це найбезпечніший і практичний вид цієї косметичної «операції» з усіх існуючих.",
             "photo": {
-              "url": "/api/photo/74244693-eb9e-40db-97b1-5b7479be6ec7.jpg",
+              "url": "/photo/74244693-eb9e-40db-97b1-5b7479be6ec7.jpg",
               "_id": "581c6afe71085d0b74bbd557"
             }
           },
@@ -1499,7 +1499,7 @@
             },
             "__v": 0,
             "photo": {
-              "url": "/api/photo/d9c03688-2e9d-4e6b-8c45-71223d2f9647.jpg",
+              "url": "/photo/d9c03688-2e9d-4e6b-8c45-71223d2f9647.jpg",
               "_id": "581c6ce971085d0b74bbd559"
             }
           },
@@ -1524,7 +1524,7 @@
             "__v": 0,
             "description": "Ціна від 200грн. Це дуже приємна омолоджує і тонізуюча процедура для шкіри обличчя, рук і ніг. Виконується ця процедура за допомогою розплавленого і розігрітого до 55 градусів косметичного парафіну.",
             "photo": {
-              "url": "/api/photo/cf407a85-014c-458f-bfad-538b15adeb34.jpg",
+              "url": "/photo/cf407a85-014c-458f-bfad-538b15adeb34.jpg",
               "_id": "581c700fdf709c0c6e8bcea8"
             }
           },
@@ -1539,7 +1539,7 @@
       ],
       "__v": 2,
       "photo": {
-        "url": "/api/photo/9a93aa5d-0a22-4e92-b9ac-4ce7f19e9f89.jpg",
+        "url": "/photo/9a93aa5d-0a22-4e92-b9ac-4ce7f19e9f89.jpg",
         "_id": "581e089db922051a2e979481"
       },
       "order": 3
@@ -1564,7 +1564,7 @@
             "__v": 0,
             "description": "Ціна становить від 300 грн. На ціну впливає довжина та фактура волосся, а також складність форми стрижки та квалифікація майстра.",
             "photo": {
-              "url": "/api/photo/0042aa5f-f1a2-4caf-a32c-8460f969b912.jpg",
+              "url": "/photo/0042aa5f-f1a2-4caf-a32c-8460f969b912.jpg",
               "_id": "581c633271085d0b74bbd53b"
             }
           },
@@ -1588,7 +1588,7 @@
             },
             "__v": 1,
             "photo": {
-              "url": "/api/photo/1ab2e973-aab4-491f-8b87-f45ac7b82bae.jpg"
+              "url": "/photo/1ab2e973-aab4-491f-8b87-f45ac7b82bae.jpg"
             },
             "params": []
           },
@@ -1603,7 +1603,7 @@
       ],
       "__v": 2,
       "photo": {
-        "url": "/api/photo/195511c2-ac20-41a1-99ab-594b4a897e12.jpg",
+        "url": "/photo/195511c2-ac20-41a1-99ab-594b4a897e12.jpg",
         "_id": "581e0762b922051a2e979479"
       },
       "description": "Оля -  добре серце і безгранна душа! Відкрита, весела, завжди усміхненна, відповідальна дівчина! Любить добро і всіх хто її оточують!",
@@ -1635,7 +1635,7 @@
             },
             "__v": 0,
             "photo": {
-              "url": "/api/photo/82f5615f-e3e0-493d-becb-f87e0325a821.jpg",
+              "url": "/photo/82f5615f-e3e0-493d-becb-f87e0325a821.jpg",
               "_id": "581c636871085d0b74bbd53d"
             }
           },
@@ -1659,7 +1659,7 @@
             },
             "__v": 1,
             "photo": {
-              "url": "/api/photo/1ab2e973-aab4-491f-8b87-f45ac7b82bae.jpg"
+              "url": "/photo/1ab2e973-aab4-491f-8b87-f45ac7b82bae.jpg"
             },
             "params": []
           },
@@ -1684,7 +1684,7 @@
             "defPrice": 300,
             "description": "Ціна становить від 300 грн. На ціну впливає довжина та фактура волосся, а також складність складність та квалифікація майстра.",
             "photo": {
-              "url": "/api/photo/2b8cfddb-a128-4714-971c-5fb08e8afd48.jpg",
+              "url": "/photo/2b8cfddb-a128-4714-971c-5fb08e8afd48.jpg",
               "_id": "581c666971085d0b74bbd548"
             }
           },
@@ -1709,7 +1709,7 @@
             },
             "__v": 0,
             "photo": {
-              "url": "/api/photo/40791ce5-9cd5-4fe5-99a4-bf06904e90cf.jpg",
+              "url": "/photo/40791ce5-9cd5-4fe5-99a4-bf06904e90cf.jpg",
               "_id": "581c662f71085d0b74bbd547"
             }
           },
@@ -1734,7 +1734,7 @@
             },
             "__v": 0,
             "photo": {
-              "url": "/api/photo/234fce65-0c85-49b7-95b1-037560cb9f51.jpg",
+              "url": "/photo/234fce65-0c85-49b7-95b1-037560cb9f51.jpg",
               "_id": "581c659f71085d0b74bbd544"
             }
           },
@@ -1749,7 +1749,7 @@
       ],
       "__v": 1,
       "photo": {
-        "url": "/api/photo/2f18b033-d914-46da-8117-a1dfd47e9f1a.jpg",
+        "url": "/photo/2f18b033-d914-46da-8117-a1dfd47e9f1a.jpg",
         "_id": "581e0b60b922051a2e9794ba"
       },
       "order": 5
@@ -1766,7 +1766,7 @@
       "works": [
         {
           "name": "",
-          "url": "/api/photo/65306759-1fa5-4883-af60-a1b282bf5d82.jpg",
+          "url": "/photo/65306759-1fa5-4883-af60-a1b282bf5d82.jpg",
           "order": 0,
           "_id": "581dcaffb922051a2e979467"
         }
@@ -1786,7 +1786,7 @@
             "__v": 0,
             "description": "Ціна становить від 300 грн. На ціну впливає довжина та фактура волосся, а також складність форми стрижки та квалифікація майстра.",
             "photo": {
-              "url": "/api/photo/0042aa5f-f1a2-4caf-a32c-8460f969b912.jpg",
+              "url": "/photo/0042aa5f-f1a2-4caf-a32c-8460f969b912.jpg",
               "_id": "581c633271085d0b74bbd53b"
             }
           },
@@ -1810,7 +1810,7 @@
             },
             "__v": 0,
             "photo": {
-              "url": "/api/photo/666b83df-a99f-449e-9494-3199a17a60b9.jpg",
+              "url": "/photo/666b83df-a99f-449e-9494-3199a17a60b9.jpg",
               "_id": "581c63ab71085d0b74bbd53f"
             },
             "description": "Ціна становить від 400 грн. На ціну впливає довжина та фактура волосся, фарбники, а також складність роботи та квалифікація майстра."
@@ -1836,7 +1836,7 @@
             "defPrice": 300,
             "description": "Ціна становить від 300 грн. На ціну впливає довжина та фактура волосся, а також складність складність та квалифікація майстра.",
             "photo": {
-              "url": "/api/photo/2b8cfddb-a128-4714-971c-5fb08e8afd48.jpg",
+              "url": "/photo/2b8cfddb-a128-4714-971c-5fb08e8afd48.jpg",
               "_id": "581c666971085d0b74bbd548"
             }
           },
@@ -1851,7 +1851,7 @@
       ],
       "__v": 3,
       "photo": {
-        "url": "/api/photo/a654e588-e6a3-4e80-a6da-6b1763d5fd8b.jpg",
+        "url": "/photo/a654e588-e6a3-4e80-a6da-6b1763d5fd8b.jpg",
         "_id": "581e06f8b922051a2e979477"
       },
       "description": "",
@@ -1878,7 +1878,7 @@
             "__v": 0,
             "description": "Ціна становить від 300 грн. На ціну впливає довжина та фактура волосся, а також складність форми стрижки та квалифікація майстра.",
             "photo": {
-              "url": "/api/photo/0042aa5f-f1a2-4caf-a32c-8460f969b912.jpg",
+              "url": "/photo/0042aa5f-f1a2-4caf-a32c-8460f969b912.jpg",
               "_id": "581c633271085d0b74bbd53b"
             }
           },
@@ -1902,7 +1902,7 @@
             },
             "__v": 0,
             "photo": {
-              "url": "/api/photo/666b83df-a99f-449e-9494-3199a17a60b9.jpg",
+              "url": "/photo/666b83df-a99f-449e-9494-3199a17a60b9.jpg",
               "_id": "581c63ab71085d0b74bbd53f"
             },
             "description": "Ціна становить від 400 грн. На ціну впливає довжина та фактура волосся, фарбники, а також складність роботи та квалифікація майстра."
@@ -1928,7 +1928,7 @@
             },
             "__v": 0,
             "photo": {
-              "url": "/api/photo/82f5615f-e3e0-493d-becb-f87e0325a821.jpg",
+              "url": "/photo/82f5615f-e3e0-493d-becb-f87e0325a821.jpg",
               "_id": "581c636871085d0b74bbd53d"
             }
           },
@@ -1945,7 +1945,7 @@
             "_id": "581c677571085d0b74bbd54b",
             "name": "Плетіння",
             "photo": {
-              "url": "/api/photo/0af74e8a-4872-4516-b14e-c3699e814b35.jpg",
+              "url": "/photo/0af74e8a-4872-4516-b14e-c3699e814b35.jpg",
               "_id": "581c677571085d0b74bbd54c"
             },
             "params": [],
@@ -1977,7 +1977,7 @@
             },
             "__v": 1,
             "photo": {
-              "url": "/api/photo/1ab2e973-aab4-491f-8b87-f45ac7b82bae.jpg"
+              "url": "/photo/1ab2e973-aab4-491f-8b87-f45ac7b82bae.jpg"
             },
             "params": []
           },
@@ -2002,7 +2002,7 @@
             "defPrice": 300,
             "description": "Ціна становить від 300 грн. На ціну впливає довжина та фактура волосся, а також складність складність та квалифікація майстра.",
             "photo": {
-              "url": "/api/photo/2b8cfddb-a128-4714-971c-5fb08e8afd48.jpg",
+              "url": "/photo/2b8cfddb-a128-4714-971c-5fb08e8afd48.jpg",
               "_id": "581c666971085d0b74bbd548"
             }
           },
@@ -2022,7 +2022,7 @@
         "text": "Top Stylist"
       },
       "photo": {
-        "url": "/api/photo/2506f4ce-2136-488c-ab2e-eb5e4cc2df91.jpg",
+        "url": "/photo/2506f4ce-2136-488c-ab2e-eb5e4cc2df91.jpg",
         "_id": "581e0b37b922051a2e9794b3"
       },
       "order": 7
@@ -2034,25 +2034,25 @@
       "works": [
         {
           "name": "",
-          "url": "/api/photo/cc62f5a7-d0e2-4f4c-94e1-5b77f06e1bb7.jpg",
+          "url": "/photo/cc62f5a7-d0e2-4f4c-94e1-5b77f06e1bb7.jpg",
           "order": 0,
           "_id": "581e28cd04db46216a7fd22a"
         },
         {
           "name": "",
-          "url": "/api/photo/38c24eb4-477f-46fa-ae6d-6641006bb0e3.jpg",
+          "url": "/photo/38c24eb4-477f-46fa-ae6d-6641006bb0e3.jpg",
           "order": 0,
           "_id": "581e28cd04db46216a7fd229"
         },
         {
           "name": "",
-          "url": "/api/photo/ba53cbf1-a211-4fb8-81cd-71e2d3b16f11.jpg",
+          "url": "/photo/ba53cbf1-a211-4fb8-81cd-71e2d3b16f11.jpg",
           "order": 0,
           "_id": "581e28cd04db46216a7fd228"
         },
         {
           "name": "",
-          "url": "/api/photo/7f9facad-4e0e-4907-8239-881ca236ee48.jpg",
+          "url": "/photo/7f9facad-4e0e-4907-8239-881ca236ee48.jpg",
           "order": 0,
           "_id": "581e28cd04db46216a7fd227"
         }
@@ -2066,7 +2066,7 @@
             "params": [],
             "__v": 0,
             "photo": {
-              "url": "/api/photo/47cfd909-c435-4490-8047-bacaa8b72afb.jpg",
+              "url": "/photo/47cfd909-c435-4490-8047-bacaa8b72afb.jpg",
               "_id": "581c85a43ea3c71022759011"
             },
             "category": {
@@ -2097,7 +2097,7 @@
             "defPrice": 200,
             "description": "Ціна становить від 200 грн. На ціну впливає складність роботи та вартість матеріалів.",
             "photo": {
-              "url": "/api/photo/53f26e53-3628-47a5-bf2e-2aa9a6d6efd3.jpg",
+              "url": "/photo/53f26e53-3628-47a5-bf2e-2aa9a6d6efd3.jpg",
               "_id": "581c85493ea3c71022759010"
             }
           },
@@ -2122,7 +2122,7 @@
             "defPrice": 100,
             "description": "Ціна від 200 грн.",
             "photo": {
-              "url": "/api/photo/779a2ee4-a2c0-4876-b46f-cc66b14c3921.jpeg",
+              "url": "/photo/779a2ee4-a2c0-4876-b46f-cc66b14c3921.jpeg",
               "_id": "581c88963ea3c71022759016"
             },
             "order": 31
@@ -2147,7 +2147,7 @@
             },
             "defPrice": 200,
             "photo": {
-              "url": "/api/photo/d6c8968e-5d4d-4626-b938-7b47fe27406a.jpg",
+              "url": "/photo/d6c8968e-5d4d-4626-b938-7b47fe27406a.jpg",
               "_id": "581c71bddf709c0c6e8bceab"
             },
             "description": "Ціна становить від 100 грн. На ціну впливає складність роботи та вартість матеріалів."
@@ -2173,7 +2173,7 @@
             "__v": 0,
             "description": "Ціна становить від 200 грн. На ціну впливає складність роботи та вартість матеріалів.",
             "photo": {
-              "url": "/api/photo/bae51976-f17d-4bb4-acda-9099cd6043c8.jpg",
+              "url": "/photo/bae51976-f17d-4bb4-acda-9099cd6043c8.jpg",
               "_id": "581c725ddf709c0c6e8bcead"
             }
           },
@@ -2199,7 +2199,7 @@
             "description": "Ціна становить від 200 грн. На ціну впливає складність роботи та вартість матеріалів.",
             "order": 60,
             "photo": {
-              "url": "/api/photo/da6b4240-1372-4f05-8a0a-5e4df71fa61e.jpg",
+              "url": "/photo/da6b4240-1372-4f05-8a0a-5e4df71fa61e.jpg",
               "_id": "581c851c3ea3c7102275900f"
             }
           },
@@ -2214,7 +2214,7 @@
       ],
       "__v": 2,
       "photo": {
-        "url": "/api/photo/512ba845-c5af-4a8e-bb6a-aea0582c0e25.jpg",
+        "url": "/photo/512ba845-c5af-4a8e-bb6a-aea0582c0e25.jpg",
         "_id": "581e07b1b922051a2e97947c"
       },
       "rate": {
@@ -2251,7 +2251,7 @@
             "__v": 0,
             "description": "Ціна становить від 300 грн. На ціну впливає довжина та фактура волосся, а також складність форми стрижки та квалифікація майстра.",
             "photo": {
-              "url": "/api/photo/0042aa5f-f1a2-4caf-a32c-8460f969b912.jpg",
+              "url": "/photo/0042aa5f-f1a2-4caf-a32c-8460f969b912.jpg",
               "_id": "581c633271085d0b74bbd53b"
             }
           },
@@ -2275,7 +2275,7 @@
             },
             "__v": 0,
             "photo": {
-              "url": "/api/photo/666b83df-a99f-449e-9494-3199a17a60b9.jpg",
+              "url": "/photo/666b83df-a99f-449e-9494-3199a17a60b9.jpg",
               "_id": "581c63ab71085d0b74bbd53f"
             },
             "description": "Ціна становить від 400 грн. На ціну впливає довжина та фактура волосся, фарбники, а також складність роботи та квалифікація майстра."
@@ -2301,7 +2301,7 @@
             },
             "__v": 0,
             "photo": {
-              "url": "/api/photo/40791ce5-9cd5-4fe5-99a4-bf06904e90cf.jpg",
+              "url": "/photo/40791ce5-9cd5-4fe5-99a4-bf06904e90cf.jpg",
               "_id": "581c662f71085d0b74bbd547"
             }
           },
@@ -2318,7 +2318,7 @@
             "_id": "581c677571085d0b74bbd54b",
             "name": "Плетіння",
             "photo": {
-              "url": "/api/photo/0af74e8a-4872-4516-b14e-c3699e814b35.jpg",
+              "url": "/photo/0af74e8a-4872-4516-b14e-c3699e814b35.jpg",
               "_id": "581c677571085d0b74bbd54c"
             },
             "params": [],
@@ -2341,7 +2341,7 @@
       ],
       "__v": 1,
       "photo": {
-        "url": "/api/photo/de5de358-b446-4f13-ba41-1f594d510194.jpg",
+        "url": "/photo/de5de358-b446-4f13-ba41-1f594d510194.jpg",
         "_id": "581e0c40b922051a2e9794c4"
       },
       "order": 9
@@ -2355,14 +2355,14 @@
       "name": "Ol SHAMPOO",
       "__v": 0,
       "photo": {
-        "url": "/api/photo/a5745cbe-d017-495c-944c-047440ee56ec.jpg"
+        "url": "/photo/a5745cbe-d017-495c-944c-047440ee56ec.jpg"
       },
       "order": 1
     },
     {
       "_id": "581c5eb471085d0b74bbd535",
       "photo": {
-        "url": "/api/photo/60c14beb-669c-4303-8bb2-910c10412820.jpg",
+        "url": "/photo/60c14beb-669c-4303-8bb2-910c10412820.jpg",
         "_id": "581c5eb471085d0b74bbd536"
       },
       "__v": 0,
@@ -2378,7 +2378,7 @@
       "name": "NUTRIZIONE",
       "price": 200,
       "photo": {
-        "url": "/api/photo/d6ca2256-e1a6-4d2f-ba4e-a0c5b202ffde.jpg",
+        "url": "/photo/d6ca2256-e1a6-4d2f-ba4e-a0c5b202ffde.jpg",
         "_id": "581c4a074c4f3704e0347c97"
       },
       "order": 3
@@ -2388,7 +2388,7 @@
       "description": "Для того щоб ваші кудряшки були в форм",
       "__v": 0,
       "photo": {
-        "url": "/api/photo/44f2d38a-b33f-42d2-b1a5-cfafb651f487.jpg"
+        "url": "/photo/44f2d38a-b33f-42d2-b1a5-cfafb651f487.jpg"
       },
       "name": "CYRLY",
       "price": 60,
@@ -2399,7 +2399,7 @@
       "description": "Лінія для профілактики та лікування випадіння волосся Kemon P Factor System",
       "__v": 0,
       "photo": {
-        "url": "/api/photo/b044da62-d8df-443c-bae4-d230da93c34a.jpg",
+        "url": "/photo/b044da62-d8df-443c-bae4-d230da93c34a.jpg",
         "_id": "581c4a2f4c4f3704e0347c99"
       },
       "name": "Kemon P Factor System Balsem",
@@ -2413,7 +2413,7 @@
       "price": 100,
       "__v": 0,
       "photo": {
-        "url": "/api/photo/5b98c304-8b26-478c-b6dc-79fbe324c282.jpg"
+        "url": "/photo/5b98c304-8b26-478c-b6dc-79fbe324c282.jpg"
       },
       "order": 6
     },
@@ -2424,7 +2424,7 @@
       "price": 200,
       "__v": 0,
       "photo": {
-        "url": "/api/photo/ab433a3c-a8ab-4b83-b10e-e1d0ffcc88a7.jpg"
+        "url": "/photo/ab433a3c-a8ab-4b83-b10e-e1d0ffcc88a7.jpg"
       },
       "order": 7
     }
@@ -2441,7 +2441,7 @@
       },
       "__v": 1,
       "photo": {
-        "url": "/api/photo/1ab2e973-aab4-491f-8b87-f45ac7b82bae.jpg"
+        "url": "/photo/1ab2e973-aab4-491f-8b87-f45ac7b82bae.jpg"
       },
       "params": []
     },
@@ -2457,7 +2457,7 @@
       "__v": 0,
       "description": "Ціна становить від 300 грн. На ціну впливає довжина та фактура волосся, а також складність форми стрижки та квалифікація майстра.",
       "photo": {
-        "url": "/api/photo/0042aa5f-f1a2-4caf-a32c-8460f969b912.jpg",
+        "url": "/photo/0042aa5f-f1a2-4caf-a32c-8460f969b912.jpg",
         "_id": "581c633271085d0b74bbd53b"
       }
     },
@@ -2473,7 +2473,7 @@
       },
       "__v": 0,
       "photo": {
-        "url": "/api/photo/82f5615f-e3e0-493d-becb-f87e0325a821.jpg",
+        "url": "/photo/82f5615f-e3e0-493d-becb-f87e0325a821.jpg",
         "_id": "581c636871085d0b74bbd53d"
       }
     },
@@ -2488,7 +2488,7 @@
       },
       "__v": 0,
       "photo": {
-        "url": "/api/photo/666b83df-a99f-449e-9494-3199a17a60b9.jpg",
+        "url": "/photo/666b83df-a99f-449e-9494-3199a17a60b9.jpg",
         "_id": "581c63ab71085d0b74bbd53f"
       },
       "description": "Ціна становить від 400 грн. На ціну впливає довжина та фактура волосся, фарбники, а також складність роботи та квалифікація майстра."
@@ -2505,7 +2505,7 @@
       "__v": 0,
       "description": "Лікувальні процедури для волосся та шкіри голови. Ціна становить від 200 грн. На ціну впливає вартість засобів, що використовуються.",
       "photo": {
-        "url": "/api/photo/b17ba1b1-5867-4ef8-b57e-af837b229790.jpg",
+        "url": "/photo/b17ba1b1-5867-4ef8-b57e-af837b229790.jpg",
         "_id": "581c64ea71085d0b74bbd542"
       }
     },
@@ -2521,7 +2521,7 @@
       },
       "__v": 0,
       "photo": {
-        "url": "/api/photo/234fce65-0c85-49b7-95b1-037560cb9f51.jpg",
+        "url": "/photo/234fce65-0c85-49b7-95b1-037560cb9f51.jpg",
         "_id": "581c659f71085d0b74bbd544"
       }
     },
@@ -2537,7 +2537,7 @@
       "defPrice": 300,
       "description": "Ціна становить від 300 грн. На ціну впливає довжина та фактура волосся, а також складність складність та квалифікація майстра.",
       "photo": {
-        "url": "/api/photo/2b8cfddb-a128-4714-971c-5fb08e8afd48.jpg",
+        "url": "/photo/2b8cfddb-a128-4714-971c-5fb08e8afd48.jpg",
         "_id": "581c666971085d0b74bbd548"
       }
     },
@@ -2553,7 +2553,7 @@
       },
       "__v": 0,
       "photo": {
-        "url": "/api/photo/40791ce5-9cd5-4fe5-99a4-bf06904e90cf.jpg",
+        "url": "/photo/40791ce5-9cd5-4fe5-99a4-bf06904e90cf.jpg",
         "_id": "581c662f71085d0b74bbd547"
       }
     },
@@ -2561,7 +2561,7 @@
       "_id": "581c677571085d0b74bbd54b",
       "name": "Плетіння",
       "photo": {
-        "url": "/api/photo/0af74e8a-4872-4516-b14e-c3699e814b35.jpg",
+        "url": "/photo/0af74e8a-4872-4516-b14e-c3699e814b35.jpg",
         "_id": "581c677571085d0b74bbd54c"
       },
       "params": [],
@@ -2585,7 +2585,7 @@
       "__v": 0,
       "description": "Ціна становить від 100 грн. На ціну впливає  складність роботи та ватрість матеріалів.",
       "photo": {
-        "url": "/api/photo/07385f32-cf17-4de8-b166-fcfad5fb100c.jpg",
+        "url": "/photo/07385f32-cf17-4de8-b166-fcfad5fb100c.jpg",
         "_id": "581c686b71085d0b74bbd550"
       }
     },
@@ -2601,7 +2601,7 @@
       },
       "__v": 0,
       "photo": {
-        "url": "/api/photo/c68cfdf4-a3fc-4d58-84d5-fb7c011c1211.jpg",
+        "url": "/photo/c68cfdf4-a3fc-4d58-84d5-fb7c011c1211.jpg",
         "_id": "581c68b871085d0b74bbd552"
       }
     },
@@ -2617,7 +2617,7 @@
       "__v": 0,
       "description": "Ціна становить від 150 грн. На ціну впливає  складність роботи та ватрість матеріалів.",
       "photo": {
-        "url": "/api/photo/cc3fb178-fc70-4c3f-876d-084c59eb9098.jpg",
+        "url": "/photo/cc3fb178-fc70-4c3f-876d-084c59eb9098.jpg",
         "_id": "581c69ad71085d0b74bbd554"
       }
     },
@@ -2633,7 +2633,7 @@
       "defPrice": 150,
       "description": "Ціна становить від 150 грн. Європейський чи французький необрізний манікюр - це найбезпечніший і практичний вид цієї косметичної «операції» з усіх існуючих.",
       "photo": {
-        "url": "/api/photo/74244693-eb9e-40db-97b1-5b7479be6ec7.jpg",
+        "url": "/photo/74244693-eb9e-40db-97b1-5b7479be6ec7.jpg",
         "_id": "581c6afe71085d0b74bbd557"
       }
     },
@@ -2649,7 +2649,7 @@
       },
       "__v": 0,
       "photo": {
-        "url": "/api/photo/d9c03688-2e9d-4e6b-8c45-71223d2f9647.jpg",
+        "url": "/photo/d9c03688-2e9d-4e6b-8c45-71223d2f9647.jpg",
         "_id": "581c6ce971085d0b74bbd559"
       }
     },
@@ -2665,7 +2665,7 @@
       },
       "__v": 0,
       "photo": {
-        "url": "/api/photo/98a12b68-da35-47de-aff2-142150538d48.jpg",
+        "url": "/photo/98a12b68-da35-47de-aff2-142150538d48.jpg",
         "_id": "581c6dc871085d0b74bbd55b"
       }
     },
@@ -2681,7 +2681,7 @@
       "__v": 0,
       "description": "Ціна від 200грн. Це дуже приємна омолоджує і тонізуюча процедура для шкіри обличчя, рук і ніг. Виконується ця процедура за допомогою розплавленого і розігрітого до 55 градусів косметичного парафіну.",
       "photo": {
-        "url": "/api/photo/cf407a85-014c-458f-bfad-538b15adeb34.jpg",
+        "url": "/photo/cf407a85-014c-458f-bfad-538b15adeb34.jpg",
         "_id": "581c700fdf709c0c6e8bcea8"
       }
     },
@@ -2696,7 +2696,7 @@
       },
       "defPrice": 200,
       "photo": {
-        "url": "/api/photo/d6c8968e-5d4d-4626-b938-7b47fe27406a.jpg",
+        "url": "/photo/d6c8968e-5d4d-4626-b938-7b47fe27406a.jpg",
         "_id": "581c71bddf709c0c6e8bceab"
       },
       "description": "Ціна становить від 100 грн. На ціну впливає складність роботи та вартість матеріалів."
@@ -2713,7 +2713,7 @@
       "__v": 0,
       "description": "Ціна становить від 200 грн. На ціну впливає складність роботи та вартість матеріалів.",
       "photo": {
-        "url": "/api/photo/bae51976-f17d-4bb4-acda-9099cd6043c8.jpg",
+        "url": "/photo/bae51976-f17d-4bb4-acda-9099cd6043c8.jpg",
         "_id": "581c725ddf709c0c6e8bcead"
       }
     },
@@ -2729,7 +2729,7 @@
       "defPrice": 200,
       "description": "Ціна становить від 200 грн. На ціну впливає складність роботи та вартість матеріалів.",
       "photo": {
-        "url": "/api/photo/53f26e53-3628-47a5-bf2e-2aa9a6d6efd3.jpg",
+        "url": "/photo/53f26e53-3628-47a5-bf2e-2aa9a6d6efd3.jpg",
         "_id": "581c85493ea3c71022759010"
       }
     },
@@ -2739,7 +2739,7 @@
       "params": [],
       "__v": 0,
       "photo": {
-        "url": "/api/photo/47cfd909-c435-4490-8047-bacaa8b72afb.jpg",
+        "url": "/photo/47cfd909-c435-4490-8047-bacaa8b72afb.jpg",
         "_id": "581c85a43ea3c71022759011"
       },
       "category": {
@@ -2761,7 +2761,7 @@
       "defPrice": 100,
       "description": "Ціна 100 грн.",
       "photo": {
-        "url": "/api/photo/f77adc86-a3d4-4280-95c2-caa01a35ec84.jpg",
+        "url": "/photo/f77adc86-a3d4-4280-95c2-caa01a35ec84.jpg",
         "_id": "581c88273ea3c71022759015"
       }
     },
@@ -2777,7 +2777,7 @@
       "defPrice": 100,
       "description": "Ціна від 200 грн.",
       "photo": {
-        "url": "/api/photo/779a2ee4-a2c0-4876-b46f-cc66b14c3921.jpeg",
+        "url": "/photo/779a2ee4-a2c0-4876-b46f-cc66b14c3921.jpeg",
         "_id": "581c88963ea3c71022759016"
       },
       "order": 31
@@ -2795,7 +2795,7 @@
       "description": "Ціна становить від 200 грн. На ціну впливає складність роботи та вартість матеріалів.",
       "order": 60,
       "photo": {
-        "url": "/api/photo/da6b4240-1372-4f05-8a0a-5e4df71fa61e.jpg",
+        "url": "/photo/da6b4240-1372-4f05-8a0a-5e4df71fa61e.jpg",
         "_id": "581c851c3ea3c7102275900f"
       }
     }
@@ -2811,19 +2811,19 @@
       "photos": [
         {
           "name": "",
-          "url": "/api/photo/2574d830-ec60-4388-a661-2d2834df6c67.jpg",
+          "url": "/photo/2574d830-ec60-4388-a661-2d2834df6c67.jpg",
           "order": 0,
           "_id": "581e1cf8464cc5208e8159dc"
         },
         {
           "name": "",
-          "url": "/api/photo/e8bc5743-1020-4221-b375-99cf4d113c91.jpg",
+          "url": "/photo/e8bc5743-1020-4221-b375-99cf4d113c91.jpg",
           "order": 0,
           "_id": "581e1cf8464cc5208e8159db"
         },
         {
           "name": "",
-          "url": "/api/photo/56630fef-14da-4755-b800-5d48a15dd180.jpg",
+          "url": "/photo/56630fef-14da-4755-b800-5d48a15dd180.jpg",
           "order": 0,
           "_id": "581e1cf8464cc5208e8159da"
         }
@@ -2839,7 +2839,7 @@
       "url": "http://vtholding.com/",
       "__v": 0,
       "photo": {
-        "url": "/api/photo/8953fe43-99cb-470e-9e63-8165972d068e.jpg",
+        "url": "/photo/8953fe43-99cb-470e-9e63-8165972d068e.jpg",
         "_id": "581e2e34af06dc22703834e7"
       }
     },
@@ -2848,7 +2848,7 @@
       "name": "sayple",
       "__v": 0,
       "photo": {
-        "url": "/api/photo/84704e53-6cf1-4181-80e7-eaa7700b3d99.jpg",
+        "url": "/photo/84704e53-6cf1-4181-80e7-eaa7700b3d99.jpg",
         "_id": "581e2f62af06dc22703834eb"
       },
       "url": "https://vk.com/albums358551474"
@@ -2859,7 +2859,7 @@
       "name": "kemonua",
       "__v": 0,
       "photo": {
-        "url": "/api/photo/8a7f946b-3b34-41cd-b68b-f5aae68a2b9a.jpg",
+        "url": "/photo/8a7f946b-3b34-41cd-b68b-f5aae68a2b9a.jpg",
         "_id": "581e355c37686823b4278b78"
       }
     }
@@ -2876,7 +2876,7 @@
       "photo": {
         "name": "",
         "order": 0,
-        "url": "/api/photo/ce6bbe33-e892-45c9-a380-7ae081c9c0c1.jpg",
+        "url": "/photo/ce6bbe33-e892-45c9-a380-7ae081c9c0c1.jpg",
         "_id": "581e2bce04db46216a7fd231"
       }
     },
@@ -2889,7 +2889,7 @@
       "phone": "067 264 6216",
       "photo": {
         "order": 0,
-        "url": "/api/photo/358643ea-89f2-4f20-9db2-18b436806c00.jpg",
+        "url": "/photo/358643ea-89f2-4f20-9db2-18b436806c00.jpg",
         "name": "",
         "_id": "581e1dcf464cc5208e8159e0"
       }
@@ -2900,7 +2900,7 @@
       "isAcademy": false,
       "photo": {
         "name": "",
-        "url": "/api/photo/0ea5a079-cb19-4e83-8ff4-4b7674db6615.jpg",
+        "url": "/photo/0ea5a079-cb19-4e83-8ff4-4b7674db6615.jpg",
         "order": 0,
         "_id": "581e1f3b04db46216a7fd1ff"
       },
@@ -2916,7 +2916,7 @@
       "url": "http://vtholding.com/",
       "__v": 0,
       "photo": {
-        "url": "/api/photo/8953fe43-99cb-470e-9e63-8165972d068e.jpg",
+        "url": "/photo/8953fe43-99cb-470e-9e63-8165972d068e.jpg",
         "_id": "581e2e34af06dc22703834e7"
       }
     },
@@ -2925,7 +2925,7 @@
       "name": "sayple",
       "__v": 0,
       "photo": {
-        "url": "/api/photo/84704e53-6cf1-4181-80e7-eaa7700b3d99.jpg",
+        "url": "/photo/84704e53-6cf1-4181-80e7-eaa7700b3d99.jpg",
         "_id": "581e2f62af06dc22703834eb"
       },
       "url": "https://vk.com/albums358551474"
@@ -2936,7 +2936,7 @@
       "name": "kemonua",
       "__v": 0,
       "photo": {
-        "url": "/api/photo/8a7f946b-3b34-41cd-b68b-f5aae68a2b9a.jpg",
+        "url": "/photo/8a7f946b-3b34-41cd-b68b-f5aae68a2b9a.jpg",
         "_id": "581e355c37686823b4278b78"
       }
     }
