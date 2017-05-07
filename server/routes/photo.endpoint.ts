@@ -9,8 +9,6 @@ let fs = require('fs');
 let MongoClient = require('mongodb');
 import {config} from '../config';
 
-
-
 photoApi.route('/')
     .post(function (req: Request, res, next) {
             if (!req.files || !req.files.file) {
@@ -30,20 +28,12 @@ photoApi.route('/')
         },
         async function (req: Request, res) {
             //TODO: add security handling!!
-            let newName = await photoService.create(req.files.file.path);
+            let newName = await photoService.upload(req.files.file.path);
             //TODO: remove hardcode
             res.json({url: "/photo/" + newName});
         });
 
 photoApi.route('/:name')
-    .get(function (req, res) {
-        let path = photoService.path(req.params.name);
-        res.sendFile(path, function (err) {
-            if (err) {
-                res.status(err.status).end();
-            }
-        });
-    })
     .delete(auth, currentUser.is('admin'),
         async function(req, res){
             try{

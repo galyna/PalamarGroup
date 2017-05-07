@@ -1,53 +1,35 @@
-import {config} from '../config';
 let uuid = require('node-uuid');
 let fs = require('fs');
-let path = require('path');
-let AWS = require('aws-sdk');
+let pathModule = require('path');
+import S3 = require('aws-sdk/clients/s3');
 
 class PhotoService {
 
-    private uploadDir: string;
-    private static extFromPathRegExp = /.+\.(\w+)$/;
+    private uploadsBucket;
 
-    constructor(config, private uuid, private fs, private pathUtil) {
-        this.uploadDir = config.uploadDir;
+    constructor() {
+        this.uploadsBucket = new S3({params: {Bucket: process.env.UPLOADS_BUCKET}});
     }
 
-    create(path: string) {
-        let ext = path.match(PhotoService.extFromPathRegExp)[1];
-        let newName = this.uuid.v4() + '.' + ext;
-        let newPath = this.uploadDir + '/' + newName;
+    upload(path: string) {
+        let ext = pathModule.extname(path);
+        let newName = uuid.v4() + '.' + ext;
         return new Promise((resolve, reject) => {
-            this.fs.rename(path, newPath, (err) => {
-                if (err) return reject(err);
-                return resolve(newName)
-            });
-        });
-    }
-
-    s3Upload(path: string) {
-        let ext = path.match(PhotoService.extFromPathRegExp)[1];
-        let newName = this.uuid.v4() + '.' + ext;
-        let newPath = this.uploadDir + '/' + newName;
-        return new Promise((resolve, reject) => {
-
-          // Read in the file, convert it to base64, store to S3
-            fs.readFile(path, function (err, data) {
+            fs.readFile(path, (err, data) => {
                 if (err) {
-                    throw err;
+                    reject(err);
                 }
 
-                var base64data = new Buffer(data, 'binary');
-
-                var s3 = new AWS.S3();
-                s3.client.putObject({
-                    Bucket: 'banners-adxs',
-                    Key: 'del2.txt',
+                const base64data = new Buffer(data, 'binary');
+                this.uploadsBucket.upload({
+                    Key: newName,
                     Body: base64data,
                     ACL: 'public-read'
-                }, function (resp) {
-                    console.log(arguments);
-                    console.log('Successfully uploaded package.');
+                }, (err, data) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    resolve(data.Location)
                 });
 
             });
@@ -55,27 +37,21 @@ class PhotoService {
     }
 
     remove(name: string) {
-        let fileToDelete = this.uploadDir + '/' + name;
-        console.log('removing file: ' + fileToDelete);
-        return new Promise<void>((resolve, reject) => {
-            fs.unlink(fileToDelete, function (err) {
+        return new Promise((resolve, reject) => {
+            this.uploadsBucket.deleteObject({Key: name}, function(err, data) {
                 if (err) {
-                    return reject(err);
+                    reject(err)
                 }
-                return resolve();
+                resolve(data)
             });
         });
     }
 
     removeByUrl(url: string) {
-        let name = this.pathUtil.basename(url);
+        let name = pathModule.basename(url);
         return this.remove(name);
-    }
-
-    path(name: string) {
-        return this.uploadDir + '/' + name;
     }
 
 }
 
-export let photoService = new PhotoService(config, uuid, fs, path);
+export let photoService = new PhotoService();
