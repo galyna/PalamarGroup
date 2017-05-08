@@ -1,3 +1,4 @@
+require('dotenv-safe').load();
 import * as express from 'express';
 let passport = require("passport");
 let path = require('path');
@@ -5,20 +6,16 @@ import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
 import * as slash from 'express-slash';
 let multipart = require('connect-multiparty');
-
-import {config} from "./config";
 import "./models/user";
 import "./auth/passport";
-import {setupRouter} from './routes/setup.endpoint';
-let isBot = require('isbot');
 import api from './routes/api';
-
-
+import {ENVIRONMENTS} from './constants'
 let app = express();
-let port = parseInt(process.env['PORT']) || 9000;
-let env = process.env['TYPE'];
+let port = process.env['PORT'];
+let env = process.env['NODE_ENV'];
 
-mongoose.connect(config.mongoUrl);
+mongoose.connect(process.env['MONGO_URL']);
+// mongoose.Promise = require('bluebird');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -60,6 +57,7 @@ app.use('/', api);
 //     res.sendFile(path.resolve(pathes.sitemap));
 // });
 
+// let isBot = require('isbot');
 // const phantomRegex = /(phantom)/i;
 // //app.use('/',  express.static(pathes.all));
 // app.use('/', function (req, res, next) {
@@ -93,7 +91,7 @@ app.use((err: any, req, res, next) => {
 
 // development error handler
 // will print stacktrace
-if (env !== 'prod') {
+if ((env === ENVIRONMENTS.PROD) || (env === ENVIRONMENTS.DEV)) {
     app.use((err: any, req, res, next) => {
         res.status(err.status || 500);
         res.json({
@@ -113,10 +111,9 @@ app.use((err: any, req, res, next) => {
     });
 });
 
-app.listen(port, 'localhost', ()=> {
-    console.log(`origin: ${config.origin}`);
-    console.log(`port: ${port}`);
-    console.log(`environment: ${env}`);
+const server = app.listen(port, ()=> {
+    console.log(`NODE_ENV: '${env}'`);
+    console.log(`express listening on '${server.address().address}:${server.address().port}'`);
 });
 
 

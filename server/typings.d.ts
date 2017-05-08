@@ -1,3 +1,9 @@
-/// <reference path="../typings/index.d.ts" />
-/// <reference path="../typings/main.extensions.d.ts" />
 /// <reference path="../typings/shared.d.ts" />
+
+declare module "connect-multiparty" {
+    import * as express from '@types/express'
+    export interface Request extends express.Request{
+        files: any;
+    }
+}
+

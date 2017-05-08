@@ -37,7 +37,7 @@ export class TestComponentController {
         // });
         // this.img = "/content/images/avatar-placeholder.png";
         this.model = {
-            url: '/api/photo/asdsasad.jpg',
+            url: '/asdsasad.jpg',
             name: 'name',
             order: 123,
             description: 'some descr'

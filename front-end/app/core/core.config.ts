@@ -11,11 +11,11 @@ export interface IConstants {
 }
 
 export let constants: IConstants = {
-    host: 'http://palamar.com.ua',
+    host: 'http://dev.palamar.com.ua',
     baseUrl: '/',
-    apiUrl: '/api',
+    apiUrl: 'http://api.palamar.com.ua',
     uploadDir: '/content/uploads',
-    photoUrl: '/api/photo',
+    photoUrl: '/photo',
     orderStatuses: [
         {_id: 0, name: "Новий"},
         {_id: 1, name: "Підтвірджено"},

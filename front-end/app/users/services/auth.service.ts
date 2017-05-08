@@ -1,13 +1,17 @@
 import jwtDecode from 'jwt-decode';
+import {IConstants} from "../../core/core.config";
 
 export class AuthService{
 
-    static $inject = ['$http', '$window', '$rootScope'];
+    static $inject = ['$http', '$window', '$rootScope', 'constants'];
     static tokenKey = 'Authorization';
-    static loginUrl = '/api/authenticate';
-    
-    constructor(private $http, private $window, private $rootScope){
 
+    private loginUrl;
+    private registerUrl;
+
+    constructor(private $http, private $window, private $rootScope, private constants: IConstants){
+        this.loginUrl = `${this.constants.apiUrl}/authenticate`;
+        this.registerUrl = `${this.constants.apiUrl}/register`;
     }
 
     saveToken(token) {
@@ -46,7 +50,7 @@ export class AuthService{
     }
 
     register(user) {
-        return this.$http.post('/api/register', user).then(function(data){
+        return this.$http.post(this.registerUrl, user).then(function(data){
             this.saveToken(data.token);
         });
     };
@@ -71,7 +75,7 @@ export class AuthService{
     }
     
     login(user:{email: string, password: string}) {
-        return this.$http.post(AuthService.loginUrl, user).then((res) => {
+        return this.$http.post(`${this.loginUrl}`, user).then((res) => {
             return this.setUserInfo(res.data.token);
         });
     };
