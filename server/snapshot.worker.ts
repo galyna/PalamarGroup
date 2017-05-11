@@ -4,7 +4,6 @@
 import {Course} from "./models/course";
 import {Master} from "./models/master";
 import {Favor} from "./models/favor";
-import {config} from "./config";
 var htmlSnapshots = require('html-snapshots');
 let schedule = require('node-schedule');
 let path = require('path');
@@ -73,7 +72,8 @@ async function saveSitemap() {
     addCollection(favors, urls, "/beauty-salon/service/", date);
 
     var sitemap = sm.createSitemap({
-        hostname: config.origin,
+        // todo get from config
+        hostname: 'palamar.com.ua',
         cacheTime: 600000,  //600 sec (10 min) cache purge period,
         urls: urls
     });
@@ -85,7 +85,7 @@ async function saveSitemap() {
 schedule.scheduleJob({
     hour: 0
 }, () => {
-    mongoose.connect(config.mongoUrl, () => {
+    mongoose.connect(process.env.MONGO_URL, () => {
         console.log('saveSitemap started');
         saveSitemap().then(() => {
             console.log('complete');

@@ -4,8 +4,6 @@ import {currentUser} from '../auth/current_user';
 import photoEndpoint from './photo.endpoint';
 import {auth} from "../auth/auth";
 let passport = require("passport");
-;
-import {config} from "../config";
 import {paging} from "../services/paging.service";
 
 //models
@@ -43,7 +41,7 @@ let api = express.Router();
 let restifyDefaults = {
     prefix: '',
     version: '',
-    limit: config.defaultQueryLimit, //max and default query limit
+    limit: process.env.DEFAULT_QUERY_LIMIT, //max and default query limit
     findOneAndUpdate: false,
     findOneAndRemove: false,
     //distinct queries can't be used with totalCountHeader enabled

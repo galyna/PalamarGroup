@@ -5,7 +5,6 @@ import IContact = pg.models.IContact;
 import {Request} from "express-serve-static-core";
 import ISalonClient = pg.models.ISalonClient;
 import {SalonClient} from "../models/salon.client";
-import {config} from '../config';
 export let emailEndpoint = Router();
 let emailService = new EmailService( {
     user: 'palamargroupacademyinvites@gmail.com',
@@ -59,7 +58,7 @@ emailEndpoint.route( '/adv/:courseId' )
 </head>
 <body>
 <div  style=" display: table;">
-<a style="text-decoration: none;" href="${config.origin + '/course/' + req.course._id}">
+<a style="text-decoration: none;" href="${process.env.ORIGIN + '/course/' + req.course._id}">
     <div class="logo " style=" background-color: white;
             width: 1000px;height: 100px;">
         <div class="page-header-wrap " style=" text-align: center;margin: auto; 
@@ -71,7 +70,7 @@ emailEndpoint.route( '/adv/:courseId' )
             width: 70px;
             min-height: 70px;
             height: 70px;
-            padding: 10px;" src="${config.origin + '/content/images/logo/palamar_logo_70.png'}"/>
+            padding: 10px;" src="${process.env.ORIGIN + '/content/images/logo/palamar_logo_70.png'}"/>
             <div >
                 <h1 class="featured-area-title" style=" text-align: center;
             font-size: 4.9428em;
@@ -88,7 +87,7 @@ emailEndpoint.route( '/adv/:courseId' )
             <img style="display: inline-block;
             width: 70px;
             height: 70px;
-            padding: 10px; min-height: 70px;" src="${config.origin + '/content/images/logo/palamar_logo_70.png'}"/>
+            padding: 10px; min-height: 70px;" src="${process.env.ORIGIN + '/content/images/logo/palamar_logo_70.png'}"/>
         </div>
 
     </div>
@@ -98,7 +97,7 @@ emailEndpoint.route( '/adv/:courseId' )
         <img style="z-index: -100;
             width: 500px;
             height: 500px;
-            display: inline-block;" src="${config.origin +  req.course.avatar}"
+            display: inline-block;" src="${process.env.ORIGIN +  req.course.avatar}"
         >
         <div style=" background: white;
             width: 500px;
@@ -151,7 +150,7 @@ emailEndpoint.route( '/adv/:courseId' )
             border-radius: 0px;
             text-align: center;
             transition: background-color 0.3s;
-            min-width: 200px;text-decoration: none;"  href="${config.origin + '/course/' + req.course._id}"  ng-transclude=""
+            min-width: 200px;text-decoration: none;"  href="${process.env.ORIGIN + '/course/' + req.course._id}"  ng-transclude=""
                     aria-label="Details" ><div style="cursor: pointer; font-size: 40px;">
                                     Деталі
            </div></a>

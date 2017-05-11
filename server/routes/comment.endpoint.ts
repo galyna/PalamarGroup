@@ -3,7 +3,6 @@
  */
 import {Router} from "express";
 import {Course} from "../models/course";
-import {config} from "../config";
 import {paging} from "../services/paging.service";
 import {Request} from "express-serve-static-core";
 
@@ -45,7 +44,7 @@ getCommentsApi.route('/')
         },
         async(req:CustomRequest, res, next) => {
             let skip = req.query.skip || 0;
-            let limit = req.query.limit || config.defaultQueryLimit;
+            let limit = req.query.limit || process.env.DEFAULT_QUERY_LIMIT;
             let sort = getSortObj(req.query.sort + "");
             try {
                 let aggr = <any>[

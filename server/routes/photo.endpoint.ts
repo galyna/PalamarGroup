@@ -7,7 +7,6 @@ let photoApi = Router();
 let uuid = require('node-uuid');
 let fs = require('fs');
 let MongoClient = require('mongodb');
-import {config} from '../config';
 
 photoApi.route('/')
     .post(function (req: Request, res, next) {
@@ -175,7 +174,7 @@ photoApi.route('/clear')
         async function(req, res){
             try{
 
-                    MongoClient.connect(config.mongoUrl, async (err, db)=>{
+                    MongoClient.connect(process.env.MONGO_URL, async (err, db)=>{
                         const uploadsDir = `${__dirname}/uploads`;
                         let filesOnDisk = fs.readdirSync(`${uploadsDir}`);
 

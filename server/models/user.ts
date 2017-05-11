@@ -1,7 +1,6 @@
 import {Document, Schema, model} from "mongoose";
 import jwt = require('jsonwebtoken');
 import bcrypt = require("bcrypt-nodejs");
-import {config} from "../config";
 
 const SALT_WORK_FACTOR = 10;
 
@@ -62,7 +61,7 @@ UserSchema.methods.generateJwt = function() {
         name: this.name,
         roles: this.roles,
         exp: expiry.getTime() / 1000
-    }, config.appSecret, {});
+    }, process.env.APP_SECRET, {});
 };
 
 export let User = model<IUserModel>('User', UserSchema);
