@@ -1,4 +1,3 @@
-///<reference path="../../typings/browser.extensions.d.ts"/>
 import {IRootScope} from "../typings";
 import {SeoPageResourceName, ISeoPageResource} from "./resources/seo.page.resource";
 

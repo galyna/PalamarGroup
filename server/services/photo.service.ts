@@ -8,7 +8,10 @@ class PhotoService {
     private uploadsBucket;
 
     constructor() {
-        this.uploadsBucket = new S3({params: {Bucket: process.env.UPLOADS_BUCKET}});
+        this.uploadsBucket = new S3({
+            signatureVersion: 'v4',
+            params: {Bucket: process.env.UPLOADS_BUCKET}
+        });
     }
 
     upload(path: string) {
@@ -27,7 +30,7 @@ class PhotoService {
                     ACL: 'public-read'
                 }, (err, data) => {
                     if (err) {
-                        reject(err);
+                        return reject(err);
                     }
                     resolve(data.Location)
                 });

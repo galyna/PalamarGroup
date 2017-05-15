@@ -41,7 +41,7 @@ let api = express.Router();
 let restifyDefaults = {
     prefix: '',
     version: '',
-    limit: process.env.DEFAULT_QUERY_LIMIT, //max and default query limit
+    limit: parseInt(process.env.DEFAULT_QUERY_LIMIT), //max and default query limit
     findOneAndUpdate: false,
     findOneAndRemove: false,
     //distinct queries can't be used with totalCountHeader enabled

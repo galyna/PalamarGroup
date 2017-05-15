@@ -44,7 +44,7 @@ getCommentsApi.route('/')
         },
         async(req:CustomRequest, res, next) => {
             let skip = req.query.skip || 0;
-            let limit = req.query.limit || process.env.DEFAULT_QUERY_LIMIT;
+            let limit = parseInt(req.query.limit) || parseInt(process.env.DEFAULT_QUERY_LIMIT);
             let sort = getSortObj(req.query.sort + "");
             try {
                 let aggr = <any>[

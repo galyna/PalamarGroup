@@ -3,7 +3,7 @@ import {Response} from "express-serve-static-core";
 export let paging = {
     //expr-mongoose-restify understands only skip/limit
     preRead: (req, res, next) => {
-        let limit = (req.query.perPage || process.env.DEFAULT_QUERY_LIMIT);
+        let limit = (parseInt(req.query.perPage) || parseInt(process.env.DEFAULT_QUERY_LIMIT));
         if (req.query.perPage) {
             req.query.limit = limit;
         }
@@ -14,7 +14,7 @@ export let paging = {
     },
     postRead: (req, res:Response, next) => {
         if (req.erm.totalCount) {
-            let perPage = req.query.perPage || process.env.DEFAULT_QUERY_LIMIT;
+            let perPage = parseInt(req.query.perPage) || parseInt(process.env.DEFAULT_QUERY_LIMIT);
             let page = req.query.page || 1;
             res.set(paging.getHeaders(page, perPage, req.erm.totalCount));
         }
@@ -23,7 +23,7 @@ export let paging = {
     getHeaders: (page:number, perPage:number, totalCount:number) => {
         return {
             'X-Total-Count': totalCount,
-            'X-Per-Page': perPage || process.env.DEFAULT_QUERY_LIMIT,
+            'X-Per-Page': perPage || parseInt(process.env.DEFAULT_QUERY_LIMIT),
             'X-Page': page || 1
         };
     }
