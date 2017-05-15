@@ -28,8 +28,7 @@ photoApi.route('/')
         async function (req: Request, res) {
             //TODO: add security handling!!
             let newName = await photoService.upload(req.files.file.path);
-            //TODO: remove hardcode
-            res.json({url: "/photo/" + newName});
+            res.json({url: newName});
         });
 
 photoApi.route('/:name')
