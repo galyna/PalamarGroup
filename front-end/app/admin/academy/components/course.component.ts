@@ -4,7 +4,7 @@ import {PhotoServiceName, PhotoService} from "../../../resources/photo.service";
 const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCourse(saveCourseForm)" flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" ng-href="#/academy/courses">
+            <md-button class="md-icon-button" ng-href="admin.html#!/academy/courses">
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
                 <md-tooltip>Курси</md-tooltip>
             </md-button>
@@ -51,7 +51,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                         </md-input-container>
                     </div>
                     <div>
-                        <div class="md-block">
+                        <div class="md-block" ng-if="$ctrl.course._id">
                             <md-subheader class="md-no-sticky">Дати блоків</md-subheader>
                             <div ng-repeat="day in $ctrl.course.days">
                                 <md-divider></md-divider>
@@ -59,7 +59,7 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                                     <div class="md-margin md-padding " id="prokgram" name="program">{{day.date |
                                     date:"dd.MM.yyyy"}}
                                     </div>
-                                    <div class="md-margin md-padding " id="program" name="program">{{day.program}}</div>
+                                    
                                     <md-button ng-if="::$root.it.can('modifyAcademy')" class="md-icon-button"
                                                ng-click="$ctrl.deleteDate(day)">
                                         <md-icon md-svg-src="action:ic_delete_24px"></md-icon>
@@ -67,19 +67,16 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                                 </div>
                             </div>
                         </div>
-                        <md-subheader ng-if="::$root.it.can('modifyAcademy')" class="md-no-sticky">Додати дату
+                        <md-subheader ng-if="::$root.it.can('modifyAcademy') && $ctrl.course._id" class="md-no-sticky">Додати дату
                         </md-subheader>
-                        <div layout="row" ng-if="::$root.it.can('modifyAcademy')" class="md-block">
-                            <md-datepicker ng-model="$ctrl.newDate"
+                        <div layout="row" ng-if="::$root.it.can('modifyAcademy') && $ctrl.course._id" class="md-block">
+                            <md-datepicker ng-model="$ctrl.newDate" md-min-date="$ctrl.startDate"
                                            md-placeholder="Дата"
                                            md-open-on-focus></md-datepicker>
                         </div>
-                        <md-input-container ng-if="::$root.it.can('modifyAcademy')" layout="row" class="md-block">
-                            <label for="newProgram">Програма</label>
-                            <textarea ng-model="$ctrl.newProgram" id="newProgram" name="newProgram"></textarea>
-                        </md-input-container>
-                        <md-input-container ng-if="::$root.it.can('modifyAcademy')" class="md-block">
-                            <md-button class="md-primary" ng-click="$ctrl.addDate()">
+                       
+                        <md-input-container  ng-if="::$root.it.can('modifyAcademy') && $ctrl.course._id " class="md-block">
+                            <md-button ng-disabled=" !$ctrl.newDate""  ng-click="$ctrl.addDate()">
                                 Додати
                             </md-button>
                         </md-input-container>
@@ -334,7 +331,7 @@ class AdminCourseController {
     newProgram: string;
     showHistoryPhotoUpload: boolean;
     showFormPhotoUpload: boolean;
-    showAuthorPhotoUpload: boolean;
+    startDate: Date;
 
     constructor(private $log: ng.ILogService, private $routeParams: ng.route.IRouteParamsService,
                 private $mdToast: ng.material.IToastService, private $timeout: ng.ITimeoutService,
@@ -343,6 +340,7 @@ class AdminCourseController {
     }
 
     $onInit() {
+        this.startDate=new Date();
         if (this.$routeParams["id"]) {
             this.CourseResource.get({id: this.$routeParams["id"]}).$promise
                 .then((course) => {

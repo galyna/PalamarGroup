@@ -69,12 +69,12 @@ export class AdminCoursesController {
     }
 
     private showPage(page = 1) {
-        this.courses = this.CourseResource.query({page: page,perPage:10},
+        this.courses = this.CourseResource.query({page: page,perPage: 10},
             (res, headers) => {
-                let {total, page, perPage} = this.pagingService.parseHeaders(headers);
-                this.pagingService.update({page: page, perPage: perPage, total: total});
-                this.paging = angular.copy(this.pagingService.params());
-            });
+                let {total, page, perPage} = this.pagingService.parseHeaders( headers );
+                this.pagingService.update( {page: page, perPage: perPage, total: total} );
+                this.paging = angular.copy( this.pagingService.params() );
+            } );
     }
 
     showEditForm(course = new this.CourseResource()) {

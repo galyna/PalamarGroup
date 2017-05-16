@@ -8,7 +8,7 @@ import {SalonResourceName, ISalonResource, ISalon} from "../../../resources/salo
 const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
     <md-toolbar>
         <div  class="md-toolbar-tools">
-            <md-button class="md-icon-button" ng-href="#/salon/contacts">
+            <md-button class="md-icon-button" ng-href="admin.html#!/salon/contacts">
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
                 <md-tooltip>Контакти академії</md-tooltip>
             </md-button>          

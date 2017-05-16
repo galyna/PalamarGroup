@@ -1,6 +1,6 @@
 let template = `
 <p><strong ng-bind="$ctrl.current"></strong> of <strong ng-bind="$ctrl.total"></strong> 
-<md-button ng-click="$ctrl.prev()" ng-disabled="$ctrl.prevDisabled" class="md-icon-button md-raised" aria-label="Previous">
+<md-button ng-click="$ctrl.prev()" ng-disabled="$ctrl.prevDisabled"  class="md-icon-button md-raised" aria-label="Previous">
         <md-icon md-svg-icon="navigation:ic_chevron_left_24px"></md-icon>
 </md-button>
 <md-button ng-click="$ctrl.next()" ng-disabled="$ctrl.nextDisabled" class="md-icon-button md-raised" aria-label="Next">
@@ -43,7 +43,7 @@ export class AdminPagingComponentController {
 
     //noinspection JSMethodCanBeStatic
     isLastPage(page:number, perPage:number, total:number) {
-        return (total - (page - 1) * perPage + 1) < perPage;
+        return (total - (page - 1) * perPage ) < perPage;
     }
 
     //noinspection JSMethodCanBeStatic

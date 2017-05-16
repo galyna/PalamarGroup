@@ -6,7 +6,7 @@ import {
 const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
     <md-toolbar>
         <div  class="md-toolbar-tools">
-            <md-button class="md-icon-button" ng-href="#/academy/videos">
+            <md-button class="md-icon-button" ng-href="admin.html#!/academy/videos">
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
                 <md-tooltip>Вілео група</md-tooltip>
             </md-button>          

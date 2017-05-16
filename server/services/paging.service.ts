@@ -24,7 +24,8 @@ export let paging = {
         return {
             'X-Total-Count': totalCount,
             'X-Per-Page': perPage || parseInt(process.env.DEFAULT_QUERY_LIMIT),
-            'X-Page': page || 1
+            'X-Page': page || 1,
+            'Access-Control-Expose-Headers':"x-total-count, x-per-page, x-page"
         };
     }
 }

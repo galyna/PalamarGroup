@@ -275,7 +275,7 @@ export class SalonContactsComponentController {
 
     $onInit() {
 
-        this.seo = this.SeoPageResource.query({query: {"name": "academy.contacts"}}).$promise.then((seo) => {
+        this.seo = this.SeoPageResource.query({query: {"name": "salon.contacts"}}).$promise.then((seo) => {
             if (seo.length > 0) {
                 this.$rootScope.seo = seo[0];
                 document.title = this.$rootScope.seo.title;

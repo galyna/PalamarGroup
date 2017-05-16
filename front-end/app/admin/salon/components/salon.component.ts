@@ -6,7 +6,7 @@ import IPhoto = pg.models.IPhoto;
 const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" ng-href="#/salon/salons">
+            <md-button class="md-icon-button" ng-href="admin.html#!/salon/salons">
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
                 <md-tooltip>Салони</md-tooltip>
             </md-button>

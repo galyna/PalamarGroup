@@ -9,7 +9,7 @@ import {IConstants} from "../../../core/core.config";
 const template = `<div flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" ng-href="#/salon/masters">
+            <md-button class="md-icon-button" ng-href="admin.html#!/salon/masters">
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
                 <md-tooltip>Команда</md-tooltip>
             </md-button>
