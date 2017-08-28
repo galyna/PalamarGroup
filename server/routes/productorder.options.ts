@@ -1,11 +1,10 @@
 import {IOptions} from "express-restify-mongoose";
-import * as momentTz from 'moment-timezone'
 import {currentUser} from "../auth/current_user";
 import {auth} from "../auth/auth";
 import {adminEmailService} from "../services/email.service";
 import settings from "../settings";
 
-export let appointmentOptions:IOptions = {
+export let productorderOptions:IOptions = {
     preUpdate: [auth, currentUser.is( 'salonModerator' )],
     preDelete: [auth, currentUser.is( 'salonModerator' )],
     access: () => 'public',
@@ -14,7 +13,7 @@ export let appointmentOptions:IOptions = {
         next();
         const mailOptions = {
             to: settings.email.adminEmail,
-            subject: 'новий запис на прийом/запитання',
+            subject: 'нове замовлення продукції',
             html: createEmailHTML(req.body)
         };
         adminEmailService.send(mailOptions)
@@ -23,15 +22,11 @@ export let appointmentOptions:IOptions = {
 };
 
 function createEmailHTML(body){
-    const date = body.date ? momentTz(body.date).tz('Europe/Kiev').format('YYYY-MM-DD HH:mm') : '-';
     return `<ul>
 <li>тел: ${body.phone || '-'}</li>
 <li>ім'я: ${body.name || '-'}</li>
-<li>дата: ${date}</li>
-<li>коментар: ${body.comment}</li>
-<li>консультація: ${body.isConsultation ? 'так' : 'ні'}</li>
-<li>послуга: ${body.service && body.service.favor ? body.service.favor.name : '-'}</li>
-<li>майстер: ${body.master ? body.master.name : '-'}</li>
+<li>продукт: ${body.product || '-'}</li>
+<li>коментар: ${body.comment || '-'}</li>
 </ul>
-<a href="${settings.adminURL}#!/salon/appointments">Перейти до адмінки</a>`
+<a href="${settings.adminURL}#!/salon/productorders">Перейти до адмінки</a>`
 }
