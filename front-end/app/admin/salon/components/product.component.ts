@@ -25,23 +25,32 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                 <md-card-content>
                     <md-input-container class="md-block ">
                         <label for="name">Назва</label>
-                        <input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.favor.name" name="name"/>
+                        <input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.product.name" name="name"/>
                     </md-input-container>
                      <md-input-container class="md-block">
                         <label for="order1">Порядок відображення</label>
                         <input id="order1" ng-disabled="::!$root.it.can('modifySalon')"
-                               ng-model="$ctrl.favor.order" name="order1" type="number"/>
+                               ng-model="$ctrl.product.order" name="order1" type="number"/>
                     </md-input-container>
                     <md-input-container class="md-block">
                         <label for="description">Опис</label>
-                        <textarea ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.favor.description"
+                        <textarea ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.product.description"
                                   id="description" name="description" ></textarea>
                     </md-input-container>
 
+                    <md-input-container>
+                        <label>Категорія</label>
+                        <md-select ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.product.category" ng-model-options="{trackBy: '$value._id'}">
+                            <md-option ng-repeat="n in $ctrl.categories" ng-value="n">
+                                {{ n.name }}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    
                       <md-input-container class="md-block">
                         <label for="defPrice">Ціна</label>
                         <input ng-disabled="::!$root.it.can('modifySalon')"
-                         type="number" ng-model="$ctrl.favor.price" id="defPrice" name="defPrice"/>
+                         type="number" ng-model="$ctrl.product.price" id="defPrice" name="defPrice"/>
                     </md-input-container>
                 </md-card-content>
             </md-card>
@@ -51,7 +60,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                 <md-card-content >
                     <div layout="row" >
                      <div >
-                        <img ng-src="{{$ctrl.favor.photo.url}}" />
+                        <img ng-src="{{$ctrl.product.photo.url}}" />
  </div>
                         <div ng-if="::$root.it.can('modifySalon')" >
                             <md-button ng-if="!$ctrl.showAuthorPhotoUpload" class="md-raised"
@@ -63,7 +72,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                                     Вибрати файл
                                 </md-button>
                                 <md-button class="md-primary"
-                                           ng-click="$ctrl.uploadPhoto(croppedhearFormsPhotoFile, hearFormsPhotoFile.name,$ctrl.favor)">
+                                           ng-click="$ctrl.uploadPhoto(croppedhearFormsPhotoFile, hearFormsPhotoFile.name,$ctrl.product)">
                                     Завантажити
                                 </md-button>
                                 <div ngf-drop ng-model="hearFormsPhotoFile" ngf-pattern="image/*"
@@ -92,31 +101,31 @@ export class ProductComponentController {
     static $inject = ["$log", "$routeParams", "$mdToast", "$timeout", '$mdDialog',
         ProductResourceName, 'constants', PhotoServiceName];
 
-    originalFavor:IProduct;
-    favor:IProduct;
+    originalProduct:IProduct;
+    product:IProduct;
     showPhotoUpload:boolean;
     categories:any;
 
 
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
-                private $mdDialog:ng.material.IDialogService, private favorResource:IProductResource,
+                private $mdDialog:ng.material.IDialogService, private productResource:IProductResource,
                 private constants:IConstants, private photoService:PhotoService) {
     }
 
 
     $onInit() {
         if (this.$routeParams["id"]) {
-            this.favorResource.get( {id: this.$routeParams["id"]}).$promise
-                .then( (favor) => {
-                    this.originalFavor = favor;
-                    this.favor = angular.copy( this.originalFavor );
+            this.productResource.get( {id: this.$routeParams["id"]}).$promise
+                .then( (product) => {
+                    this.originalProduct = product;
+                    this.product = angular.copy( this.originalProduct );
                 } );
         } else {
-            this.originalFavor = new this.favorResource();
-            this.favor = angular.copy( this.originalFavor );
+            this.originalProduct = new this.productResource();
+            this.product = angular.copy( this.originalProduct );
         }
-        this.categories = this.constants.favorCategories;
+        this.categories = this.constants.productCategories;
     }
 
     uploadPhoto(dataUrl, name, model) {
@@ -137,13 +146,13 @@ export class ProductComponentController {
 
 
     cancel() {
-        this.favor = angular.copy( this.originalFavor );
+        this.product = angular.copy( this.originalProduct );
     }
 
     save(form:ng.IFormController) {
 
-        this.favor.$save()
-            .then( (favor) => {
+        this.product.$save()
+            .then( (product) => {
                 this.$mdToast.showSimple( `Дані послуги збережено` );
             } )
             .catch( (err)=> {
@@ -157,7 +166,7 @@ export class ProductComponentController {
             .title( "Помилка" )
             .textContent( `Спробуйте будь ласка пізніше` )
             .ariaLabel( "Помилка" )
-            .ok( 'OK' )
+            .ok( 'OK' );
         return this.$mdDialog.show( confirm );
 
     }

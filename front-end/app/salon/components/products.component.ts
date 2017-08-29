@@ -2,6 +2,7 @@ import {IProductResource, IProduct, ProductResourceName} from "../../resources/p
 import {IRootScope} from "../../../typings";
 import {IProductOrder, ProductOrderResourceName, IProductOrderResource} from "../../resources/product.order.resource";
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
+import {ICategory, IConstants} from "../../core/core.config";
 
 const template = `
 
@@ -264,7 +265,7 @@ class ProductOrderDialogController {
 
 export class ProductsComponentController {
 
-    static $inject = ["$log", '$rootScope', '$mdDialog', ProductOrderResourceName, ProductResourceName,
+    static $inject = ["$log", '$rootScope', '$mdDialog', "$routeParams", 'constants', ProductOrderResourceName, ProductResourceName,
         'smoothScroll', SeoPageResourceName, "$q", '$mdMedia'];
 
     products: IProduct[];
@@ -272,9 +273,12 @@ export class ProductsComponentController {
     showAnimation: boolean;
     markerReadySEO: string;
     seo: any;
+    category: ICategory;
 
     constructor(private $log: ng.ILogService, private $rootScope: IRootScope,
                 private $mdDialog: ng.material.IDialogService,
+                private $routeParams: ng.route.IRouteParamsService,
+                private constants: IConstants,
                 private ProductOrderResource: IProductOrderResource,
                 private ProductResource: IProductResource, private smoothScroll,
                 private SeoPageResource: ISeoPageResource, private $q, private $mdMedia) {
@@ -285,59 +289,68 @@ export class ProductsComponentController {
 
 
     $onInit() {
-        this.seo = this.SeoPageResource.query({query: {"name": "products"}}).$promise.then((seo)=> {
-            if (seo.length > 0) {
-                this.$rootScope.seo = seo[0];
-                document.title = this.$rootScope.seo.title;
-            }
+        if (this.$routeParams["category"]) {
+            this.seo = this.SeoPageResource.query({query: {"name": `products/${this.$routeParams["category"]}`}}).$promise.then((seo)=> {
+                if (seo.length > 0) {
+                    this.$rootScope.seo = seo[0];
+                    document.title = this.$rootScope.seo.title;
+                }
 
-        });
-        this.products = this.ProductResource.query({sort: "order"});
-        this.products.$promise.then((products) => {
-                this.scrollToMain();
-                this.products.forEach((product)=> {
+            });
 
-                    product.seoJson =
-                    {
-                        "@context": "http://www.schema.org",
-                        "@type": "product",
-                        "brand": {
-                            "@context": "http://schema.org/",
-                            "@type": "Brand",
-                            "url": "http:/palamar.com.ua/",
-                            "alternateName": "PALAMAR",
-                            "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-                            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
-                            "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
-                            "name": "PALAMAR GROUP"
-                        },
-                        "name": product.name,
-                        "image": "http://palamar.com.ua" + product.photo.url,
-                        "description":product.description,
+            this.category = this.constants.productCategories.filter(cat => {
+                return cat.url == this.$routeParams["category"]
+            })[0];
 
-                        "offers": {
-                            "@type": "Offer",
-                            "priceCurrency": "UAH",
-                            "price": product.price,
-                            "seller": {
-                                "@type": "BeautySalon",
-                                "name": "PALAMAR GROUP",
-                                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-                                "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
-                                "sameAs": [
-                                    "https://www.facebook.com/hashtag/palamar_group",
-                                    "https://www.instagram.com/palamar_group/",
-                                    "https://vk.com/id202584528"
-                                ]
-                            }
-                        }
-                    };
-                })
-            }
-        );
-        this.$q.all([this.products.$promise, this.seo.$promise]).then((tt) => {
-            this.markerReadySEO = "dynamic-content";
-        });
+            this.products = this.ProductResource.query({
+                sort: "order",
+                query: {"category._id": this.category._id},
+            });
+
+            this.products.$promise.then(() => {
+                    this.scrollToMain();
+                    this.products.forEach((product)=> {
+                        product.seoJson =
+                            {
+                                "@context": "http://www.schema.org",
+                                "@type": "product",
+                                "brand": {
+                                    "@context": "http://schema.org/",
+                                    "@type": "Brand",
+                                    "url": "http:/palamar.com.ua/",
+                                    "alternateName": "PALAMAR",
+                                    "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                                    "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
+                                    "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
+                                    "name": "PALAMAR GROUP"
+                                },
+                                "name": product.name,
+                                "image": "http://palamar.com.ua" + product.photo.url,
+                                "description":product.description,
+
+                                "offers": {
+                                    "@type": "Offer",
+                                    "priceCurrency": "UAH",
+                                    "price": product.price,
+                                    "seller": {
+                                        "@type": "BeautySalon",
+                                        "name": "PALAMAR GROUP",
+                                        "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                                        "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
+                                        "sameAs": [
+                                            "https://www.facebook.com/hashtag/palamar_group",
+                                            "https://www.instagram.com/palamar_group/",
+                                            "https://vk.com/id202584528"
+                                        ]
+                                    }
+                                }
+                            };
+                    })
+                });
+            this.$q.all([this.products.$promise, this.seo.$promise]).then((tt) => {
+                this.markerReadySEO = "dynamic-content";
+            });
+        }
     }
 
     showAppointmentDialog(product) {
@@ -402,7 +415,7 @@ export class ProductsComponentController {
     }
 }
 
-export let ProductsComponentUrl = "/beauty-salon/products";
+export let ProductsComponentUrl = "/beauty-salon/products/:category";
 export let ProductsComponentName = 'pgProducts';
 export let ProductsComponentOptions = {
     template: template,

@@ -1,18 +1,27 @@
+export interface ICategory {
+    _id: string,
+    name: string,
+    url: string,
+}
+
 export interface IConstants {
     host: string,
     baseUrl: string,
     apiUrl: string,
     uploadDir: string,
     photoUrl: string,
-    favorCategories: any[],
+    productCategories: ICategory[]
+    favorCategories: ICategory[],
     rates: any[],
     orderStatuses: any[],
     showSalon: boolean
 }
 
 export let constants: IConstants = {
-    host: 'http://dev.palamar.com.ua',
+    // host: 'http://localhost:8080',
+    host: 'http://palamar.com.ua',
     baseUrl: '/',
+    // apiUrl: 'http://localhost:9000',
     apiUrl: 'http://api.palamar.com.ua',
     uploadDir: '/content/uploads',
     photoUrl: '/photo',
@@ -21,6 +30,10 @@ export let constants: IConstants = {
         {_id: 1, name: "Підтвірджено"},
         {_id: 2, name: "Оплачено"},
         {_id: 3, name: "Відмова"}],
+    productCategories: [
+        {_id: "products", name: "ПРОДУКЦІЯ", url: "products"},
+        {_id: "hairhealing", name: "ЛІКУВАННЯ ВОЛОССЯ", url: "hearhealing"},
+    ],
     favorCategories: [
         {_id: "hear", name: "ПЕРУКАРСЬКІ ПОСЛУГИ",url:"hairdressing"},
         ],
