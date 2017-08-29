@@ -28,4 +28,9 @@ export class EmailService {
     }
 }
 
-export const adminEmailService = new EmailService(settings.email.adminCredentials);
+export const adminEmailService = new EmailService({
+    user: settings.email.admin.user,
+    clientId: settings.email.admin.clientId,
+    clientSecret: settings.email.admin.clientSecret,
+    refreshToken: settings.email.admin.refreshToken,
+});
