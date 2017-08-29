@@ -13,7 +13,7 @@ export let appointmentOptions:IOptions = {
         // we don't wait for admin email to be send, user don't care about it
         next();
         const mailOptions = {
-            to: settings.email.adminEmail,
+            to: settings.email.admin.user,
             subject: 'новий запис на прийом/запитання',
             html: createEmailHTML(req.body)
         };
