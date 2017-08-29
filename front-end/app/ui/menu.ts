@@ -43,16 +43,9 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
                 </div>
             </div>
             <div layout="row" layout-xs="column">
-                <div flex ng-click="::vm.goToURL('/beauty-salon/services/nail-aesthetics')"
-                     class=" pg-menu-item ">МАНІКЮР ТА ПЕДИКЮР
-                </div>
                 <div flex ng-click="::vm.goToURL('/beauty-salon/services/hairdressing')"
                      class=" pg-menu-item ">ПЕРУКАРСЬКІ ПОСЛУГИ
                 </div>
-
-                <div flex ng-click="::vm.goToURL('/beauty-salon/services/makeup')" class=" pg-menu-item ">МАКІЯЖ
-                </div>
-
             </div>
             <div layout="row" layout-xs="column">
 

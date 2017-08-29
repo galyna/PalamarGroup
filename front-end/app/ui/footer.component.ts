@@ -152,7 +152,7 @@ export class FooterComponentController {
             ],
             "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
             "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
-            "description": "Салон краси Львів стрижка, фарбування, манікюр, педікур, мейкап, догляд за шкірою голови ",
+            "description": "Салон краси Львів стрижка, фарбування, мейкап, догляд за шкірою голови ",
             "serviceArea": {
                 "@type": "AdministrativeArea",
                 "name": "Львів"
@@ -192,7 +192,7 @@ export class FooterComponentController {
                 "alternateName": "PALAMAR",
                 "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
                 "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
-                "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
                 "name": "PALAMAR GROUP"
             }
         }

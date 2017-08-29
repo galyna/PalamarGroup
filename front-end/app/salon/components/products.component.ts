@@ -308,7 +308,7 @@ export class ProductsComponentController {
                             "alternateName": "PALAMAR",
                             "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
                             "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
-                            "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                            "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
                             "name": "PALAMAR GROUP"
                         },
                         "name": product.name,
@@ -356,7 +356,6 @@ export class ProductsComponentController {
         }).then((result) => {
             this.handleDialogResult(result);
         });
-        ;
     }
 
     handleDialogResult(result) {
@@ -397,7 +396,7 @@ export class ProductsComponentController {
             easing: 'easeInQuad',
             offset: 0,
 
-        }
+        };
         var element = document.getElementById('mainContent');
         this.smoothScroll(element, options);
     }

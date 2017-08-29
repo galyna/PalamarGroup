@@ -11,6 +11,7 @@
     "body-parser": "^1.15.0",
     "connect-multiparty": "^2.0.0",
     "connect-roles": "^3.1.2",
+    "cors": "^2.8.4",
     "dotenv-safe": "^4.0.4",
     "e-pochta-sms-api": "0.0.2",
     "express": "^4.13.4",

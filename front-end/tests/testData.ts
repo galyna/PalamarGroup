@@ -261,52 +261,6 @@ export let testData = {
       "videos": []
     },
     {
-      "_id": "5710118122b3688c1e275f34",
-      "name": "Мистецтво макіяжу",
-      "description": "Зробивши вибір вчитися на візажиста , майбутні фахівці отримують шанс перейняти досвід професіоналів своєї справи , які діляться корисними рекомендаціями .",
-      "price": 5000,
-      "order": 4,
-      "isVisible": true,
-      "courseModulesDates": [
-        "2016-05-23T21:00:00.000Z",
-        "2016-05-24T21:00:00.000Z",
-        "2016-05-25T21:00:00.000Z",
-        "2016-05-26T21:00:00.000Z"
-      ],
-      "author": {
-        "name": "Тетяна Літвінова",
-        "photoUrl": "/api/photo/58a2b7e4-1c34-46fc-ac42-b19e8b166db2.jpg"
-      },
-      "historyPhotos": [],
-      "hearFormsPhotos": [
-        {
-          "name": "Назва прийоми",
-          "url": "/api/photo/0c5ade51-ce3c-4fb0-ad15-a683a982c60b.jpg",
-          "order": 0,
-          "_id": "5710118c22b3688c1e275f35"
-        },
-        {
-          "name": "Назва прийоми",
-          "url": "/api/photo/df116a18-67c8-42d9-9f38-62b3f8ce5202.jpg",
-          "order": 0,
-          "_id": "5710b74fd307a76811b5e2e4"
-        },
-        {
-          "name": "Назва прийоми",
-          "url": "/api/photo/68950e97-488a-405a-9359-c0f1a61bdc92.jpg",
-          "order": 0,
-          "_id": "5710b74fd307a76811b5e2e3"
-        },
-        {
-          "name": "Назва прийоми",
-          "url": "/api/photo/7babf4e4-9e4b-4245-adba-ec0180d34871.jpg",
-          "order": 0,
-          "_id": "5710b74fd307a76811b5e2e2"
-        }
-      ],
-      "videos": []
-    },
-    {
       "_id": "571011b922b3688c1e275f36",
       "name": "Fasion-Cтилістика",
       "description": "Курси стилістів включають в себе ознайомлення з історичними віхами розвитку костюма , візажу та зачісок , а також припускають розгляд походження стилів і їх класифікацію за групами .",
@@ -536,25 +490,6 @@ export let testData = {
       "__v": 0
     },
     {
-      "_id": "575ab9a3fcd70bce180c3be4",
-      "name": "vvvvvvvvvv",
-      "email": "w4rgdgcbfvds",
-      "phone": "wsrgdbgdrvsec",
-      "comment": "67utjbter sd",
-      "event_id": "5710118122b3688c1e275f34",
-      "event_name": "Мистецтво макіяжу",
-      "booked": false,
-      "answered": false,
-      "event_dates": [
-        "2016-05-23T21:00:00.000Z",
-        "2016-05-24T21:00:00.000Z",
-        "2016-05-25T21:00:00.000Z",
-        "2016-05-26T21:00:00.000Z"
-      ],
-      "date": "2016-06-10T12:59:35.923Z",
-      "__v": 0
-    },
-    {
       "_id": "575ab9cbfcd70bce180c3be5",
       "name": "aaaaaaaaaa",
       "email": "56rhtfbves ew5yer",
@@ -628,82 +563,6 @@ export let testData = {
         "2016-07-06T21:00:00.000Z"
       ],
       "date": "2016-06-10T13:02:36.130Z",
-      "__v": 0
-    },
-    {
-      "_id": "575aba86fcd70bce180c3be9",
-      "name": "jytyhtgcvt",
-      "email": "j 435645",
-      "phone": "34v5y4346546",
-      "comment": "gm gsvdjfhdhjfhngf",
-      "event_id": "5710118122b3688c1e275f34",
-      "event_name": "Мистецтво макіяжу",
-      "booked": false,
-      "answered": false,
-      "event_dates": [
-        "2016-05-23T21:00:00.000Z",
-        "2016-05-24T21:00:00.000Z",
-        "2016-05-25T21:00:00.000Z",
-        "2016-05-26T21:00:00.000Z"
-      ],
-      "date": "2016-06-10T13:03:02.594Z",
-      "__v": 0
-    },
-    {
-      "_id": "575aba90fcd70bce180c3bea",
-      "name": "4y54twh jgf",
-      "email": "gfesvdbfg jy54teth",
-      "phone": "tj ghdsc45y454",
-      "comment": "54yut mhngbvs v",
-      "event_id": "5710118122b3688c1e275f34",
-      "event_name": "Мистецтво макіяжу",
-      "booked": false,
-      "answered": false,
-      "event_dates": [
-        "2016-05-23T21:00:00.000Z",
-        "2016-05-24T21:00:00.000Z",
-        "2016-05-25T21:00:00.000Z",
-        "2016-05-26T21:00:00.000Z"
-      ],
-      "date": "2016-06-10T13:03:12.699Z",
-      "__v": 0
-    },
-    {
-      "_id": "575aba9bfcd70bce180c3beb",
-      "name": "gfhggshdj",
-      "email": "4544bgnt",
-      "phone": "354654564534",
-      "comment": "5yujhngfbvb nrggdfgnmfydtdxgfd",
-      "event_id": "5710118122b3688c1e275f34",
-      "event_name": "Мистецтво макіяжу",
-      "booked": false,
-      "answered": false,
-      "event_dates": [
-        "2016-05-23T21:00:00.000Z",
-        "2016-05-24T21:00:00.000Z",
-        "2016-05-25T21:00:00.000Z",
-        "2016-05-26T21:00:00.000Z"
-      ],
-      "date": "2016-06-10T13:03:23.315Z",
-      "__v": 0
-    },
-    {
-      "_id": "575abaa5fcd70bce180c3bec",
-      "name": "sdfjfjhghdj",
-      "email": "fmhdgty6yjtngfdvsn",
-      "phone": "hgf4565434564",
-      "comment": "yjmngbfvdx m,jgytdrgsf",
-      "event_id": "5710118122b3688c1e275f34",
-      "event_name": "Мистецтво макіяжу",
-      "booked": false,
-      "answered": true,
-      "event_dates": [
-        "2016-05-23T21:00:00.000Z",
-        "2016-05-24T21:00:00.000Z",
-        "2016-05-25T21:00:00.000Z",
-        "2016-05-26T21:00:00.000Z"
-      ],
-      "date": "2016-06-10T13:03:33.034Z",
       "__v": 0
     },
     {

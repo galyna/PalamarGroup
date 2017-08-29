@@ -322,32 +322,32 @@ export class SalonHomeComponentController {
         {
             name: "ПОНЕДІЛОК",
             short: "ПН",
-            program: '10:00 - 19:00',
+            program: '09:00 - 21:00',
         },
         {
             name: "ВІВТОРОК",
             short: "ВТ",
-            program: '10:00 - 19:00',
+            program: '09:00 - 21:00',
         }, {
             name: "СЕРЕДА",
             short: "СР",
-            program: '10:00 - 19:00',
+            program: '09:00 - 21:00',
         }, {
             name: "ЧЕТВЕР",
             short: "ЧТ",
-            program: '10:00 - 19:00',
+            program: '09:00 - 21:00',
         }, {
             name: "П`ЯТНИЦЯ",
             short: "ПТ",
-            program: '10:00 - 19:00',
+            program: '09:00 - 21:00',
         }, {
             name: "СУБОТА",
             short: "СБ",
-            program: 'зачинено',
+            program: '09:00 - 21:00',
         }, {
             name: "НЕДІЛЯ",
             short: "НД",
-            program: 'зачинено',
+            program: '09:00 - 15:00',
         }];
     categories: any;
     showMoreTransforms: boolean;
@@ -453,7 +453,7 @@ export class SalonHomeComponentController {
                     "alternateName": "PALAMAR",
                     "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
                     "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
-                    "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                    "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
                     "name": "PALAMAR GROUP"
                 },
                 "homeLocation": {
@@ -517,7 +517,7 @@ export class SalonHomeComponentController {
                         "alternateName": "PALAMAR",
                         "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
                         "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
-                        "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                        "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
                         "sameAs": [
                             "https://www.facebook.com/hashtag/palamar_group",
                             "https://www.instagram.com/palamar_group/",
@@ -541,7 +541,7 @@ export class SalonHomeComponentController {
                     "alternateName": "PALAMAR",
                     "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
                     "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
-                    "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                    "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
                     "name": "PALAMAR GROUP"
                 }
             }
