@@ -29,15 +29,13 @@ const template = `
                     <div class="card-desc  "
                          flex="50" layout="column" layout-align="space-around center">
                         <div ng-if="$ctrl.master.rate && $ctrl.master.rate._id!=='0'" hide show-md="true"
+                             ng-class="{ 'two-lines': master.rate.text.indexOf('\r\n') >= 0 }" 
                              class="corner-ribbon top-right white"
-                        >
-                            {{::$ctrl.master.rate.text}}
-                        </div>
+                        >{{::$ctrl.master.rate.text}}</div>
                         <div ng-if="$ctrl.master.rate && $ctrl.master.rate._id!=='0'" hide-md="true"
+                             ng-class="{ 'two-lines': master.rate.text.indexOf('\r\n') >= 0 }" 
                              class="corner-ribbon-min top-right white"
-                        >
-                            {{::$ctrl.master.rate.text}}
-                        </div>
+                        >{{::$ctrl.master.rate.text}}</div>
                         <div layout="row" layout-align="center center" class="md-padding md-margin ">
                             <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">
                                 {{::$ctrl.master.name}}
