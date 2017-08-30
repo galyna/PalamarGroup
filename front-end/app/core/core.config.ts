@@ -32,10 +32,10 @@ export let constants: IConstants = {
         {_id: 3, name: "Відмова"}],
     productCategories: [
         {_id: "products", name: "ПРОДУКЦІЯ", url: "products"},
-        {_id: "hairhealing", name: "ЛІКУВАННЯ ВОЛОССЯ", url: "hearhealing"},
     ],
     favorCategories: [
         {_id: "hear", name: "ПЕРУКАРСЬКІ ПОСЛУГИ",url:"hairdressing"},
+        {_id: "hairhealing", name: "ЛІКУВАННЯ ВОЛОССЯ", url: "hearhealing"},
         ],
      rates: [
         {_id: "0", name: "ВІДСУТНІЙ", text: ""},

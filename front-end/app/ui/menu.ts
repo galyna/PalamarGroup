@@ -47,7 +47,7 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
                 <div flex ng-click="::vm.goToURL('/beauty-salon/services/hairdressing')"
                      class=" pg-menu-item ">ПЕРУКАРСЬКІ ПОСЛУГИ
                 </div>
-                <div flex ng-click="::vm.goToURL('/beauty-salon/products/hearhealing')" 
+                <div flex ng-click="::vm.goToURL('/beauty-salon/services/hearhealing')" 
                     class=" pg-menu-item ">ЛІКУВАННЯ ВОЛОССЯ
                 </div>
                 <div flex ng-click="::vm.goToURL(vm.SalonTransformsComponentUrl)" 
