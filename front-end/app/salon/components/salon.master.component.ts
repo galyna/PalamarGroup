@@ -1,6 +1,6 @@
 import {MasterResourceName, IMasterResource, IMaster, IScheduler} from "../../resources/master.resource";
 import {AppointmentServiceName, IAppointmentService} from "../servises/appointment.service";
-;
+
 import {IAppointmentResource, AppointmentResourceName, IAppointment} from "../../resources/appointment.resource";
 import ITask = pg.models.ITask;
 import IMasterFavor = pg.models.IMasterFavor;
@@ -313,93 +313,98 @@ export class MasterComponentController {
                 .then((master) => {
                     this.seoMaster(master);
                     this.master = master;
-                    document.title = master.subtitle + " Львів " + master.name
+                    document.title = master.subtitle + " Львів " + master.name;
                     this.$rootScope.seo.description = master.description;
                     this.scrollToMain();
-                }).catch((err) => {
-                this.$log.error(err);
-                this.$location.path(`/beauty-salon/masters`);
-            }).finally(() => {
-                this.markerReadySEO = "dynamic-content";
-            });
+                })
+                .catch((err) => {
+                    this.$log.error(err);
+                    this.$location.path(`/beauty-salon/masters`);
+                })
+                .finally(() => {
+                    this.markerReadySEO = "dynamic-content";
+                });
             this.loadEvents(new Date(), this.$routeParams["id"]);
-            ;
         }
     }
 
 
     seoMaster(master) {
-        this.seoJson =
-            [{
-                "@context": "http://schema.org/",
-                "@type": "Person",
-                "jobTitle": master.subtitle,
-                "url": "http://palamar.com.ua" + "/beauty-salon/master/" + master._id,
-                "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
-                    "addressLocality": "Львів, Україна",
-                    "addressCountry": "Україна"
-                },
-                "name": master.name,
-                "description": master.description,
-                "image": "http://palamar.com.ua" + master.photo.url,
-                "brand": {
+        try {
+            this.seoJson =
+                [{
                     "@context": "http://schema.org/",
-                    "@type": "Brand",
-                    "url": "http:/palamar.com.ua/",
-                    "alternateName": "PALAMAR",
-                    "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-                    "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
-                    "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
-                    "name": "PALAMAR GROUP"
-                },
-                "homeLocation":{
-                    "@type": "Place",
-                    "geo": {
-                        "@type": "GeoCircle",
-                        "geoMidpoint": {
-                            "@type": "GeoCoordinates",
-                            "latitude": "49.8110769",
-                            "longitude": "23.9737773"
-                        },
-                        "geoRadius": "50"
-                    },
+                    "@type": "Person",
+                    "jobTitle": master.subtitle,
+                    "url": "http://palamar.com.ua" + "/beauty-salon/master/" + master._id,
                     "address": {
                         "@type": "PostalAddress",
                         "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
                         "addressLocality": "Львів, Україна",
                         "addressCountry": "Україна"
-                    }
-                }
-            }, {
-                "@context": "http://schema.org",
-                "@type": "BreadcrumbList",
-                "itemListElement": [{
-                    "@type": "ListItem",
-                    "position": 1,
-                    "item": {
-                        "@id": "http://palamar.com.ua/beauty-salon",
-                        "name": "Салон",
-                        "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
+                    },
+                    "name": master.name,
+                    "description": master.description,
+                    "image": "http://palamar.com.ua" + master.photo.url,
+                    "brand": {
+                        "@context": "http://schema.org/",
+                        "@type": "Brand",
+                        "url": "http:/palamar.com.ua/",
+                        "alternateName": "PALAMAR",
+                        "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                        "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+                        "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
+                        "name": "PALAMAR GROUP"
+                    },
+                    "homeLocation": {
+                        "@type": "Place",
+                        "geo": {
+                            "@type": "GeoCircle",
+                            "geoMidpoint": {
+                                "@type": "GeoCoordinates",
+                                "latitude": "49.8110769",
+                                "longitude": "23.9737773"
+                            },
+                            "geoRadius": "50"
+                        },
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                            "addressLocality": "Львів, Україна",
+                            "addressCountry": "Україна"
+                        }
                     }
                 }, {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "item": {
-                        "@id": "http://palamar.com.ua/beauty-salon/masters",
-                        "name": "Команда"
-                    }
-                }, {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "item": {
-                        "@id": "http://palamar.com.ua/beauty-salon/master/" + master._id,
-                        "name": master.name,
-                        "image": "http://palamar.com.ua" + master.photo.url
-                    }
-                }]
-            }];
+                    "@context": "http://schema.org",
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [{
+                        "@type": "ListItem",
+                        "position": 1,
+                        "item": {
+                            "@id": "http://palamar.com.ua/beauty-salon",
+                            "name": "Салон",
+                            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg"
+                        }
+                    }, {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "item": {
+                            "@id": "http://palamar.com.ua/beauty-salon/masters",
+                            "name": "Команда"
+                        }
+                    }, {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "item": {
+                            "@id": "http://palamar.com.ua/beauty-salon/master/" + master._id,
+                            "name": master.name,
+                            "image": "http://palamar.com.ua" + master.photo.url
+                        }
+                    }]
+                }];
+        } catch(error) {
+            this.$log.error(error)
+        }
     }
 
     scrollToMain() {
@@ -408,7 +413,7 @@ export class MasterComponentController {
             easing: 'easeInQuad',
             offset: 0,
 
-        }
+        };
         var element = document.getElementById('mainContent');
         this.smoothScroll(element, options);
     }
@@ -487,7 +492,7 @@ export class MasterComponentController {
     }
 
     getPictureFlex(index, length) {
-        if (length > 3 && ( length % 3 == 1 && index >= length - 4 ) || ( length % 3 == 2 && index >= length - 5 )) {
+        if (length > 3 && (length % 3 == 1 && index >= length - 4) || (length % 3 == 2 && index >= length - 5)) {
             return 46;
         } else {
             return 22;

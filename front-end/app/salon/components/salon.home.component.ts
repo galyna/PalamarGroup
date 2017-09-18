@@ -76,9 +76,9 @@ const template = `<script type="application/ld+json">
                              layout="column"
                              layout-align=" center center">
                             <div hide show-gt-sm='true' class=" md-headline">{{ ::day.name}}</div>
-                            <div hide show-gt-sm='true' class="md-subhead  ">{{::day.program}}</div>
+                            <div hide show-gt-sm='true' class="md-subhead">{{::day.program}}</div>
                             <div hide-gt-sm='true' class=" md-title">{{ ::day.short}}</div>
-                            <div hide-gt-sm='true' class="md-caption  ">{{::day.program}}</div>
+                            <div hide-gt-sm='true' class="md-caption">{{::day.program}}</div>
                         </div>
                     </div>
                 </div>

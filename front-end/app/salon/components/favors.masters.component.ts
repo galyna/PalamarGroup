@@ -217,7 +217,7 @@ const template = `
     <div layout="row" ng-if="$ctrl.videos.length>0 || $ctrl.photos.length>0" flex>
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap  header-super">
-                <div flex class="md-display-2"> Роботи та навчання</div>
+                <div flex class="md-display-2">Наші роботи та навчання</div>
             </div>
             <div class="overlay-days">
             </div>
@@ -260,7 +260,7 @@ const template = `
 
         </div>
 
-        <div layout="row" layout-align="center center">
+        <!-- <div layout="row" layout-align="center center">
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
                 <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                     <md-card md-whiteframe="6" ng-repeat="photo in $ctrl.photos  track by $index"
@@ -286,7 +286,7 @@ const template = `
 
             </div>
 
-        </div>
+        </div> -->
     </div>
 </div>
 `;
@@ -368,18 +368,18 @@ export class FavorsMastersComponentController {
             this.favors = favors;
             this.scrollToMain();
             this.favors.forEach((fav) => {
-                if (fav.photos && fav.photos.length > 0) {
-                    this.photos = this.photos.concat(fav.photos);
-                }
+                // if (fav.photos && fav.photos.length > 0) {
+                //     this.photos = this.photos.concat(fav.photos);
+                // }
                 if (fav.videos && fav.videos.length > 0) {
                     this.videos = this.videos.concat(fav.videos);
                 }
                 this.initSeo(fav);
 
-            })
-            this.photos = this.orderByFilter(this.photos, "order");
+            });
+            // this.photos = this.orderByFilter(this.photos, "order");
             this.videos = this.orderByFilter(this.videos, "order");
-            this.photos.splice(9, this.photos.length - 10)
+            // this.photos.splice(9, this.photos.length - 10)
             this.videos.splice(2, this.videos.length - 3)
         });
     }
