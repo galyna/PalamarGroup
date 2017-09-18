@@ -62,7 +62,17 @@ const template = `<script type="application/ld+json">
                         </md-card-content>
                     </a>
                 </md-card>
-
+                <md-card md-whiteframe="6" class="md-margin" flex-gt-xs="22" flex-xs="80">
+                    <a hreflang="uk" ng-href="/beauty-salon/transformations">
+                        <img ng-src="/content/images/services/fashionchange.jpg"
+                             alt="ЗМІНА ОБРАЗУ від PALAMAR GROUP"/>
+                        
+                        <md-card-content layout="column" layout-align="center center"
+                                         class=" md-padding  show-description-favor">
+                            <div  class=" cat-name ">ЗМІНА ОБРАЗУ</div>
+                        </md-card-content>
+                    </a>
+                </md-card>
             </div>
      </div>
     </div>
