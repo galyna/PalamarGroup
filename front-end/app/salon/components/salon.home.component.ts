@@ -288,7 +288,7 @@ const template = `<script type="application/ld+json">
     <div layout="row" flex ng-if="$ctrl.brends.length>0 " class="md-padding">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap header-super">
-                <div class="md-display-2"> БРЕНДИ</div>
+                <div class="md-display-2">ПАРТНЕРИ</div>
             </div>
             <div class="overlay-comments">
             </div>

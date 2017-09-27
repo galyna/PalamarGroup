@@ -9,7 +9,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button" ng-href="admin.html#!/salon/brends">
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
-                <md-tooltip>Бренди</md-tooltip>
+                <md-tooltip>Партнери</md-tooltip>
             </md-button>
             <span flex></span>
             <md-button ng-click="$ctrl.cancel()" ng-disabled="saveForm.$pristine">

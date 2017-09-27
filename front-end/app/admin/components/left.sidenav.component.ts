@@ -157,7 +157,7 @@ export class LeftSidenavComponentController {
                     }
                     ,
                     {
-                        text: 'Бренди',
+                        text: 'Партнери',
                         visible: () => true,
                         url: BrendsComponentUrl,
                     },
