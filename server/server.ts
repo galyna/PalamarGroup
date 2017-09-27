@@ -1,4 +1,5 @@
 require('dotenv-safe').load();
+import * as cors from 'cors';
 import * as express from 'express';
 let passport = require("passport");
 let path = require('path');
@@ -17,6 +18,7 @@ let env = process.env['NODE_ENV'];
 mongoose.connect(process.env['MONGO_URL']);
 // mongoose.Promise = require('bluebird');
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(multipart());

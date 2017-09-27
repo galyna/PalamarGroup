@@ -321,6 +321,16 @@ md-card.md-default-theme, md-card {
   color: #f0f0f0;
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
+
+  &.two-lines {
+    white-space: pre-wrap;
+    width: 250px;
+    right: -80px;
+    top: 13px;
+    letter-spacing: inherit;
+    line-height: 22px;
+    padding: 5px 0;
+  }
 }
 
 .corner-ribbon-min {
@@ -335,6 +345,15 @@ md-card.md-default-theme, md-card {
   color: #f0f0f0;
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
+
+  &.two-lines {
+    white-space: pre-wrap;
+    width: 250px;
+    right: -80px;
+    top: 13px;
+    line-height: 22px;
+    padding: 5px 0;
+  }
 }
 
 .top-right {
@@ -350,6 +369,10 @@ md-card.md-default-theme, md-card {
   left: -50px;
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
+}
+
+.white-space-pre {
+  white-space: pre;
 }
 
 .black {

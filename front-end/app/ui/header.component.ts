@@ -2,8 +2,8 @@
 const template = `<div ng-click="$ctrl.handleVideoRuning()" class="stop-video-container"
      layout="row"
      layout-align="center center ">
-    <div ng-if="$ctrl.runVideo" class="stop-label">ЗУПИНТИ ВІДЕО</div>
-    <div ng-if="!$ctrl.runVideo" class="stop-label">ЗAПУСПИТИ ВІДЕО</div>
+    <div ng-if="$ctrl.runVideo" class="stop-label">ЗУПИНИТИ ВІДЕО</div>
+    <div ng-if="!$ctrl.runVideo" class="stop-label">ЗAПУСТИТИ ВІДЕО</div>
 </div>
 <div class="pic-wrapper">
     <figure  class="pic-1"></figure>

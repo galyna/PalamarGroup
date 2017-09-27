@@ -23,7 +23,7 @@ export function MediaObserverFactory($compile:ng.ICompileService, $rootScope:IRo
         img: {},
         socialParams: {}
     };
-    var test = $templateCache.get( 'app/ui/mediaObserver.html' );
+    var test = <string>$templateCache.get( 'app/ui/mediaObserver.html' );
     var templateEl = angular.element( test );
     var element = $compile( templateEl )( $scope );
     var body = angular.element( document.body );

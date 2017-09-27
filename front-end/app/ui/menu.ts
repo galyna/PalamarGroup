@@ -39,26 +39,22 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
                 <div flex ng-click="::vm.goToURL(vm.MastersComponentUrl)" class=" pg-menu-item ">КОМАНДА
                 </div>
 
-                <div flex ng-click="::vm.goToURL(vm.ProductsComponentUrl)" class=" pg-menu-item ">ПРОДУКЦІЯ
+                <div flex ng-click="::vm.goToURL('/beauty-salon/products/products')" class=" pg-menu-item ">ПРОДУКЦІЯ
                 </div>
+
             </div>
             <div layout="row" layout-xs="column">
-                <div flex ng-click="::vm.goToURL('/beauty-salon/services/nail-aesthetics')"
-                     class=" pg-menu-item ">МАНІКЮР ТА ПЕДИКЮР
-                </div>
                 <div flex ng-click="::vm.goToURL('/beauty-salon/services/hairdressing')"
                      class=" pg-menu-item ">ПЕРУКАРСЬКІ ПОСЛУГИ
                 </div>
-
-                <div flex ng-click="::vm.goToURL('/beauty-salon/services/makeup')" class=" pg-menu-item ">МАКІЯЖ
+                <div flex ng-click="::vm.goToURL('/beauty-salon/services/hearhealing')" 
+                    class=" pg-menu-item ">ЛІКУВАННЯ ВОЛОССЯ
                 </div>
-
+                <div flex ng-click="::vm.goToURL(vm.SalonTransformsComponentUrl)" 
+                    class=" pg-menu-item ">ЗМІНА ОБРАЗУ
+                </div>
             </div>
             <div layout="row" layout-xs="column">
-
-                <div flex ng-click="::vm.goToURL(vm.SalonTransformsComponentUrl)" class=" pg-menu-item ">ЗМІНА ОБРАЗУ
-                </div>
-
                 <div flex ng-click="::vm.goToURL(vm.SalonContactsComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
                 </div>
             </div>

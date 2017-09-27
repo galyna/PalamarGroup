@@ -237,6 +237,7 @@ declare module pg {
             photo: IPhoto,
             order: number,
             seoJson?:any,
+            category: { _id: string, name: string},
         }
 
         export interface IBrend {

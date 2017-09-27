@@ -24,7 +24,10 @@ const template = `<md-toolbar>
     <md-list-item class="md-2-line" ng-repeat="favor in $ctrl.favors" ng-disabled="!$root.it.can('modifySalon')"  ng-click="$ctrl.editFavor( favor) "
     >
      <img ng-src="{{favor.photo.url}}" class="md-avatar" alt="{{favor.name}}" />
-
+        <div class="md-list-item-text" layout="column">
+            <h3>Категорія</h3>
+            <p>{{::favor.category.name}}</p>
+        </div>
         <div class="md-list-item-text" layout="column">
             <h3>Назва</h3>
             <p>{{::favor.name}}</p>

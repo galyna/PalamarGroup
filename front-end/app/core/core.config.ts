@@ -1,18 +1,27 @@
+export interface ICategory {
+    _id: string,
+    name: string,
+    url: string,
+}
+
 export interface IConstants {
     host: string,
     baseUrl: string,
     apiUrl: string,
     uploadDir: string,
     photoUrl: string,
-    favorCategories: any[],
+    productCategories: ICategory[]
+    favorCategories: ICategory[],
     rates: any[],
     orderStatuses: any[],
     showSalon: boolean
 }
 
 export let constants: IConstants = {
-    host: 'http://dev.palamar.com.ua',
+    // host: 'http://localhost:8080',
+    host: 'http://palamar.com.ua',
     baseUrl: '/',
+    // apiUrl: 'http://localhost:9000',
     apiUrl: 'http://api.palamar.com.ua',
     uploadDir: '/content/uploads',
     photoUrl: '/photo',
@@ -21,15 +30,22 @@ export let constants: IConstants = {
         {_id: 1, name: "Підтвірджено"},
         {_id: 2, name: "Оплачено"},
         {_id: 3, name: "Відмова"}],
+    productCategories: [
+        {_id: "products", name: "ПРОДУКЦІЯ", url: "products"},
+    ],
     favorCategories: [
         {_id: "hear", name: "ПЕРУКАРСЬКІ ПОСЛУГИ",url:"hairdressing"},
-        {_id: "neils", name: "МАНІКЮР ТА ПЕДИКЮР",url:"nail-aesthetics"},
-        {_id: "makeup", name: "МАКІЯЖ",url:"makeup"}],
+        {_id: "hairhealing", name: "ЛІКУВАННЯ ВОЛОССЯ", url: "hearhealing"},
+        ],
      rates: [
         {_id: "0", name: "ВІДСУТНІЙ", text: ""},
-        {_id: "1", name: "ПОЧАТКОВИЙ", text: "Junior Stylist"},
-        {_id: "2", name: "СЕРЕДНІЙ", text: "Middle Stylist"},
-        {_id: "3", name: "ТОП", text: "Top Stylist"}
+        {_id: "1", name: "Top Stylist", text: "Top Stylist"},
+        {_id: "2", name: "Senior Stylist", text: "Senior Stylist"},
+        {_id: "3", name: "Middle Stylist", text: "Middle Stylist"},
+        {_id: "4", name: "Junior Stylis", text: "Junior Stylist"},
+        {_id: "5", name: "Асистент майстра-перукаря", text: 'Асистент\r\nмайстра-перукаря'},
+        {_id: "6", name: "Консультант-трихолог", text: "Консультант\r\n-трихолог"},
+        {_id: "7", name: "Старший адміністратор", text: "Старший\r\nадміністратор"},
     ],
     showSalon: true
 };

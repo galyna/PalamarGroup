@@ -33,6 +33,7 @@ import IOrder = pg.models.IOrder;
 import {salonClientApi, salonClientOptions} from "./salon.client.endpoint";
 import {tasksOptions, tasksApi} from './tasks.endpoint';
 import {appointmentOptions} from './appointment.options';
+import {productorderOptions} from './productorder.options';
 
 import {SeoPage} from "../models/seo.page";
 
@@ -87,7 +88,7 @@ restify.serve(api, Master, tasksOptions);
 restify.serve(api, Model, modelOptions);
 restify.serve(api, Order, orderOptions);
 restify.serve(api, AcademyVideos, orderOptions);
-restify.serve(api, ProductOrder, appointmentOptions);
+restify.serve(api, ProductOrder, productorderOptions);
 restify.serve(api, Appointment, appointmentOptions);
 api.use('/salonclient', salonClientApi);
 restify.serve(api, SalonClient, salonClientOptions);

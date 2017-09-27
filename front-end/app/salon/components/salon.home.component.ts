@@ -62,7 +62,17 @@ const template = `<script type="application/ld+json">
                         </md-card-content>
                     </a>
                 </md-card>
-
+                <md-card md-whiteframe="6" class="md-margin" flex-gt-xs="22" flex-xs="80">
+                    <a hreflang="uk" ng-href="/beauty-salon/transformations">
+                        <img ng-src="/content/images/services/fashionchange.jpg"
+                             alt="ЗМІНА ОБРАЗУ від PALAMAR GROUP"/>
+                        
+                        <md-card-content layout="column" layout-align="center center"
+                                         class=" md-padding  show-description-favor">
+                            <div  class=" cat-name ">ЗМІНА ОБРАЗУ</div>
+                        </md-card-content>
+                    </a>
+                </md-card>
             </div>
      </div>
     </div>
@@ -76,9 +86,9 @@ const template = `<script type="application/ld+json">
                              layout="column"
                              layout-align=" center center">
                             <div hide show-gt-sm='true' class=" md-headline">{{ ::day.name}}</div>
-                            <div hide show-gt-sm='true' class="md-subhead  ">{{::day.program}}</div>
+                            <div hide show-gt-sm='true' class="md-subhead">{{::day.program}}</div>
                             <div hide-gt-sm='true' class=" md-title">{{ ::day.short}}</div>
-                            <div hide-gt-sm='true' class="md-caption  ">{{::day.program}}</div>
+                            <div hide-gt-sm='true' class="md-caption">{{::day.program}}</div>
                         </div>
                     </div>
                 </div>
@@ -278,7 +288,7 @@ const template = `<script type="application/ld+json">
     <div layout="row" flex ng-if="$ctrl.brends.length>0 " class="md-padding">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap header-super">
-                <div class="md-display-2"> БРЕНДИ</div>
+                <div class="md-display-2">ПАРТНЕРИ</div>
             </div>
             <div class="overlay-comments">
             </div>
@@ -322,32 +332,32 @@ export class SalonHomeComponentController {
         {
             name: "ПОНЕДІЛОК",
             short: "ПН",
-            program: '10:00 - 19:00',
+            program: '09:00 - 21:00',
         },
         {
             name: "ВІВТОРОК",
             short: "ВТ",
-            program: '10:00 - 19:00',
+            program: '09:00 - 21:00',
         }, {
             name: "СЕРЕДА",
             short: "СР",
-            program: '10:00 - 19:00',
+            program: '09:00 - 21:00',
         }, {
             name: "ЧЕТВЕР",
             short: "ЧТ",
-            program: '10:00 - 19:00',
+            program: '09:00 - 21:00',
         }, {
             name: "П`ЯТНИЦЯ",
             short: "ПТ",
-            program: '10:00 - 19:00',
+            program: '09:00 - 21:00',
         }, {
             name: "СУБОТА",
             short: "СБ",
-            program: 'зачинено',
+            program: '09:00 - 21:00',
         }, {
             name: "НЕДІЛЯ",
             short: "НД",
-            program: 'зачинено',
+            program: '09:00 - 15:00',
         }];
     categories: any;
     showMoreTransforms: boolean;
@@ -453,7 +463,7 @@ export class SalonHomeComponentController {
                     "alternateName": "PALAMAR",
                     "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
                     "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
-                    "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                    "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
                     "name": "PALAMAR GROUP"
                 },
                 "homeLocation": {
@@ -517,7 +527,7 @@ export class SalonHomeComponentController {
                         "alternateName": "PALAMAR",
                         "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
                         "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
-                        "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                        "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
                         "sameAs": [
                             "https://www.facebook.com/hashtag/palamar_group",
                             "https://www.instagram.com/palamar_group/",
@@ -541,7 +551,7 @@ export class SalonHomeComponentController {
                     "alternateName": "PALAMAR",
                     "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
                     "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
-                    "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                    "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
                     "name": "PALAMAR GROUP"
                 }
             }

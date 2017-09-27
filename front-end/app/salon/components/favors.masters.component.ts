@@ -91,15 +91,13 @@ const template = `
                         <div class="card-desc box "
                              flex="50" layout="column" layout-align="space-around center">
                             <div ng-if="master.rate && master.rate._id!=='0'" hide show-md="true"
+                                 ng-class="{ 'two-lines': master.rate.text.indexOf('\r\n') >= 0 }" 
                                  class="corner-ribbon top-right white"
-                            >
-                                {{::master.rate.text}}
-                            </div>
+                            >{{::master.rate.text}}</div>
                             <div ng-if="master.rate && master.rate._id!=='0'" hide-md="true"
+                                 ng-class="{ 'two-lines': master.rate.text.indexOf('\r\n') >= 0 }" 
                                  class="corner-ribbon-min top-right white"
-                            >
-                                {{::master.rate.text}}
-                            </div>
+                            >{{::master.rate.text}}</div>
                             <div layout="row" layout-align="center center" class="md-padding ">
                                 <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">
                                     {{::master.name}}
@@ -219,7 +217,7 @@ const template = `
     <div layout="row" ng-if="$ctrl.videos.length>0 || $ctrl.photos.length>0" flex>
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap  header-super">
-                <div flex class="md-display-2"> Роботи та навчання</div>
+                <div flex class="md-display-2">Наші роботи та навчання</div>
             </div>
             <div class="overlay-days">
             </div>
@@ -262,7 +260,7 @@ const template = `
 
         </div>
 
-        <div layout="row" layout-align="center center">
+        <!-- <div layout="row" layout-align="center center">
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
                 <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
                     <md-card md-whiteframe="6" ng-repeat="photo in $ctrl.photos  track by $index"
@@ -288,7 +286,7 @@ const template = `
 
             </div>
 
-        </div>
+        </div> -->
     </div>
 </div>
 `;
@@ -370,18 +368,18 @@ export class FavorsMastersComponentController {
             this.favors = favors;
             this.scrollToMain();
             this.favors.forEach((fav) => {
-                if (fav.photos && fav.photos.length > 0) {
-                    this.photos = this.photos.concat(fav.photos);
-                }
+                // if (fav.photos && fav.photos.length > 0) {
+                //     this.photos = this.photos.concat(fav.photos);
+                // }
                 if (fav.videos && fav.videos.length > 0) {
                     this.videos = this.videos.concat(fav.videos);
                 }
                 this.initSeo(fav);
 
-            })
-            this.photos = this.orderByFilter(this.photos, "order");
+            });
+            // this.photos = this.orderByFilter(this.photos, "order");
             this.videos = this.orderByFilter(this.videos, "order");
-            this.photos.splice(9, this.photos.length - 10)
+            // this.photos.splice(9, this.photos.length - 10)
             this.videos.splice(2, this.videos.length - 3)
         });
     }
@@ -422,7 +420,7 @@ export class FavorsMastersComponentController {
                     "alternateName": "PALAMAR",
                     "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
                     "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
-                    "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                    "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
                     "name": "PALAMAR GROUP"
                 },
                 "homeLocation":{
@@ -527,7 +525,7 @@ export class FavorsMastersComponentController {
                         "alternateName": "PALAMAR",
                         "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
                         "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
-                        "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                        "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
                         "sameAs": [
                             "https://www.facebook.com/hashtag/palamar_group",
                             "https://www.instagram.com/palamar_group/",
@@ -551,7 +549,7 @@ export class FavorsMastersComponentController {
                     "alternateName": "PALAMAR",
                     "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
                     "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
-                    "description": "Салон краси у Львуві. Послуги: стрижки, зачіски,фарбування, манікюр, візаж, мейкап, педікюр. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, манікюру, візажу, педікюру",
+                    "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
                     "name": "PALAMAR GROUP"
                 }
             }

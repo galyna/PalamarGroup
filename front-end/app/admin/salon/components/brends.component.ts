@@ -4,7 +4,7 @@ import {IConstants} from "../../../core/core.config";
 
 const template = `<md-toolbar>
     <div class="md-toolbar-tools">
-        <h3>Бренди</h3>
+        <h3>Партнери</h3>
         <span flex></span>
         <pg-admin-paging
                 params="$ctrl.paging"
