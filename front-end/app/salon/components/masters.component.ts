@@ -65,7 +65,7 @@ const template: string = `<script type="application/ld+json">
                                  ng-class="{ 'two-lines': master.rate.text.indexOf('\r\n') >= 0 }" 
                                  class="corner-ribbon-min top-right white">{{::master.rate.text}}</div>
                             <div layout="row" layout-align="center center" class="md-padding ">
-                                <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">
+                                <div hide show-gt-sm="true" flex="90" class="md-display-1 capitalize">
                                     {{::master.name}}
                                 </div>
                                 <div hide show-sm="true" flex="90" class="md-headline capitalize">{{::master.name}}
@@ -125,7 +125,7 @@ const template: string = `<script type="application/ld+json">
                                  class="corner-ribbon-min top-left white"
                             >{{::master.rate.text}}</div>
                             <div layout="row" layout-align="center center" class="md-padding md-margin">
-                                <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">
+                                <div hide show-gt-sm="true" flex="90" class="md-display-1 capitalize">
                                     {{::master.name}}
                                 </div>
                                 <div hide show-sm="true" flex="90" class="md-headline capitalize">{{::master.name}}
@@ -201,7 +201,7 @@ const template: string = `<script type="application/ld+json">
                                  class="corner-ribbon-min top-right white"
                             >{{::master.rate.text}}</div>
                             <div layout="row" layout-align="center center" class="md-padding md-margin">
-                                <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">
+                                <div hide show-gt-sm="true" flex="90" class="md-display-1 capitalize">
                                     {{::master.name}}
                                 </div>
                                 <div hide show-sm="true" flex="90" class="md-headline capitalize">{{::master.name}}

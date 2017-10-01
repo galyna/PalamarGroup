@@ -49,7 +49,7 @@ const template = `
                              flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text layout-align="space-around center">
-                                    <div hide show-gt-sm="true" class="md-display-2 ">{{::product.name}}</div>
+                                    <div hide show-gt-sm="true" class="md-display-1 ">{{::product.name}}</div>
                                     <div hide-gt-sm="true" class="md-headline">{{::product.name}}</div>
 
                                     <div hide show-gt-sm="true" class="md-title">Ціна {{::product.price}} грн.</div>
@@ -85,7 +85,7 @@ const template = `
                              flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text layout-align="space-around center">
-                                    <div hide show-gt-sm="true" class="md-display-2 ">{{::product.name}}</div>
+                                    <div hide show-gt-sm="true" class="md-display-1 ">{{::product.name}}</div>
                                     <div hide-gt-sm="true" class="md-headline">{{::product.name}}</div>
 
                                     <div hide show-gt-sm="true" class="md-title">Ціна {{::product.price}} грн.</div>
@@ -127,7 +127,7 @@ const template = `
                              flex="50" layout="column" layout-align="center center">
                             <md-card-title flex>
                                 <md-card-title-text layout-align="space-around center">
-                                    <div hide show-gt-sm="true" class="md-display-2 ">{{::product.name}}</div>
+                                    <div hide show-gt-sm="true" class="md-display-1 ">{{::product.name}}</div>
                                     <div hide-gt-sm="true" class="md-headline">{{::product.name}}</div>
 
                                     <div hide show-gt-sm="true" class="md-title">Ціна {{::product.price}} грн.</div>
