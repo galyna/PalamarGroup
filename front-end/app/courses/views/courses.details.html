@@ -1,5 +1,3 @@
-
-
 <script type="application/ld+json">
 {
             "@context": "http://www.schema.org",
@@ -32,6 +30,7 @@
 
             "telephone": "+38 068 9898806"
         }
+
 </script>
 
 
@@ -41,7 +40,7 @@
     <!--author-->
     <div layout="row" class="top-info" flex layout-align="center center">
 
-        <md-card flex-md="90"  flex-gt-md="60"  flex-xs="none" flex md-whiteframe="5">
+        <md-card flex-md="90" flex-gt-md="60" flex-xs="none" flex md-whiteframe="5">
             <md-card-content layuot="column" layout-gt-sm="row">
                 <div class="card-desc-top " flex hide-gt-sm="true" layout="column" layout-align=" space-around center">
                     <md-card-title>
@@ -53,86 +52,87 @@
                 </div>
                 <div class=" card-media" layout="column"
                      flex-gt-sm="50" layout-align="center center">
-                    <img ng-src="{{::vm.course.author.photoUrl}}" alt="Курс {{::vm.course.name}} від PALAMAR GROUP Львів "/>
+                    <img ng-src="{{::vm.course.author.photoUrl}}"
+                         alt="Курс {{::vm.course.name}} від PALAMAR GROUP Львів "/>
                     <div class="md-padding author-name" layout="column" layout-align="space-around center">
                         <div class="md-headline">Автор</div>
                         <div class="md-headline">{{ ::vm.course.author.name}}</div>
                     </div>
                 </div>
-                <div  class="card-desc "   flex-gt-sm="50"
+                <div class="card-desc " flex-gt-sm="50"
                      layout="column" layout-align=" space-between center" class="md-margin">
 
 
-                        <md-card-title layout="column" layout-align="space-around center">
-                            <md-card-title-text hide show-gt-sm="true"  layout="column"
-                                                layout-align=" center center">
+                    <md-card-title layout="column" layout-align="space-around center">
+                        <md-card-title-text hide show-gt-sm="true" layout="column"
+                                            layout-align=" center center">
 
-                                <div class="md-display-1  md-padding">{{::vm.course.name}}</div>
-                            </md-card-title-text>
-                            <div  class="md-title "  layout="row" layout-align=" space-around center">
-                                <div class=" md-padding">Вартість</div>
-                                <div flex>{{::vm.course.price}} грн.</div>
-                            </div>
-                        </md-card-title>
-                        <md-button class="md-raised md-margin"  aria-label="Play" ng-click="::vm.showModelDialog($event)">
-                            Стати моделлю
-                        </md-button>
-                        <md-button class=" md-raised xs-selected md-margin" aria-label="Play"
-                                   ng-click="::vm.showOrderDialog($event)">
-                            Записатись
-                        </md-button>
-                        <md-button scroll-to="comments" easing="easeInOutCubic"
-                                   duration="700" class=" md-raised  " aria-label="Відгуки">
-                            Відгуки
-                        </md-button>
-                        <div class="md-padding md-margin" layout="column" layout-gt-sm="row"
-                             layout-align="center center">
-                            <div flex class="md-title md-padding">Поділитись</div>
-                            <div class="social-image-container" layout="row"
-                                 layout-align="center center">
-                                <a href=""
-                                   socialshare
-                                   socialshare-type="feed"
-                                   socialshare-provider="facebook"
-                                   socialshare-via="614392392043708"
-                                   socialshare-caption="PALAMAR GROUP ACADEMY"
-                                   socialshare-description="{{::vm.socialParams.description}}"
-                                   socialshare-media="{{::vm.socialParams.image}}"
-                                   socialshare-url="{{::vm.socialParams.target}}">
-                                    <md-icon class="social-image"
-                                             md-svg-src="../content/images/icons/social/face.svg"></md-icon>
-                                </a>
-                                <a href=""
-                                   socialshare
-                                   socialshare-provider="vk"
-                                   socialshare-text="{{ ::vm.socialParams.title}}"
-                                   socialshare-description="{{::vm.socialParams.description}}"
-                                   socialshare-media='{{::vm.socialParams.image}}'
-                                   socialshare-url="{{::vm.socialParams.target}}">
-                                    <md-icon class="social-image"
-                                             md-svg-src="../content/images/icons/social/vk-social-logotype.svg"></md-icon>
-                                </a>
-                                <a href=""
-                                   socialshare
-                                   socialshare-provider="twitter"
-                                   socialshare-text="{{ 'Запрошуємо на блок '+ vm.socialParams.title }}"
-                                   socialshare-hashtags=""
-                                   socialshare-url="{{::vm.socialParams.target}}">
-                                    <md-icon class="social-image"
-                                             md-svg-src="../content/images/icons/social/twi.svg"></md-icon>
-                                </a>
-                                <a href=""
-                                   socialshare
-                                   socialshare-provider="google"
-                                   socialshare-url="{{::vm.socialParams.target}}">
-                                    <md-icon class="social-image"
-                                             md-svg-src="../content/images/icons/social/goo.svg"></md-icon>
-
-                                </a>
-
-
-                            </div>
+                            <div class="md-display-1  md-padding">{{::vm.course.name}}</div>
+                        </md-card-title-text>
+                        <div class="md-title " layout="row" layout-align=" space-around center">
+                            <div class=" md-padding">Вартість</div>
+                            <div flex>{{::vm.course.price}} грн.</div>
                         </div>
+                    </md-card-title>
+                    <md-button class="md-raised md-margin" aria-label="Play" ng-click="::vm.showModelDialog($event)">
+                        Стати моделлю
+                    </md-button>
+                    <md-button class=" md-raised xs-selected md-margin" aria-label="Play"
+                               ng-click="::vm.showOrderDialog($event)">
+                        Записатись
+                    </md-button>
+                    <md-button scroll-to="comments" easing="easeInOutCubic"
+                               duration="700" class=" md-raised  " aria-label="Відгуки">
+                        Відгуки
+                    </md-button>
+                    <div class="md-padding md-margin" layout="column" layout-gt-sm="row"
+                         layout-align="center center">
+                        <div flex class="md-title md-padding">Поділитись</div>
+                        <div class="social-image-container" layout="row"
+                             layout-align="center center">
+                            <a href=""
+                               socialshare
+                               socialshare-type="feed"
+                               socialshare-provider="facebook"
+                               socialshare-via="614392392043708"
+                               socialshare-caption="PALAMAR GROUP ACADEMY"
+                               socialshare-description="{{::vm.socialParams.description}}"
+                               socialshare-media="{{::vm.socialParams.image}}"
+                               socialshare-url="{{::vm.socialParams.target}}">
+                                <md-icon class="social-image"
+                                         md-svg-src="../content/images/icons/social/face.svg"></md-icon>
+                            </a>
+                            <a href=""
+                               socialshare
+                               socialshare-provider="vk"
+                               socialshare-text="{{ ::vm.socialParams.title}}"
+                               socialshare-description="{{::vm.socialParams.description}}"
+                               socialshare-media='{{::vm.socialParams.image}}'
+                               socialshare-url="{{::vm.socialParams.target}}">
+                                <md-icon class="social-image"
+                                         md-svg-src="../content/images/icons/social/vk-social-logotype.svg"></md-icon>
+                            </a>
+                            <a href=""
+                               socialshare
+                               socialshare-provider="twitter"
+                               socialshare-text="{{ 'Запрошуємо на блок '+ vm.socialParams.title }}"
+                               socialshare-hashtags=""
+                               socialshare-url="{{::vm.socialParams.target}}">
+                                <md-icon class="social-image"
+                                         md-svg-src="../content/images/icons/social/twi.svg"></md-icon>
+                            </a>
+                            <a href=""
+                               socialshare
+                               socialshare-provider="google"
+                               socialshare-url="{{::vm.socialParams.target}}">
+                                <md-icon class="social-image"
+                                         md-svg-src="../content/images/icons/social/goo.svg"></md-icon>
+
+                            </a>
+
+
+                        </div>
+                    </div>
 
                 </div>
             </md-card-content>
@@ -145,7 +145,7 @@
             <div class="fit-screen-wrap header-long " layout="column">
                 <div flex="none" layout="row" class="md-padding program-block  " layout-align=" center center">
                     <div ng-repeat="day in ::vm.course.days track by $index">
-                        <div class="date-block md-margin "   layout="column"
+                        <div class="date-block md-margin " layout="column"
                              layout-align=" center center">
                             <div hide show-gt-sx='true' class=" md-display-2">{{ ::day.date| date:'dd.MM'}}</div>
                             <div show-sx='true' class="md-title  ">{{::day.date| date:'dd.MM'}}</div>
@@ -158,12 +158,14 @@
             </div>
 
 
-            <div  class="overlay-days"> <figure ></figure></div>
+            <div class="overlay-days">
+                <figure></figure>
+            </div>
 
         </div>
     </div>
 
-    <div  layout="row" flex ng-if="vm.course.hearFormsPhotos.length>0">
+    <div layout="row" flex ng-if="vm.course.hearFormsPhotos.length>0">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap invers header">
                 <div class="md-display-2"> Mатеріали блоку</div>
@@ -174,11 +176,14 @@
 
     <div layout="row" layout-align="center center" ng-if="vm.course.hearFormsPhotos.length>0">
 
-        <div  flex flex-gt-md="60" flex-md="80"  flex-gt-xs="60">
+        <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6"  ng-repeat="photo in vm.course.hearFormsPhotos" temprop="workPerformed" itemscope=""
+                <md-card md-whiteframe="6" ng-repeat="photo in vm.course.hearFormsPhotos" temprop="workPerformed"
+                         itemscope=""
                          itemtype="http://schema.org/CreativeWork"
-                         class="md-margin " ng-attr-flex-gt-sm="{{::vm.getPictureFlex($index,vm.course.hearFormsPhotos.length)}}"   flex-gt-xs="46" flex-xs="80"
+                         class="md-margin "
+                         ng-attr-flex-gt-sm="{{::vm.getPictureFlex($index,vm.course.hearFormsPhotos.length)}}"
+                         flex-gt-xs="46" flex-xs="80"
                          ng-click="::vm.showMediaObserver(vm.course.hearFormsPhotos, $index)">
                     <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                         <meta itemprop="name" content="PALAMAR GROUP"/>
@@ -189,7 +194,7 @@
                     </div>
                     <meta itemprop="image"
                           content="http://palamar.com.ua{{::photo.url}}"/>
-                    <img ng-src="{{::photo.url}}" class="md-card-image"  alt="{{::photo.name}}">
+                    <img ng-src="{{::photo.url}}" class="md-card-image" alt="{{::photo.name}}">
                     <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                         <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
                     </md-card-content>
@@ -200,8 +205,9 @@
     </div>
 
     <div layout="row" layout-align="center center" ng-if="vm.course.videos.length>0">
-        <div flex flex-gt-md="60" flex-md="80" >
-            <div layout="column" layout-margin layout layout-wrap layout-align="center center" class="embed-responsive-container" >
+        <div flex flex-gt-md="60" flex-md="80">
+            <div layout="column" layout-margin layout layout-wrap layout-align="center center"
+                 class="embed-responsive-container">
                 <md-card md-whiteframe="6" class="  courses-videos"
                          ng-repeat="video in ::vm.course.videos track by $index" temprop="workPerformed" itemscope=""
                          itemtype="http://schema.org/CreativeWork"
@@ -235,16 +241,22 @@
 
     <div layout="row" flex ng-if="::vm.course.description">
         <div class="page-delimiter content-block" flex>
-            <div  class="fit-screen-wrap header-long " layout="column">
+            <div class="fit-screen-wrap header-long " layout="column">
 
                 <div layout="row" layout-align="center center">
-                    <div   hide-xs="true" flex="60" flex-gt-sm="50"
-                         class="md-display-1 md-margin md-padding">
-                        {{::vm.course.description}}
-                    </div>
-                    <div    hide-gt-xs="true"  flex="70"
-                         class="md-headline ">{{::vm.course.description}}
-                    </div>
+                    <div
+                            hide-xs="true"
+                            flex="60"
+                            flex-gt-sm="50"
+                            class="md-display-1 md-margin md-padding"
+                            ng-bind-html="::vm.course.description"
+                    ></div>
+                    <div
+                            hide-gt-xs="true"
+                            flex="70"
+                            class="md-headline "
+                            ng-bind-html="::vm.course.description"
+                    ></div>
 
                 </div>
             </div>
@@ -262,11 +274,12 @@
         </div>
     </div>
     <div layout="row" layout-align="center center" ng-if="vm.course.historyPhotos.length>0">
-        <div  flex-gt-md="60" flex-md="80"  flex-gt-xs="60" >
+        <div flex-gt-md="60" flex-md="80" flex-gt-xs="60">
 
             <div class="courses-history" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6"  ng-repeat="photo in ::vm.course.historyPhotos"
-                         class="md-margin " flex-gt-xs="46" flex-xs="80" itemscope="" itemtype="http://schema.org/ImageObject"
+                <md-card md-whiteframe="6" ng-repeat="photo in ::vm.course.historyPhotos"
+                         class="md-margin " flex-gt-xs="46" flex-xs="80" itemscope=""
+                         itemtype="http://schema.org/ImageObject"
                          ng-click="::vm.showMediaObserver(vm.course.historyPhotos, $index)">
                     <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                         <meta itemprop="name" content="PALAMAR GROUP"/>
@@ -275,7 +288,7 @@
                         <meta itemprop="address" content="Львів"/>
                     </div>
                     <meta itemprop="image" content="http://palamar.com.ua{{::photo.url}}"/>
-                    <img ng-src="{{::photo.url}}" class="md-card-image"  alt="{{::photo.name}}">
+                    <img ng-src="{{::photo.url}}" class="md-card-image" alt="{{::photo.name}}">
                     <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
                         <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
                     </md-card-content>
@@ -290,7 +303,7 @@
     <div layout="row" flex ng-if="vm.showComments()">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap header-super">
-                <div   class="md-display-3">Відгуки</div>
+                <div class="md-display-3">Відгуки</div>
             </div>
             <div class="overlay-comments"></div>
             <!-- ng-style="{'background-image':'url({{vm.course.historyPhotos[0].url}})'}"></div>-->
@@ -299,7 +312,7 @@
     <div id="comments" ng-class="{'content-block':vm.showComments()}" layout="row" layout-align="center center">
         <div flex="60" flex-xs="100" flex-sm="90">
 
-            <div   ng-if="vm.showComments()">
+            <div ng-if="vm.showComments()">
                 <md-list class="md-dense" flex>
                     <md-list-item class="md-2-line" ng-if="comment.isVisible"
                                   ng-repeat="comment in vm.course.comments track by $index">

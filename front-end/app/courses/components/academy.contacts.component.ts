@@ -37,7 +37,11 @@ const template = `
             <div class="page-delimiter" flex>
                 <div class="fit-screen-wrap invers header">                  
                     <div class="md-display-1"> Адреса {{$ctrl.salon.address}}</div>
-                      <div class="md-title md-padding"> {{$ctrl.salon.description}}</div>
+                      <div 
+                        class="md-title 
+                        md-padding"
+                        ng-bind-html="$ctrl.salon.description"
+                      ></div>
                 </div>
 
             </div>

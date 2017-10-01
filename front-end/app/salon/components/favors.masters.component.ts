@@ -37,7 +37,10 @@ const template = `
                         <md-card-content layout="column"
                                          class="  show-description-favor" layout-align="center center">
                             <span class="  md-margin">{{::favor.name}}</span>
-                            <div class=" md-margin show-description-content">{{::favor.description}}</div>
+                            <div 
+                                class="md-margin show-description-content"
+                                ng-bind-html="::favor.description"
+                            ></div>
                         </md-card-content>
                     </a>
                     <md-card-content layout="column" class="  card-appoint" layout-align="center center"

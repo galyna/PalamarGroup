@@ -55,8 +55,17 @@ const template = `
                                     <div hide show-gt-sm="true" class="md-title">Ціна {{::product.price}} грн.</div>
                                     <div hide-gt-sm="true" class="md-subhead">Ціна {{::product.price}} грн.</div>
                                     <div class="descr-container">
-                                        <div hide show-gt-sm="true" class="md-title md-padding">{{::product.description}}</div>
-                                        <div hide-gt-sm="true" class="md-subhead">{{::product.description}}</div>
+                                        <div 
+                                            hide 
+                                            show-gt-sm="true" 
+                                            class="md-title md-padding"
+                                            ng-bind-html="::product.description"
+                                        ></div>
+                                        <div 
+                                            hide-gt-sm="true" 
+                                            class="md-subhead"
+                                            ng-bind-html="::product.description"
+                                        ></div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
@@ -82,8 +91,17 @@ const template = `
                                     <div hide show-gt-sm="true" class="md-title">Ціна {{::product.price}} грн.</div>
                                     <div hide-gt-sm="true" class="md-subhead">Ціна {{::product.price}} грн.</div>
                                     <div class="descr-container">
-                                        <div hide show-gt-sm="true" class="md-title md-padding">{{::product.description}}</div>
-                                        <div hide-gt-sm="true" class="md-subhead">{{::product.description}}</div>
+                                        <div 
+                                            hide 
+                                            show-gt-sm="true" 
+                                            class="md-title md-padding"
+                                            ng-bind-html="::product.description"
+                                        ></div>
+                                        <div 
+                                            hide-gt-sm="true" 
+                                            class="md-subhead"
+                                            ng-bind-html="::product.description"
+                                        ></div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
@@ -115,8 +133,17 @@ const template = `
                                     <div hide show-gt-sm="true" class="md-title">Ціна {{::product.price}} грн.</div>
                                     <div hide-gt-sm="true" class="md-subhead">Ціна {{::product.price}} грн.</div>
                                     <div class="descr-container">
-                                        <div hide show-gt-sm="true" class="md-title md-padding">{{::product.description}}</div>
-                                        <div hide-gt-sm="true" class="md-subhead">{{::product.description}}</div>
+                                        <div 
+                                            hide 
+                                            show-gt-sm="true" 
+                                            class="md-title md-padding"
+                                            ng-bind-html="::product.description"
+                                        ></div>
+                                        <div 
+                                            hide-gt-sm="true" 
+                                            class="md-subhead"
+                                            ng-bind-html="::product.description"
+                                        ></div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
@@ -144,7 +171,10 @@ const template = `
                                 <md-card-title-text>
                                     <div class="md-headline">{{::product.name}}</div>
                                     <div class="md-title md-padding">Ціна {{::product.price}} грн.</div>
-                                    <div class="md-subhead">{{::product.description}}</div>
+                                    <div 
+                                        class="md-subhead"
+                                        ng-bind-html="::product.description"
+                                    ></div>
                                 </md-card-title-text>
                             </md-card-title>
                             <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
@@ -209,9 +239,13 @@ const appointmentTemplate = `<md-dialog class="pop-form-dialog" aria-label="ЗА
                             <div class="card-desc md-padding" layout="column" layout-align="center center">
                                 <div flex class="md-headline">{{::vm.product.name}}</div>
                                 <div class="md-subhead">Ціна {{::vm.product.price}} грн.</div>
-                                <div flex class="md-subhead" layout="row" layout-align="center center">
-                                    {{::vm.product.description}}
-                                </div>
+                                <div 
+                                    flex 
+                                    class="md-subhead" 
+                                    layout="row" 
+                                    layout-align="center center"
+                                    ng-bind-html="::vm.product.description"
+                                ></div>
                             </div>
                         </div>
                     </div>
