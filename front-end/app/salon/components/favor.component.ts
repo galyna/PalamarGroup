@@ -28,7 +28,10 @@ const template = `
                                 </div>
                                 <div hide-md="true" class="md-display-1">{{::$ctrl.favor.name}}</div>
                                 <div class="favor-container ">
-                                    <div class="md-title">{{::$ctrl.favor.description}}</div>
+                                    <div 
+                                        class="md-title"
+                                        ng-bind-html="$ctrl.favor.description"
+                                    ></div>
 
                                 </div>
                             </md-card-title-text>
@@ -63,7 +66,10 @@ const template = `
                         <md-card-title>
                             <md-card-title-text>
                                 <div class="md-headline capitalize md-margin">{{::$ctrl.favor.name}}</div>
-                                <div class="md-title">{{::$ctrl.favor.description}}</div>
+                                <div 
+                                    class="md-title"
+                                    ng-bind-html="$ctrl.favor.description"
+                                ></div>
                             </md-card-title-text>
                         </md-card-title>
                           <md-button class=" md-margin near-master xs-selected md-display-1 md-raised "
@@ -189,7 +195,10 @@ const template = `
                         <md-card-title>
                             <md-card-title-text>
                                 <div class="md-headline capitalize md-padding">{{::master.name}}</div>
-                                <div class="md-title">{{::master.description}}</div>
+                                <div 
+                                    class="md-title"
+                                    ng-bind-html="$ctrl.favor.description"
+                                ></div>
                             </md-card-title-text>
                         </md-card-title>
                        </a>

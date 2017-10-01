@@ -187,10 +187,11 @@ const template = `
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap  flex  header-super">
                 <div layout="row" layout-align="center center">
-                    <div flex="70"
-                         class="md-title md-margin md-padding">
-                        {{::$ctrl.master.description}}
-                    </div>
+                    <div 
+                        flex="70"
+                        class="md-title md-margin md-padding"
+                        ng-bind-html="::$ctrl.master.description"
+                        ></div>
                 </div>
             </div>
             <div class="overlay-trans ">

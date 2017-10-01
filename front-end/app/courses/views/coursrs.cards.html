@@ -75,7 +75,10 @@
                                     <div hide show-md="true"  class="md-display-2">{{::course.name}}</div>
                                     <div hide-md="true" class="md-display-1" >{{::course.name}}</div>
                                     <div hide-sm="true" class="descr-container">
-                                        <div class="md-title">{{::course.description}}</div>
+                                        <div
+                                                class="md-title"
+                                                ng-bind-html="::course.description"
+                                        ></div>
 
                                     </div>
                                 </md-card-title-text>
@@ -98,7 +101,10 @@
                                     <div hide show-md="true"  class="md-display-2">{{::course.name}}</div>
                                     <div hide-md="true" class="md-display-1" >{{::course.name}}</div>
                                     <div hide-sm="true" class="descr-container"  >
-                                        <div class="md-title">{{::course.description}}</div>
+                                        <div
+                                                class="md-title"
+                                                ng-bind-html="::course.description"
+                                        ></div>
 
                                     </div>
                                 </md-card-title-text>
@@ -126,7 +132,10 @@
                                     <div hide show-md="true"  class="md-display-2">{{::course.name}}</div>
                                     <div hide-md="true" class="md-display-1" >{{::course.name}}</div>
                                     <div hide-sm="true" class="descr-container">
-                                        <div class="md-title">{{::course.description}}</div>
+                                        <div
+                                                class="md-title"
+                                                ng-bind-html="::course.description"
+                                        ></div>
                                     </div>
                                 </md-card-title-text>
                             </md-card-title>
