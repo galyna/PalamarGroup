@@ -39,7 +39,7 @@ export let constants: IConstants = {
         ],
      rates: [
         {_id: "0", name: "ВІДСУТНІЙ", text: ""},
-        {_id: "1", name: "Top Stylist", text: "Top Stylist"},
+        {_id: "1", name: "TOP Stylist", text: "TOP Stylist"},
         {_id: "2", name: "Senior Stylist", text: "Senior Stylist"},
         {_id: "3", name: "Middle Stylist", text: "Middle Stylist"},
         {_id: "4", name: "Junior Stylis", text: "Junior Stylist"},
