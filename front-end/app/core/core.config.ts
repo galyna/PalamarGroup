@@ -18,11 +18,11 @@ export interface IConstants {
 }
 
 export let constants: IConstants = {
-    host: 'http://localhost:8080',
-    // host: 'http://palamar.com.ua',
+    // host: 'http://localhost:8080',
+    host: 'http://palamar.com.ua',
     baseUrl: '/',
-    apiUrl: 'http://localhost:9000',
-    // apiUrl: 'http://api.palamar.com.ua',
+    // apiUrl: 'http://localhost:9000',
+    apiUrl: 'http://api.palamar.com.ua',
     uploadDir: '/content/uploads',
     photoUrl: '/photo',
     orderStatuses: [
