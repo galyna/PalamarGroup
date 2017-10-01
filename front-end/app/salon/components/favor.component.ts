@@ -128,6 +128,7 @@ const template = `
                                 <div hide show-sm="true" flex="90" class="md-headline capitalize">{{::master.name}}
                                 </div>
                             </div>
+                            <div hide show-gt-sm="true" class="md-title" style="margin-top: -45px" ng-bind="::master.rate.text"></div>
                             <div hide show-gt-sm="true" class="md-title">
                                 Вибери послугу та запишись
                             </div>
