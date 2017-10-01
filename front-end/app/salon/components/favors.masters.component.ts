@@ -102,7 +102,7 @@ const template = `
                                  class="corner-ribbon-min top-right white"
                             >{{::master.rate.text}}</div>
                             <div layout="row" layout-align="center center" class="md-padding ">
-                                <div hide show-gt-sm="true" flex="90" class="md-display-2 capitalize">
+                                <div hide show-gt-sm="true" flex="90" class="md-display-1 capitalize">
                                     {{::master.name}}
                                 </div>
                                 <div hide show-sm="true" flex="90" class="md-headline capitalize">{{::master.name}}
