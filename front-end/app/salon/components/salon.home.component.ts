@@ -243,20 +243,31 @@ const template = `<script type="application/ld+json">
         </div>
     </div>
 
-    <div layout="row" layout-align="center center">
-
-        <div flex flex-gt-md="60" flex-gt-lg="40" flex-md="80" flex-gt-xs="70">
-            <div flex class="brends-container" layout-margin layout layout-wrap layout-align="center center">
-                <a hreflang="uk" ng-href="{{::bren.url}}" class="md-margin brend " layout="row" layout-align="center center"
-                   target="_blank"
-                   flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
-                   flex-gt-xs="46" flex-xs="80" ng-repeat="bren in $ctrl.brends track by $index">
-                    <sb-jsonld json="{{::bren.seoJson}}"></sb-jsonld>
-                    <img ng-src="{{::bren.photo.url}}"
-                         class=""/> </a>
-            </div>
-        </div>
-
+    <div 
+        class="brends" 
+        layout-xs="column"
+        layout-gt-xs="row" 
+        layout-align="center center"
+        ng-repeat="row in $ctrl.brendRows"
+    >
+        <span flex></span>
+        <pg-photocard
+                    ng-repeat="brend in row | orderBy:'order' track by $index"
+                    layout-margin
+                    flex-sm="40"
+                    flex-gt-sm="30"
+                    url="brend.photo.url"
+                    name="brend.name"
+                    description="brend.description"
+                    ng-click="$ctrl.goToURL(brend.url, '_blank')"
+                ></pg-photocard>
+        <span 
+            ng-if="row.length === 1"
+            flex-sm="40"
+            flex-gt-sm="30"
+            layout-margin
+        ></span>
+        <span flex></span>
     </div>
 </div>
 
@@ -266,13 +277,14 @@ const template = `<script type="application/ld+json">
 
 export class SalonHomeComponentController {
 
-    static $inject = [MasterResourceName, "$location", 'constants',
+    static $inject = [MasterResourceName, "$window", "$location", 'constants',
         TransformResourceName, BrendResourceName, "$rootScope", MediaObserverFactoryName,
         '$q', FavorResourceName, AcademyVideosResourceName, SeoPageResourceName, AppointmentServiceName, AppointmentResourceName];
 
     favors: IFavor[];
     masters: IMaster[];
     brends: IBrend[];
+    brendRows: IBrend[][];
     markerReadySEO: string;
     transforms: ITransform[];
     days = [
@@ -314,12 +326,14 @@ export class SalonHomeComponentController {
 
 
     constructor(private masterResource: IMasterResource,
+                private $window: ng.IWindowService,
                 private $location: ng.ILocationService,
                 private constants: IConstants, private TransformResource: ITransformResource,
                 private BrendResource: IBrendResource, private $rootScope: IRootScope,
                 private mediaObserver: IMediaObserverFactory, private $q, private favorResource: IFavorResource,
                 private SeoPageResource: ISeoPageResource, private AppointmentService: IAppointmentService, private AppointmentResource: IAppointmentResource) {
         this.categories = this.constants.favorCategories;
+        this.brendRows = []
     }
 
     $onInit() {
@@ -337,9 +351,14 @@ export class SalonHomeComponentController {
 
         this.brends = this.BrendResource.query({sort: "order"});
         this.brends.$promise.then((brends) => {
+            // 2 brands per row
+            for (let i = 1; i <= brends.length; i += 2) {
+                const row = [brends[i - 1]];
+                if (brends[i]) row.push(brends[i]);
+                this.brendRows = [...this.brendRows, row]
+            }
             this.brends.forEach((brend) => {
                 this.seoBrend(brend);
-
             })
         })
         this.transforms = this.TransformResource.query({sort: "order", page: 1, perPage: 3});
@@ -515,7 +534,7 @@ export class SalonHomeComponentController {
                 this.categories.forEach((category) => {
                     category.favors = favors.filter((favor) => {
                         this.initFavorSeo(favor);
-                        return category._id== favor.category._id;
+                        return category._id == favor.category._id;
                     });
                 })
             }
@@ -533,7 +552,7 @@ export class SalonHomeComponentController {
     }
 
     getPictureFlex(index, length) {
-        if (length > 3 && ( length % 3 == 1 && index >= length - 4 ) || ( length % 3 == 2 && index >= length - 5 )) {
+        if (length > 3 && (length % 3 == 1 && index >= length - 4) || (length % 3 == 2 && index >= length - 5)) {
             return 46;
         } else {
             return 22;
@@ -543,6 +562,10 @@ export class SalonHomeComponentController {
     showMediaObserver(items, index): void {
         this.setSocialParams(items[index]);
         this.mediaObserver.observe(items, index, this.socialParams);
+    }
+
+    goToURL(url, target) {
+        this.$window.open(url, target);
     }
 }
 

@@ -244,6 +244,7 @@ declare module pg {
         export interface IBrend {
             _id: any,
             name: string,
+            description: string,
             url: string,
             photo: IPhoto,
             seoJson?:any
