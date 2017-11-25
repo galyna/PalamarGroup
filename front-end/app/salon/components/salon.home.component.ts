@@ -230,60 +230,15 @@ const template = `<script type="application/ld+json">
         </a>
 
     </div>
-    <div layout="row" ng-if="$ctrl.videos.length>0 " flex>
+    <div layout="row" flex>
         <div class="page-delimiter " flex>
             <div class="fit-screen-wrap md-padding header-super">
                 <div hide show-gt-xs='true' class="md-display-1"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
-                <div hide show-xs="true" class="md-headline"
-                > ВЧИМОСЬ У ПРОФЕСІОНАЛІВ
-                </div>
-
+                <div hide show-xs="true" class="md-headline"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
             </div>
             <div class="overlay-days">
             </div>
         </div>
-    </div>
-    <div ng-repeat="group in $ctrl.videos">
-
-        <div layout="row" layout-align="center center">
-            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85">
-                <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
-                    <md-card md-whiteframe="6" class="  courses-videos"
-                             ng-repeat="video in ::group.videos track by $index" emprop="workPerformed" itemscope=""
-                             itemtype="http://schema.org/CreativeWork"
-                             flex>
-                        <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
-                            <meta itemprop="name" content="PALAMAR GROUP"/>
-                            <meta itemprop="image"
-                                  content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
-                            <meta itemprop="address" content="Львів, Україна"/>
-                            <meta itemprop="telephone" content="+38 067 264 6216"/>
-                        </div>
-                        <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
-                        <div flex class="embed-responsive embed-responsive-16by9"
-                             class="embed-responsive embed-responsive-16by9" itemscope
-                             itemtype="http://schema.org/VideoObject">
-                            <meta itemprop="description" content="{{::video.name}}"/>
-                           
-                            <meta itemprop="thumbnailUrl"
-                                  content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
-                            <meta itemprop="embedUrl" content="https://www.youtube.com/embed/{{video.url}}"/>
-                            <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
-                                           video-id="::video.url"></youtube-video>
-                        </div>                                                
-                       
-                    </md-card>
-                </div>
-            </div>
-
-        </div>
-
-
-    </div>
-    <div ng-if="$ctrl.showMoreVideos" layout="row" layout-align=" center center" layout-align-xs="  center">
-        <a hreflang="uk" ng-href="/academy/videos" class="md-button md-primary comment-btn xs-selected md-raised "
-           layout="row" layout-align=" center center"><span>Всі відео</span>
-        </a>
     </div>
     <div layout="row" flex ng-if="$ctrl.brends.length>0 " class="md-padding">
         <div class="page-delimiter" flex>
@@ -363,7 +318,6 @@ export class SalonHomeComponentController {
     showMoreTransforms: boolean;
     socialParams: any;
     videos: IAcademyVideos[];
-    showMoreVideos: boolean;
     seo: any;
 
 
@@ -372,8 +326,7 @@ export class SalonHomeComponentController {
                 private constants: IConstants, private TransformResource: ITransformResource,
                 private BrendResource: IBrendResource, private $rootScope: IRootScope,
                 private mediaObserver: IMediaObserverFactory, private $q, private favorResource: IFavorResource,
-                private AcademyVideosResource: IAcademyVideosResource, private SeoPageResource: ISeoPageResource,
-                private AppointmentService: IAppointmentService, private AppointmentResource: IAppointmentResource) {
+                private SeoPageResource: ISeoPageResource, private AppointmentService: IAppointmentService, private AppointmentResource: IAppointmentResource) {
         this.categories = this.constants.favorCategories;
     }
 
@@ -408,15 +361,7 @@ export class SalonHomeComponentController {
         var favorPromise = this.favorResource.query({sort: "order"}).$promise;
         this.initFavors(favorPromise);
 
-        this.videos = this.AcademyVideosResource.query({sort: 'order', page: 1, perPage: 3});
-        this.videos.$promise.then((videos) => {
-            this.showMoreVideos = videos.length > 2;
-            videos.splice(2, videos.length - 2);
-        });
-
-
-        this.$q.all([this.masters.$promise,
-            this.videos.$promise, favorPromise,
+        this.$q.all([this.masters.$promise, favorPromise,
             this.transforms.$promise, this.brends,
             this.seo.$promise
         ]).then((result) => {
