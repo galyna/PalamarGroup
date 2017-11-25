@@ -55,8 +55,9 @@ const dialogTemplate = `<md-dialog class="menu-dialog " aria-label="menu" layout
                 </div>
             </div>
             <div layout="row" layout-xs="column">
-                <div flex ng-click="::vm.goToURL(vm.SalonContactsComponentUrl)" class=" pg-menu-item ">КОНТАКТИ
-                </div>
+                <div flex ng-click="::vm.goToAbsURL('/why_us.html')" class=" pg-menu-item">ЧОМУ МИ</div>
+                <div flex ng-click="::vm.goToURL(vm.SalonContactsComponentUrl)" class=" pg-menu-item ">КОНТАКТИ</div>
+                <div flex ng-click="::vm.goToAbsURL('/vacancies.html')" class=" pg-menu-item ">ВАКАНСІЇ</div>
             </div>
         </div>
 
@@ -83,7 +84,7 @@ export class MenuComponentController {
     static $inject = ['$mdDialog', '$location', 'constants', 'smoothScroll', '$rootScope'];
     static componentName = 'MenuComponentController';
 
-    showSalon: boolean
+    showSalon: boolean;
     SalonHomeComponentUrl = SalonHomeComponentUrl;
     CourseCalendarComponentUrl = CourseCalendarComponentUrl;
     AcademyContactComponentUrl = AcademyContactComponentUrl;
@@ -94,7 +95,7 @@ export class MenuComponentController {
     AcademyVideoComponentUrl = AcademyVideoComponentUrl;
 
 
-    constructor(private mdDialog: ng.material.IDialogService, private $location,
+    constructor(private mdDialog: ng.material.IDialogService, private $location: ng.ILocationService,
                 private constants: IConstants, private smoothScroll, private $rootScope: IRootScope) {
         this.showSalon = constants.showSalon;
     }
@@ -110,6 +111,10 @@ export class MenuComponentController {
         this.smoothScroll(element, options);
     }
 
+    goToAbsURL(url): void {
+        window.location.href = url
+    }
+
     goToURL(url): void {
         this.$location.url(url);
         this.mdDialog.hide().then(()=> {
@@ -119,7 +124,6 @@ export class MenuComponentController {
         var menuBtn = angular.element(document.getElementById('menu-container'));
         menuBtn.css('z-index', 80);
         angular.element(document.querySelector(menuBtnSelector)).toggleClass('open');
-
     }
 
 
