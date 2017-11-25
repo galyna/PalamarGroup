@@ -7,7 +7,6 @@ import {IBrendResource, IBrend, BrendResourceName} from "../../resources/brend.r
 import {MediaObserverFactoryName, IMediaObserverFactory} from "../../ui/mediaObserver.service";
 import {IRootScope} from "../../../typings";
 import {
-    IAcademyVideosResource, IAcademyVideos,
     AcademyVideosResourceName
 } from "../../resources/academy.video.resource";
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
@@ -42,11 +41,15 @@ const template = `<script type="application/ld+json">
 
         <div flex flex-gt-md="60" flex-md="90" flex-gt-xs="100">
             <div class="home-category-btn" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" ng-repeat="category in $ctrl.categories track by $index "
-                         class="md-margin "  
-                         flex-gt-xs="22" flex-xs="80">
+                <md-card 
+                    md-whiteframe="6" 
+                    ng-repeat="category in $ctrl.categories track by $index"
+                    class="md-margin "  
+                    flex-gt-xs="22" 
+                    flex-xs="80"
+                >
                    
-                    <a hreflang="uk" ng-href="/beauty-salon/services/{{category.url}}">
+                    <a hreflang="uk" ng-href="{{::$ctrl.getCategoryURL(category)}}">
                         <img ng-src="{{'/content/images/services/'+ category._id+'.jpg'}}"
                              alt="{{::category.name}} Львів від PALAMAR GROUP"/>
                         
@@ -59,17 +62,6 @@ const template = `<script type="application/ld+json">
                                 <div layout="column">{{::favor.name}}
                                 </div>
                             </div>
-                        </md-card-content>
-                    </a>
-                </md-card>
-                <md-card md-whiteframe="6" class="md-margin" flex-gt-xs="22" flex-xs="80">
-                    <a hreflang="uk" ng-href="/beauty-salon/transformations">
-                        <img ng-src="/content/images/services/fashionchange.jpg"
-                             alt="ЗМІНА ОБРАЗУ від PALAMAR GROUP"/>
-                        
-                        <md-card-content layout="column" layout-align="center center"
-                                         class=" md-padding  show-description-favor">
-                            <div  class=" cat-name ">ЗМІНА ОБРАЗУ</div>
                         </md-card-content>
                     </a>
                 </md-card>
@@ -321,7 +313,6 @@ export class SalonHomeComponentController {
     categories: any;
     showMoreTransforms: boolean;
     socialParams: any;
-    videos: IAcademyVideos[];
     seo: any;
 
 
@@ -397,121 +388,128 @@ export class SalonHomeComponentController {
     }
 
     seoMaster(master) {
-        master.seoJson =
-            {
-                "@context": "http://schema.org/",
-                "@type": "Person",
-                "jobTitle": master.subtitle,
-                "url": "http://palamar.com.ua" + "/beauty-salon/master/" + master._id,
-                "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
-                    "addressLocality": "Львів, Україна",
-                    "addressCountry": "Україна"
-                },
-                "name": master.name,
-                "description": master.description,
-                "image": "http://palamar.com.ua" + master.photo.url,
-                "brand": {
+        try {
+            master.seoJson =
+                {
                     "@context": "http://schema.org/",
-                    "@type": "Brand",
-                    "url": "http:/palamar.com.ua/",
-                    "alternateName": "PALAMAR",
-                    "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-                    "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
-                    "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
-                    "name": "PALAMAR GROUP"
-                },
-                "homeLocation": {
-                    "@type": "Place",
-                    "geo": {
-                        "@type": "GeoCircle",
-                        "geoMidpoint": {
-                            "@type": "GeoCoordinates",
-                            "latitude": "49.8110769",
-                            "longitude": "23.9737773"
-                        },
-                        "geoRadius": "50"
-                    },
+                    "@type": "Person",
+                    "jobTitle": master.subtitle,
+                    "url": "http://palamar.com.ua" + "/beauty-salon/master/" + master._id,
                     "address": {
                         "@type": "PostalAddress",
                         "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
                         "addressLocality": "Львів, Україна",
                         "addressCountry": "Україна"
-                    }
-                }
-            };
-    }
-
-    initFavorSeo(favor: IFavor) {
-        favor.seoJson =
-            {
-                "@context": "http://schema.org/",
-                "@type": "Service",
-                "areaServed": {
-                    "@type": "Place",
-                    "geo": {
-                        "@type": "GeoCircle",
-                        "geoMidpoint": {
-                            "@type": "GeoCoordinates",
-                            "latitude": "49.8110769",
-                            "longitude": "23.9737773"
+                    },
+                    "name": master.name,
+                    "description": master.description,
+                    "image": "http://palamar.com.ua" + master.photo.url,
+                    "brand": {
+                        "@context": "http://schema.org/",
+                        "@type": "Brand",
+                        "url": "http:/palamar.com.ua/",
+                        "alternateName": "PALAMAR",
+                        "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                        "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+                        "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
+                        "name": "PALAMAR GROUP"
+                    },
+                    "homeLocation": {
+                        "@type": "Place",
+                        "geo": {
+                            "@type": "GeoCircle",
+                            "geoMidpoint": {
+                                "@type": "GeoCoordinates",
+                                "latitude": "49.8110769",
+                                "longitude": "23.9737773"
+                            },
+                            "geoRadius": "50"
                         },
-                        "geoRadius": "50",
                         "address": {
                             "@type": "PostalAddress",
                             "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
                             "addressLocality": "Львів, Україна",
                             "addressCountry": "Україна"
                         }
+                    }
+                };
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    initFavorSeo(favor: IFavor) {
+        try {
+            favor.seoJson =
+                {
+                    "@context": "http://schema.org/",
+                    "@type": "Service",
+                    "areaServed": {
+                        "@type": "Place",
+                        "geo": {
+                            "@type": "GeoCircle",
+                            "geoMidpoint": {
+                                "@type": "GeoCoordinates",
+                                "latitude": "49.8110769",
+                                "longitude": "23.9737773"
+                            },
+                            "geoRadius": "50",
+                            "address": {
+                                "@type": "PostalAddress",
+                                "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                                "addressLocality": "Львів, Україна",
+                                "addressCountry": "Україна"
+                            }
+                        },
+                        "map": "https://www.google.ru/maps/place/%D0%A1%D1%82%D1%83%D0%B4%D1%96%D1%8F+%D0%BA%D1%80%D0%B0%D1%81%D0%B8+%D0%AE%D0%BB%D1%96%D1%97+%D0%9F%D0%B0%D0%BB%D0%B0%D0%BC%D0%B0%D1%80/@49.8110803,23.9715886,17z/data=!3m1!4b1!4m5!3m4!1s0x473ae70c7a4a754b:0x96d5b6a9de35eaa0!8m2!3d49.8110769!4d23.9737773"
                     },
-                    "map": "https://www.google.ru/maps/place/%D0%A1%D1%82%D1%83%D0%B4%D1%96%D1%8F+%D0%BA%D1%80%D0%B0%D1%81%D0%B8+%D0%AE%D0%BB%D1%96%D1%97+%D0%9F%D0%B0%D0%BB%D0%B0%D0%BC%D0%B0%D1%80/@49.8110803,23.9715886,17z/data=!3m1!4b1!4m5!3m4!1s0x473ae70c7a4a754b:0x96d5b6a9de35eaa0!8m2!3d49.8110769!4d23.9737773"
-                },
-                "image": "http://palamar.com.ua" + favor.photo.url,
-                "category": favor.category.name,
-                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-                "serviceType": "сфера послуг",
-                "description": favor.description,
-                "offers": {
-                    "@type": "Offer",
-                    "priceCurrency": "UAH",
-                    "price": favor.defPrice,
-                    "seller": {
-                        "@type": "BeautySalon",
-                        "name": "PALAMAR GROUP",
+                    "image": "http://palamar.com.ua" + favor.photo.url,
+                    "category": favor.category.name,
+                    "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                    "serviceType": "сфера послуг",
+                    "description": favor.description,
+                    "offers": {
+                        "@type": "Offer",
+                        "priceCurrency": "UAH",
+                        "price": favor.defPrice,
+                        "seller": {
+                            "@type": "BeautySalon",
+                            "name": "PALAMAR GROUP",
+                            "url": "http:/palamar.com.ua/",
+                            "alternateName": "PALAMAR",
+                            "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
+                            "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
+                            "sameAs": [
+                                "https://www.facebook.com/hashtag/palamar_group",
+                                "https://www.instagram.com/palamar_group/",
+                                "https://vk.com/id202584528"
+                            ],
+                            "address": {
+                                "@type": "PostalAddress",
+                                "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                                "addressLocality": "Львів, Україна",
+                                "addressCountry": "Україна"
+                            },
+                            "telephone": "+38 067 264 6216",
+                            "priceRange": "від 300 грн",
+                        }
+                    },
+                    "name": favor.name,
+                    "brand": {
+                        "@context": "http://schema.org/",
+                        "@type": "Brand",
                         "url": "http:/palamar.com.ua/",
                         "alternateName": "PALAMAR",
                         "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
                         "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
                         "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
-                        "sameAs": [
-                            "https://www.facebook.com/hashtag/palamar_group",
-                            "https://www.instagram.com/palamar_group/",
-                            "https://vk.com/id202584528"
-                        ],
-                        "address": {
-                            "@type": "PostalAddress",
-                            "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
-                            "addressLocality": "Львів, Україна",
-                            "addressCountry": "Україна"
-                        },
-                        "telephone": "+38 067 264 6216",
-                        "priceRange": "від 300 грн",
+                        "name": "PALAMAR GROUP"
                     }
-                },
-                "name": favor.name,
-                "brand": {
-                    "@context": "http://schema.org/",
-                    "@type": "Brand",
-                    "url": "http:/palamar.com.ua/",
-                    "alternateName": "PALAMAR",
-                    "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-                    "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
-                    "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
-                    "name": "PALAMAR GROUP"
                 }
-            }
-
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     seoBrend(brend) {
@@ -536,7 +534,7 @@ export class SalonHomeComponentController {
                         this.initFavorSeo(favor);
                         return category._id == favor.category._id;
                     });
-                })
+                });
             }
 
         });
@@ -566,6 +564,15 @@ export class SalonHomeComponentController {
 
     goToURL(url, target) {
         this.$window.open(url, target);
+    }
+
+    getCategoryURL(category) {
+        // tmp, while we don't know what page to use for 'lookchange'
+        if (category._id === 'fashionchange') {
+            return `/beauty-salon/transformations`
+        } else {
+            return `/beauty-salon/services/${category.url}`
+        }
     }
 }
 
