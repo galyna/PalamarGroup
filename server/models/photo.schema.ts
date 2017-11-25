@@ -9,6 +9,7 @@ export interface IPhotoModel extends pg.models.IPhoto, Document{
 
 export let PhotoSchema = new Schema({
     name: String,
+    description: String,
     url: {
         type: String,
         set: function(url) {

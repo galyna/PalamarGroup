@@ -46,7 +46,19 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                             <div layout="column" ng-if="::$root.it.can('modifySalon')">
                                 <md-input-container class="md-block  ">
                                     <label for="historyNme">Назва </label>
-                                    <input id="historyNme" ng-model="item.name" name="historyNme"/>
+                                    <input 
+                                        id="historyNme" 
+                                        ng-model="item.name" 
+                                        name="historyNme"
+                                    />
+                                </md-input-container>
+                                <md-input-container class="md-block">
+                                    <label for="description">Опис</label>
+                                    <textarea 
+                                        ng-model="item.description"
+                                        id="description" 
+                                        name="description" 
+                                    ></textarea>
                                 </md-input-container>
                                 <md-input-container class="md-block  ">
                                     <label for="ord">Порядок відображення</label>
@@ -145,7 +157,7 @@ export class TransformComponentController {
     originalTransform:ITransform;
     transform:ITransform;
     showWorkUpload:boolean;
-    
+
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
                 private $mdDialog:ng.material.IDialogService, private transformResource:ITransformResource,
@@ -224,7 +236,7 @@ export class TransformComponentController {
     deleteFromList(list:any[], item:any) {
         list.splice( list.indexOf( item ), 1 );
     }
- 
+
     cancel() {
         this.transform = angular.copy( this.originalTransform );
     }
@@ -240,7 +252,7 @@ export class TransformComponentController {
                 this.showErrorDialog();
             } );
     }
-    
+
     showErrorDialog() {
         let confirm = this.$mdDialog.alert()
             .title( "Помилка" )

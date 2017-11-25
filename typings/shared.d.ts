@@ -143,8 +143,9 @@ declare module pg {
 
         export interface IPhoto {
             _id?: any;
-            name: string,
             url: string,
+            name: string,
+            description?: string,
             order: number,
             seoJson?:any
         }
