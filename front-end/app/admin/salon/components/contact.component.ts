@@ -32,7 +32,16 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                         <label>Телефон</label>
                         <input ng-disabled="::!$root.it.can('modifySalon')" id="name" ng-model="$ctrl.contact.phone" name="name"/>
                     </md-input-container>
-               
+                    <md-input-container class="md-block ">
+                        <label>Email</label>
+                        <input 
+                            ng-disabled="::!$root.it.can('modifySalon')" 
+                            id="email" 
+                            ng-model="$ctrl.contact.email" 
+                            name="name"
+                        />
+                    </md-input-container>
+                    
                         <label>Салон</label>
                     <md-select  ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.newSalon" ng-model-options="{trackBy: '$value._id'}">
                         <md-option ng-repeat="salon in $ctrl.salons" ng-value="salon">

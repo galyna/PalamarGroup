@@ -63,7 +63,8 @@ const template = `
                                 <div class="md-title">Координатор Академії</div>
                                 <div class="md-display-1">{{::contact.name}}</div>
                                 <div class="descr-container">
-                                    <div class="md-display-1">{{::contact.phone}}</div>
+                                    <div class="md-title">{{::contact.phone}}</div>
+                                    <div class="md-title">{{::contact.email}}</div>
                                 </div>
                             </md-card-title-text>
                         </md-card-title>
