@@ -8,6 +8,8 @@ import {FavorsComponentName, FavorsComponentOptions} from "./components/favors.c
 import {FavorComponentName, FavorComponentOptions} from "./components/favor.component";
 import {TransformComponentName, TransformComponentOptions} from "./components/transform.component";
 import {TransformsComponentName, TransformsComponentOptions} from "./components/transforms.component";
+import {LearnsComponentName, LearnsComponentOptions} from "./components/learns.component";
+import {LearnComponentName, LearnComponentOptions} from "./components/learn.component";
 import {BrendComponentName, BrendComponentOptions} from "./components/brend.component";
 import {BrendsComponentName, BrendsComponentOptions} from "./components/brends.component";
 import {ProductComponentName, ProductComponentOptions} from "./components/product.component";
@@ -34,6 +36,8 @@ export let salonModule = angular.module( 'salon', [
     .component( FavorsComponentName, FavorsComponentOptions )
     .component( TransformComponentName, TransformComponentOptions )
     .component( TransformsComponentName, TransformsComponentOptions )
+    .component( LearnsComponentName, LearnsComponentOptions )
+    .component( LearnComponentName, LearnComponentOptions )
     .component( BrendComponentName, BrendComponentOptions )
     .component( BrendsComponentName, BrendsComponentOptions )
     .component( ProductComponentName, ProductComponentOptions )

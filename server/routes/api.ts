@@ -22,6 +22,7 @@ import {Brend} from "../models/brend";
 import {ProductOrder} from "../models/product.order";
 import {Salon} from "../models/salon";
 import {AcademyVideos} from "../models/academy.videos";
+import {Learn} from "../models/learn";
 
 //endpoints
 import {emailEndpoint} from "./email.endpoint";
@@ -29,7 +30,6 @@ import {orderOptions, modelOptions} from "./order.options";
 import {courseApi, coursesOptions} from "./course.endpoint";
 import {courseGetCommentsApi} from "./comment.endpoint";
 import {userOptions, userApi} from "./user.endpoint";
-import IOrder = pg.models.IOrder;
 import {salonClientApi, salonClientOptions} from "./salon.client.endpoint";
 import {tasksOptions, tasksApi} from './tasks.endpoint';
 import {appointmentOptions} from './appointment.options';
@@ -94,6 +94,7 @@ api.use('/salonclient', salonClientApi);
 restify.serve(api, SalonClient, salonClientOptions);
 restify.serve(api, Favor, tasksOptions);
 restify.serve(api, Transform, tasksOptions);
+restify.serve(api, Learn, tasksOptions);
 restify.serve(api, Product, tasksOptions);
 restify.serve(api, Brend, tasksOptions);
 restify.serve(api, Salon, tasksOptions);

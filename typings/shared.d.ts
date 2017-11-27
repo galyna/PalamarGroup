@@ -277,6 +277,14 @@ declare module pg {
             isMain: boolean,
             isAcademy: boolean,
         }
+
+        export interface ILearn {
+            _id: any,
+            name: string,
+            order: number,
+            photos: IPhoto[],
+            videos: IVideo[],
+        }
     }
 
     type UserRole =

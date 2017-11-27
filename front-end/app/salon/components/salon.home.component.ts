@@ -12,6 +12,7 @@ import {
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
 import {AppointmentServiceName, IAppointmentService} from "../servises/appointment.service";
 import {IAppointmentResource, AppointmentResourceName} from "../../resources/appointment.resource";
+import {ILearn, ILearnResource, LearnResourceName} from "../../resources/learn.resource";
 
 
 const template = `<script type="application/ld+json">
@@ -214,7 +215,7 @@ const template = `<script type="application/ld+json">
         </a>
 
     </div>
-    <div layout="row" flex>
+    <div layout="row" flex ng-if="$ctrl.transforms.length>0">
         <div class="page-delimiter " flex>
             <div class="fit-screen-wrap md-padding header-super">
                 <div hide show-gt-xs='true' class="md-display-1"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
@@ -224,6 +225,62 @@ const template = `<script type="application/ld+json">
             </div>
         </div>
     </div>
+    <div ng-repeat="learn in $ctrl.learns track by $index">
+        <div layout="row" layout-align="center center" ng-if="learn.videos.length>0">
+            <div flex-xs="90" flex-gt-md="60" flex-md="80" flex-gt-xs="70">
+                <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
+                    <md-card md-whiteframe="6" class="  courses-videos"
+                             temprop="workPerformed" itemscope=""
+                             itemtype="http://schema.org/CreativeWork"
+                             ng-repeat="video in ::learn.videos track by $index"
+                             flex>
+                        <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
+                            <meta itemprop="name" content="PALAMAR GROUP"/>
+                            <meta itemprop="image"
+                                  content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
+                            <meta itemprop="address" content="Львів, Україна"/>
+                            <meta itemprop="telephone" content="+38 067 264 6216"/>
+                        </div>
+
+                        <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
+                        <div flex class="embed-responsive embed-responsive-16by9" itemscope
+                             itemtype="http://schema.org/VideoObject">
+                            <meta itemprop="description" content="{{::video.name}}"/>
+                            <meta itemprop="name" content="{{::video.name}}"/>
+                            <meta itemprop="thumbnailUrl"
+                                  content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
+                            <meta itemprop="embedUrl" content="https://www.youtube.com/embed/{{video.url}}"/>
+                            <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
+                                           video-id="::video.url"></youtube-video>
+                        </div>
+                       
+                    </md-card>
+                </div>
+            </div>
+
+        </div>
+
+        <div 
+            class="learn-photos" 
+            layout-xs="column"
+            layout-gt-xs="row" 
+            layout-align="center center"
+        >
+            <span flex></span>
+            <pg-photocard
+                        ng-repeat="photo in ::learn.photos | orderBy:'order' track by $index"
+                        layout-margin
+                        flex-sm="40"
+                        flex-gt-sm="30"
+                        url="photo.url"
+                        name="photo.name"
+                        description="photo.description"
+                        ng-click="::$ctrl.showMediaObserver(learn.photos  | orderBy:'order' , $index)"
+                    ></pg-photocard>
+            <span flex></span>
+        </div>
+    </div>
+        
     <div layout="row" flex ng-if="$ctrl.brends.length>0 " class="md-padding">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap header-super">
@@ -270,13 +327,14 @@ const template = `<script type="application/ld+json">
 export class SalonHomeComponentController {
 
     static $inject = [MasterResourceName, "$window", "$location", 'constants',
-        TransformResourceName, BrendResourceName, "$rootScope", MediaObserverFactoryName,
+        TransformResourceName, LearnResourceName, BrendResourceName, "$rootScope", MediaObserverFactoryName,
         '$q', FavorResourceName, AcademyVideosResourceName, SeoPageResourceName, AppointmentServiceName, AppointmentResourceName];
 
     favors: IFavor[];
     masters: IMaster[];
     brends: IBrend[];
     brendRows: IBrend[][];
+    learns: ILearn[];
     markerReadySEO: string;
     transforms: ITransform[];
     days = [
@@ -320,6 +378,7 @@ export class SalonHomeComponentController {
                 private $window: ng.IWindowService,
                 private $location: ng.ILocationService,
                 private constants: IConstants, private TransformResource: ITransformResource,
+                private LearnResource: ILearnResource,
                 private BrendResource: IBrendResource, private $rootScope: IRootScope,
                 private mediaObserver: IMediaObserverFactory, private $q, private favorResource: IFavorResource,
                 private SeoPageResource: ISeoPageResource, private AppointmentService: IAppointmentService, private AppointmentResource: IAppointmentResource) {
@@ -333,9 +392,7 @@ export class SalonHomeComponentController {
             if (seo.length > 0) {
                 this.$rootScope.seo = seo[0];
                 document.title = this.$rootScope.seo.title;
-
             }
-
         });
         this.masters = this.masterResource.query({sort: "order"})
         this.initMasters();
@@ -351,25 +408,29 @@ export class SalonHomeComponentController {
             this.brends.forEach((brend) => {
                 this.seoBrend(brend);
             })
-        })
+        });
         this.transforms = this.TransformResource.query({sort: "order", page: 1, perPage: 3});
 
         this.transforms.$promise.then((transforms) => {
             this.showMoreTransforms = transforms.length > 2;
             transforms.splice(2, transforms.length - 2);
-        })
+        });
 
+        this.learns = this.LearnResource.query({sort: "order", page: 1});
 
         var favorPromise = this.favorResource.query({sort: "order"}).$promise;
         this.initFavors(favorPromise);
 
-        this.$q.all([this.masters.$promise, favorPromise,
-            this.transforms.$promise, this.brends,
+        this.$q.all([
+            this.masters.$promise,
+            favorPromise,
+            this.transforms.$promise,
+            this.learns.$promise,
+            this.brends,
             this.seo.$promise
-        ]).then((result) => {
+        ]).then(() => {
             this.markerReadySEO = "dynamic-content";
         });
-
     }
 
     showAppointmentDialog(master) {
