@@ -22,6 +22,7 @@ import {ProductOrderResource, ProductOrderResourceName} from "./product.order.re
 import {SalonResource, SalonResourceName} from "./salon.resource";
 import {AcademyVideosResource, AcademyVideosResourceName} from "./academy.video.resource";
 import {SeoPageResourceName, SeoPageResource} from "./seo.page.resource";
+import {LearnResource, LearnResourceName} from "./learn.resource";
 
 export let resourcesModule = angular.module('resources', ['ngResource', coreModule.name])
     .factory(CourseResourceName, CourseResource)
@@ -33,6 +34,7 @@ export let resourcesModule = angular.module('resources', ['ngResource', coreModu
     .service(UserResourceName, UserResource)
     .service(FavorResourceName, FavorResource)
     .service(TransformResourceName, TransformResource)
+    .service(LearnResourceName, LearnResource)
     .service(AppointmentResourceName, AppointmentResource)
     .service(BrendResourceName, BrendResource)
     .service(ProductResourceName, ProductResource)

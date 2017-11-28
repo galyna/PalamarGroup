@@ -7,12 +7,12 @@ import {IBrendResource, IBrend, BrendResourceName} from "../../resources/brend.r
 import {MediaObserverFactoryName, IMediaObserverFactory} from "../../ui/mediaObserver.service";
 import {IRootScope} from "../../../typings";
 import {
-    IAcademyVideosResource, IAcademyVideos,
     AcademyVideosResourceName
 } from "../../resources/academy.video.resource";
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
 import {AppointmentServiceName, IAppointmentService} from "../servises/appointment.service";
 import {IAppointmentResource, AppointmentResourceName} from "../../resources/appointment.resource";
+import {ILearn, ILearnResource, LearnResourceName} from "../../resources/learn.resource";
 
 
 const template = `<script type="application/ld+json">
@@ -42,11 +42,15 @@ const template = `<script type="application/ld+json">
 
         <div flex flex-gt-md="60" flex-md="90" flex-gt-xs="100">
             <div class="home-category-btn" layout-margin layout layout-wrap layout-align="center center">
-                <md-card md-whiteframe="6" ng-repeat="category in $ctrl.categories track by $index "
-                         class="md-margin "  
-                         flex-gt-xs="22" flex-xs="80">
+                <md-card 
+                    md-whiteframe="6" 
+                    ng-repeat="category in $ctrl.categories track by $index"
+                    class="md-margin "  
+                    flex-gt-xs="22" 
+                    flex-xs="80"
+                >
                    
-                    <a hreflang="uk" ng-href="/beauty-salon/services/{{category.url}}">
+                    <a hreflang="uk" ng-href="{{::$ctrl.getCategoryURL(category)}}">
                         <img ng-src="{{'/content/images/services/'+ category._id+'.jpg'}}"
                              alt="{{::category.name}} Львів від PALAMAR GROUP"/>
                         
@@ -59,17 +63,6 @@ const template = `<script type="application/ld+json">
                                 <div layout="column">{{::favor.name}}
                                 </div>
                             </div>
-                        </md-card-content>
-                    </a>
-                </md-card>
-                <md-card md-whiteframe="6" class="md-margin" flex-gt-xs="22" flex-xs="80">
-                    <a hreflang="uk" ng-href="/beauty-salon/transformations">
-                        <img ng-src="/content/images/services/fashionchange.jpg"
-                             alt="ЗМІНА ОБРАЗУ від PALAMAR GROUP"/>
-                        
-                        <md-card-content layout="column" layout-align="center center"
-                                         class=" md-padding  show-description-favor">
-                            <div  class=" cat-name ">ЗМІНА ОБРАЗУ</div>
                         </md-card-content>
                     </a>
                 </md-card>
@@ -195,32 +188,24 @@ const template = `<script type="application/ld+json">
 
         </div>
 
-        <div layout="row" layout-align="center center">
-            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="70">
-                <div class="courses-hear-forms " layout layout-wrap layout-align="center center"
-                     style="padding-top:8px;padding-bottom:0;margin-bottom:0;">
-                    <md-card md-whiteframe="6"
-                             ng-repeat="photo in ::transform.photos  | orderBy:'order' track by $index"
-                             class="md-margin "
-                             ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.master.works.length)}}"
-                             temprop="workPerformed" itemscope="" itemtype="http://schema.org/CreativeWork"
-                             flex-gt-xs="46" flex-xs="80"
-                             ng-click="::$ctrl.showMediaObserver(transform.photos  | orderBy:'order', $index)">
-                        <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
-                            <meta itemprop="name" content="PALAMAR GROUP"/>
-                            <meta itemprop="image"
-                                  content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
-                            <meta itemprop="address" content="Львів, Україна"/>
-                            <meta itemprop="telephone" content="+38 067 264 6216"/>
-                        </div>
-                        <meta itemprop="image" content="http://palamar.com.ua{{::photo.url}}"/>
-                        <img ng-src="{{::photo.url}}" class="md-card-image" alt="{{::photo.name}}">
-                        <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
-                        </md-card-content>
-                    </md-card>
-                </div>
-            </div>
+        <div 
+            class="transform-photos" 
+            layout-xs="column"
+            layout-gt-xs="row" 
+            layout-align="center center"
+        >
+            <span flex></span>
+            <pg-photocard
+                        ng-repeat="photo in ::transform.photos | orderBy:'order' track by $index"
+                        layout-margin
+                        flex-sm="40"
+                        flex-gt-sm="30"
+                        url="photo.url"
+                        name="photo.name"
+                        description="photo.description"
+                        ng-click="::$ctrl.showMediaObserver(transform.photos  | orderBy:'order' , $index)"
+                    ></pg-photocard>
+            <span flex></span>
         </div>
     </div>
     <div ng-if="$ctrl.showMoreTransforms" class="md-padding" layout="row" layout-align=" center center"
@@ -230,27 +215,24 @@ const template = `<script type="application/ld+json">
         </a>
 
     </div>
-    <div layout="row" ng-if="$ctrl.videos.length>0 " flex>
+    <div layout="row" flex ng-if="$ctrl.transforms.length>0">
         <div class="page-delimiter " flex>
             <div class="fit-screen-wrap md-padding header-super">
                 <div hide show-gt-xs='true' class="md-display-1"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
-                <div hide show-xs="true" class="md-headline"
-                > ВЧИМОСЬ У ПРОФЕСІОНАЛІВ
-                </div>
-
+                <div hide show-xs="true" class="md-headline"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
             </div>
             <div class="overlay-days">
             </div>
         </div>
     </div>
-    <div ng-repeat="group in $ctrl.videos">
-
-        <div layout="row" layout-align="center center">
-            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85">
+    <div ng-repeat="learn in $ctrl.learns track by $index">
+        <div layout="row" layout-align="center center" ng-if="learn.videos.length>0">
+            <div flex-xs="90" flex-gt-md="60" flex-md="80" flex-gt-xs="70">
                 <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
                     <md-card md-whiteframe="6" class="  courses-videos"
-                             ng-repeat="video in ::group.videos track by $index" emprop="workPerformed" itemscope=""
+                             temprop="workPerformed" itemscope=""
                              itemtype="http://schema.org/CreativeWork"
+                             ng-repeat="video in ::learn.videos track by $index"
                              flex>
                         <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
                             <meta itemprop="name" content="PALAMAR GROUP"/>
@@ -259,18 +241,18 @@ const template = `<script type="application/ld+json">
                             <meta itemprop="address" content="Львів, Україна"/>
                             <meta itemprop="telephone" content="+38 067 264 6216"/>
                         </div>
+
                         <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
-                        <div flex class="embed-responsive embed-responsive-16by9"
-                             class="embed-responsive embed-responsive-16by9" itemscope
+                        <div flex class="embed-responsive embed-responsive-16by9" itemscope
                              itemtype="http://schema.org/VideoObject">
                             <meta itemprop="description" content="{{::video.name}}"/>
-                           
+                            <meta itemprop="name" content="{{::video.name}}"/>
                             <meta itemprop="thumbnailUrl"
                                   content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
                             <meta itemprop="embedUrl" content="https://www.youtube.com/embed/{{video.url}}"/>
                             <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
                                            video-id="::video.url"></youtube-video>
-                        </div>                                                
+                        </div>
                        
                     </md-card>
                 </div>
@@ -278,13 +260,27 @@ const template = `<script type="application/ld+json">
 
         </div>
 
-
+        <div 
+            class="learn-photos" 
+            layout-xs="column"
+            layout-gt-xs="row" 
+            layout-align="center center"
+        >
+            <span flex></span>
+            <pg-photocard
+                        ng-repeat="photo in ::learn.photos | orderBy:'order' track by $index"
+                        layout-margin
+                        flex-sm="40"
+                        flex-gt-sm="30"
+                        url="photo.url"
+                        name="photo.name"
+                        description="photo.description"
+                        ng-click="::$ctrl.showMediaObserver(learn.photos  | orderBy:'order' , $index)"
+                    ></pg-photocard>
+            <span flex></span>
+        </div>
     </div>
-    <div ng-if="$ctrl.showMoreVideos" layout="row" layout-align=" center center" layout-align-xs="  center">
-        <a hreflang="uk" ng-href="/academy/videos" class="md-button md-primary comment-btn xs-selected md-raised "
-           layout="row" layout-align=" center center"><span>Всі відео</span>
-        </a>
-    </div>
+        
     <div layout="row" flex ng-if="$ctrl.brends.length>0 " class="md-padding">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap header-super">
@@ -296,20 +292,31 @@ const template = `<script type="application/ld+json">
         </div>
     </div>
 
-    <div layout="row" layout-align="center center">
-
-        <div flex flex-gt-md="60" flex-gt-lg="40" flex-md="80" flex-gt-xs="70">
-            <div flex class="brends-container" layout-margin layout layout-wrap layout-align="center center">
-                <a hreflang="uk" ng-href="{{::bren.url}}" class="md-margin brend " layout="row" layout-align="center center"
-                   target="_blank"
-                   flex-gt-sm="{{::$ctrl.getPictureFlex($index,$ctrl.brends.length)}}"
-                   flex-gt-xs="46" flex-xs="80" ng-repeat="bren in $ctrl.brends track by $index">
-                    <sb-jsonld json="{{::bren.seoJson}}"></sb-jsonld>
-                    <img ng-src="{{::bren.photo.url}}"
-                         class=""/> </a>
-            </div>
-        </div>
-
+    <div 
+        class="brends" 
+        layout-xs="column"
+        layout-gt-xs="row" 
+        layout-align="center center"
+        ng-repeat="row in $ctrl.brendRows"
+    >
+        <span flex></span>
+        <pg-photocard
+                    ng-repeat="brend in row | orderBy:'order' track by $index"
+                    layout-margin
+                    flex-sm="40"
+                    flex-gt-sm="30"
+                    url="brend.photo.url"
+                    name="brend.name"
+                    description="brend.description"
+                    ng-click="$ctrl.goToURL(brend.url, '_blank')"
+                ></pg-photocard>
+        <span 
+            ng-if="row.length === 1"
+            flex-sm="40"
+            flex-gt-sm="30"
+            layout-margin
+        ></span>
+        <span flex></span>
     </div>
 </div>
 
@@ -319,13 +326,15 @@ const template = `<script type="application/ld+json">
 
 export class SalonHomeComponentController {
 
-    static $inject = [MasterResourceName, "$location", 'constants',
-        TransformResourceName, BrendResourceName, "$rootScope", MediaObserverFactoryName,
+    static $inject = [MasterResourceName, "$window", "$location", 'constants',
+        TransformResourceName, LearnResourceName, BrendResourceName, "$rootScope", MediaObserverFactoryName,
         '$q', FavorResourceName, AcademyVideosResourceName, SeoPageResourceName, AppointmentServiceName, AppointmentResourceName];
 
     favors: IFavor[];
     masters: IMaster[];
     brends: IBrend[];
+    brendRows: IBrend[][];
+    learns: ILearn[];
     markerReadySEO: string;
     transforms: ITransform[];
     days = [
@@ -362,19 +371,19 @@ export class SalonHomeComponentController {
     categories: any;
     showMoreTransforms: boolean;
     socialParams: any;
-    videos: IAcademyVideos[];
-    showMoreVideos: boolean;
     seo: any;
 
 
     constructor(private masterResource: IMasterResource,
+                private $window: ng.IWindowService,
                 private $location: ng.ILocationService,
                 private constants: IConstants, private TransformResource: ITransformResource,
+                private LearnResource: ILearnResource,
                 private BrendResource: IBrendResource, private $rootScope: IRootScope,
                 private mediaObserver: IMediaObserverFactory, private $q, private favorResource: IFavorResource,
-                private AcademyVideosResource: IAcademyVideosResource, private SeoPageResource: ISeoPageResource,
-                private AppointmentService: IAppointmentService, private AppointmentResource: IAppointmentResource) {
+                private SeoPageResource: ISeoPageResource, private AppointmentService: IAppointmentService, private AppointmentResource: IAppointmentResource) {
         this.categories = this.constants.favorCategories;
+        this.brendRows = []
     }
 
     $onInit() {
@@ -383,46 +392,45 @@ export class SalonHomeComponentController {
             if (seo.length > 0) {
                 this.$rootScope.seo = seo[0];
                 document.title = this.$rootScope.seo.title;
-
             }
-
         });
         this.masters = this.masterResource.query({sort: "order"})
         this.initMasters();
 
         this.brends = this.BrendResource.query({sort: "order"});
         this.brends.$promise.then((brends) => {
+            // 2 brands per row
+            for (let i = 1; i <= brends.length; i += 2) {
+                const row = [brends[i - 1]];
+                if (brends[i]) row.push(brends[i]);
+                this.brendRows = [...this.brendRows, row]
+            }
             this.brends.forEach((brend) => {
                 this.seoBrend(brend);
-
             })
-        })
+        });
         this.transforms = this.TransformResource.query({sort: "order", page: 1, perPage: 3});
 
         this.transforms.$promise.then((transforms) => {
             this.showMoreTransforms = transforms.length > 2;
             transforms.splice(2, transforms.length - 2);
-        })
+        });
 
+        this.learns = this.LearnResource.query({sort: "order", page: 1});
 
         var favorPromise = this.favorResource.query({sort: "order"}).$promise;
         this.initFavors(favorPromise);
 
-        this.videos = this.AcademyVideosResource.query({sort: 'order', page: 1, perPage: 3});
-        this.videos.$promise.then((videos) => {
-            this.showMoreVideos = videos.length > 2;
-            videos.splice(2, videos.length - 2);
-        });
-
-
-        this.$q.all([this.masters.$promise,
-            this.videos.$promise, favorPromise,
-            this.transforms.$promise, this.brends,
+        this.$q.all([
+            this.masters.$promise,
+            favorPromise,
+            this.transforms.$promise,
+            this.learns.$promise,
+            this.brends,
             this.seo.$promise
-        ]).then((result) => {
+        ]).then(() => {
             this.markerReadySEO = "dynamic-content";
         });
-
     }
 
     showAppointmentDialog(master) {
@@ -441,121 +449,128 @@ export class SalonHomeComponentController {
     }
 
     seoMaster(master) {
-        master.seoJson =
-            {
-                "@context": "http://schema.org/",
-                "@type": "Person",
-                "jobTitle": master.subtitle,
-                "url": "http://palamar.com.ua" + "/beauty-salon/master/" + master._id,
-                "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
-                    "addressLocality": "Львів, Україна",
-                    "addressCountry": "Україна"
-                },
-                "name": master.name,
-                "description": master.description,
-                "image": "http://palamar.com.ua" + master.photo.url,
-                "brand": {
+        try {
+            master.seoJson =
+                {
                     "@context": "http://schema.org/",
-                    "@type": "Brand",
-                    "url": "http:/palamar.com.ua/",
-                    "alternateName": "PALAMAR",
-                    "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-                    "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
-                    "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
-                    "name": "PALAMAR GROUP"
-                },
-                "homeLocation": {
-                    "@type": "Place",
-                    "geo": {
-                        "@type": "GeoCircle",
-                        "geoMidpoint": {
-                            "@type": "GeoCoordinates",
-                            "latitude": "49.8110769",
-                            "longitude": "23.9737773"
-                        },
-                        "geoRadius": "50"
-                    },
+                    "@type": "Person",
+                    "jobTitle": master.subtitle,
+                    "url": "http://palamar.com.ua" + "/beauty-salon/master/" + master._id,
                     "address": {
                         "@type": "PostalAddress",
                         "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
                         "addressLocality": "Львів, Україна",
                         "addressCountry": "Україна"
-                    }
-                }
-            };
-    }
-
-    initFavorSeo(favor: IFavor) {
-        favor.seoJson =
-            {
-                "@context": "http://schema.org/",
-                "@type": "Service",
-                "areaServed": {
-                    "@type": "Place",
-                    "geo": {
-                        "@type": "GeoCircle",
-                        "geoMidpoint": {
-                            "@type": "GeoCoordinates",
-                            "latitude": "49.8110769",
-                            "longitude": "23.9737773"
+                    },
+                    "name": master.name,
+                    "description": master.description,
+                    "image": "http://palamar.com.ua" + master.photo.url,
+                    "brand": {
+                        "@context": "http://schema.org/",
+                        "@type": "Brand",
+                        "url": "http:/palamar.com.ua/",
+                        "alternateName": "PALAMAR",
+                        "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                        "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_723.jpg",
+                        "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
+                        "name": "PALAMAR GROUP"
+                    },
+                    "homeLocation": {
+                        "@type": "Place",
+                        "geo": {
+                            "@type": "GeoCircle",
+                            "geoMidpoint": {
+                                "@type": "GeoCoordinates",
+                                "latitude": "49.8110769",
+                                "longitude": "23.9737773"
+                            },
+                            "geoRadius": "50"
                         },
-                        "geoRadius": "50",
                         "address": {
                             "@type": "PostalAddress",
                             "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
                             "addressLocality": "Львів, Україна",
                             "addressCountry": "Україна"
                         }
+                    }
+                };
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    initFavorSeo(favor: IFavor) {
+        try {
+            favor.seoJson =
+                {
+                    "@context": "http://schema.org/",
+                    "@type": "Service",
+                    "areaServed": {
+                        "@type": "Place",
+                        "geo": {
+                            "@type": "GeoCircle",
+                            "geoMidpoint": {
+                                "@type": "GeoCoordinates",
+                                "latitude": "49.8110769",
+                                "longitude": "23.9737773"
+                            },
+                            "geoRadius": "50",
+                            "address": {
+                                "@type": "PostalAddress",
+                                "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                                "addressLocality": "Львів, Україна",
+                                "addressCountry": "Україна"
+                            }
+                        },
+                        "map": "https://www.google.ru/maps/place/%D0%A1%D1%82%D1%83%D0%B4%D1%96%D1%8F+%D0%BA%D1%80%D0%B0%D1%81%D0%B8+%D0%AE%D0%BB%D1%96%D1%97+%D0%9F%D0%B0%D0%BB%D0%B0%D0%BC%D0%B0%D1%80/@49.8110803,23.9715886,17z/data=!3m1!4b1!4m5!3m4!1s0x473ae70c7a4a754b:0x96d5b6a9de35eaa0!8m2!3d49.8110769!4d23.9737773"
                     },
-                    "map": "https://www.google.ru/maps/place/%D0%A1%D1%82%D1%83%D0%B4%D1%96%D1%8F+%D0%BA%D1%80%D0%B0%D1%81%D0%B8+%D0%AE%D0%BB%D1%96%D1%97+%D0%9F%D0%B0%D0%BB%D0%B0%D0%BC%D0%B0%D1%80/@49.8110803,23.9715886,17z/data=!3m1!4b1!4m5!3m4!1s0x473ae70c7a4a754b:0x96d5b6a9de35eaa0!8m2!3d49.8110769!4d23.9737773"
-                },
-                "image": "http://palamar.com.ua" + favor.photo.url,
-                "category": favor.category.name,
-                "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-                "serviceType": "сфера послуг",
-                "description": favor.description,
-                "offers": {
-                    "@type": "Offer",
-                    "priceCurrency": "UAH",
-                    "price": favor.defPrice,
-                    "seller": {
-                        "@type": "BeautySalon",
-                        "name": "PALAMAR GROUP",
+                    "image": "http://palamar.com.ua" + favor.photo.url,
+                    "category": favor.category.name,
+                    "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                    "serviceType": "сфера послуг",
+                    "description": favor.description,
+                    "offers": {
+                        "@type": "Offer",
+                        "priceCurrency": "UAH",
+                        "price": favor.defPrice,
+                        "seller": {
+                            "@type": "BeautySalon",
+                            "name": "PALAMAR GROUP",
+                            "url": "http:/palamar.com.ua/",
+                            "alternateName": "PALAMAR",
+                            "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
+                            "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
+                            "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
+                            "sameAs": [
+                                "https://www.facebook.com/hashtag/palamar_group",
+                                "https://www.instagram.com/palamar_group/",
+                                "https://vk.com/id202584528"
+                            ],
+                            "address": {
+                                "@type": "PostalAddress",
+                                "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
+                                "addressLocality": "Львів, Україна",
+                                "addressCountry": "Україна"
+                            },
+                            "telephone": "+38 067 264 6216",
+                            "priceRange": "від 300 грн",
+                        }
+                    },
+                    "name": favor.name,
+                    "brand": {
+                        "@context": "http://schema.org/",
+                        "@type": "Brand",
                         "url": "http:/palamar.com.ua/",
                         "alternateName": "PALAMAR",
                         "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
                         "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
                         "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
-                        "sameAs": [
-                            "https://www.facebook.com/hashtag/palamar_group",
-                            "https://www.instagram.com/palamar_group/",
-                            "https://vk.com/id202584528"
-                        ],
-                        "address": {
-                            "@type": "PostalAddress",
-                            "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
-                            "addressLocality": "Львів, Україна",
-                            "addressCountry": "Україна"
-                        },
-                        "telephone": "+38 067 264 6216",
-                        "priceRange": "від 300 грн",
+                        "name": "PALAMAR GROUP"
                     }
-                },
-                "name": favor.name,
-                "brand": {
-                    "@context": "http://schema.org/",
-                    "@type": "Brand",
-                    "url": "http:/palamar.com.ua/",
-                    "alternateName": "PALAMAR",
-                    "logo": "http://palamar.com.ua/content/images/logo/palamar_logo.png",
-                    "image": "http://palamar.com.ua/content/images/bg/slider/IMG_6917_1200.jpg",
-                    "description": "Салон краси у Львові. Послуги: стрижки, зачіски,фарбування, візаж, мейкап. Навчальний центр працівників салонів краси. Курси з колористики, перукарського мистецтва, , візажу",
-                    "name": "PALAMAR GROUP"
                 }
-            }
-
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     seoBrend(brend) {
@@ -578,9 +593,9 @@ export class SalonHomeComponentController {
                 this.categories.forEach((category) => {
                     category.favors = favors.filter((favor) => {
                         this.initFavorSeo(favor);
-                        return category._id== favor.category._id;
+                        return category._id == favor.category._id;
                     });
-                })
+                });
             }
 
         });
@@ -596,7 +611,7 @@ export class SalonHomeComponentController {
     }
 
     getPictureFlex(index, length) {
-        if (length > 3 && ( length % 3 == 1 && index >= length - 4 ) || ( length % 3 == 2 && index >= length - 5 )) {
+        if (length > 3 && (length % 3 == 1 && index >= length - 4) || (length % 3 == 2 && index >= length - 5)) {
             return 46;
         } else {
             return 22;
@@ -606,6 +621,19 @@ export class SalonHomeComponentController {
     showMediaObserver(items, index): void {
         this.setSocialParams(items[index]);
         this.mediaObserver.observe(items, index, this.socialParams);
+    }
+
+    goToURL(url, target) {
+        this.$window.open(url, target);
+    }
+
+    getCategoryURL(category) {
+        // tmp, while we don't know what page to use for 'lookchange'
+        if (category._id === 'fashionchange') {
+            return `/beauty-salon/transformations`
+        } else {
+            return `/beauty-salon/services/${category.url}`
+        }
     }
 }
 

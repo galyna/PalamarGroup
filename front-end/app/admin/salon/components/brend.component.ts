@@ -33,6 +33,14 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                         <input id="name" ng-model="$ctrl.favor.url" name="name"/>
                     </md-input-container>
 
+                    <md-input-container class="md-block">
+                        <label for="description">Опис</label>
+                        <textarea
+                            ng-model="$ctrl.favor.description"
+                            id="description" 
+                            name="description" 
+                        ></textarea>
+                    </md-input-container>
                 </md-card-content>
             </md-card>
         </md-tab>

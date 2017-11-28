@@ -13,6 +13,7 @@ export interface IBrendModel extends pg.models.IBrend, Document{
 
 export let BrendSchema = new Schema({
     name: String,
+    description: String,
     url:String,
     photo: PhotoSchema,
 });

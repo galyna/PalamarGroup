@@ -217,7 +217,7 @@ const template = `
     <div layout="row" ng-if="$ctrl.videos.length>0 || $ctrl.photos.length>0" flex>
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap  header-super">
-                <div flex class="md-display-2">Наші роботи та навчання</div>
+                <div flex class="md-display-2">Наші роботи</div>
             </div>
             <div class="overlay-days">
             </div>

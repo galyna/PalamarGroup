@@ -74,34 +74,25 @@ const template = `
             </div>
 
         </div>
-
-        <div layout="row" layout-align="center center">
-            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">
-                <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
-                    <md-card md-whiteframe="6" ng-repeat="photo in ::transform.photos | orderBy:'order' track by $index"
-                             class="md-margin "
-                             ng-attr-flex-gt-sm="{{::$ctrl.getPictureFlex($index,transform.photos.length)}}"
-                             flex-gt-xs="46" flex-xs="80"
-                             ng-click="::$ctrl.showMediaObserver(transform.photos  | orderBy:'order' , $index)"
-                             temprop="workPerformed" itemscope="" itemtype="http://schema.org/CreativeWork">
-                       <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
-                            <meta itemprop="name" content="PALAMAR GROUP"/>
-                            <meta itemprop="image"
-                                  content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
-                             <meta itemprop="address" content="Львів, Україна"/>
-                        <meta itemprop="telephone" content="+38 067 264 6216"/>
-                        </div>
-                        <meta itemprop="description" content="{{::photo.name}}"/>
-                        <meta itemprop="image" content="http://palamar.com.ua{{::photo.url}}"/>
-                        <img ng-src="{{::photo.url}}" class="md-card-image" alt="{{::photo.name}}">
-                        <md-card-content ng-if="photo.name" layout="column" flex="100" layout-align="center center">
-                            <span itemprop="name" class="  md-margin">{{::photo.name}}</span>
-                        </md-card-content>
-                    </md-card>
-                </div>
-
-            </div>
-
+        
+        <div 
+            class="transform-photos" 
+            layout-xs="column"
+            layout-gt-xs="row" 
+            layout-align="center center"
+        >
+            <span flex></span>
+            <pg-photocard
+                        ng-repeat="photo in ::transform.photos | orderBy:'order' track by $index"
+                        layout-margin
+                        flex-sm="40"
+                        flex-gt-sm="30"
+                        url="photo.url"
+                        name="photo.name"
+                        description="photo.description"
+                        ng-click="::$ctrl.showMediaObserver(transform.photos  | orderBy:'order' , $index)"
+                    ></pg-photocard>
+            <span flex></span>
         </div>
     </div>
 </div>
