@@ -4,7 +4,7 @@ import {PhotoServiceName, PhotoService} from "../../../resources/photo.service";
 import IPhoto = pg.models.IPhoto;
 
 
-const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
+const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button" ng-href="admin.html#!/salon/learns">
@@ -60,9 +60,21 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                                         name="description" 
                                     ></textarea>
                                 </md-input-container>
-                                <md-input-container class="md-block  ">
+                                <md-input-container class="md-block">
+                                    <label for="link">Посилання</label>
+                                    <input 
+                                        id="link" 
+                                        ng-model="item.link" 
+                                        name="link"
+                                    />
+                                </md-input-container>
+                                <md-input-container class="md-block">
                                     <label for="ord">Порядок відображення</label>
-                                    <input id="ord" ng-model="item.order" type="number"/>
+                                    <input 
+                                        id="ord" 
+                                        ng-model="item.order" 
+                                        type="number"
+                                    />
                                 </md-input-container>
                                 <md-button class="  md-raised"
                                            ng-click="$ctrl.deleteFromList($ctrl.learn.photos ,item)">
@@ -149,8 +161,6 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
 </form>`;
 
 export class LearnComponentController {
-
-
     static $inject = ["$log", "$routeParams", "$mdToast", "$timeout", '$mdDialog',
         LearnResourceName, 'constants', PhotoServiceName];
 
@@ -223,7 +233,7 @@ export class LearnComponentController {
         } );
         this.learn.$save()
             .then( (course) => {
-                this.$mdToast.showSimple( `ЗМІНА ОБРАЗУ ${course.name} збережено` );
+                this.$mdToast.showSimple(`${course.name} збережено` );
             } )
             .catch( (err)=> {
                 this.$log.error( err );
@@ -244,7 +254,7 @@ export class LearnComponentController {
         if (form.$invalid) return;
         this.learn.$save()
             .then( (favor) => {
-                this.$mdToast.showSimple( `Дані ЗМІНА ОБРАЗУ збережено` );
+                this.$mdToast.showSimple( `Дані збережено` );
             } )
             .catch( (err)=> {
                 this.$log.error( err );

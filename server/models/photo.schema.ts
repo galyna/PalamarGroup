@@ -17,7 +17,8 @@ export let PhotoSchema = new Schema({
             return url;
         }
     },
-    order: Number
+    order: Number,
+    link: String,
 });
 
 //cleanup unneeded photos

@@ -215,7 +215,7 @@ const template = `<script type="application/ld+json">
         </a>
 
     </div>
-    <div layout="row" flex ng-if="$ctrl.transforms.length>0">
+    <div layout="row" flex ng-if="$ctrl.learns.length>0">
         <div class="page-delimiter " flex>
             <div class="fit-screen-wrap md-padding header-super">
                 <div hide show-gt-xs='true' class="md-display-1"> ВЧИМОСЬ У ПРОФЕСІОНАЛІВ</div>
@@ -268,15 +268,15 @@ const template = `<script type="application/ld+json">
         >
             <span flex></span>
             <pg-photocard
-                        ng-repeat="photo in ::learn.photos | orderBy:'order' track by $index"
-                        layout-margin
-                        flex-sm="40"
-                        flex-gt-sm="30"
-                        url="photo.url"
-                        name="photo.name"
-                        description="photo.description"
-                        ng-click="::$ctrl.showMediaObserver(learn.photos  | orderBy:'order' , $index)"
-                    ></pg-photocard>
+                ng-repeat="photo in ::learn.photos | orderBy:'order' track by $index"
+                layout-margin
+                flex-sm="40"
+                flex-gt-sm="30"
+                url="photo.url"
+                name="photo.name"
+                description="photo.description"
+                ng-click="::$ctrl.goToURL(photo.link, '_blank')"
+            ></pg-photocard>
             <span flex></span>
         </div>
     </div>
