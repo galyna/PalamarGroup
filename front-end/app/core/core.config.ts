@@ -69,8 +69,8 @@ export function materialConfig($mdIconProvider: ng.material.IIconProvider, $mdDa
         .iconSet("av", "/content/images/icons/svg-sprite-av.svg")
 
     // Example of a French localization.
-    $mdDateLocaleProvider.months = ['Січень', 'Лютий', 'Березень', "Квітель", 'Травень', 'Липень', 'Червень', 'Серпень', "Вересень", 'Жовтень', 'Листопад', 'Грудень'];
-    $mdDateLocaleProvider.shortMonths = ['Січ', 'Лют', 'Бер', "Кві", 'Тра', 'Лип', 'Чер', 'Сер', "Вер", 'Жов', 'Лис', 'Гру'];
+    $mdDateLocaleProvider.months = ['Січень', 'Лютий', 'Березень', "Квітень", 'Травень', 'Червень', 'Липень', 'Серпень', "Вересень", 'Жовтень', 'Листопад', 'Грудень'];
+    $mdDateLocaleProvider.shortMonths = ['Січ', 'Лют', 'Бер', "Кві", 'Тра', 'Чер', 'Лип', 'Сер', "Вер", 'Жов', 'Лис', 'Гру'];
     $mdDateLocaleProvider.days = ['Понеділок', 'Вівторок', 'Середа', "Четвер", "П'ятниця", 'Субота', 'Неділя'];
     $mdDateLocaleProvider.shortDays = ['Нд', 'Пн', 'Вт', 'Ср', "Чт", "Пт", 'Сб'];
 
