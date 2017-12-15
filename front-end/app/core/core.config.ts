@@ -72,7 +72,7 @@ export function materialConfig($mdIconProvider: ng.material.IIconProvider, $mdDa
     $mdDateLocaleProvider.months = ['Січень', 'Лютий', 'Березень', "Квітель", 'Травень', 'Липень', 'Червень', 'Серпень', "Вересень", 'Жовтень', 'Листопад', 'Грудень'];
     $mdDateLocaleProvider.shortMonths = ['Січ', 'Лют', 'Бер', "Кві", 'Тра', 'Лип', 'Чер', 'Сер', "Вер", 'Жов', 'Лис', 'Гру'];
     $mdDateLocaleProvider.days = ['Понеділок', 'Вівторок', 'Середа', "Четвер", "П'ятниця", 'Субота', 'Неділя'];
-    $mdDateLocaleProvider.shortDays = ['Пн', 'Вт', 'Ср', "Чт", "Пт", 'Сб', 'Нд'];
+    $mdDateLocaleProvider.shortDays = ['Нд', 'Пн', 'Вт', 'Ср', "Чт", "Пт", 'Сб'];
 
     // Can change week display to start on Monday.
     $mdDateLocaleProvider.firstDayOfWeek = 1;
