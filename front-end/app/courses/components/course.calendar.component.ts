@@ -104,7 +104,7 @@ const template = `
             day-label-format="'EEE'"
             day-label-tooltip-format="'EEEE'"
             day-tooltip-format="'fullDate'"
-            week-starts-on="firstDayOfWeek"
+            week-starts-on="$ctrl.firstDayOfWeek"
             day-content="setDayContent"
             template-url="'app/calendar/calendar.html'"></pg-calendar>
 </div>`;
@@ -118,20 +118,32 @@ export interface ICourseDates {
 
 export class CalendarComponentController {
 
-    static $inject = ['pgCalendarData','$rootScope', CourseResourceName, '$sce',
-        '$location', 'orderByFilter', 'smoothScroll',
-        SeoPageResourceName,"$q"];
+    static $inject = [
+        'pgCalendarData',
+        '$rootScope',
+        CourseResourceName,
+        '$sce',
+        '$location',
+        'orderByFilter',
+        'smoothScroll',
+        SeoPageResourceName,
+        "$q",
+        '$mdDateLocale'
+    ];
 
     seo:any;
     courses:ICourse[];
     calendarDirection = 'horizontal';
     coursesDateMap:ICourseDates[];
     markerReadySEO: string;
+    firstDayOfWeek: number;
+
     constructor(private pgCalendarData:IPgCalendarDataService,private $rootScope:IRootScope,
                 private CourseResource:ICourseResource, private $sce,
                 private $location, private orderByFilter:ng.IFilterOrderBy, private smoothScroll,
-                private SeoPageResource:ISeoPageResource, private $q) {
+                private SeoPageResource:ISeoPageResource, private $q, $mdDateLocale: ng.material.IDateLocaleProvider) {
 
+        this.firstDayOfWeek = $mdDateLocale.firstDayOfWeek;
         this.getCourses();
     }
 

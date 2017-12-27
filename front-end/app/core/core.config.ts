@@ -36,8 +36,9 @@ export let constants: IConstants = {
     favorCategories: [
         {_id: "hear", name: "ПЕРУКАРСЬКІ ПОСЛУГИ",url:"hairdressing"},
         {_id: "hairhealing", name: "ЛІКУВАННЯ ВОЛОССЯ", url: "hearhealing"},
-        ],
-     rates: [
+        {_id: "fashionchange", name: "ЗМІНА ОБРАЗУ", url: "fashionchange"},
+    ],
+    rates: [
         {_id: "0", name: "ВІДСУТНІЙ", text: ""},
         {_id: "1", name: "TOP Stylist", text: "TOP Stylist"},
         {_id: "2", name: "Senior Stylist", text: "Senior Stylist"},
@@ -68,10 +69,10 @@ export function materialConfig($mdIconProvider: ng.material.IIconProvider, $mdDa
         .iconSet("av", "/content/images/icons/svg-sprite-av.svg")
 
     // Example of a French localization.
-    $mdDateLocaleProvider.months = ['Січень', 'Лютий', 'Березень', "Квітель", 'Травень', 'Липень', 'Червень', 'Серпень', "Вересень", 'Жовтень', 'Листопад', 'Грудень'];
-    $mdDateLocaleProvider.shortMonths = ['Січ', 'Лют', 'Бер', "Кві", 'Тра', 'Лип', 'Чер', 'Сер', "Вер", 'Жов', 'Лис', 'Гру'];
+    $mdDateLocaleProvider.months = ['Січень', 'Лютий', 'Березень', "Квітень", 'Травень', 'Червень', 'Липень', 'Серпень', "Вересень", 'Жовтень', 'Листопад', 'Грудень'];
+    $mdDateLocaleProvider.shortMonths = ['Січ', 'Лют', 'Бер', "Кві", 'Тра', 'Чер', 'Лип', 'Сер', "Вер", 'Жов', 'Лис', 'Гру'];
     $mdDateLocaleProvider.days = ['Понеділок', 'Вівторок', 'Середа', "Четвер", "П'ятниця", 'Субота', 'Неділя'];
-    $mdDateLocaleProvider.shortDays = ['Пн', 'Вт', 'Ср', "Чт", "Пт", 'Сб', 'Нд'];
+    $mdDateLocaleProvider.shortDays = ['Нд', 'Пн', 'Вт', 'Ср', "Чт", "Пт", 'Сб'];
 
     // Can change week display to start on Monday.
     $mdDateLocaleProvider.firstDayOfWeek = 1;

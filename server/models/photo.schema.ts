@@ -9,6 +9,7 @@ export interface IPhotoModel extends pg.models.IPhoto, Document{
 
 export let PhotoSchema = new Schema({
     name: String,
+    description: String,
     url: {
         type: String,
         set: function(url) {
@@ -16,7 +17,8 @@ export let PhotoSchema = new Schema({
             return url;
         }
     },
-    order: Number
+    order: Number,
+    link: String,
 });
 
 //cleanup unneeded photos

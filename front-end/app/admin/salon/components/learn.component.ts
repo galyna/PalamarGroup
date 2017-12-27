@@ -1,17 +1,17 @@
-import {ITransform,ITransformResource,TransformResourceName} from "../../../resources/transform.resource";
+import {ILearn,ILearnResource,LearnResourceName} from "../../../resources/learn.resource";
 import {IConstants} from "../../../core/core.config";
 import {PhotoServiceName, PhotoService} from "../../../resources/photo.service";
 import IPhoto = pg.models.IPhoto;
 
 
-const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
+const template = `<form name="saveForm" novalidate ng-submit="$ctrl.save(saveForm)" flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" ng-href="admin.html#!/salon/transforms">
+            <md-button class="md-icon-button" ng-href="admin.html#!/salon/learns">
                 <md-icon md-svg-src="navigation:ic_arrow_back_24px"></md-icon>
-                <md-tooltip>ЗМІНА ОБРАЗУ</md-tooltip>
+                <md-tooltip>ВЧИМОСЯ У ПРОФЕСІОНАЛІВ</md-tooltip>
             </md-button>
-            <h3>Перевтілення</h3>
+            <h3>Вчимося у професіоналів</h3>
             <span flex></span>
             <md-button ng-if="::$root.it.can('modifySalon')" ng-click="$ctrl.cancel()" ng-disabled="saveForm.$pristine">
                 <span>Скасувати</span>
@@ -26,11 +26,11 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                 <md-card-content>
                     <md-input-container class="md-block ">
                         <label for="name">Назва</label>
-                        <input id="name" ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.transform.name" name="name"/>
+                        <input id="name" ng-disabled="::!$root.it.can('modifySalon')" ng-model="$ctrl.learn.name" name="name"/>
                     </md-input-container>
                           <md-input-container class="md-block  ">
                                     <label for="ord">Порядок відображення</label>
-                                    <input ng-disabled="::!$root.it.can('modifySalon')" id="ord" ng-model="$ctrl.transform.order" type="number"/>
+                                    <input ng-disabled="::!$root.it.can('modifySalon')" id="ord" ng-model="$ctrl.learn.order" type="number"/>
                                 </md-input-container>
                 </md-card-content>
             </md-card>
@@ -40,7 +40,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                 <md-card-content>
                     <div flex>
                         <div class="md-padding md-margin" layout="row"
-                             ng-repeat="item in $ctrl.transform.photos track by $index"
+                             ng-repeat="item in $ctrl.learn.photos track by $index"
                              ng-click="null">
                             <img ng-src="{{item.url}}" class="module-history-img"/>
                             <div layout="column" ng-if="::$root.it.can('modifySalon')">
@@ -60,12 +60,24 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                                         name="description" 
                                     ></textarea>
                                 </md-input-container>
-                                <md-input-container class="md-block  ">
+                                <md-input-container class="md-block">
+                                    <label for="link">Посилання</label>
+                                    <input 
+                                        id="link" 
+                                        ng-model="item.link" 
+                                        name="link"
+                                    />
+                                </md-input-container>
+                                <md-input-container class="md-block">
                                     <label for="ord">Порядок відображення</label>
-                                    <input id="ord" ng-model="item.order" type="number"/>
+                                    <input 
+                                        id="ord" 
+                                        ng-model="item.order" 
+                                        type="number"
+                                    />
                                 </md-input-container>
                                 <md-button class="  md-raised"
-                                           ng-click="$ctrl.deleteFromList($ctrl.transform.photos ,item)">
+                                           ng-click="$ctrl.deleteFromList($ctrl.learn.photos ,item)">
                                     Видалити
                                 </md-button>
                             </div>
@@ -81,7 +93,7 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                                 Вибрати файл
                             </md-button>
                             <md-button class="md-primary" ng-show="masrerNewWork"
-                                       ng-click="$ctrl.uploadCollPhoto(croppedhearFormsPhotoFile, masrerNewWork.name,$ctrl.transform.photos)">
+                                       ng-click="$ctrl.uploadCollPhoto(croppedhearFormsPhotoFile, masrerNewWork.name,$ctrl.learn.photos)">
                                 Завантажити
                             </md-button>
                             <div ngf-drop ng-model="masrerNewWork" ngf-pattern="image/*"
@@ -99,94 +111,91 @@ const template:string = `<form name="saveForm" novalidate ng-submit="$ctrl.save(
                 </md-card-content>
             </md-card>
         </md-tab>
-        <md-tab label="Відео" flex>
-            <md-card>
-                <md-card-content layout="row">
-                    <div flex="60">
-                        <md-subheader class="md-no-sticky">Відео</md-subheader>
-                        <div class="md-padding md-margin"
-                             ng-repeat="item in $ctrl.transform.videos track by $index"
-                             ng-click="null">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
-                                               video-id="item.url"></youtube-video>
-                            </div>
-                            <div layout="column" ng-if="::$root.it.can('modifySalon')">
-                                <md-input-container class="md-block  ">
-                                    <label for="historyNme">Назва відео</label>
-                                    <input id="historyNme" ng-model="item.name" name="historyNme"/>
-                                </md-input-container>
-                                <md-input-container class="md-block  ">
-                                    <label for="historyNme">ID</label>
-                                    <input id="historyNme" ng-model="item.url" name="historyNme"/>
-                                </md-input-container>
-                                <md-input-container class="md-block  ">
-                                    <label for="ord">Порядок відображення</label>
-                                    <input id="ord" ng-model="item.order" type="number"/>
-                                </md-input-container>
-                                <md-button class="  md-raised"
-                                           ng-click="$ctrl.deleteFromList($ctrl.transform.videos,item)">
-                                    Видалити
-                                </md-button>
-                            </div>
-                        </div>
-                    </div>
-                    <div flex ng-if="::$root.it.can('modifySalon')">
-                        <md-input-container class="md-block  ">
-                            <label for="videoId">ID</label>
-                            <input id="videoId" ng-model="videoId" name="videoId"/>
-                        </md-input-container>
-                        <md-button class="md-raised" ng-if="::$root.it.can('modifySalon')"
-                                   ng-click="$ctrl.addVideo(videoId)">
-                            Додати відео
-                        </md-button>
+        <!--<md-tab label="Відео" flex>-->
+            <!--<md-card>-->
+                <!--<md-card-content layout="row">-->
+                    <!--<div flex="60">-->
+                        <!--<md-subheader class="md-no-sticky">Відео</md-subheader>-->
+                        <!--<div class="md-padding md-margin"-->
+                             <!--ng-repeat="item in $ctrl.learn.videos track by $index"-->
+                             <!--ng-click="null">-->
+                            <!--<div class="embed-responsive embed-responsive-16by9">-->
+                                <!--<youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"-->
+                                               <!--video-id="item.url"></youtube-video>-->
+                            <!--</div>-->
+                            <!--<div layout="column" ng-if="::$root.it.can('modifySalon')">-->
+                                <!--<md-input-container class="md-block  ">-->
+                                    <!--<label for="historyNme">Назва відео</label>-->
+                                    <!--<input id="historyNme" ng-model="item.name" name="historyNme"/>-->
+                                <!--</md-input-container>-->
+                                <!--<md-input-container class="md-block  ">-->
+                                    <!--<label for="historyNme">ID</label>-->
+                                    <!--<input id="historyNme" ng-model="item.url" name="historyNme"/>-->
+                                <!--</md-input-container>-->
+                                <!--<md-input-container class="md-block  ">-->
+                                    <!--<label for="ord">Порядок відображення</label>-->
+                                    <!--<input id="ord" ng-model="item.order" type="number"/>-->
+                                <!--</md-input-container>-->
+                                <!--<md-button class="  md-raised"-->
+                                           <!--ng-click="$ctrl.deleteFromList($ctrl.learn.videos,item)">-->
+                                    <!--Видалити-->
+                                <!--</md-button>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div flex ng-if="::$root.it.can('modifySalon')">-->
+                        <!--<md-input-container class="md-block  ">-->
+                            <!--<label for="videoId">ID</label>-->
+                            <!--<input id="videoId" ng-model="videoId" name="videoId"/>-->
+                        <!--</md-input-container>-->
+                        <!--<md-button class="md-raised" ng-if="::$root.it.can('modifySalon')"-->
+                                   <!--ng-click="$ctrl.addVideo(videoId)">-->
+                            <!--Додати відео-->
+                        <!--</md-button>-->
 
-                    </div>
-                </md-card-content>
-            </md-card>
-        </md-tab>
+                    <!--</div>-->
+                <!--</md-card-content>-->
+            <!--</md-card>-->
+        <!--</md-tab>-->
     </md-tabs>
 </form>`;
 
-export class TransformComponentController {
-
-
+export class LearnComponentController {
     static $inject = ["$log", "$routeParams", "$mdToast", "$timeout", '$mdDialog',
-        TransformResourceName, 'constants', PhotoServiceName];
+        LearnResourceName, 'constants', PhotoServiceName];
 
-    originalTransform:ITransform;
-    transform:ITransform;
+    originalLearn:ILearn;
+    learn:ILearn;
     showWorkUpload:boolean;
 
     constructor(private $log:ng.ILogService, private $routeParams:ng.route.IRouteParamsService,
                 private $mdToast:ng.material.IToastService, private $timeout:ng.ITimeoutService,
-                private $mdDialog:ng.material.IDialogService, private transformResource:ITransformResource,
+                private $mdDialog:ng.material.IDialogService, private learnResource:ILearnResource,
                 private constants:IConstants, private photoService:PhotoService) {
     }
 
 
     $onInit() {
         if (this.$routeParams["id"]) {
-            this.transformResource.get( {id: this.$routeParams["id"]}).$promise
-                .then( (favor) => {
-                    this.originalTransform = favor;
-                    this.transform = angular.copy( this.originalTransform );
+            this.learnResource.get( {id: this.$routeParams["id"]}).$promise
+                .then( (learn) => {
+                    this.originalLearn = learn;
+                    this.learn = angular.copy( this.originalLearn );
                 } );
         } else {
-            this.originalTransform = new this.transformResource();
-            this.transform = angular.copy( this.originalTransform );
+            this.originalLearn = new this.learnResource();
+            this.learn = angular.copy( this.originalLearn );
         }
 
     }
 
 
     uploadCollPhoto(dataUrl, name) {
-        if (!this.transform._id) {
-            this.transform.$save({populate: 'services.favor'})
-                .then((master) => {
-
-                    this.$mdToast.showSimple(`Дані майстра збережено`);
-                    this.photoSave(dataUrl, name, this.transform.photos);
+        if (!this.learn._id) {
+            this.learn.$save()
+                .then(() => {
+                    this.$mdToast.showSimple(`Збережено`);
+                    this.photoSave(dataUrl, name, this.learn.photos);
                 })
                 .catch((err)=> {
                     this.$log.error(err);
@@ -194,7 +203,7 @@ export class TransformComponentController {
                 });
 
         } else {
-            this.photoSave(dataUrl, name, this.transform.photos)
+            this.photoSave(dataUrl, name, this.learn.photos)
         }
     }
 
@@ -216,15 +225,15 @@ export class TransformComponentController {
 
 
     addVideo(id) {
-        if(!this.transform.videos){this.transform.videos= [];}
-        this.transform.videos.push( {
+        if(!this.learn.videos){this.learn.videos= [];}
+        this.learn.videos.push( {
             name: "",
             url: id,
             order: 0
         } );
-        this.transform.$save()
+        this.learn.$save()
             .then( (course) => {
-                this.$mdToast.showSimple( `ЗМІНА ОБРАЗУ ${course.name} збережено` );
+                this.$mdToast.showSimple(`${course.name} збережено` );
             } )
             .catch( (err)=> {
                 this.$log.error( err );
@@ -238,14 +247,14 @@ export class TransformComponentController {
     }
 
     cancel() {
-        this.transform = angular.copy( this.originalTransform );
+        this.learn = angular.copy( this.originalLearn );
     }
 
     save(form:ng.IFormController) {
         if (form.$invalid) return;
-        this.transform.$save()
+        this.learn.$save()
             .then( (favor) => {
-                this.$mdToast.showSimple( `Дані ЗМІНА ОБРАЗУ збережено` );
+                this.$mdToast.showSimple( `Дані збережено` );
             } )
             .catch( (err)=> {
                 this.$log.error( err );
@@ -266,9 +275,9 @@ export class TransformComponentController {
 
 }
 
-export let TransformComponentUrl ="/salon/transform/:id?";
-export let TransformComponentName = 'pgTransform';
-export let TransformComponentOptions = {
+export let LearnComponentUrl ="/salon/learn/:id?";
+export let LearnComponentName = 'pgLearn';
+export let LearnComponentOptions = {
     template: template,
-    controller: TransformComponentController
+    controller: LearnComponentController
 };

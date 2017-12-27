@@ -64,7 +64,7 @@ export function pgCalendarDirective($compile:ng.ICompileService, $parse:ng.IPars
             $scope.monthHeaderFormatter =$mdDateLocale.monthHeaderFormatter;
             $scope.dayLabelFormat = $scope.dayLabelFormat || "EEE";
             $scope.dayLabelTooltipFormat = $scope.dayLabelTooltipFormat || "EEEE";
-            $scope.shortDays = $mdDateLocale.shortDays;
+            $scope.shortDays = ['Пн', 'Вт', 'Ср', "Чт", "Пт", 'Сб', 'Нд'];
             $scope.dayTooltipFormat = $scope.dayTooltipFormat || "fullDate";
             $scope.disableFutureSelection = $scope.disableFutureSelection || false;
 

@@ -221,7 +221,7 @@ const template = `
     <div layout="row" ng-if="$ctrl.videos.length>0 || $ctrl.photos.length>0" flex>
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap  header-super">
-                <div flex class="md-display-2">Наші роботи та навчання</div>
+                <div flex class="md-display-2">Наші роботи</div>
             </div>
             <div class="overlay-days">
             </div>
@@ -229,40 +229,40 @@ const template = `
     </div>
 
     <div>
-        <div layout="row" layout-align="center center">
-            <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85">
-                <div layout="column" layout-margin class="embed-responsive-container" ng-if="$ctrl.videos.length>0"
-                     layout-align="center center">
-                    <md-card md-whiteframe="6" class="  courses-videos" temprop="workPerformed" itemscope=""
-                             itemtype="http://schema.org/CreativeWork"
-                             ng-repeat="video in $ctrl.videos  track by $index"
-                             flex>
-                         <div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">
-                            <meta itemprop="name" content="PALAMAR GROUP"/>
-                            <meta itemprop="image"
-                                  content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>
-                             <meta itemprop="address" content="Львів, Україна"/>
-                        <meta itemprop="telephone" content="+38 067 264 6216"/>
-                        </div>
-                    
-                        <meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
-                        <div flex class="embed-responsive embed-responsive-16by9"
-                             class="embed-responsive embed-responsive-16by9" itemscope
-                             itemtype="http://schema.org/VideoObject">
-                            <meta itemprop="description" content="{{::video.name}}"/>
-                            <meta itemprop="name" content="{{::video.name}}"/>
-                            <meta itemprop="thumbnailUrl"
-                                  content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>
-                            <meta itemprop="embedUrl" content="https://www.youtube.com/embed/{{video.url}}"/>
-                            <youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"
-                                           video-id="::video.url"></youtube-video>
-                        </div>
-                       
-                    </md-card>
-                </div>
-            </div>
+        <!--<div layout="row" layout-align="center center">-->
+            <!--<div flex flex-gt-md="60" flex-md="80" flex-gt-xs="85">-->
+                <!--<div layout="column" layout-margin class="embed-responsive-container" ng-if="$ctrl.videos.length>0"-->
+                     <!--layout-align="center center">-->
+                    <!--<md-card md-whiteframe="6" class="  courses-videos" temprop="workPerformed" itemscope=""-->
+                             <!--itemtype="http://schema.org/CreativeWork"-->
+                             <!--ng-repeat="video in $ctrl.videos  track by $index"-->
+                             <!--flex>-->
+                         <!--<div itemprop="creator" itemscope itemtype="http://schema.org/BeautySalon">-->
+                            <!--<meta itemprop="name" content="PALAMAR GROUP"/>-->
+                            <!--<meta itemprop="image"-->
+                                  <!--content="http://palamar.com.ua/content/images/logo/palamar_logo.png"/>-->
+                             <!--<meta itemprop="address" content="Львів, Україна"/>-->
+                        <!--<meta itemprop="telephone" content="+38 067 264 6216"/>-->
+                        <!--</div>-->
+                    <!---->
+                        <!--<meta itemprop="image" content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>-->
+                        <!--<div flex class="embed-responsive embed-responsive-16by9"-->
+                             <!--class="embed-responsive embed-responsive-16by9" itemscope-->
+                             <!--itemtype="http://schema.org/VideoObject">-->
+                            <!--<meta itemprop="description" content="{{::video.name}}"/>-->
+                            <!--<meta itemprop="name" content="{{::video.name}}"/>-->
+                            <!--<meta itemprop="thumbnailUrl"-->
+                                  <!--content="http://img.youtube.com/vi/{{video.url}}/mqdefault.jpg"/>-->
+                            <!--<meta itemprop="embedUrl" content="https://www.youtube.com/embed/{{video.url}}"/>-->
+                            <!--<youtube-video class="embed-responsive-item" player-vars="{showinfo: 0}"-->
+                                           <!--video-id="::video.url"></youtube-video>-->
+                        <!--</div>-->
+                       <!---->
+                    <!--</md-card>-->
+                <!--</div>-->
+            <!--</div>-->
 
-        </div>
+        <!--</div>-->
 
         <!-- <div layout="row" layout-align="center center">
             <div flex flex-gt-md="60" flex-md="80" flex-gt-xs="60">

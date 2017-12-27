@@ -143,8 +143,9 @@ declare module pg {
 
         export interface IPhoto {
             _id?: any;
-            name: string,
             url: string,
+            name: string,
+            description?: string,
             order: number,
             seoJson?:any
         }
@@ -243,6 +244,7 @@ declare module pg {
         export interface IBrend {
             _id: any,
             name: string,
+            description: string,
             url: string,
             photo: IPhoto,
             seoJson?:any
@@ -274,6 +276,14 @@ declare module pg {
             longitude: string,
             isMain: boolean,
             isAcademy: boolean,
+        }
+
+        export interface ILearn {
+            _id: any,
+            name: string,
+            order: number,
+            photos: IPhoto[],
+            videos: IVideo[],
         }
     }
 

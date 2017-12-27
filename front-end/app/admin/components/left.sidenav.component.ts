@@ -11,6 +11,7 @@ import {BrendsComponentUrl} from "../../admin/salon/components/brends.component"
 import {ProductsComponentUrl} from "../../admin/salon/components/products.component";
 import {ProductOrdersComponentUrl} from "../../admin/salon/components/product.orders.component";
 import {SalonsComponentUrl} from "../../admin/salon/components/salons.component";
+import {LearnsComponentUrl} from "../../admin/salon/components/learns.component";
 import {SalonContactsComponentUrl} from "../../admin/salon/components/contacts.component";
 
 import {AdminCoursesComponentUrl} from "../../admin/academy/components/courses.component";
@@ -171,6 +172,13 @@ export class LeftSidenavComponentController {
                     {
                         text: 'Салони',
                         url: SalonsComponentUrl,
+                        visible: ()=> {
+                            return true;
+                        }
+                    },
+                    {
+                        text: 'Вчимося у професіоналів',
+                        url: LearnsComponentUrl,
                         visible: ()=> {
                             return true;
                         }

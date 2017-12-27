@@ -15,6 +15,8 @@ import {SalonContactComponentUrl} from "./components/contact.component";
 import {SalonContactsComponentUrl} from "./components/contacts.component";
 import {SalonsComponentUrl} from "./components/salons.component";
 import {SalonComponentUrl} from "./components/salon.component";
+import {LearnsComponentUrl} from "./components/learns.component";
+import {LearnComponentUrl} from "./components/learn.component";
 
 salonRoutes.$inject = ['$routeProvider'];
 export function salonRoutes($routeProvider:ng.route.IRouteProvider) {
@@ -111,6 +113,18 @@ export function salonRoutes($routeProvider:ng.route.IRouteProvider) {
         } )
         .when( SalonsComponentUrl, {
             template: '<pg-salons></pg-salons>',
+            resolve: {
+                auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
+            }
+        } )
+        .when( LearnsComponentUrl, {
+            template: '<pg-learns></pg-learns>',
+            resolve: {
+                auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
+            }
+        } )
+        .when( LearnComponentUrl, {
+            template: '<pg-learn></pg-learn>',
             resolve: {
                 auth: [ItServiceName, (it:ItService) => it.canAsync( 'readSalon' )]
             }
