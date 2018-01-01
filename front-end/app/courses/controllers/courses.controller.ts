@@ -2,9 +2,6 @@ import {CourseResourceName, ICourseResource, ICourse} from "../../resources/cour
 import {IPgCalendarDataService} from "../../calendar/calendar.data.service";
 import {IRootScope} from "../../../typings";
 import {SeoPageResourceName, ISeoPageResource} from "../../resources/seo.page.resource";
-/**
- * Created by Galyna on 13.04.2016.
- */
 
 export interface ICourseDates {
     date: string;
@@ -12,9 +9,11 @@ export interface ICourseDates {
 }
 
 export class CoursesController {
-
-    static $inject = ['$scope', '$sce', '$location', '$rootScope',
-        'pgCalendarData', CourseResourceName, '$mdMedia', 'orderByFilter', 'smoothScroll', SeoPageResourceName, "$q"];
+    static $inject = [
+        '$scope', '$sce', '$location', '$rootScope',
+        'pgCalendarData', CourseResourceName, '$mdMedia',
+        'orderByFilter', 'smoothScroll', SeoPageResourceName, "$q"
+    ];
     static componentName = 'CoursesController';
     courses: ICourse[];
     calendarDirection = 'horizontal';
@@ -22,7 +21,6 @@ export class CoursesController {
     markerReadySEO: string;
     seo: any;
     seoJson: any;
-
 
     constructor($scope, private $sce, private $location, private $rootScope: IRootScope,
                 private pgCalendarData: IPgCalendarDataService,
@@ -34,14 +32,13 @@ export class CoursesController {
 
         $scope.$on("$destroy", () => {
             this.courses = null;
-
-        })
+        });
 
         this.getCourses();
     }
 
     getCourses() {
-        this.seo = this.SeoPageResource.query({query: {"name": "academy"}}).$promise.then((seo)=> {
+        this.seo = this.SeoPageResource.query({query: {"name": "academy"}}).$promise.then((seo) => {
             if (seo.length > 0) {
                 this.$rootScope.seo = seo[0];
                 document.title = this.$rootScope.seo.title;
@@ -51,9 +48,9 @@ export class CoursesController {
         });
         this.courses = this.CourseResource.query({sort: "order"});
         this.courses.$promise.then((courses) => {
-            courses.forEach((course)=> {
+            courses.forEach((course) => {
                 course.seoJson = this.createSeoJson(course);
-            })
+            });
             this.scrollToMain();
         });
         this.$q.all([this.courses.$promise, this.seo.$promise]).then((result) => {
@@ -62,7 +59,9 @@ export class CoursesController {
     }
 
     createSeoJson(course) {
-        if(!course.isVisible){return;}
+        if (!course.isVisible) {
+            return;
+        }
         return {
 
             "@context": "http://schema.org",
@@ -77,7 +76,7 @@ export class CoursesController {
                     "https://www.instagram.com/palamar_group/"
                 ],
                 "location": {
-                    "name":"Palamar Group Academy",
+                    "name": "Palamar Group Academy",
                     "@type": "PostalAddress",
                     "streetAddress": "вул.Щирецька 36, ТЦ «ГАЛЕРЕЯ» ДРУГИЙ ПОВЕРХ № СТУДІЯ ",
                     "addressLocality": "Львів, Україна",
@@ -85,11 +84,11 @@ export class CoursesController {
                 },
             },
             "previewUrl": "http://palamar.com.ua/academy/course/" + course._id,
-            "image":"http://palamar.com.ua"+ course.avatar,
+            "image": "http://palamar.com.ua" + course.avatar,
             "creator": {
-                    "@type": "Person",
-                    "name": course.author.name,
-                "homeLocation":{
+                "@type": "Person",
+                "name": course.author.name,
+                "homeLocation": {
                     "@type": "Place",
                     "geo": {
                         "@type": "GeoCircle",
@@ -127,19 +126,20 @@ export class CoursesController {
     }
 
 
-
     scrollToMain() {
-        var options = {
+        const options = {
             duration: 1,
             easing: 'easeInQuad',
             offset: 0,
 
-        }
-        var element = document.getElementById('mainContent');
+        };
+        const element = document.getElementById('mainContent');
         this.smoothScroll(element, options);
     }
 
-
+    getDetailsLink(course: ICourse) {
+        return course.detailsLink || `/academy/course/${course._id}`
+    }
 }
 
 

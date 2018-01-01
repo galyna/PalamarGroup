@@ -29,14 +29,34 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                     </md-input-container>
                     <md-input-container class="md-block ">
                         <label for="name">Назва</label>
-                        <input id="name" ng-disabled="::!$root.it.can('modifyAcademy')" ng-model="$ctrl.course.name"
-                               name="name"/>
+                        <input 
+                            id="name" 
+                            ng-disabled="::!$root.it.can('modifyAcademy')" 
+                            ng-model="$ctrl.course.name"
+                            name="name"
+                        />
                         <!--TODO add validation-->
                     </md-input-container>
                     <md-input-container class="md-block">
                         <label for="description">Опис</label>
-                        <textarea ng-disabled="::!$root.it.can('modifyAcademy')" ng-model="$ctrl.course.description"
-                                  id="description" name="description" required></textarea>
+                        <textarea 
+                            ng-disabled="::!$root.it.can('modifyAcademy')" 
+                            ng-model="$ctrl.course.description"
+                            id="description" 
+                            name="description" 
+                            required
+                        ></textarea>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label for="details-link">Посилання "Деталі"</label>
+                        <input 
+                            type="url" 
+                            ng-disabled="::!$root.it.can('modifyAcademy')" 
+                            ng-model="$ctrl.course.detailsLink"
+                            id="details-link" 
+                            name="details-link"
+                            required
+                        />
                     </md-input-container>
                     <div>
                         <md-input-container>

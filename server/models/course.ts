@@ -31,6 +31,7 @@ let CommentSchema = new Schema({
 let CourseSchema = new Schema({
     name: String,
     description: String,
+    detailsLink: String,
     price: Number,
     order: Number,
     videos: [VideoSchema],

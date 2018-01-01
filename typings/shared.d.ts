@@ -154,6 +154,7 @@ declare module pg {
             _id?: any;
             name: string,
             description: string,
+            detailsLink: string,
             price: number,
             order: number,
             videos: IVideo[],

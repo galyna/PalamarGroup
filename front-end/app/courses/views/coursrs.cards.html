@@ -41,8 +41,8 @@
 
             "telephone": "+38 068 9898806"
         }]
-</script>
 
+</script>
 
 
 <div layout="row" flex>
@@ -53,127 +53,136 @@
 
     </div>
 </div>
-<div class="courses description-container" ng-attr-id="{{ vm.markerReadySEO }}" layout="row" layout-align="center center">
+<div class="courses description-container" ng-attr-id="{{ vm.markerReadySEO }}" layout="row"
+     layout-align="center center">
     <div layout="column" layout-align="center center">
-
-        <div class="course-bg " layout-align="center center" flex
-             ng-repeat="course in vm.courses track by $index" ng-if="::course.isVisible">
+        <div
+            class="course-bg"
+            layout-align="center center"
+            flex
+            ng-repeat="course in vm.courses track by $index"
+            ng-if="::course.isVisible"
+        >
             <sb-jsonld json="{{course.seoJson}}"></sb-jsonld>
-            <a ng-href="/academy/course/{{course._id}}">
-            <div hide show-gt-xs="true" layout="row" layout-align="center center">
+            <a ng-href="{{::vm.getDetailsLink(course)}}">
+                <div hide show-gt-xs="true" layout="row" layout-align="center center">
 
-                <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
-                >
-                    <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media "
-                             flex="50"><img ng-src="{{::course.avatar}}" class="md-card-image " alt="Курс {{::course.name}} від PALAMAR GROUP Львів "/>
-                        </div>
-                        <div  class="card-desc "
-                              layout="column" layout-align="space-around  center">
-                            <md-card-title >
-                                <md-card-title-text  layout="column" layout-align="space-around center">
-                                    <div hide show-md="true"  class="md-display-2">{{::course.name}}</div>
-                                    <div hide-md="true" class="md-display-1" >{{::course.name}}</div>
-                                    <div hide-sm="true" class="descr-container">
-                                        <div
-                                                class="md-title"
-                                                ng-bind-html="::course.description"
-                                        ></div>
+                    <md-card ng-if="$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5"
+                    >
+                        <md-card-content layout="row" layout-align="start none">
+                            <div class="card-media "
+                                 flex="50"><img ng-src="{{::course.avatar}}" class="md-card-image "
+                                                alt="Курс {{::course.name}} від PALAMAR GROUP Львів "/>
+                            </div>
+                            <div class="card-desc "
+                                 layout="column" layout-align="space-around  center">
+                                <md-card-title>
+                                    <md-card-title-text layout="column" layout-align="space-around center">
+                                        <div hide show-md="true" class="md-display-2">{{::course.name}}</div>
+                                        <div hide-md="true" class="md-display-1">{{::course.name}}</div>
+                                        <div hide-sm="true" class="descr-container">
+                                            <div
+                                                    class="md-title"
+                                                    ng-bind-html="::course.description"
+                                            ></div>
+                                        </div>
+                                    </md-card-title-text>
+                                </md-card-title>
+                                <md-card-actions style="padding-bottom: 15px">
+                                    <md-button
+                                            class="xs-selected md-display-1 md-raised"
+                                            aria-label="Details"
+                                    >Деталі
+                                    </md-button>
+                                </md-card-actions>
+                            </div>
+                        </md-card-content>
+                    </md-card>
+                    <md-card id="trigger-right" ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
+                        <md-card-content layout="row" layout-align="start none">
+                            <div class="card-desc  "
+                                 flex="50" flex layout="column" layout-align="center center">
+                                <md-card-title>
+                                    <md-card-title-text flex layout-align="space-around center">
+                                        <div hide show-md="true" class="md-display-2">{{::course.name}}</div>
+                                        <div hide-md="true" class="md-display-1">{{::course.name}}</div>
+                                        <div hide-sm="true" class="descr-container">
+                                            <div
+                                                    class="md-title"
+                                                    ng-bind-html="::course.description"
+                                            ></div>
 
-                                    </div>
-                                </md-card-title-text>
-                            </md-card-title>
-                            <md-card-actions style="padding-bottom: 15px" >
+                                        </div>
+                                    </md-card-title-text>
+                                </md-card-title>
+                                <md-card-actions style="padding-bottom: 15px">
+                                    <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
+                                    >
+                                        Деталі
+                                    </md-button>
+                                </md-card-actions>
+                            </div>
+                            <div class="card-media "
+                                 flex="50"><img ng-src="{{::course.avatar}}" class="md-card-image"
+                                                alt="Курс {{::course.name}} від PALAMAR GROUP Львів "/></div>
+                        </md-card-content>
+                    </md-card>
+                    <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
+                        <md-card-content layout="row" layout-align="start none">
+                            <div class="card-media "
+                                 flex="50"><img ng-src="{{::course.avatar}}" class="md-card-image "
+                                                alt="Курс {{::course.name}} від PALAMAR GROUP Львів "/>
+                            </div>
+                            <div class="card-desc " flex="50"
+                                 layout="column" layout-align="center center">
+                                <md-card-title>
+                                    <md-card-title-text layout-align="space-around center">
+                                        <div hide show-md="true" class="md-display-2">{{::course.name}}</div>
+                                        <div hide-md="true" class="md-display-1">{{::course.name}}</div>
+                                        <div hide-sm="true" class="descr-container">
+                                            <div
+                                                    class="md-title"
+                                                    ng-bind-html="::course.description"
+                                            ></div>
+                                        </div>
+                                    </md-card-title-text>
+                                </md-card-title>
+                                <md-card-actions style="padding-bottom: 15px">
+                                    <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
+                                    >
+                                        Деталі
+                                    </md-button>
+                                </md-card-actions>
+                            </div>
+
+                        </md-card-content>
+                    </md-card>
+
+
+                </div>
+
+                <div hide-gt-xs="true" layout="row" layout-align="center center">
+                    <div class="overlay-bg trigger-right"></div>
+                    <md-card md-whiteframe="8">
+                        <md-card-content layout="column">
+                            <div class="card-media "><img ng-src="{{::course.avatar}}" class="md-card-image"
+                                                          alt="Курс {{::course.name}} від PALAMAR GROUP Львів "/></div>
+                            <div class="card-desc "
+                                 layout="column" layout-align="space-around center">
+                                <md-card-title>
+                                    <md-card-title-text>
+                                        <div class="md-headline">{{::course.name}}</div>
+                                    </md-card-title-text>
+                                </md-card-title>
                                 <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
-                                       >
-                                    Деталі
+                                >Деталі
                                 </md-button>
-                            </md-card-actions>
-                        </div>
-                    </md-card-content>
-                </md-card>
-                <md-card id="trigger-right" ng-if="$odd " flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
-                    <md-card-content layout="row" layout-align="start none">
-                        <div class="card-desc  "
-                             flex="50" flex layout="column" layout-align="center center">
-                            <md-card-title >
-                                <md-card-title-text flex  layout-align="space-around center">
-                                    <div hide show-md="true"  class="md-display-2">{{::course.name}}</div>
-                                    <div hide-md="true" class="md-display-1" >{{::course.name}}</div>
-                                    <div hide-sm="true" class="descr-container"  >
-                                        <div
-                                                class="md-title"
-                                                ng-bind-html="::course.description"
-                                        ></div>
+                            </div>
+                        </md-card-content>
 
-                                    </div>
-                                </md-card-title-text>
-                            </md-card-title>
-                            <md-card-actions  style="padding-bottom: 15px" >
-                                <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
-                                           >
-                                    Деталі
-                                </md-button>
-                            </md-card-actions>
-                        </div>
-                        <div class="card-media "
-                             flex="50"><img ng-src="{{::course.avatar}}" class="md-card-image" alt="Курс {{::course.name}} від PALAMAR GROUP Львів "/></div>
-                    </md-card-content>
-                </md-card>
-                <md-card ng-if="!$first && !$odd" flex-md="90" flex-sm="70" flex="100" md-whiteframe="5">
-                    <md-card-content layout="row" layout-align="start none">
-                        <div class="card-media "
-                             flex="50"><img ng-src="{{::course.avatar}}" class="md-card-image " alt="Курс {{::course.name}} від PALAMAR GROUP Львів " />
-                        </div>
-                        <div class="card-desc " flex="50"
-                             layout="column" layout-align="center center">
-                            <md-card-title >
-                                <md-card-title-text  layout-align="space-around center">
-                                    <div hide show-md="true"  class="md-display-2">{{::course.name}}</div>
-                                    <div hide-md="true" class="md-display-1" >{{::course.name}}</div>
-                                    <div hide-sm="true" class="descr-container">
-                                        <div
-                                                class="md-title"
-                                                ng-bind-html="::course.description"
-                                        ></div>
-                                    </div>
-                                </md-card-title-text>
-                            </md-card-title>
-                            <md-card-actions style="padding-bottom: 15px" >
-                                <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
-                                           >
-                                    Деталі
-                                </md-button>
-                            </md-card-actions>
-                        </div>
+                    </md-card>
 
-                    </md-card-content>
-                </md-card>
-
-
-            </div>
-
-            <div hide-gt-xs="true" layout="row" layout-align="center center">
-                <div class="overlay-bg trigger-right"></div>
-                <md-card md-whiteframe="8" >
-                    <md-card-content layout="column">
-                        <div class="card-media "><img ng-src="{{::course.avatar}}" class="md-card-image" alt="Курс {{::course.name}} від PALAMAR GROUP Львів "/></div>
-                        <div class="card-desc "
-                             layout="column" layout-align="space-around center">
-                            <md-card-title>
-                                <md-card-title-text>
-                                    <div class="md-headline">{{::course.name}}</div>
-                                </md-card-title-text>
-                            </md-card-title>
-                            <md-button class="xs-selected md-display-1 md-raised " aria-label="Details"
-                            >Деталі
-                            </md-button>
-                        </div>
-                    </md-card-content>
-
-                </md-card>
-
-            </div>
+                </div>
             </a>
         </div>
     </div>
