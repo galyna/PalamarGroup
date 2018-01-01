@@ -55,7 +55,6 @@ const template = `<form name="saveCourseForm" novalidate ng-submit="$ctrl.saveCo
                             ng-model="$ctrl.course.detailsLink"
                             id="details-link" 
                             name="details-link"
-                            required
                         />
                     </md-input-container>
                     <div>
