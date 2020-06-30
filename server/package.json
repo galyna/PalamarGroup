@@ -15,7 +15,7 @@
     "dotenv-safe": "^4.0.4",
     "e-pochta-sms-api": "0.0.2",
     "express": "^4.13.4",
-    "express-jwt": "^3.4.0",
+    "express-jwt": "^6.0.0",
     "express-restify-mongoose": "^4.0.2",
     "express-slash": "^2.0.1",
     "html-snapshots": "^0.13.2",
