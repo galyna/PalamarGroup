@@ -200,18 +200,18 @@ const template = `
         </div>
 
     </div>
-
+<!--
     <div flex layout-align="center center" layout="row"
          ng-if="$ctrl.master.videos.length>0 || $ctrl.master.works.length>0">
         <div class="page-delimiter" flex>
             <div class="fit-screen-wrap  invers header">
-                <div class="md-display-2"> РОБОТИ МАЙСТРА</div>
+                <div class="md-display-2"> РОБОТИ МАЙСТРА </div>
             </div>
 
         </div>
 
     </div>
-
+-->
     <div class="courses-details" layout="row" flex layout-align="center center" ng-if="salon.videos.length>0">
         <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
             <div layout="column" layout-margin class="embed-responsive-container" layout-align="center center">
@@ -245,7 +245,7 @@ const template = `
         </div>
 
     </div>
-
+<!--
     <div flex="100" class="courses-details" layout="row" layout-align="center center">
         <div flex flex-gt-md="70" flex-md="80" flex-gt-xs="85">
             <div class="courses-hear-forms" layout-margin layout layout-wrap layout-align="center center">
@@ -271,7 +271,7 @@ const template = `
             </div>
         </div>
     </div>
-
+-->
 
 </div>
 
